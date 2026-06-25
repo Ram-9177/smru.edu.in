@@ -1,0 +1,11 @@
+.DS_Store
+.next/
+.next-dev/
+.playwright-cli/
+node_modules/
+out/
+server.log
+*.log
+*_Error.txt
+Campus Tour - SMRU/
+__Campus Tour - SMRU/
