@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { margin: 0; padding: 0; position: relative; }
+        #map { width: 100%; height: auto; display: block; }
+        .marker { position: absolute; width: 12px; height: 12px; background: red; border: 2px solid white; border-radius: 50%; transform: translate(-50%, -50%); cursor: pointer; }
+        .label { position: absolute; color: white; background: rgba(0,0,0,0.8); font-size: 14px; font-weight: bold; padding: 2px 5px; transform: translate(10px, -10px); white-space: nowrap; pointer-events: none; }
+        #click-log { position: fixed; top: 10px; left: 10px; background: white; padding: 10px; border: 2px solid black; z-index: 1000; font-family: monospace; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div id="click-log">Click on the center of the building for a marker to get its real coordinates.</div>
+    <div style="position: relative; width: 100vw;">
+        <img id="map" src="../public/campus-guide/images/campus-map-base.jpg" />
+        <div class="marker" style="left: 83.2%; top: 24.5%;"></div>
+        <div class="label" style="left: 83.2%; top: 24.5%;">1: Entry Gate</div>
+        <div class="marker" style="left: 67.98%; top: 15.59%;"></div>
+        <div class="label" style="left: 67.98%; top: 15.59%;">2: Canteen</div>
+        <div class="marker" style="left: 84.4%; top: 63.05%;"></div>
+        <div class="label" style="left: 84.4%; top: 63.05%;">3: Hostel Block</div>
+        <div class="marker" style="left: 96.5%; top: 76.32%;"></div>
+        <div class="label" style="left: 96.5%; top: 76.32%;">4: A One Block</div>
+        <div class="marker" style="left: 65.87%; top: 27.34%;"></div>
+        <div class="label" style="left: 65.87%; top: 27.34%;">5: Rent a Bike Facility</div>
+        <div class="marker" style="left: 60.45%; top: 25.75%;"></div>
+        <div class="label" style="left: 60.45%; top: 25.75%;">6: Multi-Disciplinary Play and Fitness Complex</div>
+        <div class="marker" style="left: 51.3%; top: 21.69%;"></div>
+        <div class="label" style="left: 51.3%; top: 21.69%;">7: Central Library</div>
+        <div class="marker" style="left: 44.51%; top: 2.51%;"></div>
+        <div class="label" style="left: 44.51%; top: 2.51%;">8: M B A and Law Block</div>
+        <div class="marker" style="left: 54.49%; top: 15.14%;"></div>
+        <div class="label" style="left: 54.49%; top: 15.14%;">9: A T M Facility</div>
+        <div class="marker" style="left: 52.5%; top: 78.0%;"></div>
+        <div class="label" style="left: 52.5%; top: 78.0%;">10: Cricket Ground, Gymnasium, and Indoor Games</div>
+        <div class="marker" style="left: 78.21%; top: 56.3%;"></div>
+        <div class="label" style="left: 78.21%; top: 56.3%;">11: Hostel Block</div>
+        <div class="marker" style="left: 57.44%; top: 58.8%;"></div>
+        <div class="label" style="left: 57.44%; top: 58.8%;">12: Cricket Ground, Gymnasium, and Indoor Games</div>
+        <div class="marker" style="left: 42.96%; top: 54.61%;"></div>
+        <div class="label" style="left: 42.96%; top: 54.61%;">13: Girl's Hostel</div>
+        <div class="marker" style="left: 39.5%; top: 86.5%;"></div>
+        <div class="label" style="left: 39.5%; top: 86.5%;">14: Boy's Hostel</div>
+        <div class="marker" style="left: 28.99%; top: 41.87%;"></div>
+        <div class="label" style="left: 28.99%; top: 41.87%;">15: Mini - Parking Area</div>
+        <div class="marker" style="left: 25.61%; top: 32.67%;"></div>
+        <div class="label" style="left: 25.61%; top: 32.67%;">16: Admission Room</div>
+        <div class="marker" style="left: 25.6%; top: 17.85%;"></div>
+        <div class="label" style="left: 25.6%; top: 17.85%;">17: University Block</div>
+        <div class="marker" style="left: 13.89%; top: 55.91%;"></div>
+        <div class="label" style="left: 13.89%; top: 55.91%;">18: Rehab Block and Hospital</div>
+        <div class="marker" style="left: 7.2%; top: 40.54%;"></div>
+        <div class="label" style="left: 7.2%; top: 40.54%;">19: Sensory Park</div>
+        <div class="marker" style="left: 4.92%; top: 47.6%;"></div>
+        <div class="label" style="left: 4.92%; top: 47.6%;">20: Swimming Pool</div>
+        <div class="marker" style="left: 14.13%; top: 38.55%;"></div>
+        <div class="label" style="left: 14.13%; top: 38.55%;">21: Amphitheatre</div>
+        <div class="marker" style="left: 69.48%; top: 46.0%;"></div>
+        <div class="label" style="left: 69.48%; top: 46.0%;">22: Main Block</div>
+
+    </div>
+    <script>
+        const map = document.getElementById('map');
+        const log = document.getElementById('click-log');
+        map.onclick = (e) => {
+            const rect = map.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width * 100;
+            const y = (e.clientY - rect.top) / rect.height * 100;
+            const msg = `Clicked: ${x.toFixed(2)}%, ${y.toFixed(2)}%`;
+            console.log(msg);
+            log.innerHTML += '<br/>' + msg;
+            
+            const m = document.createElement('div');
+            m.className = 'marker';
+            m.style.left = x + '%';
+            m.style.top = y + '%';
+            m.style.background = 'blue';
+            map.parentElement.appendChild(m);
+        };
+    </script>
+</body>
+</html>

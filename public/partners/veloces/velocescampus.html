@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veloces Campus Partnership | St. Mary's University</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://smru.edu.in/partner/veloces/" />
+  <link rel="icon" type="image/png" href="images/v 160x160@2x.webp" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff; color: #1a1a1a; }
+
+    /* ---- NAV ---- */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 64px;
+    }
+    .nav-logo { height: 40px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { text-decoration: none; color: #374151; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #991b1b; }
+    .nav-links .badge { background: #fef3c7; color: #92400e; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: 700; vertical-align: middle; margin-left: 4px; }
+    .btn-apply-nav {
+      background: #991b1b !important;
+  color: #ffffff !important; padding: 9px 20px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: background .2s;
+    }
+    .btn-apply-nav:hover { background: #7f1d1d !important;
+  color: #ffffff !important; }
+
+    /* ---- HERO ---- */
+    .hero {
+      background: #111827; color: #fff;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 64px 24px 48px;
+      text-align: center;
+  position: relative;
+  overflow: hidden;
+    }
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+
+  opacity: 0.5;        /* video visibility */
+  filter: brightness(0.6);
+}
+
+.hero > *:not(.hero-video) {
+  position: relative;
+  z-index: 1;
+}
+
+    .hero-tag { background: #991b1b; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; display: inline-block; }
+    .hero h1 { font-size: 48px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+    .hero h1 span { color: #fbbf24; }
+    .hero-sub { font-size: 16px; color: #d1d5db; max-width: 580px; line-height: 1.7; margin-bottom: 32px; }
+    .hero-location { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: #9ca3af; margin-bottom: 28px; }
+    .hero-location svg { width: 16px; height: 16px; fill: #9ca3af; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary { background: #991b1b; color: #fff; padding: 13px 28px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .2s; }
+    .btn-primary:hover { background: #7f1d1d; }
+    .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; padding: 13px 28px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; transition: background .2s, color .2s; }
+    .btn-secondary:hover { background: #fff; color: #111; }
+
+    /* ---- IMAGE PLACEHOLDER ---- */
+    .img-placeholder {
+      width: 100%; max-width: 860px; margin: 0 auto;
+      background: #374151; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      color: #9ca3af; font-size: 15px; font-weight: 500;
+    }
+    .hero-img {
+      width: 100%;
+      max-width: 860px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-top: 48px;
+    }
+    .img-placeholder.collab-img { height: 340px; margin: 0 auto; }
+    .img-placeholder.small { height: 200px; border-radius: 10px; margin-bottom: 16px; }
+
+    /* ---- SECTION WRAPPER ---- */
+    section { padding: 72px 24px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    /* ---- ABOUT SECTION ---- */
+    .about-section { background: #f9fafb; }
+    .about-section h2 { font-size: 36px; font-weight: 800; color: #111; margin-bottom: 16px; }
+    .about-section p { font-size: 16px; color: #4b5563; line-height: 1.8; max-width: 950px; margin-bottom: 28px; }
+    .about-section .location-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: #6b7280; margin-bottom: 24px; }
+    .about-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-outline { border: 2px solid #991b1b; color: #991b1b; padding: 11px 24px; border-radius: 8px; font-weight: 700; font-size: 14px; text-decoration: none; transition: background .2s, color .2s; }
+    .btn-outline:hover { background: #991b1b; color: #fff; }
+
+    /* ---- CAMPUS HIGHLIGHTS ---- */
+    .highlights-section { background: #fff; }
+    .highlights-section h2 { font-size: 32px; font-weight: 800; color: #111; margin-bottom: 48px; text-align: center; }
+    .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+    .highlight-card { background: #f3f4f6; border-radius: 14px; padding: 28px; }
+    .highlight-card .icon { width: 44px; height: 44px; background: #991b1b; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .highlight-card .icon svg { width: 22px; height: 22px; fill: #fff; }
+    .highlight-card h3 { font-size: 16px; font-weight: 700; color: #111; margin-bottom: 10px; line-height: 1.4; }
+    .highlight-card p { font-size: 14px; color: #6b7280; line-height: 1.7; }
+
+    /* ---- COLLABORATION ---- */
+    .collab-section { background: #111827; color: #fff; text-align: center; }
+    .collab-section .label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #9ca3af; margin-bottom: 12px; }
+    .collab-section h2 { font-size: 38px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; }
+    .collab-section h2 span { color: #fbbf24; }
+    .collab-section .sub { color: #9ca3af; font-size: 14px; margin-bottom: 40px; }
+
+    /* ---- STEPS ---- */
+    .steps-section { background: #fff; }
+    .steps-section h2 { font-size: 32px; font-weight: 800; color: #111; margin-bottom: 48px; text-align: center; }
+    .steps { display: flex; flex-direction: column; gap: 28px; }
+    .step { display: flex; gap: 24px; background: #f9fafb; border-radius: 14px; padding: 28px; align-items: flex-start; }
+    .step-num { min-width: 44px; height: 44px; background: #991b1b; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; }
+    .step-content h3 { font-size: 18px; font-weight: 700; color: #111; margin-bottom: 10px; }
+    .step-content p, .step-content ul { font-size: 15px; color: #4b5563; line-height: 1.75; }
+    .step-content ul { padding-left: 20px; }
+    .step-content ul li { margin-bottom: 4px; }
+    .step-content strong { color: #111; }
+    .steps-cta { text-align: center; margin-top: 40px; }
+
+    /* ---- WHO CAN APPLY ---- */
+    .apply-section { background: #f9fafb; }
+    .apply-section .inner { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
+    .apply-section .left { flex: 1; min-width: 280px; }
+    .apply-section h2 { font-size: 32px; font-weight: 800; color: #111; margin-bottom: 24px; }
+    .apply-criteria { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+    .criterion { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: #374151; }
+    .criterion .check { width: 22px; height: 22px; background: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .criterion .check svg { width: 12px; height: 12px; fill: #fff; }
+    .apply-note { font-size: 13px; color: #6b7280; margin-bottom: 24px; }
+    .apply-section .right { flex: 1; min-width: 260px; }
+
+    /* ---- UNIVERSITIES ---- */
+    .univ-section { background: #fff; }
+    .univ-section h2 { font-size: 28px; font-weight: 800; color: #111; margin-bottom: 40px; text-align: center; }
+    .univ-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
+    .univ-card { border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow .2s; }
+    .univ-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.1); }
+    .univ-card-img {
+  width: 100%;
+  height: 180px;        /* increase height for better look */
+  object-fit: cover;    /* THIS fixes the stretching issue */
+  display: block;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+    .univ-card-body { padding: 12px; }
+    .univ-phase { font-size: 11px; font-weight: 700; color: #991b1b; margin-bottom: 4px; text-transform: uppercase; letter-spacing: .5px; }
+    .univ-name { font-size: 14px; font-weight: 700; color: #111; line-height: 1.4; }
+    .univ-loc { font-size: 12px; color: #6b7280; margin-top: 2px; }
+
+    /* ---- FAQ ---- */
+    .faq-section { background: #f9fafb; }
+    .faq-section h2 { font-size: 32px; font-weight: 800; color: #111; margin-bottom: 40px; text-align: center; }
+    .faq-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; justify-content: center; }
+    .faq-tab { padding: 8px 18px; border-radius: 20px; border: 1px solid #d1d5db; font-size: 14px; font-weight: 600; cursor: pointer; background: #fff; color: #374151; transition: all .2s; }
+    .faq-tab.active { background: #991b1b; color: #fff; border-color: #991b1b; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; }
+    .faq-item { background: #fff; border-radius: 10px; border: 1px solid #e5e7eb; overflow: hidden; }
+    .faq-q { padding: 18px 20px; font-size: 15px; font-weight: 600; color: #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q span { font-size: 18px; color: #991b1b; }
+
+    /* ---- DISCLAIMER ---- */
+    .disclaimer { background: #1f2937; color: #9ca3af; padding: 28px 24px; text-align: center; font-size: 13px; line-height: 1.7; }
+    .disclaimer strong { color: #d1d5db; }
+
+    /* ---- FOOTER ---- */
+    footer { background: #111827; color: #fff; padding: 56px 24px 28px; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; max-width: 1080px; margin: 0 auto; margin-bottom: 40px; }
+    .footer-logo { font-size: 22px; font-weight: 800; color: #fef9c3; margin-bottom: 12px; }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 14px; color: #d1d5db; text-decoration: none; margin-bottom: 10px; transition: color .2s; }
+    .footer-col a:hover { color: #fbbf24; }
+    .footer-col p { font-size: 14px; color: #d1d5db; line-height: 1.7; }
+    .footer-bottom { max-width: 1080px; margin: 0 auto; border-top: 1px solid #374151; padding-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; }
+    .footer-bottom a { font-size: 12px; color: #6b7280; text-decoration: none; }
+    .footer-bottom a:hover { color: #9ca3af; }
+    .footer-disc { font-size: 12px; color: #6b7280; max-width: 680px; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 30px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+    }
+    .eligibility-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+
+/* when active */
+.faq-item.active .faq-a {
+  max-height: 200px;
+  padding: 0 20px 16px;
+}
+
+/* rotate + icon */
+.faq-item.active .faq-q span {
+  transform: rotate(45deg);
+}
+
+/* ---- HIGHLIGHTS REDESIGN ---- */
+.highlights-header { text-align: center; margin-bottom: 48px; }
+.highlights-sub { font-size: 16px; color: #6b7280; margin-top: 10px; }
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.highlight-card:nth-child(5) {
+  grid-column: 1 / span 1; /* center it */
+}
+.highlight-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+  overflow: hidden;
+}
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.card-1::before { background: linear-gradient(90deg, #991b1b, #dc2626); }
+.card-2::before { background: linear-gradient(90deg, #1d4ed8, #3b82f6); }
+.card-3::before { background: linear-gradient(90deg, #065f46, #10b981); }
+.card-4::before { background: linear-gradient(90deg, #92400e, #f59e0b); }
+.card-5::before { background: linear-gradient(90deg, #0e8392, #0bf565); }
+
+.highlight-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.card-number {
+  font-size: 52px;
+  font-weight: 900;
+  color: #dde0e6;
+  line-height: 1;
+  margin-bottom: 12px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.card-brand-logo { height: 24px; margin-bottom: 16px; display: block; }
+
+.multi-logos {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-badge {
+  display: inline-block;
+  background: #991b1b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.highlight-card h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.highlight-card p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.75;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+.tag {
+  background: #f9fafb;
+  color: #374151;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid #e5e7eb;
+}
+
+.faq-a {
+  padding: 12px 20px 18px;
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.75;
+  display: none;
+  overflow: visible;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/*slide*/
+/* ---- SLIDER ---- */
+.collab-slider {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.collab-slides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.collab-slide {
+  min-width: 100%;
+}
+.collab-slide img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background .2s;
+  z-index: 10;
+}
+.slide-btn:hover { background: rgba(153,27,27,0.8); }
+.slide-btn.prev { left: 12px; }
+.slide-btn.next { right: 12px; }
+.slide-dots {
+  text-align: center;
+  padding: 12px 0 4px;
+}
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #6b7280;
+  border-radius: 50%;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.dot.active { background: #991b1b; }
+  </style>
+</head>
+
+
+<body>
+<!-- NAV -->
+<nav>
+  <img src="images/velocescampuslogo.webp" alt="VelocesCampus Logo" class="nav-logo" />
+  <div class="nav-links">
+    <a class="btn-apply-nav" href="https://admissions.velocescampus.com/">Apply Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <video autoplay muted loop playsinline class="hero-video">
+  <source src="images/6843f3997cfba079258483_6819f2db44b2a480579978_ADayatVeloces.mp4" type="video/mp4">
+</video>
+
+  <span class="hero-tag">Veloces Campus × St. Mary's University</span>
+  <h1>St. Mary's <span>University</span></h1>
+  <p class="hero-sub">
+    Located in Hyderabad, Telangana, Stmarys University is India's pioneering private university devoted to immersive technologies, inclusive healthcare, and allied health education.
+  </p>
+  <div class="hero-location">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    Hyderabad
+  </div>
+  <div class="hero-btns">
+    <a class="btn-primary" href="https://admissions.velocescampus.com/">Apply Now</a>
+    <a class="btn-secondary" href="images/St%20Marys.pdf" download>Download Brochure</a>
+  </div>
+  <img src="images/Microsoft Skilling Champions_Photo Moment.webp" alt="Campus Image" class="hero-img" />
+</div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="container">
+    <h2>Stmarys University</h2>
+    <div class="location-tag">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;fill:#6b7280;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Hyderabad
+    </div>
+    <p>
+      Veloces Campus, a knwoledge partner with Stmarys University, Hyderabad, offers next-generation industry-integrated learning experience. This partnership combines the academic excellence of Stmarys University with Veloces’ advanced training in AI, Cloud, and emerging technologies.<br> Students benefit from the curriculum designed and developed in colloaboration with Microsoft, hands-on projects, global certifications, and continuous mentorship. This Ensures the student with strong fundamentals and real-world skills. This unique industry-academia collaboration is designed to make students industry-ready from day one and prepare them for high-demand careers in the technology-driven world.
+    </p>
+    <div class="about-btns">
+      <a class="btn-primary" href="https://admissions.velocescampus.com/" target="_blank" rel="noopener noreferrer">Apply Now</a>
+     <a class="btn-outline" href="images/St%20Marys.pdf" download>Download Brochure</a>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPUS HIGHLIGHTS -->
+<section class="highlights-section">
+  <div class="container">
+    <div class="highlights-header">
+      <h2>Why Study Here</h2>
+      <p class="highlights-sub">A future-ready education powered by Microsoft, built for the tech industry</p>
+    </div>
+    <div class="highlights-grid">
+
+      <div class="highlight-card card-1">
+        <div class="card-number">01</div>
+        <img src="images/download.png.webp" alt="Microsoft" class="card-brand-logo" />
+        <h3>Microsoft Integrated Curriculum</h3>
+        <p>Curriculum co-designed with Microsoft covering AI, Cloud, Machine Learning, and emerging technologies from day one.</p>
+        <div class="card-tags">
+          <span class="tag">AI/ML</span>
+          <span class="tag">CFIS</span>
+          <span class="tag">AR/VR</span>
+          <span class="tag">Robotics</span>
+          <span class="tag">IOT</span>
+        </div>
+      </div>
+
+      <div class="highlight-card card-2">
+        <div class="card-number">02</div>
+        <div class="multi-logos">
+          <img src="images/micrologo.webp" alt="Microsoft" style="height:18px;" />
+          <img src="images/aws-noback.webp" alt="AWS" style="height:18px;" />
+          <img src="images/imagesredhat-removebg-preview.webp" alt="Red Hat" style="height:18px;" />
+          <img src="images/adobe_new-removebg-preview.webp" alt="Adobe" style="height:18px;" />
+          <img src="images/unity.webp" alt="Unity" style="height:18px;" />
+        </div>
+        <h3>Global Certifications</h3>
+        <p>Earn globally recognized certifications from Microsoft, AWS, Google Cloud, Red Hat and Certiport alongside your B.Tech degree.</p>
+        <div class="card-tags">
+          <span class="tag">Microsoft</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Red Hat</span>
+          <span class="tag">Certiport</span>
+          <span class="tag">Adobe</span>
+          <span class="tag">Unity</span>
+          <span class="tag">IT Specialist</span>
+          <span class="tag">Apple-Swift</span>
+        </div>
+      </div>
+
+      <div class="highlight-card card-3">
+        <div class="card-number">03</div>
+        <div class="stat-badge">100+ Hiring Partners</div>
+        <h3>Top Industry Placements</h3>
+        <p>Strong alliances with Microsoft, AWS, Google Cloud and Red Hat give students direct access to top MNC placements and internships.</p>
+        <div class="card-tags">
+          <span class="tag">MNC Placements</span>
+          <span class="tag">Internships</span>
+          <span class="tag">Career Support</span>
+        </div>
+      </div>
+
+      <div class="highlight-card card-4">
+        <div class="card-number">04</div>
+        <div class="stat-badge" style="background:#1d4ed8;">Hands-on Learning</div>
+        <h3>Practical Based Learning</h3>
+        <p>AI hackathons, Microsoft AI Lab access, live industry projects and campus visits ensure you learn by doing — not just theory.</p>
+        <div class="card-tags">
+          <span class="tag">AI Hackathons</span>
+          <span class="tag">Live Projects</span>
+          <span class="tag">International projects</span>
+          <span class="tag">Industry Visits</span>
+        </div>
+      </div>
+
+      <div class="highlight-card card-5">
+        <div class="card-number">05</div>
+        <div class="stat-badge" style="background:#1db3d8;">On-Ground Training</div>
+        <h3>Aviation Industry Exposure</h3>
+        <p>Gain knowledge of airport and airline operations, aviation safety, and global regulations while building skills in management, customer service, and leadership.</p>
+        <div class="card-tags">
+          <span class="tag">Airport Ops</span>
+          <span class="tag">Airline Mgmt</span>
+          <span class="tag">Safety & Security</span>
+          <span class="tag">Customer Service</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- COLLABORATION -->
+<section class="collab-section">
+  <div class="container">
+    <p class="label">Celebrating Learning Beyond Academics</p>
+    <h2><span>Experiences That Build Future Leaders</span></h2>
+    <div class="collab-slider">
+  <div class="collab-slides">
+    <div class="collab-slide active">
+      <img src="images/cut image.webp" alt="Collaboration 1" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/slide4.webp" alt="Collaboration 2" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/img 1.webp" alt="Collaboration 3" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/slide_1.webp" alt="Collaboration 4" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/img 2.webp" alt="Collaboration 5" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/img 6.webp" alt="Collaboration 6" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/img 3.webp" alt="Collaboration 7" />
+    </div>
+    <div class="collab-slide">
+      <img src="images/img 4.webp" alt="Collaboration 8" />
+    </div>
+
+  </div>
+  <button class="slide-btn prev" onclick="moveSlide(-1)">&#8592;</button>
+  <button class="slide-btn next" onclick="moveSlide(1)">&#8594;</button>
+  <div class="slide-dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+    <span class="dot" onclick="goToSlide(4)"></span>
+    <span class="dot" onclick="goToSlide(5)"></span>
+    <span class="dot" onclick="goToSlide(6)"></span>
+    <span class="dot" onclick="goToSlide(7)"></span>
+  </div>
+</div>
+  </div>
+</section>
+
+<!--  STEPS -->
+<section class="steps-section">
+  <div class="container">
+    <h2>Steps To Apply For Admission At <br> St. Mary's University – Veloces Campus</h2>
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Fill in the Application Form</h3>
+          <ul>
+            <li>Fill out your personal and academic details online</li>
+            <li>Pay ₹1,200/- as entrance test application fee (non-refundable)</li>
+          </ul>
+          <br>
+          <a class="btn-primary" href="https://admissions.velocescampus.com" style="display:inline-block;margin-top:8px;">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Take the VSAT Exam</h3>
+          <p>VSAT (Veloces Scholarship and Aptitude Test) is an online test required as part of the admission process to enrol in B.Tech CSE at St. Mary's University, Hyderabad.</p>
+          <br>
+          <p><strong>Exam Details:</strong></p>
+          <ul>
+            <li><strong>Mode:</strong> Online</li>
+            <li><strong>Scholarship:</strong> Upto 100% on 1st Year Tuition Fees based on VSAT performance</li>
+            <li><strong>Microsoft Women Empowerment Scholarship:</strong> Upto 10% on Tuition Fee across 4 years</li>
+            <li><strong>Outstanding Achievement Scholarship:</strong> Upto 10% on Tuition Fee across 4 years</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Personal Interview</h3>
+          <ul>
+            <li>Shortlisted candidates will be invited for a Personal Interview round.</li>
+            <li>The interview helps us understand your interests, goals, and passion for technology.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Appear for Counselling Session</h3>
+          <ul>
+            <li>Selected students will be invited for a one-on-one counselling session.</li>
+            <li>Our team will guide you in choosing the right program.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>Book Your Seat</h3>
+          <ul>
+            <li>Pay the booking fee to confirm and reserve your seat.</li>
+            <li>Booking fee will be adjusted in the 1st Year Admission Fee.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <h3>Verify Your Documents</h3>
+          <ul>
+            <li>Submit all required documents for final admission verification.</li>
+            <li>Eligibility: Passed HSC or equivalent with 50% and above in Physics, Chemistry and Maths (PCM) for 2025 & 2026 batch.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="steps-cta">
+      <p style="margin-bottom:16px;font-size:18px;font-weight:700;color:#111;">Start Your Journey Today</p>
+      <a class="btn-primary" href="https://admissions.velocescampus.com">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHO CAN APPLY -->
+<section class="apply-section">
+  <div class="container">
+    <div class="inner">
+      <div class="left">
+        <h2>Who Can Apply?</h2>
+        <div class="apply-criteria">
+          <div class="criterion">
+            <div class="check">
+              <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <span>Completed 12th grade with Maths, Physics, and Chemistry</span>
+          </div>
+        </div>
+        <a class="btn-primary" href="https://admissions.velocescampus.com/">Apply for Counselling</a>
+      </div>
+      <div class="right">
+        <img src="images/Copy of DSC08599.webp" alt="Eligibility Image" class="eligibility-img" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- UNIVERSITIES -->
+<section class="univ-section">
+  <div class="container">
+    <h2>Universities Where Our Programs Are Offered</h2>
+    <div class="univ-grid">
+
+      <div class="univ-card">
+        <img src="images/download (1).webp" class="univ-card-img" alt="University Image">
+        <div class="univ-card-body">
+          <p class="univ-phase">B.Tech</p>
+          <p class="univ-name">Ajeenkya DY Patil University</p>
+          <p class="univ-loc">Pune</p>
+        </div>
+      </div>
+
+      <div class="univ-card">
+        <img src="images/DJI_0823.webp" class="univ-card-img" alt="University Image">
+        <div class="univ-card-body">
+          <p class="univ-phase">B.Tech, BBA</p>
+          <p class="univ-name">Sandip University</p>
+          <p class="univ-loc">Nashik</p>
+        </div>
+      </div>
+
+      <div class="univ-card">
+        <img src="images/download (3).webp" class="univ-card-img" alt="University Image">
+        <div class="univ-card-body">
+          <p class="univ-phase">B.Tech, BBA</p>
+          <p class="univ-name">St. Mary's University</p>
+          <p class="univ-loc">Hyderabad</p>
+        </div>
+      </div>
+
+      <div class="univ-card">
+        <img src="images/download (2).webp" class="univ-card-img" alt="University Image">
+        <div class="univ-card-body">
+          <p class="univ-phase">B.Tech</p>
+          <p class="univ-name">Vidhyadeep University</p>
+          <p class="univ-loc">Surat</p>
+        </div>
+      </div>
+
+      <div class="univ-card">
+        <img src="images/images.webp" class="univ-card-img" alt="University Image">
+        <div class="univ-card-body">
+          <p class="univ-phase">B.Sc Computer Science</p>
+          <p class="univ-name">Periyar Maniammai Institute of Science & Technology</p>
+          <p class="univ-loc">Tamil Nadu</p>
+        </div>
+      </div>
+
+
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-tabs">
+      <div class="faq-tab active" onclick="filterFaq('general')">General</div>
+      <div class="faq-tab" onclick="filterFaq('enrollment')">Enrollment</div>
+      <div class="faq-tab" onclick="filterFaq('vsat')">VSAT</div>
+      <div class="faq-tab" onclick="filterFaq('programs')">Programs</div>
+      <div class="faq-tab" onclick="filterFaq('campus')">Campus</div>
+      <div class="faq-tab" onclick="filterFaq('Scholarship')">Scholarship</div>
+      <div class="faq-tab" onclick="filterFaq('hostel')">Hostel</div>
+    </div>
+    <div class="faq-list">
+
+      <!-- GENERAL -->
+      <div class="faq-item" data-category="general">
+        <div class="faq-q" onclick="toggleFaq(this)">What is Veloces Campus? <span>+</span></div>
+        <div class="faq-a">Veloces Campus is an EdTech organisation that offers Industry - Academia integrated B.Tech and B.Sc programs designed in collaboration with Microsoft. These programs are delivered at top UGC/AICTE approved universities across India. Veloces is a Microsoft Gold Partner, bringing industry-relevant technology education to students.</div>
+      </div>
+      <div class="faq-item" data-category="general">
+        <div class="faq-q" onclick="toggleFaq(this)">What makes Veloces Campus's program special? <span>+</span></div>
+        <div class="faq-a">Veloces programs are co-designed with Microsoft, integrating AI, Machine Learning, Cloud Computing, Cyber Security, AR/VR, IoT, and Blockchain from day one. Students also earn global certifications from Microsoft, AWS, Google Cloud, Red Hat and Certiport alongside their degree.</div>
+      </div>
+      <div class="faq-item" data-category="general">
+        <div class="faq-q" onclick="toggleFaq(this)">Where is the Veloces Campus program offered? <span>+</span></div>
+        <div class="faq-a">Veloces Campus programs are currently offered at 5 university campuses — Ajeenkya DY Patil University (Pune), Periyar Maniammai Institute of Science & Technology (Thanjavur), Sandip University (Nashik), St. Mary's University (Hyderabad), and Vidhyadeep University (Surat).</div>
+      </div>
+      <div class="faq-item" data-category="general">
+        <div class="faq-q" onclick="toggleFaq(this)">Is the B.Tech degree awarded by Veloces Campus? <span>+</span></div>
+        <div class="faq-a">No. Veloces Campus is not a university. The B.Tech degree is awarded by the respective UGC-recognized and AICTE-approved university.</div>
+      </div>
+      <div class="faq-item" data-category="general">
+        <div class="faq-q" onclick="toggleFaq(this)">Is the B.Tech degree valid for jobs and higher studies in India and abroad? <span>+</span></div>
+        <div class="faq-a">Yes. The B.Tech degree is awarded by UGC-recognized and AICTE-approved universities, making it fully valid for jobs, higher studies, and further education in India and abroad.</div>
+      </div>
+          <div class="faq-item" data-category="general">
+        <div class="faq-q" onclick="toggleFaq(this)">Does Veloces Campus provide Management programs <span>+</span></div>
+        <div class="faq-a">Yes. Currently Veloces Campus offers BBA Aviation Management in two of its partner university campuses (Sandip University - Nashik, St. Mary's University - Hyderabad).</div>
+      </div>
+
+      <!-- ENROLLMENT -->
+      <div class="faq-item" data-category="enrollment">
+        <div class="faq-q" onclick="toggleFaq(this)">Who is eligible to apply at Veloces Campus? <span>+</span></div>
+        <div class="faq-a"><b>B.Tech</b> - Students who have passed Higher Secondary (HSC) or equivalent from a recognized board with 50% and above in Physics, Chemistry and Maths (PCM) are eligible to apply.<br>
+        <b>BBA Aviation Management</b> - Passed 10+2 or equivalent course in any discipline from recognised Board/ Council/ University with minimum 45% marks.</div>
+      </div>
+
+      <div class="faq-item" data-category="enrollment">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the admission process? <span>+</span></div>
+        <div class="faq-a">The admission process has 6 steps: (1) Fill the application form online, <a href="https://admissions.velocescampus.com/">(2) Take the VSAT exam</a>, (3) Personal Interview, (4) Counselling session, (5) Book your seat, (6) Document verification. <br>Visit <a href="https://admissions.velocescampus.com/">admissions.velocescampus.com</a> to get started.</div>
+      </div>
+      <div class="faq-item" data-category="enrollment">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I apply? <span>+</span></div>
+        <div class="faq-a">You can apply online at <a href="https://admissions.velocescampus.com/">admissions.velocescampus.com</a>. Fill in your details, pay the application fee of ₹1,200/- and register for the VSAT exam.</div>
+      </div>
+
+      <!-- VSAT -->
+      <div class="faq-item" data-category="vsat">
+        <div class="faq-q" onclick="toggleFaq(this)">What is VSAT? <span>+</span></div>
+        <div class="faq-a">VSAT - Veloces Scholarship and Aptitude Test. It is an online entrance test required as part of the admission process to enrol in B.Tech/B.Sc/BBA programs at Veloces Campus universities.</div>
+      </div>
+      <div class="faq-item" data-category="vsat">
+        <div class="faq-q" onclick="toggleFaq(this)">When is the VSAT exam? <span>+</span></div>
+        <div class="faq-a">All students who have aplied for VSAT would be intimated via Email.</div>
+      </div>
+            <div class="faq-item" data-category="vsat">
+        <div class="faq-q" onclick="toggleFaq(this)">Is VSAT Exam an online or an offline examination? <span>+</span></div>
+        <div class="faq-a">VSAT Exam is conducted online.</div>
+      </div>
+      <div class="faq-item" data-category="vsat">
+        <div class="faq-q" onclick="toggleFaq(this)">What scholarships are available based on VSAT? <span>+</span></div>
+        <div class="faq-a">Based on VSAT performance, students can avail: (1) Upto 100% Scholarship on 1st Year Tuition Fees, (2) Microsoft Women Empowerment Scholarship on Tuition Fee across 4 years (3) Outstanding Achievement Scholarship on Tuition Fee across 4 years.</div>
+      </div>
+      <div class="faq-item" data-category="vsat">
+        <div class="faq-q" onclick="toggleFaq(this)">Is the VSAT application fee refundable? <span>+</span></div>
+        <div class="faq-a">No. The VSAT Exam application fee of ₹1,200/- is non-refundable under any circumstances.</div>
+      </div>
+
+      <!-- PROGRAMS -->
+      <div class="faq-item" data-category="programs">
+        <div class="faq-q" onclick="toggleFaq(this)">What programs does Veloces Campus offer? <span>+</span></div>
+        <div class="faq-a">Veloces Campus offers <br>1. B.Tech CSE in Virtual & Augmented Reality <br>2. B.Tech CSE in Cyber Forensics & Information Security <br>3. B.Tech in Robotics & AI <br>4. B.Tech in AI & Data Science <br>5. B.Tech CSE in IoT & Cyber Security <br>6. B.Sc in CS with AI in Immersive Technologies <br>7. BBA Aviation Management</div>
+      </div>
+      <div class="faq-item" data-category="programs">
+        <div class="faq-q" onclick="toggleFaq(this)">What technologies are integrated into the curriculum? <span>+</span></div>
+        <div class="faq-a">The curriculum integrates Artificial Intelligence, Machine Learning, Data Science, Cyber Security, Internet of Things, Blockchain Technology, Immersive Technologies (AR/VR), and Robotics & Drone Technology.</div>
+      </div>
+
+      <!-- CAMPUS -->
+      <div class="faq-item" data-category="campus">
+        <div class="faq-q" onclick="toggleFaq(this)">Where is St. Mary's University campus located? <span>+</span></div>
+        <div class="faq-a">Stmarys University is located in Hyderabad, Telangana.</div>
+      </div>
+
+      <div class="faq-item" data-category="campus">
+        <div class="faq-q" onclick="toggleFaq(this)">What programs does Veloces Campus at St. Mary's University offer? <span>+</span></div>
+        <div class="faq-a">Veloces Campus at St. Mary's University offers specialized programs in rehabilitation sciences, allied health, psychology, and therapy disciplines. The curriculum integrates theoretical knowledge with real-world clinical immersion, research, and applied problem-solving.</div>
+      </div>
+
+
+      <!-- Scholarship -->
+      <div class="faq-item" data-category="">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the fee structure at St. Mary's University offer? <span>+</span></div>
+        <div class="faq-a">The B.Tech program at St. Mary's University has a <br>- Tuition Fee - ₹3,00,000/- per year <br>- The 1st Year total is ₹3,85,000/- (including Admission Registration Fee of ₹10,000/- and Caution Deposit of ₹50,000/- which is refundable). Hostel fee is ₹1,25,000/- per year for 3-sharing accommodation.</div>
+      </div>
+      <div class="faq-item" data-category="Scholarship">
+        <div class="faq-q" onclick="toggleFaq(this)">Are there any scholarships available? <span>+</span></div>
+        <div class="faq-a">Yes. Students can avail Upto 100% Scholarship* on 1st Year Tuition Fees based on VSAT performance, Microsoft Women Empowerment Scholarship, and Outstanding Achievement Scholarship on tuition fees across all 4 years.</div>
+      </div>
+
+      <!-- HOSTEL -->
+      <div class="faq-item" data-category="hostel">
+        <div class="faq-q" onclick="toggleFaq(this)">Is hostel facility available? <span>+</span></div>
+        <div class="faq-a">Yes. We offer on-campus hostel facility.</div>
+      </div>
+      <div class="faq-item" data-category="hostel">
+        <div class="faq-q" onclick="toggleFaq(this)">What types of hostel rooms are available? <span>+</span></div>
+        <div class="faq-a">We offer three sharing rooms.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Veloces Campus</div>
+      <p style="font-size:13px;color:#9ca3af;line-height:1.7;">Veloces Campus is an Ed-Tech organisation delivering industry-integrated programs across various universities in India. These programs combines academic learning with real-world training in collaboration with Microsoft to prepare students for future-ready careers.</p>
+    </div>
+    <div class="footer-col">
+      <!--<h4>Quick Links</h4>
+      <a href="https://admissions.velocescampus.com/">Assessment Test</a>
+      <a href="/contact">Talk to Counsellor</a>
+      <a href="/partner/veloces/">University Collabs</a>
+      <a href="/partner/veloces/">VelocesCampus Advantage</a>
+      <a href="/partner/veloces/">AI Bootcamp</a>
+      <a href="/partner/veloces/">VelocesCampus Masterclass</a>-->
+    </div>
+    <div class="footer-col">
+      <h4>Reach Us</h4>
+      <p>+91 844 844 8611</p>
+      <p style="margin-top:6px;">info@veloces.in</p>
+      <p style="margin-top:12px;font-size:13px;">Veloces Campus<br>St. Mary's University,<br>Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana – 508284, India.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-disc">Disclaimer: Veloces Campus is a Knowledge Partner to Stmarys University and not a university and does not itself award degrees. Admission into university is offered solely at the discretion of the university based on its established admission policies. <br>*Conditions Apply</p>
+    <p class="footer-disc"></p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+
+      <!-- <a href="/privacy-policy">Privacy Policy</a>
+      <a href="/grievance-redressal">Grievance Redressal</a>
+      <a href="/privacy-policy">Cookie Policy</a>
+      <a href="/about">Corporate Information</a>
+      <a href="/terms-of-service">Terms of use</a>
+      <a href="/about">Vision and Values</a>
+      <a href="/terms-of-service">Legal Disclaimer</a> -->
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ tab switching
+  function filterFaq(category) {
+    document.querySelectorAll('.faq-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.style.display = item.dataset.category === category ? 'block' : 'none';
+    });
+  }
+
+  // FAQ open/close answer
+  function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    const span = el.querySelector('span');
+    const isOpen = answer.style.display === 'block';
+    // close all
+    document.querySelectorAll('.faq-a').forEach(a => a.style.display = 'none');
+    document.querySelectorAll('.faq-q span').forEach(s => s.textContent = '+');
+    // open clicked
+    if (!isOpen) {
+      answer.style.display = 'block';
+      span.textContent = '−';
+    }
+  }
+
+  // show only general on load
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = item.dataset.category === 'general' ? 'block' : 'none';
+  });
+
+  // Slider
+let currentSlide = 0;
+const slides = document.querySelectorAll('.collab-slide');
+const totalSlides = slides.length;
+const slider = document.querySelector('.collab-slides');
+const dots = document.querySelectorAll('.dot');
+
+function updateSlider() {
+  slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+  dots.forEach(dot => dot.classList.remove('active'));
+  dots[currentSlide].classList.add('active');
+}
+
+function moveSlide(direction) {
+  currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+  updateSlider();
+}
+
+function goToSlide(n) {
+  currentSlide = n;
+  updateSlider();
+}
+
+// Auto slide (continuous loop)
+setInterval(() => {
+  moveSlide(1);
+}, 4000);
+</script>
+</script>
+</body>
+</html>

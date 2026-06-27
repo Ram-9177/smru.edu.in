@@ -1,0 +1,67 @@
+{
+  "auditDate": "2026-06-11",
+  "scope": "SEO baseline only; no UI or content changes",
+  "semrushExportStatus": {
+    "foundInRepo": false,
+    "note": "sheet.csv is a Google Sheets access HTML page, not a usable Semrush export. Counts below are the user-provided Semrush warning counts."
+  },
+  "knownSemrushWarnings": {
+    "lowTextToHtmlRatio": 89,
+    "brokenExternalLinks": 78,
+    "titleElementTooLong": 44,
+    "pagesWithOnlyOneInternalLink": 18,
+    "duplicateH1AndTitle": 11,
+    "lowWordCount": 10,
+    "noHstsSupport": 2,
+    "multipleH1Tags": 1,
+    "blockedFromCrawling": 1
+  },
+  "repoRenderedBaseline": {
+    "source": "out/**/*.html static export",
+    "htmlPagesChecked": 467,
+    "sitemapLocs": 305,
+    "sitemapDuplicates": 0,
+    "sitemapLocsMissingRenderedHtml": 0,
+    "robotsTxtPresent": true,
+    "robotsDisallow": ["/developer/", "/api/", "/thank-you/"],
+    "titleLengthCandidates": {
+      "titleGreaterThan60Chars": 370,
+      "titleGreaterThan70Chars": 263,
+      "titleGreaterThan75Chars": 208
+    },
+    "h1Candidates": {
+      "noH1": 44,
+      "multipleH1": 2,
+      "duplicateFirstH1AndTitleAfterBrandTrim": 277
+    },
+    "wordCountCandidates": {
+      "wordsLessThan100": 8,
+      "wordsLessThan200": 38
+    },
+    "linkCandidates": {
+      "pagesWithExactlyOneRenderedInternalAnchor": 3,
+      "uniqueRenderedExternalAnchorUrls": 26,
+      "liveExternalAnchorChecksBroken": 0,
+      "liveExternalAnchorCheckNote": "Bounded HEAD/GET check of unique rendered external anchors; Semrush broken-link URL list was not present."
+    },
+    "textHtmlRatioCandidates": {
+      "ratioLessThan10Percent": 457,
+      "ratioLessThan5Percent": 104,
+      "note": "Rendered Next.js export includes shared app shell, scripts, styles, and static asset pages; this local threshold is not equivalent to Semrush's reported 89 pages."
+    },
+    "indexingCandidates": {
+      "renderedNoindexPages": 140,
+      "renderedNoCanonicalPages": 18
+    },
+    "securityHeaderCandidates": {
+      "strictTransportSecurityInRepo": false,
+      "source": "public/.htaccess and next.config.mjs"
+    }
+  },
+  "availableNpmScripts": {
+    "build": "npm run build",
+    "lint": "npm run lint",
+    "typecheck": null,
+    "typecheckFallback": "npx tsc --noEmit"
+  }
+}

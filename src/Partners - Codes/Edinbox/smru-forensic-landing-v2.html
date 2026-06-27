@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edinbox Partnership | Stmarys University</title>
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://smru.edu.in/partner/edinbox/">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --teal:        #1b5c48;
+  --teal-dark:   #133d30;
+  --teal-light:  #227055;
+  --teal-hover:  #2a8c6a;
+  --orange:      #e8971f;
+  --orange-light:#f5b042;
+  --white:       #ffffff;
+  --off-white:   #f4f7f5;
+  --light-gray:  #f0f2f1;
+  --text-dark:   #1a2e28;
+  --text-mid:    #3d5a52;
+  --text-light:  #6b8a80;
+  --border:      #d0ddd8;
+  --nav-top:     #0f2d23;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  color: var(--text-dark);
+  background: #fff;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-dark);
+}
+
+a { text-decoration: none; }
+
+/* ═══════════════════════════════
+   TOP UTILITY BAR
+═══════════════════════════════ */
+.top-bar {
+  background: var(--nav-top);
+  padding: 0.45rem 0;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+  font-family: 'Source Sans 3', sans-serif;
+}
+.top-bar a {
+  color: rgba(255,255,255,0.75);
+  margin: 0 0.7rem;
+  transition: color 0.2s;
+  font-size: 0.78rem;
+}
+.top-bar a:hover { color: var(--orange); }
+.top-bar .top-bar-right a {
+  border-left: 1px solid rgba(255,255,255,0.15);
+  padding-left: 0.7rem;
+}
+.top-bar .btn-apply {
+  background: var(--orange);
+  color: #fff;
+  padding: 0.2rem 0.9rem;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 0.78rem;
+  margin-left: 0.5rem;
+}
+.top-bar .btn-apply:hover { background: var(--orange-light); color: #fff; }
+
+/* ═══════════════════════════════
+   MAIN NAVBAR
+═══════════════════════════════ */
+.navbar-main {
+  background: var(--teal);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.navbar-main .container {
+  display: flex;
+  align-items: stretch;
+  min-height: 62px;
+}
+.navbar-brand-wrap {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1.5rem 0.5rem 0;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  margin-right: 1rem;
+}
+.navbar-logo-text {
+  line-height: 1.15;
+}
+.navbar-logo-text .logo-main {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  display: block;
+}
+.navbar-logo-text .logo-sub {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: block;
+}
+.nav-main-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+.nav-main-links > li {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+.nav-main-links > li > a {
+  display: flex;
+  align-items: center;
+  padding: 0 1.1rem;
+  color: rgba(255,255,255,0.88);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+  font-family: 'Source Sans 3', sans-serif;
+  border-bottom: 3px solid transparent;
+}
+.nav-main-links > li > a:hover,
+.nav-main-links > li > a.active {
+  background: var(--teal-dark);
+  color: #fff;
+  border-bottom-color: var(--orange);
+}
+.nav-main-links > li > a i { font-size: 0.7rem; margin-left: 0.3rem; }
+.navbar-cta-wrap {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+.btn-nav-cta {
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.4rem;
+  border-radius: 3px;
+  border: none;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-nav-cta:hover { background: var(--orange-light); color: #fff; transform: translateY(-1px); }
+
+/* DROPDOWN */
+.nav-main-links li:hover .dropdown-nav { display: block; }
+.dropdown-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  border-top: 3px solid var(--orange);
+  z-index: 100;
+}
+.dropdown-nav a {
+  display: block;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s, color 0.15s;
+}
+.dropdown-nav a:hover { background: var(--off-white); color: var(--teal); padding-left: 1.5rem; }
+.dropdown-nav a:last-child { border-bottom: none; }
+
+/* Mobile toggler */
+.navbar-toggler-custom {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  padding: 0.4rem 0.7rem;
+  border-radius: 3px;
+  cursor: pointer;
+  display: none;
+  margin-left: auto;
+}
+@media (max-width: 991px) {
+  .navbar-toggler-custom { display: flex; align-items: center; }
+  .nav-main-links { display: none; flex-direction: column; width: 100%; }
+  .nav-main-links.open { display: flex; }
+  .navbar-main .container { flex-wrap: wrap; }
+  .navbar-cta-wrap { display: none; }
+  .nav-main-links > li > a { padding: 0.75rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .navbar-brand-wrap { border-right: none; }
+}
+
+/* ═══════════════════════════════
+   HERO / BANNER
+═══════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--teal-dark);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(100deg, rgba(15,45,35,0.97) 0%, rgba(27,92,72,0.88) 55%, rgba(27,92,72,0.55) 100%),
+    url('https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=1600&q=80') center/cover no-repeat;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(232,151,31,0.15);
+  border: 1px solid rgba(232,151,31,0.5);
+  color: var(--orange-light);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border-radius: 3px;
+  margin-bottom: 1.4rem;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--orange-light);
+}
+.hero-sub-heading {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.hero-desc {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.82);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 2.2rem;
+  font-weight: 300;
+}
+.btn-hero-primary {
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  border-radius: 3px;
+  display: inline-block;
+  transition: all 0.25s;
+  border: 2px solid var(--orange);
+}
+.btn-hero-primary:hover {
+  background: var(--orange-light);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,151,31,0.4);
+}
+.btn-hero-outline {
+  background: transparent;
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.88rem 2.2rem;
+  border-radius: 3px;
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.45);
+  margin-left: 0.8rem;
+  transition: all 0.25s;
+}
+.btn-hero-outline:hover {
+  border-color: #fff;
+  color: #fff;
+}
+.hero-stats-row {
+  display: flex;
+  gap: 0;
+  margin-top: 3.5rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 2rem;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  flex: 1;
+  min-width: 110px;
+  padding-right: 1.5rem;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  margin-bottom: 1rem;
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--orange-light);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+/* Hero image card */
+.hero-img-card {
+  position: relative;
+  z-index: 2;
+}
+.hero-img-card img {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  filter: saturate(0.85);
+}
+.hero-badge-float {
+  position: absolute;
+  bottom: -1rem;
+  left: -1rem;
+  background: var(--orange);
+  color: #fff;
+  padding: 1rem 1.4rem;
+  border-radius: 4px;
+  font-family: 'Source Sans 3', sans-serif;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.hero-badge-float .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.hero-badge-float .txt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.88;
+}
+
+/* ═══════════════════════════════
+   ANNOUNCEMENT BANNER
+═══════════════════════════════ */
+.announcement-bar {
+  background: #fff;
+  border-bottom: 3px solid var(--orange);
+  padding: 0.9rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.announcement-bar .label-pill {
+  background: var(--orange);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 3px;
+  margin-right: 1rem;
+  white-space: nowrap;
+}
+.announcement-bar .text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-family: 'Source Sans 3', sans-serif;
+}
+.announcement-bar .dates {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin: 0 1.2rem;
+}
+.announcement-bar .dates strong { color: var(--teal); }
+.btn-register-now {
+  background: var(--teal);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.4rem 1.2rem;
+  border-radius: 3px;
+  white-space: nowrap;
+  transition: background 0.2s;
+  font-family: 'Source Sans 3', sans-serif;
+  letter-spacing: 0.04em;
+}
+.btn-register-now:hover { background: var(--teal-light); color: #fff; }
+
+/* ═══════════════════════════════
+   SECTIONS COMMONS
+═══════════════════════════════ */
+section { padding: 4.5rem 0; }
+.section-tag {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+}
+.section-heading {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: 0.8rem;
+}
+.section-heading em { font-style: italic; color: var(--teal); }
+.section-heading span { color: var(--orange); }
+.underline-accent {
+  display: block;
+  width: 52px;
+  height: 3px;
+  background: var(--orange);
+  margin: 0.8rem auto 1.5rem;
+}
+.underline-accent.left { margin-left: 0; }
+.section-desc {
+  font-size: 1rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  max-width: 640px;
+}
+
+/* ═══════════════════════════════
+   WHY Stmarys University — ICON CARDS
+═══════════════════════════════ */
+.why-section { background: #fff; }
+.why-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  height: 100%;
+}
+.why-card:hover {
+  background: var(--off-white);
+  box-shadow: 0 8px 28px rgba(27,92,72,0.1);
+  transform: translateY(-4px);
+}
+.why-card .icon-wrap {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, rgba(27,92,72,0.1), rgba(27,92,72,0.06));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  border: 2px solid rgba(27,92,72,0.12);
+  font-size: 1.8rem;
+  color: var(--teal);
+  transition: all 0.3s;
+}
+.why-card:hover .icon-wrap {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+}
+.why-card h5 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+.why-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.65; }
+
+/* ═══════════════════════════════
+   AIFSET — TEAL SECTION
+═══════════════════════════════ */
+.aifset-section {
+  background: var(--teal);
+  position: relative;
+  overflow: hidden;
+}
+.aifset-section::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -80px;
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.aifset-section .section-heading { color: #fff; }
+.aifset-section .section-desc { color: rgba(255,255,255,0.78); }
+.aifset-section .section-tag { color: var(--orange-light); }
+.aifset-feature-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 1.8rem 1.5rem;
+  height: 100%;
+  transition: all 0.3s;
+  text-align: center;
+}
+.aifset-feature-card:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+}
+.aifset-feature-card .icon {
+  font-size: 2rem;
+  color: var(--orange-light);
+  margin-bottom: 1rem;
+  display: block;
+}
+.aifset-feature-card h5 {
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.aifset-feature-card p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+/* ═══════════════════════════════
+   ELIGIBILITY — LIGHT SECTION
+═══════════════════════════════ */
+.eligibility-section { background: var(--off-white); }
+.elig-card {
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.elig-row-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.elig-row-item:last-child { border-bottom: none; }
+.elig-row-item:hover { background: var(--off-white); }
+.elig-icon-wrap {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.elig-text strong {
+  display: block;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  margin-bottom: 0.15rem;
+}
+.elig-text span { font-size: 0.88rem; color: var(--text-mid); }
+
+/* ═══════════════════════════════
+   ADMISSION PROCESS
+═══════════════════════════════ */
+.process-section { background: #fff; }
+.step-card {
+  position: relative;
+  padding: 2rem 1.5rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-align: center;
+  height: 100%;
+  transition: all 0.3s;
+  background: #fff;
+}
+.step-card:hover {
+  border-color: var(--teal);
+  box-shadow: 0 8px 28px rgba(27,92,72,0.12);
+  transform: translateY(-4px);
+}
+.step-num-badge {
+  width: 48px;
+  height: 48px;
+  background: var(--teal);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 auto 1.2rem;
+  box-shadow: 0 4px 12px rgba(27,92,72,0.3);
+}
+.step-card h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-family: 'Source Sans 3', sans-serif;
+  letter-spacing: 0.04em;
+}
+.step-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+.step-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--orange);
+  font-size: 1.4rem;
+  padding-top: 1.5rem;
+}
+@media (max-width: 767px) { .step-connector { display: none; } }
+
+/* ═══════════════════════════════
+   CAREERS
+═══════════════════════════════ */
+.careers-section { background: var(--off-white); }
+.career-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  transition: all 0.25s;
+}
+.career-item:hover {
+  border-color: var(--teal);
+  box-shadow: 0 4px 16px rgba(27,92,72,0.1);
+  transform: translateX(4px);
+}
+.career-item .career-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--teal), var(--teal-light));
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.career-item .career-text strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  font-family: 'Source Sans 3', sans-serif;
+}
+.career-item .career-text span {
+  font-size: 0.8rem;
+  color: var(--text-light);
+}
+
+/* ═══════════════════════════════
+   SCHOLARSHIP SECTION (teal)
+═══════════════════════════════ */
+.scholarship-section {
+  background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%);
+  padding: 5rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.scholarship-section::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(232,151,31,0.12) 0%, transparent 70%);
+}
+.scholarship-section h2 {
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+.scholarship-section h2 span { color: var(--orange-light); font-style: italic; }
+.scholarship-section p { color: rgba(255,255,255,0.78); font-size: 1.05rem; max-width: 580px; margin: 1rem auto 2rem; }
+.btn-scholarship {
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  border-radius: 3px;
+  border: 2px solid var(--orange);
+  display: inline-block;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(232,151,31,0.35);
+}
+.btn-scholarship:hover {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255,255,255,0.7);
+}
+
+/* ═══════════════════════════════
+   TESTIMONIAL / QUOTE SECTION
+═══════════════════════════════ */
+.testimonial-section {
+  background: var(--nav-top);
+  padding: 5rem 0;
+  text-align: center;
+}
+.testimonial-section blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  font-style: italic;
+  color: rgba(255,255,255,0.9);
+  max-width: 720px;
+  margin: 1.5rem auto;
+  line-height: 1.6;
+}
+.testimonial-section .quote-icon {
+  font-size: 3rem;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.testimonial-section .author {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-light);
+  margin-top: 1.5rem;
+}
+.testimonial-section .author span { color: rgba(255,255,255,0.5); font-weight: 300; }
+
+/* ═══════════════════════════════
+   FAQ
+═══════════════════════════════ */
+.faq-section { background: #fff; }
+.faq-accordion .faq-item {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.4rem;
+  cursor: pointer;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--text-dark);
+  transition: background 0.2s;
+  user-select: none;
+  gap: 1rem;
+}
+.faq-question:hover { background: var(--off-white); }
+.faq-question.active { background: var(--teal); color: #fff; }
+.faq-question .faq-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--teal);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  transition: transform 0.3s, background 0.2s;
+}
+.faq-question.active .faq-icon { background: var(--orange); transform: rotate(45deg); }
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  font-size: 0.93rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  background: var(--off-white);
+}
+.faq-answer.open { max-height: 200px; padding: 1.1rem 1.4rem; }
+
+/* ═══════════════════════════════
+   FINAL CTA BANNER
+═══════════════════════════════ */
+.final-cta {
+  background:
+    linear-gradient(90deg, rgba(15,45,35,0.95) 0%, rgba(27,92,72,0.88) 100%),
+    url('https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=1600&q=80') center/cover no-repeat;
+  padding: 5rem 0;
+  text-align: center;
+}
+.final-cta h2 {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+.final-cta h2 em { font-style: italic; color: var(--orange-light); }
+.final-cta p { color: rgba(255,255,255,0.78); font-size: 1.05rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+.cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer {
+  background: var(--nav-top);
+  padding: 4rem 0 0;
+  color: rgba(255,255,255,0.65);
+}
+.footer-logo-area {
+  margin-bottom: 1.5rem;
+}
+.footer-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+.footer-brand-name span { display: block; font-size: 0.9rem; font-style: italic; color: var(--orange-light); font-weight: 400; }
+.footer-tagline {
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.4rem;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.footer-desc {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  margin: 1rem 0 1.5rem;
+}
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.9rem;
+  margin-right: 0.4rem;
+  transition: all 0.2s;
+}
+.footer-social a:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+.footer-col-heading {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--orange);
+  display: inline-block;
+}
+.footer-links { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 0.55rem; }
+.footer-links a {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.88rem;
+  transition: color 0.2s, padding-left 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.footer-links a:hover { color: var(--orange-light); padding-left: 4px; }
+.footer-links a i { font-size: 0.65rem; color: var(--orange); }
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.5);
+}
+.footer-contact-item i { color: var(--orange); margin-top: 3px; font-size: 0.85rem; flex-shrink: 0; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 3rem;
+  padding: 1.2rem 0;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.3);
+}
+.footer-bottom a { color: rgba(255,255,255,0.45); }
+.footer-bottom a:hover { color: var(--orange-light); }
+
+/* ═══════════════════════════════
+   BUTTONS UTILITY
+═══════════════════════════════ */
+.btn-teal {
+  background: var(--teal);
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 3px;
+  display: inline-block;
+  border: 2px solid var(--teal);
+  transition: all 0.25s;
+}
+.btn-teal:hover { background: var(--teal-light); border-color: var(--teal-light); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27,92,72,0.3); }
+
+.btn-orange {
+  background: var(--orange);
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem;
+  border-radius: 3px;
+  display: inline-block;
+  border: 2px solid var(--orange);
+  transition: all 0.25s;
+}
+.btn-orange:hover { background: var(--orange-light); border-color: var(--orange-light); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,151,31,0.35); }
+
+.btn-outline-white {
+  background: transparent;
+  color: #fff;
+  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.83rem 2rem;
+  border-radius: 3px;
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.45);
+  transition: all 0.25s;
+}
+.btn-outline-white:hover { border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media (max-width: 767px) {
+  .hero { min-height: 70vh; }
+  .hero-badge-float { display: none; }
+  section { padding: 3rem 0; }
+  .hero-stats-row { gap: 1rem; }
+  .hero-stat { min-width: 90px; }
+}
+
+/* ═══════════════════════════════
+   ANIMATIONS
+═══════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up   { animation: fadeUp 0.7s ease both; }
+.delay-1   { animation-delay: 0.1s; }
+.delay-2   { animation-delay: 0.22s; }
+.delay-3   { animation-delay: 0.35s; }
+.delay-4   { animation-delay: 0.48s; }
+.delay-5   { animation-delay: 0.6s; }
+
+/* scroll reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════
+     TOP UTILITY BAR
+══════════════════════ -->
+<div class="top-bar">
+  <div class="container d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex align-items-center flex-wrap">
+      <a href="tel:08071296016"><i class="fas fa-phone-alt mr-1"></i> 08071296016</a>
+      <a href="mailto:support@edinbox.com"><i class="fas fa-envelope mr-1"></i> support@edinbox.com</a>
+      <a href="/contact"><i class="fas fa-map-marker-alt mr-1"></i> Hyderabad, Telangana</a>
+    </div>
+    <div class="top-bar-right d-flex align-items-center">
+      <a href="https://www.facebook.com/SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/smruhyderabad" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/company/smruhyderabad/" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://aifset.com/" class="btn-apply ml-2">Apply Now</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════
+     MAIN NAVBAR
+══════════════════════ -->
+<nav class="navbar-main">
+  <div class="container">
+    <a href="/partner/edinbox/" class="navbar-brand-wrap">
+      <div class="navbar-logo-text">
+        <span class="logo-main"> Stmarys</span>
+        <span class="logo-sub">Rehabilitation University</span>
+      </div>
+    </a>
+    <button class="navbar-toggler-custom" onclick="toggleNav()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-main-links" id="mainNav">
+      <li><a href="/partner/edinbox/" class="active">Home</a></li>
+      <li>
+        <a href="/about">About <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-nav">
+          <a href="/about">About Stmarys University</a>
+          <a href="/about">Vision & Mission</a>
+          <a href="/leadership">Leadership</a>
+          <a href="/campus-location-hyderabad">Campus</a>
+        </div>
+      </li>
+      <li>
+        <a href="/schools">Schools <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-nav">
+          <a href="/schools">Forensic Science</a>
+          <a href="/schools/rehabilitation-sciences">Rehabilitation Sciences</a>
+          <a href="/schools/health-allied-health-sciences">Allied Health Sciences</a>
+        </div>
+      </li>
+      <li>
+        <a href="/admissions">Admissions <i class="fas fa-chevron-down"></i></a>
+        <div class="dropdown-nav">
+          <a href="/admissions">How to Apply</a>
+          <a href="https://aifset.com/" target="_blank" rel="noopener noreferrer">AIFSET Entrance Exam</a>
+          <a href="/admissions">Eligibility Criteria</a>
+          <a href="/admissions">Scholarships</a>
+        </div>
+      </li>
+      <li><a href="#careers">Careers</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/contact">Campus SOS</a></li>
+    </ul>
+    <div class="navbar-cta-wrap">
+      <a href="https://aifset.com/" class="btn-nav-cta">Register for AIFSET &nbsp;<i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════
+     HERO
+══════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="container hero-content">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-xl-6">
+        <div class="hero-eyebrow fade-up">
+          <i class="fas fa-circle" style="font-size:0.45rem;"></i>
+          Now Admitting Nationwide
+        </div>
+        <p class="hero-sub-heading fade-up delay-1">India's First Rehabilitation University</p>
+        <h1 class="fade-up delay-2">
+          B.Sc <em>Forensic</em><br>Science
+        </h1>
+        <p class="hero-desc fade-up delay-3">
+          Build a career in one of India's most sought-after fields. Stmarys University × AIFSET makes forensic science education accessible to every eligible student in India — via a single online entrance exam.
+        </p>
+        <div class="fade-up delay-4">
+          <a href="https://aifset.com/" class="btn-hero-primary">Register for AIFSET</a>
+          <a href="#about" class="btn-hero-outline">Book Free Consultation</a>
+        </div>
+        <div class="hero-stats-row fade-up delay-5">
+          <div class="hero-stat">
+            <div class="hero-stat-num">3×</div>
+            <div class="hero-stat-label">Attempts per Year</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Online Exam</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">#1</div>
+            <div class="hero-stat-label">Rehab Univ. India</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-flex justify-content-end">
+        <div class="hero-img-card">
+          <img src="https://images.unsplash.com/photo-1614308460973-0ecdaadfc13e?w=700&q=80" alt="Forensic Lab">
+          <div class="hero-badge-float">
+            <div class="num">50+</div>
+            <div class="txt">Years of Excellence</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     ANNOUNCEMENT BAR
+══════════════════════ -->
+<div class="announcement-bar">
+  <div class="container d-flex align-items-center flex-wrap" style="gap:0.5rem;">
+    <span class="label-pill"><i class="fas fa-bullhorn mr-1"></i> Admissions Open</span>
+    <span class="text">Registration Open for B.Sc Forensic Science 2025–26</span>
+    <span class="dates">
+    </span>
+    <a href="https://aifset.com/" class="btn-register-now ml-auto">Explore Eligibility &nbsp;<i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<!-- ══════════════════════
+     WHY Stmarys University
+══════════════════════ -->
+<section class="why-section" id="about">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-tag">Two Missions, One Purpose</p>
+      <h2 class="section-heading">Why Join <em>Stmarys University?</em></h2>
+      <span class="underline-accent"></span>
+      <p class="section-desc mx-auto">Stmarys University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India.</p>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-book-open"></i></div>
+          <h5>Rehab-Focused Curriculum</h5>
+          <p>Specialised expertise across the world of health sciences and forensics.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-hands-helping"></i></div>
+          <h5>Clinical Training &amp; Outreach</h5>
+          <p>Real-world facility training backed by a 100-bedded hospital on campus.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-history"></i></div>
+          <h5>50+ Years of Experience</h5>
+          <p>A proven record of over 5,000 graduates placed across India since inception.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-trophy"></i></div>
+          <h5>Top Placement Record</h5>
+          <p>Consistent excellence in graduate placements in government and private sectors.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-dumbbell"></i></div>
+          <h5>Activity-Based Therapy</h5>
+          <p>Practical, hands-on learning for real-world professional development.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-flask"></i></div>
+          <h5>Simulation-Based Practice</h5>
+          <p>State-of-the-art simulation labs accessible for our students.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-users"></i></div>
+          <h5>Multisensory Learning</h5>
+          <p>All types of learners supported across diverse, inclusive pathways.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 mb-4 reveal">
+        <div class="why-card">
+          <div class="icon-wrap"><i class="fas fa-comments"></i></div>
+          <h5>Peer-Led Discussions</h5>
+          <p>Collaborative case study groups fostering teamwork and critical thinking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     AIFSET — TEAL
+══════════════════════ -->
+<section class="aifset-section" id="aifset">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-6">
+        <p class="section-tag">National Entrance Examination</p>
+        <h2 class="section-heading" style="color:#fff;">The <span>AIFSET</span> Advantage</h2>
+        <div class="underline-accent left" style="background:var(--orange-light);"></div>
+        <p class="section-desc" style="color:rgba(255,255,255,0.78);">
+          The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to Stmarys University.
+        </p>
+      </div>
+      <div class="col-lg-5 offset-lg-1 text-center text-lg-right mt-4 mt-lg-0">
+        <a href="https://aifset.com/" class="btn-orange" style="font-size:1rem;padding:1rem 2.5rem;">
+          Register for AIFSET &nbsp;<i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-lg-3 mb-4 reveal">
+        <div class="aifset-feature-card">
+          <span class="icon"><i class="fas fa-laptop-house"></i></span>
+          <h5>100% Online</h5>
+          <p>Appear from home on any device. No travel or exam centre required.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 mb-4 reveal">
+        <div class="aifset-feature-card">
+          <span class="icon"><i class="fas fa-redo"></i></span>
+          <h5>3 Attempts / Year</h5>
+          <p>Multiple attempts remove single-chance pressure and maximise your score.</p>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3 mb-4 reveal">
+        <div class="aifset-feature-card">
+          <span class="icon"><i class="fas fa-medal"></i></span>
+          <h5>Early-Bird Scholarship</h5>
+          <p>Merit-based scholarship seats available for early AIFSET applicants.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     ELIGIBILITY
+══════════════════════ -->
+<section class="eligibility-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-5 mb-5 mb-lg-0">
+        <p class="section-tag">Who Can Apply</p>
+        <h2 class="section-heading">Eligibility <em>Criteria</em></h2>
+        <div class="underline-accent left"></div>
+        <p class="section-desc">AIFSET is open to science students across India who meet these straightforward requirements — from any recognised board.</p>
+        <a href="https://aifset.com/" class="btn-teal mt-4">Check My Eligibility</a>
+      </div>
+      <div class="col-lg-6 offset-lg-1 reveal">
+        <div class="elig-card">
+          <div class="elig-row-item">
+            <div class="elig-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
+            <div class="elig-text">
+              <strong>Qualification</strong>
+              <span>Class 12 pass or appearing from any recognised board in India</span>
+            </div>
+          </div>
+          <div class="elig-row-item">
+            <div class="elig-icon-wrap"><i class="fas fa-atom"></i></div>
+            <div class="elig-text">
+              <strong>Stream</strong>
+              <span>Science — Physics, Chemistry with Biology (PCB) or Mathematics (PCM)</span>
+            </div>
+          </div>
+          <div class="elig-row-item">
+            <div class="elig-icon-wrap"><i class="fas fa-chart-bar"></i></div>
+            <div class="elig-text">
+              <strong>Minimum Marks</strong>
+              <span>50% aggregate from a recognised board</span>
+            </div>
+          </div>
+          <div class="elig-row-item">
+            <div class="elig-icon-wrap"><i class="fas fa-calendar-check"></i></div>
+            <div class="elig-text">
+              <strong>Age Requirement</strong>
+              <span>17 years and above at the time of admission</span>
+            </div>
+          </div>
+          <div class="elig-row-item">
+            <div class="elig-icon-wrap"><i class="fas fa-map-marked-alt"></i></div>
+            <div class="elig-text">
+              <strong>Location</strong>
+              <span>Open to students from all states across India — no barriers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     ADMISSION PROCESS
+══════════════════════ -->
+<section class="process-section" id="process">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-tag">Step-by-Step</p>
+      <h2 class="section-heading">Admission <em>Process</em></h2>
+      <span class="underline-accent"></span>
+      <p class="section-desc mx-auto">A straightforward 5-step path from your home to a confirmed seat at Stmarys University — fully guided by AIFSET counsellors.</p>
+    </div>
+    <div class="row align-items-stretch justify-content-center">
+      <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
+        <div class="step-card">
+          <div class="step-num-badge">1</div>
+          <h5>Register for AIFSET</h5>
+          <p>Visit the portal, fill your details, and pay the application fee — done in under 10 minutes.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-lg-flex align-items-center step-connector"><i class="fas fa-chevron-right"></i></div>
+      <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
+        <div class="step-card">
+          <div class="step-num-badge">2</div>
+          <h5>Appear for Exam</h5>
+          <p>Take the AIFSET fully online from home. Any device, any location, zero travel.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-lg-flex align-items-center step-connector"><i class="fas fa-chevron-right"></i></div>
+      <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
+        <div class="step-card">
+          <div class="step-num-badge">3</div>
+          <h5>Receive Score</h5>
+          <p>Scores declared online. Up to 3 attempts per year — maximise your result.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-lg-flex align-items-center step-connector"><i class="fas fa-chevron-right"></i></div>
+      <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
+        <div class="step-card">
+          <div class="step-num-badge">4</div>
+          <h5>Apply to Stmarys University</h5>
+          <p>Submit your AIFSET score directly to Stmarys University via the AIFSET counselling portal.</p>
+        </div>
+      </div>
+      <div class="col-auto d-none d-lg-flex align-items-center step-connector"><i class="fas fa-chevron-right"></i></div>
+      <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
+        <div class="step-card">
+          <div class="step-num-badge">5</div>
+          <h5>Confirm Seat</h5>
+          <p>AIFSET counsellors guide you through docs, fee payment, and final seat confirmation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-3">
+      <a href="https://aifset.com/" class="btn-orange">Start My Application &nbsp;<i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     CAREERS
+══════════════════════ -->
+<section class="careers-section" id="careers">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 mb-5 mb-lg-0">
+        <p class="section-tag">Career Scope</p>
+        <h2 class="section-heading">What You Can <em>Become</em></h2>
+        <div class="underline-accent left"></div>
+        <p class="section-desc">A B.Sc Forensic Science from Stmarys University opens doors across government labs, law enforcement, private agencies, and research — nationwide.</p>
+        <a href="https://aifset.com/" class="btn-teal mt-4">Explore the Degree</a>
+      </div>
+      <div class="col-lg-7 reveal">
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-microscope"></i></div>
+          <div class="career-text">
+            <strong>Forensic Scientist</strong>
+            <span>Government &amp; Private Forensic Laboratories</span>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-search-location"></i></div>
+          <div class="career-text">
+            <strong>Crime Scene Investigator</strong>
+            <span>Police Departments, CBI, Intelligence Agencies</span>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-dna"></i></div>
+          <div class="career-text">
+            <strong>DNA Analyst / Serologist</strong>
+            <span>Forensic Science Laboratories, Research Institutes</span>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-pills"></i></div>
+          <div class="career-text">
+            <strong>Forensic Toxicologist</strong>
+            <span>AIIMS, Govt Hospitals, Poison Control Centres</span>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="career-text">
+            <strong>Cyber &amp; Digital Forensics Expert</strong>
+            <span>Tech Companies, Government Cyber Cells, CERT-In</span>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-balance-scale"></i></div>
+          <div class="career-text">
+            <strong>Forensic Consultant</strong>
+            <span>Law Firms, Private Investigative Agencies</span>
+          </div>
+        </div>
+        <div class="career-item">
+          <div class="career-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <div class="career-text">
+            <strong>Researcher / Lecturer</strong>
+            <span>After Post-Graduation — Universities &amp; Research Centres</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     SCHOLARSHIP
+══════════════════════ -->
+<section class="scholarship-section">
+  <div class="container" style="position:relative;z-index:2;">
+    <p class="section-tag" style="color:var(--orange-light);">Limited Opportunity</p>
+    <h2>Scholarships at <span>Stmarys University</span></h2>
+    <p>Merit-based scholarship seats available for early AIFSET applicants. Limited intake — first come, first served. Don't miss your window.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap" style="gap:1rem;">
+      <a href="https://aifset.com/" class="btn-scholarship">Secure My Scholarship Seat</a>
+      <a href="/schools" class="btn-outline-white ml-2">View All Programmes</a>
+    </div>
+    <div class="mt-4 d-flex justify-content-center flex-wrap" style="gap:1.5rem;">
+      <div class="text-center" style="color:rgba(255,255,255,0.65);font-size:0.85rem;">
+        <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> Forensic Biotechnology
+      </div>
+      <div class="text-center" style="color:rgba(255,255,255,0.65);font-size:0.85rem;">
+        <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> Stmarys Rehab University
+      </div>
+      <div class="text-center" style="color:rgba(255,255,255,0.65);font-size:0.85rem;">
+        <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> Forensic Science (B.Sc)
+      </div>
+      <div class="text-center" style="color:rgba(255,255,255,0.65);font-size:0.85rem;">
+        <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> AIFSET Counselled Intake
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     TESTIMONIAL
+══════════════════════ -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+    <blockquote>
+      "At Stmarys University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
+    </blockquote>
+    <div class="author">
+      Dr. Shiva Deekshith
+      <span style="display:block;font-weight:300;margin-top:0.2rem;">Dean, School of Forensic Sciences — Stmarys University</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     FAQ
+══════════════════════ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="text-center mb-5">
+          <p class="section-tag">Got Questions?</p>
+          <h2 class="section-heading">Frequently Asked <em>Questions</em></h2>
+          <span class="underline-accent"></span>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div style="background:var(--off-white);border-radius:6px;padding:1.5rem;">
+              <p class="section-tag mb-2">Dimensions</p>
+              <ul class="footer-links" style="color:var(--text-mid);">
+                <li><a href="/admissions" style="color:var(--text-mid);">Admissions</a></li>
+                <li><a href="/schools" style="color:var(--text-mid);">Programmes</a></li>
+                <li><a href="/campus-location-hyderabad" style="color:var(--text-mid);">Campus &amp; Facilities</a></li>
+                <li><a href="/admissions" style="color:var(--text-mid);">Scholarships</a></li>
+                <li><a href="/contact" style="color:var(--text-mid);">Career Support</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-8 faq-accordion">
+            <div class="faq-item">
+              <div class="faq-question active" onclick="toggleFaq(this)">
+                Is AIFSET recognised by Stmarys University?
+                <div class="faq-icon"><i class="fas fa-plus"></i></div>
+              </div>
+              <div class="faq-answer open">Yes. Stmarys University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                How many times can I take the AIFSET?
+                <div class="faq-icon"><i class="fas fa-plus"></i></div>
+              </div>
+              <div class="faq-answer">You can take the AIFSET up to 3 times per year. This gives you multiple opportunities to achieve your best score without the pressure of a single attempt.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                Can I apply from outside Hyderabad?
+                <div class="faq-icon"><i class="fas fa-plus"></i></div>
+              </div>
+              <div class="faq-answer">Absolutely. AIFSET is fully online and Stmarys University admits students from all states across India. Your location is not a barrier — all you need is an internet connection and the right qualifications.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                Is there a scholarship available?
+                <div class="faq-icon"><i class="fas fa-plus"></i></div>
+              </div>
+              <div class="faq-answer">Yes. Merit-based scholarships are available for eligible AIFSET applicants. Early registration significantly increases your chances of qualifying for the early-bird scholarship seats.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                What is the eligibility for AIFSET?
+                <div class="faq-icon"><i class="fas fa-plus"></i></div>
+              </div>
+              <div class="faq-answer">Class 12 with Physics, Chemistry, and Biology or Mathematics. Minimum 50% aggregate from a recognised board. Age 17 years and above at the time of admission.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question" onclick="toggleFaq(this)">
+                What support does AIFSET provide?
+                <div class="faq-icon"><i class="fas fa-plus"></i></div>
+              </div>
+              <div class="faq-answer">AIFSET provides free academic counselling, document guidance, regional on-ground support across India, and complete hand-holding through every step of the Stmarys University admission process.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     FINAL CTA
+══════════════════════ -->
+<section class="final-cta" id="register">
+  <div class="container">
+    <p class="section-tag" style="color:var(--orange-light);">Limited Seats Available</p>
+    <h2>Register for AIFSET.<br><em>Choose Stmarys University. Build India.</em></h2>
+    <p>India is training its next generation of forensic experts. Don't miss your admission window — seats are strictly limited per intake.</p>
+    <div class="cta-buttons">
+      <a href="https://aifset.com/" target="_blank" rel="noopener noreferrer" class="btn-orange" style="font-size:1rem;padding:1rem 2.5rem;">
+        <i class="fas fa-pen-alt mr-2"></i> Register for AIFSET
+      </a>
+      <a href="/contact" class="btn-outline-white" style="font-size:1rem;padding:1rem 2.5rem;">
+        <i class="fas fa-phone mr-2"></i> Book Free Consultation
+      </a>
+    </div>
+    <p class="mt-4" style="font-size:0.82rem;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;">
+      Stmarys University × AIFSET Partnership &nbsp;·&nbsp; Telangana State Act University &nbsp;·&nbsp; 100% Online AIFSET Exam
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     FOOTER
+══════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-5">
+        <div class="footer-logo-area">
+          <div class="footer-brand-name">
+            Stmarys
+            <span>Rehabilitation University</span>
+          </div>
+          <div class="footer-tagline">Established Under Telangana State Act</div>
+        </div>
+        <p class="footer-desc">India's first and only university dedicated entirely to rehabilitation sciences. Backed by a 100-bedded hospital and 50-bedded psychiatric facility. Partnering with AIFSET to reach every student in India.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/smruhyderabad" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/company/smruhyderabad/" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="/contact" aria-label="Contact Stmarys University"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2 mb-5">
+        <div class="footer-col-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="/partner/edinbox/"><i class="fas fa-angle-right"></i> Home</a></li>
+          <li><a href="#about"><i class="fas fa-angle-right"></i> About Stmarys University</a></li>
+          <li><a href="#aifset"><i class="fas fa-angle-right"></i> AIFSET Exam</a></li>
+          <li><a href="#process"><i class="fas fa-angle-right"></i> Admission</a></li>
+          <li><a href="#careers"><i class="fas fa-angle-right"></i> Career Scope</a></li>
+          <li><a href="#faq"><i class="fas fa-angle-right"></i> FAQ</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2 mb-5">
+        <div class="footer-col-heading">Programmes</div>
+        <ul class="footer-links">
+          <li><a href="/schools"><i class="fas fa-angle-right"></i> B.Sc Forensic Science</a></li>
+          <li><a href="/schools"><i class="fas fa-angle-right"></i> Forensic Toxicology</a></li>
+          <li><a href="/schools"><i class="fas fa-angle-right"></i> Cyber Forensics</a></li>
+          <li><a href="/schools"><i class="fas fa-angle-right"></i> DNA Analysis</a></li>
+          <li><a href="/schools"><i class="fas fa-angle-right"></i> Ballistics Science</a></li>
+          <li><a href="/schools"><i class="fas fa-angle-right"></i> Rehab Sciences</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 col-lg-4 mb-5">
+        <div class="footer-col-heading">Get In Touch</div>
+        <div class="footer-contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Stmarys University, Hyderabad, Telangana — 500 034, India</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-phone-alt"></i>
+          <span>08071296016</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>admissions@smru.edu.in</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fas fa-globe"></i>
+          <span>www.smru.edu.in</span>
+        </div>
+        <div class="mt-3">
+          <a href="https://aifset.com/" class="btn-orange" style="font-size:0.85rem;padding:0.65rem 1.5rem;">
+            Apply via AIFSET &nbsp;<i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container d-flex justify-content-between flex-wrap align-items-center" style="gap:0.5rem;">
+      <span>&copy; 2025 Stmarys University. All rights reserved.</span>
+      <span>
+        <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="/terms-of-service">Terms of Use</a> &nbsp;·&nbsp;
+        <a href="/html-sitemap">Sitemap</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════
+     JS
+══════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+<script>
+// Mobile nav
+function toggleNav() {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('open');
+}
+
+// FAQ accordion
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+  if (!isOpen) {
+    answer.classList.add('open');
+    el.classList.add('active');
+  }
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+    }
+  });
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drag to Calibrate Map Points</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: sans-serif; background: #eee; }
+        .container { position: relative; width: 1200px; height: 760px; border: 1px solid #ccc; background: url('../public/campus-guide/images/campus-map.svg') no-repeat; background-size: cover; margin-bottom: 20px; }
+        .point { 
+            position: absolute; width: 16px; height: 16px; background: red; border-radius: 50%; 
+            transform: translate(-50%, -50%); cursor: grab; box-shadow: 0 2px 4px rgba(0,0,0,0.5); border: 2px solid white;
+        }
+        .point:active { cursor: grabbing; }
+        .label { 
+            position: absolute; background: rgba(255,255,255,0.8); padding: 2px 4px; font-size: 12px; font-weight: bold;
+            border-radius: 3px; transform: translate(12px, -12px); pointer-events: none; white-space: nowrap;
+        }
+        #output { width: 100%; height: 200px; font-family: monospace; }
+        .controls { margin-bottom: 10px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button onclick="generateJSON()">Generate guide.json</button>
+        <span style="margin-left: 20px; color: #555;">Drag the red dots to the correct locations on the map.</span>
+    </div>
+    <div class="container" id="map"></div>
+    <textarea id="output" placeholder="Updated JSON will appear here..."></textarea>
+
+    <script>
+        // Load the existing guide.json data
+        fetch('../public/campus-guide/data/guide.json')
+            .then(res => res.json())
+            .then(data => {
+                window.guideData = data;
+                initMap(data.points);
+            })
+            .catch(err => {
+                document.getElementById('output').value = "Error loading guide.json: " + err;
+            });
+
+        const map = document.getElementById('map');
+        let activePoint = null;
+
+        function initMap(points) {
+            points.forEach((point, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'point';
+                dot.style.left = point.mapX + '%';
+                dot.style.top = point.mapY + '%';
+                dot.dataset.id = point.id;
+                dot.dataset.index = index;
+                
+                const label = document.createElement('div');
+                label.className = 'label';
+                label.style.left = point.mapX + '%';
+                label.style.top = point.mapY + '%';
+                label.textContent = point.title.en || point.id;
+                label.dataset.id = point.id;
+                
+                map.appendChild(dot);
+                map.appendChild(label);
+
+                dot.addEventListener('mousedown', (e) => {
+                    activePoint = { dot, label, pointId: point.id, dataIndex: index };
+                });
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (!activePoint) return;
+            const rect = map.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+            
+            x = Math.max(0, Math.min(x, rect.width));
+            y = Math.max(0, Math.min(y, rect.height));
+
+            const pctX = (x / rect.width) * 100;
+            const pctY = (y / rect.height) * 100;
+
+            activePoint.dot.style.left = pctX + '%';
+            activePoint.dot.style.top = pctY + '%';
+            activePoint.label.style.left = pctX + '%';
+            activePoint.label.style.top = pctY + '%';
+            
+            window.guideData.points[activePoint.dataIndex].mapX = Number(pctX.toFixed(2));
+            window.guideData.points[activePoint.dataIndex].mapY = Number(pctY.toFixed(2));
+        });
+
+        document.addEventListener('mouseup', () => {
+            activePoint = null;
+        });
+
+        function generateJSON() {
+            if (!window.guideData) return;
+            document.getElementById('output').value = JSON.stringify(window.guideData, null, 2);
+            document.getElementById('output').select();
+            document.execCommand('copy');
+            alert('JSON copied to clipboard! You can paste it into public/campus-guide/data/guide.json');
+        }
+    </script>
+</body>
+</html>

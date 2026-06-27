@@ -1,0 +1,14 @@
+Source URL,Target URL,Anchor,Status,Notes
+/,/about/,About,Present,Primary brand to institutional background
+/,/schools/,Schools,Present,Primary brand to academics
+/,/admissions/,Admissions,Present,Primary brand to conversion
+/,/smru-facts/,SMRU Facts & AI Guidance,Present in footer,AEO/GEO factual page discoverability
+/about/,/leadership/all,Leadership / Governance,Present,Existing route used instead of creating /governance
+/about/,/approvals-recognitions,Approvals & Recognitions,Present,Governance to proof documents
+/about/,/mandatory-disclosure,Mandatory Disclosure,Present,Governance to disclosures
+/approvals-recognitions,/leadership/all,Governance & Leadership,Present,Trust page to governing bodies
+/mandatory-disclosure,/approvals-recognitions,Approvals & Recognitions,Present,Disclosure hub to proof documents
+/smru-facts/,/leadership/all,Governance & Leadership,Present,AEO facts page to governance
+/smru-facts/,/,Return to Homepage,Present,AEO facts page to primary brand page
+/campus-location-hyderabad,/contact,Contact,Present,Local intent to contact route
+partner/static pages,Excluded,Excluded,Excluded,Not audited per user instruction

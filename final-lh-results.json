@@ -1,0 +1,44 @@
+{
+  "/": {
+    "performance": 69,
+    "accessibility": 96,
+    "bestPractices": 100,
+    "seo": 100
+  },
+  "/about/": {
+    "performance": 71,
+    "accessibility": 90,
+    "bestPractices": 100,
+    "seo": 92
+  },
+  "/admissions/": {
+    "performance": 72,
+    "accessibility": 96,
+    "bestPractices": 100,
+    "seo": 100
+  },
+  "/schools/": {
+    "performance": 71,
+    "accessibility": 96,
+    "bestPractices": 100,
+    "seo": 100
+  },
+  "/partner/qtst/": {
+    "performance": 65,
+    "accessibility": 100,
+    "bestPractices": 96,
+    "seo": 100
+  },
+  "/campus-360/": {
+    "performance": 70,
+    "accessibility": 100,
+    "bestPractices": 100,
+    "seo": 100
+  },
+  "/contact/": {
+    "performance": 71,
+    "accessibility": 96,
+    "bestPractices": 100,
+    "seo": 100
+  }
+}

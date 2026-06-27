@@ -1,0 +1,2 @@
+file 'welcome.mp3'
+file 'main-entrance.mp3'

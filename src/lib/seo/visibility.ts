@@ -1,0 +1,4 @@
+export const SHOW_PUBLIC_SEO_SECTIONS = true;
+export const SHOW_PUBLIC_FAQ_SCHEMA = SHOW_PUBLIC_SEO_SECTIONS;
+export const SHOW_PUBLIC_INFO_PAGE_LINKS = true;
+export const SHOW_PUBLIC_INFO_PAGES = true;

@@ -1,0 +1,1001 @@
+{
+  "mapImage": "/campus-guide/images/campus-satellite.webp",
+  "welcome": {
+    "title": {
+      "en": "Welcome to Saint Mary's Rehabilitation University",
+      "te": "సెయింట్ మెరీస్ రిహాబిలిటేషన్ యూనివర్సిటీకి స్వాగతం",
+      "hi": "सेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी में आपका स्वागत है"
+    },
+    "subtitle": {
+      "en": "Begin a point-to-point campus journey through St. Mary's University academic blocks, healthcare spaces, student facilities, and open learning areas.",
+      "te": "నిజైన ఎస్ఎంఆర్యూ మ్యాప్ పాయింట్లు, సదుపాయాలు, మరియు సందర్శకుల ప్రదేశాలతో గైడెడ్ క్యాంపస్ రూట్‌ను ప్రారంభించండి.",
+      "hi": "सेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी के वर्चुअल टूर में आपका स्वागत है—यहाँ से आपका 120 एकड़ के पॉइंट-टू-पॉइंट अनुभव की शुरुआत होती है।"
+    },
+    "audioFileName": "welcome.mp3"
+  },
+  "tour": {
+    "title": {
+      "en": "St. Mary's University Campus Guide",
+      "te": "ఎస్ఎంఆర్యూ క్యాంపస్ గైడ్",
+      "hi": "एसएमआरयू कैंपस गाइड"
+    },
+    "description": {
+      "en": "A guided English campus route built from the official St. Mary's University tour points for physical and virtual visits.",
+      "te": "భౌతిక మరియు వర్చువల్ టూర్ల కోసం అధికారిక క్యాంపస్ టూర్ మ్యాప్ పాయింట్లతో రూపొందించిన సాధారణ సందర్శకుల మార్గం.",
+      "hi": "आधिकारिक एसएमआरयू टूर पॉइंट्स से बना एक गाइडेड हिंदी कैंपस रूट।"
+    }
+  },
+  "pointOrder": [
+    "point-1",
+    "point-5",
+    "point-2",
+    "point-clock-tower",
+    "point-6",
+    "point-atm-sports",
+    "point-9",
+    "point-7",
+    "point-8",
+    "point-12",
+    "point-11",
+    "point-13",
+    "point-class-room",
+    "point-22",
+    "point-16",
+    "point-admission-office-1",
+    "point-admission-office-2",
+    "point-admission-enroll",
+    "point-17",
+    "point-18",
+    "point-19",
+    "point-20",
+    "point-21",
+    "point-signoff"
+  ],
+  "points": [
+    {
+      "id": "point-overview",
+      "coordinates": {
+        "x": 50,
+        "y": 50
+      },
+      "title": {
+        "en": "Full Campus Overview"
+      },
+      "description": {
+        "en": "St. Mary's University — Full 120-Acre Campus Overview."
+      },
+      "category": "info",
+      "panorama360": {
+        "src": "/campus-360/full-campus-360-image/panorama.jpg",
+        "alt": "Interactive 360-degree view of Full Campus Overview",
+        "caption": "Full Campus Overview",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25,
+        "markers": [
+          {
+            "id": "marker-main-block",
+            "targetPointId": "point-22",
+            "yaw": 0.1,
+            "pitch": -0.2,
+            "label": "Main Block"
+          },
+          {
+            "id": "marker-library",
+            "targetPointId": "point-7",
+            "yaw": -0.5,
+            "pitch": -0.15,
+            "label": "Central Library"
+          },
+          {
+            "id": "marker-hostel",
+            "targetPointId": "point-11",
+            "yaw": 1.5,
+            "pitch": -0.1,
+            "label": "Hostels"
+          },
+          {
+            "id": "marker-sports",
+            "targetPointId": "point-6",
+            "yaw": -1.2,
+            "pitch": -0.2,
+            "label": "Sports Complex"
+          },
+          {
+            "id": "marker-entry",
+            "targetPointId": "point-1",
+            "yaw": 2.8,
+            "pitch": -0.25,
+            "label": "Main Gate"
+          }
+        ]
+      }
+    },
+    {
+      "id": "point-1",
+      "latitude": 17.3320276,
+      "longitude": 78.7278257,
+      "mapX": 79.3,
+      "mapY": 35.7,
+      "title": {
+        "en": "Main Entrance and Campus Overview & Entry Gate",
+        "te": "ప్రధాన ద్వారం మరియు క్యాంపస్ అవలోకనం",
+        "hi": "मुख्य प्रवेश द्वार और कैंपस अवलोकन"
+      },
+      "image": "/assets/campus-gallery/campus-aerial.webp",
+      "transcript": {
+        "en": "Welcome to Saint Mary’s Rehabilitation University.\n\nSaint Mary’s Rehabilitation University is a rehabilitation-focused university in Hyderabad, designed around inclusive education and professional learning.\n\nWe believe in our motto of inclusiveness.\n\nThat spirit of inclusiveness is what makes us distinctive.\n\nLet me take you through a virtual tour of our campus.\n\nThis is a vibrant campus, built not only for academics, but also for knowledge, growth, purpose, and overall development.\n\nThe university brings together healthcare, rehabilitation, management, technology, law, and other important fields of learning.\n\nLocated in an open and vast area covering 120 acres, the campus offers a green, peaceful, and serene learning environment.\n\nHere, students do not study only to earn a degree.\n\nThey prepare for meaningful careers, strong leadership, service to society, and nation building.\n\nYour campus journey begins here.\n\nYou are now at the main entrance.\n\nTake a moment to look around.\n\nFrom this gate, every road leads to a different part of the campus, spread across one hundred and twenty acres.\n\nAround you, you will see academic blocks, healthcare facilities, student spaces, play fields, and peaceful green zones.\n\nLet us now move ahead and experience each important area of the campus.",
+        "hi": "सेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी में आपका स्वागत है।\n\nसेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी, हैदराबाद की एक रिहैबिलिटेशन-केंद्रित यूनिवर्सिटी है। यह इन्क्लूसिव शिक्षा और प्रोफेशनल लर्निंग पर केंद्रित है।\n\nहमारी यूनिवर्सिटी का मुख्य विश्वास है — इन्क्लूसिवनेस, यानी सबको साथ लेकर आगे बढ़ने की सोच।\n\nयही इन्क्लूसिवनेस की भावना, हमारी यूनिवर्सिटी को अलग और खास बनाती है।\n\nअब मैं आपको हमारे कैंपस के वर्चुअल टूर पर ले चलता हूँ।\n\nयह एक जीवंत और प्रेरणा देने वाला कैंपस है। यहाँ केवल शिक्षा ही नहीं, बल्कि ज्ञान, विकास, लक्ष्य, और विद्यार्थियों के सम्पूर्ण विकास को भी महत्व दिया जाता है।\n\nयह यूनिवर्सिटी हेल्थकेयर, रिहैबिलिटेशन, मैनेजमेंट, टेक्नोलॉजी, लॉ, और अन्य महत्वपूर्ण शिक्षा क्षेत्रों को एक ही जगह पर जोड़ती है।\n\nलगभग 120 एकड़ के विशाल और खुले क्षेत्र में फैला यह कैंपस, हरियाली, शांति, और एक अच्छा लर्निंग एनवायरनमेंट प्रदान करता है।\n\nयहाँ विद्यार्थी केवल डिग्री पाने के लिए नहीं पढ़ते।\n\nवे अर्थपूर्ण करियर, मजबूत नेतृत्व, समाज सेवा, और राष्ट्र निर्माण में अपनी भूमिका निभाने के लिए तैयार होते हैं।\n\nआपकी कैंपस यात्रा यहीं से शुरू होती है।\n\nअब आप मेन एंट्रेंस के पास हैं।\n\nएक क्षण रुककर अपने चारों ओर देखिए, और इस कैंपस के वातावरण को महसूस कीजिए।\n\nइस गेट से जाने वाली हर सड़क, कैंपस के अलग-अलग महत्वपूर्ण क्षेत्रों तक ले जाती है।\n\nलगभग 120 एकड़ में फैले इस कैंपस में, आपके आसपास अकादमिक ब्लॉक्स, हेल्थकेयर सुविधाएँ, विद्यार्थियों के लिए बनाए गए स्पेस, खेल के मैदान, और शांत हरे-भरे क्षेत्र दिखाई देते हैं।\n\nअब हम आगे बढ़ते हैं, और कैंपस के हर महत्वपूर्ण क्षेत्र को एक-एक करके अनुभव करते हैं।",
+        "te": "సెయింట్ మేరీస్ రిహాబిలిటేషన్ యూనివర్సిటీకి స్వాగతం.\n\nసెయింట్ మేరీస్ రిహాబిలిటేషన్ యూనివర్సిటీ, హైదరాబాద్‌లోని రిహాబిలిటేషన్‌పై దృష్టి పెట్టిన యూనివర్సిటీ. ఇది ఇన్‌క్లూజివ్ విద్య మరియు ప్రొఫెషనల్ లెర్నింగ్‌పై దృష్టి సారిస్తుంది.\n\nమా యూనివర్సిటీ యొక్క ప్రధాన నమ్మకం — ఇన్‌క్లూజివ్‌నెస్, అంటే అందరినీ కలుపుకుని ముందుకు తీసుకెళ్లే భావన.\n\nఈ ఇన్‌క్లూజివ్‌నెస్ అనే ఆలోచనే, మా యూనివర్సిటీని ప్రత్యేకంగా నిలబెడుతుంది.\n\nఇప్పుడు, నేను మిమ్మల్ని మా క్యాంపస్ యొక్క వర్చువల్ టూర్‌కి తీసుకెళ్తాను.\n\nఇది ఒక చురుకైన, ప్రేరణ ఇచ్చే క్యాంపస్. ఇక్కడ విద్య మాత్రమే కాదు, జ్ఞానం, ఎదుగుదల, లక్ష్యం, మరియు విద్యార్థుల సమగ్ర అభివృద్ధికి కూడా ప్రాధాన్యం ఉంటుంది.\n\nఈ యూనివర్సిటీ హెల్త్‌కేర్, రిహాబిలిటేషన్, మేనేజ్‌మెంట్, టెక్నాలజీ, లా, మరియు ఇతర ముఖ్యమైన విద్యా రంగాలను ఒకే చోట కలుపుతుంది.\n\nవిశాలమైన, ఓపెన్ ఏరియాలో, సుమారు 120 ఎకరాల్లో విస్తరించి ఉన్న ఈ క్యాంపస్, పచ్చదనం, ప్రశాంతత, మరియు మంచి లెర్నింగ్ ఎన్విరాన్‌మెంట్‌ను అందిస్తుంది.\n\nఇక్కడ విద్యార్థులు కేవలం డిగ్రీ కోసం మాత్రమే చదవరు.\n\nవారు అర్థవంతమైన కెరీర్‌ల కోసం, బలమైన నాయకత్వం కోసం, సమాజ సేవ కోసం, మరియు దేశ నిర్మాణంలో తమ పాత్రను పోషించడానికి సిద్ధమవుతారు.\n\nమీ క్యాంపస్ ప్రయాణం ఇక్కడి నుంచే ప్రారంభమవుతుంది.\n\nఇప్పుడు మీరు మెయిన్ ఎంట్రన్స్ దగ్గర ఉన్నారు.\n\nఒక్కసారి చుట్టూ చూసి, ఈ క్యాంపస్ వాతావరణాన్ని గమనించండి.\n\nఈ గేట్ నుంచి వెళ్లే ప్రతి రోడ్, క్యాంపస్‌లోని వేర్వేరు ముఖ్యమైన ప్రాంతాలకు తీసుకెళ్తుంది.\n\nసుమారు 120 ఎకరాల్లో విస్తరించి ఉన్న ఈ క్యాంపస్‌లో, మీ చుట్టూ అకడమిక్ బ్లాక్స్, హెల్త్‌కేర్ సదుపాయాలు, విద్యార్థుల కోసం ఏర్పాటు చేసిన స్పేస్‌లు, ఆట స్థలాలు, మరియు ప్రశాంతమైన పచ్చని ప్రాంతాలు కనిపిస్తాయి.\n\nఇప్పుడు మనం ముందుకు సాగుతూ, క్యాంపస్‌లోని ప్రతి ముఖ్యమైన ప్రాంతాన్ని ఒక్కొక్కటిగా అనుభవిద్దాం."
+      },
+      "panorama360": {
+        "src": "/campus-360/entry-gate/panorama.jpg",
+        "alt": "Interactive 360-degree view of Main Entry Gate at St. Mary's University",
+        "caption": "Main Entry Gate",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/entry-gate.mp3",
+        "hi": "/campus-guide/audio/hi/common/entry-gate.mp3",
+        "te": "/campus-guide/audio/te/common/main-entrance-combined.mp3"
+      }
+    },
+    {
+      "id": "point-2",
+      "latitude": 17.332184,
+      "longitude": 78.7269044,
+      "mapX": 65.7,
+      "mapY": 31.2,
+      "title": {
+        "en": "Canteen",
+        "te": "క్యాంటీన్",
+        "hi": "Canteen"
+      },
+      "image": "/assets/Campus guide images/canteen-CZmCaPgx.webp",
+      "transcript": {
+        "en": "As we go further, we can see the student cafeteria.\n\nThis is a lively place where students can enjoy a quick bite and spend time between classes.\n\nThe cafeteria offers different food options for students.\n\nSmall refreshment outlets are also planned across the campus for student convenience.",
+        "hi": "थोड़ा और आगे बढ़ने पर, आपको स्टूडेंट कैफेटेरिया दिखाई देगा।\n\nयह विद्यार्थियों के लिए क्लासेस के बीच जल्दी कुछ खाने, और दोस्तों के साथ थोड़ा समय बिताने के लिए एक सुविधाजनक जगह है।\n\nकैफेटेरिया, कैंपस लाइफ का एक जीवंत और आरामदायक स्पेस है।\n\nयहाँ विद्यार्थियों के लिए अलग-अलग प्रकार के फूड ऑप्शन्स उपलब्ध रहते हैं।\n\nसाथ ही, विद्यार्थियों की सुविधा के लिए कैंपस के अलग-अलग क्षेत्रों में छोटे रिफ्रेशमेंट आउटलेट्स भी प्लान किए जा रहे हैं।",
+        "te": "మరింత ముందుకు వెళ్తే, మీకు స్టూడెంట్ క్యాఫెటీరియా కనిపిస్తుంది.\n\nఇది విద్యార్థులు క్లాసుల మధ్యలో త్వరగా ఏదైనా తినడానికి, అలాగే స్నేహితులతో కలిసి కొంత సమయం గడపడానికి అనువైన ప్రదేశం.\n\nక్యాఫెటీరియా, క్యాంపస్ లైఫ్‌లో ఒక చురుకైన మరియు సౌకర్యవంతమైన స్పేస్‌గా ఉంటుంది.\n\nఇక్కడ విద్యార్థుల కోసం వివిధ రకాల ఫుడ్ ఆప్షన్స్ అందుబాటులో ఉంటాయి.\n\nఅలాగే, విద్యార్థుల సౌకర్యం కోసం క్యాంపస్‌లోని వేర్వేరు ప్రాంతాల్లో చిన్న రిఫ్రెష్‌మెంట్ ఔట్‌లెట్స్‌ను కూడా ఏర్పాటు చేయడానికి ప్లాన్ చేస్తున్నారు."
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/student-cafeteria.mp3",
+        "hi": "/campus-guide/audio/hi/common/student-cafeteria.mp3",
+        "te": "/campus-guide/audio/te/common/student-cafeteria.mp3"
+      },
+      "panorama360": {
+        "src": "/campus-360/canteen-area/panorama.jpg",
+        "projection": "flat",
+        "alt": "Interactive 360-degree view of Canteen Area Center View at St. Mary's University",
+        "caption": "Canteen Area Center View",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      }
+    },
+    {
+      "id": "point-3",
+      "latitude": 17.3310959,
+      "longitude": 78.7278857,
+      "audioFileName": "hostel-block-ground.mp3",
+      "mapX": 78,
+      "mapY": 61.5,
+      "title": {
+        "en": "Hostel Block",
+        "te": "హాస్టల్ బ్లాక్",
+        "hi": "Hostel Block"
+      },
+      "image": "/assets/Campus guide images/Hostel2-C_Z6DObd.webp",
+      "transcript": {
+        "en": "A little ahead, you can see one of our hostel blocks.\n\nSaint Mary’s provides separate hostel facilities for boys and girls.\n\nThe hostels are designed with student comfort in mind.\n\nThey include air conditioning, individual study tables, storage cupboards, laundry facilities, and dining services with different weekly menus.\n\nThe hostel in front of you is one such facility.\n\nYou may also take a look at the sample room to understand the student living experience better.\n\nWe actively promote a strong play and fitness culture.\n\nTo your right, you can see one of the grounds.\n\nThis ground is used for high-intensity activities such as football, kho-kho, track events, field events, and other outdoor games.",
+        "hi": "थोड़ा आगे बढ़ने पर, आपको हमारे हॉस्टल ब्लॉक्स में से एक दिखाई देगा।\n\nसेंट मैरीज़ में लड़कों और लड़कियों के लिए अलग-अलग हॉस्टल सुविधाएँ उपलब्ध हैं।\n\nविद्यार्थियों की सुविधा को ध्यान में रखकर इन हॉस्टल्स को डिज़ाइन किया गया है।\n\nयहाँ एयर कंडीशनिंग, हर विद्यार्थी के लिए अलग स्टडी टेबल, स्टोरेज कपबोर्ड्स, लॉन्ड्री सुविधाएँ, और हर सप्ताह अलग-अलग मेनू के साथ डाइनिंग सर्विसेस उपलब्ध हैं।\n\nआपके सामने दिखाई देने वाला यह हॉस्टल भी ऐसी ही सुविधाओं में से एक है।\n\nविद्यार्थियों के लिविंग एक्सपीरियंस को बेहतर समझने के लिए, आप सैंपल रूम भी देख सकते हैं।\n\nसेंट मैरीज़ में हम मजबूत प्ले और फिटनेस कल्चर को बढ़ावा देते हैं।\n\nआपकी दाईं ओर, आपको एक ग्राउंड दिखाई देगा।\n\nइस ग्राउंड का उपयोग फुटबॉल, खो-खो, ट्रैक इवेंट्स, फील्ड इवेंट्स, और अन्य आउटडोर गेम्स जैसी हाई-इंटेंसिटी एक्टिविटीज़ के लिए किया जाता है।",
+        "te": "కొంచెం ముందుకు వెళ్తే, మీకు మా హాస్టల్ బ్లాక్స్‌లో ఒకటి కనిపిస్తుంది.\n\nసెయింట్ మేరీస్‌లో అబ్బాయిలు మరియు అమ్మాయిల కోసం వేర్వేరు హాస్టల్ సదుపాయాలు అందుబాటులో ఉన్నాయి.\n\nవిద్యార్థుల సౌకర్యాన్ని దృష్టిలో పెట్టుకుని, ఈ హాస్టల్స్‌ను రూపొందించారు.\n\nఇక్కడ ఎయిర్ కండిషనింగ్, ప్రతి విద్యార్థికి ప్రత్యేకమైన స్టడీ టేబుల్, స్టోరేజ్ కప్‌బోర్డ్స్, లాండ్రీ సదుపాయాలు, అలాగే ప్రతి వారం వేర్వేరు మెనూతో డైనింగ్ సర్వీసెస్ అందుబాటులో ఉంటాయి.\n\nమీ ముందున్న ఈ హాస్టల్ కూడా అలాంటి సదుపాయాల్లో ఒకటి.\n\nవిద్యార్థుల లివింగ్ ఎక్స్‌పీరియన్స్‌ను ఇంకా బాగా అర్థం చేసుకోవడానికి, మీరు సాంపిల్ రూమ్‌ను కూడా చూడవచ్చు.\n\nసెయింట్ మేరీస్‌లో మేము బలమైన ప్లే మరియు ఫిట్‌నెస్ కల్చర్‌ను ప్రోత్సహిస్తాము.\n\nమీ కుడివైపు, మీకు ఒక గ్రౌండ్ కనిపిస్తుంది.\n\nఈ గ్రౌండ్‌ను ఫుట్‌బాల్, ఖో-ఖో, ట్రాక్ ఈవెంట్స్, ఫీల్డ్ ఈవెంట్స్, మరియు ఇతర అవుట్‌డోర్ గేమ్స్ వంటి హై-ఇంటెన్సిటీ యాక్టివిటీస్ కోసం ఉపయోగిస్తారు."
+      }
+    },
+    {
+      "id": "point-5",
+      "latitude": 17.3318903,
+      "longitude": 78.7267728,
+      "mapX": 64.9,
+      "mapY": 37.7,
+      "title": {
+        "en": "Rent a Bike Facility",
+        "te": "ఎలక్ట్రిక్ బైక్స్ / రెంట్ ఎ బైక్",
+        "hi": "Rent a Bike Facility"
+      },
+      "image": "/assets/Campus guide images/Bike rentals.webp",
+      "transcript": {
+        "en": "To make movement across the campus easier, electric bikes are available for students on nominal rent.\n\nThese bikes help students move comfortably between different areas of the campus.\n\nRegular bikes may also be hired when students need to travel outside the campus.",
+        "hi": "कैंपस में एक जगह से दूसरी जगह आसानी से जाने के लिए, विद्यार्थियों के लिए इलेक्ट्रिक बाइक्स उपलब्ध हैं।\n\nइन बाइक्स को नॉमिनल रेंट पर उपयोग किया जा सकता है।\n\nकैंपस के अलग-अलग क्षेत्रों के बीच आराम से आने-जाने में ये बाइक्स विद्यार्थियों की मदद करती हैं।\n\nसाथ ही, जब विद्यार्थियों को कैंपस के बाहर जाना हो, तो सामान्य बाइक्स भी रेंट पर ली जा सकती हैं।",
+        "te": "క్యాంపస్‌లో ఒక ప్రాంతం నుంచి మరో ప్రాంతానికి సులభంగా వెళ్లేందుకు, విద్యార్థుల కోసం ఎలక్ట్రిక్ బైక్స్ అందుబాటులో ఉన్నాయి.\n\nఈ బైక్స్‌ను నామినల్ రెంట్‌పై ఉపయోగించుకోవచ్చు.\n\nక్యాంపస్‌లోని వేర్వేరు ప్రాంతాల మధ్య విద్యార్థులు సౌకర్యంగా ప్రయాణించడానికి ఇవి సహాయపడతాయి.\n\nఅలాగే, క్యాంపస్ బయటకు వెళ్లాల్సిన అవసరం ఉన్నప్పుడు, సాధారణ బైక్స్‌ను కూడా రెంట్‌కు తీసుకోవచ్చు."
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/electric-bikes.mp3",
+        "hi": "/campus-guide/audio/hi/common/electric-bikes.mp3",
+        "te": "/campus-guide/audio/te/common/electric-bikes.mp3"
+      },
+      "panorama360": {
+        "src": "/campus-360/main-entrance-and-campus-overview/panorama.jpg",
+        "projection": "flat",
+        "alt": "Interactive 360-degree view of Rent a Bike Facility Area at St. Mary's University",
+        "caption": "Rent a Bike Facility Area",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      }
+    },
+    {
+      "id": "point-6",
+      "latitude": 17.3319076,
+      "longitude": 78.726444,
+      "mapX": 60.6,
+      "mapY": 35.3,
+      "title": {
+        "en": "Multi-Disciplinary Play and Fitness Complex",
+        "te": "ప్లే అండ్ ఫిట్‌నెస్ కాంప్లెక్స్",
+        "hi": "Multi-Disciplinary Play and Fitness Complex"
+      },
+      "image": "/assets/Campus guide images/sports.webp",
+      "transcript": {
+        "en": "Now we arrive at the multi-disciplinary play and fitness complex.\n\nIt is often said that a healthy mind lives in a healthy body, and we truly believe in that idea.\n\nThis complex brings students together and encourages coordination, cooperation, leadership, discipline, and teamwork.\n\nIt creates an energetic atmosphere where students from different schools of the university can interact, build friendships, and appreciate diversity.\n\nThe area includes courts for badminton, volleyball, basketball, and other games.\n\nIt also supports contemporary games such as pickleball, which many young people enjoy today.\n\nThis is not only a place for physical activity.\n\nIt is also a training ground for confidence, discipline, inclusiveness, and overall development.",
+        "hi": "अब हम मल्टी-डिसिप्लिनरी प्ले एंड फिटनेस कॉम्प्लेक्स के पास पहुँच चुके हैं।\n\nअक्सर कहा जाता है कि स्वस्थ शरीर में ही स्वस्थ मन रहता है। सेंट मैरीज़ में हम इस विचार पर सच में विश्वास करते हैं।\n\nयह कॉम्प्लेक्स विद्यार्थियों को एक साथ लाकर, कोऑर्डिनेशन, कोऑपरेशन, लीडरशिप, डिसिप्लिन, और टीमवर्क को बढ़ावा देता है।\n\nयहाँ यूनिवर्सिटी के अलग-अलग स्कूल्स में पढ़ने वाले विद्यार्थी एक-दूसरे से मिल सकते हैं, दोस्ती बना सकते हैं, और विविधता को बेहतर तरीके से समझ सकते हैं।\n\nइस क्षेत्र में बैडमिंटन, वॉलीबॉल, बास्केटबॉल, और अन्य गेम्स के लिए कोर्ट्स मौजूद हैं।\n\nसाथ ही, आज के युवाओं में लोकप्रिय पिकलबॉल जैसे कंटेम्पररी गेम्स के लिए भी यहाँ सुविधा है।\n\nयह सिर्फ शारीरिक गतिविधियों की जगह नहीं है।\n\nयह कॉन्फिडेंस, डिसिप्लिन, इन्क्लूसिवनेस, और विद्यार्थियों के सम्पूर्ण विकास में मदद करने वाला एक महत्वपूर्ण स्पेस है।",
+        "te": "ఇప్పుడు మనం మల్టీ-డిసిప్లినరీ ప్లే అండ్ ఫిట్‌నెస్ కాంప్లెక్స్ దగ్గరకు వచ్చాము.\n\nఆరోగ్యమైన శరీరంలోనే ఆరోగ్యమైన మనసు ఉంటుంది అని తరచుగా చెబుతారు. సెయింట్ మేరీస్‌లో మేము ఆ ఆలోచనను నిజంగా నమ్ముతాము.\n\nఈ కాంప్లెక్స్ విద్యార్థులను ఒక చోటకు తీసుకువచ్చి, కోఆర్డినేషన్, కోఆపరేషన్, లీడర్‌షిప్, డిసిప్లిన్, మరియు టీమ్‌వర్క్‌ను ప్రోత్సహిస్తుంది.\n\nఇక్కడ యూనివర్సిటీకి చెందిన వేర్వేరు స్కూల్స్‌లో చదివే విద్యార్థులు ఒకరితో ఒకరు కలుసుకోవచ్చు, స్నేహాలు పెంచుకోవచ్చు, మరియు వైవిధ్యాన్ని మరింత బాగా అర్థం చేసుకోవచ్చు.\n\nఈ ప్రాంతంలో బ్యాడ్మింటన్, వాలీబాల్, బాస్కెట్‌బాల్, మరియు ఇతర గేమ్స్ కోసం కోర్ట్స్ ఉన్నాయి.\n\nఅలాగే, ఈరోజుల్లో యువత ఎక్కువగా ఆసక్తి చూపుతున్న పికిల్‌బాల్ వంటి కాంటెంపరరీ గేమ్స్‌కు కూడా ఇక్కడ అవకాశం ఉంది.\n\nఇది కేవలం శారీరక వ్యాయామం కోసం మాత్రమే ఉన్న ప్రదేశం కాదు.\n\nఇది కాన్ఫిడెన్స్, డిసిప్లిన్, ఇన్‌క్లూజివ్‌నెస్, మరియు విద్యార్థుల సమగ్ర అభివృద్ధికి సహాయపడే ఒక ముఖ్యమైన స్పేస్."
+      },
+      "panorama360": {
+        "src": "/campus-360/multi-disciplinary-play-and-fitness-complex/panorama.jpg",
+        "alt": "Interactive 360-degree view of Play and Fitness Complex at St. Mary's University",
+        "caption": "Play and Fitness Complex",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/play-fitness-complex.mp3",
+        "hi": "/campus-guide/audio/hi/common/play-fitness-complex.mp3",
+        "te": "/campus-guide/audio/te/common/play-fitness-complex.mp3"
+      }
+    },
+    {
+      "id": "point-7",
+      "latitude": 17.3319703,
+      "longitude": 78.72589,
+      "mapX": 50.6,
+      "mapY": 32.4,
+      "title": {
+        "en": "Central Library",
+        "te": "సెంట్రల్ లైబ్రరీ",
+        "hi": "Central Library"
+      },
+      "transcript": {
+        "en": "We are now near the Central Library.\n\nThe Central Library is a quiet and focused space for serious learning.\n\nIt spreads across seventeen thousand five hundred square feet.\n\nThe library includes thousands of books across medical sciences, management, artificial intelligence, law, and other fields.\n\nIt gives students a place to read, research, think, and grow.\n\nAs you look around, you will notice that the campus is surrounded by small hillocks.\n\nThese natural surroundings enhance the peaceful and green character of the campus.",
+        "hi": "अब हम सेंट्रल लाइब्रेरी के पास हैं।\n\nसेंट्रल लाइब्रेरी, शांत और ध्यानपूर्वक पढ़ाई के लिए एक महत्वपूर्ण स्थान है।\n\nयह लगभग सत्रह हज़ार पाँच सौ वर्ग फीट क्षेत्र में फैली हुई है।\n\nइस लाइब्रेरी में मेडिकल साइंसेस, मैनेजमेंट, आर्टिफिशियल इंटेलिजेंस, लॉ, और अन्य शिक्षा क्षेत्रों से संबंधित हज़ारों किताबें उपलब्ध हैं।\n\nयहाँ विद्यार्थियों को पढ़ने, रिसर्च करने, सोचने, और अपने ज्ञान को बढ़ाने के लिए अच्छा वातावरण मिलता है।\n\nअगर आप चारों ओर ध्यान से देखें, तो आपको लगेगा कि यह कैंपस छोटी-छोटी पहाड़ियों से घिरा हुआ है।\n\nये प्राकृतिक परिवेश, कैंपस को और भी शांत, हरा-भरा, और सुंदर वातावरण देते हैं।",
+        "te": "ఇప్పుడు మనం సెంట్రల్ లైబ్రరీ దగ్గర ఉన్నాము.\n\nసెంట్రల్ లైబ్రరీ, ప్రశాంతంగా మరియు ఏకాగ్రతతో చదవడానికి అనువైన ముఖ్యమైన ప్రదేశం.\n\nఇది సుమారు పదిహేడు వేల ఐదు వందల చదరపు అడుగుల విస్తీర్ణంలో ఉంది.\n\nఈ లైబ్రరీలో మెడికల్ సైన్సెస్, మేనేజ్‌మెంట్, ఆర్టిఫిషియల్ ఇంటెలిజెన్స్, లా, మరియు ఇతర విద్యా రంగాలకు సంబంధించిన వేలాది పుస్తకాలు అందుబాటులో ఉన్నాయి.\n\nఇక్కడ విద్యార్థులు చదవడానికి, రీసెర్చ్ చేయడానికి, ఆలోచించడానికి, మరియు తమ జ్ఞానాన్ని పెంపొందించుకోవడానికి మంచి వాతావరణం లభిస్తుంది.\n\nమీరు చుట్టూ గమనిస్తే, ఈ క్యాంపస్ చిన్న చిన్న కొండలతో చుట్టుముట్టి ఉన్నట్టు కనిపిస్తుంది.\n\nఈ సహజమైన పరిసరాలు, క్యాంపస్‌కు మరింత ప్రశాంతమైన, పచ్చదనంతో కూడిన అందమైన వాతావరణాన్ని ఇస్తాయి."
+      },
+      "panorama360": {
+        "src": "/campus-360/central-library/panorama.jpg",
+        "alt": "Interactive 360-degree view of Central Library at St. Mary's University",
+        "caption": "Central Library",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/central-library.mp3",
+        "hi": "/campus-guide/audio/hi/common/central-library.mp3",
+        "te": "/campus-guide/audio/te/common/central-library.mp3"
+      }
+    },
+    {
+      "id": "point-8",
+      "latitude": 17.3324094,
+      "longitude": 78.7254836,
+      "mapX": 43.3,
+      "mapY": 23.2,
+      "title": {
+        "en": "M B A and Law Block",
+        "te": "ఎం బీ ఏ మరియు లా బ్లాక్",
+        "hi": "M B A and Law Block"
+      },
+      "transcript": {
+        "en": "At the far end, you can see the M B A and Law Block.\n\nThis block reflects the multi-field educational strength of Saint Mary’s University.\n\nClasses for both M B A and Law students are conducted here.\n\nThis space brings together business thinking, leadership, legal understanding, and ethical decision making.\n\nAs we drive past the University Block, you can see the boys’ hostel on your right.\n\nThe building next to it is the Pharmacy College of the University.",
+        "hi": "अंत की ओर देखने पर, आपको एम.बी.ए और लॉ ब्लॉक दिखाई देगा।\n\nयह ब्लॉक, सेंट मैरीज़ यूनिवर्सिटी की मल्टी-फील्ड एजुकेशन स्ट्रेंथ को दर्शाता है।\n\nयहाँ एम.बी.ए विद्यार्थियों और लॉ विद्यार्थियों के लिए क्लासेस आयोजित की जाती हैं।\n\nइस स्पेस में बिज़नेस थिंकिंग, लीडरशिप, लीगल अंडरस्टैंडिंग, और एथिकल डिसीजन मेकिंग जैसे महत्वपूर्ण पहलू एक साथ आते हैं।\n\nजैसे ही हम यूनिवर्सिटी ब्लॉक को पार करके आगे बढ़ते हैं, आपकी दाईं ओर बॉयज़ हॉस्टल दिखाई देगा।\n\nउसके पास दिखाई देने वाला भवन, यूनिवर्सिटी का फार्मेसी कॉलेज है।",
+        "te": "చివర వైపు చూస్తే, మీకు ఎం.బి.ఏ మరియు లా బ్లాక్ కనిపిస్తుంది.\n\nఈ బ్లాక్, సెయింట్ మేరీస్ యూనివర్సిటీ యొక్క మల్టీ-ఫీల్డ్ ఎడ్యుకేషన్ స్ట్రెంత్‌ను ప్రతిబింబిస్తుంది.\n\nఇక్కడ ఎం.బి.ఏ విద్యార్థులు మరియు లా విద్యార్థుల కోసం క్లాసులు నిర్వహించబడతాయి.\n\nఈ స్పేస్‌లో బిజినెస్ థింకింగ్, లీడర్‌షిప్, లీగల్ అండర్‌స్టాండింగ్, మరియు ఎథికల్ డెసిషన్ మేకింగ్ వంటి ముఖ్యమైన అంశాలు ఒకే చోట కలుస్తాయి.\n\nమనము యూనివర్సిటీ బ్లాక్‌ను దాటి ముందుకు వెళ్తున్నప్పుడు, మీ కుడివైపు బాయ్స్ హాస్టల్ కనిపిస్తుంది.\n\nదాని పక్కన కనిపిస్తున్న భవనం, యూనివర్సిటీకి చెందిన ఫార్మసీ కాలేజ్."
+      },
+      "panorama360": {
+        "src": "/campus-360/m-b-a-and-law-block/panorama.jpg",
+        "alt": "Interactive 360-degree view of MBA and Law Block Discussion Hall at St. Mary's University",
+        "caption": "MBA and Law Block Discussion Hall",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/mba-law-block.mp3",
+        "hi": "/campus-guide/audio/hi/common/mba-law-block.mp3",
+        "te": "/campus-guide/audio/te/common/mba-law-block.mp3"
+      }
+    },
+    {
+      "id": "point-9",
+      "latitude": 17.3321418,
+      "longitude": 78.7260858,
+      "mapX": 54.9,
+      "mapY": 31.8,
+      "title": {
+        "en": "A T M Facility",
+        "te": "ఏ టీ ఎం సదుపాయం",
+        "hi": "A T M Facility"
+      },
+      "transcript": {
+        "en": "You can also find an A T M facility on campus.\n\nFor students, this helps meet immediate monetary requirements whenever needed.",
+        "hi": "कैंपस में विद्यार्थियों की सुविधा के लिए ए.टी.एम सुविधा भी उपलब्ध है।\n\nज़रूरत पड़ने पर तुरंत नकद राशि निकालने के लिए, यह सुविधा विद्यार्थियों के लिए उपयोगी होती है।",
+        "te": "క్యాంపస్‌లో విద్యార్థుల సౌకర్యం కోసం ఏ.టి.ఎం సదుపాయం కూడా అందుబాటులో ఉంది.\n\nఅవసరమైనప్పుడు వెంటనే నగదు తీసుకోవడానికి, ఈ సదుపాయం విద్యార్థులకు ఉపయోగపడుతుంది."
+      },
+      "panorama360": {
+        "src": "/campus-360/a-t-m-facility/panorama.jpg",
+        "alt": "Interactive 360-degree view of ATM Facility at St. Mary's University",
+        "caption": "ATM Facility",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/atm-facility.mp3",
+        "hi": "/campus-guide/audio/hi/common/atm-facility.mp3",
+        "te": "/campus-guide/audio/te/common/atm-facility.mp3"
+      }
+    },
+    {
+      "id": "point-10",
+      "latitude": 17.330607,
+      "longitude": 78.7259442,
+      "mapX": 59,
+      "mapY": 57.4,
+      "title": {
+        "en": "Cricket Ground, Gymnasium, and Indoor Games",
+        "te": "క్రికెట్ గ్రౌండ్, వ్యాయామశాల మరియు ఇండోర్ గేమ్స్",
+        "hi": "Cricket Ground, Gymnasium, and Indoor Games"
+      },
+      "transcript": {
+        "en": "In front of you is the cricket ground.\n\nThis open field can also be used for other fast-paced outdoor games.\n\nAs you face the ground, on your left, you will find the cricket nets and the kabaddi field.\n\nStudents can further improve their fitness routine through the gymnasium facility.\n\nThe campus also includes an indoor games room for table tennis, carrom, and other recreational activities.\n\nTo break the monotony of classroom study, students also have open green spaces where they can sit, talk, discuss, relax, and enjoy campus life.",
+        "hi": "आपके सामने क्रिकेट ग्राउंड दिखाई दे रहा है।\n\nइस ओपन फील्ड का उपयोग क्रिकेट के साथ-साथ, अन्य फास्ट-पेस्ड आउटडोर गेम्स के लिए भी किया जा सकता है।\n\nजब आप ग्राउंड की ओर देखेंगे, तो आपकी बाईं ओर क्रिकेट नेट्स और कबड्डी फील्ड दिखाई देंगे।\n\nविद्यार्थी अपनी फिटनेस रूटीन को और बेहतर बनाने के लिए कैंपस में उपलब्ध जिम्नेज़ियम सुविधा का भी उपयोग कर सकते हैं।\n\nसाथ ही, टेबल टेनिस, कैरम, और अन्य रिक्रिएशनल एक्टिविटीज़ के लिए इंडोर गेम्स रूम भी उपलब्ध है।\n\nक्लासरूम स्टडी से थोड़ा रिलैक्स होने के लिए, विद्यार्थियों के पास ओपन ग्रीन स्पेसेस भी हैं।\n\nयहाँ वे बैठ सकते हैं, बातचीत कर सकते हैं, चर्चा कर सकते हैं, रिलैक्स कर सकते हैं, और कैंपस लाइफ का आनंद ले सकते हैं।",
+        "te": "మీ ముందుగా క్రికెట్ గ్రౌండ్ కనిపిస్తుంది.\n\nఈ ఓపెన్ ఫీల్డ్‌ను క్రికెట్‌తో పాటు, ఇతర ఫాస్ట్-పేస్డ్ అవుట్‌డోర్ గేమ్స్ కోసం కూడా ఉపయోగించవచ్చు.\n\nమీరు గ్రౌండ్ వైపు చూస్తున్నప్పుడు, మీ ఎడమవైపు క్రికెట్ నెట్స్ మరియు కబడ్డీ ఫీల్డ్ కనిపిస్తాయి.\n\nవిద్యార్థులు తమ ఫిట్‌నెస్ రూటీన్‌ను మరింత మెరుగుపరుచుకోవడానికి, క్యాంపస్‌లో జిమ్నేషియం సదుపాయం కూడా అందుబాటులో ఉంది.\n\nఅలాగే, టేబుల్ టెన్నిస్, క్యారమ్, మరియు ఇతర రిక్రియేషనల్ యాక్టివిటీస్ కోసం ఇండోర్ గేమ్స్ రూమ్ కూడా ఉంది.\n\nక్లాస్‌రూమ్ స్టడీ నుంచి కొంత రిలాక్స్ అవ్వడానికి, విద్యార్థుల కోసం ఓపెన్ గ్రీన్ స్పేస్‌లు కూడా ఉన్నాయి.\n\nఇక్కడ వారు కూర్చోవచ్చు, మాట్లాడుకోవచ్చు, డిస్కస్ చేయవచ్చు, రిలాక్స్ అవ్వచ్చు, మరియు క్యాంపస్ లైఫ్‌ను ఆనందించవచ్చు."
+      },
+      "panorama360": {
+        "src": "/campus-360/cricket-ground-gymnasium-and-indoor-games/panorama.jpg",
+        "alt": "Interactive 360-degree view of Cricket Ground, Gymnasium, and Indoor Games",
+        "caption": "Cricket Ground, Gymnasium, and Indoor Games",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/cricket-ground.mp3",
+        "hi": "/campus-guide/audio/hi/common/cricket-ground.mp3",
+        "te": "/campus-guide/audio/te/common/cricket-ground.mp3"
+      }
+    },
+    {
+      "id": "point-11",
+      "latitude": 17.3312355,
+      "longitude": 78.7275125,
+      "mapX": 81.9,
+      "mapY": 53.9,
+      "title": {
+        "en": "Hostel Block",
+        "te": "హాస్టల్ బ్లాక్",
+        "hi": "Hostel Block"
+      },
+      "image": "/assets/Campus guide images/Hostel1-CfcW80Kf.webp",
+      "transcript": {
+        "en": "A little ahead, you can see one of our hostel blocks.\n\nSaint Mary’s provides separate hostel facilities for boys and girls.\n\nThe hostels are designed with student comfort in mind.\n\nThey include air conditioning, individual study tables, storage cupboards, laundry facilities, and dining services with different weekly menus.\n\nThe hostel in front of you is one such facility.\n\nYou may also take a look at the sample room to understand the student living experience better.\n\nWe actively promote a strong play and fitness culture.\n\nTo your right, you can see one of the grounds.\n\nThis ground is used for high-intensity activities such as football, kho-kho, track events, field events, and other outdoor games.",
+        "hi": "थोड़ा आगे बढ़ने पर, आपको हमारे हॉस्टल ब्लॉक्स में से एक दिखाई देगा।\n\nसेंट मैरीज़ में लड़कों और लड़कियों के लिए अलग-अलग हॉस्टल सुविधाएँ उपलब्ध हैं।\n\nविद्यार्थियों की सुविधा को ध्यान में रखकर इन हॉस्टल्स को डिज़ाइन किया गया है।\n\nयहाँ एयर कंडीशनिंग, हर विद्यार्थी के लिए अलग स्टडी टेबल, स्टोरेज कपबोर्ड्स, लॉन्ड्री सुविधाएँ, और हर सप्ताह अलग-अलग मेनू के साथ डाइनिंग सर्विसेस उपलब्ध हैं।\n\nआपके सामने दिखाई देने वाला यह हॉस्टल भी ऐसी ही सुविधाओं में से एक है।\n\nविद्यार्थियों के लिविंग एक्सपीरियंस को बेहतर समझने के लिए, आप सैंपल रूम भी देख सकते हैं।\n\nसेंट मैरीज़ में हम मजबूत प्ले और फिटनेस कल्चर को बढ़ावा देते हैं।\n\nआपकी दाईं ओर, आपको एक ग्राउंड दिखाई देगा।\n\nइस ग्राउंड का उपयोग फुटबॉल, खो-खो, ट्रैक इवेंट्स, फील्ड इवेंट्स, और अन्य आउटडोर गेम्स जैसी हाई-इंटेंसिटी एक्टिविटीज़ के लिए किया जाता है।",
+        "te": "కొంచెం ముందుకు వెళ్తే, మీకు మా హాస్టల్ బ్లాక్స్‌లో ఒకటి కనిపిస్తుంది.\n\nసెయింట్ మేరీస్‌లో అబ్బాయిలు మరియు అమ్మాయిల కోసం వేర్వేరు హాస్టల్ సదుపాయాలు అందుబాటులో ఉన్నాయి.\n\nవిద్యార్థుల సౌకర్యాన్ని దృష్టిలో పెట్టుకుని, ఈ హాస్టల్స్‌ను రూపొందించారు.\n\nఇక్కడ ఎయిర్ కండిషనింగ్, ప్రతి విద్యార్థికి ప్రత్యేకమైన స్టడీ టేబుల్, స్టోరేజ్ కప్‌బోర్డ్స్, లాండ్రీ సదుపాయాలు, అలాగే ప్రతి వారం వేర్వేరు మెనూతో డైనింగ్ సర్వీసెస్ అందుబాటులో ఉంటాయి.\n\nమీ ముందున్న ఈ హాస్టల్ కూడా అలాంటి సదుపాయాల్లో ఒకటి.\n\nవిద్యార్థుల లివింగ్ ఎక్స్‌పీరియన్స్‌ను ఇంకా బాగా అర్థం చేసుకోవడానికి, మీరు సాంపిల్ రూమ్‌ను కూడా చూడవచ్చు.\n\nసెయింట్ మేరీస్‌లో మేము బలమైన ప్లే మరియు ఫిట్‌నెస్ కల్చర్‌ను ప్రోత్సహిస్తాము.\n\nమీ కుడివైపు, మీకు ఒక గ్రౌండ్ కనిపిస్తుంది.\n\nఈ గ్రౌండ్‌ను ఫుట్‌బాల్, ఖో-ఖో, ట్రాక్ ఈవెంట్స్, ఫీల్డ్ ఈవెంట్స్, మరియు ఇతర అవుట్‌డోర్ గేమ్స్ వంటి హై-ఇంటెన్సిటీ యాక్టివిటీస్ కోసం ఉపయోగిస్తారు."
+      },
+      "panorama360": {
+        "src": "/campus-360/hostel-block/panorama.jpg",
+        "alt": "Interactive 360-degree view of Hostel Block at St. Mary's University",
+        "caption": "Hostel Block",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/hostel-block-ground.mp3",
+        "hi": "/campus-guide/audio/hi/common/hostel-block-ground.mp3",
+        "te": "/campus-guide/audio/te/common/hostel-block-ground.mp3"
+      }
+    },
+    {
+      "id": "point-12",
+      "latitude": 17.3310929,
+      "longitude": 78.7262502,
+      "audioFileName": "cricket-ground.mp3",
+      "mapX": 51.3,
+      "mapY": 71.7,
+      "title": {
+        "en": "Cricket Ground, Gymnasium, and Indoor Games",
+        "te": "క్రికెట్ గ్రౌండ్, వ్యాయామశాల మరియు ఇండోర్ గేమ్స్",
+        "hi": "Cricket Ground, Gymnasium, and Indoor Games"
+      },
+      "transcript": {
+        "en": "In front of you is the cricket ground.\n\nThis open field can also be used for other fast-paced outdoor games.\n\nAs you face the ground, on your left, you will find the cricket nets and the kabaddi field.\n\nStudents can further improve their fitness routine through the gymnasium facility.\n\nThe campus also includes an indoor games room for table tennis, carrom, and other recreational activities.\n\nTo break the monotony of classroom study, students also have open green spaces where they can sit, talk, discuss, relax, and enjoy campus life.",
+        "hi": "आपके सामने क्रिकेट ग्राउंड दिखाई दे रहा है।\n\nइस ओपन फील्ड का उपयोग क्रिकेट के साथ-साथ, अन्य फास्ट-पेस्ड आउटडोर गेम्स के लिए भी किया जा सकता है।\n\nजब आप ग्राउंड की ओर देखेंगे, तो आपकी बाईं ओर क्रिकेट नेट्स और कबड्डी फील्ड दिखाई देंगे।\n\nविद्यार्थी अपनी फिटनेस रूटीन को और बेहतर बनाने के लिए कैंपस में उपलब्ध जिम्नेज़ियम सुविधा का भी उपयोग कर सकते हैं।\n\nसाथ ही, टेबल टेनिस, कैरम, और अन्य रिक्रिएशनल एक्टिविटीज़ के लिए इंडोर गेम्स रूम भी उपलब्ध है।\n\nक्लासरूम स्टडी से थोड़ा रिलैक्स होने के लिए, विद्यार्थियों के पास ओपन ग्रीन स्पेसेस भी हैं।\n\nयहाँ वे बैठ सकते हैं, बातचीत कर सकते हैं, चर्चा कर सकते हैं, रिलैक्स कर सकते हैं, और कैंपस लाइफ का आनंद ले सकते हैं।",
+        "te": "మీ ముందుగా క్రికెట్ గ్రౌండ్ కనిపిస్తుంది.\n\nఈ ఓపెన్ ఫీల్డ్‌ను క్రికెట్‌తో పాటు, ఇతర ఫాస్ట్-పేస్డ్ అవుట్‌డోర్ గేమ్స్ కోసం కూడా ఉపయోగించవచ్చు.\n\nమీరు గ్రౌండ్ వైపు చూస్తున్నప్పుడు, మీ ఎడమవైపు క్రికెట్ నెట్స్ మరియు కబడ్డీ ఫీల్డ్ కనిపిస్తాయి.\n\nవిద్యార్థులు తమ ఫిట్‌నెస్ రూటీన్‌ను మరింత మెరుగుపరుచుకోవడానికి, క్యాంపస్‌లో జిమ్నేషియం సదుపాయం కూడా అందుబాటులో ఉంది.\n\nఅలాగే, టేబుల్ టెన్నిస్, క్యారమ్, మరియు ఇతర రిక్రియేషనల్ యాక్టివిటీస్ కోసం ఇండోర్ గేమ్స్ రూమ్ కూడా ఉంది.\n\nక్లాస్‌రూమ్ స్టడీ నుంచి కొంత రిలాక్స్ అవ్వడానికి, విద్యార్థుల కోసం ఓపెన్ గ్రీన్ స్పేస్‌లు కూడా ఉన్నాయి.\n\nఇక్కడ వారు కూర్చోవచ్చు, మాట్లాడుకోవచ్చు, డిస్కస్ చేయవచ్చు, రిలాక్స్ అవ్వచ్చు, మరియు క్యాంపస్ లైఫ్‌ను ఆనందించవచ్చు."
+      },
+      "panorama360": {
+        "src": "/campus-360/cricket-ground-gymnasium-and-indoor-games/panorama.jpg",
+        "alt": "Interactive 360-degree view of Cricket Ground at St. Mary's University",
+        "caption": "Cricket Ground",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-13",
+      "latitude": 17.3311377,
+      "longitude": 78.7253728,
+      "audioFileName": "",
+      "mapX": 43.7,
+      "mapY": 53.9,
+      "title": {
+        "en": "Girl's Hostel",
+        "te": "Girl's Hostel",
+        "hi": "Girl's Hostel"
+      },
+      "transcript": {
+        "en": "",
+        "hi": "",
+        "te": ""
+      },
+      "panorama360": {
+        "src": "/campus-360/hostel-block/panorama.jpg",
+        "alt": "Interactive 360-degree view of Girls' Hostel Block at St. Mary's University",
+        "caption": "Girls' Hostel Block",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-14",
+      "latitude": 17.3303493,
+      "longitude": 78.7251521,
+      "audioFileName": "",
+      "mapX": 39.5,
+      "mapY": 73.3,
+      "title": {
+        "en": "Boy's Hostel",
+        "te": "Boy's Hostel",
+        "hi": "Boy's Hostel"
+      },
+      "transcript": {
+        "en": "",
+        "hi": "",
+        "te": ""
+      }
+    },
+    {
+      "id": "point-15",
+      "latitude": 17.3313922,
+      "longitude": 78.7245287,
+      "audioFileName": "",
+      "mapX": 30.9,
+      "mapY": 50.8,
+      "title": {
+        "en": "Mini - Parking Area",
+        "te": "Mini - Parking Area",
+        "hi": "Mini - Parking Area"
+      },
+      "transcript": {
+        "en": "",
+        "hi": "",
+        "te": ""
+      }
+    },
+    {
+      "id": "point-16",
+      "latitude": 17.3316023,
+      "longitude": 78.7243262,
+      "mapX": 27.3,
+      "mapY": 43.2,
+      "title": {
+        "en": "Admission Office & Reception",
+        "te": "అడ్మిషన్ల కార్యాలయం & రిసెప్షన్",
+        "hi": "प्रवेश कार्यालय और स्वागत कक्ष"
+      },
+      "transcript": {
+        "en": "Welcome to the Admission Office and Reception at Saint Mary's Rehabilitation University. This is where your journey as a student begins. Our helpful admissions team is here to guide you and your parents through the enrollment process, explain various courses, eligibility criteria, and help you select the right career path. Feel free to explore our facilities and clarify any questions you may have.",
+        "hi": "सेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी के प्रवेश कार्यालय और स्वागत कक्ष में आपका स्वागत है। एक छात्र के रूप में आपकी यात्रा यहीं से शुरू होती है। हमारी सहयोगी प्रवेश टीम आपको और आपके माता-पिता को नामांकन प्रक्रिया के माध्यम से मार्गदर्शन करने, विभिन्न पाठ्यक्रमों, पात्रता मानदंडों को समझाने और सही करियर मार्ग चुनने में मदद करने के लिए यहाँ मौजूद है।",
+        "te": "సెయింట్ మేరీస్ రిహాబిలిటేషన్ యూనివర్సిటీ అడ్మిషన్ల కార్యాలయం మరియు రిసెప్షన్‌కు స్వాగతం. విద్యార్థిగా మీ ప్రయాణం ఇక్కడే ప్రారంభమవుతుంది. మీకు మరియు మీ తల్లిదండ్రులకు ప్రవేశ ప్రక్రియలో మార్గదర్శకత్వం చేయడానికి, विभिन्न కోర్సులు, అర్హత ప్రమాణాలను వివరించడానికి మరియు సరైన కెరీర్ మార్గాన్ని ఎంచుకోవడంలో సహాయపడటానికి మా సహాయక అడ్మిషన్ల బృందం ఇక్కడ సిద్ధంగా ఉంది."
+      },
+      "panorama360": {
+        "src": "/campus-360/admission-room-outside/panorama.jpg",
+        "alt": "Interactive 360-degree view of Admission Office & Reception at St. Mary's University",
+        "caption": "Admission Office & Reception",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/main-entrance-combined.mp3",
+        "hi": "/campus-guide/audio/hi/common/main-entrance-combined.mp3",
+        "te": "/campus-guide/audio/te/common/main-entrance-combined.mp3"
+      }
+    },
+    {
+      "id": "point-17",
+      "latitude": 17.3319623,
+      "longitude": 78.7243304,
+      "mapX": 26.8,
+      "mapY": 34.3,
+      "title": {
+        "en": "University Block",
+        "te": "యూనివర్సిటీ బ్లాక్",
+        "hi": "University Block"
+      },
+      "image": "/assets/Campusimages/University.png",
+      "transcript": {
+        "en": "We are now approaching the University Block.\n\nThis is the main building of Saint Mary’s Rehabilitation University.\n\nIt houses classrooms for technical courses, rehabilitation courses, and allied health courses.\n\nThe classrooms are equipped with air conditioning, individual desks, smart classroom facilities, projector systems, and other advanced teaching tools.\n\nThese facilities help make the teaching and learning process smooth and effective for students.\n\nThe building is also well ventilated, with ample natural light.\n\nThe University Block also houses a second library.\n\nThis library includes books across varied disciplines, helping students enhance their learning and gain a deeper understanding of their subjects.",
+        "hi": "अब हम यूनिवर्सिटी ब्लॉक के पास पहुँच रहे हैं।\n\nयह सेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी का मुख्य भवन है।\n\nइस भवन में टेक्निकल कोर्सेस, रिहैबिलिटेशन कोर्सेस, और अलाइड हेल्थ कोर्सेस से संबंधित क्लासरूम्स हैं।\n\nक्लासरूम्स में एयर कंडीशनिंग, हर विद्यार्थी के लिए अलग डेस्क, स्मार्ट क्लासरूम सुविधाएँ, प्रोजेक्टर सिस्टम्स, और अन्य आधुनिक टीचिंग टूल्स उपलब्ध हैं।\n\nये सुविधाएँ विद्यार्थियों के लिए टीचिंग और लर्निंग प्रोसेस को अधिक सहज और प्रभावी बनाती हैं।\n\nयह भवन अच्छी वेंटिलेशन के साथ, पर्याप्त प्राकृतिक रोशनी आने के लिए भी डिज़ाइन किया गया है।\n\nयूनिवर्सिटी ब्लॉक में एक दूसरी लाइब्रेरी भी है।\n\nइस लाइब्रेरी में विभिन्न शिक्षा क्षेत्रों से संबंधित किताबें उपलब्ध हैं। ये विद्यार्थियों को अपनी लर्निंग को बेहतर बनाने, और अपने विषयों की गहरी समझ प्राप्त करने में मदद करती हैं।",
+        "te": "ఇప్పుడు మనం యూనివర్సిటీ బ్లాక్ దగ్గరకు చేరుకుంటున్నాము.\n\nఇది సెయింట్ మేరీస్ రిహాబిలిటేషన్ యూనివర్సిటీ యొక్క ప్రధాన భవనం.\n\nఈ భవనంలో టెక్నికల్ కోర్సులు, రిహాబిలిటేషన్ కోర్సులు, మరియు అలైడ్ హెల్త్ కోర్సులకు సంబంధించిన క్లాస్‌రూమ్స్ ఉన్నాయి.\n\nక్లాస్‌రూమ్స్‌లో ఎయిర్ కండిషనింగ్, ప్రతి విద్యార్థికి ప్రత్యేకమైన డెస్క్, స్మార్ట్ క్లాస్‌రూమ్ సదుపాయాలు, ప్రొజెక్టర్ సిస్టమ్స్, మరియు ఇతర ఆధునిక టీచింగ్ టూల్స్ అందుబాటులో ఉన్నాయి.\n\nఈ సదుపాయాలు విద్యార్థుల కోసం టీచింగ్ మరియు లెర్నింగ్ ప్రాసెస్‌ను మరింత సులభంగా, ప్రభావవంతంగా మారుస్తాయి.\n\nఈ భవనం మంచి వెంటిలేషన్‌తో పాటు, సహజమైన వెలుతురు వచ్చేలా రూపొందించబడింది.\n\nయూనివర్సిటీ బ్లాక్‌లో మరో లైబ్రరీ కూడా ఉంది.\n\nఈ లైబ్రరీలో వివిధ విద్యా రంగాలకు సంబంధించిన పుస్తకాలు అందుబాటులో ఉన్నాయి. ఇవి విద్యార్థులు తమ లెర్నింగ్‌ను మెరుగుపరుచుకోవడానికి, అలాగే తమ సబ్జెక్ట్స్‌పై మరింత లోతైన అవగాహన పొందడానికి సహాయపడతాయి."
+      },
+      "panorama360": {
+        "src": "/campus-360/university-block/panorama.jpg",
+        "alt": "Interactive 360-degree view of University Block Class Room at St. Mary's University",
+        "caption": "University Block Class Room",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/university-block.mp3",
+        "hi": "/campus-guide/audio/hi/common/university-block.mp3",
+        "te": "/campus-guide/audio/te/common/university-block.mp3"
+      }
+    },
+    {
+      "id": "point-18",
+      "latitude": 17.3309915,
+      "longitude": 78.723607,
+      "mapX": 17.4,
+      "mapY": 59.2,
+      "title": {
+        "en": "Rehab Block and Hospital",
+        "te": "రిహాబ్ బ్లాక్ మరియు హాస్పిటల్",
+        "hi": "Rehab Block and Hospital"
+      },
+      "transcript": {
+        "en": "We are now moving towards one of the most scenic and important parts of the campus, the Rehab Block.\n\nThe Rehab Block represents the university’s strong focus on healthcare and rehabilitation.\n\nIt includes a hundred-bedded medical rehabilitation hospital and a specialized psychiatric facility.\n\nThis is where students connect classroom learning with real clinical practice.\n\nHere, education becomes service.\n\nAnd skill becomes care for human lives.\n\nThe hundred-bedded rehabilitation hospital supports practical learning, patient care, and professional training.\n\nThis is where medical knowledge becomes real practice.\n\nThe Rehab Centre also includes laboratories for Occupational Therapy, Physiotherapy, Psychology, Audiology, and other allied health and rehabilitation sciences.\n\nThese labs help students receive hands-on exposure and clinical training.",
+        "hi": "अब हम कैंपस के सबसे सुंदर और महत्वपूर्ण क्षेत्रों में से एक, रिहैब ब्लॉक की ओर बढ़ रहे हैं।\n\nरिहैब ब्लॉक, हेल्थकेयर और रिहैबिलिटेशन के प्रति यूनिवर्सिटी के मजबूत फोकस को दर्शाता है।\n\nयहाँ सौ बेड वाला मेडिकल रिहैबिलिटेशन हॉस्पिटल, और एक विशेष साइकियाट्रिक सुविधा भी मौजूद है।\n\nयही वह जगह है जहाँ विद्यार्थी क्लासरूम में सीखी गई बातों को वास्तविक क्लिनिकल प्रैक्टिस से जोड़ते हैं।\n\nयहाँ शिक्षा, सेवा में बदल जाती है।\n\nऔर विद्यार्थियों की स्किल, इंसानी जीवन की देखभाल करने की शक्ति बन जाती है।\n\nयह सौ बेड वाला रिहैबिलिटेशन हॉस्पिटल, प्रैक्टिकल लर्निंग, पेशेंट केयर, और प्रोफेशनल ट्रेनिंग में मदद करता है।\n\nयहीं मेडिकल नॉलेज, वास्तविक प्रैक्टिस में बदलता है।\n\nरिहैब सेंटर में ऑक्यूपेशनल थेरेपी, फिजियोथेरेपी, साइकोलॉजी, ऑडियोलॉजी, और अन्य अलाइड हेल्थ तथा रिहैबिलिटेशन साइंसेस से संबंधित लैब्स भी मौजूद हैं।\n\nइन लैब्स के माध्यम से विद्यार्थी हैंड्स-ऑन एक्सपोज़र और क्लिनिकल ट्रेनिंग प्राप्त करते हैं।",
+        "te": "ఇప్పుడు మనం క్యాంపస్‌లోని అత్యంత అందమైన మరియు ముఖ్యమైన ప్రాంతాల్లో ఒకటైన రిహాబ్ బ్లాక్ వైపు వెళ్తున్నాము.\n\nరిహాబ్ బ్లాక్, హెల్త్‌కేర్ మరియు రిహాబిలిటేషన్‌పై యూనివర్సిటీకి ఉన్న బలమైన ఫోకస్‌ను ప్రతిబింబిస్తుంది.\n\nఇక్కడ వంద పడకల మెడికల్ రిహాబిలిటేషన్ హాస్పిటల్‌తో పాటు, ప్రత్యేకమైన సైకియాట్రిక్ ఫెసిలిటీ కూడా ఉంది.\n\nఇదే విద్యార్థులు క్లాస్‌రూమ్‌లో నేర్చుకున్న విషయాలను నిజమైన క్లినికల్ ప్రాక్టీస్‌తో కనెక్ట్ చేసుకునే ప్రదేశం.\n\nఇక్కడ విద్య అనేది సేవగా మారుతుంది.\n\nఅలాగే, విద్యార్థుల స్కిల్ అనేది మనుషుల జీవితాలకు కేర్ అందించే శక్తిగా మారుతుంది.\n\nఈ వంద పడకల రిహాబిలిటేషన్ హాస్పిటల్, ప్రాక్టికల్ లెర్నింగ్, పేషెంట్ కేర్, మరియు ప్రొఫెషనల్ ట్రైనింగ్‌కు సహాయపడుతుంది.\n\nఇక్కడ మెడికల్ నాలెడ్జ్, నిజమైన ప్రాక్టీస్‌గా మారుతుంది.\n\nరిహాబ్ సెంటర్‌లో ఆక్యుపేషనల్ థెరపీ, ఫిజియోథెరపీ, సైకాలజీ, ఆడియాలజీ, మరియు ఇతర అలైడ్ హెల్త్ మరియు రిహాబిలిటేషన్ సైన్సెస్‌కు సంబంధించిన ల్యాబ్స్ కూడా ఉన్నాయి.\n\nఈ ల్యాబ్స్ ద్వారా విద్యార్థులు హ్యాండ్స్-ఆన్ ఎక్స్‌పోజర్ మరియు క్లినికల్ ట్రైనింగ్ పొందుతారు."
+      },
+      "panorama360": {
+        "src": "/campus-360/rehab-block-and-hospital/panorama.jpg",
+        "alt": "Interactive 360-degree view of Rehab Block and Hospital at St. Mary's University",
+        "caption": "Rehab Block and Hospital",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/rehab-block.mp3",
+        "hi": "/campus-guide/audio/hi/common/rehab-block.mp3",
+        "te": "/campus-guide/audio/te/common/rehab-block.mp3"
+      }
+    },
+    {
+      "id": "point-19",
+      "latitude": 17.3313386,
+      "longitude": 78.723206,
+      "mapX": 9.9,
+      "mapY": 50,
+      "title": {
+        "en": "Sensory Park",
+        "te": "సెన్సరీ పార్క్",
+        "hi": "Sensory Park"
+      },
+      "transcript": {
+        "en": "A little further up, we have the Sensory Park.\n\nAt first, it may look like a play area.\n\nHowever, this space has different equipment designed to provide sensory stimulation for people with special needs.\n\nIt also gives students practical training opportunities in understanding sensory support and therapeutic care.",
+        "hi": "थोड़ा ऊपर आगे बढ़ने पर, हमें सेंसरी पार्क दिखाई देगा।\n\nपहली नज़र में यह एक प्ले एरिया जैसा लग सकता है।\n\nलेकिन इस स्पेस में, स्पेशल नीड्स वाले लोगों को सेंसरी स्टिम्युलेशन देने के लिए अलग-अलग उपकरण विशेष रूप से डिज़ाइन किए गए हैं।\n\nसाथ ही, सेंसरी सपोर्ट और थेरेप्यूटिक केयर को समझने में, यह विद्यार्थियों को प्रैक्टिकल ट्रेनिंग के अवसर भी प्रदान करता है।",
+        "te": "కొంచెం పైకి ముందుకు వెళ్తే, మనకు సెన్సరీ పార్క్ కనిపిస్తుంది.\n\nమొదట చూసినప్పుడు, ఇది ఒక ప్లే ఏరియాలా కనిపించవచ్చు.\n\nకానీ ఈ స్పేస్‌లో, స్పెషల్ నీడ్స్ ఉన్న వ్యక్తులకు సెన్సరీ స్టిమ్యులేషన్ అందించడానికి ప్రత్యేకంగా డిజైన్ చేసిన వేర్వేరు ఎక్విప్‌మెంట్ ఉంటుంది.\n\nఅలాగే, సెన్సరీ సపోర్ట్ మరియు థెరప్యూటిక్ కేర్‌ను అర్థం చేసుకోవడంలో, విద్యార్థులకు ప్రాక్టికల్ ట్రైనింగ్ అవకాశాలను కూడా ఇది అందిస్తుంది."
+      },
+      "panorama360": {
+        "src": "/campus-360/sensory-park/panorama.jpg",
+        "alt": "Interactive 360-degree view of Sensory Park Garden at St. Mary's University",
+        "caption": "Sensory Park Garden",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/sensory-park.mp3",
+        "hi": "/campus-guide/audio/hi/common/sensory-park.mp3",
+        "te": "/campus-guide/audio/te/common/sensory-park.mp3"
+      }
+    },
+    {
+      "id": "point-20",
+      "latitude": 17.3311581,
+      "longitude": 78.7230652,
+      "mapX": 9.5,
+      "mapY": 56.9,
+      "title": {
+        "en": "Swimming Pool",
+        "te": "స్విమ్మింగ్ పూల్",
+        "hi": "Swimming Pool"
+      },
+      "transcript": {
+        "en": "Next to the Sensory Park is the swimming pool.\n\nThe pool is used as a place for water therapy for people with specific needs.\n\nIt is also a space where students can enjoy swimming, especially during hot weather.",
+        "hi": "सेंसरी पार्क के पास ही हमें स्विमिंग पूल दिखाई देता है।\n\nइस पूल का उपयोग विशेष आवश्यकताओं वाले लोगों के लिए वॉटर थेरेपी देने की जगह के रूप में किया जाता है।\n\nसाथ ही, गर्म मौसम में विद्यार्थी स्विमिंग का आनंद लेने के लिए भी इस स्पेस का उपयोग कर सकते हैं।",
+        "te": "సెన్సరీ పార్క్ పక్కనే మనకు స్విమ్మింగ్ పూల్ కనిపిస్తుంది.\n\nఈ పూల్‌ను, ప్రత్యేక అవసరాలు ఉన్న వ్యక్తుల కోసం వాటర్ థెరపీ అందించే ప్రదేశంగా ఉపయోగిస్తారు.\n\nఅలాగే, వేడి వాతావరణంలో విద్యార్థులు స్విమ్మింగ్‌ను ఆస్వాదించడానికి కూడా ఇది మంచి స్పేస్‌గా ఉంటుంది."
+      },
+      "panorama360": {
+        "src": "/campus-360/swimming-pool/panorama.jpg",
+        "alt": "Interactive 360-degree view of Swimming Pool & DBR View at St. Mary's University",
+        "caption": "Swimming Pool & DBR View",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/swimming-pool.mp3",
+        "hi": "/campus-guide/audio/hi/common/swimming-pool.mp3",
+        "te": "/campus-guide/audio/te/common/swimming-pool.mp3"
+      }
+    },
+    {
+      "id": "point-21",
+      "latitude": 17.3314142,
+      "longitude": 78.7236271,
+      "mapX": 17,
+      "mapY": 49.5,
+      "title": {
+        "en": "Amphitheatre",
+        "te": "ఆంఫిథియేటర్",
+        "hi": "Amphitheatre"
+      },
+      "transcript": {
+        "en": "Further down, you can see the amphitheatre.\n\nThis is an open gathering space that can accommodate a large number of students.\n\nIt allows students to participate in discussions, seminars, debates, cultural activities, and other campus events.",
+        "hi": "थोड़ा नीचे की ओर जाने पर, हमें एम्फी थिएटर दिखाई देगा।\n\nयह एक ओपन गैदरिंग स्पेस है, जहाँ बड़ी संख्या में विद्यार्थी एक साथ बैठ सकते हैं।\n\nयहाँ विद्यार्थी डिस्कशन्स, सेमिनार्स, डिबेट्स, कल्चरल एक्टिविटीज़, और अन्य कैंपस इवेंट्स में भाग ले सकते हैं।",
+        "te": "కొంచెం కిందికి వెళ్తే, మనకు ఆంఫి థియేటర్ కనిపిస్తుంది.\n\nఇది ఎక్కువ మంది విద్యార్థులు ఒకేసారి కలిసి కూర్చోవడానికి అనువైన ఓపెన్ గ్యాదరింగ్ స్పేస్.\n\nఇక్కడ విద్యార్థులు డిస్కషన్స్, సెమినార్స్, డిబేట్స్, కల్చరల్ యాక్టివిటీస్, మరియు ఇతర క్యాంపస్ ఈవెంట్స్‌లో పాల్గొనవచ్చు."
+      },
+      "panorama360": {
+        "src": "/campus-360/amphitheatre/panorama.jpg",
+        "alt": "Interactive 360-degree view of Amphitheatre at St. Mary's University",
+        "caption": "Amphitheatre",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/amphitheatre.mp3",
+        "hi": "/campus-guide/audio/hi/common/amphitheatre.mp3",
+        "te": "/campus-guide/audio/te/common/amphitheatre.mp3"
+      }
+    },
+    {
+      "id": "point-22",
+      "latitude": 17.3314512,
+      "longitude": 78.7269858,
+      "mapX": 66.4,
+      "mapY": 47.5,
+      "title": {
+        "en": "Main Block",
+        "te": "మెయిన్ బ్లాక్",
+        "hi": "Main Block"
+      },
+      "transcript": {
+        "en": "A little ahead of the circle, towards the left, you will find the Main Block.\n\nThis building houses important offices such as the Chancellor’s Office, the C E O’s Office, the Secretariat, and the Central Office.\n\nClasses for the autonomous colleges are also conducted here.\n\nThe building includes computer labs, where students apply classroom learning through practical sessions.\n\nAs we move ahead, you will notice that the campus terrain has a natural step-like layout.\n\nThis beautiful formation gives the Saint Mary’s University campus a distinctive character and scenic appeal.",
+        "hi": "सर्कल को पार करके थोड़ा आगे बढ़ने पर, बाईं ओर आपको मेन ब्लॉक दिखाई देगा।\n\nइस भवन में चांसलर ऑफिस, सी.ई.ओ ऑफिस, सेक्रेटेरिएट, और सेंट्रल ऑफिस जैसे महत्वपूर्ण कार्यालय मौजूद हैं।\n\nऑटोनॉमस कॉलेजेस से संबंधित क्लासेस भी यहीं आयोजित की जाती हैं।\n\nइस भवन में कंप्यूटर लैब्स भी हैं। यहाँ विद्यार्थी क्लासरूम में सीखी गई बातों को प्रैक्टिकल सेशन्स के माध्यम से अप्लाई करते हैं।\n\nजैसे-जैसे हम आगे बढ़ते हैं, आप देखेंगे कि कैंपस का भूभाग प्राकृतिक रूप से सीढ़ियों की तरह ऊपर और नीचे फैला हुआ है।\n\nयह नैचुरल स्टेप-लाइक लेआउट, सेंट मैरीज़ यूनिवर्सिटी कैंपस को एक अलग और सुंदर पहचान देता है।",
+        "te": "సర్కిల్‌ను దాటి కొంచెం ముందుకు వెళ్తే, ఎడమవైపు మీకు మెయిన్ బ్లాక్ కనిపిస్తుంది.\n\nఈ భవనంలో ఛాన్స్‌లర్ ఆఫీస్, సి.ఈ.ఓ ఆఫీస్, సెక్రటేరియట్, మరియు సెంట్రల్ ఆఫీస్ వంటి ముఖ్యమైన కార్యాలయాలు ఉన్నాయి.\n\nఅటానమస్ కాలేజీలకు సంబంధించిన క్లాసులు కూడా ఇక్కడ నిర్వహించబడతాయి.\n\nఈ భవనంలో కంప్యూటర్ ల్యాబ్స్ కూడా ఉన్నాయి. ఇక్కడ విద్యార్థులు తరగతి గదిలో నేర్చుకున్న విషయాలను ప్రాక్టికల్ సెషన్స్ ద్వారా అప్లై చేస్తారు.\n\nమనము ముందుకు సాగుతున్నప్పుడు, క్యాంపస్ భూభాగం సహజంగా మెట్లలా పైకి, కిందకి విస్తరించి ఉన్నట్టు మీరు గమనించవచ్చు.\n\nఈ సహజమైన స్టెప్-లైక్ లేఅవుట్, సెయింట్ మేరీస్ యూనివర్సిటీ క్యాంపస్‌కు ఒక ప్రత్యేకమైన అందాన్ని ఇస్తుంది."
+      },
+      "panorama360": {
+        "src": "/campus-360/main-block/panorama.jpg",
+        "alt": "Interactive 360-degree view of Main Block at St. Mary's University",
+        "caption": "Main Block",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/main-block.mp3",
+        "hi": "/campus-guide/audio/hi/common/main-block.mp3",
+        "te": "/campus-guide/audio/te/common/main-block.mp3"
+      }
+    },
+    {
+      "id": "point-signoff",
+      "latitude": 17.3314142,
+      "longitude": 78.7236271,
+      "mapX": 80.8,
+      "mapY": 38.2,
+      "title": {
+        "en": "Sign Off",
+        "te": "సందర్శన ముగింపు",
+        "hi": "साइन ऑफ"
+      },
+      "transcript": {
+        "en": "Thank you for taking the time to visit our campus today.\n\nWe hope this tour has given you a clear understanding of our academic environment, infrastructure, student facilities, and learning culture.\n\nAt Saint Mary’s Rehabilitation University, we focus not only on academic excellence, but also on the overall growth and future success of every student.\n\nFrom classrooms and laboratories to libraries, clinical exposure, student activities, and open learning spaces, every facility is designed to help students achieve their goals with confidence.\n\nWe look forward to welcoming you to Saint Mary’s Rehabilitation University.",
+        "te": "ఈ రోజు మా క్యాంపస్‌ను సందర్శించడానికి మీ సమయాన్ని కేటాయించినందుకు ధన్యవాదాలు.\n\nఈ టూర్ ద్వారా, మా అకడమిక్ ఎన్విరాన్‌మెంట్, ఇన్‌ఫ్రాస్ట్రక్చర్, విద్యార్థుల సదుపాయాలు, మరియు లెర్నింగ్ కల్చర్ గురించి మీకు స్పష్టమైన అవగాహన వచ్చిందని మేము ఆశిస్తున్నాము.\n\nసెయింట్ మేరీస్ రిహాబిలిటేషన్ యూనివర్సిటీలో, మేము కేవలం అకడమిక్ ఎక్సలెన్స్‌పై మాత్రమే కాకుండా, ప్రతి విద్యార్థి సమగ్ర అభివృద్ధి మరియు భవిష్యత్ విజయంపై కూడా ప్రత్యేకంగా దృష్టి పెడతాము.\n\nసెయింట్ మేరీస్ రిహాబిలిటేషన్ యూనివర్సిటీలో మిమ్మల్ని స్వాగతించడానికి మేము ఎదురుచూస్తున్నాము.",
+        "hi": "आज हमारे कैंपस को देखने के लिए अपना समय देने के लिए धन्यवाद।\n\nहमें उम्मीद है कि इस टूर के माध्यम से आपको हमारे अकादमिक एनवायरनमेंट, इन्फ्रास्ट्रक्चर, विद्यार्थी सुविधाओं, और लर्निंग कल्चर के बारे में स्पष्ट समझ मिली होगी।\n\nसेंट मैरीज़ रिहैबिलिटेशन यूनिवर्सिटी में आपका स्वागत करने के लिए हम उत्सुक हैं।"
+      },
+      "panorama360": {
+        "src": "/campus-360/signing-off/panorama.jpg",
+        "alt": "Interactive 360-degree view of Exit Gate Sign Off at St. Mary's University",
+        "caption": "Exit Gate Sign Off",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/signing-off.mp3",
+        "hi": "/campus-guide/audio/hi/common/signing-off.mp3",
+        "te": "/campus-guide/audio/te/common/signing-off.mp3"
+      }
+    },
+    {
+      "id": "point-clock-tower",
+      "latitude": 17.3315,
+      "longitude": 78.7265,
+      "audioFileName": "",
+      "mapX": 65,
+      "mapY": 45,
+      "title": {
+        "en": "St. Mary's Clock Tower",
+        "te": "స్టాఫ్ మేరీస్ క్లాక్ టవర్",
+        "hi": "सेंट मैरीज़ क्लॉक टॉवर"
+      },
+      "transcript": {
+        "en": "Welcome to the St. Mary's Clock Tower, the central landmark connecting all major sectors of the university campus.",
+        "te": "యూనివర్సిటీ క్యాంపస్‌లోని అన్ని ప్రధాన విభాగాలను అనుసంధానించే కేంద్ర ల్యాండ్‌మార్క్ అయిన స్టాఫ్ మేరీస్ క్లాక్ టవర్‌కు స్వాగతం.",
+        "hi": "सेंट मैरीज़ क्लॉक टॉवर में आपका स्वागत है, जो विश्वविद्यालय परिसर के सभी प्रमुख क्षेत्रों को जोड़ने वाला केंद्रीय मील का पत्थर है।"
+      },
+      "panorama360": {
+        "src": "/campus-360/clock-tower/panorama.jpg",
+        "alt": "Interactive 360-degree view of St. Mary's Clock Tower at St. Mary's University",
+        "caption": "St. Mary's Clock Tower",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-class-room",
+      "latitude": 17.3311,
+      "longitude": 78.7272,
+      "audioFileName": "",
+      "mapX": 85,
+      "mapY": 55,
+      "title": {
+        "en": "Class Room",
+        "te": "క్లాస్ రూమ్",
+        "hi": "क्लास रूम"
+      },
+      "transcript": {
+        "en": "Explore one of our modern, smart class spaces designed for interactive and comfortable student learning.",
+        "te": "విద్యార్థులు ఇంటరాక్టివ్‌గా మరియు సౌకర్యవంతంగా నేర్చుకోవడానికి అనువైన మా ఆధునిక, స్మార్ట్ క్లాస్ స్పేస్‌లను అన్వేషించండి.",
+        "hi": "इंटरैक्टिव और आरामदायक छात्र सीखने के लिए डिज़ाइन किए गए हमारे आधुनिक, स्मार्ट क्लास स्पेस में से एक का अन्वेषण करें।"
+      },
+      "panorama360": {
+        "src": "/campus-360/class-room/panorama.jpg",
+        "alt": "Interactive 360-degree view of Class Room at St. Mary's University",
+        "caption": "Class Room",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-atm-sports",
+      "latitude": 17.3319,
+      "longitude": 78.7261,
+      "audioFileName": "",
+      "mapX": 57.5,
+      "mapY": 33.5,
+      "title": {
+        "en": "ATM & Sports Complex Link",
+        "te": "ఏటీఎం మరియు స్పోర్ట్స్ కాంప్లెక్స్ లింక్",
+        "hi": "एटीएम और स्पोर्ट्स कॉम्प्लेक्स लिंक"
+      },
+      "transcript": {
+        "en": "This area connects our ATM and banking facilities with the multidisciplinary sports and fitness complex.",
+        "te": "ఈ ప్రాంతం మా ఏటీఎం మరియు బ్యాంకింగ్ సదుపాయాలను మల్టీ-డిసిప్లినరీ స్పోర్ట్స్ అండ్ ఫిట్‌నెస్ కాంప్లెక్స్‌తో కలుపుతుంది.",
+        "hi": "यह क्षेत्र हमारे एटीएम और बैंकिंग सुविधाओं को बहु-विषयक खेल और फिटनेस परिसर से जोड़ता है।"
+      },
+      "panorama360": {
+        "src": "/campus-360/a-t-m-facility/panorama.jpg",
+        "alt": "Interactive 360-degree view of ATM & Sports Complex Area at St. Mary's University",
+        "caption": "ATM & Sports Complex Area",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-admission-office-1",
+      "latitude": 17.3315,
+      "longitude": 78.7242,
+      "audioFileName": "",
+      "mapX": 27.3,
+      "mapY": 42,
+      "title": {
+        "en": "Admission Office Counseling Area",
+        "te": "అడ్మిషన్ల కార్యాలయ కౌన్సెలింగ్ విభాగం",
+        "hi": "प्रवेश कार्यालय परामर्श क्षेत्र"
+      },
+      "transcript": {
+        "en": "Explore the main counseling desks inside the Admission Office where enrollment guidance is provided.",
+        "te": "అడ్మిషన్ల కార్యాలయంలోని ప్రధాన కౌన్సెలింగ్ డెస్క్‌లను అన్వేషించండి, ఇక్కడ విద్యార్థులకు ప్రవేశ మార్గదర్శకత్వం అందించబడుతుంది.",
+        "hi": "प्रवेश कार्यालय के भीतर मुख्य परामर्श डेस्क का अन्वेषण करें जहां नामांकन मार्गदर्शन प्रदान किया जाता है।"
+      },
+      "panorama360": {
+        "src": "/campus-360/admission-room/panorama.jpg",
+        "alt": "Interactive 360-degree view of Admission Office Counseling Area at St. Mary's University",
+        "caption": "Admission Office Counseling Area",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-admission-office-2",
+      "latitude": 17.3316,
+      "longitude": 78.7244,
+      "audioFileName": "",
+      "mapX": 28.5,
+      "mapY": 43.2,
+      "title": {
+        "en": "Admission Registration Wing",
+        "te": "అడ్మిషన్ రిజిస్ట్రేషన్ విభాగం",
+        "hi": "प्रवेश पंजीकरण विंग"
+      },
+      "transcript": {
+        "en": "This wing of the Admission Office handles document verification, academic registration, and student inquiries.",
+        "te": "అడ్మిషన్ల కార్యాలయం యొక్క ఈ విభాగం పత్రాల ధృవీకరణ, విద్యా నమోదు మరియు విద్యార్థుల విచారణలను నిర్వహిస్తుంది.",
+        "hi": "प्रवेश कार्यालय का यह विंग दस्तावेज़ सत्यापन, शैक्षणिक पंजीकरण और छात्र पूछताछ को संभालता है।"
+      },
+      "panorama360": {
+        "src": "/campus-360/admission-room-2/panorama.jpg",
+        "alt": "Interactive 360-degree view of Admission Registration Wing at St. Mary's University",
+        "caption": "Admission Registration Wing",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-admission-enroll",
+      "latitude": 17.3317,
+      "longitude": 78.7241,
+      "audioFileName": "",
+      "mapX": 26.1,
+      "mapY": 43.2,
+      "title": {
+        "en": "Admission Enroll Room",
+        "te": "అడ్మిషన్ ఎన్‌రోల్ రూమ్",
+        "hi": "प्रवेश नामांकन कक्ष"
+      },
+      "transcript": {
+        "en": "Step inside the Admission Enroll Room, where prospective students complete their onboarding and registry.",
+        "te": "అడ్మిషన్ ఎన్‌రోల్ రూమ్‌లోకి అడుగు పెట్టండి, ఇక్కడ విద్యార్థులు తమ ఆన్‌బోర్డింగ్ మరియు రిజిస్ట్రేషన్‌ను పూర్తి చేస్తారు.",
+        "hi": "प्रवेश नामांकन कक्ष के अंदर कदम रखें, जहां संभावित छात्र अपना ऑनबोर्डिंग और रजिस्ट्री पूरा करते हैं।"
+      },
+      "panorama360": {
+        "src": "/campus-360/admission-enroll-room/panorama.jpg",
+        "alt": "Interactive 360-degree view of Admission Enroll Room at St. Mary's University",
+        "caption": "Admission Enroll Room",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 0
+      }
+    },
+    {
+      "id": "point-overview-1",
+      "title": {
+        "en": "Main Entrance & Campus Overview",
+        "hi": "मुख्य प्रवेश और परिसर अवलोकन",
+        "te": "ప్రధాన ప్రవేశం మరియు క్యాంపస్ అవలోకనం"
+      },
+      "description": {
+        "en": "Main Entrance & Campus Overview"
+      },
+      "category": "info",
+      "coordinates": {
+        "x": 50,
+        "y": 50
+      },
+      "panorama360": {
+        "src": "/campus-360/main-entrance-and-campus-overview/panorama.jpg",
+        "projection": "flat",
+        "alt": "Interactive 360-degree view of Main Entrance & Campus Overview",
+        "caption": "Main Entrance & Campus Overview",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      },
+      "audio": "Main Entrance and Campus Overview.mp3"
+    },
+    {
+      "id": "point-a-one-block",
+      "title": {
+        "en": "A One Block",
+        "hi": "ए वन ब्लॉक",
+        "te": "ఏ వన్ బ్లాక్"
+      },
+      "description": {
+        "en": "A One Block"
+      },
+      "category": "info",
+      "coordinates": {
+        "x": 50,
+        "y": 50
+      },
+      "panorama360": {
+        "src": "/campus-360/a-one-block/panorama.jpg",
+        "projection": "flat",
+        "alt": "Interactive 360-degree view of A One Block",
+        "caption": "A One Block",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      },
+      "audio": {
+        "en": "/campus-guide/audio/en/common/a-one-block.mp3",
+        "hi": "/campus-guide/audio/hi/common/a-one-block.mp3",
+        "te": "/campus-guide/audio/te/common/a-one-block.mp3"
+      }
+    },
+    {
+      "id": "point-board-room",
+      "title": {
+        "en": "Board Room / Conference Hall",
+        "hi": "बोर्ड रूम / सम्मेलन कक्ष",
+        "te": "బోర్డు రూమ్ / కాన్ఫరెన్స్ హాల్"
+      },
+      "description": {
+        "en": "Board Room / Conference Hall"
+      },
+      "category": "info",
+      "coordinates": {
+        "x": 50,
+        "y": 50
+      },
+      "panorama360": {
+        "src": "/campus-360/board-roomconference-hall/panorama.jpg",
+        "alt": "Interactive 360-degree view of Board Room / Conference Hall",
+        "caption": "Board Room / Conference Hall",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      }
+    },
+    {
+      "id": "point-conference",
+      "title": {
+        "en": "Conference Halls",
+        "hi": "सम्मेलन कक्ष",
+        "te": "కాన్ఫరెన్స్ హాల్"
+      },
+      "description": {
+        "en": "Conference Halls"
+      },
+      "category": "info",
+      "coordinates": {
+        "x": 50,
+        "y": 50
+      },
+      "panorama360": {
+        "src": "/campus-360/conference-halls/panorama.jpg",
+        "alt": "Interactive 360-degree view of Conference Halls",
+        "caption": "Conference Halls",
+        "initialYaw": 0,
+        "initialPitch": 0,
+        "initialZoom": 25
+      }
+    }
+  ],
+  "mapAttribution": "Imagery © Esri, Maxar, Earthstar Geographics, GIS User Community"
+}
