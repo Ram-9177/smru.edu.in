@@ -2,6 +2,8 @@
 
 Branch: `seo-hardening-phase-1`
 
+Repository: `Ram-9177/smru.edu.in`
+
 ## Completed in this branch
 
 1. Navbar authority links now use the central SEO authority map.
@@ -14,23 +16,32 @@ Branch: `seo-hardening-phase-1`
 8. Low-risk LCP improvement was applied by reducing splash/preloader duration and removing image priority from the splash logo.
 9. A backlink and citation execution sheet was added.
 10. A small lint cleanup removed an unused import from the dynamic school page.
+11. A GitHub Actions SEO CI workflow was added to run install, lint, build, and SEO guard-file checks.
 
-## Still pending after this branch work
+## Code-level items still open
 
-1. Wire the homepage Important Links block directly to the SEO authority map. The homepage already links several authority pages, but it is still hardcoded.
+1. Homepage Important Links block still uses hardcoded links. It already links authority pages, but it is not yet fully wired through `SEO_AUTHORITY_PAGES`.
+2. Repo-wide lint cleanup may still be required because historical lint issues existed before this SEO branch.
+3. Full image optimization for large hero/gallery media still requires asset-level review and visual QA.
+4. Full accessibility QA still requires route-by-route browser testing.
+
+## Verification pending
+
+1. Run or review GitHub Actions workflow result for this branch.
 2. Run `npm run build` locally or in CI.
-3. Run `npm run lint` and finish the remaining lint cleanup across the full repo.
-4. Run Lighthouse/PageSpeed after deployment or local build to confirm LCP improvement.
-5. Complete the full image optimization pass for large hero/gallery images.
-6. Complete full accessibility QA across all routes.
-7. Verify sitemap submission and coverage in Google Search Console.
-8. Execute the backlink/citation outreach manually because it requires access to profiles, partners, directories, and official listings.
+3. Run `npm run lint` locally or in CI and resolve remaining findings.
+4. Run Lighthouse/PageSpeed after deployment or local production build.
+5. Verify sitemap submission and coverage in Google Search Console.
 
 ## Manual SEO operations pending
 
-- Google Business Profile NAP check.
-- Social profile canonical website check.
-- Partner backlink outreach.
-- Reputable education directory citation submissions.
-- PR/news link plan.
-- GSC query and CTR review.
+1. Google Business Profile NAP check.
+2. Social profile canonical website check.
+3. Partner backlink outreach.
+4. Reputable education directory citation submissions.
+5. PR/news link plan.
+6. GSC query and CTR review.
+
+## Production merge note
+
+This branch must be updated with latest `main` before merging because `main` moved after the branch was created.
