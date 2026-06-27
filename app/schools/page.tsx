@@ -3,6 +3,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import Schools from "@/views/Schools";
 import { buildMetadata } from "@/lib/metadata";
 import { buildBreadcrumbSchema, buildCollectionPageSchema, buildItemListSchema } from "@/lib/seo/schema";
+import { buildCourseItemListSchema, getAllCourseListItems } from "@/lib/seo/course-list";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
 
@@ -23,6 +24,8 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function Page() {
+  const courseListItems = getAllCourseListItems(schools);
+
   return (
     <>
       <StructuredData
@@ -48,6 +51,10 @@ export default function Page() {
             url: `/schools/${safeSlug(school.slug, school.name)}`,
           }))
         )}
+      />
+      <StructuredData
+        id="schools-course-item-list-schema"
+        data={buildCourseItemListSchema(courseListItems)}
       />
       <Schools />
     </>
