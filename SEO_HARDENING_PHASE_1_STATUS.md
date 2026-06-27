@@ -16,7 +16,9 @@ Repository: `Ram-9177/smru.edu.in`
 8. Low-risk LCP improvement was applied by reducing splash/preloader duration and removing image priority from the splash logo.
 9. A backlink and citation execution sheet was added.
 10. A small lint cleanup removed an unused import from the dynamic school page.
-11. A GitHub Actions SEO CI workflow was added to run install, lint, build, and SEO guard-file checks.
+11. A GitHub Actions SEO CI workflow was added to run install, SEO guard, lint, and build checks.
+12. A repository SEO guard script was added as `npm run seo:guard`.
+13. An end-to-end SEO, AEO, GEO execution master document was added.
 
 ## Code-level items still open
 
@@ -27,11 +29,12 @@ Repository: `Ram-9177/smru.edu.in`
 
 ## Verification pending
 
-1. Run or review GitHub Actions workflow result for this branch.
-2. Run `npm run build` locally or in CI.
-3. Run `npm run lint` locally or in CI and resolve remaining findings.
-4. Run Lighthouse/PageSpeed after deployment or local production build.
-5. Verify sitemap submission and coverage in Google Search Console.
+1. Review GitHub Actions workflow result for this branch after GitHub runs it.
+2. Run `npm run seo:guard` locally or in CI.
+3. Run `npm run build` locally or in CI.
+4. Run `npm run lint` locally or in CI and resolve remaining findings.
+5. Run Lighthouse/PageSpeed after deployment or local production build.
+6. Verify sitemap submission and coverage in Google Search Console.
 
 ## Manual SEO operations pending
 
