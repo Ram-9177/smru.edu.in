@@ -5,7 +5,6 @@ import { buildCourseItemListSchema, getSchoolCourseListItems } from "@/lib/seo/c
 import { buildSchoolBreadcrumbs, buildSchoolFaqs, resolveSchool } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import School from "@/views/School";
-import SchoolOfLaw from "@/views/SchoolOfLaw";
 import { getSchoolMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
@@ -28,7 +27,6 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
     ? getSchoolSearchTerms({ slug: params.schoolSlug, name: school.name })
     : [];
   const courseListItems = school ? getSchoolCourseListItems(school) : [];
-
 
   return (
     <>
