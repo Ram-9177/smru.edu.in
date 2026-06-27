@@ -16,12 +16,12 @@ export type SeoCourseListItem = {
 const clean = (value?: string) => String(value || "").replace(/\s+/g, " ").trim();
 
 const fallbackDescription = (item: SeoCourseListItem) => {
-  const parts = [
-    item.level ? `${item.level} programme` : "Programme",
-    item.schoolName ? `under ${item.schoolName}` : "at Stmarys University",
-    item.departmentName ? `, ${item.departmentName}` : "",
-  ];
-  return `${parts.join("")} at Stmarys University Hyderabad.`.replace(/\s+,/g, ",");
+  const level = clean(item.level) || "Programme";
+  const school = clean(item.schoolName) || "Stmarys University";
+  const department = clean(item.departmentName);
+  const departmentSuffix = department ? ` in ${department}` : "";
+
+  return `${level} programme under ${school}${departmentSuffix} at Stmarys University Hyderabad.`;
 };
 
 export const buildCourseItemListSchema = (items: SeoCourseListItem[]) => ({
