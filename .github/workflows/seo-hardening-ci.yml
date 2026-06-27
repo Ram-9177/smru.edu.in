@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: SEO guard
+        run: npm run seo:guard
+
       - name: Lint
         run: npm run lint
 
@@ -37,10 +40,3 @@ jobs:
       - name: Verify generated sitemap exists
         run: |
           test -f .next/server/app/sitemap.xml.body || test -f out/sitemap.xml || test -d .next
-
-      - name: Verify SEO guard files exist
-        run: |
-          test -f src/lib/seo/authority-map.ts
-          test -f src/lib/seo/course-list.ts
-          test -f SEO_BACKLINK_CITATION_EXECUTION_SHEET.md
-          test -f SEO_HARDENING_PHASE_1_STATUS.md
