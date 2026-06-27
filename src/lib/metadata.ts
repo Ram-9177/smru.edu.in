@@ -8,6 +8,7 @@ export const SEO_TITLE_BRAND = "Stmarys University";
 const TITLE_SEPARATOR = " | ";
 const MAX_SEO_TITLE_LENGTH = 60;
 const MAX_META_DESCRIPTION_LENGTH = 160;
+const HOME_PATHNAMES = new Set(["", "/"]);
 
 const normalizeWhitespace = (value: string) => value.replace(/\s+/g, " ").trim();
 
@@ -24,11 +25,28 @@ const normalizePrimaryTitle = (title: string) => {
   return primary;
 };
 
-export const formatSeoTitle = (title: string) => {
+const normalizePathname = (pathname = "/") => {
+  const path = pathname.split("?")[0].split("#")[0].replace(/\/+$/, "");
+  return path || "/";
+};
+
+export const formatSeoTitle = (title: string, pathname = "/") => {
   const primary = trimAtWord(normalizePrimaryTitle(title), 50);
-  
-  if (/^(?:St\.?\s*Mary'?s|Stmarys)\s+University/i.test(primary)) {
+  const normalizedPathname = normalizePathname(pathname);
+
+  // Keep the homepage as the broad brand-intent landing page.
+  // Brand-like subpages must retain their own intent-specific titles so that
+  // approvals, admissions, facts, and other official pages do not all collapse
+  // into the same SERP title.
+  if (
+    HOME_PATHNAMES.has(normalizedPathname) &&
+    /^(?:St\.?\s*Mary'?s|Stmarys)\s+University/i.test(primary)
+  ) {
     return "Stmarys University | Private University in Hyderabad";
+  }
+
+  if (primary.toLowerCase().endsWith(SEO_TITLE_BRAND.toLowerCase())) {
+    return trimAtWord(primary, MAX_SEO_TITLE_LENGTH);
   }
 
   const maxPrimaryLength = MAX_SEO_TITLE_LENGTH - TITLE_SEPARATOR.length - SEO_TITLE_BRAND.length;
@@ -39,8 +57,8 @@ export const formatSeoTitle = (title: string) => {
 export const formatMetaDescription = (description: string) =>
   trimAtWord(description || "", MAX_META_DESCRIPTION_LENGTH);
 
-const normalizeTitle = (title: string) => {
-  return formatSeoTitle(title);
+const normalizeTitle = (title: string, pathname = "/") => {
+  return formatSeoTitle(title, pathname);
 };
 
 /**
@@ -73,12 +91,11 @@ export function buildMetadata({
   imagePath?: string;
 }): Metadata {
   const canonical = absoluteUrl(pathname);
-  const normalizedTitle = normalizeTitle(title);
+  const normalizedTitle = normalizeTitle(title, pathname);
   const normalizedDescription = formatMetaDescription(description);
   const ogImage = absoluteUrl(imagePath);
   const baseKeywords = [
     UNIVERSITY_INFO.brandName,
-    "Stmarys University",
     "Stmarys University",
     "private university in Telangana",
     "university in Hyderabad",
