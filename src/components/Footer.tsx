@@ -14,8 +14,11 @@ import {
 } from "react-icons/fa";
 import { SITE_CONTACT, SITE_CTA_LINKS, SITE_SOCIAL_LINKS } from "@/lib/shared/site-constants";
 import { getSchoolLandingPath } from "@/lib/shared/school-landing";
+import { getSeoAuthorityPage } from "@/lib/seo/authority-map";
 
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
+
+const authorityPath = (key: string, fallback: string) => getSeoAuthorityPage(key)?.path || fallback;
 
 const Footer = () => {
   const { state } = useDeveloperCms();
@@ -37,6 +40,16 @@ const Footer = () => {
   const secondaryPhone = normalizePhoneDisplay(cmsContact[1] || SITE_CONTACT.secondaryPhone);
   const email = cmsContact[2] || SITE_CONTACT.email;
 
+  const authority = {
+    admissions: authorityPath("admissions", "/admissions"),
+    schools: authorityPath("schools", "/schools"),
+    approvals: authorityPath("approvalsRecognitions", "/approvals-recognitions"),
+    campus360: authorityPath("campus360", "/campus-360"),
+    contact: authorityPath("contact", "/contact"),
+    brochure: authorityPath("brochure", "/brochure"),
+    phdAdmissions: authorityPath("phdAdmissions", "/phd-admissions"),
+    leadership: authorityPath("leadership", "/leadership/all"),
+  };
 
   const socialIconLinks = [
     { icon: FaYoutube, href: SITE_SOCIAL_LINKS.youtube, label: "YouTube" },
@@ -45,8 +58,6 @@ const Footer = () => {
     { icon: FaLinkedinIn, href: SITE_SOCIAL_LINKS.linkedin, label: "LinkedIn" },
   ];
   const academicLinks = (schools || []).filter(s => s.visibility !== "hidden").slice(0, 6);
-  
-
 
   const handleScrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -116,7 +127,7 @@ const Footer = () => {
             <h4 className="text-[12px] font-black uppercase tracking-widest text-[#ffaf3a]">Academics</h4>
             <nav aria-label="Academics">
               <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
-                <li><Link href="/schools" className="transition-colors hover:text-white">Schools</Link></li>
+                <li><Link href={authority.schools} className="transition-colors hover:text-white">Schools</Link></li>
                 {academicLinks.map((school) => (
                   <li key={school.slug}>
                     <Link
@@ -138,8 +149,9 @@ const Footer = () => {
               <nav aria-label="Admissions">
                 <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
                   <li><a href={SITE_CTA_LINKS.apply} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">Apply Now</a></li>
-                  <li><Link href="/admissions" className="transition-colors hover:text-white">Admissions Overview</Link></li>
-                  <li><Link href="/phd-admissions" className="transition-colors hover:text-white">Ph.D. Admissions</Link></li>
+                  <li><Link href={authority.admissions} className="transition-colors hover:text-white">Admissions Overview</Link></li>
+                  <li><Link href={authority.phdAdmissions} className="transition-colors hover:text-white">Ph.D. Admissions</Link></li>
+                  <li><Link href={authority.brochure} className="transition-colors hover:text-white">Download Brochure</Link></li>
                   <li><Link href="/fee-structure" className="transition-colors hover:text-white">Fee Structure</Link></li>
                   <li><Link href="/admission-policy" className="transition-colors hover:text-white">Admission Policy</Link></li>
                 </ul>
@@ -151,7 +163,7 @@ const Footer = () => {
               <nav aria-label="Campus">
                 <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
                   <li><Link href="/campus-location-hyderabad" className="transition-colors hover:text-white">Campus Location</Link></li>
-                  <li><Link href="/campus-360" className="transition-colors hover:text-white">Visit Campus</Link></li>
+                  <li><Link href={authority.campus360} className="transition-colors hover:text-white">Visit Campus</Link></li>
                   <li><Link href="/hostel" className="transition-colors hover:text-white">Hostel Facilities</Link></li>
                 </ul>
               </nav>
@@ -167,8 +179,8 @@ const Footer = () => {
                 <li><Link href="/grievance-redressal" className="transition-colors hover:text-white">Grievance Redressal</Link></li>
                 <li><Link href="/ombudsperson" className="transition-colors hover:text-white">Ombudsperson</Link></li>
                 <li><Link href="/search" className="transition-colors hover:text-white">Site Search</Link></li>
-                <li><Link href="/admissions" className="transition-colors hover:text-white">Admissions</Link></li>
-                <li><Link href="/contact" className="transition-colors hover:text-white">Career Guidance</Link></li>
+                <li><Link href={authority.admissions} className="transition-colors hover:text-white">Admissions</Link></li>
+                <li><Link href={authority.contact} className="transition-colors hover:text-white">Career Guidance</Link></li>
                 <li><Link href="/contact-directory" className="transition-colors hover:text-white">Contact Directory</Link></li>
               </ul>
             </nav>
@@ -179,8 +191,8 @@ const Footer = () => {
             <h4 className="text-[12px] font-black uppercase tracking-widest text-[#ffaf3a]">Information & Disclosures</h4>
             <nav aria-label="University Information & Disclosures">
               <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
-                <li><Link href="/approvals-recognitions" className="transition-colors hover:text-white">Approvals & Recognitions</Link></li>
-                <li><Link href="/leadership/all" className="transition-colors hover:text-white">Governance & Leadership</Link></li>
+                <li><Link href={authority.approvals} className="transition-colors hover:text-white">Approvals & Recognitions</Link></li>
+                <li><Link href={authority.leadership} className="transition-colors hover:text-white">Governance & Leadership</Link></li>
                 <li><a href="/assets/St.%20Marys%20Rehabilitation%20University%20UGC%20recognition%20letter%202(f).pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">UGC Recognition Letter</a></li>
                 <li><a href="/assets/SMRU%20Act%2010%20of%202026.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">University Establishment Act</a></li>
                 <li><Link href="/mandatory-disclosure" className="transition-colors hover:text-white">Mandatory Disclosure</Link></li>
@@ -190,7 +202,7 @@ const Footer = () => {
                 <li><Link href="/first-academic-year-disclosures" className="transition-colors hover:text-white">University Cycle Note</Link></li>
                 <li><Link href="/sponsor-society" className="transition-colors hover:text-white">Sponsor Society</Link></li>
                 <li><Link href="/accessibility-statement" className="transition-colors hover:text-white">Accessibility Statement</Link></li>
-                <li><Link href="/Stmarys-facts" className="transition-colors hover:text-[#019e6e] font-bold">Stmarys University Facts & AI Guidance</Link></li>
+                <li><Link href="/stmarys-facts" className="transition-colors hover:text-[#019e6e] font-bold">Stmarys University Facts & AI Guidance</Link></li>
               </ul>
             </nav>
           </div>
@@ -224,7 +236,7 @@ const Footer = () => {
               <Link href="/terms-of-service" className="transition-colors hover:text-white/70">
                 Terms Of Service
               </Link>
-              <Link href="/schools" className="text-[#ffaf3a] transition-colors hover:text-white">
+              <Link href={authority.schools} className="text-[#ffaf3a] transition-colors hover:text-white">
                 Academics
               </Link>
             </div>
