@@ -1,6 +1,6 @@
 // @ts-nocheck
 "use client";
-import React, { startTransition, useCallback, useState, useMemo, useEffect } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,10 +10,10 @@ import { FaLayerGroup } from "react-icons/fa";
 import { useOpenApply } from "../context/ApplyModalContext";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
-import {
-  detectProgramCategory,
-  safeSlug,
-} from "@/lib/shared/program-utils";
+import { detectProgramCategory, safeSlug } from "@/lib/shared/program-utils";
+import { getSeoAuthorityPage } from "@/lib/seo/authority-map";
+
+const authorityPath = (key: string, fallback: string) => getSeoAuthorityPage(key)?.path || fallback;
 
 const MobileAccordionItem = ({ group, closeMenu, openApply }) => {
   return null; // This is now handled in MobileMenu.tsx
@@ -38,6 +38,18 @@ const Navbar = ({
   const cmsItems = useMemo(() => buildAcademicSchoolsFromCms(state), [state]);
   const schools = useMemo(() => syncAcademicSchoolsWithCms(staticSchools, cmsItems), [cmsItems]);
 
+  const authority = useMemo(() => ({
+    about: authorityPath("about", "/about"),
+    academicStructure: authorityPath("academicStructure", "/academic-structure"),
+    admissions: authorityPath("admissions", "/admissions"),
+    schools: authorityPath("schools", "/schools"),
+    phdAdmissions: authorityPath("phdAdmissions", "/phd-admissions"),
+    contact: authorityPath("contact", "/contact"),
+    campus360: authorityPath("campus360", "/campus-360"),
+    brochure: authorityPath("brochure", "/brochure"),
+    approvals: authorityPath("approvalsRecognitions", "/approvals-recognitions"),
+  }), []);
+
   const isPartner = propIsPartner !== undefined ? propIsPartner : PARTNER_HIDDEN_STICKY_ROUTES.some(
     (route) => pathname === route || pathname?.startsWith(`${route}/`)
   );
@@ -55,8 +67,6 @@ const Navbar = ({
     [router]
   );
 
-  const academicLinks = (schools || []).filter(s => s.visibility !== "hidden").slice(0, 6);
-
   const activeSchool = useMemo(() => {
     const filtered = schools.filter(s => s.visibility !== "hidden");
     return filtered.find((s) => s.slug === activeSchoolSlug) || filtered[0];
@@ -72,7 +82,7 @@ const Navbar = ({
           ...prog, 
           deptSlug, 
           slug: safeSlug(prog.slug, prog.name),
-          deptName: dept.name // Add department name here
+          deptName: dept.name
         });
       });
     });
@@ -101,7 +111,6 @@ const Navbar = ({
       onMouseLeave={() => setActiveMenu(null)}
     >
       <div className="flex h-full items-center justify-between lg:items-center lg:justify-between lg:py-0 lg:pr-8">
-        {/* Logo - Full Height & Left Aligned */}
         <Link href="/" onClick={closeMenu} onMouseEnter={() => setActiveMenu(null)} className="flex h-full items-center justify-center shrink-0 bg-white cut-corner-badge shadow-md overflow-hidden transition-all duration-300 px-3 sm:px-4 lg:px-5 min-w-[112px] sm:min-w-[128px] lg:min-w-[140px]">
           <Image
             src="/assets/Logo.webp"
@@ -114,7 +123,6 @@ const Navbar = ({
           />
         </Link>
 
-        {/* Main Nav */}
         <ul className="hidden flex-wrap items-center justify-end gap-x-6 gap-y-1 overflow-visible font-outfit [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>li]:shrink-0 h-full lg:flex lg:flex-nowrap lg:gap-4 xl:gap-7 pr-4">
           <li onMouseEnter={() => setActiveMenu(null)}>
             <Link href="/" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
@@ -123,14 +131,12 @@ const Navbar = ({
             </Link>
           </li>
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/about" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link href={authority.about} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               About
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
 
-          
-          {/* Schools Mega Menu Entry */}
           <li 
             className="flex items-center md:h-full"
             onMouseEnter={() => {
@@ -139,7 +145,7 @@ const Navbar = ({
             }}
           >
             <Link
-              href="/schools"
+              href={authority.schools}
               onClick={closeMenu}
               aria-label="Academic Schools Mega Menu"
               className={`whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] cursor-pointer transition-all flex items-center gap-1.5 py-2 md:gap-2 md:py-4 ${isSchoolsOpen ? "text-[#ffaf3a]" : "text-white/90 hover:text-[#ffaf3a]"}`}
@@ -153,8 +159,6 @@ const Navbar = ({
                 className={`fixed top-[104px] lg:top-[116px] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1100px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-200 cut-corner-panel overflow-hidden flex animate-in fade-in slide-in-from-top-2 duration-200`}
                 onMouseLeave={() => setActiveMenu(null)}
               >
-                
-                {/* School List Sidebar */}
                 <div className="w-[300px] shrink-0 bg-slate-50 border-r border-slate-100 p-8 flex flex-col">
                   <h3 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-slate-400 border-b border-slate-100 pb-2">Academic Units</h3>
                   <div className="flex flex-col gap-1 flex-grow overflow-y-auto pr-2 custom-scrollbar">
@@ -184,7 +188,7 @@ const Navbar = ({
 
                   <div className="mt-8 pt-6 border-t border-white/20">
                     <Link 
-                      href="/academic-structure"
+                      href={authority.academicStructure}
                       onClick={closeMenu}
                       className="text-left flex items-center gap-3 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all group w-full"
                     >
@@ -199,7 +203,6 @@ const Navbar = ({
                   </div>
                 </div>
 
-                {/* Programs Content Area */}
                 <div className="flex-grow p-6 overflow-y-auto max-h-[70vh] bg-slate-50/20">
                   <div className="mb-5">
                     <p className="text-[#019e6e] text-[9px] font-black uppercase tracking-[0.2em] mb-1.5">{activeSchool?.name}</p>
@@ -256,13 +259,12 @@ const Navbar = ({
             )}
           </li>
 
-          {/* Admissions Dropdown */}
           <li 
             className="flex items-center md:h-full"
             onMouseEnter={() => setActiveMenu('admissions')}
           >
             <Link
-              href="/admissions"
+              href={authority.admissions}
               onClick={closeMenu}
               aria-label="Official University Admissions Mega Menu"
               className={`whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] cursor-pointer transition-all flex items-center gap-1.5 py-2 md:gap-2 md:py-4 ${isAdmissionsOpen ? "text-[#ffaf3a]" : "text-white/90 hover:text-[#ffaf3a]"}`}
@@ -276,7 +278,6 @@ const Navbar = ({
                 className="fixed top-[104px] lg:top-[116px] left-1/2 -translate-x-1/2 w-[95vw] max-w-[1000px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-200 cut-corner-panel overflow-hidden flex animate-in fade-in slide-in-from-top-2 duration-200"
                 onMouseLeave={() => setActiveMenu(null)}
               >
-                {/* Admissions Sidebar */}
                 <div className="w-[280px] shrink-0 bg-slate-50 border-r border-slate-100 p-8 flex flex-col">
                   <h3 className="text-[10px] font-black uppercase tracking-[0.3em] mb-8 text-slate-400 border-b border-slate-100 pb-2">Enrollment Hub</h3>
                   <div className="space-y-4">
@@ -290,7 +291,7 @@ const Navbar = ({
                       <p className="text-lg font-black leading-none">Admissions 2026</p>
                     </a>
                     <Link 
-                      href="/admissions"
+                      href={authority.admissions}
                       onClick={closeMenu}
                       className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-[#019e6e] hover:bg-slate-50 transition-all group w-full text-left"
                     >
@@ -302,16 +303,15 @@ const Navbar = ({
                   </div>
                 </div>
 
-                {/* Admissions Categories */}
                 <div className="flex-grow p-8 bg-white grid grid-cols-2 gap-10">
                   <div>
                     <h4 className="text-[12px] font-black text-[#019e6e] uppercase tracking-[0.2em] mb-6">Degree Programs</h4>
                     <ul className="space-y-5">
                       {[
-                        { label: "UG Admissions", desc: "Bachelors degrees across all schools", to: "/admissions" },
-                        { label: "PG Admissions", desc: "Master of Science & specialized masters", to: "/admissions" },
-                        { label: "PhD Admissions", desc: "Doctoral research opportunities", to: "/phd-admissions", highlight: true },
-                        { label: "Post-Diploma", desc: "Specialized clinical credentials", to: "/admissions" },
+                        { label: "UG Admissions", desc: "Bachelors degrees across all schools", to: authority.admissions },
+                        { label: "PG Admissions", desc: "Master of Science & specialized masters", to: authority.admissions },
+                        { label: "PhD Admissions", desc: "Doctoral research opportunities", to: authority.phdAdmissions, highlight: true },
+                        { label: "Post-Diploma", desc: "Specialized clinical credentials", to: authority.admissions },
                       ].map((item, i) => (
                         <li key={i}>
                           <Link 
@@ -331,7 +331,9 @@ const Navbar = ({
                     <h4 className="text-[12px] font-black text-[#019e6e] uppercase tracking-[0.2em] mb-6">Resources & Support</h4>
                     <ul className="space-y-5">
                       {[
-                        { label: "Counselling Helpdesk", desc: "Fee and scholarship guidance through admissions", to: "/contact" },
+                        { label: "Counselling Helpdesk", desc: "Fee and scholarship guidance through admissions", to: authority.contact },
+                        { label: "Download Brochure", desc: "Course and admissions information", to: authority.brochure },
+                        { label: "Approvals & Recognition", desc: "Official statutory documentation", to: authority.approvals },
                         { label: "Mandatory Disclosure", desc: "Official statutory documentation", to: "/mandatory-disclosure" },
                       ].map((item, i) => (
                         <li key={i}>
@@ -365,21 +367,20 @@ const Navbar = ({
             </Link>
           </li>
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/contact" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link href={authority.contact} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
 
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/campus-360" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link href={authority.campus360} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Campus 360
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
         </ul>
 
-        {/* Mobile Menu Button */}
         {!isOpen && (
           <button
             className="block lg:hidden mr-4 p-3 transition-opacity duration-200"
@@ -394,8 +395,6 @@ const Navbar = ({
           </button>
         )}
       </div>
-
-      {/* Mobile Nav Overlay & Drawer - REMOVED: Now handled by AppShell and MobileMenu.tsx */}
     </nav>
   );
 };
