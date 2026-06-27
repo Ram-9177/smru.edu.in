@@ -42,6 +42,13 @@ const checks = [
     pass: () => read("src/components/Footer.tsx").includes("getSeoAuthorityPage"),
   },
   {
+    name: "Homepage/shared link grids resolve authority-map links",
+    pass: () => {
+      const file = read("src/components/seo/PageSections.tsx");
+      return file.includes("getSeoAuthorityPageByPath") && file.includes("resolveAuthorityHref");
+    },
+  },
+  {
     name: "Program pages include direct-answer intro",
     pass: () => {
       const file = read("src/views/Program.tsx");
@@ -62,6 +69,10 @@ const checks = [
   {
     name: "Phase status report exists",
     pass: () => exists("SEO_HARDENING_PHASE_1_STATUS.md"),
+  },
+  {
+    name: "End-to-end execution master exists",
+    pass: () => exists("SEO_END_TO_END_EXECUTION_MASTER.md"),
   },
 ];
 
