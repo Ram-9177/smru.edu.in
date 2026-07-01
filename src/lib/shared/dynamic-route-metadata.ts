@@ -3,6 +3,7 @@ import { schools } from "@/data/schools";
 import { buildMetadata } from "@/lib/metadata";
 import {
   getDepartmentSearchTerms,
+  getProgramSearchSubject,
   getProgramSearchTerms,
   getSchoolSearchTerms,
 } from "@/lib/seo/search-intent";
@@ -115,14 +116,19 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
 
   const programName = program?.name || "Program";
   const deptName = dept?.name || "Department";
+  const schoolName = school?.name || "Stmarys University";
+  const subject = getProgramSearchSubject(
+    { slug: params.programSlug, name: programName, level: program?.level },
+    { slug: params.deptSlug, name: deptName }
+  );
   const programSummary = buildProgramSummary(program);
   
-  // Authority Pattern: [Program Name] Admissions 2026 | Stmarys University
-  const title = `${programName} Admissions 2026 | Stmarys University Hyderabad`;
+  // Authority Pattern: [Program Name] Admissions 2026, Eligibility, Fees & Syllabus | Stmarys University
+  const title = `${programName} Admissions 2026, Eligibility, Fees & Syllabus | Stmarys University Hyderabad`;
   const description = trimText(
     program?.overview
-      ? `${programName} admissions 2026: check eligibility, duration, course details, and official application updates. ${program.overview} ${programSummary ? `${programSummary}.` : ""}`
-      : `Explore ${programName} at Stmarys University. ${programSummary ? `${programSummary}. ` : ""}Get details on admissions 2026, eligibility, syllabus, and career outcomes.`
+      ? `${programName} admissions 2026 at Stmarys University Hyderabad: eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses. ${programSummary ? `${programSummary}. ` : ""}${program.overview}`
+      : `${programName} at Stmarys University Hyderabad: admissions 2026, eligibility, duration, fee guidance, syllabus, career outcomes, and recommended related courses. ${programSummary ? `${programSummary}.` : ""}`
   );
 
   return buildMetadata({
@@ -132,9 +138,20 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
     keywords: [
       programName,
       `${programName} course`,
+      `${programName} course details`,
       `${programName} eligibility`,
+      `${programName} fees`,
+      `${programName} fee structure`,
+      `${programName} syllabus`,
+      `${programName} duration`,
+      `${programName} career opportunities`,
       `${programName} admissions 2026`,
+      `${programName} recommended courses`,
+      `${subject} course in Hyderabad`,
+      `${subject} admissions 2026`,
+      `${subject} eligibility and fees`,
       deptName,
+      schoolName,
       "admissions updates",
       "Hyderabad Admissions",
       "University Fees",
@@ -142,7 +159,7 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
       "Duration",
       "Stmarys University",
       ...getProgramSearchTerms(
-        { slug: params.schoolSlug, name: school?.name },
+        { slug: params.schoolSlug, name: schoolName },
         { slug: params.deptSlug, name: deptName },
         { slug: params.programSlug, name: programName, level: program?.level }
       ),
