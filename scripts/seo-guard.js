@@ -116,6 +116,19 @@ const checks = [
     },
   },
   {
+    name: "Best university Hyderabad pillar page exists",
+    pass: () => {
+      const file = read("app/guides/best-university-in-hyderabad/page.tsx");
+      return (
+        file.includes("Best University in Hyderabad") &&
+        file.includes("best university in Hyderabad") &&
+        file.includes("SEO, AEO, and GEO") &&
+        file.includes("InformationPage") &&
+        file.includes("does not claim")
+      );
+    },
+  },
+  {
     name: "Preloader no longer competes as priority LCP asset",
     pass: () => {
       const file = read("src/components/Preloader.tsx");

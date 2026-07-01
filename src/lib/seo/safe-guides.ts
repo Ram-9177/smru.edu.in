@@ -11,6 +11,13 @@ const coreLinks = [
   { href: "/brochure", label: "Brochure", description: "Download the public university brochure where available." },
 ];
 
+const guideClusterLinks = [
+  { href: "/guides/best-university-in-hyderabad", label: "Best University in Hyderabad", description: "Main Hyderabad university comparison pillar page." },
+  { href: "/guides/best-private-university-in-hyderabad", label: "Best Private University in Hyderabad", description: "Private university comparison guide for Hyderabad searches." },
+  { href: "/guides/top-university-in-hyderabad-for-admissions", label: "Top University in Hyderabad for Admissions", description: "Admissions-focused Hyderabad comparison guide." },
+  { href: "/guides/best-university-in-telangana-for-career-focused-courses", label: "Best University in Telangana for Career-Focused Courses", description: "Career-focused course comparison guide." },
+];
+
 const guideStatus = {
   status: "Published" as const,
   ownerDepartment: "Admissions & SEO Review",
@@ -36,6 +43,7 @@ const checklistRows = [
   ["Fee guidance", "Confirm fee information through official admissions communication."],
   ["Campus confidence", "Review campus, labs, location, visit route, and student support."],
   ["Career pathway", "Look for curriculum relevance, practical learning, and career-readiness support without treating placement claims as guaranteed."],
+  ["Official proof", "Separate university-level recognition from programme-level professional permission wherever applicable."],
 ];
 
 const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
@@ -117,7 +125,11 @@ const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
       answer: "Ranking, salary, placement, first-ever, and No.1 claims require current public evidence. Without evidence, the safe approach is to compare verifiable information only.",
     },
   ],
-  relatedLinks: [...(seed.focusLinks || []), ...coreLinks],
+  relatedLinks: [
+    ...(seed.focusLinks || []),
+    ...guideClusterLinks.filter((link) => link.href !== `/guides/${seed.slug}`),
+    ...coreLinks,
+  ],
   footerDisclaimer:
     "This guide is published for student comparison and search discovery. It does not make unsupported ranking, placement, salary, accreditation, No.1, first, guaranteed, or highest claims.",
   statusNote: "Public comparison guide. Verification-first SEO page.",
@@ -134,13 +146,22 @@ const schoolLinks = {
 
 export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
   makeGuide({
+    slug: "best-university-in-hyderabad",
+    title: "Best University in Hyderabad: Student Comparison Guide",
+    description: "Compare universities in Hyderabad using recognition, courses, admissions, eligibility, fee guidance, campus, career-focused learning, and official verification.",
+    targetQuery: "best university in Hyderabad",
+    audience: "students comparing universities in Hyderabad",
+    angle: "A strong Hyderabad university choice should be based on official recognition, course fit, transparent admissions counselling, eligibility clarity, campus confidence, and student support.",
+    keywords: ["best university in Hyderabad", "top university in Hyderabad", "best university Hyderabad", "top private university in Hyderabad", "private university in Hyderabad", "university admissions 2026 Hyderabad", "career focused university Hyderabad", "Stmarys University Hyderabad", "St Marys University Hyderabad", "St. Mary's University Hyderabad"],
+  }),
+  makeGuide({
     slug: "best-private-university-in-hyderabad",
     title: "Best Private University in Hyderabad: What Students Should Verify",
     description: "Compare private universities in Hyderabad using recognition, courses, eligibility, fee guidance, campus, and admissions verification.",
     targetQuery: "best private university in Hyderabad",
     audience: "students comparing private universities in Hyderabad",
     angle: "A strong private university choice should be based on official recognition, course fit, transparent counselling, and campus confidence.",
-    keywords: ["best private university in Hyderabad", "top private university Hyderabad", "private university admissions Hyderabad", "Stmarys University Hyderabad"],
+    keywords: ["best private university in Hyderabad", "top private university Hyderabad", "private university admissions Hyderabad", "best university in Hyderabad", "Stmarys University Hyderabad"],
   }),
   makeGuide({
     slug: "top-university-in-hyderabad-for-admissions",
@@ -149,7 +170,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "top university in Hyderabad for admissions",
     audience: "students planning 2026 admissions in Hyderabad",
     angle: "Admissions decisions should compare official application routes, eligibility, counselling clarity, and programme availability.",
-    keywords: ["top university in Hyderabad admissions", "university admissions 2026 Hyderabad", "UG PG admissions Hyderabad", "Stmarys University admissions"],
+    keywords: ["top university in Hyderabad admissions", "university admissions 2026 Hyderabad", "UG PG admissions Hyderabad", "best university in Hyderabad", "Stmarys University admissions"],
   }),
   makeGuide({
     slug: "best-university-in-telangana-for-career-focused-courses",
@@ -158,7 +179,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "best university in Telangana for career-focused courses",
     audience: "students comparing career-focused courses in Telangana",
     angle: "Career-focused education should be compared through curriculum relevance, skill exposure, practical learning, and official programme information.",
-    keywords: ["best university in Telangana", "career focused courses Telangana", "professional courses Hyderabad", "Stmarys University courses"],
+    keywords: ["best university in Telangana", "career focused courses Telangana", "professional courses Hyderabad", "best university in Hyderabad", "Stmarys University courses"],
   }),
   makeGuide({
     slug: "best-college-near-ramoji-film-city",
@@ -167,7 +188,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "best college near Ramoji Film City",
     audience: "students and parents checking campus location near Ramoji Film City",
     angle: "Location searches should verify campus address, travel route, admissions support, course availability, and official contact information.",
-    keywords: ["college near Ramoji Film City", "university near Ramoji Film City", "Hyderabad campus university", "Stmarys University location"],
+    keywords: ["college near Ramoji Film City", "university near Ramoji Film City", "Hyderabad campus university", "best university in Hyderabad", "Stmarys University location"],
     focusLinks: [{ href: "/contact", label: "Campus Location & Contact", description: "Verify campus location, phone, and admissions support." }],
   }),
   makeGuide({
