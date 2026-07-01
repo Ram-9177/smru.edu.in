@@ -3,6 +3,7 @@ import { leaders } from "../src/data/leaders";
 import { EDU_PARTNERS, schools } from "../src/data/schools";
 import { SEO_AUTHORITY_PAGES } from "../src/lib/seo/authority-map";
 import { INFO_PAGES } from "../src/lib/seo/info-pages";
+import { SAFE_GUIDE_PAGES } from "../src/lib/seo/safe-guides";
 import { SHOW_PUBLIC_INFO_PAGES } from "../src/lib/seo/visibility";
 import { safeSlug } from "../src/lib/shared/program-utils";
 import { COMING_SOON_SCHOOL_SLUGS, SCHOOL_LANDING_PATHS } from "../src/lib/shared/school-landing";
@@ -46,6 +47,7 @@ const tier3Routes = [
 ];
 
 const infoPageRoutes = SHOW_PUBLIC_INFO_PAGES ? INFO_PAGES.map((page) => `/${page.slug}`) : [];
+const safeGuideRoutes = SAFE_GUIDE_PAGES.map((page) => `/${page.slug}`);
 
 const partnerPathFromLandingUrl = (landingUrl?: string | null) => {
   const value = (landingUrl || "").trim();
@@ -125,6 +127,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const safeGuideEntries: MetadataRoute.Sitemap = safeGuideRoutes.map((path) => ({
+    url: urlFor(path),
+    lastModified: LAST_MODIFIED,
+    changeFrequency: "monthly",
+    priority: 0.65,
+  }));
+
   const partnerEntries: MetadataRoute.Sitemap = partnerRoutes.map((path) => ({
     url: urlFor(path),
     lastModified: LAST_MODIFIED,
@@ -176,6 +185,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...leadershipRoutes,
     // Trust & disclosure info pages
     ...infoRoutes,
+    // Safe best/top comparison guides
+    ...safeGuideEntries,
     // Partner routes
     ...partnerEntries,
   ]);

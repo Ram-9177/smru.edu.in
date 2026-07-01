@@ -100,6 +100,22 @@ const checks = [
     },
   },
   {
+    name: "Safe best/top guide pages are public and sitemap-backed",
+    pass: () => {
+      const guides = read("src/lib/seo/safe-guides.ts");
+      const route = read("app/guides/[slug]/page.tsx");
+      const sitemap = read("app/sitemap.ts");
+      return (
+        guides.includes("SAFE_GUIDE_PAGES") &&
+        guides.includes("best-private-university-in-hyderabad") &&
+        guides.includes("does not claim") &&
+        route.includes("SAFE_GUIDE_PAGE_MAP") &&
+        sitemap.includes("SAFE_GUIDE_PAGES") &&
+        sitemap.includes("safeGuideEntries")
+      );
+    },
+  },
+  {
     name: "Preloader no longer competes as priority LCP asset",
     pass: () => {
       const file = read("src/components/Preloader.tsx");
