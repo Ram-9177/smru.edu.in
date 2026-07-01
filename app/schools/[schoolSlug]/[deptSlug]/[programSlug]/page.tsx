@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
-import { buildBreadcrumbSchema, buildCourseSchema, buildFaqSchema, buildWebPageSchema } from "@/lib/seo/schema";
-import { buildProgramBreadcrumbs, buildProgramFaqs, resolveProgram } from "@/lib/seo/academic";
+import { buildBreadcrumbSchema, buildCourseSchema, buildFaqSchema, buildItemListSchema, buildWebPageSchema } from "@/lib/seo/schema";
+import { buildProgramBreadcrumbs, buildProgramFaqs, buildProgramRecommendationLinks, resolveProgram } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import Program from "@/views/Program";
 import { getProgramMetadata } from "@/lib/shared/dynamic-route-metadata";
@@ -57,6 +57,11 @@ export default function Page({
     { slug: params.deptSlug, name: department.name },
     { slug: params.programSlug, name: programName, level: program.level }
   );
+  const recommendations = buildProgramRecommendationLinks(school, department, program, 8);
+  const description = program?.overview
+    ? `${program.overview} Check admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`
+    : `${programName} programme details at Stmarys University Hyderabad with admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`;
+
   return (
     <>
       <StructuredData
@@ -66,8 +71,8 @@ export default function Page({
       <StructuredData
         id={`${params.schoolSlug}-${params.deptSlug}-${params.programSlug}-page-schema`}
         data={buildWebPageSchema({
-          title: programName,
-          description: program?.overview || "Program detail at Stmarys University.",
+          title: `${programName} Admissions 2026`,
+          description,
           pathname,
           keywords: searchTerms,
         })}
@@ -78,7 +83,7 @@ export default function Page({
           program
             ? buildCourseSchema({
                 name: programName,
-                description: program?.overview || "Program detail at Stmarys University.",
+                description,
                 pathname,
                 schoolName: school?.name,
                 level: program?.level,
@@ -86,6 +91,14 @@ export default function Page({
                 eligibility: program?.eligibility,
                 keywords: searchTerms,
               })
+            : null
+        }
+      />
+      <StructuredData
+        id={`${params.schoolSlug}-${params.deptSlug}-${params.programSlug}-recommended-course-item-list-schema`}
+        data={
+          recommendations.length
+            ? buildItemListSchema(recommendations.map((item) => ({ name: item.label, url: item.href })))
             : null
         }
       />
