@@ -129,6 +129,18 @@ const checks = [
     },
   },
   {
+    name: "Google site verification is configured",
+    pass: () => {
+      const layout = read("app/layout.tsx");
+      const htmlFile = read("public/google6dae2ac571d34510.html");
+      return (
+        layout.includes("verification") &&
+        layout.includes("MNlkKsQJcg3Cv14G_CeV3L_C7f2A3MpdPNSYNdDtdfU") &&
+        htmlFile.includes("google-site-verification: google6dae2ac571d34510.html")
+      );
+    },
+  },
+  {
     name: "Preloader no longer competes as priority LCP asset",
     pass: () => {
       const file = read("src/components/Preloader.tsx");
