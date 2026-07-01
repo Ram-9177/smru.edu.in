@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_IDENTITY.canonicalBaseUrl),
   title: SITE_IDENTITY.defaultTitle,
   description: SITE_IDENTITY.defaultDescription,
+  verification: {
+    google: "MNlkKsQJcg3Cv14G_CeV3L_C7f2A3MpdPNSYNdDtdfU",
+  },
   keywords: [
     "Stmarys University",
     "Stmarys University Hyderabad",
