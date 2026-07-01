@@ -49,6 +49,29 @@ const checks = [
     },
   },
   {
+    name: "Brand spelling aliases are protected in structured SEO identity",
+    pass: () => {
+      const site = read("src/lib/seo/site.ts");
+      const metadata = read("src/lib/metadata.ts");
+      const aliases = [
+        "Stmarys University",
+        "St Marys University",
+        "St. Mary's University",
+        "St.Mary's University",
+        "StMarys University",
+        "stmarys university",
+        "Stmarys",
+        "St Marys",
+        "St. Mary's",
+        "St.Mary's",
+        "StMarys",
+        "stmarys",
+      ];
+
+      return aliases.every((alias) => site.includes(alias)) && metadata.includes("...SITE_IDENTITY.alternateNames");
+    },
+  },
+  {
     name: "Program pages include direct-answer intro",
     pass: () => {
       const file = read("src/views/Program.tsx");
