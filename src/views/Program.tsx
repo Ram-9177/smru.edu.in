@@ -13,7 +13,7 @@ import {
   safeSlug,
 } from "@/lib/shared/program-utils";
 import { AnswerGridSection, FaqSection, LinkGridSection } from "@/components/seo/PageSections";
-import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRelatedLinks } from "@/lib/seo/academic";
+import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRecommendationLinks } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 import { APPROVAL_SAFETY_NOTE } from "@/lib/shared/university";
 import { 
@@ -34,7 +34,7 @@ const formatLevel = (lvl = "") => {
 const compact = (value = "") => value.replace(/\s+/g, " ").trim();
 
 const buildProgramSeoTitle = (programName: string) =>
-  `${compact(programName)} Admissions 2026 at Stmarys University Hyderabad`;
+  `${compact(programName)} Admissions 2026, Eligibility, Fees & Syllabus at Stmarys University Hyderabad`;
 
 const buildProgramDirectAnswer = ({
   programName,
@@ -59,7 +59,7 @@ const buildProgramDirectAnswer = ({
     eligibility ? `Eligibility: ${eligibility}` : "",
   ].filter(Boolean);
 
-  return `${parts.join(". ")}. Admissions and fee guidance are confirmed through the official university counselling route.`;
+  return `${parts.join(". ")}. This page also helps students review course details, admission route, fee guidance, career pathways, FAQs, and recommended related courses before applying.`;
 };
 
 const getProgramPositioning = (schoolSlug: string, progName: string) => {
@@ -204,16 +204,17 @@ export default function Program() {
   const programSlugSafe = safeSlug(prog?.slug || "", prog?.name || "");
   const programQuickAnswers = useMemo(() => buildProgramAnswers(school, dept, prog), [dept, prog, school]);
   const programFaqs = useMemo(() => buildProgramFaqs(school, dept, prog), [dept, prog, school]);
-  const programQuickLinks = useMemo(() => {
+  const programRecommendationLinks = useMemo(() => buildProgramRecommendationLinks(school, dept, prog, 8), [dept, prog, school]);
+  const programTrustLinks = useMemo(() => {
     if (!school || !dept || !prog) return [];
     return [
-      { href: `/schools/${schoolSlugSafe}/${deptSlugSafe}`, label: dept.name, description: "Parent department." },
-      { href: `/schools/${schoolSlugSafe}`, label: school.name, description: "Parent school." },
-      ...buildProgramRelatedLinks(school, dept, prog),
+      { href: `/schools/${schoolSlugSafe}/${deptSlugSafe}`, label: dept.name, description: "Parent department with all listed programme options." },
+      { href: `/schools/${schoolSlugSafe}`, label: school.name, description: "Parent school with departments, programmes, and academic pathways." },
       { href: "/admissions", label: "Admissions", description: "Official admissions information for this programme." },
       ENTRANCE_EXAM_LINK,
       { href: "/contact", label: "Contact", description: "Contact the university for current programme guidance." },
-      { href: "/approvals-recognitions", label: "Regulatory Status", description: "Official approvals." },
+      { href: "/approvals-recognitions", label: "Regulatory Status", description: "Official approvals and recognition information." },
+      { href: "/brochure", label: "Download Brochure", description: "Review the latest public brochure and programme information." },
     ].filter(Boolean);
   }, [dept, deptSlugSafe, prog, school, schoolSlugSafe]);
 
@@ -474,12 +475,13 @@ export default function Program() {
           </section>
         )}
 
-        {/* 6. SEO Sections (Existing) */}
+        {/* 6. SEO Sections */}
         {SHOW_PUBLIC_SEO_SECTIONS && (
           <div className="pt-8 border-t border-slate-100">
-            <AnswerGridSection title="Quick Answers" items={programQuickAnswers} />
-            <LinkGridSection title="Related Pathways & Trust" items={programQuickLinks} />
-            <FaqSection title="Program FAQs" items={programFaqs} />
+            <AnswerGridSection title={`${programName} Quick Answers`} items={programQuickAnswers} />
+            <LinkGridSection title="Recommended Related Courses" items={programRecommendationLinks} />
+            <LinkGridSection title="Admissions & Trust Links" items={programTrustLinks} />
+            <FaqSection title={`${programName} FAQs`} items={programFaqs} />
           </div>
         )}
       </div>

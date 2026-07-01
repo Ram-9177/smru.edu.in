@@ -10,6 +10,7 @@ import {
   buildDepartmentComparisonFaqs,
   buildProgramComparisonFaqs,
   buildSchoolComparisonFaqs,
+  getProgramSearchSubject,
 } from "@/lib/seo/search-intent";
 
 export type SeoAnswerItem = {
@@ -37,6 +38,25 @@ const uniquePrograms = (programs: Array<{ slug?: string; name?: string }> = []) 
     seen.add(key);
     return true;
   });
+};
+
+const normalizeLevel = (value = "") => {
+  const level = value.toLowerCase();
+  if (/ph\.?d|doctoral/.test(level)) return "doctoral";
+  if (/pg|postgraduate|m\.?sc|m\.?tech|ll\.?m/.test(level)) return "pg";
+  if (/ug|undergraduate|b\.?sc|b\.?tech|ll\.?b|integrated/.test(level)) return "ug";
+  if (/diploma|certificate/.test(level)) return "diploma";
+  return level.trim();
+};
+
+const programPath = (school: any, department: any, program: any) =>
+  `/schools/${safeSlug(school?.slug, school?.name)}/${safeSlug(department?.slug, department?.name)}/${safeSlug(program?.slug, program?.name)}`;
+
+const programDescription = (department: any, program: any, reason = "related programme") => {
+  const level = program?.level ? `${program.level} ` : "";
+  const duration = program?.duration ? ` Duration: ${program.duration}.` : "";
+  const eligibility = program?.eligibility ? ` Eligibility: ${program.eligibility}.` : "";
+  return `${level}${reason} under ${department?.name || "the department"}.${duration}${eligibility}`.replace(/\s+/g, " ").trim();
 };
 
 export const resolveSchool = (schoolSlug: string) => findBySlugOrName(schools, schoolSlug) as any;
@@ -79,7 +99,7 @@ export const buildProgramBreadcrumbs = (school: any, department: any, program: a
   },
   {
     name: cleanProgramName(program?.name || "Program"),
-    path: `/schools/${safeSlug(school?.slug, school?.name)}/${safeSlug(department?.slug, department?.name)}/${safeSlug(program?.slug, program?.name)}`,
+    path: programPath(school, department, program),
   },
 ];
 
@@ -194,51 +214,118 @@ export const buildDepartmentFaqs = (school: any, department: any) => {
   ];
 };
 
-export const buildProgramAnswers = (school: any, department: any, program: any): SeoAnswerItem[] => [
-  {
-    question: `What is ${cleanProgramName(program?.name || "this program")}?`,
-    answer: program?.overview || SEO_UPDATE_NOTE,
-  },
-  {
-    question: "Who can apply to this program?",
-    answer: program?.eligibility || SEO_UPDATE_NOTE,
-  },
-  {
-    question: "What is the duration of this program?",
-    answer: program?.duration || SEO_UPDATE_NOTE,
-  },
-  {
-    question: "How do I apply for this program?",
-    answer:
-      school && department
-        ? `Use the admissions or enquiry actions shown on this program page. This program is listed under ${department.name} in ${school.name}; entrance test or counselling applies only where officially notified.`
-        : SEO_UPDATE_NOTE,
-  },
-];
+export const buildProgramRecommendationLinks = (
+  school: any,
+  department: any,
+  currentProgram: any,
+  limit = 8
+): SeoLinkItem[] => {
+  if (!school || !department || !currentProgram) return [];
 
-export const buildProgramFaqs = (school: any, department: any, program: any) => [
-  {
-    question: `What overview is available for ${cleanProgramName(program?.name || "this program")}?`,
-    answer: program?.overview || SEO_UPDATE_NOTE,
-  },
-  {
-    question: `What eligibility is listed for ${cleanProgramName(program?.name || "this program")}?`,
-    answer: program?.eligibility || SEO_UPDATE_NOTE,
-  },
-  {
-    question: `How long does ${cleanProgramName(program?.name || "this program")} take?`,
-    answer: program?.duration || SEO_UPDATE_NOTE,
-  },
-  {
-    question: `Are intake, fees, and statutory approvals confirmed for ${cleanProgramName(program?.name || "this program")}?`,
-    answer: `${MANUAL_VERIFICATION_LABEL}. Review official fee, disclosure, and admissions pages for confirmed updates.`,
-  },
-  {
-    question: `Is an entrance exam currently announced for ${cleanProgramName(program?.name || "this program")}?`,
-    answer: "No university entrance exam is currently announced. Future requirements will be published through an official university notice.",
-  },
-  ...buildProgramComparisonFaqs(school, department, program),
-];
+  const currentKey = getCanonicalProgramKey(currentProgram?.name || "", { extended: true });
+  const currentLevel = normalizeLevel(currentProgram?.level || "");
+  const currentSubject = getProgramSearchSubject(currentProgram, department);
+
+  const candidates = (school?.departments || []).flatMap((candidateDepartment: any) =>
+    uniquePrograms(candidateDepartment?.programs || [])
+      .filter((program: any) => getCanonicalProgramKey(program?.name || "", { extended: true }) !== currentKey)
+      .map((program: any) => {
+        const candidateLevel = normalizeLevel(program?.level || "");
+        const candidateSubject = getProgramSearchSubject(program, candidateDepartment);
+        const sameDepartment = safeSlug(candidateDepartment?.slug, candidateDepartment?.name) === safeSlug(department?.slug, department?.name);
+        const sameLevel = candidateLevel && candidateLevel === currentLevel;
+        const sameSubject = candidateSubject && candidateSubject === currentSubject;
+        const score = (sameDepartment ? 40 : 0) + (sameSubject ? 30 : 0) + (sameLevel ? 20 : 0);
+        const reason = sameDepartment
+          ? "Recommended related course"
+          : sameSubject
+            ? `Related ${candidateSubject} pathway`
+            : "Recommended course pathway";
+
+        return {
+          score,
+          href: programPath(school, candidateDepartment, program),
+          label: cleanProgramName(program?.name || "Program", { trailingOnly: true }),
+          description: programDescription(candidateDepartment, program, reason),
+        };
+      })
+  );
+
+  const seen = new Set<string>();
+  return candidates
+    .sort((a, b) => b.score - a.score || a.label.localeCompare(b.label))
+    .filter((candidate) => {
+      if (seen.has(candidate.href)) return false;
+      seen.add(candidate.href);
+      return true;
+    })
+    .slice(0, limit)
+    .map(({ score: _score, ...link }) => link);
+};
+
+export const buildProgramAnswers = (school: any, department: any, program: any): SeoAnswerItem[] => {
+  const recommendations = buildProgramRecommendationLinks(school, department, program, 4);
+  return [
+    {
+      question: `What is ${cleanProgramName(program?.name || "this program")}?`,
+      answer: program?.overview || SEO_UPDATE_NOTE,
+    },
+    {
+      question: "Who can apply to this program?",
+      answer: program?.eligibility || SEO_UPDATE_NOTE,
+    },
+    {
+      question: "What is the duration of this program?",
+      answer: program?.duration || SEO_UPDATE_NOTE,
+    },
+    {
+      question: "How do I apply for this program?",
+      answer:
+        school && department
+          ? `Use the admissions or enquiry actions shown on this program page. This program is listed under ${department.name} in ${school.name}; entrance test or counselling applies only where officially notified.`
+          : SEO_UPDATE_NOTE,
+    },
+    {
+      question: "Which related courses should I compare?",
+      answer: recommendations.length
+        ? `Recommended related course pages include ${recommendations.map((item) => item.label).join("; ")}. Compare eligibility, duration, practical exposure, admission route, and official fee guidance before applying.`
+        : "Use the parent department and school links to compare related programmes, eligibility, duration, and admissions guidance.",
+    },
+  ];
+};
+
+export const buildProgramFaqs = (school: any, department: any, program: any) => {
+  const recommendations = buildProgramRecommendationLinks(school, department, program, 5);
+  return [
+    {
+      question: `What overview is available for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: program?.overview || SEO_UPDATE_NOTE,
+    },
+    {
+      question: `What eligibility is listed for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: program?.eligibility || SEO_UPDATE_NOTE,
+    },
+    {
+      question: `How long does ${cleanProgramName(program?.name || "this program")} take?`,
+      answer: program?.duration || SEO_UPDATE_NOTE,
+    },
+    {
+      question: `Which courses are recommended with ${cleanProgramName(program?.name || "this program")}?`,
+      answer: recommendations.length
+        ? `Students can compare ${recommendations.map((item) => item.label).join("; ")} from the recommended related courses section on this page.`
+        : "Students can use the parent department and school pages to compare related programmes.",
+    },
+    {
+      question: `Are intake, fees, and statutory approvals confirmed for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: `${MANUAL_VERIFICATION_LABEL}. Review official fee, disclosure, and admissions pages for confirmed updates.`,
+    },
+    {
+      question: `Is an entrance exam currently announced for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: "No university entrance exam is currently announced. Future requirements will be published through an official university notice.",
+    },
+    ...buildProgramComparisonFaqs(school, department, program),
+  ];
+};
 
 export const buildDepartmentSiblingLinks = (school: any, currentDepartment: any): SeoLinkItem[] =>
   (school?.departments || [])
@@ -261,17 +348,10 @@ export const buildDepartmentProgramLinks = (school: any, department: any): SeoLi
   uniquePrograms(department?.programs || [])
     .slice(0, 6)
     .map((program) => ({
-      href: `/schools/${safeSlug(school.slug, school.name)}/${safeSlug(department.slug, department.name)}/${safeSlug(program.slug, program.name)}`,
+      href: programPath(school, department, program),
       label: cleanProgramName(program.name || "", { trailingOnly: true }),
-      description: `${department?.name || "Department"} program page`,
+      description: programDescription(department, program, `${department?.name || "Department"} programme`),
     }));
 
 export const buildProgramRelatedLinks = (school: any, department: any, currentProgram: any): SeoLinkItem[] =>
-  uniquePrograms(department?.programs || [])
-    .filter((program) => program?.slug !== currentProgram?.slug)
-    .slice(0, 6)
-    .map((program) => ({
-      href: `/schools/${safeSlug(school.slug, school.name)}/${safeSlug(department.slug, department.name)}/${safeSlug(program.slug, program.name)}`,
-      label: cleanProgramName(program.name || "", { trailingOnly: true }),
-      description: `${department?.name || "Department"} program page`,
-    }));
+  buildProgramRecommendationLinks(school, department, currentProgram, 6);
