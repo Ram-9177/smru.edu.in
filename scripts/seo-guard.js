@@ -79,6 +79,27 @@ const checks = [
     },
   },
   {
+    name: "Program pages include recommended related courses",
+    pass: () => {
+      const academic = read("src/lib/seo/academic.ts");
+      const view = read("src/views/Program.tsx");
+      const route = read("app/schools/[schoolSlug]/[deptSlug]/[programSlug]/page.tsx");
+      return (
+        academic.includes("buildProgramRecommendationLinks") &&
+        view.includes("Recommended Related Courses") &&
+        route.includes("recommended-course-item-list-schema") &&
+        route.includes("buildItemListSchema")
+      );
+    },
+  },
+  {
+    name: "Program metadata targets course detail intent",
+    pass: () => {
+      const file = read("src/lib/shared/dynamic-route-metadata.ts");
+      return file.includes("Eligibility, Fees & Syllabus") && file.includes("recommended related courses");
+    },
+  },
+  {
     name: "Preloader no longer competes as priority LCP asset",
     pass: () => {
       const file = read("src/components/Preloader.tsx");
