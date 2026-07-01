@@ -19,18 +19,18 @@ export default function Preloader() {
       return;
     }
 
-    // Lock body scroll while splash is active
+    // Keep the splash very short so it does not compete with the real LCP element.
     document.body.style.overflow = "hidden";
 
     const timer = setTimeout(() => {
       setIsVisible(false);
       sessionStorage.setItem("smru_splash_seen", "true");
       document.body.style.overflow = "";
-    }, 300);
+    }, 150);
 
     const removeTimer = setTimeout(() => {
       setShouldRender(false);
-    }, 1000);
+    }, 550);
 
     return () => {
       clearTimeout(timer);
@@ -44,12 +44,12 @@ export default function Preloader() {
   return (
     <div
       id="site-preloader"
-      className={`fixed inset-0 z-[10000] flex items-center justify-center bg-white transition-opacity duration-1000 ease-in-out ${
+      className={`fixed inset-0 z-[10000] flex items-center justify-center bg-white transition-opacity duration-500 ease-in-out ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >
       <div 
-        className={`transition-all duration-[1200ms] ease-out transform ${
+        className={`transition-all duration-[600ms] ease-out transform ${
           isVisible ? "scale-100 opacity-100 blur-0" : "scale-110 opacity-0 blur-md"
         }`}
       >
@@ -58,7 +58,7 @@ export default function Preloader() {
           alt="Stmarys University Logo"
           width={450}
           height={240}
-          priority={true}
+          priority={false}
           sizes="(max-width: 768px) 280px, 450px"
           className="h-auto w-[280px] md:w-[450px] object-contain"
           style={{ height: "auto" }}

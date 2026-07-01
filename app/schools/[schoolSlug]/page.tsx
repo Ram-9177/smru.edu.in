@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildCollectionPageSchema, buildFaqSchema, buildItemListSchema } from "@/lib/seo/schema";
+import { buildCourseItemListSchema, getSchoolCourseListItems } from "@/lib/seo/course-list";
 import { buildSchoolBreadcrumbs, buildSchoolFaqs, resolveSchool } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import School from "@/views/School";
-import SchoolOfLaw from "@/views/SchoolOfLaw";
 import { getSchoolMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
@@ -26,7 +26,7 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
   const searchTerms = school
     ? getSchoolSearchTerms({ slug: params.schoolSlug, name: school.name })
     : [];
-
+  const courseListItems = school ? getSchoolCourseListItems(school) : [];
 
   return (
     <>
@@ -59,6 +59,10 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
               )
             : null
         }
+      />
+      <StructuredData
+        id={`${params.schoolSlug}-course-item-list-schema`}
+        data={school ? buildCourseItemListSchema(courseListItems) : null}
       />
       <School />
     </>

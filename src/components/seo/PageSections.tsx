@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { getSeoAuthorityPageByPath } from "@/lib/seo/authority-map";
 
 type AnswerItem = {
   question: string;
@@ -16,6 +17,19 @@ type LinkItem = {
 const officialSectionClip = "[clip-path:polygon(0_0,calc(100%-18px)_0,100%_14px,100%_100%,16px_100%,0_calc(100%-14px))] md:[clip-path:polygon(0_0,calc(100%-30px)_0,100%_24px,100%_100%,28px_100%,0_calc(100%-24px))]";
 const officialCardClip = "[clip-path:polygon(0_0,calc(100%-10px)_0,100%_8px,100%_100%,8px_100%,0_calc(100%-8px))] md:[clip-path:polygon(0_0,calc(100%-18px)_0,100%_14px,100%_100%,18px_100%,0_calc(100%-14px))]";
 const officialTileClip = "[clip-path:polygon(0_0,calc(100%-8px)_0,100%_6px,100%_100%,6px_100%,0_calc(100%-6px))] md:[clip-path:polygon(0_0,calc(100%-14px)_0,100%_12px,100%_100%,12px_100%,0_calc(100%-10px))]";
+
+const normalizeInternalPath = (href: string) => {
+  if (!href || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:")) return href;
+  const [path, suffix = ""] = href.split(/(?=[?#])/);
+  const normalizedPath = path.replace(/\/+$/, "") || "/";
+  return `${normalizedPath}${suffix}`;
+};
+
+const resolveAuthorityHref = (href: string) => {
+  const normalized = normalizeInternalPath(href);
+  const authorityPage = getSeoAuthorityPageByPath(normalized);
+  return authorityPage?.path || href;
+};
 
 const formatRichText = (text: string) => {
   if (!text) return null;
@@ -109,17 +123,20 @@ export function LinkGridSection({
         <div className="mt-2 h-1.5 w-full cut-corner-underline bg-[#019e6e]" />
       </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {items.map((item) => (
-          <Link
-            key={`${item.href}-${item.label}`}
-            href={item.href}
-            className={`border border-[#dce7f3] bg-[#f8fbff] p-5 transition-all hover:-translate-y-0.5 hover:border-[#019e6e] hover:bg-white ${officialCardClip}`}
-          >
-            <h3 className="text-base font-black text-[#0d315c]">{item.label}</h3>
-            <p className="mt-2 text-sm font-medium leading-7 text-slate-600">{item.description}</p>
-            <span className="mt-4 inline-flex text-[11px] font-black uppercase tracking-[0.2em] text-[#017552]">Open Page</span>
-          </Link>
-        ))}
+        {items.map((item) => {
+          const href = resolveAuthorityHref(item.href);
+          return (
+            <Link
+              key={`${href}-${item.label}`}
+              href={href}
+              className={`border border-[#dce7f3] bg-[#f8fbff] p-5 transition-all hover:-translate-y-0.5 hover:border-[#019e6e] hover:bg-white ${officialCardClip}`}
+            >
+              <h3 className="text-base font-black text-[#0d315c]">{item.label}</h3>
+              <p className="mt-2 text-sm font-medium leading-7 text-slate-600">{item.description}</p>
+              <span className="mt-4 inline-flex text-[11px] font-black uppercase tracking-[0.2em] text-[#017552]">Open Page</span>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

@@ -6,7 +6,8 @@
     "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "seo:guard": "node scripts/seo-guard.js"
   },
   "dependencies": {
     "@photo-sphere-viewer/core": "^5.14.1",

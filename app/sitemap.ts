@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { leaders } from "../src/data/leaders";
 import { EDU_PARTNERS, schools } from "../src/data/schools";
+import { SEO_AUTHORITY_PAGES } from "../src/lib/seo/authority-map";
 import { INFO_PAGES } from "../src/lib/seo/info-pages";
 import { SHOW_PUBLIC_INFO_PAGES } from "../src/lib/seo/visibility";
 import { safeSlug } from "../src/lib/shared/program-utils";
@@ -66,6 +67,19 @@ const dateFor = (value?: string) => {
   return Number.isNaN(parsed.getTime()) ? LAST_MODIFIED : parsed;
 };
 
+const priorityForAuthorityPage = (priority: string) => {
+  if (priority === "conversion" || priority === "trust" || priority === "academic") return 0.9;
+  if (priority === "local") return 0.85;
+  return 0.7;
+};
+
+const authorityEntries: MetadataRoute.Sitemap = SEO_AUTHORITY_PAGES.map((page) => ({
+  url: urlFor(page.path),
+  lastModified: LAST_MODIFIED,
+  changeFrequency: "weekly" as const,
+  priority: priorityForAuthorityPage(page.priority),
+}));
+
 const uniqueEntries = (entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap => {
   const seen = new Set<string>();
   return entries.filter((entry) => {
@@ -126,6 +140,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1.0,
     },
+    // Central authority pages for sitelinks, trust, admissions, and academic discovery.
+    ...authorityEntries,
     // Tier 1: Conversion pages
     ...tier1Routes.map((path) => ({
       url: urlFor(path),

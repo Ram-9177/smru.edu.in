@@ -13,12 +13,11 @@ import {
   safeSlug,
 } from "@/lib/shared/program-utils";
 import { AnswerGridSection, FaqSection, LinkGridSection } from "@/components/seo/PageSections";
-import { RESEARCH_LINKS, TRUST_LINKS } from "@/lib/seo/info-pages";
 import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRelatedLinks } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 import { APPROVAL_SAFETY_NOTE } from "@/lib/shared/university";
 import { 
-  FaClock, FaUserGraduate, FaCheckCircle, FaHospital, FaMicroscope, 
+  FaClock, FaUserGraduate, FaCheckCircle,
   FaBriefcase, FaFileDownload, FaUsers, FaArrowRight, FaShieldAlt 
 } from "react-icons/fa";
 import { resolveAssetSrc } from "@/lib/shared/media";
@@ -30,6 +29,37 @@ const formatLevel = (lvl = "") => {
   if (l.includes("ph.d") || l.includes("phd")) return "Doctoral Program (Ph.D.)";
   if (l.includes("post") || l.includes("dip")) return "Postgraduate Diploma";
   return l.toUpperCase();
+};
+
+const compact = (value = "") => value.replace(/\s+/g, " ").trim();
+
+const buildProgramSeoTitle = (programName: string) =>
+  `${compact(programName)} Admissions 2026 at Stmarys University Hyderabad`;
+
+const buildProgramDirectAnswer = ({
+  programName,
+  levelFull,
+  schoolName,
+  departmentName,
+  duration,
+  eligibility,
+}: {
+  programName: string;
+  levelFull: string;
+  schoolName?: string;
+  departmentName?: string;
+  duration?: string;
+  eligibility?: string;
+}) => {
+  const parts = [
+    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "Stmarys University"}`,
+    departmentName ? `under ${departmentName}` : "",
+    "at Stmarys University Hyderabad",
+    duration ? `Duration: ${duration}` : "",
+    eligibility ? `Eligibility: ${eligibility}` : "",
+  ].filter(Boolean);
+
+  return `${parts.join(". ")}. Admissions and fee guidance are confirmed through the official university counselling route.`;
 };
 
 const getProgramPositioning = (schoolSlug: string, progName: string) => {
@@ -180,14 +210,24 @@ export default function Program() {
       { href: `/schools/${schoolSlugSafe}/${deptSlugSafe}`, label: dept.name, description: "Parent department." },
       { href: `/schools/${schoolSlugSafe}`, label: school.name, description: "Parent school." },
       ...buildProgramRelatedLinks(school, dept, prog),
-      { href: "/admissions", label: "Admissions", description: "Official admissions information for this prog." },
+      { href: "/admissions", label: "Admissions", description: "Official admissions information for this programme." },
       ENTRANCE_EXAM_LINK,
-      { href: "/contact", label: "Contact", description: "Contact the university for current program guidance." },
+      { href: "/contact", label: "Contact", description: "Contact the university for current programme guidance." },
       { href: "/approvals-recognitions", label: "Regulatory Status", description: "Official approvals." },
     ].filter(Boolean);
   }, [dept, deptSlugSafe, prog, school, schoolSlugSafe]);
 
   if (!school || !dept || !prog) notFound();
+
+  const programSeoTitle = buildProgramSeoTitle(programName);
+  const programDirectAnswer = buildProgramDirectAnswer({
+    programName,
+    levelFull,
+    schoolName: school.name,
+    departmentName: dept.name,
+    duration: prog.duration,
+    eligibility: prog.eligibility,
+  });
 
   const programBreadcrumbs = [
     { name: school.short || school.name, path: `/schools/${schoolSlugSafe}` },
@@ -199,7 +239,7 @@ export default function Program() {
     <>
       <SchoolLayout
       activeSchoolSlug={schoolSlugSafe}
-      title={programName}
+      title={programSeoTitle}
       subtitle={levelFull}
       breadcrumbs={programBreadcrumbs.map(b => ({ label: b.name, path: b.path }))}
       sectionLabel={levelFull.toUpperCase()}
@@ -230,7 +270,10 @@ export default function Program() {
           <div className="flex-1 space-y-8">
             <div>
               <h3 className="text-2xl font-black text-[#0d315c] mb-4">Programme Overview</h3>
-              <p className="text-[15px] text-slate-700 font-medium leading-[1.8]">
+              <p className="text-[15px] text-slate-700 font-semibold leading-[1.8]">
+                {programDirectAnswer}
+              </p>
+              <p className="mt-4 text-[15px] text-slate-700 font-medium leading-[1.8]">
                 {prog.overview || getProgramPositioning(school.slug, prog.name).overview}
               </p>
             </div>

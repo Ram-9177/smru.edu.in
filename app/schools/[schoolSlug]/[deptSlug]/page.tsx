@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildCollectionPageSchema, buildFaqSchema, buildItemListSchema } from "@/lib/seo/schema";
+import { buildCourseItemListSchema, getDepartmentCourseListItems } from "@/lib/seo/course-list";
 import { buildDepartmentBreadcrumbs, buildDepartmentFaqs, resolveDepartment } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import Department from "@/views/Department";
@@ -32,6 +33,8 @@ export default function Page({ params }: { params: { schoolSlug: string; deptSlu
           { slug: params.deptSlug, name: department.name }
         )
       : [];
+  const courseListItems = school && department ? getDepartmentCourseListItems(school, department) : [];
+
   return (
     <>
       <StructuredData
@@ -67,6 +70,10 @@ export default function Page({ params }: { params: { schoolSlug: string; deptSlu
               )
             : null
         }
+      />
+      <StructuredData
+        id={`${params.schoolSlug}-${params.deptSlug}-course-item-list-schema`}
+        data={school && department ? buildCourseItemListSchema(courseListItems) : null}
       />
       <Department />
     </>
