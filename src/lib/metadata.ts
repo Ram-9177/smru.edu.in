@@ -95,8 +95,8 @@ export function buildMetadata({
   const normalizedDescription = formatMetaDescription(description);
   const ogImage = absoluteUrl(imagePath);
   const baseKeywords = [
+    ...SITE_IDENTITY.alternateNames,
     UNIVERSITY_INFO.brandName,
-    "Stmarys University",
     "private university in Telangana",
     "university in Hyderabad",
     "admissions",
