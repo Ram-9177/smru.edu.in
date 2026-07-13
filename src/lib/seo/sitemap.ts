@@ -4,7 +4,9 @@ import { EDU_PARTNERS, schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
 import { COMING_SOON_SCHOOL_SLUGS, SCHOOL_LANDING_PATHS } from "@/lib/shared/school-landing";
 import { isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
+import { SEO_AUTHORITY_PAGES } from "./authority-map";
 import { INFO_PAGES } from "./info-pages";
+import { SAFE_GUIDE_PAGES } from "./safe-guides";
 import { SHOW_PUBLIC_INFO_PAGES } from "./visibility";
 import { INDEXABLE_COMPLIANCE_PAGES, NOINDEX_COMPLIANCE_PATHS } from "../../../data/compliance-pages";
 import { INDEXABLE_SEO_PAGES } from "../../../data/seo-pages";
@@ -80,6 +82,7 @@ const partnerRoutes = Object.values(EDU_PARTNERS || {})
   .filter((path): path is string => Boolean(path));
 
 const schoolLandingRoutes = COMING_SOON_SCHOOL_SLUGS.map((slug) => SCHOOL_LANDING_PATHS[slug]);
+const safeGuideRoutes = SAFE_GUIDE_PAGES.map((page) => `/${page.slug}`);
 const indexableComplianceRoutes = INDEXABLE_COMPLIANCE_PAGES.map((page) => `/${page.section}/${page.slug}`);
 const isolatedSeoRoutes = [
   "/html-sitemap",
@@ -93,6 +96,12 @@ const urlFor = (path: string) => `${base}${path === "/" ? "/" : `${path.replace(
 const dateFor = (value?: string) => {
   const parsed = value ? new Date(value) : LAST_MODIFIED;
   return Number.isNaN(parsed.getTime()) ? LAST_MODIFIED : parsed;
+};
+
+const priorityForAuthorityPage = (priority: string) => {
+  if (priority === "conversion" || priority === "trust" || priority === "academic") return 0.9;
+  if (priority === "local") return 0.85;
+  return 0.7;
 };
 
 const uniqueEntries = (entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap => {
@@ -140,6 +149,20 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const authorityEntries: MetadataRoute.Sitemap = SEO_AUTHORITY_PAGES.map((page) => ({
+    url: urlFor(page.path),
+    lastModified: LAST_MODIFIED,
+    changeFrequency: "weekly",
+    priority: priorityForAuthorityPage(page.priority),
+  }));
+
+  const safeGuideEntries: MetadataRoute.Sitemap = safeGuideRoutes.map((path) => ({
+    url: urlFor(path),
+    lastModified: LAST_MODIFIED,
+    changeFrequency: "monthly",
+    priority: 0.65,
+  }));
+
   const partnerEntries: MetadataRoute.Sitemap = partnerRoutes.map((path) => ({
     url: urlFor(path),
     lastModified: LAST_MODIFIED,
@@ -161,6 +184,7 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1.0,
     },
+    ...authorityEntries,
     ...tier1Routes.map((path) => ({
       url: urlFor(path),
       lastModified: LAST_MODIFIED,
@@ -188,6 +212,7 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
     ...schoolRoutes,
     ...leadershipRoutes,
     ...infoRoutes,
+    ...safeGuideEntries,
     ...partnerEntries,
     ...isolatedSeoEntries,
   ]);

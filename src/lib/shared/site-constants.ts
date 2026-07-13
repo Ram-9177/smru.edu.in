@@ -5,6 +5,9 @@ export const SITE_CONTACT = {
   email: "reach@smru.edu.in",
   address:
     "Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.",
+  corporateOfficeAddress:
+    "Corporate Office, Ground Floor, Prajay Princeton Towers, Opp. Metro Pillar No. 1650, LB Nagar, Hyderabad.",
+  corporateOfficeMapsUrl: "https://share.google/0eAqF4CKwBP3xTiHk",
 } as const;
 
 export const ADMISSIONS_CONTENT_LAST_UPDATED = "15 May 2026";

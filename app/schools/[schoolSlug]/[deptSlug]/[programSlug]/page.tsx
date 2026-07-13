@@ -89,6 +89,7 @@ export default function Page({
                 level: program?.level,
                 duration: program?.duration,
                 eligibility: program?.eligibility,
+                identifier: program?.courseCode,
                 keywords: searchTerms,
               })
             : null

@@ -62,7 +62,7 @@ const Contact = () => {
             data-reveal="fade-up"
             style={{ "--delay": "0.08s" }}
           >
-            Admissions and campus helpdesk for students, parents, visitors, and public information requests. Our Deshmukhi campus is located near Ramoji Film City, Hyderabad.
+            Admissions, campus helpdesk, and corporate office support for students, parents, visitors, and public information requests. Our Deshmukhi campus is located near Ramoji Film City, Hyderabad.
           </p>
         </div>
       </section>
@@ -205,6 +205,26 @@ const Contact = () => {
             <div className="bg-[#f8fafc] border border-[#dce7f3] cut-corner-panel p-8 space-y-6">
                <h3 className="text-[12px] font-black text-[#0d315c] uppercase tracking-widest border-b border-[#dce7f3] pb-3">Corporate & Support</h3>
                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <FaMapMarkerAlt className="mt-1 text-[#019e6e]" />
+                    <div>
+                      <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Corporate Office</p>
+                      <address className="text-[14px] font-bold text-[#0d315c] not-italic leading-relaxed">
+                        {SITE_CONTACT.corporateOfficeAddress}
+                      </address>
+                      <p className="mt-1 text-[12px] font-semibold text-slate-500">
+                        Visitors may also visit the corporate office for admissions and support guidance during office hours.
+                      </p>
+                      <a
+                        href={SITE_CONTACT.corporateOfficeMapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#019e6e] hover:text-[#0d315c]"
+                      >
+                        Open Corporate Office Maps <FaArrowRight />
+                      </a>
+                    </div>
+                  </div>
                   <div className="flex items-start gap-3">
                     <FaEnvelope className="mt-1 text-[#019e6e]" />
                     <div>

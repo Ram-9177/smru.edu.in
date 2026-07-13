@@ -7,15 +7,20 @@ const siteName = SITE_IDENTITY.siteName;
 export const SEO_TITLE_BRAND = "St.Mary's University";
 const TITLE_SEPARATOR = " | ";
 const MAX_SEO_TITLE_LENGTH = 60;
+const MAX_PROGRAM_SEO_TITLE_LENGTH = 82;
 const MAX_META_DESCRIPTION_LENGTH = 160;
 const HOME_PATHNAMES = new Set(["", "/"]);
+const PROGRAM_DETAIL_PATHNAME = /^\/schools\/[^/]+\/[^/]+\/[^/]+$/;
 
 const normalizeWhitespace = (value: string) => value.replace(/\s+/g, " ").trim();
 
 const trimAtWord = (value: string, maxLength: number) => {
   const normalized = normalizeWhitespace(value);
   if (normalized.length <= maxLength) return normalized;
-  const clipped = normalized.slice(0, maxLength).replace(/\s+\S*$/, "");
+  const clipped = normalized
+    .slice(0, maxLength)
+    .replace(/\s+\S*$/, "")
+    .replace(/[,\-:;|&\s]+$/, "");
   return clipped || normalized.slice(0, maxLength).trim();
 };
 
@@ -31,8 +36,12 @@ const normalizePathname = (pathname = "/") => {
 };
 
 export const formatSeoTitle = (title: string, pathname = "/") => {
-  const primary = trimAtWord(normalizePrimaryTitle(title), 50);
   const normalizedPathname = normalizePathname(pathname);
+  const maxTitleLength = PROGRAM_DETAIL_PATHNAME.test(normalizedPathname)
+    ? MAX_PROGRAM_SEO_TITLE_LENGTH
+    : MAX_SEO_TITLE_LENGTH;
+  const maxPrimaryLength = maxTitleLength - TITLE_SEPARATOR.length - SEO_TITLE_BRAND.length;
+  const primary = trimAtWord(normalizePrimaryTitle(title), maxPrimaryLength);
 
   // Keep the homepage as the broad brand-intent landing page.
   // Brand-like subpages must retain their own intent-specific titles so that
@@ -46,10 +55,9 @@ export const formatSeoTitle = (title: string, pathname = "/") => {
   }
 
   if (primary.toLowerCase().endsWith(SEO_TITLE_BRAND.toLowerCase())) {
-    return trimAtWord(primary, MAX_SEO_TITLE_LENGTH);
+    return trimAtWord(primary, maxTitleLength);
   }
 
-  const maxPrimaryLength = MAX_SEO_TITLE_LENGTH - TITLE_SEPARATOR.length - SEO_TITLE_BRAND.length;
   const standardPrimary = trimAtWord(primary, maxPrimaryLength);
   return `${standardPrimary}${TITLE_SEPARATOR}${SEO_TITLE_BRAND}`;
 };

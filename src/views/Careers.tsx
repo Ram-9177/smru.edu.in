@@ -21,6 +21,7 @@ import {
   FiBriefcase,
   FiHeart,
   FiMonitor,
+  FiPhone,
 } from "react-icons/fi";
 import {
   FaAward,
@@ -231,157 +232,34 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* JOB OPENINGS */}
-      <section id="openings" className="scroll-mt-24 max-w-5xl mx-auto px-4 pb-20">
-        <div className="bg-white cut-corner-panel shadow-xl p-10 border border-gray-100">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-            <h2 className="text-2xl font-bold text-[#0d315c] tracking-tight">Current Openings</h2>
-            <div className="flex gap-2 flex-wrap">
-              {categories.map((cat, i) => (
-                <button
-                  key={cat}
-                  className={tabClass(cat)}
-                  onClick={() => onChangeFilter(cat)}
-                  style={{ "--delay": `${i * 0.04}s` }}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+      {/* JOB INQUIRIES */}
+      <section id="openings" className="scroll-mt-24 max-w-4xl mx-auto px-4 pb-20 mt-10">
+        <div className="bg-white cut-corner-panel shadow-xl p-10 border border-gray-100 text-center flex flex-col items-center">
+          <div className="h-16 w-16 bg-[#019e6e]/10 text-[#019e6e] rounded-full flex items-center justify-center mb-6 text-3xl">
+            <FiBriefcase />
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {(!jobs || jobs.length === 0) && (
-              <div className="col-span-full text-center text-base text-[#970c0c] py-8 font-semibold">
-                No openings in this category currently.
-              </div>
-            )}
-            {jobs.map((job, i) => (
-              <div
-                key={job.id ?? i}
-                className="relative cut-corner-card border border-gray-200 p-7 flex flex-col justify-between shadow hover:shadow-xl transition overflow-hidden"
-                style={{ "--delay": `${i * 0.06}s` }}
-              >
-                <div className="relative flex flex-col justify-between h-full z-10">
-                  <div>
-                    <h3 className="text-xl font-bold text-[#0d315c] mb-1">{job.title}</h3>
-                    <p className="flex items-center gap-2 text-sm font-semibold text-[#019e6e] mb-2">
-                       <FiMapPin className="text-base" />
-                       {job.location}
-                       {job.category_name && (
-                         <span className="ml-2 bg-[#0d315c] text-white px-2 py-0.5 cut-corner-badge text-xs">
-                           {job.category_name}
-                         </span>
-                       )}
-                    </p>
-                    <p className="text-base text-gray-700 mb-3">{job.summary}</p>
-                  </div>
-                  <button
-                    className="mt-2 inline-block bg-[#019e6e] hover:bg-[#0fa571] text-white px-5 py-2 cut-corner-badge font-semibold transition shadow text-center w-max self-start focus:outline-none focus:ring-2 focus:ring-[#019e6e]"
-                    onClick={() => setModalJob(job)}
-                    aria-label={`View details for ${job.title}`}
-                    tabIndex={0}
-                    type="button"
-                  >
-                    View Details
-                  </button>
-                </div>
-              </div>
-            ))}
+          <h2 className="text-3xl font-bold text-[#0d315c] tracking-tight mb-4">Join Our Team</h2>
+          <p className="text-lg text-slate-700 mb-8 max-w-2xl leading-relaxed">
+            We are always looking for passionate educators, professionals, and support staff to join our university. For any job inquiries or to submit your resume, please reach out to our careers team.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-6 justify-center w-full">
+            <a href="mailto:enquiry@smru.edu.in" className="flex-1 flex flex-col items-center justify-center gap-3 text-[#0d315c] hover:text-[#019e6e] bg-gray-50 p-6 rounded-xl border border-gray-200 transition-all hover:shadow-md hover:-translate-y-1">
+              <span className="text-2xl text-[#019e6e]"><FiMail /></span>
+              <span className="text-lg font-bold">enquiry@smru.edu.in</span>
+            </a>
+            <a href="tel:+919010455591" className="flex-1 flex flex-col items-center justify-center gap-3 text-[#0d315c] hover:text-[#019e6e] bg-gray-50 p-6 rounded-xl border border-gray-200 transition-all hover:shadow-md hover:-translate-y-1">
+              <span className="text-2xl text-[#019e6e]"><FiPhone /></span>
+              <span className="text-lg font-bold">+91 9010455591</span>
+            </a>
           </div>
-        </div>
-      </section>
-
-      {/* JOB MODAL */}
-      {modalJob && (
-        <div
-          className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-3"
-          onClick={() => setModalJob(null)}
-        >
-          <div
-            className="bg-white cut-corner-panel p-8 relative w-full max-w-lg shadow-2xl border border-gray-200"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="absolute right-4 top-4 w-8 h-8 cut-corner-badge bg-[#ffaf3a] text-white font-bold hover:bg-yellow-500 shadow"
-              onClick={() => setModalJob(null)}
-              aria-label="Close"
-            >
-              ×
-            </button>
-            <h3 className="text-2xl font-bold text-[#0d315c] mb-2">{modalJob.title}</h3>
-            <p className="flex items-center gap-2 text-base font-semibold text-[#019e6e] mb-2">
-              <FiMapPin className="text-base" />
-              {modalJob.location}
-              {modalJob.category_name && (
-                <span className="ml-2 bg-[#0d315c] text-white px-2 py-0.5 cut-corner-badge text-xs">
-                  {modalJob.category_name}
-                </span>
-              )}
+          
+          <div className="mt-10 pt-8 border-t border-gray-100 w-full text-slate-600 text-sm">
+            <p>
+              <strong>St.Mary's University</strong><br />
+              Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.
             </p>
-            <ul className="list-disc pl-6 mt-3 space-y-2 text-base text-gray-700">
-              {Array.isArray(modalJob.details) && modalJob.details.length ? (
-                modalJob.details.map((d, i) => <li key={i}>{d}</li>)
-              ) : (
-                <li>No details provided.</li>
-              )}
-            </ul>
-            <div className="mt-8 flex flex-col md:flex-row items-center gap-3">
-              <a
-                href={`mailto:careers@smru.edu.in?subject=Application%20for%20${encodeURIComponent(
-                  modalJob.title
-                )}`}
-                className="inline-block bg-[#019e6e] hover:bg-[#0fa571] text-white px-6 py-2 cut-corner-badge font-semibold transition shadow"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Apply via Email
-              </a>
-              <span className="text-sm text-gray-500">
-                Please mention the job title in your email.
-              </span>
-            </div>
           </div>
         </div>
-      )}
-
-      {/* CONTACT HR */}
-      <section id="contact-hr" className="scroll-mt-24 max-w-2xl mx-auto px-4 pb-20">
-        <div
-          className="relative overflow-hidden border border-gray-200 cut-corner-panel text-center p-8 shadow-lg"
-          data-reveal="fade-up"
-        >
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-center bg-cover"
-            style={{ backgroundImage: `url(${resolveAssetSrc(cls1)})` }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(105deg, rgba(245,246,238,0.9) 0%, rgba(200,239,223,0.86) 55%, rgba(159,223,202,0.9) 100%)" }}
-          />
-          <div className="relative">
-          <h2 className="text-2xl font-bold text-[#0d315c] mb-3">Contact Careers Team</h2>
-          <p className="text-base flex items-center justify-center gap-2 mb-2">
-            <FiUserCheck aria-hidden /> Contact:
-            <span className="font-semibold text-[#0d315c]">Narmada - 94902 60261</span>
-          </p>
-          <p className="text-base flex items-center justify-center gap-2 mb-2">
-            <FiMail aria-hidden /> Email CV:
-              <a href="mailto:careers@smru.edu.in" className="font-semibold text-[#0d315c] hover:underline">
-                careers@smru.edu.in
-              </a>
-          </p>
-          <p className="text-base text-[#0d315c]">
-            St.Mary's University
-            <br />
-             Near Ramoji Film City, Deshmukhi Village,
-             <br />
-             Pochampally Mandal, Yadadri Bhuvanagiri District,
-             <br />
-             Hyderabad, Telangana - 508284, India.
-          </p>          </div>        </div>
       </section>
 
       {/* Inline reveal styles (same as About) */}

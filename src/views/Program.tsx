@@ -14,6 +14,7 @@ import {
 } from "@/lib/shared/program-utils";
 import { AnswerGridSection, FaqSection, LinkGridSection } from "@/components/seo/PageSections";
 import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRecommendationLinks } from "@/lib/seo/academic";
+import { getHealthAlliedCourseSeoProfile } from "@/lib/seo/health-allied-course-seo";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 import { APPROVAL_SAFETY_NOTE } from "@/lib/shared/university";
 import { 
@@ -30,11 +31,6 @@ const formatLevel = (lvl = "") => {
   if (l.includes("post") || l.includes("dip")) return "Postgraduate Diploma";
   return l.toUpperCase();
 };
-
-const compact = (value = "") => value.replace(/\s+/g, " ").trim();
-
-const buildProgramSeoTitle = (programName: string) =>
-  `${compact(programName)} Admissions 2026, Eligibility, Fees & Syllabus at St.Mary's University Hyderabad`;
 
 const buildProgramDirectAnswer = ({
   programName,
@@ -183,6 +179,10 @@ export default function Program() {
 
   const regulatoryStatus = useMemo(() => getRegulatoryStatus(prog), [prog]);
   const admissionRoute = useMemo(() => getAdmissionRoute(prog, isPhd), [prog, isPhd]);
+  const healthAlliedSeo = useMemo(
+    () => getHealthAlliedCourseSeoProfile({ schoolSlug, departmentSlug: deptSlug, programSlug }),
+    [deptSlug, programSlug, schoolSlug]
+  );
 
   const handleApplyClick = () => {
     if (isPhd) {
@@ -220,8 +220,7 @@ export default function Program() {
 
   if (!school || !dept || !prog) notFound();
 
-  const programSeoTitle = buildProgramSeoTitle(programName);
-  const programDirectAnswer = buildProgramDirectAnswer({
+  const fallbackProgramDirectAnswer = buildProgramDirectAnswer({
     programName,
     levelFull,
     schoolName: school.name,
@@ -229,6 +228,9 @@ export default function Program() {
     duration: prog.duration,
     eligibility: prog.eligibility,
   });
+  const programDirectAnswer = healthAlliedSeo
+    ? `${healthAlliedSeo.directAnswer}${prog.duration ? ` Duration: ${prog.duration}.` : ""}${prog.eligibility ? ` Eligibility: ${prog.eligibility}.` : ""} Fee, intake, placement, salary, and council recognition details should be verified with the university before application.`
+    : fallbackProgramDirectAnswer;
 
   const programBreadcrumbs = [
     { name: school.short || school.name, path: `/schools/${schoolSlugSafe}` },
@@ -240,7 +242,7 @@ export default function Program() {
     <>
       <SchoolLayout
       activeSchoolSlug={schoolSlugSafe}
-      title={programSeoTitle}
+      title={programName}
       subtitle={levelFull}
       breadcrumbs={programBreadcrumbs.map(b => ({ label: b.name, path: b.path }))}
       sectionLabel={levelFull.toUpperCase()}
@@ -297,13 +299,13 @@ export default function Program() {
               <div>
                 <h4 className="text-[13px] font-black uppercase tracking-widest text-[#019e6e] mb-3">What Students Study</h4>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  {getProgramPositioning(school.slug, prog.name).study}
+                  {healthAlliedSeo?.study || getProgramPositioning(school.slug, prog.name).study}
                 </p>
               </div>
               <div>
                 <h4 className="text-[13px] font-black uppercase tracking-widest text-[#019e6e] mb-3">Learning Experience</h4>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  {prog.labs || prog.fieldExposure || getProgramPositioning(school.slug, prog.name).experience}
+                  {prog.labs || prog.fieldExposure || healthAlliedSeo?.experience || getProgramPositioning(school.slug, prog.name).experience}
                 </p>
               </div>
             </div>

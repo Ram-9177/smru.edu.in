@@ -3,7 +3,6 @@ export const REMOVED_PARTNER_PAGE_SLUGS = new Set([
   "iist",
   "kpmg",
   "microsoft",
-  "nextgen",
 ]);
 
 export const isRemovedPartnerPageSlug = (slug?: string | null) =>

@@ -1,3 +1,8 @@
+import {
+  getHealthAlliedCourseSearchSubject,
+  getHealthAlliedCourseTerms,
+} from "@/lib/seo/health-allied-course-seo";
+
 type AcademicEntity = {
   slug?: string;
   name?: string;
@@ -25,7 +30,9 @@ const SEARCH_CLUSTERS: Record<string, SearchCluster> = {
     subject: "allied health sciences",
     keywords: [
       "allied health sciences college in Hyderabad",
+      "allied health sciences college in Andhra Pradesh",
       "paramedical courses in Hyderabad",
+      "paramedical courses in Vijayawada",
       "allied health courses after 12th",
       "healthcare courses in Hyderabad",
       "clinical courses after 12th",
@@ -131,6 +138,50 @@ const unique = (values: string[], limit = 36) =>
 
 const cleanName = (value = "") => value.replace(/\s*\/\s*.*/, "").replace(/\s+/g, " ").trim();
 
+const typoPhrase = (value = "") =>
+  value
+    .replace(/\badmissions\b/gi, "admisions")
+    .replace(/\badmission\b/gi, "admision")
+    .replace(/\beligibility\b/gi, "eligiblity")
+    .replace(/\bcourses\b/gi, "cources")
+    .replace(/\bcourse\b/gi, "cource")
+    .replace(/\bcollege\b/gi, "collage")
+    .replace(/\btechnology\b/gi, "tecnology")
+    .replace(/\bphysiotherapy\b/gi, "physiotheraphy")
+    .replace(/\boccupational therapy\b/gi, "occupational theraphy")
+    .replace(/\bpsychology\b/gi, "psycology")
+    .replace(/\bforensic science\b/gi, "forensic scince")
+    .replace(/\boptometry\b/gi, "optomitry")
+    .replace(/\bdialysis\b/gi, "dialisis")
+    .replace(/\bradiotherapy\b/gi, "radio therapy")
+    .replace(/\brespiratory\b/gi, "respitory")
+    .replace(/\bHyderabad\b/g, "hyderbad")
+    .replace(/\bhyderabad\b/g, "hyderbad");
+
+const buildProgramTypoSearchTerms = (name: string, subject: string, isDoctoral: boolean) => {
+  const baseTerms = [
+    `${name} course in Hyderabad`,
+    `${name} admission 2026`,
+    `${name} eligibility fees`,
+    `${subject} course Hyderabad`,
+    `${subject} college Hyderabad`,
+    isDoctoral ? `PhD ${subject} admission Hyderabad` : `${subject} courses after 12th`,
+  ];
+
+  return unique(
+    [
+      ...baseTerms.map(typoPhrase),
+      `${name} cource hyd`,
+      `${name} admision 2026`,
+      `${name} eligiblity fees`,
+      `${subject} cource hyd`,
+      `${subject} collage hyderabad`,
+      `${subject} fee structure hyd`,
+    ],
+    24
+  );
+};
+
 const clusterFor = (schoolSlug = "") =>
   SEARCH_CLUSTERS[schoolSlug] || {
     subject: "professional education",
@@ -169,7 +220,11 @@ export const getDepartmentSearchTerms = (school: AcademicEntity, department: Aca
 
 export const getProgramSearchSubject = (program: AcademicEntity, department?: AcademicEntity) => {
   const name = cleanName(program.name || "programme");
-  return PROGRAM_RULES.find((rule) => rule.pattern.test(name))?.subject || cleanName(department?.name || name);
+  return (
+    getHealthAlliedCourseSearchSubject(department?.slug, program.slug) ||
+    PROGRAM_RULES.find((rule) => rule.pattern.test(name))?.subject ||
+    cleanName(department?.name || name)
+  );
 };
 
 export const getProgramSearchTerms = (
@@ -190,9 +245,15 @@ export const getProgramSearchTerms = (
   const afterTwelfth = /ug|undergraduate|integrated/i.test(program.level || "")
     ? [`${subject} courses after 12th`]
     : [];
+  const healthAlliedTerms = getHealthAlliedCourseTerms({
+    schoolSlug: school.slug,
+    departmentSlug: department.slug,
+    programSlug: program.slug,
+  });
 
   return unique([
     name,
+    ...healthAlliedTerms,
     `${name} course in Hyderabad`,
     `${name} admission 2026`,
     `${name} eligibility`,
@@ -204,8 +265,9 @@ export const getProgramSearchTerms = (
     isDoctoral ? `top PhD ${subject} programmes in Telangana` : `top ${subject} colleges in Telangana`,
     ...afterTwelfth,
     ...matchingTerms,
+    ...buildProgramTypoSearchTerms(name, subject, isDoctoral),
     ...getDepartmentSearchTerms(school, department).slice(0, 8),
-  ]);
+  ], 72);
 };
 
 export const buildSchoolComparisonFaqs = (school: AcademicEntity) => {

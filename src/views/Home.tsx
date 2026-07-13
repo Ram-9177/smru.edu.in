@@ -526,7 +526,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= OUR INDUSTRIAL PARTNERS ================= */}
+      {/* ================= OUR INDUSTRIAL SKILL PARTNERS ================= */}
       <section id="partners" className="relative scroll-mt-24 smru-section bg-[#f8fbff] overflow-hidden bg-[radial-gradient(circle_at_50%_50%,rgba(255,175,58,0.08)_0,transparent_60%)]">
         <div className="smru-container text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-[#0d315c] mb-8 shadow-sm border border-slate-100 overflow-hidden p-3 mx-auto">
@@ -534,7 +534,7 @@ export default function Home() {
             <img src="/assets/Stmarys-Logo.webp" alt="Stmarys University Logo" className="w-full h-full object-contain" />
           </div>
           <UniversitySectionHeader
-            title="Our Industrial Partners"
+            title="Our Industrial Skill Partners"
             subtitle="St.Mary's University collaborates with leading healthcare and technology organizations to ensure our students graduate industry-ready."
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -577,11 +577,15 @@ export default function Home() {
                 { bg: "bg-[#ffaf3a]", text: "text-[#0d315c]", border: "hover:border-[#ffaf3a]", glow: "hover:shadow-[0_10px_30px_rgba(255,175,58,0.3)]", lightBg: "bg-[#ffaf3a]/10" },
               ];
               const theme = colors[i % colors.length];
+              const rawLandingUrl = String(partner.landingUrl || "").trim();
+              const partnerHref = /^https?:\/\//i.test(rawLandingUrl)
+                ? rawLandingUrl
+                : `/partner/${rawLandingUrl.replace(/^\/+/, "").replace(/\/$/, "")}`;
 
               return (
                 <Link 
 	                  key={partner.code} 
-	                  href={`/partner/${String(partner.landingUrl).replace(/^\/+/, "").replace(/\/$/, "")}`}
+	                  href={partnerHref}
                   className={`group relative overflow-hidden p-8 border border-slate-200 cut-corner-panel bg-white transition-all duration-500 hover:-translate-y-2 ${theme.border} ${theme.glow}`}
                 >
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${theme.lightBg} pointer-events-none`} />

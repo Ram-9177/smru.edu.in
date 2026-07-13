@@ -217,6 +217,7 @@ export const buildCourseSchema = ({
   level,
   duration,
   eligibility,
+  identifier,
   offers,
   keywords = [],
 }: {
@@ -227,6 +228,7 @@ export const buildCourseSchema = ({
   level?: string;
   duration?: string;
   eligibility?: string;
+  identifier?: string;
   offers?: any;
   keywords?: string[];
 }) => {
@@ -244,6 +246,7 @@ export const buildCourseSchema = ({
     ...(level ? { educationalCredentialAwarded: level } : {}),
     ...(duration ? { timeRequired: duration } : {}),
     ...(eligibility ? { coursePrerequisites: eligibility } : {}),
+    ...(identifier ? { identifier: { "@type": "PropertyValue", name: "Course Code", value: identifier } } : {}),
     ...(offers ? { offers: { "@type": "Offer", ...offers } } : {}),
     ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
   };

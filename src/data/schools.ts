@@ -113,7 +113,7 @@ export const EDU_PARTNERS = {
   NEXTGEN: {
     code: "NEXTGEN",
     name: "NextGen",
-    landingUrl: "/nextgen",
+    landingUrl: "https://smrunextgenstageprod.ctpl.io/",
     logo: nextgenLogo,
     embedCode: ""
   },
@@ -1168,6 +1168,30 @@ const schoolsSeed: SchoolData[] = [
             whyChooseNote: text("Empowers you to apply the power of science to the pursuit of justice."),
             hostelFee: "1,25,000 per year",
             hostelFeeNote: text("On-campus accommodation including meals.")
+          },
+          {
+            slug: "bmit",
+            name: "B.Sc. Medical Imaging Technology",
+            level: "UG Program",
+            duration: "4 Years (8 Semesters)",
+            eligibility: "10+2 with Physics, Chemistry, Biology",
+            overview: text("The B.Sc. Medical Imaging Technology program trains students in radiographic techniques, MRI, CT scanning, and radiation safety. Students develop practical skills to assist in modern imaging departments."),
+          },
+          {
+            slug: "bsc-him",
+            name: "B.Sc. Health Information Management",
+            level: "UG Program",
+            duration: "3 Years (6 Semesters)",
+            eligibility: "10+2 in any stream (Science preferred)",
+            overview: text("B.Sc. Health Information Management focuses on medical coding, hospital records administration, healthcare data analytics, and healthcare IT systems. It prepares students for the digital transformation of healthcare administration."),
+          },
+          {
+            slug: "bsc-public-health",
+            name: "B.Sc. Public Health",
+            level: "UG Program",
+            duration: "3 Years (6 Semesters)",
+            eligibility: "10+2 in any stream",
+            overview: text("The B.Sc. Public Health program equips students with knowledge in epidemiology, community health, biostatistics, and health policy. Graduates are prepared for roles in community health projects, NGOs, and public health administration."),
           }
         ]
       }

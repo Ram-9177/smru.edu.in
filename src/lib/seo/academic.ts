@@ -12,6 +12,10 @@ import {
   buildSchoolComparisonFaqs,
   getProgramSearchSubject,
 } from "@/lib/seo/search-intent";
+import {
+  buildHealthAlliedCourseFaqs,
+  getHealthAlliedCourseSeoProfile,
+} from "@/lib/seo/health-allied-course-seo";
 
 export type SeoAnswerItem = {
   question: string;
@@ -265,10 +269,15 @@ export const buildProgramRecommendationLinks = (
 
 export const buildProgramAnswers = (school: any, department: any, program: any): SeoAnswerItem[] => {
   const recommendations = buildProgramRecommendationLinks(school, department, program, 4);
+  const healthAlliedSeo = getHealthAlliedCourseSeoProfile({
+    schoolSlug: school?.slug,
+    departmentSlug: department?.slug,
+    programSlug: program?.slug,
+  });
   return [
     {
       question: `What is ${cleanProgramName(program?.name || "this program")}?`,
-      answer: program?.overview || SEO_UPDATE_NOTE,
+      answer: program?.overview || healthAlliedSeo?.directAnswer || SEO_UPDATE_NOTE,
     },
     {
       question: "Who can apply to this program?",
@@ -296,6 +305,12 @@ export const buildProgramAnswers = (school: any, department: any, program: any):
 
 export const buildProgramFaqs = (school: any, department: any, program: any) => {
   const recommendations = buildProgramRecommendationLinks(school, department, program, 5);
+  const healthAlliedFaqs = buildHealthAlliedCourseFaqs({
+    schoolSlug: school?.slug,
+    departmentSlug: department?.slug,
+    programSlug: program?.slug,
+    programName: cleanProgramName(program?.name || "this program", { trailingOnly: true }),
+  });
   return [
     {
       question: `What overview is available for ${cleanProgramName(program?.name || "this program")}?`,
@@ -323,6 +338,7 @@ export const buildProgramFaqs = (school: any, department: any, program: any) => 
       question: `Is an entrance exam currently announced for ${cleanProgramName(program?.name || "this program")}?`,
       answer: "No university entrance exam is currently announced. Future requirements will be published through an official university notice.",
     },
+    ...healthAlliedFaqs,
     ...buildProgramComparisonFaqs(school, department, program),
   ];
 };

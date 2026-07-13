@@ -13,7 +13,7 @@ const checks = [
   {
     name: "Sitemap includes authority pages",
     pass: () => {
-      const file = read("app/sitemap.ts");
+      const file = read("src/lib/seo/sitemap.ts");
       return file.includes("SEO_AUTHORITY_PAGES") && file.includes("authorityEntries") && file.includes("...authorityEntries");
     },
   },
@@ -100,11 +100,71 @@ const checks = [
     },
   },
   {
+    name: "All course pages include typo keyword support",
+    pass: () => {
+      const file = read("src/lib/seo/search-intent.ts");
+      return (
+        file.includes("buildProgramTypoSearchTerms") &&
+        file.includes("typoPhrase") &&
+        ["admision", "eligiblity", "cource", "collage", "hyderbad"].every((term) => file.includes(term))
+      );
+    },
+  },
+  {
+    name: "Health Allied courses have high-intent SEO profiles",
+    pass: () => {
+      const officialCourses = read("src/data/official-courses.ts");
+      const healthSeo = read("src/lib/seo/health-allied-course-seo.ts");
+      const canonicalSlug = (slug) => {
+        const s = slug.toLowerCase();
+        if (s === "bpt-emversity") return "bpt";
+        if (s === "bot-emversity") return "bot";
+        if (s === "bmls") return "bmlt";
+        if (s === "bemt") return "betcms";
+        if (s === "baott") return "bsc-anaesthesia-ot";
+        if (s === "brtt") return "brt";
+        return s;
+      };
+      const courseKeys = [
+        ...officialCourses.matchAll(
+          /\{\s*schoolSlug:\s*"health-allied-health-sciences",\s*departmentSlug:\s*"([^"]+)"[\s\S]*?slug:\s*"([^"]+)"/g
+        ),
+      ].map((match) => `${match[1]}/${canonicalSlug(match[2])}`);
+      const uniqueCourseKeys = [...new Set(courseKeys)];
+
+      return (
+        uniqueCourseKeys.length > 0 &&
+        uniqueCourseKeys.every((key) => healthSeo.includes(`"${key}": profile({`)) &&
+        uniqueCourseKeys.every((key) => healthSeo.includes(`"${key}": [`)) &&
+        healthSeo.includes("buildHighIntentMetaTitle") &&
+        healthSeo.includes("Admission 2026, Fees") &&
+        healthSeo.includes("TYPO_KEYWORD_SUPPORT") &&
+        healthSeo.includes("COURSE_TYPO_SUPPORT") &&
+        ["physiotheraphy", "tecnology", "admision", "cource", "hyderbad"].every((term) => healthSeo.includes(term))
+      );
+    },
+  },
+  {
+    name: "Health Allied seed-only courses are not linked as live routes",
+    pass: () => {
+      const schools = read("src/data/schools.ts");
+      const officialCourses = read("src/data/official-courses.ts");
+      const liveRoutes = [
+        ...officialCourses.matchAll(
+          /\{\s*schoolSlug:\s*"health-allied-health-sciences",\s*departmentSlug:\s*"([^"]+)"[\s\S]*?slug:\s*"([^"]+)"/g
+        ),
+      ].map((match) => `${match[1]}/${match[2]}`);
+      const seedOnly = ["allied-health-sciences/bmit", "allied-health-sciences/bsc-him", "allied-health-sciences/bsc-public-health"];
+
+      return seedOnly.every((key) => schools.includes(`slug: "${key.split("/")[1]}"`) && !liveRoutes.includes(key));
+    },
+  },
+  {
     name: "Safe best/top guide pages are public and sitemap-backed",
     pass: () => {
       const guides = read("src/lib/seo/safe-guides.ts");
       const route = read("app/guides/[slug]/page.tsx");
-      const sitemap = read("app/sitemap.ts");
+      const sitemap = read("src/lib/seo/sitemap.ts");
       return (
         guides.includes("SAFE_GUIDE_PAGES") &&
         guides.includes("best-private-university-in-hyderabad") &&

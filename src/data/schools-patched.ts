@@ -113,7 +113,7 @@ export const EDU_PARTNERS = {
   NEXTGEN: {
     code: "NEXTGEN",
     name: "NextGen",
-    landingUrl: "/nextgen",
+    landingUrl: "https://smrunextgenstageprod.ctpl.io/",
     logo: nextgenLogo,
     embedCode: ""
   },

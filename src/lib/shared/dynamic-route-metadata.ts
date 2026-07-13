@@ -7,6 +7,7 @@ import {
   getProgramSearchTerms,
   getSchoolSearchTerms,
 } from "@/lib/seo/search-intent";
+import { getHealthAlliedCourseSeoProfile } from "@/lib/seo/health-allied-course-seo";
 import { findBySlugOrName } from "@/lib/shared/program-utils";
 
 const trimText = (value: string, maxLength = 160) => {
@@ -117,6 +118,11 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
   const programName = program?.name || "Program";
   const deptName = dept?.name || "Department";
   const schoolName = school?.name || "St.Mary's University";
+  const healthAlliedSeo = getHealthAlliedCourseSeoProfile({
+    schoolSlug: params.schoolSlug,
+    departmentSlug: params.deptSlug,
+    programSlug: params.programSlug,
+  });
   const subject = getProgramSearchSubject(
     { slug: params.programSlug, name: programName, level: program?.level },
     { slug: params.deptSlug, name: deptName }
@@ -124,9 +130,11 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
   const programSummary = buildProgramSummary(program);
   
   // Authority Pattern: [Program Name] Admissions 2026, Eligibility, Fees & Syllabus | St.Mary's University
-  const title = `${programName} Admissions 2026, Eligibility, Fees & Syllabus | St.Mary's University Hyderabad`;
+  const title = healthAlliedSeo?.metaTitle || `${programName} Admissions 2026, Eligibility, Fees & Syllabus | St.Mary's University Hyderabad`;
   const description = trimText(
-    program?.overview
+    healthAlliedSeo
+      ? `${healthAlliedSeo.metaDescription} ${programSummary ? `${programSummary}. ` : ""}Latest intake, approvals, placement, salary, and council recognition must be verified with the university.`
+      : program?.overview
       ? `${programName} admissions 2026 at St.Mary's University Hyderabad: eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses. ${programSummary ? `${programSummary}. ` : ""}${program.overview}`
       : `${programName} at St.Mary's University Hyderabad: admissions 2026, eligibility, duration, fee guidance, syllabus, career outcomes, and recommended related courses. ${programSummary ? `${programSummary}.` : ""}`
   );

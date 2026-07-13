@@ -42,17 +42,17 @@ export default function SchoolLayout({
           <div className="mx-auto cut-corner-panel p-[1.5px] bg-gradient-to-br from-[#dbe8f8] via-[#e2eaf4] to-[#c4d7ec] shadow-[0_20px_50px_rgba(13,49,92,0.05)] hover:shadow-[0_24px_60px_rgba(13,49,92,0.09)] hover:scale-[1.01] transition-all duration-300">
             <div className="cut-corner-panel bg-white/85 backdrop-blur-md p-6 sm:p-8 md:p-12">
               {/* Breadcrumbs */}
-              <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 mb-6 opacity-70">
-                <Link href="/schools" className="text-[10px] font-black uppercase tracking-[0.4em] hover:text-[#019e6e] transition-colors">Schools</Link>
+              <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mb-6 opacity-70 leading-none">
+                <Link href="/schools" className="inline-block max-w-[70vw] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] sm:text-[10px] font-black uppercase tracking-[0.22em] sm:tracking-[0.32em] md:tracking-[0.4em] hover:text-[#019e6e] transition-colors">Schools</Link>
                 {breadcrumbs.map((bc, i) => (
-                  <React.Fragment key={i}>
-                    <span className="text-[11px] font-black text-[#6c819e] leading-none">/</span>
+                  <span key={i} className="inline-flex items-center gap-2 whitespace-nowrap">
+                    <span className="text-[10px] sm:text-[11px] font-black text-[#6c819e] leading-none">/</span>
                     {bc.path ? (
-                      <Link href={bc.path} className="text-[10px] font-black uppercase tracking-[0.4em] hover:text-[#019e6e] transition-colors">{bc.label}</Link>
+                      <Link href={bc.path} className="inline-block max-w-[70vw] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] sm:text-[10px] font-black uppercase tracking-[0.22em] sm:tracking-[0.32em] md:tracking-[0.4em] hover:text-[#019e6e] transition-colors">{bc.label}</Link>
                     ) : (
-                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">{bc.label}</span>
+                      <span className="inline-block max-w-[70vw] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] sm:text-[10px] font-black uppercase tracking-[0.22em] sm:tracking-[0.32em] md:tracking-[0.4em] text-slate-500">{bc.label}</span>
                     )}
-                  </React.Fragment>
+                  </span>
                 ))}
               </nav>
               
