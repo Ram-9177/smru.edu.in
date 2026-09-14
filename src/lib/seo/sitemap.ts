@@ -25,7 +25,7 @@ export type SitemapSection = (typeof SITEMAP_SECTIONS)[number];
 export const sitemapSectionPath = (section: SitemapSection | "images") => `/sitemap-${section}.xml`;
 
 // Tier 1: conversion & trust pages. Tier 2: catalogue & campus. Tier 3: legal & utility.
-const tier1Routes = ["/smru", "/admissions", "/exam-notification", "/phd-admissions", "/schools", "/about", "/contact"];
+const tier1Routes = ["/smru", "/programmes", "/admissions", "/exam-notification", "/phd-admissions", "/schools", "/about", "/contact"];
 const tier2Routes = ["/academic-structure", "/campus-360", "/brochure", "/careers", "/partner", "/mandatory-disclosure", "/leadership/all"];
 const tier3Routes = [
   "/privacy-policy",

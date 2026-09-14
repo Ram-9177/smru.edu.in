@@ -170,6 +170,42 @@ This is the single markdown control file to maintain for every change cycle. Kee
   remain (`/leadership/all/` renders the About view; `/partner/carebridge/` mirrors `/carebridge/`)
   — unrelated to this consolidation, logged for cleanup.
 
+### Phase 4: Programme-page standard and course discovery (14 September 2026)
+- **Course schema upgraded** (`buildCourseSchema`) for all 71 programme pages: `hasCourseInstance`
+  (`courseMode: onsite`, campus `Place` with address + geo, `courseWorkload` = ISO duration),
+  ISO-8601 `timeRequired` (`toIsoDuration`: "5 Years …" → P5Y), `educationalCredentialAwarded`,
+  `coursePrerequisites`, and `offers` **only when a real fee exists** (never a placeholder price).
+  Previously Course had no `hasCourseInstance` and no `offers`, making every page ineligible for
+  Course rich results. `inLanguage`/`availableLanguage` set to en. The `keywords` searchTerms dump
+  was removed from both the Course and WebPage JSON-LD on the programme route.
+- **Fee plumbing** (`src/data/programme-fees.ts`): a typed `PROGRAMME_FEES` map keyed by programme
+  path with `getProgrammeFee()`; empty today (no public fee table — fees must not be guessed). The
+  facts table shows "Published at official admissions counselling" until a real figure lands, and
+  the schema emits `offers` only then. All 71 fee gaps logged in `docs/seo/course-coverage.csv` and
+  `docs/seo/needs-input.md`.
+- **`/programmes/` A–Z catalogue** (`src/views/Programmes.tsx`, `src/lib/seo/programme-catalogue.ts`):
+  every programme grouped by school with level, duration and fee, a client-side school/level/search
+  filter (all 71 rows rendered in the static HTML — crawlable), `CollectionPage` + `ItemList` +
+  `BreadcrumbList` schema. Tier-1 sitemap; linked from the footer and HTML sitemap. The single page
+  an engine or LLM can crawl to learn the whole catalogue.
+- **`docs/seo/course-coverage.csv`** (`scripts/course-coverage.mjs`, `npm run seo:coverage`): audits
+  all 71 programmes × [page, title ≤65, answer-first ≥40w, fee/offer, eligibility, duration,
+  approvals, curriculum, FAQs, Course, CourseInstance, image, words]. Result: **71/71 structurally
+  complete** (Course + CourseInstance + curriculum + image + title ≤65 + FAQPage); gaps flagged for
+  university input — fees 71, eligibility 45, richer answer-first ~57 (the stub programmes carry
+  `{slug,name,level}` only). Every row is complete or carries a `NEEDS_INPUT` reason.
+- **Fact fix**: `src/data/schools.ts` / `schools-patched.ts` still said "legally established as St.
+  Mary's University" (a tautology the Phase 1 sweep created) — corrected to "St. Mary's
+  Rehabilitation University" across all programme accreditation strings.
+- Guard: 2 new invariants (`/programmes/` catalogue, Course `hasCourseInstance` + fee plumbing) →
+  34 checks. All programme Course nodes carry the Google-required name + description + provider +
+  `hasCourseInstance.courseMode`; `audit:checklist` reports `invalidJsonLd: 0`.
+- **Deferred (needs university content, not invented):** per-programme fees, eligibility for 45
+  stub programmes, and a 40–70-word answer-first lead for ~57 programmes — all tracked in
+  `course-coverage.csv`. The named-hospital / salary-with-source / labs detail (Phase 4a items 4–5)
+  likewise awaits real data. The catalogue reports 71 programmes, not the brief's "90+".
+- Pages: 256 → 258 routes (+`/programmes/`, +1). Sitemap 180 → 181.
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel

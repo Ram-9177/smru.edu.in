@@ -6,8 +6,8 @@ import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import Program from "@/views/Program";
 import { getProgramMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
+import { getProgrammeFee } from "@/data/programme-fees";
 import { safeSlug } from "@/lib/shared/program-utils";
-import { getProgramSearchTerms } from "@/lib/seo/search-intent";
 
 import { notFound } from "next/navigation";
 
@@ -40,11 +40,6 @@ export default function Page({
 
   const pathname = `/schools/${params.schoolSlug}/${params.deptSlug}/${params.programSlug}`;
   const programName = program?.name || "Program";
-  const searchTerms = getProgramSearchTerms(
-    { slug: params.schoolSlug, name: school.name },
-    { slug: params.deptSlug, name: department.name },
-    { slug: params.programSlug, name: programName, level: program.level }
-  );
   const recommendations = buildProgramRecommendationLinks(school, department, program, 8);
   const description = program?.overview
     ? `${program.overview} Check admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`
@@ -62,7 +57,6 @@ export default function Page({
           title: `${programName} Admissions 2026`,
           description,
           pathname,
-          keywords: searchTerms,
         })}
       />
       <StructuredData
@@ -78,7 +72,7 @@ export default function Page({
                 duration: program?.duration,
                 eligibility: program?.eligibility,
                 identifier: program?.courseCode,
-                keywords: searchTerms,
+                fee: getProgrammeFee(pathname),
               })
             : null
         }

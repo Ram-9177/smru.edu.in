@@ -336,6 +336,36 @@ const checks = [
     },
   },
   {
+    name: "Programme catalogue /programmes/ exists and is in tier-1 sitemap",
+    pass: () => {
+      const page = read("app/programmes/page.tsx");
+      const sitemap = read("src/lib/seo/sitemap.ts");
+      const view = read("src/views/Programmes.tsx");
+      return (
+        page.includes("getCatalogueProgrammes") &&
+        page.includes("buildItemListSchema") &&
+        page.includes("buildCollectionPageSchema") &&
+        sitemap.includes('"/programmes"') &&
+        view.includes("<table")
+      );
+    },
+  },
+  {
+    name: "Course schema emits hasCourseInstance and gated Offer + fee plumbing exists",
+    pass: () => {
+      const schema = read("src/lib/seo/schema.ts");
+      const route = read("app/schools/[schoolSlug]/[deptSlug]/[programSlug]/page.tsx");
+      return (
+        schema.includes("hasCourseInstance") &&
+        schema.includes("CourseInstance") &&
+        schema.includes("toIsoDuration") &&
+        schema.includes("fee && (fee.annualINR || fee.totalINR)") &&
+        route.includes("getProgrammeFee(pathname)") &&
+        exists("src/data/programme-fees.ts")
+      );
+    },
+  },
+  {
     name: "Master remediation control log exists",
     pass: () =>
       exists("REMEDIATION_SUMMARY.md") &&

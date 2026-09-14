@@ -311,7 +311,7 @@ export const schoolsSeed: SchoolData[] = [
               "Scholarships and education loans available as per university policy"
             ],
             accreditation: text(
-              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's Rehabilitation University, is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Strong clinical exposure and simulation-based training",
@@ -399,7 +399,7 @@ export const schoolsSeed: SchoolData[] = [
               "Scholarships and education loans available as per university policy"
             ],
             accreditation: text(
-              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded by St. Mary's University. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's Rehabilitation University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded by St. Mary's University. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Comprehensive clinical exposure and simulation-led training",
@@ -1046,7 +1046,7 @@ export const schoolsSeed: SchoolData[] = [
               "Clinical rotations and internships in eye hospitals, outpatient departments, optical dispensing units, and community eye health camps."
             ),
             accreditation: text(
-              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded solely by St. Mary's University. Applicants should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's Rehabilitation University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded solely by St. Mary's University. Applicants should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Integrated academic degree with industry-skilling for workplace readiness",
@@ -1114,7 +1114,7 @@ export const schoolsSeed: SchoolData[] = [
               "Clinical rotations in radiation oncology departments, hands-on treatment planning, and supervised brachytherapy sessions."
             ),
             accreditation: text(
-              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Degree and certifications are awarded by St. Mary's University. Applicants should confirm current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's Rehabilitation University, is UGC 2(f) recognized at the university level. Degree and certifications are awarded by St. Mary's University. Applicants should confirm current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Industry-skilling partnership with Emversity",

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { EDU_PARTNERS, schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
+import { getProgrammeFee, formatINR } from "@/data/programme-fees";
 import useOpenApply from "../hooks/useOpenApply";
 import SchoolLayout from "../components/SchoolLayout";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
@@ -159,6 +160,13 @@ export default function Program() {
   const school = findBySlugOrName(schoolSource, schoolSlug) as any;
   const dept = findBySlugOrName(school?.departments, deptSlug) as any;
   const prog = findBySlugOrName(dept?.programs, programSlug) as any;
+  const programmePathname = `/schools/${schoolSlug}/${deptSlug}/${programSlug}`;
+  const programmeFee = getProgrammeFee(programmePathname);
+  const feeValue = programmeFee?.annualINR
+    ? `${formatINR(programmeFee.annualINR)} per year (verify at counselling)`
+    : programmeFee?.totalINR
+      ? `${formatINR(programmeFee.totalINR)} total (verify at counselling)`
+      : "Published at official admissions counselling — call the admissions office.";
 
   const programName = prog?.name || "";
   const levelFull = useMemo(() => prog ? formatLevel(prog.level || "") : "", [prog]);
@@ -325,7 +333,7 @@ export default function Program() {
                     { label: "Duration", value: prog.duration, icon: FaClock },
                     { label: "Level", value: prog.level, icon: FaUserGraduate },
                     { label: "Eligibility", value: prog.eligibility, icon: FaCheckCircle },
-                    { label: "Fee Guidance", value: "Confirmed through official admissions counselling and university communication.", icon: FaFileDownload },
+                    { label: "Annual Fee", value: feeValue, icon: FaFileDownload },
                     { label: "Intake / Batch Status", value: prog.intakeDisplay || prog.intake, icon: FaUsers },
                     { label: "Admission Route", value: admissionRoute, icon: FaShieldAlt },
                   ].map((fact, i) => (

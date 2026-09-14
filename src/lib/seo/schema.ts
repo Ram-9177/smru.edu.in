@@ -219,6 +219,18 @@ export const buildBreadcrumbSchema = (items: SeoBreadcrumbItem[]) => ({
 });
 
 // 4. Academic Schema
+// "4 Years (3 Academic + 1 Internship)" / "18 Months" -> ISO 8601 (P4Y / P18M). Undefined when unparseable.
+export const toIsoDuration = (duration?: string): string | undefined => {
+  if (!duration) return undefined;
+  const year = duration.match(/(\d+(?:\.\d+)?)\s*year/i);
+  if (year) return `P${Math.round(parseFloat(year[1]))}Y`;
+  const month = duration.match(/(\d+)\s*month/i);
+  if (month) return `P${month[1]}M`;
+  return undefined;
+};
+
+export type CourseFeeOffer = { annualINR?: number; totalINR?: number; annualUSD?: number };
+
 export const buildCourseSchema = ({
   name,
   description,
@@ -228,7 +240,9 @@ export const buildCourseSchema = ({
   duration,
   eligibility,
   identifier,
-  offers,
+  fee,
+  credentialAwarded,
+  occupationalCredential,
   keywords = [],
 }: {
   name: string;
@@ -239,10 +253,39 @@ export const buildCourseSchema = ({
   duration?: string;
   eligibility?: string;
   identifier?: string;
-  offers?: any;
+  fee?: CourseFeeOffer;
+  credentialAwarded?: string;
+  occupationalCredential?: string;
   keywords?: string[];
 }) => {
   const url = absoluteUrl(pathname);
+  const iso = toIsoDuration(duration);
+  const campusLocation = {
+    "@type": "Place" as const,
+    name: `${SITE_IDENTITY.publicName} (SMRU) campus`,
+    address: { "@type": "PostalAddress" as const, ...SITE_IDENTITY.address },
+    geo: { "@type": "GeoCoordinates" as const, ...SITE_IDENTITY.geo },
+  };
+  // Required for Course rich results. courseMode is always onsite; courseWorkload carries the ISO duration
+  // when known. Never invent a startDate.
+  const courseInstance = {
+    "@type": "CourseInstance" as const,
+    courseMode: "onsite",
+    location: campusLocation,
+    ...(iso ? { courseWorkload: iso } : {}),
+  };
+  // Emit `offers` only when a real annual/total fee exists (never a placeholder price).
+  const offers =
+    fee && (fee.annualINR || fee.totalINR)
+      ? [
+          ...(fee.annualINR
+            ? [{ "@type": "Offer" as const, category: "Annual tuition", price: String(fee.annualINR), priceCurrency: "INR", availability: "https://schema.org/InStock", url: "https://apply.smru.edu.in" }]
+            : []),
+          ...(fee.annualUSD
+            ? [{ "@type": "Offer" as const, category: "Annual tuition (international)", price: String(fee.annualUSD), priceCurrency: "USD", availability: "https://schema.org/InStock", url: "https://apply.smru.edu.in" }]
+            : []),
+        ]
+      : undefined;
   return {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -251,13 +294,16 @@ export const buildCourseSchema = ({
     description,
     url,
     provider: { "@id": SITE_IDENTITY.id },
-    inLanguage: "en-IN",
+    inLanguage: "en",
+    availableLanguage: "en",
+    hasCourseInstance: courseInstance,
     ...(schoolName ? { isPartOf: { "@type": "EducationalOrganization", name: schoolName } } : {}),
-    ...(level ? { educationalCredentialAwarded: level } : {}),
-    ...(duration ? { timeRequired: duration } : {}),
+    ...(credentialAwarded || level ? { educationalCredentialAwarded: credentialAwarded || level } : {}),
+    ...(occupationalCredential ? { occupationalCredentialAwarded: occupationalCredential } : {}),
+    ...(iso ? { timeRequired: iso } : {}),
     ...(eligibility ? { coursePrerequisites: eligibility } : {}),
     ...(identifier ? { identifier: { "@type": "PropertyValue", name: "Course Code", value: identifier } } : {}),
-    ...(offers ? { offers: { "@type": "Offer", ...offers } } : {}),
+    ...(offers ? { offers } : {}),
     ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
   };
 };
