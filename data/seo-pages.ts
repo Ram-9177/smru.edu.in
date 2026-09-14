@@ -121,7 +121,14 @@ const titleCase = (value: string) =>
     .map((word) => (word.length <= 3 && word === word.toUpperCase() ? word : `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`))
     .join(" ");
 
-const trim = (value: string, max: number) => (value.length <= max ? value : `${value.slice(0, max - 3).replace(/\s+\S*$/, "")}...`);
+// Word-safe trim: never cuts mid-word, never ends on a preposition/conjunction, no ellipsis.
+const DANGLING = new Set(["in", "for", "with", "of", "and", "to", "at", "on", "by", "or", "&", "the", "a", "an", "vs"]);
+const trim = (value: string, max: number) => {
+  if (value.length <= max) return value;
+  const words = value.slice(0, max).replace(/\s+\S*$/, "").split(" ");
+  while (words.length > 1 && DANGLING.has(words[words.length - 1].toLowerCase())) words.pop();
+  return words.join(" ").replace(/[,:;\-–]+$/, "");
+};
 
 const intentKind = (seed: Seed) => {
   if (seed.routeGroup === "mandatory-disclosure" || seed.routeGroup === "iqac") return "compliance";
@@ -362,11 +369,21 @@ const makePage = (seed: Seed): SeoPage => {
     : requiresManualApproval
       ? HIGH_RISK_CLAIM_DISCLAIMER
       : "This page is an isolated student guidance page. Official St. Mary's University routes should be used for final verification.";
-  const titleBase =
-    seed.risk === "High" && /best|top|no\.?1|100%|highest|first/i.test(seed.keyword)
+  const comparison = seed.keyword.match(/^(.+?)\s+vs\s+(.+)$/i);
+  const titleBase = comparison
+    ? // Comparison pages: "{A} vs {B}: Which to Choose in 2026" (shorter forms when the pair is long).
+      [
+        `${titleCase(comparison[1])} vs ${titleCase(comparison[2])}: Which to Choose in 2026`,
+        `${titleCase(comparison[1])} vs ${titleCase(comparison[2])}: Which to Choose`,
+        `${titleCase(comparison[1])} vs ${titleCase(comparison[2])} (2026)`,
+        `${titleCase(comparison[1])} vs ${titleCase(comparison[2])}`,
+      ].find((candidate) => candidate.length <= 41) || `${titleCase(comparison[1])} vs ${titleCase(comparison[2])}`
+    : seed.risk === "High" && /best|top|no\.?1|100%|highest|first/i.test(seed.keyword)
       ? `${titleCase(seed.keyword)}? Verify First`
-      : `${titleCase(seed.keyword)} Guide`;
-  const title = trim(titleBase, 58);
+      : /\bguide\b/i.test(seed.keyword)
+        ? titleCase(seed.keyword)
+        : `${titleCase(seed.keyword)} Guide`;
+  const title = trim(titleBase, 41);
   const description = trim(
     kind === "patient"
       ? `People searching for ${seed.keyword} can contact St. Mary's University to verify current rehabilitation-linked support before visiting.`
@@ -638,9 +655,6 @@ const seeds: Seed[] = [
   { no: 175, bucket: "F. Local/high-conversion keywords", keyword: "Weekend campus visit Hyderabad", slug: "weekend-campus-visit-hyderabad", routeGroup: "student-guides", intent: "Local conversion", pageType: "Local guide", risk: "Medium" },
   { no: 176, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What is St. Mary's University", slug: "what-is-smru", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
   { no: 177, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Is St. Mary's University same as St. Mary's University", slug: "is-st-marys-university-same-as-smru", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
-  { no: 221, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St. Mary's University", slug: "Stmarys-university", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
-  { no: 222, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St. Mary's University hyderabad", slug: "Stmarys-university-hyderabad", routeGroup: "student-guides", intent: "Local FAQ", pageType: "AEO FAQ", risk: "Low" },
-  { no: 223, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St. Mary's University", slug: "Stmarys-rehabilitation-university", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
   { no: 178, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Where is St. Mary's University located", slug: "where-is-smru-located", routeGroup: "student-guides", intent: "Local FAQ", pageType: "AEO FAQ", risk: "Low" },
   { no: 179, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Is St. Mary's University UGC recognized", slug: "is-smru-ugc-recognized", routeGroup: "student-guides", intent: "Trust FAQ", pageType: "AEO FAQ", risk: "Medium" },
   { no: 180, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "How to apply to St. Mary's University", slug: "how-to-apply-to-smru", routeGroup: "student-guides", intent: "Admission FAQ", pageType: "AEO FAQ", risk: "Low" },

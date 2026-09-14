@@ -14,6 +14,8 @@ import { SITE_IDENTITY } from "@/lib/seo/site";
 
 export type InfoPageConfig = {
   slug: string;
+  /** Placeholder / under-process pages stay reachable but out of the index until they carry real content. */
+  robots?: "index,follow" | "noindex,follow";
   title: string;
   description: string;
   eyebrow: string;
@@ -107,149 +109,6 @@ const universityReferenceAnswers = [
 ];
 
 export const INFO_PAGES: InfoPageConfig[] = [
-  {
-    slug: "Stmarys-university",
-    title: "St. Mary's University",
-    description: "St. Mary's University is the public brand used for St. Mary's University, Hyderabad, Telangana.",
-    eyebrow: "Brand Reference",
-    intro: SITE_IDENTITY.bridgeSentence,
-    pageType: "trust",
-    keywords: ["St. Mary's University", "St. Mary's University Hyderabad", "St. Mary's University", "St. Mary's University Hyderabad", "St. Mary's University"],
-    ...defaultStatus,
-    answers: universityReferenceAnswers,
-    sections: [
-      {
-        heading: "Official Identity",
-        paragraphs: [
-          "Official website: https://smru.edu.in.",
-          "Public brand: St. Mary's University.",
-          "Official/legal name: St. Mary's Rehabilitation University.",
-          "Display name: St. Mary's University.",
-          "Short name: SMRU.",
-          "Location: Hyderabad, Telangana.",
-        ],
-      },
-    ],
-    faqItems: [
-      { question: "Is St. Mary's University the same institution as St. Mary's University?", answer: SITE_IDENTITY.bridgeSentence },
-      { question: "Where should official course and school information be checked?", answer: "Official school and course information should be checked on smru.edu.in pages." },
-    ],
-    relatedLinks: corePublicLinks,
-  },
-  {
-    slug: "Stmarys-university-official",
-    title: "St. Mary's University Official Name | St. Mary's University",
-    description: "St. Mary's Rehabilitation University is the official/legal name of St. Mary's University (SMRU), Hyderabad, Telangana.",
-    eyebrow: "Official Name",
-    intro: SITE_IDENTITY.bridgeSentence,
-    pageType: "trust",
-    keywords: ["St. Mary's University", "St. Mary's University", "St. Mary's University", "St. Mary's University"],
-    ...defaultStatus,
-    answers: universityReferenceAnswers,
-    sections: [
-      {
-        heading: "University Reference",
-        paragraphs: [
-          "St. Mary's Rehabilitation University is the official/legal name used for St. Mary's University (SMRU).",
-          "SMRU is the short name used across the domain, social handles and admissions references.",
-          "The public brand used for the university is St. Mary's University.",
-          "St. Mary's University is located in Hyderabad, Telangana.",
-        ],
-      },
-    ],
-    faqItems: [
-      { question: "What does St. Mary's University stand for?", answer: "St. Mary's University stands for St. Mary's University." },
-      { question: "Which website should be used for official information?", answer: "Use https://smru.edu.in for official university information." },
-    ],
-    relatedLinks: corePublicLinks,
-  },
-  {
-    slug: "Stmarys-hyderabad",
-    title: "St. Mary's University Hyderabad | St. Mary's University",
-    description: "St. Mary's University Hyderabad refers to St. Mary's University, publicly known as St. Mary's University, located in Hyderabad, Telangana.",
-    eyebrow: "Location Reference",
-    intro: SITE_IDENTITY.bridgeSentence,
-    pageType: "trust",
-    keywords: ["St. Mary's University Hyderabad", "St. Mary's University", "St. Mary's University Hyderabad", "St. Mary's University Hyderabad", "St. Mary's University"],
-    ...defaultStatus,
-    answers: universityReferenceAnswers,
-    sections: [
-      {
-        heading: "Factual Summary",
-        paragraphs: [
-          "Official website: https://smru.edu.in.",
-          "Public brand: St. Mary's University.",
-          "Official/legal name: St. Mary's Rehabilitation University.",
-          "Short name: SMRU.",
-          "Location: Hyderabad, Telangana.",
-        ],
-      },
-    ],
-    faqItems: [
-      { question: "Is St. Mary's University located in Hyderabad?", answer: "St. Mary's University is located in Hyderabad, Telangana." },
-      { question: "Where are St. Mary's University schools and programmes listed?", answer: "Schools and programme information are listed on smru.edu.in pages including /schools and /academic-structure." },
-    ],
-    relatedLinks: corePublicLinks,
-  },
-  {
-    slug: "rehabilitation-university-hyderabad",
-    title: "Rehabilitation University Hyderabad",
-    description: "Reference page for St. Mary's University, Hyderabad, Telangana, publicly known as St. Mary's University.",
-    eyebrow: "University Reference",
-    intro: SITE_IDENTITY.bridgeSentence,
-    pageType: "trust",
-    keywords: ["Rehabilitation University Hyderabad", "St. Mary's University", "St. Mary's University Hyderabad", "St. Mary's University Hyderabad"],
-    ...defaultStatus,
-    answers: universityReferenceAnswers,
-    sections: [
-      {
-        heading: "Official Reference",
-        paragraphs: [
-          "St. Mary's University is a rehabilitation-led university established in Telangana.",
-          "The university uses public disclosure pages to help students, parents, and stakeholders verify published information.",
-          APPROVAL_SAFETY_NOTE,
-        ],
-      },
-    ],
-    faqItems: [
-      { question: "Where should official school information be checked?", answer: "Official school information should be checked only on smru.edu.in pages." },
-    ],
-    relatedLinks: corePublicLinks,
-  },
-  {
-    slug: "Stmarys-facts",
-    title: "St. Mary's University Facts | St. Mary's University",
-    description: "Factual reference for St. Mary's University: official website, public brand, legal name, short-name alias, location, and important public routes.",
-    eyebrow: "Factual Reference",
-    intro: "This page provides factual reference information for St. Mary's University and its official/legal name.",
-    pageType: "trust",
-    keywords: ["St. Mary's University facts", "St. Mary's University facts", "St. Mary's University", "St. Mary's University facts"],
-    ...defaultStatus,
-    answers: [
-      { question: "What is the official website?", answer: "The official website is https://smru.edu.in." },
-      { question: "What is the official/legal name?", answer: "The official/legal name is St. Mary's Rehabilitation University; St. Mary's University (SMRU) is the public name." },
-      { question: "What display name is used on the website?", answer: "The website uses St. Mary's University as the public display name." },
-      { question: "What is the short name?", answer: "The short name is SMRU." },
-    ],
-    sections: [
-      {
-        heading: "Entity Facts",
-        paragraphs: [
-          "Official website: https://smru.edu.in.",
-          "Public brand: St. Mary's University.",
-          "Official/legal name: St. Mary's Rehabilitation University.",
-          "Display name: St. Mary's University.",
-          "Short name: SMRU.",
-          "Location: Hyderabad, Telangana.",
-        ],
-      },
-    ],
-    faqItems: [
-      { question: "What source should be used for official St. Mary's University course and school information?", answer: "Official course and school information should be taken only from smru.edu.in pages." },
-      { question: "What is the relationship between St. Mary's University and St. Mary's University?", answer: SITE_IDENTITY.bridgeSentence },
-    ],
-    relatedLinks: corePublicLinks,
-  },
   {
     slug: "approvals-recognitions",
     title: "Approvals & Recognitions",
@@ -399,6 +258,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     ],
   },
   {
+    robots: "noindex,follow",
     slug: "first-academic-year-disclosures",
     title: "University Academic Cycle Disclosure Note",
     description: "Verified status note for first university-cycle disclosures such as alumni, placements, annual reports, audited accounts, NAAC, and NIRF outputs.",
@@ -426,6 +286,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     relatedLinks: complianceLinks,
   },
   {
+    robots: "noindex,follow",
     slug: "public-information",
     title: "Public Information",
     description: "Public information desk and compliance contacts for St. Mary's University.",
@@ -503,6 +364,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     ],
   },
   {
+    robots: "noindex,follow",
     slug: "ombudsperson",
     title: "Ombudsperson",
     description: "University ombudsperson status and independent review information.",
@@ -554,6 +416,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     ],
   },
   {
+    robots: "noindex,follow",
     slug: "academic-calendar",
     title: "Academic Calendar",
     description: "Official academic calendar status, term dates, and exam schedule publication route.",
@@ -577,6 +440,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     relatedLinks: admissionsLinks,
   },
   {
+    robots: "noindex,follow",
     slug: "faculty-directory",
     title: "Faculty Directory",
     description: "Faculty directory status and public release page for St. Mary's University academic departments.",
@@ -604,6 +468,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     ],
   },
   {
+    robots: "noindex,follow",
     slug: "contact-directory",
     title: "Contact Directory",
     description: "Official contact directory for departments, administration, admissions, and support.",
@@ -730,6 +595,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     ],
   },
   {
+    robots: "noindex,follow",
     slug: "naac",
     title: "NAAC Quality-Cycle Readiness",
     description: "NAAC quality-cycle readiness information for St. Mary's University.",
@@ -760,6 +626,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     ],
   },
   {
+    robots: "noindex,follow",
     slug: "nirf",
     title: "NIRF Disclosure Status",
     description: "NIRF participation and ranking-data status for the first university academic cycle at St. Mary's University.",

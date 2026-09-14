@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { buildSchoolLandingMetadata } from "@/lib/shared/school-landing";
-import NursingLandingClient from "./NursingLandingClient";
+import { redirect } from "next/navigation";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-const schoolSlug = "nursing-sciences";
+// Retired short-form school URL: canonical hub is /schools/{slug}/ (301 in public/.htaccess).
+const TARGET_PATH = "/schools/nursing-sciences";
 
-export const metadata: Metadata = buildSchoolLandingMetadata(schoolSlug);
+export const metadata = buildRedirectMetadata("School of Nursing | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  return <NursingLandingClient />;
+  redirect(TARGET_PATH);
 }

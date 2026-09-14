@@ -128,7 +128,7 @@ const checks = [
     name: "Program metadata targets course detail intent",
     pass: () => {
       const file = read("src/lib/shared/dynamic-route-metadata.ts");
-      return file.includes("Eligibility, Fees & Syllabus") && file.includes("recommended related courses");
+      return file.includes("in Hyderabad: Fees, Eligibility 2026") && file.includes("pickTitleCandidate") && file.includes("recommended related courses");
     },
   },
   {
@@ -282,6 +282,57 @@ const checks = [
     pass: () => {
       const file = read("src/components/Preloader.tsx");
       return file.includes("priority={false}") && file.includes("}, 150);") && file.includes("}, 550);");
+    },
+  },
+  {
+    name: "Sitemap is an index with per-section child sitemaps",
+    pass: () =>
+      read("app/sitemap.xml/route.ts").includes("buildSitemapIndexXml") &&
+      ["pages", "schools", "programmes", "guides", "images"].every((section) => exists(`app/sitemap-${section}.xml/route.ts`)) &&
+      !read("src/lib/seo/sitemap.ts").includes('"/iqac"') &&
+      !read("src/lib/seo/sitemap.ts").includes("indexableComplianceRoutes") &&
+      !read("src/lib/seo/sitemap.ts").includes('"/niat"'),
+  },
+  {
+    name: "Retired and duplicate URLs have server-side 301s and the branded 404 is served",
+    pass: () => {
+      const htaccess = read("public/.htaccess");
+      const redirectMap = read("REDIRECT_MAP.csv");
+      return (
+        htaccess.includes("ErrorDocument 404 /404.html") &&
+        htaccess.includes("Stmarys-facts|stmarys-facts)/?$ https://smru.edu.in/smru/") &&
+        htaccess.includes("^Hand-Book/?$ https://smru.edu.in/handbook/") &&
+        htaccess.includes("^iqac/?$ https://smru.edu.in/iqac-quality-assurance/") &&
+        htaccess.includes("engineering-emerging-technologies|law)/?$ https://smru.edu.in/schools/$1/") &&
+        redirectMap.includes("Hand-Book/?$") &&
+        !exists("app/Hand-Book/page.tsx") &&
+        exists("app/handbook/page.tsx")
+      );
+    },
+  },
+  {
+    name: "Brand reference info pages are retired into /smru/ and placeholders are noindex",
+    pass: () => {
+      const info = read("src/lib/seo/info-pages.ts");
+      const retired = ["Stmarys-university", "Stmarys-university-official", "Stmarys-hyderabad", "rehabilitation-university-hyderabad", "Stmarys-facts"];
+      const placeholders = ["ombudsperson", "naac", "nirf", "first-academic-year-disclosures", "academic-calendar", "faculty-directory", "public-information", "contact-directory"];
+      return (
+        retired.every((slug) => !info.includes(`slug: "${slug}"`)) &&
+        placeholders.every((slug) => new RegExp(`\\{\\n\\s*robots: "noindex,follow",\\n\\s*slug: "${slug}"`).test(info)) &&
+        read("app/(seo-pages)/[slug]/page.tsx").includes("robots: config.robots")
+      );
+    },
+  },
+  {
+    name: "School hubs are canonical at /schools/{slug}; short forms are redirect shells",
+    pass: () => {
+      const landing = read("src/lib/shared/school-landing.ts");
+      const shells = ["rehabilitation-sciences", "health-allied-health-sciences", "psychology", "nursing-sciences", "engineering-emerging-technologies", "law"];
+      return (
+        landing.includes('law: "/schools/law"') &&
+        shells.every((slug) => read(`app/${slug}/page.tsx`).includes(`redirect(TARGET_PATH)`) && read(`app/${slug}/page.tsx`).includes(`/schools/${slug}`)) &&
+        read("app/schools/[schoolSlug]/page.tsx").includes("LawHubPage")
+      );
     },
   },
   {

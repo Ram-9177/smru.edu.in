@@ -8,7 +8,7 @@ import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
   title: "Mandatory Disclosure | St. Mary's University",
-  description: "Official public mandatory self-disclosure portal of St. Mary's University, Hyderabad, Telangana, maintaining institutional compliance with the UGC Regulations.",
+  description: "Official mandatory self-disclosure portal of St. Mary's University (SMRU), Hyderabad — institutional compliance information under UGC regulations.",
   alternates: {
     canonical: "https://smru.edu.in/mandatory-disclosure",
   },
@@ -66,7 +66,7 @@ export default function MandatoryDisclosure() {
         id="mandatory-disclosure-webpage-schema"
         data={buildWebPageSchema({
           title: "Mandatory Disclosure | St. Mary's University",
-          description: "Official public mandatory self-disclosure portal of St. Mary's University, Hyderabad, Telangana, maintaining institutional compliance with the UGC Regulations.",
+          description: "Official mandatory self-disclosure portal of St. Mary's University (SMRU), Hyderabad — institutional compliance information under UGC regulations.",
           pathname: "/mandatory-disclosure",
         })}
       />

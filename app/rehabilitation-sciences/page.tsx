@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import SchoolLandingComingSoon from "@/components/SchoolLandingComingSoon";
-import { buildSchoolLandingMetadata } from "@/lib/shared/school-landing";
+import { redirect } from "next/navigation";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-const schoolSlug = "rehabilitation-sciences";
+// Retired short-form school URL: canonical hub is /schools/{slug}/ (301 in public/.htaccess).
+const TARGET_PATH = "/schools/rehabilitation-sciences";
 
-export const metadata: Metadata = buildSchoolLandingMetadata(schoolSlug);
+export const metadata = buildRedirectMetadata("School of Rehabilitation Sciences | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  return <SchoolLandingComingSoon schoolSlug={schoolSlug} />;
+  redirect(TARGET_PATH);
 }

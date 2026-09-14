@@ -4,7 +4,19 @@ import { buildMetadata } from "@/lib/metadata";
 import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
 import { findBySlugOrName, safeSlug } from "@/lib/shared/program-utils";
 
+// Canonical school hub is always /schools/{slug}. The former short-form landings
+// (/law, /nursing-sciences, ...) 301 to these in public/.htaccess and keep a client
+// redirect shell so nothing 404s without Apache.
 export const SCHOOL_LANDING_PATHS: Record<string, string> = {
+  law: "/schools/law",
+  "rehabilitation-sciences": "/schools/rehabilitation-sciences",
+  "health-allied-health-sciences": "/schools/health-allied-health-sciences",
+  psychology: "/schools/psychology",
+  "nursing-sciences": "/schools/nursing-sciences",
+  "engineering-emerging-technologies": "/schools/engineering-emerging-technologies",
+};
+
+export const LEGACY_SCHOOL_SHORT_PATHS: Record<string, string> = {
   law: "/law",
   "rehabilitation-sciences": "/rehabilitation-sciences",
   "health-allied-health-sciences": "/health-allied-health-sciences",

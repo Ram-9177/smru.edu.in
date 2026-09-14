@@ -138,7 +138,7 @@ const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
 const schoolLinks = {
   rehabilitation: [{ href: "/rehabilitation-sciences", label: "Rehabilitation Sciences", description: "Explore rehabilitation-linked school information and programme routes." }],
   alliedHealth: [{ href: "/health-allied-health-sciences", label: "Health & Allied Health Sciences", description: "Explore health and allied health course pathways." }],
-  law: [{ href: "/law", label: "Law School", description: "Explore law programmes, admissions guidance, and school information." }],
+  law: [{ href: "/schools/law", label: "Law School", description: "Explore law programmes, admissions guidance, and school information." }],
   engineering: [{ href: "/engineering-emerging-technologies", label: "Engineering & Emerging Technologies", description: "Explore technology-focused academic routes." }],
   pharmacy: [{ href: "/schools", label: "Pharmacy Courses", description: "Explore official pharmacy-related school and programme pages from the schools catalogue." }],
   management: [{ href: "/schools", label: "Management Courses", description: "Explore official management-related school and programme pages from the schools catalogue." }],

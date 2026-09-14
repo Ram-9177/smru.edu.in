@@ -9,7 +9,7 @@ type RedirectFallbackProps = {
   linkLabel?: string;
 };
 
-export const buildRedirectMetadata = (targetUrl = "/law/", description = "This page has moved."): Metadata => ({
+export const buildRedirectMetadata = (targetUrl = "/schools/law/", description = "This page has moved."): Metadata => ({
   title: "Page Moved | St. Mary's University",
   description,
   robots: "noindex,follow",
@@ -18,15 +18,15 @@ export const buildRedirectMetadata = (targetUrl = "/law/", description = "This p
   },
 });
 
-export const metadata: Metadata = buildRedirectMetadata("/law/", "This page has moved to the School of Law page.");
+export const metadata: Metadata = buildRedirectMetadata("/schools/law/", "This page has moved to the School of Law page.");
 
 export default function RedirectPage({
-  targetUrl = "/law/",
+  targetUrl = "/schools/law/",
   title = "Page Has Moved",
   description = "The content you are looking for has been moved to the current official page.",
   linkLabel = "Go to Current Page",
 }: RedirectFallbackProps) {
-  const safeTargetUrl = targetUrl.startsWith("/") ? targetUrl : "/law/";
+  const safeTargetUrl = targetUrl.startsWith("/") ? targetUrl : "/schools/law/";
 
   const redirectScript = `
     window.location.replace(${JSON.stringify(safeTargetUrl)});

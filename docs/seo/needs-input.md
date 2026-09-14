@@ -8,3 +8,4 @@ This document tracks all facts, approvals, fee structures, intake figures, facul
 | Google Business Profile URL (and whether a GBP exists) | Organization JSON-LD, `/smru/` | `sameAs` currently uses a Maps search URL, not the GBP listing | Marketing |
 | Wikidata item QID | Organization JSON-LD | Add to `sameAs` once the item is created (Phase 7 playbook) | Whoever creates the Wikidata item |
 | Ordinance No. 2 of 2025 PDF | `/smru/`, `/approvals-recognitions/` | Only the Act (No. 10 of 2026) and UGC 2(f) letter PDFs are in `/assets/`; the Ordinance is cited from the brief, not linked | Registrar |
+| Square favicon / app-icon mark (512×512 source) | All pages (`app/layout.tsx` icons) | The only logo source is a 1024×547 wide image; the generated 32/180/512 px icons are letterboxed | Marketing / design |

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { schools } from "@/data/schools";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata, pickTitleCandidate } from "@/lib/metadata";
 import {
   getDepartmentSearchTerms,
   getProgramSearchSubject,
@@ -10,12 +10,20 @@ import {
 import { getHealthAlliedCourseSeoProfile } from "@/lib/seo/health-allied-course-seo";
 import { findBySlugOrName } from "@/lib/shared/program-utils";
 
-const trimText = (value: string, maxLength = 160) => {
+const trimText = (value: string, maxLength = 155) => {
   const normalized = value.replace(/\s+/g, " ").trim();
   if (normalized.length <= maxLength) return normalized;
+  return normalized.slice(0, maxLength).replace(/\s+\S*$/, "").replace(/[,;:\-|\s]+$/, "");
+};
 
-  const clipped = normalized.slice(0, maxLength - 3).replace(/\s+\S*$/, "");
-  return `${clipped}...`;
+// Long school names are abbreviated so "{School} – Courses & Fees" fits the 41-char primary budget.
+const SCHOOL_TITLE_NAMES: Record<string, string> = {
+  "health-allied-health-sciences": "Allied Health Sciences",
+  "engineering-emerging-technologies": "Engineering & Emerging Tech",
+  "rehabilitation-sciences": "Rehabilitation Sciences",
+  "nursing-sciences": "Nursing",
+  psychology: "Psychology",
+  law: "Law",
 };
 
 const buildProgramSummary = (program?: { duration?: string; eligibility?: string; overview?: string }) => {
@@ -32,8 +40,14 @@ export const getSchoolMetadata = (params: { schoolSlug: string }): Metadata => {
   const school = findBySlugOrName(schools, params.schoolSlug);
   const schoolName = school?.name || "Academic School";
   
-  // Authority Pattern: [School Name] Admissions 2026 | St. Mary's University Hyderabad
-  const title = `${schoolName} Admissions 2026 | St. Mary's University`;
+  // Formula: "School of {X} – Courses & Fees" (abbreviated / shortened until it fits 41 chars).
+  const shortName = SCHOOL_TITLE_NAMES[params.schoolSlug] || school?.short || schoolName.replace(/^School of /, "");
+  const title = pickTitleCandidate([
+    `School of ${shortName} – Courses & Fees`,
+    `${shortName} – Courses & Fees`,
+    `${shortName} Courses & Fees`,
+    `${shortName} Courses`,
+  ]);
   const description = trimText(
     school?.about
       ? `Explore admissions 2026, courses, eligibility, and official application updates for ${schoolName}. ${school.about}`
@@ -69,8 +83,14 @@ export const getDepartmentMetadata = (params: { schoolSlug: string; deptSlug: st
   const deptName = dept?.name || "Department";
   const schoolName = school?.name || "St. Mary's University";
   
-  // Authority Pattern: [Department] Admissions | [School] | St. Mary's University Hyderabad
-  const title = `${deptName} Admissions 2026 | ${schoolName} | St. Mary's University Hyderabad`;
+  // Formula: "{Department} – Courses & Admissions 2026", shortened until it fits 41 chars.
+  const title = pickTitleCandidate([
+    `${deptName} – Courses & Admissions 2026`,
+    `${deptName} Courses & Admissions`,
+    `${deptName} Courses 2026`,
+    `${deptName} Courses`,
+    deptName,
+  ]);
   const description = trimText(
     dept?.about
       ? `${dept.about} Check admissions 2026, eligibility, and official application updates.`
@@ -129,8 +149,15 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
   );
   const programSummary = buildProgramSummary(program);
   
-  // Authority Pattern: [Program Name] Admissions 2026, Eligibility, Fees & Syllabus | St. Mary's University
-  const title = healthAlliedSeo?.metaTitle || `${programName} Admissions 2026, Eligibility, Fees & Syllabus | St. Mary's University Hyderabad`;
+  // Formula: "{Course} in Hyderabad: Fees, Eligibility 2026" — drop "in Hyderabad" before dropping "Fees".
+  const title = pickTitleCandidate([
+    `${programName} in Hyderabad: Fees, Eligibility 2026`,
+    `${programName}: Fees, Eligibility 2026`,
+    `${programName}: Fees & Eligibility`,
+    `${programName} Fees 2026`,
+    `${programName} Course`,
+    programName,
+  ]);
   const description = trimText(
     healthAlliedSeo
       ? `${healthAlliedSeo.metaDescription} ${programSummary ? `${programSummary}. ` : ""}Latest intake, approvals, placement, salary, and council recognition must be verified with the university.`

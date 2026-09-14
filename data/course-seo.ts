@@ -306,7 +306,7 @@ export const OFFICIAL_COURSE_LOCK: OfficialCourseSeo[] = [
     seoName: "LL.B.",
     slug: "llb",
     aliases: ["Bachelor of Laws"],
-    officialPath: "/law#programmes",
+    officialPath: "/schools/law#programmes",
     schemaAllowed: true,
   },
   {
@@ -315,7 +315,7 @@ export const OFFICIAL_COURSE_LOCK: OfficialCourseSeo[] = [
     seoName: "LL.B. Hons.",
     slug: "llb-hons",
     aliases: ["LL.B. (Hons.)"],
-    officialPath: "/law#programmes",
+    officialPath: "/schools/law#programmes",
     schemaAllowed: true,
   },
   {
@@ -324,7 +324,7 @@ export const OFFICIAL_COURSE_LOCK: OfficialCourseSeo[] = [
     seoName: "B.A. LL.B. Hons.",
     slug: "ba-llb-hons",
     aliases: ["B.A. LL.B. (Hons.)"],
-    officialPath: "/law#programmes",
+    officialPath: "/schools/law#programmes",
     schemaAllowed: true,
   },
   {
@@ -333,7 +333,7 @@ export const OFFICIAL_COURSE_LOCK: OfficialCourseSeo[] = [
     seoName: "B.B.A. LL.B. Hons.",
     slug: "bba-llb-hons",
     aliases: ["B.B.A. LL.B. (Hons.)"],
-    officialPath: "/law#programmes",
+    officialPath: "/schools/law#programmes",
     schemaAllowed: true,
   },
   {
@@ -342,7 +342,7 @@ export const OFFICIAL_COURSE_LOCK: OfficialCourseSeo[] = [
     seoName: "B.Sc. LL.B. Hons.",
     slug: "bsc-llb-hons",
     aliases: ["B.Sc. LL.B. (Hons.)"],
-    officialPath: "/law#programmes",
+    officialPath: "/schools/law#programmes",
     schemaAllowed: true,
   },
 ];

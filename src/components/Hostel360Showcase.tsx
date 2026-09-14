@@ -125,7 +125,9 @@ const CATEGORIES = [
   { id: "safety", label: "Corridors & Safety", icon: FaShieldAlt },
 ] as const;
 
-export default function Hostel360Showcase() {
+// headingLevel: "h1" on the standalone /hostel-360/ page, "h2" when embedded under another page's H1.
+export default function Hostel360Showcase({ headingLevel = "h1" }: { headingLevel?: "h1" | "h2" } = {}) {
+  const Heading = headingLevel;
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeScene, setActiveScene] = useState<HostelScene>(HOSTEL_SCENES[0]);
   const [isFullscreenModal, setIsFullscreenModal] = useState(false);
@@ -300,9 +302,9 @@ export default function Hostel360Showcase() {
               <span className="h-2 w-2 animate-ping rounded-full bg-[#2fe4a7]" />
               Interactive 360° Tour
             </div>
-            <h1 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl md:text-5xl">
+            <Heading className="mt-3 text-3xl font-black tracking-tight sm:text-4xl md:text-5xl">
               High-End Hostel &amp; Residential Living
-            </h1>
+            </Heading>
             <p className="mt-3 text-sm font-semibold leading-relaxed text-white/80 md:text-base">
               Explore our fully high-end student accommodation—featuring dedicated personal study suites, luxury vanity stations, segregated hygienic wet &amp; dry washrooms, and 24/7 protected living environments.
             </p>

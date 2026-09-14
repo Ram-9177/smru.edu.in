@@ -5,7 +5,7 @@ import { buildMetadata } from '@/lib/metadata';
 export const metadata: Metadata = buildMetadata({
   title: "Handbook | St. Mary's University",
   description: "View and download the official St. Mary's University Handbook.",
-  pathname: "/Hand-Book",
+  pathname: "/handbook",
   keywords: ["St. Mary's University Handbook", "university handbook Hyderabad"],
 });
 
@@ -52,7 +52,7 @@ export default function HandbookPage() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-5 w-full sm:w-auto justify-center">
             <a
-              href="/Handbook/HAND_BOOK.pdf"
+              href="/assets/handbook/HAND_BOOK.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 border-2 border-navy text-base font-semibold rounded-xl text-white bg-navy hover:bg-[#1c3c88] hover:border-[#1c3c88] transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 gap-3 whitespace-nowrap group"
@@ -64,7 +64,7 @@ export default function HandbookPage() {
             </a>
             
             <a
-              href="/Handbook/HAND_BOOK.pdf"
+              href="/assets/handbook/HAND_BOOK.pdf"
               download="SMRU_Handbook.pdf"
               className="inline-flex items-center justify-center px-8 py-4 border-2 border-[#e2e8f0] text-base font-semibold rounded-xl text-navy bg-white hover:bg-[#f8fafc] hover:border-[#cbd5e1] transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 gap-3 whitespace-nowrap group"
             >

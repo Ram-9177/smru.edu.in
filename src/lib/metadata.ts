@@ -11,21 +11,31 @@ const EXACT_TITLES: Record<string, string> = {
   "/smru": "SMRU – St. Mary's Rehabilitation University, Hyderabad",
 };
 const TITLE_SEPARATOR = " | ";
-const MAX_SEO_TITLE_LENGTH = 60;
-const MAX_PROGRAM_SEO_TITLE_LENGTH = 82;
-const MAX_META_DESCRIPTION_LENGTH = 160;
+// Formula: primary ≤ 41 chars + " | St. Mary's University" (24) = ≤ 65 total.
+const MAX_SEO_TITLE_LENGTH = 65;
+const MAX_META_DESCRIPTION_LENGTH = 155;
+// A trimmed title must never end on one of these.
+const DANGLING_TITLE_WORDS = new Set(["in", "for", "with", "of", "and", "to", "at", "on", "by", "or", "&", "the", "a", "an", "vs", "from", "into"]);
 const HOME_PATHNAMES = new Set(["", "/"]);
-const PROGRAM_DETAIL_PATHNAME = /^\/schools\/[^/]+\/[^/]+\/[^/]+$/;
 
 const normalizeWhitespace = (value: string) => value.replace(/\s+/g, " ").trim();
 
-const trimAtWord = (value: string, maxLength: number) => {
+const stripDanglingWords = (value: string) => {
+  const words = value.split(" ");
+  while (words.length > 1 && DANGLING_TITLE_WORDS.has(words[words.length - 1].toLowerCase())) words.pop();
+  return words.join(" ").replace(/[,\-:;|&–—(\s]+$/, "");
+};
+
+// Word-safe trim that never cuts mid-phrase: prefers the last clause boundary (":", "–", ",")
+// inside the limit, then the last whole word, and never ends on a preposition/conjunction.
+export const trimAtWord = (value: string, maxLength: number) => {
   const normalized = normalizeWhitespace(value);
   if (normalized.length <= maxLength) return normalized;
-  const clipped = normalized
-    .slice(0, maxLength)
-    .replace(/\s+\S*$/, "")
-    .replace(/[,\-:;|&\s]+$/, "");
+  const window = normalized.slice(0, maxLength + 1);
+  const clauseBreak = Math.max(window.lastIndexOf(": "), window.lastIndexOf(" – "), window.lastIndexOf(" — "), window.lastIndexOf(", "));
+  const clause = clauseBreak >= Math.floor(maxLength * 0.55) ? stripDanglingWords(window.slice(0, clauseBreak)) : "";
+  if (clause && clause.length <= maxLength) return clause;
+  const clipped = stripDanglingWords(normalized.slice(0, maxLength).replace(/\s+\S*$/, ""));
   return clipped || normalized.slice(0, maxLength).trim();
 };
 
@@ -42,9 +52,7 @@ const normalizePathname = (pathname = "/") => {
 
 export const formatSeoTitle = (title: string, pathname = "/") => {
   const normalizedPathname = normalizePathname(pathname);
-  const maxTitleLength = PROGRAM_DETAIL_PATHNAME.test(normalizedPathname)
-    ? MAX_PROGRAM_SEO_TITLE_LENGTH
-    : MAX_SEO_TITLE_LENGTH;
+  const maxTitleLength = MAX_SEO_TITLE_LENGTH;
   const maxPrimaryLength = maxTitleLength - TITLE_SEPARATOR.length - SEO_TITLE_BRAND.length;
   const primary = trimAtWord(normalizePrimaryTitle(title), maxPrimaryLength);
 
@@ -65,7 +73,14 @@ export const formatSeoTitle = (title: string, pathname = "/") => {
 };
 
 export const formatMetaDescription = (description: string) =>
-  trimAtWord(description || "", MAX_META_DESCRIPTION_LENGTH);
+  trimAtWord((description || "").replace(/\s*\.\.\.$/, ""), MAX_META_DESCRIPTION_LENGTH);
+
+/** First candidate that fits the primary-title budget (41 chars); falls back to a word-safe trim of the last one. */
+export const pickTitleCandidate = (candidates: string[]) => {
+  const limit = MAX_SEO_TITLE_LENGTH - TITLE_SEPARATOR.length - SEO_TITLE_BRAND.length;
+  const fit = candidates.map(normalizeWhitespace).find((candidate) => candidate.length <= limit);
+  return fit || trimAtWord(candidates[candidates.length - 1], limit);
+};
 
 const normalizeTitle = (title: string, pathname = "/") => {
   return formatSeoTitle(title, pathname);

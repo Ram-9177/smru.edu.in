@@ -94,6 +94,55 @@ This is the single markdown control file to maintain for every change cycle. Kee
   0 (was 443) · Organization graph in static HTML on 451/451 pages (was 0) · sitemap 324.
   Unchanged until Phase 2: titles > 65 = 71, duplicate titles 12 groups, cut-mid-phrase 9.
 
+### Phase 2: URLs, redirects and sitemap architecture (14 September 2026)
+- **Brand-reference pages retired into `/smru/`**: 5 info pages (`Stmarys-university`,
+  `Stmarys-university-official`, `Stmarys-hyderabad`, `rehabilitation-university-hyderabad`,
+  `Stmarys-facts`) and 3 `/seo/*` seeds (221–223) removed; every old/capitalised/lowercase variant
+  301s to `/smru/` in `public/.htaccess` (rules 2–6). `src/views/StmarysFacts.tsx` deleted.
+- **`public/.htaccess`**: brand consolidation block, alias block (`explore-smru|stmarys` →
+  `/campus-guide/`, `Hand-Book`/`Handbook` → `/handbook/`, `iqac` → `/iqac-quality-assurance/`,
+  the 5 never-built `/mandatory-disclosure/*` children → `/mandatory-disclosure/`, partner aliases
+  `niat|bb|skilgen|qtst` → `/partner/$1/`), duplicate school landings → `/schools/$1/`, and
+  **`ErrorDocument 404 /404.html`** (the server was returning a bare 13-byte 404). 17 rules total;
+  `REDIRECT_MAP.csv` rewritten as a true record (44 rows) of Apache rules + client fallbacks.
+- **School URL decision: `/schools/{slug}/` is canonical for all six schools.** The short forms
+  (`/law/`, `/nursing-sciences/`, `/rehabilitation-sciences/`, …) are now redirect shells
+  (noindex, client redirect) behind the Apache 301. The rich School of Law hub moved to
+  `src/views/LawHubPage.tsx` and the Nursing landing to `src/views/NursingLandingClient.tsx`; the
+  dynamic `/schools/[schoolSlug]` route renders them for `law` and `nursing-sciences`. All internal
+  links (`SCHOOL_LANDING_PATHS`, footer, home, safe guides, `course-seo.ts` official paths, law
+  redirect fallbacks) point at `/schools/…`.
+- **Sitemap is now an index**: `/sitemap.xml` → `/sitemap-pages.xml` (52), `-schools.xml` (21),
+  `-programmes.xml` (71), `-guides.xml` (152), `-images.xml` (7 pages with captioned campus,
+  school and event imagery) = 297 URLs, **0 without a built file** (was 6 × 404). `lastmod` is
+  derived from source-file mtimes / `lastReviewed`; `priority` dropped. Removed: `/iqac`, the
+  compliance children, partner aliases, short-form school landings, noindex info pages.
+  `/sitemap-international.xml` is added in Phase 6.
+- **Placeholder compliance pages noindexed** (`robots: "noindex,follow"` on the InfoPage config,
+  passed through `app/(seo-pages)/[slug]`): `ombudsperson`, `naac`, `nirf`,
+  `first-academic-year-disclosures`, `academic-calendar`, `faculty-directory`,
+  `public-information`, `contact-directory`. Reachable, out of the sitemap.
+- **Title formula** (`src/lib/metadata.ts`): cap 65 = primary ≤ 41 + ` | St. Mary's University`;
+  `trimAtWord` prefers clause boundaries and never ends on a preposition/conjunction;
+  `pickTitleCandidate` ladders: programme `{Course} in Hyderabad: Fees, Eligibility 2026` →
+  `{Course}: Fees, Eligibility 2026` → `{Course}: Fees & Eligibility` → `{Course} Fees 2026`;
+  school `School of {short} – Courses & Fees` (abbreviations for the two long names); department
+  `{Dept} – Courses & Admissions 2026`; comparison `{A} vs {B}: Which to Choose in 2026`.
+  Descriptions capped at 155 without ellipsis. "Guide Guide" fixed; seo-page titles no longer
+  end in "...". Result: **0 titles > 65 (was 71), 0 duplicate titles (was 12 groups), 0 cut
+  mid-phrase (was 9)**.
+- **Favicon set**: `favicon.ico` (1.1 KB, 32 px), `favicon-32x32.png`, `apple-touch-icon.png`
+  (180), `icon-512.png`; `favicon.png` reduced 379 KB → 85 KB. The source is a 1024×547 wide logo,
+  so the square icons are letterboxed — a square mark is logged in `docs/seo/needs-input.md`.
+- Handbook PDFs moved `public/Handbook/` → `public/assets/handbook/` (the capitalised static folder
+  collided with the `/handbook/` route and served a homepage duplicate); 301s added.
+- Static `/360/hostel/` viewer: canonical → `/hostel-360/` + noindex; `/explore/hostel-360/`
+  canonical → `/hostel-360/`; `/explore/` second `<h1>` demoted; `/leadership/all/` retitled.
+- Guard: 4 new invariants (sitemap index, redirects + 404 page, retired/noindex pages, school
+  canonical). `seo-gates`: all failures cleared — sitemapMissing 0, titlesOver65 0,
+  duplicateTitles 0, guideGuide 0, truncatedTitles 0, brandNoSpace 0, brokenHashes 0.
+- Pages: 451 → 443 routes (8 brand pages retired). Sitemap 324 → 297 URLs. Indexable 307.
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel

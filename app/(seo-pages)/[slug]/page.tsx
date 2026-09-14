@@ -42,6 +42,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: config.title,
     description: config.description,
     pathname: `/${config.slug}`,
+    robots: config.robots || "index,follow",
     keywords: config.keywords || [],
   });
 }

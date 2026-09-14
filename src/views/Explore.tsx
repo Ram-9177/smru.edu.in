@@ -136,7 +136,7 @@ export default function Explore() {
         <CampusExperienceSection />
       </div>
 
-      <Hostel360Showcase />
+      <Hostel360Showcase headingLevel="h2" />
 
       <section id="programs" className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <h2 className="mb-6 text-3xl font-black">Programs &amp; Courses</h2>

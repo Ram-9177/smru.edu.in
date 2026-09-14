@@ -1009,7 +1009,7 @@ export default function SchoolOfLaw() {
           <p className="mt-4 text-slate-600 max-w-2xl mx-auto font-medium">Access the complete legal education ecosystem, resources, and official student portal for the School of Law.</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
             <a 
-              href="/law/" 
+              href="/schools/law/" 
               className="inline-flex items-center gap-3 px-10 py-5 bg-[#0d315c] text-white font-black text-[13px] uppercase tracking-[0.25em] cut-corner-badge shadow-xl hover:scale-105 transition-all transform active:scale-95"
             >
               Visit Law Portal <FaArrowRight />

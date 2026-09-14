@@ -263,13 +263,15 @@ export const GATE_THRESHOLDS = {
 };
 
 const TRUNCATED_TITLE = /\b(in|for|with|of|and|to|at|on|by|or|&)\s*\|/i;
-const isIndexable = (record) => record.status === 200 && !String(record.robots ?? "").includes("noindex");
+// Search-engine verification files (google*.html) are served but are not pages.
+const isVerificationFile = (record) => /^google[0-9a-f]+\.html$/i.test(record.file ?? "");
+const isIndexable = (record) => record.status === 200 && !isVerificationFile(record) && !String(record.robots ?? "").includes("noindex");
 const example = (record) => record.path ?? record.url;
 
 // records: the objects produced by crawlRecords() (camelCase keys, one row per HTML file plus synthetic sitemap rows).
 export function computeGates(records, thresholds = GATE_THRESHOLDS) {
   const limits = { ...GATE_THRESHOLDS, ...thresholds };
-  const pages = records.filter((record) => record.file);
+  const pages = records.filter((record) => record.file && !isVerificationFile(record));
   const indexable = pages.filter(isIndexable);
   const sitemapRows = records.filter((record) => record.inSitemap);
   const failures = [];

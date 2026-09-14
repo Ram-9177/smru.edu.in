@@ -5,6 +5,8 @@ import { buildCourseItemListSchema, getSchoolCourseListItems } from "@/lib/seo/c
 import { buildSchoolBreadcrumbs, buildSchoolFaqs, resolveSchool } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import School from "@/views/School";
+import LawHubPage from "@/views/LawHubPage";
+import NursingLandingClient from "@/views/NursingLandingClient";
 import { getSchoolMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
@@ -64,7 +66,8 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
         id={`${params.schoolSlug}-course-item-list-schema`}
         data={school ? buildCourseItemListSchema(courseListItems) : null}
       />
-      <School />
+      {/* Law and Nursing keep their richer landing views at the canonical /schools/{slug}/ URL. */}
+      {params.schoolSlug === "law" ? <LawHubPage /> : params.schoolSlug === "nursing-sciences" ? <NursingLandingClient /> : <School />}
     </>
   );
 }
