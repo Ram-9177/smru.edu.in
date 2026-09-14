@@ -134,6 +134,7 @@ export function crawlRecords({ outDir = path.join(rootDir, "out"), sitemapPath }
       jsonLdRootTypes: [],
       jsonLdBlocks: 0,
       jsonLdErrors: 0,
+      answerFirstWords: 0,
       file: "",
     });
   }

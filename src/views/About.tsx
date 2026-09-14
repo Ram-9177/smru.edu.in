@@ -330,7 +330,7 @@ export default function About() {
             data-reveal="fade-up"
             style={{ "--delay": "0.08s" }}
           >
-            St. Mary's University empowers healthcare professionals to transform lives through practice-led rehabilitation education, innovative research, and compassionate care.
+            St. Mary's University (SMRU), Hyderabad — legally St. Mary's Rehabilitation University — is a UGC-recognised private university that empowers healthcare, allied-health, nursing, psychology, engineering and law professionals to transform lives through practice-led education, research, and compassionate care across its six schools.
           </p>
         </div>
       </section>

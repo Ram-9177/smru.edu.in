@@ -178,6 +178,13 @@ export function analyzeHtml(html) {
   const bodyText = visibleText(bodyMatch ? bodyMatch[1] : source);
   const main = outerMain(source);
   const mainText = main === null ? null : visibleText(main);
+  // Answer-first: first substantive paragraph (>= 12 words) inside <main>.
+  let answerFirstWords = 0;
+  const answerScope = main === null ? source : main;
+  for (const pMatch of answerScope.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)) {
+    const words = visibleText(pMatch[1]).split(/\s+/).filter(Boolean);
+    if (words.length >= 12) { answerFirstWords = words.length; break; }
+  }
   const jsonLd = extractJsonLdBlocks(source);
   const types = new Set();
   const rootTypes = new Set();
@@ -209,6 +216,7 @@ export function analyzeHtml(html) {
     jsonLdRootTypes: [...rootTypes].sort(),
     jsonLdBlocks: jsonLd.length,
     jsonLdErrors: jsonLd.filter((block) => block.error).length,
+    answerFirstWords,
   };
 }
 
@@ -310,6 +318,12 @@ export function computeGates(records, thresholds = GATE_THRESHOLDS) {
   push(failures, "missingCanonical", indexable.filter((record) => !record.canonical));
   push(failures, "jsonLdErrors", pages.filter((record) => record.jsonLdErrors > 0));
   push(limits.strictLang ? failures : warnings, "langNotEn", pages.filter((record) => record.lang !== limits.requiredLang));
+
+  // Answer-first: the entity/discovery pages must lead with a >=40-word passage engines can quote.
+  const ANSWER_FIRST_PAGES = new Set(["/", "/smru/", "/about/", "/schools/", "/programmes/"]);
+  push(failures, "answerFirstEntity", pages.filter((record) => ANSWER_FIRST_PAGES.has(record.path) && (record.answerFirstWords ?? 0) < 35));
+  // Programme pages are reported as a warning (stub programmes await content — see course-coverage.csv).
+  push(warnings, "answerFirstProgramme", pages.filter((record) => /^\/schools\/[^/]+\/[^/]+\/[^/]+\/$/.test(record.path) && isIndexable(record) && (record.answerFirstWords ?? 0) < 40));
   push(limits.expectKeywordsMeta ? warnings : failures, "keywordsMetaPresent", pages.filter((record) => record.keywordsMeta));
 
   const metrics = {

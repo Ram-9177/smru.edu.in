@@ -152,8 +152,8 @@ const checks = [
       const robots = read("app/robots.txt/route.ts");
       const llms = read("public/llms.txt");
       return (
-        robots.includes("User-agent: OAI-SearchBot") &&
-        robots.includes("User-agent: bingbot") &&
+        robots.includes('"OAI-SearchBot"') &&
+        robots.includes('"bingbot"') &&
         llms.includes("Canonical academic URL pattern:") &&
         llms.includes("St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University") &&
         llms.includes("Source priority:")
@@ -364,6 +364,44 @@ const checks = [
         exists("src/data/programme-fees.ts")
       );
     },
+  },
+  {
+    name: "Bridge sentence is byte-identical across the fact sources",
+    pass: () => {
+      const bridge =
+        "St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a UGC-recognised private university in Hyderabad, Telangana, established under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.";
+      return ["src/lib/seo/site.ts", "public/llms.txt", "public/llms-full.txt"].every((file) => read(file).includes(bridge));
+    },
+  },
+  {
+    name: "AI and answer-engine crawlers are explicitly allowed in robots.txt",
+    pass: () => {
+      const robots = read("app/robots.txt/route.ts");
+      return ["GPTBot", "OAI-SearchBot", "PerplexityBot", "ClaudeBot", "Claude-SearchBot", "Google-Extended", "CCBot", "Applebot-Extended", "bingbot"].every((agent) => robots.includes(`"${agent}"`)) &&
+        robots.includes('Disallow: ${path}') &&
+        robots.includes("/developer/");
+    },
+  },
+  {
+    name: "Eager /* speculation prefetch is removed; prerender list kept",
+    pass: () => {
+      const layout = read("app/layout.tsx");
+      return !layout.includes('href_matches: "/*"') && layout.includes("prerender:");
+    },
+  },
+  {
+    name: "llms-full.txt carries the full programme catalogue block",
+    pass: () => {
+      const llms = read("public/llms-full.txt");
+      return llms.includes("<!-- programmes:start -->") && llms.includes("<!-- programmes:end -->") && llms.includes("## Programme Catalogue");
+    },
+  },
+  {
+    name: "Fact-consistency and llms generators exist",
+    pass: () =>
+      exists("scripts/check-facts-consistency.mjs") &&
+      exists("scripts/generate-llms.mjs") &&
+      exists("docs/seo/ai-audit.md"),
   },
   {
     name: "Master remediation control log exists",

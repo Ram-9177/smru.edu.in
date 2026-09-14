@@ -82,23 +82,9 @@ export const viewport: Viewport = {
   themeColor: "#0d315c",
 };
 
+// No eager "/*" prefetch: it downloaded the whole site on mobile data. Only a small,
+// high-intent prerender list is kept.
 const speculationRules = {
-  prefetch: [
-    {
-      source: "document",
-      where: {
-        and: [
-          { href_matches: "/*" },
-          { not: { href_matches: "https://apply.smru.edu.in/*" } },
-          { not: { href_matches: "/developer/*" } },
-          { not: { href_matches: "https://wa.me/*" } },
-          { not: { href_matches: "tel:*" } },
-          { not: { href_matches: "mailto:*" } },
-        ],
-      },
-      eagerness: "eager",
-    },
-  ],
   prerender: [
     {
       source: "list",

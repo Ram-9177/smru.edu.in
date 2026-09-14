@@ -19,7 +19,9 @@
     "audit:visual:compare": "node scripts/compare-visual-baselines.mjs",
     "seo:crawl": "node scripts/crawl-export.mjs",
     "seo:gates": "node scripts/seo-gates.mjs",
-    "seo:coverage": "node scripts/course-coverage.mjs"
+    "seo:coverage": "node scripts/course-coverage.mjs",
+    "seo:llms": "node scripts/generate-llms.mjs",
+    "seo:facts": "node scripts/check-facts-consistency.mjs"
   },
   "dependencies": {
     "@photo-sphere-viewer/core": "^5.14.1",

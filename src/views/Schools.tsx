@@ -114,6 +114,11 @@ export default function Schools() {
           <p className="max-w-3xl mx-auto text-[14px] md:text-base text-[#0d315c]/50 font-black uppercase tracking-[0.4em] leading-relaxed">
             Choose the school that matches your career path
           </p>
+          <p className="max-w-3xl mx-auto mt-5 text-[14px] md:text-base text-[#0d315c]/80 font-medium leading-relaxed normal-case tracking-normal">
+            St. Mary&apos;s University (SMRU), Hyderabad organises its 70+ programmes across six schools —
+            Rehabilitation Sciences, Health &amp; Allied Health Sciences, Psychology, Nursing, Engineering &amp;
+            Emerging Technologies, and Law — each with its own departments, admissions route and programme pages.
+          </p>
           
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <button

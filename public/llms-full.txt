@@ -44,6 +44,84 @@ St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation Uni
 
 The canonical programme family is the source of truth for programme-level pages. Do not merge it with legacy redirects, partner landing pages, or keyword-guide routes.
 
+## Programme Catalogue (all live courses)
+
+Each programme links to its canonical page. Fees are confirmed at official admissions counselling unless a page states otherwise.
+
+<!-- programmes:start -->
+- BASLP: https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/baslp/ (UG Program · 4 years · fee at counselling)
+- M.Sc. Audiology: https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/msc-audiology/ (PG Program · 2 years · fee at counselling)
+- Ph.D. Audiology: https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/phd-audiology/ (Ph.D. Program · 4 years · fee at counselling)
+- M.Sc. in Audiology (MAO): https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/mao/ (PG Program · 2 years · fee at counselling)
+- Ph.D. Speech & Hearing: https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/phd-speech-hearing/ (Ph.D. Program · 4 years · fee at counselling)
+- BPO: https://smru.edu.in/schools/rehabilitation-sciences/prosthetics-orthotics/bpo/ (UG Program · 4 years · fee at counselling)
+- MPO: https://smru.edu.in/schools/rehabilitation-sciences/prosthetics-orthotics/mpo/ (PG Program · 2 years · fee at counselling)
+- B.A. B.Ed.: https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/ba-bed-special-inclusive-education/ (Integrated UG Program · 4 years · fee at counselling)
+- B.Sc. B.Ed.: https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/bsc-bed-special-inclusive-education/ (Integrated UG Program · 4 years · fee at counselling)
+- B.Com. B.Ed.: https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/bcom-bed-special-inclusive-education/ (Integrated UG Program · 4 years · fee at counselling)
+- Ph.D. Inclusive Education: https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/phd-inclusive-education/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Special Education: https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/phd-special-education/ (Ph.D. Program · 4 years · fee at counselling)
+- BPT: https://smru.edu.in/schools/health-allied-health-sciences/physiotherapy/bpt/ (UG Program · 5 years · fee at counselling)
+- MPT: https://smru.edu.in/schools/health-allied-health-sciences/physiotherapy/mpt/ (PG Program · 2 years · fee at counselling)
+- Ph.D. Physiotherapy: https://smru.edu.in/schools/health-allied-health-sciences/physiotherapy/phd-physiotherapy/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Physiotherapy Neurology: https://smru.edu.in/schools/health-allied-health-sciences/physiotherapy/phd-physiotherapy-neurology/ (Ph.D. Program · 4 years · fee at counselling)
+- BOT: https://smru.edu.in/schools/health-allied-health-sciences/occupational-therapy/bot/ (UG Program · 5 years · fee at counselling)
+- MOT: https://smru.edu.in/schools/health-allied-health-sciences/occupational-therapy/mot/ (PG Program · 2 years · fee at counselling)
+- Ph.D. Occupational Therapy: https://smru.edu.in/schools/health-allied-health-sciences/occupational-therapy/phd-occupational-therapy/ (Ph.D. Program · 4 years · fee at counselling)
+- Medical Lab Technology: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bmlt/ (UG Program · 4 years · fee at counselling)
+- Anesthesia & OT Technology: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bsc-anaesthesia-ot/ (UG Program · 4 years · fee at counselling)
+- Cardiovascular Technology: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bcvt/ (UG Program · 4 years · fee at counselling)
+- Emergency Medical Technology: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/betcms/ (UG Program · 4 years · fee at counselling)
+- Optometry: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/b-optometry/ (UG Program · 4 years · fee at counselling)
+- Radiotherapy Technology: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/brt/ (UG Program · 4 years · fee at counselling)
+- Forensic Science: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bsc-forensic-science/ (UG Program · 4 years · fee at counselling)
+- Diploma in Anaesthesia and Operation Theatre Technology (D.AOTT): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/diploma-anaesthesia-operation-theatre-technology/ (Diploma · 3 years · fee at counselling)
+- Bachelor of Nutrition and Dietetics (Hons): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bachelor-nutrition-dietetics-hons/ (UG Program · 4 years · fee at counselling)
+- Diploma of Radiotherapy Technology (D.RT): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/diploma-radiotherapy-technology/ (Diploma · 3 years · fee at counselling)
+- Bachelor of Physician Assistant (B.PA): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bpa/ (UG Program · 4 years · fee at counselling)
+- Diploma of Dialysis Technology (D.DT): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/diploma-dialysis-technology/ (Diploma · 3 years · fee at counselling)
+- Bachelor of Dialysis Therapy Technology (B.DTT): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bdtt/ (UG Program · 4 years · fee at counselling)
+- Bachelor of Respiratory Technology (B.RT): https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/brt-respiratory/ (UG Program · 4 years · fee at counselling)
+- B.Sc. Medical Imaging Technology: https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bmit/ (UG Program · 4 years · fee at counselling)
+- B.Sc. Clinical Psychology: https://smru.edu.in/schools/psychology/clinical-psychology/bsc-clinical-psychology/ (UG Program · 4 years · fee at counselling)
+- M.A. Clinical Psychology: https://smru.edu.in/schools/psychology/clinical-psychology/ma-clinical-psychology/ (PG Program · 2 years · fee at counselling)
+- Ph.D. Clinical Psychology: https://smru.edu.in/schools/psychology/clinical-psychology/phd-clinical-psychology/ (Ph.D. Program · 4 years · fee at counselling)
+- PDCP: https://smru.edu.in/schools/psychology/clinical-psychology/professional-diploma-clinical-psychology/ (PG Diploma · 1 year · fee at counselling)
+- PGDRP: https://smru.edu.in/schools/psychology/rehabilitation-psychology/pg-diploma-rehabilitation-psychology/ (PG Diploma · 1 year · fee at counselling)
+- Ph.D. Rehabilitation Psychology: https://smru.edu.in/schools/psychology/rehabilitation-psychology/phd-rehabilitation-psychology/ (Ph.D. Program · 4 years · fee at counselling)
+- B.Psychology: https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/b-psychology-applied-behavioural/ (UG Program · 4 years · fee at counselling)
+- M.Psychology: https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/m-psychology-applied-behavioural/ (PG Program · 2 years · fee at counselling)
+- Ph.D. Psychology: https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/phd-psychology/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Applied Psychology: https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/phd-applied-psychology/ (Ph.D. Program · 4 years · fee at counselling)
+- Bachelor of Medical and Psychiatric Social Work (B.MPSW): https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/bmpsw/ (UG Program · 4 years · fee at counselling)
+- Master of Medical and Social Work (M.MSW): https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/mmsw/ (PG Program · 2 years · fee at counselling)
+- Master of Psychiatric Social Work (M.PSW): https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/mpsw/ (PG Program · 2 years · fee at counselling)
+- B.Sc. Nursing: https://smru.edu.in/schools/nursing-sciences/nursing/bsc-nursing/ (UG Program · 4 years · fee at counselling)
+- M.Sc. Nursing: https://smru.edu.in/schools/nursing-sciences/nursing/msc-nursing/ (PG Program · 2 years · fee at counselling)
+- B.Tech Rehab Engineering: https://smru.edu.in/schools/engineering-emerging-technologies/rehabilitation-engineering-assistive-technologies/btech-rehab-engineering/ (UG Program · fee at counselling)
+- B.Tech RE (P&O/AT): https://smru.edu.in/schools/engineering-emerging-technologies/rehabilitation-engineering-assistive-technologies/btech-rehabilitation-engineering-prosthetics-orthotics-assistive-technologies/ (UG Program · fee at counselling)
+- B.Tech CSE: https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse/ (UG Program · 4 years · fee at counselling)
+- B.Tech CSE (AI & ML): https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-aiml/ (UG Program · 4 years · fee at counselling)
+- B.Tech CSE (AI & DS): https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-ai-ds/ (UG Program · 4 years · fee at counselling)
+- B.Tech CSE (CS): https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-cs/ (UG Program · 4 years · fee at counselling)
+- B.Tech CSE (Fintech & AI): https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-fintech-ai/ (UG Program · 4 years · fee at counselling)
+- B.Tech CSE (Biomedical Engineering): https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-biomedical-engineering/ (UG Program · 4 years · fee at counselling)
+- Ph.D. CSE: https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/phd-cse/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Mathematics: https://smru.edu.in/schools/engineering-emerging-technologies/sciences-humanities/phd-mathematics/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Physics: https://smru.edu.in/schools/engineering-emerging-technologies/sciences-humanities/phd-physics/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Chemistry: https://smru.edu.in/schools/engineering-emerging-technologies/sciences-humanities/phd-chemistry/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. English: https://smru.edu.in/schools/engineering-emerging-technologies/sciences-humanities/phd-english/ (Ph.D. Program · 4 years · fee at counselling)
+- Ph.D. Business Administration: https://smru.edu.in/schools/engineering-emerging-technologies/business-administration-computer-applications/phd-business-administration/ (Ph.D. Program · 4 years · fee at counselling)
+- LL.B.: https://smru.edu.in/schools/law/legal-studies/llb/ (UG Program · 3 years · fee at counselling)
+- LL.B. (Hons.): https://smru.edu.in/schools/law/legal-studies/llb-hons/ (UG Program · 3 years · fee at counselling)
+- B.A. LL.B. / B.A. LL.B. (Hons.): https://smru.edu.in/schools/law/legal-studies/ba-llb-hons/ (Integrated UG Program · 5 years · fee at counselling)
+- B.B.A. LL.B. / B.B.A. LL.B. (Hons.): https://smru.edu.in/schools/law/legal-studies/bba-llb-hons/ (Integrated UG Program · 5 years · fee at counselling)
+- B.Sc. LL.B. / B.Sc. LL.B. (Hons.): https://smru.edu.in/schools/law/legal-studies/bsc-llb-hons/ (Integrated UG Program · 5 years · fee at counselling)
+- B.Sc. (Forensic) LL.B. (Hons.): https://smru.edu.in/schools/law/legal-studies/bsc-forensic-llb-hons/ (Integrated UG Program · 5 years · fee at counselling)
+- LL.M.: https://smru.edu.in/schools/law/legal-studies/llm/ (PG Program · 1 year · fee at counselling)
+- Ph.D. in Law: https://smru.edu.in/schools/law/legal-studies/phd-law/ (Ph.D. Program · 4 years · fee at counselling)
+<!-- programmes:end -->
+
 ## Source Priority
 
 - Use the matching canonical school, department, or programme page for academic facts.
@@ -134,6 +212,13 @@ Allowed schema facts:
 - Course schema only for the official course-lock list
 
 Do not add fee, intake, eligibility, duration, approval, salary, placement, ranking, accreditation, NAAC status or medical-service fields to schema unless the same fact is officially published and visible on the page.
+
+## Contact
+
+Official email: reach@smru.edu.in
+Admissions phone: +91-7331119432 (also 9010455591)
+Apply online: https://apply.smru.edu.in
+Contact page: https://smru.edu.in/contact/
 
 ## AI Answer Rules
 

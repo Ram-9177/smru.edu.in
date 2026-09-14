@@ -206,6 +206,37 @@ This is the single markdown control file to maintain for every change cycle. Kee
   likewise awaits real data. The catalogue reports 71 programmes, not the brief's "90+".
 - Pages: 256 → 258 routes (+`/programmes/`, +1). Sitemap 180 → 181.
 
+### Phase 5: AEO / GEO — be the cited answer (14 September 2026)
+- **Fact-consistency guard** (`scripts/check-facts-consistency.mjs`, `npm run seo:facts`): asserts
+  the bridge sentence is byte-identical across `site.ts`, `llms.txt`, `llms-full.txt`, the built
+  `/smru/` and the homepage Organization JSON-LD, and that legal name, Ordinance/Act, UGC 2(f),
+  sponsor society, email, postal code and the six schools match across the key built pages + llms
+  files. `--strict` fails the build on drift. Runs post-build (needs `out/`); the source-level
+  bridge check is also one of the `seo:guard` invariants. First run found and fixed a real gap —
+  the official email was absent from both llms files — now **28/28 checks pass**.
+- **llms-full.txt full catalogue** (`scripts/generate-llms.mjs`, `npm run seo:llms`): regenerates a
+  `## Programme Catalogue` block (between `<!-- programmes:start/end -->` markers) listing all 71
+  live programmes with canonical URL + level · duration · fee state, read from the built Course
+  schema. A contact block (email, admissions phone, apply URL) was added to both llms files.
+- **robots.txt** rewritten (`app/robots.txt/route.ts`) with an explicit `Allow` group for 20
+  crawlers — classic (Googlebot, bingbot), answer-engine (OAI-SearchBot, PerplexityBot,
+  Claude-SearchBot, Applebot) and generative (GPTBot, ChatGPT-User, ClaudeBot, Google-Extended,
+  CCBot, Applebot-Extended, Bytespider, Amazonbot, cohere-ai, YouBot …) — each keeping
+  `/developer/`, `/api/`, `/thank-you/` disallowed; `Sitemap:` points at the sitemap index.
+- **Answer-first enforcement**: `analyzeHtml` now measures the first substantive (≥12-word)
+  paragraph inside `<main>`; `seo-gates` fails when an entity/discovery page (`/`, `/smru/`,
+  `/about/`, `/schools/`, `/programmes/`) leads with fewer than 35 words (the canonical bridge
+  sentence length) and warns on programme pages that fall short (57 stubs — tracked in
+  `course-coverage.csv`). `/about/` (18→41 w) and `/schools/` (32→39 w) gained real factual
+  answer-first leads; all five entity pages now pass, **0 gate failures**.
+- **Speculation rules**: dropped the eager `href_matches: "/*"` prefetch (it downloaded the whole
+  site on mobile data); kept the small `prerender` list.
+- **AI answer-audit harness** (`docs/seo/ai-audit.md`): the 15 fixed monthly questions, per-engine
+  logging table, expected-answer anchors, and the trace-to-fix rule. The first live run against
+  ChatGPT / Perplexity / Gemini / Copilot / Google AI Mode is a manual/logged-in step — the harness
+  is ready; results are not fabricated here.
+- Guard: 5 new invariants → **39 checks**. `npm run seo:llms` / `seo:facts` added.
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel
