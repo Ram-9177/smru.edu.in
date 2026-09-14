@@ -126,7 +126,8 @@ const PhdAdmission = () => {
       <section className="relative isolate overflow-hidden bg-[#071a32]">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <video
-            preload="none"
+            preload="metadata"
+            poster="/assets/hero-campus-fast.webp"
             autoPlay
             muted
             loop

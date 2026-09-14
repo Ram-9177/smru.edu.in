@@ -29,7 +29,7 @@ const toProgramType = (level = ""): ProgramType => {
 
 const defaultVisibility: Visibility = "public";
 const defaultStatus: EntityStatus = "live";
-const HIDDEN_PARTNER_CODES = new Set(["STMARYS UNIVERSITY", "KPMG", "MICROSOFT", "IST"]);
+const HIDDEN_PARTNER_CODES = new Set(["ST.MARY'S UNIVERSITY", "KPMG", "MICROSOFT", "IIAT"]);
 
 const normalizePath = (path?: string | null) => {
   if (!path) return "";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -12,6 +12,7 @@ const MerittoApplyModal = dynamic(() => import("./MerittoApplyModal"));
 import ReactDomSafetyPatch from "./ReactDomSafetyPatch";
 import { ApplyModalContext } from "../context/ApplyModalContext";
 import type { MerittoModalPayload } from "../context/ApplyModalContext";
+import { initPredictiveNavigation } from "@/lib/speed/predictive-preloader";
 
 import { FaPaperPlane, FaPhoneAlt, FaFileDownload, FaWhatsapp, FaHeadset } from "react-icons/fa";
 import {
@@ -52,6 +53,7 @@ function AppShellContent({
   showEnquiryModal,
   setShowEnquiryModal,
 }: AppShellContentProps) {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const normalizedPathname = pathname?.replace(/\/+$/, "") || "/";
@@ -67,8 +69,6 @@ function AppShellContent({
       "edinbox",
       "edridge",
       "emversity",
-      "iiat",
-      "ist",
       "mjiollnir",
       "niat",
       "niat-upskilling",
@@ -76,6 +76,7 @@ function AppShellContent({
       "onnbikes",
       "qtst",
       "qtst-Stmarys",
+      "skilgen",
       "university",
       "veloces",
       "nextgen"
@@ -91,7 +92,11 @@ function AppShellContent({
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    const cleanupPredictive = initPredictiveNavigation(router);
+    return () => {
+      cleanupPredictive?.();
+    };
+  }, [router]);
 
 
 
@@ -129,6 +134,7 @@ function AppShellContent({
     isDeveloperPage ||
     isLandingPage ||
     normalizedPathname === "/campus-360" ||
+    normalizedPathname === "/nursing-sciences" ||
     PARTNER_HIDDEN_STICKY_ROUTES.some((route) => normalizedPathname === route || normalizedPathname.startsWith(`${route}/`));
 
   const isStickyHiddenRoute =

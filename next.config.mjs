@@ -13,11 +13,12 @@ const nextConfig = {
   },
   compress: true,
   distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  webpack: (config) => {
+  webpack: (config, { dev }) => {
     config.resolve.alias["react-router-dom"] = path.resolve(process.cwd(), "src/lib/router.tsx");
+    if (!dev) {
+      config.cache = false;
+      config.parallelism = 1;
+    }
     return config;
   },
 };

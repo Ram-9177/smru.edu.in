@@ -111,12 +111,13 @@ export default function Partner() {
   }, []);
 
   const PARTNER_ORDER = [
+    "carebridge",
     "nst",
     "emversity",
     "niat",
     "qtst",
     "bytexl",
-    "iiat",
+    "skilgen",
     "edinbox",
     "veloces",
     "bb",
@@ -133,14 +134,11 @@ export default function Partner() {
         const internalRedirect = partner.redirectUrl?.startsWith("/");
         const partnerRoute = partner.slug ? `/partner/${partner.slug}` : "/partner";
         const partnerSlug = (partner.slug || "").toLowerCase();
-        const forcedExternalFallback = ""; // Force internal routes to keep Navbar visible
         const configuredExternalUrl =
           (partner.redirectUrl?.startsWith("http") && partner.redirectUrl) ||
           (partner.website?.startsWith("http") && partner.website) ||
           "";
-        const path = forcedExternalFallback
-          ? configuredExternalUrl || forcedExternalFallback
-          : partnerRoute;
+        const path = partnerSlug === "nextgen" && configuredExternalUrl ? configuredExternalUrl : partnerRoute;
         const isComingSoon = !partner.redirectUrl && !partner.website;
         const meta = getPartnerMeta(partner);
 

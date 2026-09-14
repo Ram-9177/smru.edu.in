@@ -1,6 +1,6 @@
 # St.Marys University Full AI Reference
 
-Last updated: 6 June 2026
+Last reviewed: 9 September 2026
 
 ## Identity
 
@@ -20,10 +20,32 @@ St.Marys University, legally established as St. Mary's Rehabilitation University
 - Schools: https://smru.edu.in/schools/
 - Academic structure: https://smru.edu.in/academic-structure/
 - Admissions: https://smru.edu.in/admissions/
+- Fee structure: https://smru.edu.in/fee-structure/
+- Approvals & recognitions: https://smru.edu.in/approvals-recognitions/
 - Mandatory disclosure index: https://smru.edu.in/mandatory-disclosure/
 - IQAC index: https://smru.edu.in/iqac/
+- Campus location: https://smru.edu.in/campus-location-hyderabad/
+- Hostel facilities: https://smru.edu.in/hostel/
+- Research: https://smru.edu.in/research/
+- Faculty directory: https://smru.edu.in/faculty-directory/
 - Contact: https://smru.edu.in/contact/
 - HTML sitemap: https://smru.edu.in/html-sitemap/
+
+## Canonical Academic URL Pattern
+
+- School: https://smru.edu.in/schools/{school}/
+- Department: https://smru.edu.in/schools/{school}/{department}/
+- Programme: https://smru.edu.in/schools/{school}/{department}/{programme}/
+
+The canonical programme family is the source of truth for programme-level pages. Do not merge it with legacy redirects, partner landing pages, or keyword-guide routes.
+
+## Source Priority
+
+- Use the matching canonical school, department, or programme page for academic facts.
+- Use Admissions and Fee Structure for current application, fee, intake, and scholarship confirmation.
+- Use Approvals & Recognitions and Mandatory Disclosure for institutional and statutory evidence.
+- Use Contact and Campus Location for current local details and visit confirmation.
+- Treat partner landing pages and SEO guides as supporting context, not as the university identity authority.
 
 ## Official School Areas
 

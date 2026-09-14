@@ -29,8 +29,12 @@ const Footer = () => {
   };
   const normalizePhoneDisplay = (value: string) => {
     const compact = value.replace(/[^\d+]/g, "");
-    if (compact === "08065459645" || compact === "+918065459645") return "08065459645";
-    if (compact === "+919493321969" || compact === "9493321969") return "9493321969";
+    if (compact === "7331119432" || compact === "+917331119432") return "7331119432";
+    if (
+      compact === "+919493321969" ||
+      compact === "9493321969" ||
+      compact === "901045559190"
+    ) return "9010455591/90";
     return value;
   };
 
@@ -202,7 +206,7 @@ const Footer = () => {
                 <li><Link href="/first-academic-year-disclosures" className="transition-colors hover:text-white">University Cycle Note</Link></li>
                 <li><Link href="/sponsor-society" className="transition-colors hover:text-white">Sponsor Society</Link></li>
                 <li><Link href="/accessibility-statement" className="transition-colors hover:text-white">Accessibility Statement</Link></li>
-                <li><Link href="/stmarys-facts" className="transition-colors hover:text-[#019e6e] font-bold">Stmarys University Facts & AI Guidance</Link></li>
+                <li><Link href="/Stmarys-facts" className="transition-colors hover:text-[#019e6e] font-bold">Stmarys University Facts & AI Guidance</Link></li>
               </ul>
             </nav>
           </div>

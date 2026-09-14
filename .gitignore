@@ -4,6 +4,7 @@
 .playwright-cli/
 node_modules/
 out/
+output/
 server.log
 *.log
 *_Error.txt

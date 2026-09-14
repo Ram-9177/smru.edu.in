@@ -14,11 +14,13 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import CampusExperienceSection from "@/components/CampusExperienceSection";
+import Hostel360Showcase from "@/components/Hostel360Showcase";
 import ProgramsExplorer from "@/components/ProgramsExplorer";
 import { SITE_CTA_LINKS, SITE_SOCIAL_LINKS, SITE_CONTACT } from "@/lib/shared/site-constants";
 
 const quickLinks = [
   { href: "/campus-360/", label: "Campus 360 Tour" },
+  { href: "#hostel-360", label: "Hostel 360° & Living" },
   { href: "/campus-guide/", label: "Campus Guide" },
   { href: "#why-smru", label: "Why Choose SMRU" },
   { href: "#programs", label: "Programs & Courses" },
@@ -50,12 +52,14 @@ const highlights = [
 export default function Explore() {
   return (
     <div className="bg-white font-outfit text-[#0d315c]">
+      {/* Classic Explore Hero */}
       <section className="relative overflow-hidden bg-[#0d315c]">
         <Image
           src="/assets/hero-campus.webp"
           alt="St.Mary's University campus"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover"
         />
@@ -69,6 +73,7 @@ export default function Explore() {
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Link
               href="/campus-360/"
+              prefetch={true}
               className="cut-corner-panel flex min-h-[190px] flex-col justify-between border border-white/10 bg-[#10bb82] p-6 text-white shadow-[0_14px_30px_rgba(16,187,130,0.22)] transition hover:-translate-y-1 hover:border-white/30"
             >
               <span className="inline-flex h-12 w-12 items-center justify-center cut-corner-badge bg-white/20 text-2xl">
@@ -81,6 +86,7 @@ export default function Explore() {
             </Link>
             <Link
               href="/campus-guide/"
+              prefetch={true}
               className="cut-corner-panel flex min-h-[190px] flex-col justify-between border border-white/10 bg-[#0d315c] p-6 text-white shadow-[0_14px_30px_rgba(13,49,92,0.18)] transition hover:-translate-y-1 hover:border-white/30"
             >
               <span className="inline-flex h-12 w-12 items-center justify-center cut-corner-badge bg-white/20 text-2xl">
@@ -129,6 +135,8 @@ export default function Explore() {
       <div id="campus-experience">
         <CampusExperienceSection />
       </div>
+
+      <Hostel360Showcase />
 
       <section id="programs" className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <h2 className="mb-6 text-3xl font-black">Programs &amp; Courses</h2>

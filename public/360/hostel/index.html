@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hostel 360° Virtual Tour</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="preload" href="vendor/marzipano.js" as="script">
+<link rel="preload" href="data.js" as="script">
+<link rel="preload" href="tiles/0-girls-rooms/preview.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="tiles/0-girls-rooms/1/f/0/0.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="tiles/0-girls-rooms/1/b/0/0.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="tiles/0-girls-rooms/1/l/0/0.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="tiles/0-girls-rooms/1/r/0/0.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="tiles/0-girls-rooms/1/u/0/0.jpg" as="image" fetchpriority="high">
+<link rel="preload" href="tiles/0-girls-rooms/1/d/0/0.jpg" as="image" fetchpriority="high">
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="multiple-scenes view-control-buttons">
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="#pano" class="scene" data-id="0-girls-rooms">
+        <li class="text">Hostel Room &amp; Study Area</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="1-girls-washroom-entry">
+        <li class="text">Washroom Entry &amp; Corridor</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="2-girls-wet--dry">
+        <li class="text">Wet &amp; Dry Restroom</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="3-girls-washroom-360">
+        <li class="text">Modern Washroom 360°</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="4-girls-wet-and-washroom">
+        <li class="text">Washroom Facilities</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="5-girls-door-outside">
+        <li class="text">Corridor &amp; Entrance</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="6-girls_handwash">
+        <li class="text">Premium Vanity &amp; Handwash Area</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="7-inside-wet-and-dry">
+        <li class="text">Inside Wet &amp; Dry Enclosure</li>
+      </a>
+    
+      <a href="#pano" class="scene" data-id="8-hostel-room-inside">
+        <li class="text">Hostel Lounge &amp; Recreation</li>
+      </a>
+    
+  </ul>
+</div>
+
+<div id="titleBar">
+  <h1 class="sceneName"></h1>
+</div>
+
+<a href="#pano" id="autorotateToggle" aria-label="Toggle autorotation">
+  <img class="icon off" src="img/play.png" alt="Play">
+  <img class="icon on" src="img/pause.png" alt="Pause">
+</a>
+
+<a href="#pano" id="fullscreenToggle" aria-label="Toggle fullscreen">
+  <img class="icon off" src="img/fullscreen.png" alt="Fullscreen">
+  <img class="icon on" src="img/windowed.png" alt="Windowed">
+</a>
+
+<a href="#pano" id="sceneListToggle" aria-label="Toggle scene list">
+  <img class="icon off" src="img/expand.png" alt="Expand">
+  <img class="icon on" src="img/collapse.png" alt="Collapse">
+</a>
+
+<a href="#pano" id="viewUp" class="viewControlButton viewControlButton-1" aria-label="Look up">
+  <img class="icon" src="img/up.png" alt="Up">
+</a>
+<a href="#pano" id="viewDown" class="viewControlButton viewControlButton-2" aria-label="Look down">
+  <img class="icon" src="img/down.png" alt="Down">
+</a>
+<a href="#pano" id="viewLeft" class="viewControlButton viewControlButton-3" aria-label="Look left">
+  <img class="icon" src="img/left.png" alt="Left">
+</a>
+<a href="#pano" id="viewRight" class="viewControlButton viewControlButton-4" aria-label="Look right">
+  <img class="icon" src="img/right.png" alt="Right">
+</a>
+<a href="#pano" id="viewIn" class="viewControlButton viewControlButton-5" aria-label="Zoom in">
+  <img class="icon" src="img/plus.png" alt="Zoom In">
+</a>
+<a href="#pano" id="viewOut" class="viewControlButton viewControlButton-6" aria-label="Zoom out">
+  <img class="icon" src="img/minus.png" alt="Zoom Out">
+</a>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>

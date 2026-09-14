@@ -38,27 +38,34 @@ const Contact = () => {
 
   return (
     <>
-      <section id="contact-hero" className="scroll-mt-24 relative w-full min-h-[46vh] overflow-hidden flex items-center justify-center bg-gradient-to-r from-[#f0fdfa] via-[#f8fafc] to-[#eff6ff]">
-        {/* Abstract Image Hero */}
-        <img 
-          src={resolveAssetSrc(abstractHeroBg)} 
-          alt="Abstract Background" 
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.05] scale-105 z-0 pointer-events-none mix-blend-multiply" 
-        />
+      <section id="contact-hero" className="scroll-mt-24 relative w-full overflow-hidden min-h-[46vh] flex items-center justify-center">
+        {/* Clean Institutional 'Light Wash' Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#f0fdfa] via-[#f8fafc] to-[#eff6ff]" />
 
-        <div className="relative z-20 max-w-6xl mx-auto px-4 pt-20 pb-10 md:pb-12 flex flex-col items-center justify-center text-center">
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* Abstract Image Hero */}
+          <img 
+            src={resolveAssetSrc(abstractHeroBg)} 
+            alt="Abstract Background" 
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.05] scale-105" 
+          />
+          {/* Gradient Overlay for Text Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-[#f5f9ff]" />
+        </div>
+
+        <div className="smru-container relative z-20 pt-8 md:pt-16 pb-6 md:pb-12 flex flex-col items-center justify-center text-center">
           <h1
-            className="text-[clamp(3.1rem,9.5vw,9.1rem)] font-black font-outfit uppercase leading-[0.85] tracking-tighter text-[#0d315c] flex flex-col items-center"
+            className="smru-h1 text-[#0d315c] flex flex-col items-center"
             data-reveal="fade-up"
           >
             Contact 
-            <span className="text-[#019e6e] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
+            <span className="text-[#25b895] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
               St.Mary's University
             </span>
           </h1>
           <div className="mt-4 h-1.5 w-20 cut-corner-badge bg-[#ffaf3a] mx-auto" data-reveal="fade-up" style={{ "--delay": "0.1s" }} />
           <p
-            className="mt-6 max-w-4xl text-[#0f1736] text-[clamp(0.95rem,1.45vw,1.5rem)] leading-[1.35] font-semibold"
+            className="mt-7 max-w-4xl text-[#0f1736] text-[clamp(0.95rem,1.45vw,1.55rem)] leading-[1.35] font-semibold"
             data-reveal="fade-up"
             style={{ "--delay": "0.08s" }}
           >
@@ -209,7 +216,13 @@ const Contact = () => {
                     <FaMapMarkerAlt className="mt-1 text-[#019e6e]" />
                     <div>
                       <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Corporate Office</p>
-                      <address className="text-[14px] font-bold text-[#0d315c] not-italic leading-relaxed">
+                      <a
+                        href={`tel:${SITE_CONTACT.corporateOfficePhone.replace(/\s+/g, '')}`}
+                        className="mt-1 block text-[15px] font-black text-[#0d315c] hover:text-[#019e6e] transition-colors"
+                      >
+                        {SITE_CONTACT.corporateOfficePhone}
+                      </a>
+                      <address className="mt-1 text-[14px] font-bold text-[#0d315c] not-italic leading-relaxed">
                         {SITE_CONTACT.corporateOfficeAddress}
                       </address>
                       <p className="mt-1 text-[12px] font-semibold text-slate-500">
@@ -236,7 +249,15 @@ const Contact = () => {
                     <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain mt-1" alt="Safety" />
                     <div>
                       <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Campus Safety</p>
-                      <p className="text-[14px] font-bold text-[#0d315c]">24/7 Security: {SITE_CONTACT.secondaryPhone}</p>
+                      <p className="text-[14px] font-bold text-[#0d315c]">
+                        24/7 Security:{" "}
+                        <a
+                          href={`tel:${SITE_CONTACT.corporateOfficePhone.replace(/\s+/g, '')}`}
+                          className="hover:text-[#019e6e] hover:underline"
+                        >
+                          {SITE_CONTACT.corporateOfficePhone}
+                        </a>
+                      </p>
                     </div>
                   </div>
                </div>

@@ -52,7 +52,7 @@ export const STATIC_PAGE_CONTENT: CmsPageContent[] = [
     sectionType: "contact",
     visibility: "public",
     status: "live",
-    content: "08065459645 | 9493321969 | reach@smru.edu.in | Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.",
+    content: "7331119432 | 9010455591/90 | reach@smru.edu.in | Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.",
     tags: ["contact", "footer"]
   },
   {

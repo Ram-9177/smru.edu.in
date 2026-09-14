@@ -29,7 +29,11 @@ const ApplyWidget = ({ formId = DEFAULT_FORM_ID }) => {
       if (registry[registryKey]) return;
 
       registry[registryKey] = true;
-      window.ctplTag(formId);
+      try {
+        window.ctplTag(formId);
+      } catch (err) {
+        console.warn("[ApplyWidget] Handled ctplTag init:", err);
+      }
     };
 
     // Script already loaded and ready

@@ -102,6 +102,13 @@ export function buildMetadata({
   const normalizedTitle = normalizeTitle(title, pathname);
   const normalizedDescription = formatMetaDescription(description);
   const ogImage = absoluteUrl(imagePath);
+  const ogImageExtension = new URL(ogImage).pathname.split(".").pop()?.toLowerCase();
+  const ogImageType =
+    ogImageExtension === "png"
+      ? "image/png"
+      : ogImageExtension === "jpg" || ogImageExtension === "jpeg"
+        ? "image/jpeg"
+        : "image/webp";
   const baseKeywords = [
     ...SITE_IDENTITY.alternateNames,
     UNIVERSITY_INFO.brandName,
@@ -109,14 +116,12 @@ export function buildMetadata({
     "university in Hyderabad",
     "admissions",
     "courses",
+    "programmes",
     "eligibility",
     "fees",
-    "placements",
     "health sciences",
     "law",
-    "pharmacy",
     "engineering",
-    "management",
     "rehabilitation",
     "emerging technologies",
   ];
@@ -141,7 +146,7 @@ export function buildMetadata({
           alt: UNIVERSITY_INFO.brandName,
           width: 1200,
           height: 630,
-          type: "image/jpeg",
+          type: ogImageType,
         },
       ],
     },

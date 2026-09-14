@@ -28,6 +28,8 @@ import {
   campusTourText,
 } from "../data/campus-tour";
 
+import { prefetchAndDecode, warmUpTourTextures } from "@/lib/campus-360/texture-cache";
+
 const Campus360Viewer = dynamic(() => import("@/components/Campus360Viewer"), {
   ssr: false,
 });
@@ -54,9 +56,18 @@ const UI_TEXT = {
     te: "సెయింట్ మేరీస్ యూనివర్సిటీ క్యాంపస్ టూర్",
   },
   introNext: {
-    en: "Entry Gate begins in 5 seconds",
-    hi: "प्रवेश द्वार 5 सेकंड में शुरू होगा",
-    te: "ప్రవేశ ద్వారం 5 సెకన్లలో ప్రారంభమవుతుంది",
+    en: "Loading Virtual Campus Tour...",
+    hi: "वर्चुअल कैंपस टूर लोड हो रहा है...",
+    te: "వర్చువల్ క్యాంపస్ టూర్ లోడ్ అవుతోంది...",
+  },
+  categories: {
+    all: { en: "All", hi: "सभी", te: "అన్నీ" },
+    overview: { en: "Campus", hi: "परिसर", te: "క్యాంపస్" },
+    academics: { en: "Academics", hi: "शैक्षणिक", te: "అకాడెమిక్స్" },
+    admissions: { en: "Admissions", hi: "प्रवेश", te: "అడ్మిషన్స్" },
+    facilities: { en: "Facilities", hi: "सुविधाएँ", te: "సదుపాయాలు" },
+    "student-life": { en: "Student Life", hi: "छात्र जीवन", te: "విద్యార్థి జీవితం" },
+    sports: { en: "Sports", hi: "खेल", te: "क్రీడలు" },
   },
   muteNarration: {
     en: "Mute narration",
@@ -100,6 +111,8 @@ function viewerPanorama(location: CampusTourLocation, language: CampusTourLangua
 
   return {
     src: location.panoramaSrc,
+    lowResSrc: location.lowResSrc,
+    thumb: location.thumbSrc,
     preview: location.previewSrc,
     alt: `${title} at St.Mary's University`,
     caption: title,
@@ -115,8 +128,6 @@ export default function Campus360() {
   const [isAutoRotating, setIsAutoRotating] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [hasLoadedQuery, setHasLoadedQuery] = useState(false);
-  const [introPending, setIntroPending] = useState(true);
-  const [showIntro, setShowIntro] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [audioState, setAudioState] = useState<"idle" | "playing" | "paused" | "blocked">("idle");
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -160,10 +171,8 @@ export default function Campus360() {
 
     if (location) {
       setSelectedLocation(location);
-      setIntroPending(false);
     } else {
       setSelectedLocation(CAMPUS_TOUR_LOCATIONS[0]);
-      setIntroPending(true);
     }
 
     if (requestedLanguage && CAMPUS_TOUR_LANGUAGES.some(({ code }) => code === requestedLanguage)) {
@@ -171,29 +180,6 @@ export default function Campus360() {
     }
     setHasLoadedQuery(true);
   }, []);
-
-  useEffect(() => {
-    if (!introPending) return;
-
-    let frameId = 0;
-    const startIntroAfterSiteSplash = () => {
-      if (document.getElementById("site-preloader")) {
-        frameId = window.requestAnimationFrame(startIntroAfterSiteSplash);
-        return;
-      }
-      setIntroPending(false);
-      setShowIntro(true);
-    };
-
-    frameId = window.requestAnimationFrame(startIntroAfterSiteSplash);
-    return () => window.cancelAnimationFrame(frameId);
-  }, [introPending]);
-
-  useEffect(() => {
-    if (!showIntro) return;
-    const introTimer = window.setTimeout(() => setShowIntro(false), 5000);
-    return () => window.clearTimeout(introTimer);
-  }, [showIntro]);
 
   useEffect(() => {
     const handleFullscreenChange = () => setIsFullscreen(Boolean(document.fullscreenElement));
@@ -213,6 +199,11 @@ export default function Campus360() {
     if (!hasLoadedQuery) return;
     void playNarration(selectedLocation, language);
   }, [hasLoadedQuery, language, playNarration, selectedLocation]);
+
+  // Eagerly pre-warm all 22 locations (low-res spheres first, then high-res textures)
+  useEffect(() => {
+    return warmUpTourTextures(CAMPUS_TOUR_LOCATIONS);
+  }, []);
 
   const selectedTitle = campusTourText(selectedLocation.title, language);
   const panorama = viewerPanorama(selectedLocation, language);
@@ -277,7 +268,7 @@ export default function Campus360() {
       className="fixed inset-0 z-[9999] flex h-[100dvh] w-screen flex-col overflow-hidden bg-[#000814] font-outfit"
       data-testid="campus-360-tour"
       data-current-location={selectedLocation.slug}
-      data-intro-state={showIntro ? "visible" : introPending ? "pending" : "complete"}
+      data-intro-state="complete"
       data-audio-language={language}
       data-audio-src={audioSrc}
       data-audio-state={!audioSrc ? "unavailable" : isMuted ? "muted" : audioState}
@@ -359,6 +350,17 @@ export default function Campus360() {
               Deshmukhi Campus
             </p>
           </div>
+          {selectedLocation.slug === "hostel-block" && (
+            <div className="pointer-events-auto mt-4">
+              <Link
+                href="/explore/hostel-360"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#10bb82]/40 bg-[#019e6e] px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white shadow-[0_8px_20px_rgba(1,158,110,0.4)] transition hover:bg-[#10bb82]"
+              >
+                <span className="h-2 w-2 animate-ping rounded-full bg-white" />
+                Explore Interior 360° (Rooms, Vanity &amp; Washrooms) →
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 
@@ -456,6 +458,18 @@ export default function Campus360() {
                   type="button"
                   data-location-slug={location.slug}
                   onClick={() => selectLocation(location)}
+                  onPointerEnter={() => {
+                    if (location.lowResSrc) void prefetchAndDecode(location.lowResSrc);
+                    if (location.panoramaSrc) void prefetchAndDecode(location.panoramaSrc);
+                  }}
+                  onFocus={() => {
+                    if (location.lowResSrc) void prefetchAndDecode(location.lowResSrc);
+                    if (location.panoramaSrc) void prefetchAndDecode(location.panoramaSrc);
+                  }}
+                  onTouchStart={() => {
+                    if (location.lowResSrc) void prefetchAndDecode(location.lowResSrc);
+                    if (location.panoramaSrc) void prefetchAndDecode(location.panoramaSrc);
+                  }}
                   aria-pressed={active}
                   className={`group relative h-[78px] w-[126px] shrink-0 snap-start overflow-hidden rounded-lg text-left transition md:h-[105px] md:w-[175px] md:rounded-xl ${
                     active
@@ -464,7 +478,7 @@ export default function Campus360() {
                   }`}
                 >
                   <Image
-                    src={location.previewSrc}
+                    src={location.thumbSrc || location.previewSrc}
                     alt={title}
                     fill
                     priority={index < 4}
@@ -513,51 +527,8 @@ export default function Campus360() {
           display: none !important;
         }
         @keyframes campus-intro-progress {
-          from {
-            transform: scaleX(0);
-          }
-          to {
-            transform: scaleX(1);
-          }
         }
       `}</style>
-
-      {introPending ? <div className="absolute inset-0 z-[59] bg-[#000814]" /> : null}
-
-      {showIntro ? (
-        <section
-          className="absolute inset-0 z-[60] overflow-hidden bg-[#000814]"
-          data-testid="campus-tour-intro"
-          aria-label={campusTourText(CAMPUS_TOUR_INTRO_LOCATION.title, language)}
-        >
-          <Image
-            src={CAMPUS_TOUR_INTRO_LOCATION.panoramaSrc}
-            alt={campusTourText(CAMPUS_TOUR_INTRO_LOCATION.title, language)}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/30" />
-          <div className="absolute inset-x-0 bottom-0 p-6 text-white md:p-10">
-            <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#7ff0c8]">
-              {UI_TEXT.introLabel[language]}
-            </p>
-            <h1 className="mt-2 max-w-3xl text-3xl font-black uppercase leading-none md:text-6xl">
-              {campusTourText(CAMPUS_TOUR_INTRO_LOCATION.title, language)}
-            </h1>
-            <p className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-white/70">
-              {UI_TEXT.introNext[language]}
-            </p>
-            <div className="mt-5 h-1 max-w-xl overflow-hidden rounded-full bg-white/20">
-              <div
-                className="h-full origin-left bg-[#019e6e]"
-                style={{ animation: "campus-intro-progress 5s linear forwards" }}
-              />
-            </div>
-          </div>
-        </section>
-      ) : null}
     </main>
   );
 }

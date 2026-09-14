@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { FaUserShield, FaBalanceScale, FaEnvelopeOpenText } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
+import GrievanceTabs from "./GrievanceTabs";
 
 export const metadata: Metadata = {
   title: "Grievance Redressal Cell | St.Mary's University",
@@ -74,6 +75,8 @@ export default function GrievanceRedressalPage() {
                 </a>
               </div>
             </div>
+
+            <GrievanceTabs />
 
             <div className="p-8 border border-[#d8e8fb] bg-white cut-corner-panel shadow-sm">
               <h3 className="text-lg font-black text-[#0d315c] mb-4 border-b border-[#eef4fb] pb-4">Scope of Grievances</h3>

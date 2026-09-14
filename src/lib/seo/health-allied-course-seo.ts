@@ -60,6 +60,7 @@ const COURSE_TYPO_SUPPORT: Record<string, string[]> = {
   "allied-health-sciences/bmlt": ["bmlt cource hyd", "mlt cource hyderabad", "medical lab tecnology", "lab tecnician course"],
   "allied-health-sciences/bsc-anaesthesia-ot": ["anesthesia ot tecnology", "anaesthesia ot cource", "operation theater technology", "ot tecnician course"],
   "allied-health-sciences/bcvt": ["cardio vascular tecnology", "cardiac tech cource", "cv t course hyd", "bcvt admision"],
+  "allied-health-sciences/bmit": ["medical imaging tecnology", "bmit cource hyd", "radiology cource hyderabad", "bmit admision"],
   "allied-health-sciences/betcms": ["emergency medical tecnology", "emt cource hyd", "emergency care cource", "betcms admision"],
   "allied-health-sciences/b-optometry": ["optomitry course", "optometry cource hyd", "eye care cource", "optometry admision"],
   "allied-health-sciences/brt": ["radio therapy tecnology", "radiotherapy tech hyd", "brtt cource", "radiotherapy admision"],

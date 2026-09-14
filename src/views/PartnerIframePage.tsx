@@ -8,6 +8,7 @@ import { useIframeAutoHeight } from "@/hooks/useIframeAutoHeight";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/Logo.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
+import { EDU_PARTNERS } from "@/data/schools";
 
 export default function PartnerIframePage({ slug }: { slug: string }) {
   const { state } = useDeveloperCms();
@@ -17,11 +18,10 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
   const externalFallbackBySlug: Record<string, string> = {
     bytexl: "https://bytexl.com/smru.html",
     niat: "https://www.niatindia.com/external-universities/st.-mary-s-university",
-    iiat: "https://iiath.com/university/smru/",
+    skilgen: "https://skilgentech.com",
     bb: "https://smru.theblackbucks.com/",
     nst: "https://university.newtonschool.co/v1/nst-st-marys-hyd",
     emversity: "https://emversity.com/university-partners/st-marys-website-page",
-    ist: "/partners/ist/index.html",
     qtst: "/partners/qtst/index.html",
     edinbox: "/partners/edinbox/index.html",
     edridge: "https://edridge.in/edridge-st-mary-s-university/",
@@ -30,7 +30,30 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
 
   const partner = useMemo(() => {
     const key = (slug || "").toLowerCase();
-    return (state.partners || []).find((item) => (item.slug || "").toLowerCase() === key) || null;
+    const cmsPartner = (state.partners || []).find((item) => (item.slug || "").toLowerCase() === key);
+    if (cmsPartner) return cmsPartner;
+    const eduPartner = Object.values(EDU_PARTNERS || {}).find((item: any) => {
+      const s = String(item.landingUrl || "").replace(/^\/+/, "").replace(/^partner\//, "").replace(/\/$/, "").toLowerCase();
+      return s === key || (item.code || "").toLowerCase() === key;
+    });
+    if (eduPartner) {
+      return {
+        id: `partner-${(eduPartner.code || "unknown").toLowerCase()}`,
+        slug: key,
+        name: eduPartner.name,
+        redirectUrl: String(eduPartner.landingUrl || ""),
+        iframeUrl: (eduPartner as any).iframeUrl || externalFallbackBySlug[key] || "",
+        embedCode: (eduPartner as any).embedCode || "",
+        logo: (eduPartner as any).logo || "",
+        visibility: "public" as const,
+        status: "live" as const,
+        partnerType: "edutech" as const,
+        shortDescription: "Partner-linked education program pathway",
+        website: "",
+        openInNewTab: false,
+      };
+    }
+    return null;
   }, [slug, state.partners]);
 
   const activeSlug = (partner?.slug || slug || "").toLowerCase();

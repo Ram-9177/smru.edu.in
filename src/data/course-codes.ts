@@ -59,18 +59,18 @@ const sourceRows = `
 40	05	Engineering & Emerging Technologies	A	Rehabilitation Engineering	03	UG	03800	B.Tech RE (P&O/AT)	St.Mary's University	05A0303800		
 41	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	03900	B.Tech CSE(SM)	St.Mary's University	05B0303900	4	8
 42	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	03903	B.Tech CSE(QT)	QTST	05B0303903	4	8
-43	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	03906	B.Tech CSE(II)	IIAT	05B0303906	4	8
+43	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	03906	B.Tech CSE(II)	St.Mary's University	05B0303906	4	8
 44	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	03907	B.Tech CSE(VE)	Veloces	05B0303907	4	8
 45	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04000	B.Tech CSE (AI & ML)(SM)	St.Mary's University	05B0304000	4	8
 46	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04002	B.Tech CSE (AI & ML)(NI)	NIAT	05B0304002	4	8
 47	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04004	B.Tech CSE (AI & ML)(IS)	IST	05B0304004	4	8
-48	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04006	B.Tech CSE (AI & ML)(II)	IIAT	05B0304006	4	8
+48	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04006	B.Tech CSE (AI & ML)(II)	St.Mary's University	05B0304006	4	8
 49	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04007	B.Tech CSE (AI & ML)(VE)	Veloces	05B0304007	4	8
 50	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04008	B.Tech CSE (AI & ML)(BX)	ByteXL	05B0304008	4	8
 51	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04100	B.Tech CSE (AI & DS)(SM)	St.Mary's University	05B0304100	4	8
 52	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04103	B.Tech CSE (AI & DS)(QT)	QTST	05B0304103	4	8
 53	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04105	B.Tech CSE (AI & DS)(BB)	BB	05B0304105	4	8
-54	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04106	B.Tech CSE (AI & DS)(II)	IIAT	05B0304106	4	8
+54	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	04106	B.Tech CSE (AI & DS)(II)	St.Mary's University	05B0304106	4	8
 55	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	08	Ph.D.	04200	Ph.D. CSE	St.Mary's University	05B0804200	3/4	
 56	05	Engineering & Emerging Technologies	C	Sciences & Humanities	08	Ph.D.	04300	Ph.D. Mathematics	St.Mary's University	05C0804300	3/4	
 57	05	Engineering & Emerging Technologies	C	Sciences & Humanities	08	Ph.D.	04400	Ph.D.  Physics	St.Mary's University	05C0804400	3/4	
@@ -98,9 +98,9 @@ const sourceRows = `
 79	03	Psychology	C	Applied Psychology & Behavioral Health	06	PG	06600	Master of Medical and Social Work (M.MSW)	St.Mary's University	03C0606600	2	4
 80	03	Psychology	C	Applied Psychology & Behavioral Health	06	PG	06700	Master of Psychiatric Social Work (M.PSW)	St.Mary's University	03C0606700	2	4
 81	06	Law	A	Law	04	IPG	06800	B.Sc. (Forensic) LL.B. (Hons.)	St.Mary's University	06A0406800	5	10
-82	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	06906	B.Tech CSE(CS)	IIAT	05B0306906	4	8
-83	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	07006	B.Tech CSE(Fintech & AI)	IIAT	05B0307006	4	8
-84	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	07106	B.Tech CSE (Biomedical Engineering)	IIAT	05B0307106	4	8
+82	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	06906	B.Tech CSE(CS)	St.Mary's University	05B0306906	4	8
+83	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	07006	B.Tech CSE(Fintech & AI)	St.Mary's University	05B0307006	4	8
+84	05	Engineering & Emerging Technologies	B	Computer Science & Engineering	03	UG	07106	B.Tech CSE (Biomedical Engineering)	St.Mary's University	05B0307106	4	8
 85	01	Rehabilitation Sciences	A	Audiology & Speech-Language Pathology	08	Ph.D.	07200	Ph.D. Speech & Hearing	St.Mary's University	01A0807200	3/4	
 86	06	Law	A	Law	06	PG	07300	LLM	St.Mary's University	06A0607300	1	2
 87	06	Law	A	Law	08	Ph.D.	07400	Ph.D. in Law	St.Mary's University	06A0807400	3/4	

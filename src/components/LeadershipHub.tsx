@@ -24,7 +24,7 @@ const leaders = [
 
 export default function LeadershipHub() {
   return (
-    <main className="font-['Poppins']">
+    <main className="font-sans">
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-4 lg:px-6 pt-10 lg:pt-14">
         <h1 className="text-3xl sm:text-4xl font-black font-outfit text-[#0f6a5a]">

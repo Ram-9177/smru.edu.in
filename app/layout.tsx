@@ -1,16 +1,36 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Cinzel, Inter, Outfit } from "next/font/google";
 import "../src/styles/globals.css";
 import AppShell from "../src/components/AppShell";
-import Preloader from "../src/components/Preloader";
 import { absoluteUrl } from "../src/lib/metadata";
 import { UNIVERSITY_INFO } from "../src/lib/shared/university";
 import { SITE_IDENTITY } from "../src/lib/seo/site";
+import { serializeJsonLd } from "../src/lib/seo/json-ld";
 
 import { buildUniversitySchema, buildWebSiteSchema } from "../src/lib/seo/schema";
 
 const universitySchema = buildUniversitySchema();
 const websiteSchema = buildWebSiteSchema();
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cinzel",
+  weight: ["700", "900"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_IDENTITY.canonicalBaseUrl),
@@ -82,34 +102,107 @@ export const viewport: Viewport = {
   themeColor: "#0d315c",
 };
 
+const speculationRules = {
+  prefetch: [
+    {
+      source: "document",
+      where: {
+        and: [
+          { href_matches: "/*" },
+          { not: { href_matches: "https://apply.smru.edu.in/*" } },
+          { not: { href_matches: "/developer/*" } },
+          { not: { href_matches: "https://wa.me/*" } },
+          { not: { href_matches: "tel:*" } },
+          { not: { href_matches: "mailto:*" } },
+        ],
+      },
+      eagerness: "eager",
+    },
+  ],
+  prerender: [
+    {
+      source: "list",
+      urls: [
+        "/explore/",
+        "/campus-360/",
+        "/schools/",
+        "/admissions/",
+        "/about/",
+        "/contact/",
+        "/explore/hostel-360/",
+      ],
+      eagerness: "moderate",
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" className={`${inter.variable} ${outfit.variable} ${cinzel.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(speculationRules) }}
         />
       </head>
       <body>
         <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18293956146"
+          strategy="afterInteractive"
+        />
+        <Script id="google-gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18293956146');
+          `}
+        </Script>
+        {/* Meta Pixel Code */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1582040940369832');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1582040940369832&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+        {/* End Meta Pixel Code */}
+        <Script
           id="smru-university-schema"
           type="application/ld+json"
           strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(universitySchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(universitySchema) }}
         />
         <Script
           id="smru-website-schema"
           type="application/ld+json"
           strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteSchema) }}
         />
-
-        <Preloader />
         <AppShell>{children}</AppShell>
       </body>
     </html>
   );
 }
+

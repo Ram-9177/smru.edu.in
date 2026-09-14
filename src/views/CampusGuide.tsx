@@ -437,24 +437,15 @@ export default function CampusGuide() {
   useEffect(() => {
     if (!guide || typeof window === "undefined") return;
 
-    // 1. Preload the primary overview panorama (both preview and high-res) immediately
+    // 1. Preload only the primary overview low-res panorama and thumbnail
     const overviewPoint = guide.points.find(p => p.id === 'point-overview');
     if (overviewPoint?.panorama360?.src) {
-      const overviewPreview = new Image();
-      overviewPreview.src = overviewPoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg');
+      const overviewThumb = new Image();
+      overviewThumb.src = overviewPoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/thumb.webp');
       
-      const overviewFull = new Image();
-      overviewFull.src = overviewPoint.panorama360.src;
+      const overviewLow = new Image();
+      overviewLow.src = overviewPoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/panorama-low.webp');
     }
-
-    // 2. Preload only the low-res preview images for all other points in the background
-    guide.points.forEach((point) => {
-      if (point.id !== 'point-overview' && point.panorama360?.src) {
-        const previewSrc = point.panorama360.src.replace('/panorama.jpg', '/preview.jpg');
-        const previewImg = new Image();
-        previewImg.src = previewSrc;
-      }
-    });
   }, [guide]);
 
   useEffect(() => {
@@ -774,9 +765,9 @@ export default function CampusGuide() {
                 <FaRegCompass className="animate-spin text-xs" style={{ animationDuration: '8s' }} /> Interactive Guide 2.0
               </span>
               
-              <h1 className="text-4xl font-black text-[#0d315c] sm:text-7xl tracking-tight leading-none uppercase">
+              <h2 className="text-4xl font-black text-[#0d315c] sm:text-7xl tracking-tight leading-none uppercase">
                 {localized(UI_STRINGS.explore, language).split(" ")[0]} <span className="text-[#019e6e]">St. Mary&apos;s</span>
-              </h1>
+              </h2>
               <h2 className="text-3xl font-black text-[#0d315c] sm:text-5xl mt-1 tracking-tight leading-none uppercase">
                 University
               </h2>
@@ -1037,7 +1028,7 @@ export default function CampusGuide() {
                         <PointImage 
                           src={
                             activePoint.panorama360?.src
-                              ? activePoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg')
+                              ? activePoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/preview.webp')
                               : activePoint.image
                           } 
                           title={activeTitle} 
@@ -1355,7 +1346,7 @@ export default function CampusGuide() {
                   <PointImage 
                     src={
                       activePoint.panorama360?.src
-                        ? activePoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg')
+                        ? activePoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/thumb.webp')
                         : activePoint.image
                     } 
                     title={activeTitle} 
@@ -1410,7 +1401,7 @@ export default function CampusGuide() {
                       <PointImage 
                         src={
                           activePoint.panorama360?.src
-                            ? activePoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg')
+                            ? activePoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/preview.webp')
                             : activePoint.image
                         } 
                         title={activeTitle} 
@@ -1552,7 +1543,7 @@ export default function CampusGuide() {
               <div className="flex flex-col gap-1 p-1 pr-0">
                 {[
                   { icon: <FaWhatsapp />, label: "WHATSAPP", color: "#d1f9d6", text: "#1b5e20", href: "https://wa.me/919493321969" },
-                  { icon: <FaPhoneAlt />, label: "CALL US", color: "#fff9c4", text: "#827717", href: "tel:08065459645" },
+                  { icon: <FaPhoneAlt />, label: "CALL US", color: "#fff9c4", text: "#827717", href: "tel:7331119432" },
                   { icon: <FaPaperPlane />, label: "APPLY", color: "#e3f2fd", text: "#0d47a1", href: "https://apply.smru.edu.in" },
                   { icon: <FaQuestionCircle />, label: "ENQUIRY", color: "#ffe0b2", text: "#e65100", href: "https://smru.edu.in/contact" },
                   { icon: <FaFileDownload />, label: "BROCHURE", color: "#ffcdd2", text: "#b71c1c", href: "#" },

@@ -14,12 +14,10 @@ import Schools from "@/views/Schools";
 import ThankYou from "@/views/ThankYou";
 import Partner from "@/views/Partner";
 import Blackbucks from "@/views/Blackbucks";
-import UniversityPortal from "@/views/UniversityPortal";
 import Niat from "@/views/Niat";
 import QtstStmarys from "@/views/QtstStmarys";
 import NiatUpskillingView from "@/views/NiatUpskilling";
 import EdinboxForensicLandingV2 from "@/views/EdinboxForensicLandingV2";
-import PartnerIframePage from "@/views/PartnerIframePage";
 import ApprovalsRecognitions from "@/views/ApprovalsRecognitions";
 
 export type StaticRouteKey =
@@ -36,12 +34,10 @@ export type StaticRouteKey =
   | "thankYou"
   | "partner"
   | "bb"
-  | "iiat"
   | "niat"
   | "qtst"
   | "niatUpskilling"
   | "edinboxForensic"
-  | "istLanding"
   | "approvalsRecognitions";
 
 type StaticRouteConfig = {
@@ -204,14 +200,6 @@ export const STATIC_ROUTE_REGISTRY: Record<StaticRouteKey, StaticRouteConfig> = 
     }),
     View: Blackbucks,
   },
-  iiat: {
-    metadata: buildMetadata({
-      title: "IIAT Portal",
-      description: "Access the Indian Institute of Advanced Technology partner route published on the St.Mary's University website.",
-      pathname: "/iiat",
-    }),
-    View: UniversityPortal,
-  },
   niat: {
     metadata: buildMetadata({
       title: "NIAT",
@@ -243,14 +231,6 @@ export const STATIC_ROUTE_REGISTRY: Record<StaticRouteKey, StaticRouteConfig> = 
       pathname: "/partner/edinbox",
     }),
     View: EdinboxForensicLandingV2,
-  },
-  istLanding: {
-    metadata: buildMetadata({
-      title: "B.Tech Admissions 2026 | St.Mary's University",
-      description: "Apply for industry-integrated B.Tech programs in AI, Data Science, and Cyber Security. Earn a UGC-recognized degree from St.Mary's University with global career readiness.",
-      pathname: "/partners/ist/index.html",
-    }),
-    View: () => <PartnerIframePage slug="ist" />,
   },
   approvalsRecognitions: {
     metadata: buildMetadata({

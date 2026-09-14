@@ -5,7 +5,7 @@ import {
   getCanonicalProgramKey,
   safeSlug,
 } from "@/lib/shared/program-utils";
-import { MANUAL_VERIFICATION_LABEL, SEO_UPDATE_NOTE } from "@/lib/shared/university";
+import { MANUAL_VERIFICATION_LABEL, SEO_UPDATE_NOTE, UNIVERSITY_INFO } from "@/lib/shared/university";
 import {
   buildDepartmentComparisonFaqs,
   buildProgramComparisonFaqs,
@@ -61,6 +61,18 @@ const programDescription = (department: any, program: any, reason = "related pro
   const duration = program?.duration ? ` Duration: ${program.duration}.` : "";
   const eligibility = program?.eligibility ? ` Eligibility: ${program.eligibility}.` : "";
   return `${level}${reason} under ${department?.name || "the department"}.${duration}${eligibility}`.replace(/\s+/g, " ").trim();
+};
+
+const textValue = (value: unknown) => (typeof value === "string" ? value.trim() : "");
+
+const curriculumSummary = (curriculum: unknown) => {
+  if (!Array.isArray(curriculum)) return "";
+  const topics = curriculum.flatMap((item: any) => {
+    if (typeof item === "string") return [item];
+    return [item?.year, ...(Array.isArray(item?.semesters) ? item.semesters : [])];
+  });
+  const visibleTopics = topics.map(textValue).filter(Boolean).slice(0, 6);
+  return visibleTopics.length ? `${visibleTopics.join("; ")}${topics.length > visibleTopics.length ? "; and other approved modules." : "."}` : "";
 };
 
 export const resolveSchool = (schoolSlug: string) => findBySlugOrName(schools, schoolSlug) as any;
@@ -274,9 +286,27 @@ export const buildProgramAnswers = (school: any, department: any, program: any):
     departmentSlug: department?.slug,
     programSlug: program?.slug,
   });
+  const programName = cleanProgramName(program?.name || "this program");
+  const practicalAnswer =
+    textValue(program?.labs) ||
+    textValue(program?.fieldExposure) ||
+    healthAlliedSeo?.experience ||
+    "Practical exposure depends on the approved programme structure; confirm the current laboratory, clinical, internship, or project requirements through official admissions guidance.";
+  const careerAnswer =
+    Array.isArray(program?.careerOpportunities) && program.careerOpportunities.length
+      ? `Listed pathways include ${program.careerOpportunities.filter(Boolean).join("; ")}. Professional requirements and current opportunities should be confirmed before application.`
+      : textValue(program?.outcomes) ||
+        "Career and higher-study pathways depend on programme level, eligibility, professional requirements, and applicable regulations.";
+  const curriculumAnswer =
+    curriculumSummary(program?.curriculum) ||
+    textValue(program?.overview) ||
+    "Review the approved curriculum and semester structure through the official university admissions route.";
+  const locationAnswer = program?.campus
+    ? textValue(program.campus)
+    : `${programName} is listed under ${department?.name || "the academic department"} at ${UNIVERSITY_INFO.city}, ${UNIVERSITY_INFO.state}. Confirm the current teaching or clinical location with admissions.`;
   return [
     {
-      question: `What is ${cleanProgramName(program?.name || "this program")}?`,
+      question: `What is ${programName}?`,
       answer: program?.overview || healthAlliedSeo?.directAnswer || SEO_UPDATE_NOTE,
     },
     {
@@ -299,6 +329,34 @@ export const buildProgramAnswers = (school: any, department: any, program: any):
       answer: recommendations.length
         ? `Recommended related course pages include ${recommendations.map((item) => item.label).join("; ")}. Compare eligibility, duration, practical exposure, admission route, and official fee guidance before applying.`
         : "Use the parent department and school links to compare related programmes, eligibility, duration, and admissions guidance.",
+    },
+    {
+      question: "What are the fees for this program?",
+      answer: "Programme-wise fees are confirmed through official admissions counselling and university communication. Check the official fee route before paying.",
+    },
+    {
+      question: "Are scholarships available for this program?",
+      answer: "Scholarship availability, eligibility, and current terms are confirmed through the official admissions route and applicable university policy.",
+    },
+    {
+      question: "What does the curriculum cover?",
+      answer: curriculumAnswer,
+    },
+    {
+      question: "What practical experience is included?",
+      answer: practicalAnswer,
+    },
+    {
+      question: "What career pathways can this program support?",
+      answer: careerAnswer,
+    },
+    {
+      question: "Where is this program offered?",
+      answer: locationAnswer,
+    },
+    {
+      question: "What recognition or approval applies to this program?",
+      answer: "University-level recognition is published on the official approvals page. Programme-level permissions, where required, must be verified through current university notifications or relevant statutory documents.",
     },
   ];
 };
@@ -337,6 +395,26 @@ export const buildProgramFaqs = (school: any, department: any, program: any) => 
     {
       question: `Is an entrance exam currently announced for ${cleanProgramName(program?.name || "this program")}?`,
       answer: "No university entrance exam is currently announced. Future requirements will be published through an official university notice.",
+    },
+    {
+      question: `What are the fees and scholarship options for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: "Programme-wise fees, scholarship availability, eligibility, and current terms should be confirmed through official admissions counselling and university policy.",
+    },
+    {
+      question: `What curriculum and practical training does ${cleanProgramName(program?.name || "this program")} include?`,
+      answer:
+        curriculumSummary(program?.curriculum) ||
+        textValue(program?.labs) ||
+        textValue(program?.fieldExposure) ||
+        "Review the approved curriculum and confirm current practical, clinical, internship, or project requirements through official admissions guidance.",
+    },
+    {
+      question: `What career pathways can ${cleanProgramName(program?.name || "this program")} support?`,
+      answer:
+        Array.isArray(program?.careerOpportunities) && program.careerOpportunities.length
+          ? `Listed pathways include ${program.careerOpportunities.filter(Boolean).join("; ")}. Confirm professional requirements and current opportunities before application.`
+          : textValue(program?.outcomes) ||
+            "Career and higher-study pathways depend on programme level, eligibility, professional requirements, and applicable regulations.",
     },
     ...healthAlliedFaqs,
     ...buildProgramComparisonFaqs(school, department, program),

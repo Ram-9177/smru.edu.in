@@ -16,7 +16,9 @@ export type CampusTourLocation = {
   category: CampusTourCategory;
   title: LocalizedCampusText;
   panoramaSrc: string;
+  lowResSrc?: string;
   previewSrc: string;
+  thumbSrc: string;
   projection: "equirectangular" | "flat";
 };
 
@@ -52,8 +54,10 @@ const location = (
   slug,
   category,
   title,
-  panoramaSrc: `/campus-360/${slug}/panorama.jpg`,
-  previewSrc: `/campus-360/${slug}/preview.jpg`,
+  panoramaSrc: `/campus-360/${slug}/panorama.webp`,
+  lowResSrc: `/campus-360/${slug}/panorama-low.webp`,
+  previewSrc: `/campus-360/${slug}/preview.webp`,
+  thumbSrc: `/campus-360/${slug}/thumb.webp`,
   projection,
 });
 

@@ -8,4 +8,11 @@ export const metadata: Metadata = buildMetadata({
   pathname: "/niat-upskilling",
 });
 
-export default NiatUpskillingView;
+export default function NiatUpskillingPage() {
+  return (
+    <>
+      <h1 className="sr-only">NIAT Upskilling | St.Mary&apos;s University</h1>
+      <NiatUpskillingView />
+    </>
+  );
+}

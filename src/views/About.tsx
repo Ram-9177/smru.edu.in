@@ -501,7 +501,7 @@ export default function About() {
               { icon: <FaTrophy aria-hidden />, title: "Excellence", desc: "Academic quality, clinical readiness, and continuous improvement." },
               { icon: <FaHeart aria-hidden />, title: "Compassion", desc: "Patient-first thinking and dignity in care." },
               { icon: <FaLightbulb aria-hidden />, title: "Innovation", desc: "Assistive technology, rehabilitation research, and modern learning methods." },
-              { icon: <img src="/assets/Stmarys-Logo.webp" className="w-6 h-6 object-contain" />, title: "Integrity", desc: "Transparent governance and ethical institutional practice." },
+              { icon: <img src="/assets/Stmarys-Logo.webp" alt="St.Mary's University Logo" className="w-6 h-6 object-contain" />, title: "Integrity", desc: "Transparent governance and ethical institutional practice." },
             ]}
           />
         </div>

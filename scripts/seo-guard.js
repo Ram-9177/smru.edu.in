@@ -100,6 +100,42 @@ const checks = [
     },
   },
   {
+    name: "Programme pages expose workbook AEO intent blocks",
+    pass: () => {
+      const academic = read("src/lib/seo/academic.ts");
+      return [
+        "What are the fees for this program?",
+        "Are scholarships available for this program?",
+        "What does the curriculum cover?",
+        "What practical experience is included?",
+        "What career pathways can this program support?",
+        "Where is this program offered?",
+        "What recognition or approval applies to this program?",
+      ].every((question) => academic.includes(question));
+    },
+  },
+  {
+    name: "AI crawler access and llms references are configured",
+    pass: () => {
+      const robots = read("app/robots.txt/route.ts");
+      const llms = read("public/llms.txt");
+      return (
+        robots.includes("User-agent: OAI-SearchBot") &&
+        robots.includes("User-agent: bingbot") &&
+        llms.includes("Canonical academic URL pattern:") &&
+        llms.includes("Source priority:")
+      );
+    },
+  },
+  {
+    name: "Internal and temporary routes are excluded from indexing",
+    pass: () => {
+      const search = read("app/search/page.tsx");
+      const update = read("app/under-update/layout.tsx");
+      return search.includes('robots: "noindex,follow"') && update.includes('robots: "noindex,follow"');
+    },
+  },
+  {
     name: "All course pages include typo keyword support",
     pass: () => {
       const file = read("src/lib/seo/search-intent.ts");
@@ -117,11 +153,14 @@ const checks = [
       const healthSeo = read("src/lib/seo/health-allied-course-seo.ts");
       const canonicalSlug = (slug) => {
         const s = slug.toLowerCase();
-        if (s === "bpt-emversity") return "bpt";
-        if (s === "bot-emversity") return "bot";
-        if (s === "bmls") return "bmlt";
+        if (s === "bpt-emversity" || s === "bpt-edridge") return "bpt";
+        if (s === "bot-emversity" || s === "bot-edridge") return "bot";
+        if (s === "mpt-alt-code") return "mpt";
+        if (s === "bmls" || s === "bmlt-edridge") return "bmlt";
         if (s === "bemt") return "betcms";
-        if (s === "baott") return "bsc-anaesthesia-ot";
+        if (s === "baott" || s === "bsc-anaesthesia-ot-edridge") return "bsc-anaesthesia-ot";
+        if (s === "bcvt-edridge") return "bcvt";
+        if (s === "bmrit-edridge") return "bmit";
         if (s === "brtt") return "brt";
         return s;
       };
@@ -154,7 +193,7 @@ const checks = [
           /\{\s*schoolSlug:\s*"health-allied-health-sciences",\s*departmentSlug:\s*"([^"]+)"[\s\S]*?slug:\s*"([^"]+)"/g
         ),
       ].map((match) => `${match[1]}/${match[2]}`);
-      const seedOnly = ["allied-health-sciences/bmit", "allied-health-sciences/bsc-him", "allied-health-sciences/bsc-public-health"];
+      const seedOnly = ["allied-health-sciences/bsc-him", "allied-health-sciences/bsc-public-health"];
 
       return seedOnly.every((key) => schools.includes(`slug: "${key.split("/")[1]}"`) && !liveRoutes.includes(key));
     },
@@ -178,13 +217,17 @@ const checks = [
   {
     name: "Best university Hyderabad pillar page exists",
     pass: () => {
-      const file = read("app/guides/best-university-in-hyderabad/page.tsx");
+      const route = read("app/guides/best-university-in-hyderabad/page.tsx");
+      const guides = read("src/lib/seo/safe-guides.ts");
       return (
-        file.includes("Best University in Hyderabad") &&
-        file.includes("best university in Hyderabad") &&
-        file.includes("SEO, AEO, and GEO") &&
-        file.includes("InformationPage") &&
-        file.includes("does not claim")
+        route.includes('const slug = "best-university-in-hyderabad"') &&
+        route.includes("SAFE_GUIDE_PAGE_MAP.get(slug)") &&
+        route.includes("InformationPage") &&
+        guides.includes('slug: "best-university-in-hyderabad"') &&
+        guides.includes("Best University in Hyderabad") &&
+        guides.includes("best university in Hyderabad") &&
+        guides.includes("SEO, AEO, and GEO") &&
+        guides.includes("does not claim")
       );
     },
   },
@@ -208,16 +251,21 @@ const checks = [
     },
   },
   {
-    name: "Backlink/citation execution sheet exists",
-    pass: () => exists("SEO_BACKLINK_CITATION_EXECUTION_SHEET.md"),
+    name: "Master remediation control log exists",
+    pass: () =>
+      exists("REMEDIATION_SUMMARY.md") &&
+      read("REMEDIATION_SUMMARY.md").includes("Status date:") &&
+      read("REMEDIATION_SUMMARY.md").includes("Release Decision"),
   },
   {
-    name: "Phase status report exists",
-    pass: () => exists("SEO_HARDENING_PHASE_1_STATUS.md"),
-  },
-  {
-    name: "End-to-end execution master exists",
-    pass: () => exists("SEO_END_TO_END_EXECUTION_MASTER.md"),
+    name: "Repository keeps a single markdown source of truth",
+    pass: () => {
+      const files = require("fs")
+        .readdirSync(process.cwd(), { withFileTypes: true })
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+        .map((entry) => entry.name);
+      return files.length === 1 && files[0] === "REMEDIATION_SUMMARY.md";
+    },
   },
 ];
 

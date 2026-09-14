@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
-import { schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
+import { EDU_PARTNERS, schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
 import useOpenApply from "../hooks/useOpenApply";
 import SchoolLayout from "../components/SchoolLayout";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
@@ -22,6 +22,7 @@ import {
   FaBriefcase, FaFileDownload, FaUsers, FaArrowRight, FaShieldAlt 
 } from "react-icons/fa";
 import { resolveAssetSrc } from "@/lib/shared/media";
+import CampusLife360Section from "@/components/CampusLife360Section";
 
 const formatLevel = (lvl = "") => {
   const l = lvl.toLowerCase().trim();
@@ -164,7 +165,12 @@ export default function Program() {
 
   const partners = useMemo(() => {
     if (!prog) return [];
-    return getEduPartners(prog)
+    const programPartners = getEduPartners(prog);
+    const visiblePartners = programPartners.length
+      ? programPartners
+      : [EDU_PARTNERS["St.Mary's University"]];
+
+    return visiblePartners
       .map((partner) => ({ ...partner, leadUrl: partner?.landingUrl || getEduPartnerLandingUrl(prog) }))
       .filter(p => p.code);
   }, [prog]);
@@ -435,6 +441,9 @@ export default function Program() {
             </div>
           </div>
         </section>
+
+        {/* 3. Campus Life */}
+        <CampusLife360Section />
 
         {/* 5. Industry Partners (Existing) */}
         {partners.length > 0 && (

@@ -22,7 +22,7 @@ export const UNIVERSITY_INFO = {
   logoPath: "/assets/Logo.webp",
   defaultOgImage: "/assets/hero-campus.webp",
   officeHours: "Mon - Sat: 9:30 AM - 5:00 PM",
-  emergencyPhone: "9493321969",
+  emergencyPhone: "9010455591/90",
   mapEmbedUrl: "https://maps.google.com/maps?q=St.%20Mary%27s%20Rehabilitation%20University%2C%20Deshmukhi&output=embed",
 } as const;
 

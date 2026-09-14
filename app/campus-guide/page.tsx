@@ -11,5 +11,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function CampusGuidePage() {
-  return <CampusGuide />;
+  return (
+    <>
+      <h1 className="sr-only">Campus Guide | St.Mary&apos;s University</h1>
+      <CampusGuide />
+    </>
+  );
 }

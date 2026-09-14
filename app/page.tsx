@@ -2,14 +2,12 @@ import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
 import Home from "@/views/Home";
 import { buildMetadata } from "@/lib/metadata";
-import { HOME_FAQS } from "@/lib/seo/home-faqs";
-import { buildFaqSchema, buildWebPageSchema } from "@/lib/seo/schema";
-import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
+import { buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = buildMetadata({
-  title: "St.Mary's University | Top Private University in Hyderabad",
+  title: "St.Mary's University Hyderabad | Courses & Admissions",
   description:
-    "Welcome to St.Mary's University in Hyderabad, Telangana. Explore top-ranked schools, courses, admissions, and campus life at St.Mary's.",
+    "Official website of St.Mary's University in Hyderabad, Telangana. Explore schools, programmes, admissions, campus information, and official disclosures.",
   pathname: "/",
   keywords: [
     "St.Mary's University",
@@ -26,8 +24,8 @@ export const metadata: Metadata = buildMetadata({
     "university near Ramoji Film City",
     "university admissions 2026 Hyderabad",
     "professional courses in Hyderabad",
-    "best university courses after 12th",
-    "top private universities in Hyderabad",
+    "university courses after 12th",
+    "private university admissions Hyderabad",
   ],
 });
 
@@ -37,13 +35,12 @@ export default function Page() {
       <StructuredData
         id="home-webpage-schema"
         data={buildWebPageSchema({
-          title: "St.Mary's University | Top Private University in Hyderabad",
+          title: "St.Mary's University Hyderabad | Courses & Admissions",
           description:
-            "Welcome to St.Mary's University in Hyderabad, Telangana. Explore top-ranked schools, courses, admissions, and campus life at St.Mary's.",
+            "Official website of St.Mary's University in Hyderabad, Telangana. Explore schools, programmes, admissions, campus information, and official disclosures.",
           pathname: "/",
         })}
       />
-      <StructuredData id="home-faq-schema" data={SHOW_PUBLIC_FAQ_SCHEMA ? buildFaqSchema(HOME_FAQS) : null} />
       <Home />
     </>
   );

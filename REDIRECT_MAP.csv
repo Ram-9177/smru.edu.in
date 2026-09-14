@@ -9,7 +9,7 @@
 "app/(Partners)/emversity/page.tsx","getPartnerAliasRedirect(""emversity""","route redirect/fallback","app/(Partners)/emversity/page.tsx","active/review","Next route-level redirect or client fallback"
 "app/ctpl/page.tsx","SITE_CTA_LINKS.ctplApplyRedirect","route redirect/fallback","app/ctpl/page.tsx","active/review","Next route-level redirect or client fallback"
 "app/(Partners)/niat/page.tsx","TARGET_PATH","route redirect/fallback","app/(Partners)/niat/page.tsx","active/review","Next route-level redirect or client fallback"
-"app/(Partners)/iiat/page.tsx","TARGET_PATH","route redirect/fallback","app/(Partners)/iiat/page.tsx","active/review","Next route-level redirect or client fallback"
+"app/(Partners)/skilgen/page.tsx","getPartnerAliasRedirect(""skilgen""","route redirect/fallback","app/(Partners)/skilgen/page.tsx","active/review","Next route-level redirect or client fallback"
 "app/(Partners)/ist/page.tsx","getPartnerAliasRedirect(""ist""","route redirect/fallback","app/(Partners)/ist/page.tsx","active/review","Next route-level redirect or client fallback"
 "app/(Partners)/university/page.tsx","getPartnerAliasRedirect(""university""","route redirect/fallback","app/(Partners)/university/page.tsx","active/review","Next route-level redirect or client fallback"
 "app/(Partners)/qtst/page.tsx","TARGET_PATH","route redirect/fallback","app/(Partners)/qtst/page.tsx","active/review","Next route-level redirect or client fallback"

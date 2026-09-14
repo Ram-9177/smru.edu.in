@@ -30,7 +30,6 @@ const tier2Routes = [
   "/partner",
   "/mandatory-disclosure",
   "/leadership/all",
-  "/search",
   "/schools/law",
   "/schools/law/legal-studies",
 ];
@@ -47,8 +46,9 @@ const tier3Routes = [
   "/niat",
   "/qtst",
   "/niat-upskilling",
-  "/iiat",
   "/bb",
+  "/skilgen",
+  "/carebridge",
 ];
 
 const legacyComplianceInfoPageSlugs = new Set([
@@ -180,7 +180,7 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
   return uniqueEntries([
     {
       url: urlFor("/"),
-      lastModified: new Date(),
+      lastModified: LAST_MODIFIED,
       changeFrequency: "weekly",
       priority: 1.0,
     },

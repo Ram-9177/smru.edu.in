@@ -50,13 +50,9 @@ export default function Careers() {
   const [filter, setFilter] = useState("All");
   const [modalJob, setModalJob] = useState(null);
 
-  const getCmsContent = (id: string, separator = " | ") => {
-    const page = state.pages.find((p) => p.id === id);
-    return page?.content ? page.content.split(separator).map((s) => s.trim()) : [];
-  };
-
   const benefits = useMemo(() => {
-    const fromCms = getCmsContent("page-careers-benefits", ";");
+    const page = state.pages.find((item) => item.id === "page-careers-benefits");
+    const fromCms = page?.content ? page.content.split(";").map((item) => item.trim()) : [];
     const source = fromCms.length > 0 ? fromCms : CAREER_BENEFITS;
     return source.map((text) => ({ icon: iconForBenefit(text), text }));
   }, [state.pages]);
@@ -117,7 +113,7 @@ export default function Careers() {
 
   // ---- UI ----
   return (
-    <section className="w-full bg-gray-50">
+    <>
       <SEO
         title="Careers | St.Mary's University"
         description="Join St.Mary's University — careers in rehabilitation and allied health education. Faculty, clinical, technical roles and more."
@@ -128,8 +124,7 @@ export default function Careers() {
       {/* ===== HERO ===== */}
       <section
         id="careers-hero"
-        className="scroll-mt-24 relative w-full min-h-[50vh] flex items-center justify-center overflow-hidden"
-        data-reveal="fade-up"
+        className="scroll-mt-24 relative w-full overflow-hidden min-h-[46vh] flex items-center justify-center"
       >
         {/* Clean Institutional 'Light Wash' Gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#f0fdfa] via-[#f8fafc] to-[#eff6ff]" />
@@ -146,22 +141,23 @@ export default function Careers() {
           <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-[#f5f9ff]" />
         </div>
 
-        <div className="relative z-20 max-w-6xl mx-auto px-4 py-20 flex flex-col items-center justify-center text-center">
-          <h1 className="text-[clamp(3.1rem,9.5vw,9.2rem)] font-black font-outfit uppercase leading-[0.85] tracking-tighter text-[#0d315c] flex flex-col items-center">
+        <div className="smru-container relative z-20 pt-8 md:pt-16 pb-6 md:pb-12 flex flex-col items-center justify-center text-center">
+          <h1 className="smru-h1 text-[#0d315c] flex flex-col items-center" data-reveal="fade-up">
             Careers 
             <span className="text-[#25b895] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
               St.Mary's University
             </span>
           </h1>
-          <div className="mt-4 h-1.5 w-20 cut-corner-underline bg-[#ffaf3a] mx-auto" />
+          <div className="mt-4 h-1.5 w-20 cut-corner-badge bg-[#ffaf3a] mx-auto" data-reveal="fade-up" style={{ "--delay": "0.1s" }} />
           <p
-            className="mt-6 max-w-4xl text-[#0f1736] text-[clamp(0.95rem,1.45vw,1.5rem)] leading-[1.35] font-semibold"
+            className="mt-7 max-w-4xl text-[#0f1736] text-[clamp(0.95rem,1.45vw,1.55rem)] leading-[1.35] font-semibold"
+            data-reveal="fade-up"
             style={{ "--delay": "0.08s" }}
           >
             Join St.Mary's University’s specialized academic ecosystem for rehabilitation, allied health, law, and professional education.
           </p>
 
-          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 transition-all duration-700 opacity-100 translate-y-0">
+          <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 transition-all duration-700 opacity-100 translate-y-0" data-reveal="fade-up" style={{ "--delay": "0.12s" }}>
             <span className="inline-block bg-[#24b491] text-white px-5 py-2 cut-corner-badge font-semibold shadow text-sm md:text-base">
               Applications reviewed on a rolling basis
             </span>
@@ -282,6 +278,6 @@ export default function Careers() {
         [data-reveal=fade-right]{ transform: translateX(-22px); }
         [data-reveal=zoom-in]{ transform: translateY(12px); }
       `}</style>
-    </section>
+    </>
   );
 }

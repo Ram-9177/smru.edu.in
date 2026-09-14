@@ -1,3 +1,5 @@
+import { serializeJsonLd } from "@/lib/seo/json-ld";
+
 export default function StructuredData({
   id,
   data,
@@ -9,9 +11,9 @@ export default function StructuredData({
 
   return (
     <script
-      id={id}
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      id={id}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

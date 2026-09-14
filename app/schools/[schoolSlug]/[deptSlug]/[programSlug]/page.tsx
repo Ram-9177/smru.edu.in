@@ -9,15 +9,7 @@ import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
 import { getProgramSearchTerms } from "@/lib/seo/search-intent";
 
-import { notFound, redirect } from "next/navigation";
-
-const hasVelocesPartner = (program: any = {}) => {
-  const codes = Array.isArray(program.partnerCodes)
-    ? program.partnerCodes
-    : String(program.partnerCode || "").split(/[;,]/);
-
-  return codes.some((code) => String(code || "").trim().toUpperCase() === "VELOCES");
-};
+import { notFound } from "next/navigation";
 
 export function generateMetadata({ params }: { params: { schoolSlug: string; deptSlug: string; programSlug: string } }): Metadata {
   return getProgramMetadata(params);
@@ -44,10 +36,6 @@ export default function Page({
   
   if (!school || !department || !program) {
     notFound();
-  }
-
-  if (hasVelocesPartner(program)) {
-    redirect("/partner/veloces");
   }
 
   const pathname = `/schools/${params.schoolSlug}/${params.deptSlug}/${params.programSlug}`;

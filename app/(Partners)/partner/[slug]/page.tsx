@@ -1,5 +1,6 @@
 import PartnerIframePage from "@/views/PartnerIframePage";
 import EdinboxForensicLandingV2 from "@/views/EdinboxForensicLandingV2";
+import CarebridgeLanding from "@/views/CarebridgeLanding";
 import { EDU_PARTNERS } from "@/data/schools";
 import { buildMetadata } from "@/lib/metadata";
 import StructuredData from "@/components/seo/StructuredData";
@@ -69,8 +70,13 @@ export default function PartnerDetailPage({ params }: { params: { slug: string }
           pathname: `/partner/${params.slug}`,
         })}
       />
+      {params.slug !== "edinbox" && params.slug !== "carebridge" && (
+        <h1 className="sr-only">{name} Partner Programs | St.Mary&apos;s University</h1>
+      )}
       {params.slug === "edinbox" ? (
         <EdinboxForensicLandingV2 />
+      ) : params.slug === "carebridge" ? (
+        <CarebridgeLanding />
       ) : (
         <PartnerIframePage slug={params.slug} />
       )}

@@ -5,8 +5,20 @@ import { buildMetadata } from "@/lib/metadata";
 import { SHOW_PUBLIC_INFO_PAGES } from "@/lib/seo/visibility";
 import { notFound } from "next/navigation";
 
+const EXPLICIT_PAGE_SLUGS = new Set([
+  "admission-policy",
+  "anti-ragging",
+  "approvals-recognitions",
+  "grievance-redressal",
+  "iqac-quality-assurance",
+  "mandatory-disclosure",
+  "refund-policy",
+]);
+
 export function generateStaticParams() {
-  return INFO_PAGES.map((page) => ({ slug: page.slug }));
+  return INFO_PAGES
+    .filter((page) => !EXPLICIT_PAGE_SLUGS.has(page.slug))
+    .map((page) => ({ slug: page.slug }));
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {

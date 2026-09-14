@@ -1,4 +1,4 @@
-import Script from "next/script";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 
 export default function JsonLd({
   id,
@@ -9,11 +9,10 @@ export default function JsonLd({
 }) {
   if (!data) return null;
   return (
-    <Script
+    <script
       id={id}
       type="application/ld+json"
-      strategy="beforeInteractive"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

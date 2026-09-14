@@ -19,11 +19,20 @@ import bbLogo from "../assets/partner-logos/07_blackbuck_education.webp";
 import edridgeLogo from "../assets/partner-logos/08_edridge_learning_solutions.webp";
 import emversityLogo from "../assets/partner-logos/09_emversity_industry_partner.webp";
 import edinLogo from "../assets/partner-logos/10_edinbox.webp";
-// import istLogo from "../assets/partner-logos/11_intellipaat_school_of_technology.webp";
 import niatLogo from "../assets/partner-logos/12_niat.webp";
+import skilgenLogo from "../assets/partner-logos/13_skilgen.webp";
+import carebridgeLogo from "../assets/partner-logos/14_carebridge.webp";
 import smruLogo from "../assets/Logo.webp";
 
 export const EDU_PARTNERS = {
+  CAREBRIDGE: {
+    code: "CAREBRIDGE",
+    name: "Carebridge",
+    landingUrl: "/carebridge",
+    logo: carebridgeLogo,
+    iframeUrl: "https://carebridge.education",
+    embedCode: ""
+  },
   "St.Mary's University": {
     code: "St.Mary's University",
     name: "St.Mary's University",
@@ -39,13 +48,18 @@ export const EDU_PARTNERS = {
     iframeUrl: "https://www.niatindia.com/external-universities/st.-mary-s-university",
     embedCode: ""
   },
+  SKILGEN: {
+    code: "SKILGEN",
+    name: "Skilgen Tech",
+    landingUrl: "/skilgen",
+    logo: skilgenLogo,
+    iframeUrl: "https://skilgentech.com",
+    embedCode: ""
+  },
   IIAT: {
     code: "IIAT",
     name: "Indian Institute of Advanced Technology",
-    landingUrl: "/iiat",
-    logo: iiatLogo,
-    iframeUrl: "https://iiath.com/university/smru/",
-    embedCode: ""
+    landingUrl: null,
   },
   QTST: {
     code: "QTST",
@@ -54,15 +68,6 @@ export const EDU_PARTNERS = {
     logo: qtstLogo,
     embedCode: ""
   },
-  /*
-  IST: {
-    code: "IST",
-    name: "Intellipaat",
-    landingUrl: "/ist",
-    logo: istLogo,
-    embedCode: ""
-  },
-  */
   BB: {
     code: "BB",
     name: "BlackBucks",
@@ -161,7 +166,8 @@ const getEduPartnerCodes = (program: any = {}) => {
 export const getEduPartners = (program: any = {}) =>
   getEduPartnerCodes(program)
     .map((code) => EDU_PARTNERS[code])
-    .filter((partner) => partner && partner.code !== "IST");
+    .filter(Boolean)
+    .filter((partner) => Boolean(partner.landingUrl));
 
 export const getEduPartner = (program: any = {}) => {
   return getEduPartners(program)[0] || null;
@@ -1310,8 +1316,7 @@ const schoolsSeed: SchoolData[] = [
           {
             slug: "btech-biomedical-ai-robotics",
             name: "B.Tech Biomedical AI & Robotics",
-            level: "UG Program",
-            partnerCode: "IIAT"
+            level: "UG Program"
           }
         ]
       },
@@ -1321,11 +1326,11 @@ const schoolsSeed: SchoolData[] = [
         about: "",
         programs: [
           {
-            slug: "btech-cse-iiat",
+            slug: "btech-cse",
             name: "B.Tech CSE",
             level: "UG Program",
             partnerCode: "QTST",
-            partnerCodes: ["QTST", "IIAT"],
+            partnerCodes: ["QTST"],
             partnerLeadUrl: APPLY_PORTAL_URL,
             duration: "4 Years (8 Semesters)",
             eligibility: "10+2 with Physics, Chemistry, and Mathematics (PCM); entrance process as applicable",
@@ -1376,7 +1381,7 @@ const schoolsSeed: SchoolData[] = [
             name: "B.Tech CSE (AI & ML)",
             level: "UG Program",
             partnerCode: "NIAT",
-            partnerCodes: ["NIAT", "QTST", "IIAT", "BYTEXL"],
+            partnerCodes: ["NIAT", "SKILGEN", "VELOCES", "BYTEXL", "BB"],
             duration: "4 Years (8 Semesters)",
             eligibility: "10+2 with Physics, Chemistry, and Mathematics (PCM) and entrance process as applicable",
             fees: "1,50,000 per year",
@@ -1418,11 +1423,11 @@ const schoolsSeed: SchoolData[] = [
             hostelFeeNote: text("Hostel charges are separate from tuition and may include accommodation and basic facilities as per university norms.")
           },
           {
-            slug: "btech-cse-ai-ds-iiat",
+            slug: "btech-cse-ai-ds",
             name: "B.Tech CSE (AI & DS)",
             level: "UG Program",
-            partnerCode: "IIAT",
-            partnerCodes: ["IIAT", "BB"],
+            partnerCode: "BB",
+            partnerCodes: ["SKILGEN", "BB"],
             duration: "4 Years (8 Semesters)",
             eligibility: "10+2 PCM; entrance process applies",
             fees: "1,50,000 per year"
@@ -1442,14 +1447,12 @@ const schoolsSeed: SchoolData[] = [
           {
             slug: "btech-cyber-security-aiml",
             name: "B.Tech CSE (Cyber Security & AI/ML)",
-            level: "UG Program",
-            partnerCode: "IIAT"
+            level: "UG Program"
           },
           {
             slug: "btech-fintech-ai",
             name: "B.Tech CSE (FinTech & AI)",
-            level: "UG Program",
-            partnerCode: "IIAT"
+            level: "UG Program"
           },
           {
             slug: "mtech-ai-ds",
@@ -1673,20 +1676,29 @@ const normalizeProgramKey = (value = "") =>
 
 const getCanonicalSlugAndName = (slug: string, name: string) => {
   const s = slug.toLowerCase().trim();
-  if (s === "bpt" || s === "bpt-emversity") {
+  if (s === "bpt" || s === "bpt-emversity" || s === "bpt-edridge") {
     return { slug: "bpt", name: "BPT" };
   }
-  if (s === "bot" || s === "bot-emversity") {
+  if (s === "bot" || s === "bot-emversity" || s === "bot-edridge") {
     return { slug: "bot", name: "BOT" };
+  }
+  if (s === "mpt" || s === "mpt-alt-code") {
+    return { slug: "mpt", name: "MPT" };
   }
   if (s === "btech-cse" || s === "btech-cse-qtst" || s === "btech-cse-iiat" || s === "btech-cse-veloces") {
     return { slug: "btech-cse", name: "B.Tech CSE" };
   }
-  if (s === "bmlt" || s === "bmls") {
+  if (s === "bmlt" || s === "bmls" || s === "bmlt-edridge") {
     return { slug: "bmlt", name: "Medical Lab Technology" };
   }
-  if (s === "bsc-anaesthesia-ot" || s === "baott") {
+  if (s === "bsc-anaesthesia-ot" || s === "baott" || s === "bsc-anaesthesia-ot-edridge") {
     return { slug: "bsc-anaesthesia-ot", name: "Anesthesia & OT Technology" };
+  }
+  if (s === "bcvt" || s === "bcvt-edridge") {
+    return { slug: "bcvt", name: "Cardiovascular Technology" };
+  }
+  if (s === "bmit" || s === "bmrit-edridge") {
+    return { slug: "bmit", name: "B.Sc. Medical Imaging Technology" };
   }
   if (s === "betcms" || s === "bemt") {
     return { slug: "betcms", name: "Emergency Medical Technology" };
@@ -1697,10 +1709,10 @@ const getCanonicalSlugAndName = (slug: string, name: string) => {
   if (
     s === "btech-cse-aiml" ||
     s === "btech-cse-aiml-niat" ||
-    s === "btech-cse-aiml-ist" ||
-    s === "btech-cse-aiml-iiat" ||
+    s === "btech-cse-aiml-skilgen" ||
     s === "btech-cse-aiml-veloces" ||
-    s === "btech-cse-aiml-bytexl"
+    s === "btech-cse-aiml-bytexl" ||
+    s === "btech-cse-aiml-bb"
   ) {
     return { slug: "btech-cse-aiml", name: "B.Tech CSE (AI & ML)" };
   }
@@ -1708,7 +1720,8 @@ const getCanonicalSlugAndName = (slug: string, name: string) => {
     s === "btech-cse-ai-ds" ||
     s === "btech-cse-ai-ds-qtst" ||
     s === "btech-cse-ai-ds-bb" ||
-    s === "btech-cse-ai-ds-iiat"
+    s === "btech-cse-ai-ds-skilgen" ||
+    s === "btech-cse-ai-ds-smru-alt"
   ) {
     return { slug: "btech-cse-ai-ds", name: "B.Tech CSE (AI & DS)" };
   }
@@ -1743,8 +1756,8 @@ const mergeOfficialCourses = (seedSchools: SchoolData[]): SchoolData[] =>
         });
 
         const mergedPrograms = Array.from(canonicalGroups.entries()).map(([canonicalSlug, groupRows]) => {
-          // Find the primary row (prefer one with a partner if available, or just the first)
-          const primaryRow = groupRows.find((row) => row.partnerCode) || groupRows[0];
+          // Keep the university row as the canonical course; partner rows enrich it with track options.
+          const primaryRow = groupRows.find((row) => !row.partnerCode) || groupRows[0];
           
           // Get all unique partner codes from the group
           const partnerCodes = [...new Set(

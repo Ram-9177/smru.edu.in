@@ -86,7 +86,7 @@ function Section({ title, children, defaultOpen = false }) {
 
 export default function LeadershipAll() {
   return (
-    <main className="font-['Poppins'] bg-accent-50">
+    <main className="font-sans bg-accent-50">
       {/* Top bar + breadcrumb */}
       <section className="container max-w-screen-xl mx-auto px-4 lg:px-6 pt-10 lg:pt-14">
         <div className="flex items-center justify-between gap-4">

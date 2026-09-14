@@ -12,6 +12,7 @@ import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
 import { detectProgramCategory, safeSlug } from "@/lib/shared/program-utils";
 import { getSeoAuthorityPage } from "@/lib/seo/authority-map";
+import { predictivePrefetch } from "@/lib/speed/predictive-preloader";
 
 const authorityPath = (key: string, fallback: string) => getSeoAuthorityPage(key)?.path || fallback;
 
@@ -63,6 +64,7 @@ const Navbar = ({
     (path: string) => {
       if (!path) return;
       router.prefetch(path);
+      predictivePrefetch(path);
     },
     [router]
   );

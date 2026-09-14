@@ -30,6 +30,7 @@ import { buildSchoolFaqs, buildSchoolAnswers } from "@/lib/seo/academic";
 import { FaqSection, AnswerGridSection } from "@/components/seo/PageSections";
 import { buildFaqSchema } from "@/lib/seo/schema";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 
 const navLinks = [
   ["Programmes", "#programmes"],
@@ -272,8 +273,8 @@ export default function LawLanding() {
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={`tel:${SITE_CONTACT.primaryPhone}`} className="inline-flex items-center justify-center gap-3 border border-[#0d315c]/15 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.16em] text-[#0d315c]">
-                <FaPhoneAlt /> Call {SITE_CONTACT.primaryPhone}
+              <a href={`tel:${SITE_CONTACT.lawPhone}`} className="inline-flex items-center justify-center gap-3 border border-[#0d315c]/15 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.16em] text-[#0d315c]">
+                <FaPhoneAlt /> Call {SITE_CONTACT.lawPhone}
               </a>
               <a href={`mailto:${SITE_CONTACT.email}`} className="inline-flex items-center justify-center gap-3 border border-[#0d315c]/15 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.16em] text-[#0d315c]">
                 <FaEnvelope /> Email Admissions
@@ -319,14 +320,14 @@ export default function LawLanding() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildFaqSchema(schoolFaqs))
+          __html: serializeJsonLd(buildFaqSchema(schoolFaqs))
         }}
       />
 
       <footer className="bg-[#071a32] px-4 py-8 text-white sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-xs font-semibold text-white/60 md:flex-row">
           <p>St.Mary's University, Hyderabad, Telangana</p>
-          <p>{SITE_CONTACT.email} | {SITE_CONTACT.primaryPhone}</p>
+          <p>{SITE_CONTACT.email} | {SITE_CONTACT.lawPhone}</p>
         </div>
       </footer>
     </div>

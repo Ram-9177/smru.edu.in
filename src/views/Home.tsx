@@ -3,13 +3,11 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 
-const campusVideo = "/assets/campus_video_fallback.mp4";
-const campusPoster = "/assets/hero-campus.webp";
 const canteenImg = "/assets/canteen-CZmCaPgx.webp";
 const hostelImg1 = "/assets/Hostel1-CfcW80Kf.webp";
 const hostelImg2 = "/assets/Hostel2-C_Z6DObd.webp";
+const PRIMARY_HERO_IMAGE = "/assets/hero-campus-fast.webp";
 import { buildFaqSchema } from "@/lib/seo/schema";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import { useOpenApply } from "../context/ApplyModalContext";
@@ -17,6 +15,9 @@ import UniversitySectionHeader from "../components/UniversitySectionHeader";
 import { BentoTrustGrid, HalfRingStepRail, PillBand, TechniqueModernGrid, RingStepFlow, StairHighlightStrips } from "../components/InfographicSections";
 import {
   FaArrowRight,
+  FaExternalLinkAlt,
+  FaGlobeAmericas,
+  FaHospital,
   FaAward,
   FaHeartbeat,
   FaHandsHelping,
@@ -49,9 +50,11 @@ import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 import { getSchoolLandingPath } from "@/lib/shared/school-landing";
 import { isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
 import { PHD_ADMISSIONS_STATUS_MESSAGE } from "@/lib/shared/site-constants";
+import { serializeJsonLd } from "@/lib/seo/json-ld";
 
 import { EDU_PARTNERS, schools as staticSchools } from "../data/schools";
 import FAQSection from "../components/FAQSection";
+import CampusLife360Section from "../components/CampusLife360Section";
 
 import { 
   DEFAULT_SCHOLARSHIP_NAMES, 
@@ -68,14 +71,10 @@ const admissionsApplyUrl = "https://apply.smru.edu.in";
 export default function Home() {
   const router = useRouter();
   const openApply = useOpenApply();
-  const [showVideo, setShowVideo] = useState(false);
-  
-  const heroImages = useMemo(() => ["/assets/hero-campus.webp", "/assets/hero-campus-2.webp"], []);
   const latestEvents = useMemo(
     () => [...UNIVERSITY_EVENTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3),
     []
   );
-  const [heroIndex, setHeroIndex] = useState(0);
   const { state } = useDeveloperCms();
 
   const getCmsContent = useCallback((id: string, separator = " | ") => {
@@ -146,24 +145,7 @@ export default function Home() {
     return fromCms.length > 0 ? fromCms : DEFAULT_CANTEEN_HIGHLIGHTS;
   }, [getCmsContent]);
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (!showVideo) {
-      // Show images for a total of 6 seconds (3s each) then switch to video
-      timer = setTimeout(() => setShowVideo(true), 6000);
-    }
-    return () => clearTimeout(timer);
-  }, [showVideo]);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (!showVideo) {
-      interval = setInterval(() => {
-        setHeroIndex((prev) => (prev + 1) % heroImages.length);
-      }, 3000);
-    }
-    return () => clearInterval(interval);
-  }, [showVideo, heroImages.length]);
 
   useEffect(() => {
     const scrollToHash = () => {
@@ -193,47 +175,23 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildFaqSchema(HOME_FAQ_CATEGORIES.flatMap(c => c.faqs)))
+          __html: serializeJsonLd(buildFaqSchema(HOME_FAQ_CATEGORIES.flatMap(c => c.faqs)))
         }}
       />
       {/* ========================= HERO ======================== */}
       <section id="hero" className="relative w-full h-[calc(100svh-112px)] md:h-[90svh] min-h-[560px] md:min-h-[620px] overflow-hidden">
-        {/* Cinematic Asset Cross-Dissolve Overlay */}
+        {/* Campus Drone View Static Hero */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Base Layer: Video (mounts/plays when showVideo is true) */}
-          {showVideo && (
-            <video
-              poster={campusPoster}
-              preload="none"
-              autoPlay
-              muted
-              playsInline
-              onEnded={() => setShowVideo(false)}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${showVideo ? 'opacity-100' : 'opacity-0'}`}
-            >
-              <source src={campusVideo} type="video/mp4" />
-            </video>
-          )}
-
-          {/* Top Layer: Static Image Loop (fades out to reveal video) */}
-          <div className={`absolute inset-0 h-full w-full transition-all duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
-              showVideo 
-                ? 'opacity-0 scale-[1.02] blur-sm' 
-                : 'opacity-100 scale-110 blur-0'
-            }`}>
-            {heroImages.map((src, i) => (
-              <Image
-                key={src}
-                src={src}
-                alt="St.Mary's University Campus View in Hyderabad"
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className={`object-cover object-center hero-campus-image transition-opacity duration-1000 ${
-                  heroIndex === i ? 'opacity-100' : 'opacity-0'
-                }`}
-              />
-            ))}
+          <div className="absolute inset-0 h-full w-full">
+            <Image
+              src={PRIMARY_HERO_IMAGE}
+              alt="St.Mary's University Campus Drone View in Hyderabad"
+              fill
+              priority
+              fetchPriority="high"
+              sizes="100vw"
+              className="object-cover object-center hero-campus-image"
+            />
           </div>
         </div>
 
@@ -254,7 +212,7 @@ export default function Home() {
               </div>
               
               <div className="space-y-0">
-                <h1 className="text-[clamp(1.5rem,5.5vw,3.5rem)] font-black text-white drop-shadow-2xl [text-shadow:_0_8px_40px_rgba(0,0,0,0.8)] font-['Cinzel'] leading-[1.15] tracking-tight uppercase">
+                <h1 className="text-[clamp(1.5rem,5.5vw,3.5rem)] font-black text-white drop-shadow-2xl [text-shadow:_0_8px_40px_rgba(0,0,0,0.8)] font-[family-name:var(--font-cinzel)] leading-[1.15] tracking-tight uppercase">
                   <span className="sr-only">St. Mary&apos;s University - </span>
                   <span className="text-[#ffaf3a]">St. Mary&apos;s</span> Rehabilitation University
                 </h1>
@@ -268,7 +226,7 @@ export default function Home() {
         </div>
 
         {/* Subtle Scroll Indicator */}
-        <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-1000 ${showVideo ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2">
            <div className="w-[1px] h-12 bg-white/40 mx-auto" />
         </div>
       </section>
@@ -540,12 +498,13 @@ export default function Home() {
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {(() => {
               const PARTNER_ORDER = [
+                "carebridge",
                 "nst",
                 "emversity",
                 "niat",
                 "qtst",
                 "bytexl",
-                "iiat",
+                "skilgen",
                 "edinbox",
                 "veloces",
                 "bb",
@@ -606,6 +565,197 @@ export default function Home() {
                 </Link>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CAREBRIDGE GLOBAL HEALTHCARE PATHWAY SPOTLIGHT ================= */}
+      <section id="carebridge-spotlight" className="relative scroll-mt-24 smru-section bg-gradient-to-br from-[#04163f] via-[#0d315c] to-[#04163f] text-white overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="smru-container relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs font-bold uppercase tracking-wider text-amber-300">
+                <FaGlobeAmericas className="text-emerald-400 text-sm" />
+                <span>Featured Industrial Skill Pathway · Carebridge Education</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                Healthcare Degrees.{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-emerald-400 italic">
+                  Global Career Pathways.
+                </span>
+              </h2>
+
+              <p className="text-slate-200 text-base sm:text-lg leading-relaxed max-w-2xl font-normal">
+                Operated on St. Mary&apos;s University&apos;s 120-acre medical campus, <strong>Carebridge</strong> connects UGC-recognized healthcare degrees with early clinical rotations, English/OET language coaching, and international licensing readiness for shortage-driven healthcare careers in the UK (NHS), Australia, the Gulf, and North America.
+              </p>
+
+              {/* 3 Pillars Preview */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-xs font-bold text-amber-400 block mb-1">Pillar 01</span>
+                  <strong className="text-sm text-white block">Educate from Day 1</strong>
+                  <span className="text-[11px] text-slate-300 block mt-1">Live patient rotations inside 120-acre campus hospital.</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-xs font-bold text-emerald-400 block mb-1">Pillar 02</span>
+                  <strong className="text-sm text-white block">Certify in Semesters</strong>
+                  <span className="text-[11px] text-slate-300 block mt-1">OET, IELTS &amp; international licensing prep built in.</span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/5 border border-white/10">
+                  <span className="text-xs font-bold text-amber-400 block mb-1">Pillar 03</span>
+                  <strong className="text-sm text-white block">Deploy with Care</strong>
+                  <span className="text-[11px] text-slate-300 block mt-1">Hospital interview circuits, credentialing &amp; visa guidance.</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-4">
+                <a
+                  href="https://carebridge.education"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/25 transition-all transform hover:-translate-y-0.5"
+                >
+                  <span>Explore Carebridge Official Website</span>
+                  <FaExternalLinkAlt className="text-xs" />
+                </a>
+
+                <Link
+                  href="/carebridge"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 backdrop-blur-md transition-all"
+                >
+                  <span>View SMRU Carebridge Page</span>
+                  <FaArrowRight className="text-xs text-amber-400" />
+                </Link>
+              </div>
+
+              {/* Relevant Natural Hyperlinks */}
+              <div className="pt-4 border-t border-white/10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-medium text-slate-300">
+                <span className="text-slate-400 font-semibold uppercase tracking-wider text-[11px]">Direct Carebridge Links:</span>
+                <a
+                  href="https://carebridge.education/pathway.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 underline underline-offset-4"
+                >
+                  Global Pathway Guide <FaExternalLinkAlt className="text-[9px]" />
+                </a>
+                <a
+                  href="https://carebridge.education/programs.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-emerald-300 hover:text-emerald-200 underline underline-offset-4"
+                >
+                  12 Healthcare Degrees <FaExternalLinkAlt className="text-[9px]" />
+                </a>
+                <a
+                  href="https://carebridge.education/admissions.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-amber-400 hover:text-amber-300 underline underline-offset-4"
+                >
+                  Admissions 2026-27 <FaExternalLinkAlt className="text-[9px]" />
+                </a>
+                <a
+                  href="https://carebridge.education/campus.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-slate-200 hover:text-white underline underline-offset-4"
+                >
+                  120-Acre Campus <FaExternalLinkAlt className="text-[9px]" />
+                </a>
+              </div>
+            </div>
+
+            {/* Right Interactive Cards */}
+            <div className="lg:col-span-5">
+              <div className="bg-white/10 backdrop-blur-xl border border-white/15 rounded-2xl p-6 sm:p-8 shadow-2xl space-y-5 text-left">
+                <div className="flex items-center justify-between pb-4 border-b border-white/10">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-slate-950 font-black text-lg">
+                      CB
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white text-base">Key Degree Offerings</h3>
+                      <p className="text-xs text-emerald-300 font-medium">BPT · BOT · B.Sc Nursing · BASLP</p>
+                    </div>
+                  </div>
+                  <span className="text-[11px] font-bold px-2 py-1 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                    High Demand
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  <a
+                    href="https://carebridge.education/programs/bachelor-of-physiotherapy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/50 transition-all"
+                  >
+                    <div className="flex items-center justify-between">
+                      <strong className="text-sm text-white group-hover:text-amber-300 transition-colors">
+                        Bachelor of Physiotherapy (BPT)
+                      </strong>
+                      <FaExternalLinkAlt className="text-[10px] text-slate-400 group-hover:text-amber-300 transition-colors" />
+                    </div>
+                    <span className="text-xs text-slate-300 block mt-1">
+                      4.5 Years · Movement rehab with on-campus hospital rotations from Year 1.
+                    </span>
+                  </a>
+
+                  <a
+                    href="https://carebridge.education/programs/bsc-nursing/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-400/50 transition-all"
+                  >
+                    <div className="flex items-center justify-between">
+                      <strong className="text-sm text-white group-hover:text-emerald-300 transition-colors">
+                        B.Sc Nursing (Global Mobility)
+                      </strong>
+                      <FaExternalLinkAlt className="text-[10px] text-slate-400 group-hover:text-emerald-300 transition-colors" />
+                    </div>
+                    <span className="text-xs text-slate-300 block mt-1">
+                      4 Years · Aligned with UK NHS and Australian AHPRA clinical standards.
+                    </span>
+                  </a>
+
+                  <a
+                    href="https://carebridge.education/programs/bachelor-of-occupational-therapy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-3.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/50 transition-all"
+                  >
+                    <div className="flex items-center justify-between">
+                      <strong className="text-sm text-white group-hover:text-amber-300 transition-colors">
+                        Bachelor of Occupational Therapy (BOT)
+                      </strong>
+                      <FaExternalLinkAlt className="text-[10px] text-slate-400 group-hover:text-amber-300 transition-colors" />
+                    </div>
+                    <span className="text-xs text-slate-300 block mt-1">
+                      4.5 Years · Sensory recovery &amp; pediatric therapy on shortage lists abroad.
+                    </span>
+                  </a>
+                </div>
+
+                <div className="pt-2 text-center">
+                  <a
+                    href="https://carebridge.education/pathway.html#salary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 font-bold"
+                  >
+                    <span>View 5–8× Salary Uplift Comparison Table</span>
+                    <FaExternalLinkAlt className="text-[10px]" />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -775,6 +925,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ================= CAMPUS LIFE 360 ================= */}
+      <div className="bg-[#f5f9ff] py-12 md:py-20">
+        <div className="smru-container">
+          <CampusLife360Section />
+        </div>
+      </div>
 
       {/* ================= SCHOLARSHIPS ================= */}
       <section id="scholarships" className="relative scroll-mt-24 smru-section bg-white border-b border-slate-100 overflow-hidden bg-[radial-gradient(at_50%_0%,rgba(255,175,58,0.08)_0,transparent_55%)]">

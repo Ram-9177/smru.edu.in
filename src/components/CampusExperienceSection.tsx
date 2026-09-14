@@ -14,7 +14,11 @@ import {
   campusTourText,
 } from "@/data/campus-tour";
 
-const Campus360Viewer = dynamic(() => import("@/components/Campus360Viewer"), {
+import { prefetchAndDecode, warmUpTourTextures } from "@/lib/campus-360/texture-cache";
+
+const loadCampus360Viewer = () => import("@/components/Campus360Viewer");
+
+const Campus360Viewer = dynamic(loadCampus360Viewer, {
   ssr: false,
   loading: () => (
     <div className="absolute inset-0 flex items-center justify-center bg-slate-950">
@@ -107,6 +111,8 @@ function CampusLocationModal({
           <Campus360Viewer
             panorama={{
               src: location.panoramaSrc,
+              lowResSrc: location.lowResSrc,
+              thumb: location.thumbSrc,
               preview: location.previewSrc,
               alt: title,
               caption: title,
@@ -133,6 +139,16 @@ export default function CampusExperienceSection() {
         : CAMPUS_TOUR_LOCATIONS.filter((location) => location.category === category),
     [category],
   );
+
+  useEffect(() => {
+    // Immediately pre-warm top campus textures and dynamic viewer bundle
+    void loadCampus360Viewer();
+    const cancelWarmup = warmUpTourTextures(CAMPUS_TOUR_LOCATIONS.slice(0, 8));
+
+    return () => {
+      cancelWarmup?.();
+    };
+  }, []);
 
   return (
     <section className="overflow-hidden bg-[#f4f9ff] py-9" data-testid="campus-experience">
@@ -201,10 +217,25 @@ export default function CampusExperienceSection() {
               key={location.id}
               type="button"
               onClick={() => setActiveLocation(location)}
+              onPointerEnter={() => {
+                void loadCampus360Viewer();
+                if (location.lowResSrc) void prefetchAndDecode(location.lowResSrc);
+                if (location.panoramaSrc) void prefetchAndDecode(location.panoramaSrc);
+              }}
+              onFocus={() => {
+                void loadCampus360Viewer();
+                if (location.lowResSrc) void prefetchAndDecode(location.lowResSrc);
+                if (location.panoramaSrc) void prefetchAndDecode(location.panoramaSrc);
+              }}
+              onTouchStart={() => {
+                void loadCampus360Viewer();
+                if (location.lowResSrc) void prefetchAndDecode(location.lowResSrc);
+                if (location.panoramaSrc) void prefetchAndDecode(location.panoramaSrc);
+              }}
               className="group relative h-56 w-[78vw] max-w-[310px] shrink-0 snap-start overflow-hidden rounded-2xl border border-white bg-slate-900 text-left shadow-[0_16px_34px_rgba(13,49,92,0.16)] transition duration-300 hover:-translate-y-1 hover:border-[#019e6e]/40"
             >
               <Image
-                src={location.previewSrc}
+                src={location.thumbSrc || location.previewSrc}
                 alt={title}
                 fill
                 priority={index < 4}
