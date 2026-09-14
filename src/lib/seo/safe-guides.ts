@@ -231,26 +231,6 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     keywords: ["best engineering college emerging technologies Hyderabad", "BTech AI ML Hyderabad", "BTech data science Hyderabad", "cyber security course Hyderabad"],
     focusLinks: schoolLinks.engineering,
   }),
-  makeGuide({
-    slug: "best-pharmacy-college-in-hyderabad",
-    title: "Best Pharmacy College in Hyderabad: Course & Admissions Checklist",
-    description: "Compare pharmacy course options in Hyderabad using eligibility, duration, professional requirements, fee guidance, and official verification.",
-    targetQuery: "best pharmacy college in Hyderabad",
-    audience: "students comparing pharmacy-related course options",
-    angle: "Pharmacy-course decisions should separate university recognition, programme requirements, eligibility, practical exposure, and official counselling confirmation.",
-    keywords: ["best pharmacy college Hyderabad", "B Pharmacy admission Hyderabad", "D Pharmacy college Telangana", "pharmacy courses after 12th"],
-    focusLinks: schoolLinks.pharmacy,
-  }),
-  makeGuide({
-    slug: "best-mba-college-in-hyderabad",
-    title: "Best MBA College in Hyderabad: Management Admissions Checklist",
-    description: "Compare MBA and management course options in Hyderabad using curriculum, career support, eligibility, admissions, and official verification.",
-    targetQuery: "best MBA college in Hyderabad",
-    audience: "students comparing management and MBA-style pathways",
-    angle: "Management-course comparison should focus on curriculum, industry exposure, career-readiness support, eligibility, fee guidance, and official admissions counselling.",
-    keywords: ["best MBA college Hyderabad", "management courses Hyderabad", "MBA admissions 2026 Hyderabad", "career focused MBA Hyderabad"],
-    focusLinks: schoolLinks.management,
-  }),
 ];
 
 export const SAFE_GUIDE_PAGE_MAP = new Map(SAFE_GUIDE_PAGES.map((page) => [page.slug.replace(/^guides\//, ""), page]));

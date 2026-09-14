@@ -143,6 +143,33 @@ This is the single markdown control file to maintain for every change cycle. Kee
   duplicateTitles 0, guideGuide 0, truncatedTitles 0, brandNoSpace 0, brokenHashes 0.
 - Pages: 451 → 443 routes (8 brand pages retired). Sitemap 324 → 297 URLs. Indexable 307.
 
+### Phase 3: Consolidate the 152 templated pages (14 September 2026)
+- **152 → 35 templated pages.** A data-driven disposition (`RETIRED_SEO_PAGE_TARGETS` in
+  `data/seo-pages.ts`) drops 184 doorway seeds from routing (no HTML, no sitemap) plus 2 liability
+  safe-guides; each retired URL gets a specific server-side 301. Full map:
+  `docs/seo/phase3-retirement-map.md`.
+- **Survivors (35):** 6 city landings (`/seo/{bpt,baslp,nursing,law,engineering,psychology}-college-hyderabad`),
+  13 `X vs Y` comparison guides, 7 admission-process pages, 9 `/guides/best-*` (pharmacy & MBA
+  removed — SMRU offers neither, a factual liability).
+- **Retirement targets** (never bulk-to-homepage): per-course admission guides → the matching
+  programme page (27 courses); ranking/`best-*`/generic → `/about` (29) or the relevant school hub;
+  identity/AI-answer/`does-smru-*` → `/smru` (8); location → `/campus-location-hyderabad` (10);
+  hostel/campus → `/hostel`, `/campus-guide`; UGC/recognition → `/approvals-recognitions`; near-dup
+  `best-X-college-india` / `X-college-hyderabad` folded into the 6 surviving city landings.
+- **Boilerplate FAQPage stripped.** `SeoRoutePage` emitted a fake `FAQPage` on every templated page
+  ("What should I know about {topic}?" → "should be verified…") and leaked `keyword/bucket/intent`
+  into the WebPage schema. Both removed, and the visible boilerplate FAQ block deleted. Site
+  `FAQPage` count 326 → 114 (surviving ones are genuine programme / school / `/smru/` Q&A).
+- Guard/gates: all green — 0 broken links, 0 broken hashes, 0 titles > 65, 0 duplicate titles,
+  0 "Guide Guide". Pages 443 → 256 routes; sitemap 297 → 180 URLs (guides child 152 → 35);
+  indexable 190.
+- **Deferred (flagged, not done):** the 7 admission-process pages stay at `/admission-guides/`
+  rather than moving under `/admissions/` (needs new routes + content, not a mechanical move);
+  the 13 comparison guides keep their current copy — real side-by-side eligibility/duration/career
+  tables from `src/data/schools.ts` are a Phase 3b content pass. Two pre-existing duplicate `<h1>`
+  remain (`/leadership/all/` renders the About view; `/partner/carebridge/` mirrors `/carebridge/`)
+  — unrelated to this consolidation, logged for cleanup.
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel

@@ -1,17 +1,9 @@
 import Link from "next/link";
 import StructuredData from "@/components/seo/StructuredData";
-import { buildBreadcrumbSchema, buildFaqSchema, buildWebPageSchema } from "@/lib/seo/schema";
+import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import type { SeoPage } from "../../../data/seo-pages";
 
-const faqItemsFor = (page: SeoPage) =>
-  page.faqTopics.map((topic) => ({
-    question: `What should I know about ${topic}?`,
-    answer: `${topic} should be verified through official St. Mary's University links before applying or relying on the claim.`,
-  }));
-
 export default function SeoRoutePage({ page }: { page: SeoPage }) {
-  const faqItems = faqItemsFor(page);
-  const keywords = [page.keyword, page.bucket, page.intent, page.pageType];
 
   return (
     <>
@@ -29,10 +21,8 @@ export default function SeoRoutePage({ page }: { page: SeoPage }) {
           description: page.description,
           pathname: page.path,
           type: "WebPage",
-          keywords,
         })}
       />
-      <StructuredData id={`${page.slug}-faq-schema`} data={faqItems.length ? buildFaqSchema(faqItems) : null} />
 
       <main className="min-h-screen bg-[#f8fafc] pt-[120px] pb-16">
         <div className="mx-auto max-w-6xl px-4">
@@ -79,17 +69,6 @@ export default function SeoRoutePage({ page }: { page: SeoPage }) {
             ))}
           </section>
 
-          <section className="mt-6 border border-slate-200 bg-white p-6 md:p-8">
-            <h2 className="text-sm font-black uppercase tracking-[0.24em] text-[#0d315c]">Frequently Asked Questions</h2>
-            <div className="mt-4 space-y-4">
-              {faqItems.map((item) => (
-                <div key={item.question} className="border border-slate-100 bg-slate-50 p-4">
-                  <h3 className="font-black text-[#0d315c]">{item.question}</h3>
-                  <p className="mt-2 text-sm font-semibold leading-7 text-slate-600">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
 
           <section className="mt-6 border border-slate-200 bg-white p-6 md:p-8">
             <h2 className="text-sm font-black uppercase tracking-[0.24em] text-[#0d315c]">Official Links</h2>
