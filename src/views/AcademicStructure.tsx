@@ -89,8 +89,8 @@ export default function AcademicStructure() {
   return (
     <div className="min-h-screen bg-white font-outfit text-[#0d315c] selection:bg-[#019e6e]/10">
       <SEO 
-        title="Academic Structure | St.Mary's University"
-        description="Explore the academic catalogue of St.Mary's University across rehabilitation, health sciences, nursing, psychology, engineering, law, and allied professional schools."
+        title="Academic Structure | St. Mary's University"
+        description="Explore the academic catalogue of St. Mary's University across rehabilitation, health sciences, nursing, psychology, engineering, law, and allied professional schools."
       />
 
       {/* -------------------------------------------------------------------
@@ -123,7 +123,7 @@ export default function AcademicStructure() {
               Academic <span className="text-[#019e6e]">Structure</span>
             </h1>
             <p className="mt-8 text-lg md:text-2xl text-slate-500 font-medium italic leading-relaxed opacity-80 max-w-3xl mx-auto">
-              A career-focused catalogue across St.Mary's University's schools, built around clinical exposure, professional skills, and interdisciplinary learning.
+              A career-focused catalogue across St. Mary's University's schools, built around clinical exposure, professional skills, and interdisciplinary learning.
             </p>
           </motion.div>
  

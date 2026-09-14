@@ -49,26 +49,58 @@ const checks = [
     },
   },
   {
-    name: "Brand spelling aliases are protected in structured SEO identity",
+    name: "Naming standard: identity constants and bridge sentence",
     pass: () => {
+      const university = read("src/lib/shared/university.ts");
       const site = read("src/lib/seo/site.ts");
-      const metadata = read("src/lib/metadata.ts");
-      const aliases = [
-        "Stmarys University",
-        "St Marys University",
-        "St. Mary's University",
-        "St.Mary's University",
-        "StMarys University",
-        "stmarys university",
-        "Stmarys",
-        "St Marys",
-        "St. Mary's",
-        "St.Mary's",
-        "StMarys",
-        "stmarys",
-      ];
-
-      return aliases.every((alias) => site.includes(alias)) && metadata.includes("...SITE_IDENTITY.alternateNames");
+      const bridge =
+        "St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a UGC-recognised private university in Hyderabad, Telangana, established under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.";
+      return (
+        university.includes('brandName: "St. Mary\'s University"') &&
+        university.includes('shortName: "SMRU"') &&
+        university.includes('legalName: "St. Mary\'s Rehabilitation University"') &&
+        site.includes(bridge) &&
+        site.includes('foundingDate: "2025-07-24"') &&
+        ["Stmarys University", "StMarys University", "stmarys university", "Stmarys", "StMarys", "stmarys"].every(
+          (alias) => !site.includes(`"${alias}"`)
+        )
+      );
+    },
+  },
+  {
+    name: "Naming standard: no 'St.Mary' (no space) in site copy, data or llms files",
+    pass: () => {
+      const skip = /Partners - Codes/;
+      const walk = (dir) =>
+        fs.readdirSync(path.join(root, dir), { withFileTypes: true }).flatMap((entry) => {
+          const rel = `${dir}/${entry.name}`;
+          if (skip.test(rel)) return [];
+          if (entry.isDirectory()) return walk(rel);
+          return /\.(tsx?|mjs|js|json|txt|md)$/.test(entry.name) ? [rel] : [];
+        });
+      const files = [...walk("src"), ...walk("app"), ...walk("data"), "public/llms.txt", "public/llms-full.txt"];
+      // The single permitted no-space form is the schema alternateName entry in site.ts.
+      return files.every((file) => !/St\.Mary|\b(Stmarys|StMarys) University\b/.test(read(file).replace(/"St\.Mary's University",/g, "")));
+    },
+  },
+  {
+    name: "Brand rewrite script and keywords meta are gone",
+    pass: () =>
+      !exists("update_brand.js") &&
+      !read("src/lib/metadata.ts").includes("keywords: Array.from") &&
+      !read("app/layout.tsx").includes("keywords: ["),
+  },
+  {
+    name: "Canonical identity page /smru/ exists with disambiguation and FAQ schema",
+    pass: () => {
+      const page = read("app/smru/page.tsx");
+      const sitemap = read("src/lib/seo/sitemap.ts");
+      return (
+        page.includes("SITE_IDENTITY.bridgeSentence") &&
+        page.includes("Not to be confused with") &&
+        page.includes("buildFaqSchema") &&
+        sitemap.includes('"/smru"')
+      );
     },
   },
   {
@@ -123,6 +155,7 @@ const checks = [
         robots.includes("User-agent: OAI-SearchBot") &&
         robots.includes("User-agent: bingbot") &&
         llms.includes("Canonical academic URL pattern:") &&
+        llms.includes("St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University") &&
         llms.includes("Source priority:")
       );
     },
@@ -136,14 +169,19 @@ const checks = [
     },
   },
   {
-    name: "All course pages include typo keyword support",
+    name: "Deliberate-misspelling keyword machinery is absent",
     pass: () => {
-      const file = read("src/lib/seo/search-intent.ts");
-      return (
-        file.includes("buildProgramTypoSearchTerms") &&
-        file.includes("typoPhrase") &&
-        ["admision", "eligiblity", "cource", "collage", "hyderbad"].every((term) => file.includes(term))
-      );
+      const files = ["src/lib/seo/search-intent.ts", "src/lib/seo/health-allied-course-seo.ts"];
+      return files.every((file) => {
+        const text = read(file);
+        return (
+          !text.includes("buildProgramTypoSearchTerms") &&
+          !text.includes("typoPhrase") &&
+          !text.includes("TYPO_KEYWORD_SUPPORT") &&
+          !text.includes("COURSE_TYPO_SUPPORT") &&
+          !/cource|admision|collage|hyderbad|tecnology|theraphy|eligiblity|scince|optomitry/i.test(text)
+        );
+      });
     },
   },
   {
@@ -174,12 +212,8 @@ const checks = [
       return (
         uniqueCourseKeys.length > 0 &&
         uniqueCourseKeys.every((key) => healthSeo.includes(`"${key}": profile({`)) &&
-        uniqueCourseKeys.every((key) => healthSeo.includes(`"${key}": [`)) &&
         healthSeo.includes("buildHighIntentMetaTitle") &&
-        healthSeo.includes("Admission 2026, Fees") &&
-        healthSeo.includes("TYPO_KEYWORD_SUPPORT") &&
-        healthSeo.includes("COURSE_TYPO_SUPPORT") &&
-        ["physiotheraphy", "tecnology", "admision", "cource", "hyderbad"].every((term) => healthSeo.includes(term))
+        healthSeo.includes("Admission 2026, Fees")
       );
     },
   },

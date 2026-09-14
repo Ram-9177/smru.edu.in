@@ -7,10 +7,10 @@ import { PHD_FAQS } from "@/lib/seo/static-page-faqs";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Ph.D. Admissions 2026 Status | Doctoral Research Programs | St.Mary's University",
-  description: "View Ph.D. admissions status, notices, fees, and doctoral research pathways at St.Mary's University, including current cycle updates.",
+  title: "Ph.D. Admissions 2026 Status | Doctoral Research Programs | St. Mary's University",
+  description: "View Ph.D. admissions status, notices, fees, and doctoral research pathways at St. Mary's University, including current cycle updates.",
   pathname: "/phd-admissions",
-  keywords: ["St.Mary's University PhD admissions", "doctoral programs Hyderabad"],
+  keywords: ["St. Mary's University PhD admissions", "doctoral programs Hyderabad"],
 });
 
 export default function Page() {
@@ -27,7 +27,7 @@ export default function Page() {
         id="phd-page-schema"
         data={buildWebPageSchema({
           title: "Ph.D. Admissions",
-          description: "Ph.D. admissions status, notices, fees, and doctoral research routes for St.Mary's University, including current cycle updates.",
+          description: "Ph.D. admissions status, notices, fees, and doctoral research routes for St. Mary's University, including current cycle updates.",
           pathname: "/phd-admissions",
         })}
       />

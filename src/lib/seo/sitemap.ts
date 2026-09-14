@@ -19,7 +19,7 @@ const base = "https://smru.edu.in";
 const LAST_MODIFIED = new Date("2026-05-15");
 
 // Tier 1: Conversion & Trust pages - highest priority after homepage
-const tier1Routes = ["/admissions", "/exam-notification", "/phd-admissions", "/schools", "/about", "/contact", "/law"];
+const tier1Routes = ["/smru", "/admissions", "/exam-notification", "/phd-admissions", "/schools", "/about", "/contact", "/law"];
 
 // Tier 2: Academic catalogue & campus pages
 const tier2Routes = [

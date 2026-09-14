@@ -16,9 +16,9 @@ import { buildItemListSchema } from "@/lib/seo/schema";
 export const metadata: Metadata = buildMetadata({
   title: "University Events",
   description:
-    "Explore campus events, institutional initiatives, and student activities at St.Mary's University in Hyderabad.",
+    "Explore campus events, institutional initiatives, and student activities at St. Mary's University in Hyderabad.",
   pathname: "/events",
-  keywords: ["St.Mary's University events", "university events Hyderabad", "campus activities"],
+  keywords: ["St. Mary's University events", "university events Hyderabad", "campus activities"],
 });
 
 export default function EventsPage() {
@@ -46,7 +46,7 @@ export default function EventsPage() {
             University Events
           </h1>
           <p className="mt-5 max-w-2xl text-base font-medium leading-7 text-white/75 md:text-lg">
-            Campus activities, institutional initiatives, and student life updates from St.Mary&apos;s University.
+            Campus activities, institutional initiatives, and student life updates from St. Mary&apos;s University.
           </p>
         </div>
       </section>

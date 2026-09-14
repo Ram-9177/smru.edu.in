@@ -24,18 +24,28 @@ export const buildOrganizationSchema = () => ({
     "@type": "ImageObject",
     url: SITE_IDENTITY.logoUrl,
   },
-  description: SITE_IDENTITY.defaultDescription,
+  description: SITE_IDENTITY.bridgeSentence,
+  foundingDate: SITE_IDENTITY.foundingDate,
+  parentOrganization: {
+    "@type": "Organization",
+    name: SITE_IDENTITY.parentOrganizationName,
+  },
   telephone: SITE_IDENTITY.telephone,
   email: SITE_IDENTITY.email,
   address: {
     "@type": "PostalAddress",
     ...SITE_IDENTITY.address,
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    ...SITE_IDENTITY.geo,
+  },
+  areaServed: { "@type": "Country", name: "India" },
   contactPoint: SITE_IDENTITY.contactPoints.map((cp) => ({
     "@type": "ContactPoint",
     ...cp,
   })),
-  sameAs: SITE_IDENTITY.socialLinks,
+  sameAs: [...SITE_IDENTITY.socialLinks, SITE_IDENTITY.googleMapsUrl],
 });
 
 export const buildUniversitySchema = () => ({

@@ -14,8 +14,8 @@ const Niat = () => {
   return (
     <>
       <SEO 
-        title="NIAT | St.Mary's University"
-        description="Explore the NIAT programs in collaboration with St.Mary's University."
+        title="NIAT | St. Mary's University"
+        description="Explore the NIAT programs in collaboration with St. Mary's University."
         canonical="https://smru.edu.in/niat"
       />
       
@@ -36,10 +36,10 @@ const Niat = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative flex flex-col items-center"
             >
-              {/* Central St.Mary's University Logo with pulsing effect */}
+              {/* Central St. Mary's University Logo with pulsing effect */}
               <motion.img 
                 src={resolveAssetSrc(logo)} 
-                alt="St.Mary's University Logo" 
+                alt="St. Mary's University Logo" 
                 className="h-24 md:h-32 w-auto object-contain mb-10 drop-shadow-xl"
                 animate={{ 
                   scale: [1, 1.05, 1],

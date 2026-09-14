@@ -48,7 +48,7 @@ export default function ApprovalsRecognitions() {
             <div className="w-20 h-1.5 bg-[#ffaf3a] cut-corner-underline mb-8" />
 
             <p className="max-w-2xl text-slate-600 font-medium text-lg leading-relaxed mb-10">
-              St.Mary's University is legally established as St.Mary's Rehabilitation University under the Telangana State Private Universities Act and recognized by UGC under Section 2(f). This page keeps public verification documents, review dates, and university-cycle regulatory notes in one official place.
+              St. Mary's University is legally established as St. Mary's Rehabilitation University under the Telangana State Private Universities Act and recognized by UGC under Section 2(f). This page keeps public verification documents, review dates, and university-cycle regulatory notes in one official place.
             </p>
 
             {/* Quick Stats/Trust Items */}
@@ -56,7 +56,7 @@ export default function ApprovalsRecognitions() {
               {[
                 { icon: FaUniversity, label: "State Established", value: "Act No. 10 of 2026" },
                 { icon: FaCheckCircle, label: "UGC Recognized", value: "Under Section 2(f)" },
-                { icon: FaAward, label: "Academic Context", value: "St.Mary's Legacy" },
+                { icon: FaAward, label: "Academic Context", value: "St. Mary's Legacy" },
               ].map((item, i) => (
                 <div key={i} className="bg-white border border-[#d8e8fb] cut-corner-panel p-5 shadow-sm flex flex-col items-center text-center">
                   <item.icon className="text-[#019e6e] mb-3" size={20} />

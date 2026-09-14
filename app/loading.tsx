@@ -15,7 +15,7 @@ export default function Loading() {
         <div className="relative flex flex-col items-center">
           <img 
             src="/assets/Logo.png" 
-            alt="St.Mary's University" 
+            alt="St. Mary's University" 
             className="h-20 sm:h-28 w-auto object-contain animate-premium-pulse"
           />
           

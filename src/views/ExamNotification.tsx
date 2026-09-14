@@ -27,7 +27,7 @@ export default function ExamNotification() {
           <p className="mx-auto mt-5 max-w-3xl text-base font-semibold leading-8 text-white/75">
             No university entrance exam is currently announced. Any future entrance examination,
             schedule, eligibility, application or admit-card information will be published only
-            through an official St.Mary's University notice.
+            through an official St. Mary's University notice.
           </p>
         </div>
 

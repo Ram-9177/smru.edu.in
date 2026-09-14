@@ -32,12 +32,12 @@ export const getSchoolMetadata = (params: { schoolSlug: string }): Metadata => {
   const school = findBySlugOrName(schools, params.schoolSlug);
   const schoolName = school?.name || "Academic School";
   
-  // Authority Pattern: [School Name] Admissions 2026 | St.Mary's University Hyderabad
-  const title = `${schoolName} Admissions 2026 | St.Mary's University`;
+  // Authority Pattern: [School Name] Admissions 2026 | St. Mary's University Hyderabad
+  const title = `${schoolName} Admissions 2026 | St. Mary's University`;
   const description = trimText(
     school?.about
       ? `Explore admissions 2026, courses, eligibility, and official application updates for ${schoolName}. ${school.about}`
-      : `Explore admissions 2026, courses, eligibility, and official application updates for ${schoolName} at St.Mary's University.`
+      : `Explore admissions 2026, courses, eligibility, and official application updates for ${schoolName} at St. Mary's University.`
   );
 
   const isLaw = params.schoolSlug === "law";
@@ -55,7 +55,7 @@ export const getSchoolMetadata = (params: { schoolSlug: string }): Metadata => {
       "admissions updates",
       "Hyderabad University",
       "College Telangana",
-      "St.Mary's University",
+      "St. Mary's University",
       ...customKeywords,
       ...getSchoolSearchTerms({ slug: params.schoolSlug, name: schoolName }),
     ],
@@ -67,10 +67,10 @@ export const getDepartmentMetadata = (params: { schoolSlug: string; deptSlug: st
   const dept = findBySlugOrName(school?.departments as Array<{ slug?: string; name?: string; about?: string }> | undefined, params.deptSlug);
   
   const deptName = dept?.name || "Department";
-  const schoolName = school?.name || "St.Mary's University";
+  const schoolName = school?.name || "St. Mary's University";
   
-  // Authority Pattern: [Department] Admissions | [School] | St.Mary's University Hyderabad
-  const title = `${deptName} Admissions 2026 | ${schoolName} | St.Mary's University Hyderabad`;
+  // Authority Pattern: [Department] Admissions | [School] | St. Mary's University Hyderabad
+  const title = `${deptName} Admissions 2026 | ${schoolName} | St. Mary's University Hyderabad`;
   const description = trimText(
     dept?.about
       ? `${dept.about} Check admissions 2026, eligibility, and official application updates.`
@@ -87,7 +87,7 @@ export const getDepartmentMetadata = (params: { schoolSlug: string; deptSlug: st
       schoolName,
       "admissions updates",
       "Hyderabad",
-      "St.Mary's University",
+      "St. Mary's University",
       ...getDepartmentSearchTerms(
         { slug: params.schoolSlug, name: schoolName },
         { slug: params.deptSlug, name: deptName }
@@ -117,7 +117,7 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
 
   const programName = program?.name || "Program";
   const deptName = dept?.name || "Department";
-  const schoolName = school?.name || "St.Mary's University";
+  const schoolName = school?.name || "St. Mary's University";
   const healthAlliedSeo = getHealthAlliedCourseSeoProfile({
     schoolSlug: params.schoolSlug,
     departmentSlug: params.deptSlug,
@@ -129,14 +129,14 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
   );
   const programSummary = buildProgramSummary(program);
   
-  // Authority Pattern: [Program Name] Admissions 2026, Eligibility, Fees & Syllabus | St.Mary's University
-  const title = healthAlliedSeo?.metaTitle || `${programName} Admissions 2026, Eligibility, Fees & Syllabus | St.Mary's University Hyderabad`;
+  // Authority Pattern: [Program Name] Admissions 2026, Eligibility, Fees & Syllabus | St. Mary's University
+  const title = healthAlliedSeo?.metaTitle || `${programName} Admissions 2026, Eligibility, Fees & Syllabus | St. Mary's University Hyderabad`;
   const description = trimText(
     healthAlliedSeo
       ? `${healthAlliedSeo.metaDescription} ${programSummary ? `${programSummary}. ` : ""}Latest intake, approvals, placement, salary, and council recognition must be verified with the university.`
       : program?.overview
-      ? `${programName} admissions 2026 at St.Mary's University Hyderabad: eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses. ${programSummary ? `${programSummary}. ` : ""}${program.overview}`
-      : `${programName} at St.Mary's University Hyderabad: admissions 2026, eligibility, duration, fee guidance, syllabus, career outcomes, and recommended related courses. ${programSummary ? `${programSummary}.` : ""}`
+      ? `${programName} admissions 2026 at St. Mary's University Hyderabad: eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses. ${programSummary ? `${programSummary}. ` : ""}${program.overview}`
+      : `${programName} at St. Mary's University Hyderabad: admissions 2026, eligibility, duration, fee guidance, syllabus, career outcomes, and recommended related courses. ${programSummary ? `${programSummary}.` : ""}`
   );
 
   return buildMetadata({
@@ -165,7 +165,7 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
       "University Fees",
       "Eligibility",
       "Duration",
-      "St.Mary's University",
+      "St. Mary's University",
       ...getProgramSearchTerms(
         { slug: params.schoolSlug, name: schoolName },
         { slug: params.deptSlug, name: deptName },

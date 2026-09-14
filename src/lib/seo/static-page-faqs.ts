@@ -6,7 +6,7 @@ import {
 
 export const ADMISSIONS_FAQS: SeoFaqItem[] = [
   {
-    question: "How do I apply to St.Mary's University?",
+    question: "How do I apply to St. Mary's University?",
     answer:
       "Use the official application route for UG, PG, and diploma programs or the dedicated Ph.D. admissions page for doctoral applications.",
   },
@@ -38,7 +38,7 @@ export const ADMISSIONS_FAQS: SeoFaqItem[] = [
 
 export const CONTACT_FAQS: SeoFaqItem[] = [
   {
-    question: "Where is St.Mary's University located?",
+    question: "Where is St. Mary's University located?",
     answer:
       "The website lists the campus at Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana.",
   },
@@ -60,7 +60,7 @@ export const CONTACT_FAQS: SeoFaqItem[] = [
 
 export const PHD_FAQS: SeoFaqItem[] = [
   {
-    question: "How do I register interest for the next Ph.D. admissions cycle at St.Mary's University?",
+    question: "How do I register interest for the next Ph.D. admissions cycle at St. Mary's University?",
     answer: PHD_ADMISSIONS_STATUS_MESSAGE,
   },
   {

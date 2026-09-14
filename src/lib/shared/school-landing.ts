@@ -50,7 +50,7 @@ export const getSchoolLandingConfig = (schoolSlug: string) => {
     shortName: school.short || school.name,
     description:
       school.about ||
-      `${school.name} at St.Mary's University with admissions, departments, and programme information.`,
+      `${school.name} at St. Mary's University with admissions, departments, and programme information.`,
     imagePath: SCHOOL_LANDING_IMAGES[slug] || "/assets/hero-campus.webp",
   };
 };
@@ -61,7 +61,7 @@ export const buildSchoolLandingMetadata = (schoolSlug: string): Metadata => {
   const pathname = config?.pathname || `/${schoolSlug}`;
   const description =
     config?.description ||
-    `${name} at St.Mary's University with departments, programmes, admissions 2026, and academic pathway information.`;
+    `${name} at St. Mary's University with departments, programmes, admissions 2026, and academic pathway information.`;
 
   return buildMetadata({
     title: `${name} | Departments, Courses & Admissions 2026`,
@@ -71,8 +71,8 @@ export const buildSchoolLandingMetadata = (schoolSlug: string): Metadata => {
       name,
       `${name} admissions`,
       `${name} programmes`,
-      "St.Mary's University schools",
-      "St.Mary's University",
+      "St. Mary's University schools",
+      "St. Mary's University",
       ...getSchoolSearchTerms({ slug: schoolSlug, name }),
     ],
   });

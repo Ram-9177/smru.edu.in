@@ -59,10 +59,10 @@ const normalize = (value = "") =>
 const compact = (value = "") => normalize(value).replace(/\s+/g, "");
 
 const QUERY_SYNONYMS: Record<string, string[]> = {
-  "St.Mary's": ["St.Mary's University", "St.Mary's University hyderabad"],
-  "St.Mary's University": ["St.Mary's", "St.Mary's University hyderabad"],
-  Stmaryshyderabad: ["St.Mary's University hyderabad"],
-  Stmarysuniversity: ["St.Mary's", "St.Mary's University"],
+  "St. Mary's": ["St. Mary's University", "St. Mary's University hyderabad"],
+  "St. Mary's University": ["St. Mary's", "St. Mary's University hyderabad"],
+  Stmaryshyderabad: ["St. Mary's University hyderabad"],
+  Stmarysuniversity: ["St. Mary's", "St. Mary's University"],
 };
 
 const queryVariants = (query: string) => {
@@ -146,7 +146,7 @@ const scoreSearchItem = (item: SearchItem, query: string) => {
 };
 
 const staticItems: SearchItem[] = [
-  { title: "Home", description: "University overview, admissions highlights, campus, schools, and student support.", href: "/", type: "Page", keywords: "home St.Mary's University admissions campus" },
+  { title: "Home", description: "University overview, admissions highlights, campus, schools, and student support.", href: "/", type: "Page", keywords: "home St. Mary's University admissions campus" },
   { title: "About", description: "Institutional profile, leadership, journey, and university context.", href: "/about", type: "Page", keywords: "about leadership university profile" },
   { title: "Admissions", description: "UG, PG, diploma, and doctoral admissions guidance.", href: "/admissions", type: "Admissions", keywords: "admission apply eligibility fee scholarship" },
   { title: "Ph.D. Admissions", description: "Doctoral admissions status, notices, research routes, and next-cycle support.", href: "/phd-admissions", type: "Admissions", keywords: "phd doctoral research entrance" },
@@ -182,7 +182,7 @@ function buildSearchItems(): SearchItem[] {
       };
       const programmeItems: SearchItem[] = (department.programs || []).map((program) => ({
         title: program.name || "Program",
-        description: program.overview || `${department.name || "Department"} programme under ${school.name || "St.Mary's University"}.`,
+        description: program.overview || `${department.name || "Department"} programme under ${school.name || "St. Mary's University"}.`,
         href: `${deptHref}/${safeSlug(program.slug, program.name)}`,
         type: "Programme",
         keywords: `${school.name || ""} ${department.name || ""} ${program.name || ""} ${program.level || ""} ${program.eligibility || ""} ${program.duration || ""}`
@@ -249,7 +249,7 @@ export default function SiteSearchClient() {
       <section className="px-4">
         <div className="mx-auto max-w-6xl rounded-[2.5rem] border border-[#dce7f3] bg-white px-6 py-10 shadow-[0_24px_44px_rgba(13,49,92,0.08)] md:px-12">
           <p className="text-[11px] font-black uppercase tracking-[0.35em] text-[#019e6e]">Site Search</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-[#0d315c] md:text-6xl">Search Stmarys University</h2>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-[#0d315c] md:text-6xl">Search St. Mary's University</h2>
           <p className="mt-5 max-w-3xl text-base font-medium leading-8 text-slate-600 md:text-lg">
             Search schools, programmes, admissions information, official documents, campus resources, and public disclosure pages.
           </p>

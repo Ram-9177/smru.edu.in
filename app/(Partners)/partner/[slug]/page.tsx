@@ -34,8 +34,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
   const name = (partner as any)?.name || params.slug.toUpperCase();
   return buildMetadata({
-    title: `${name} Partner | St.Mary's University`,
-    description: `Explore ${name} education partner programs and pathways at St.Mary's University.`,
+    title: `${name} Partner | St. Mary's University`,
+    description: `Explore ${name} education partner programs and pathways at St. Mary's University.`,
     pathname: `/partner/${params.slug}`,
   });
 }
@@ -66,12 +66,12 @@ export default function PartnerDetailPage({ params }: { params: { slug: string }
         id={`${params.slug}-page-schema`}
         data={buildWebPageSchema({
           title: `${name} Partner`,
-          description: `Explore ${name} education partner programs and pathways at St.Mary's University.`,
+          description: `Explore ${name} education partner programs and pathways at St. Mary's University.`,
           pathname: `/partner/${params.slug}`,
         })}
       />
       {params.slug !== "edinbox" && params.slug !== "carebridge" && (
-        <h1 className="sr-only">{name} Partner Programs | St.Mary&apos;s University</h1>
+        <h1 className="sr-only">{name} Partner Programs | St. Mary&apos;s University</h1>
       )}
       {params.slug === "edinbox" ? (
         <EdinboxForensicLandingV2 />

@@ -8,11 +8,11 @@ import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Courses Offered at St.Mary's University | UG, PG & Professional Programmes",
-  description: "Explore the schools at St.Mary's University. From nursing to engineering, discover specialized career-focused pathways for 2026.",
+  title: "Courses Offered at St. Mary's University | UG, PG & Professional Programmes",
+  description: "Explore the schools at St. Mary's University. From nursing to engineering, discover specialized career-focused pathways for 2026.",
   pathname: "/schools",
   keywords: [
-    "St.Mary's University schools",
+    "St. Mary's University schools",
     "professional degree programs Hyderabad",
     "healthcare courses after 12th",
     "engineering courses after 12th",
@@ -39,7 +39,7 @@ export default function Page() {
         id="schools-page-schema"
         data={buildCollectionPageSchema({
           title: "Schools",
-          description: "Explore schools, departments, and program categories at St.Mary's University.",
+          description: "Explore schools, departments, and program categories at St. Mary's University.",
           pathname: "/schools",
         })}
       />

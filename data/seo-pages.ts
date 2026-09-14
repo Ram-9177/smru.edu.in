@@ -60,7 +60,7 @@ type Seed = {
 };
 
 const h2ByIntent = {
-  ranking: ["What this search means", "What students should verify", "Recognition and disclosure checks", "Questions to ask before applying", "Official St.Marys University links"],
+  ranking: ["What this search means", "What students should verify", "Recognition and disclosure checks", "Questions to ask before applying", "Official St. Mary's University links"],
   geo: ["Location answer", "Official campus and contact checks", "Course and school routes", "Questions to ask before visiting", "Verification links"],
   course: ["Course identity", "Official course route", "What to verify before applying", "Admissions and disclosure checks", "FAQs"],
   admission: ["Admission question", "Official application route", "Documents and fee confirmation", "Counselling questions", "FAQs"],
@@ -103,7 +103,7 @@ export const HIGH_RISK_CLAIM_DISCLAIMER =
   "This page is a student guidance page for search and comparison purposes. It does not make unsupported ranking, placement, salary, accreditation or 'No.1' claims.";
 
 export const UNAPPROVED_PAGE_DISCLAIMER =
-  "This optional page is not approved for public indexing. It must remain noindex until St.Marys University gives explicit approval and public proof is available where needed.";
+  "This optional page is not approved for public indexing. It must remain noindex until St. Mary's University gives explicit approval and public proof is available where needed.";
 
 const riskLevelFor = (seed: Seed): SeoRiskLevel =>
   HIGH_RISK_SEO_PAGE_NUMBERS.has(seed.no) ? "high" : (seed.risk.toLowerCase() as SeoRiskLevel);
@@ -150,13 +150,13 @@ const proofHeldFields = "eligibility, duration, fee, intake, approval, salary, p
 const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: OfficialCourseSeo): SeoSection[] => {
   const topic = seed.keyword;
   const courseName = course?.seoName || topic;
-  const school = course?.school || "the relevant St.Marys University school";
+  const school = course?.school || "the relevant St. Mary's University school";
 
   if (kind === "patient") {
     return [
       section("Patient Enquiry Answer", [
-        `This page supports people searching for ${topic} by routing them to official St.Marys University verification before they visit or rely on third-party information.`,
-        "St.Marys University can be considered as a verification starting point for rehabilitation-linked education and patient-care-linked learning, but current service availability must be confirmed directly.",
+        `This page supports people searching for ${topic} by routing them to official St. Mary's University verification before they visit or rely on third-party information.`,
+        "St. Mary's University can be considered as a verification starting point for rehabilitation-linked education and patient-care-linked learning, but current service availability must be confirmed directly.",
       ]),
       section("Rehabilitation Education Ecosystem", [
         "The safe positioning is clinical exposure, rehabilitation education ecosystem and patient-care-linked learning connected with rehabilitation and health-related academic areas.",
@@ -167,11 +167,11 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
         "For urgent symptoms, injury, emergency care or diagnosis, contact local emergency services or a licensed hospital immediately.",
       ]),
       section("Official Contact Routes", [
-        "Use the official St.Marys University contact route and campus-location route to verify the current process before travelling.",
+        "Use the official St. Mary's University contact route and campus-location route to verify the current process before travelling.",
         "Patient-facing searches should remain enquiry-led and verification-led until public service documents are available.",
       ]),
       section("FAQs", [
-        "FAQ answers should explain what to verify, how to contact St.Marys University, what cannot be assumed and when emergency medical care is required.",
+        "FAQ answers should explain what to verify, how to contact St. Mary's University, what cannot be assumed and when emergency medical care is required.",
         "Any future service-specific claim should be added only after official public proof is supplied.",
       ]),
     ];
@@ -180,7 +180,7 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
   if (kind === "course") {
     return [
       section("Course Identity", [
-        `${courseName} is referenced through the official St.Marys University course lock for SEO and compliance-safe discovery.`,
+        `${courseName} is referenced through the official St. Mary's University course lock for SEO and compliance-safe discovery.`,
         `The linked academic area is ${school}; this page does not add unverified ${proofHeldFields}.`,
       ]),
       section("Official Course Route", [
@@ -188,11 +188,11 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
         "If an official course page is linked, that source remains the controlling public reference for course-specific details.",
       ]),
       section("What To Verify Before Applying", [
-        `Before applying, verify ${proofHeldFields} through official St.Marys University communication or published documents.`,
+        `Before applying, verify ${proofHeldFields} through official St. Mary's University communication or published documents.`,
         "Do not rely on third-party summaries, copied fee tables, old screenshots or counselling claims unless they match the latest official source.",
       ]),
       section("Admissions And Disclosure Checks", [
-        "Admissions interest should be routed to official St.Marys University admissions channels, not unsupported deadline or seat claims.",
+        "Admissions interest should be routed to official St. Mary's University admissions channels, not unsupported deadline or seat claims.",
         "University-level recognition and programme-level approvals are separate checks and should not be merged into one claim.",
       ]),
       section("FAQs", [
@@ -206,11 +206,11 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
     return [
       section("Admission Question", [
         `This guide answers the search intent behind ${topic} without adding unverified admission dates, seat counts, fee promises or eligibility claims.`,
-        "It is designed to move prospective students from search results to official St.Marys University admissions verification.",
+        "It is designed to move prospective students from search results to official St. Mary's University admissions verification.",
       ]),
       section("Official Application Route", [
         "Use the official admissions link and contact route for the current application process.",
-        "Any deadline, counselling schedule, entrance requirement or document checklist should be treated as current only when published or confirmed by St.Marys University.",
+        "Any deadline, counselling schedule, entrance requirement or document checklist should be treated as current only when published or confirmed by St. Mary's University.",
       ]),
       section("Documents And Fee Confirmation", [
         "Applicants should confirm documents, fee structure, refund rules, scholarship status and payment process through official channels.",
@@ -218,7 +218,7 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
       ]),
       section("Counselling Questions", [
         "Useful questions include course availability, school, admission step, contact person, official document source and disclosure route.",
-        "Placement, salary, ranking and guarantee-based claims should be ignored unless St.Marys University publishes verifiable evidence.",
+        "Placement, salary, ranking and guarantee-based claims should be ignored unless St. Mary's University publishes verifiable evidence.",
       ]),
       section("FAQs", [
         "Admission FAQ answers should be short, factual and route users to official verification.",
@@ -238,7 +238,7 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
         "Claims such as best, top, guaranteed placement or highest package should be accepted only when backed by current public proof.",
       ]),
       section("Official Course And Disclosure Links", [
-        "For St.Marys University, use the official course, admissions, disclosure and contact routes linked on this page.",
+        "For St. Mary's University, use the official course, admissions, disclosure and contact routes linked on this page.",
         "Keep the university-level and programme-level verification steps separate when comparing options.",
       ]),
       section("Questions For Counselling", [
@@ -255,11 +255,11 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
   if (kind === "geo") {
     return [
       section("Location Answer", [
-        `This page serves users searching for ${topic} by connecting the query to St.Marys University's official Hyderabad, Telangana verification routes.`,
+        `This page serves users searching for ${topic} by connecting the query to St. Mary's University's official Hyderabad, Telangana verification routes.`,
         "Local-intent users should confirm campus location, travel route, admissions contact and course availability through official sources.",
       ]),
       section("Official Campus And Contact Checks", [
-        "Use St.Marys University's campus-location and contact pages before planning a visit.",
+        "Use St. Mary's University's campus-location and contact pages before planning a visit.",
         "Do not rely on third-party maps, old listings or unofficial phone numbers when making admission or visit decisions.",
       ]),
       section("Course And School Routes", [
@@ -272,7 +272,7 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
       ]),
       section("Verification Links", [
         "The links on this page are selected to reduce dependence on aggregator pages and copied local listings.",
-        "If a local claim cannot be matched with official St.Marys University information, treat it as unverified.",
+        "If a local claim cannot be matched with official St. Mary's University information, treat it as unverified.",
       ]),
     ];
   }
@@ -280,7 +280,7 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
   return [
     section("What This Search Means", [
       `${topic} is a high-risk search phrase when it suggests a ranking, guarantee, first-ever claim or outcome promise.`,
-      "This page answers the query by explaining verification steps instead of declaring St.Marys University as best, top, No.1, first, guaranteed or highest.",
+      "This page answers the query by explaining verification steps instead of declaring St. Mary's University as best, top, No.1, first, guaranteed or highest.",
     ]),
     section("What Students Should Verify", [
       `Students should verify ${proofHeldFields}, official recognition evidence, course identity, school route and admissions process.`,
@@ -288,13 +288,13 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
     ]),
     section("Recognition And Disclosure Checks", [
       "University-level recognition, professional programme approvals, NAAC status, rankings and placement outcomes are different evidence categories.",
-      "Each category should be checked separately through the official St.Marys University website, public documents or approved contact routes.",
+      "Each category should be checked separately through the official St. Mary's University website, public documents or approved contact routes.",
     ]),
     section("Questions To Ask Before Applying", [
       "Ask for the official source of any claim about fees, intake, eligibility, placements, scholarships, facilities or approvals.",
-      "If the claim cannot be verified, keep it out of application decisions until St.Marys University provides proof.",
+      "If the claim cannot be verified, keep it out of application decisions until St. Mary's University provides proof.",
     ]),
-    section("Official St.Marys University Links", [
+    section("Official St. Mary's University Links", [
       "Use the official links on this page to continue from broad search intent to verified university information.",
       "This is the safest way to support SEO, answer engines and student decision-making without creating unsupported claims.",
     ]),
@@ -304,7 +304,7 @@ const sectionsFor = (kind: keyof typeof h2ByIntent, seed: Seed, course?: Officia
 const internalLinksFor = (kind: keyof typeof h2ByIntent, seed: Seed): SeoPage["internalLinks"] => {
   const core = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About St.Marys University" },
+    { href: "/about", label: "About St. Mary's University" },
     { href: "/schools", label: "Schools" },
     { href: "/admissions", label: "Admissions" },
     { href: "/contact", label: "Contact" },
@@ -315,7 +315,7 @@ const internalLinksFor = (kind: keyof typeof h2ByIntent, seed: Seed): SeoPage["i
       { href: "/health-allied-health-sciences", label: "Health & Allied Health Sciences" },
       { href: "/rehabilitation-sciences", label: "Rehabilitation Sciences" },
       { href: "/campus-location-hyderabad", label: "Campus Location" },
-      { href: "/contact", label: "Contact St.Marys University" },
+      { href: "/contact", label: "Contact St. Mary's University" },
     ];
   }
   if (kind === "compliance") {
@@ -361,7 +361,7 @@ const makePage = (seed: Seed): SeoPage => {
     ? UNAPPROVED_PAGE_DISCLAIMER
     : requiresManualApproval
       ? HIGH_RISK_CLAIM_DISCLAIMER
-      : "This page is an isolated student guidance page. Official St.Marys University routes should be used for final verification.";
+      : "This page is an isolated student guidance page. Official St. Mary's University routes should be used for final verification.";
   const titleBase =
     seed.risk === "High" && /best|top|no\.?1|100%|highest|first/i.test(seed.keyword)
       ? `${titleCase(seed.keyword)}? Verify First`
@@ -369,12 +369,12 @@ const makePage = (seed: Seed): SeoPage => {
   const title = trim(titleBase, 58);
   const description = trim(
     kind === "patient"
-      ? `People searching for ${seed.keyword} can contact St.Marys University to verify current rehabilitation-linked support before visiting.`
+      ? `People searching for ${seed.keyword} can contact St. Mary's University to verify current rehabilitation-linked support before visiting.`
       : kind === "course"
-        ? `Check ${course?.seoName || seed.keyword} with this ${courseMetaContext(seed)} using official St.Marys University routes before applying.`
+        ? `Check ${course?.seoName || seed.keyword} with this ${courseMetaContext(seed)} using official St. Mary's University routes before applying.`
         : kind === "compliance"
-          ? `Verify ${seed.keyword} through official St.Marys University disclosure status, evidence links and contact routes.`
-          : `Use official St.Marys University routes to verify ${seed.keyword} claims before relying on rankings, fees or outcomes.`,
+          ? `Verify ${seed.keyword} through official St. Mary's University disclosure status, evidence links and contact routes.`
+          : `Use official St. Mary's University routes to verify ${seed.keyword} claims before relying on rankings, fees or outcomes.`,
     150
   );
 
@@ -408,19 +408,19 @@ const makePage = (seed: Seed): SeoPage => {
           ? "Do not add eligibility, duration, fee, intake, approval, salary, placement, ranking or accreditation unless official proof is provided."
           : kind === "compliance"
             ? "Use published evidence or status labels only."
-            : "Do not state St.Marys University is best, top, No.1, first, guaranteed or highest without official evidence.",
+            : "Do not state St. Mary's University is best, top, No.1, first, guaranteed or highest without official evidence.",
     directAnswer:
       kind === "patient"
-        ? "If you are searching for physiotherapy or rehabilitation support near Hyderabad, use official St.Marys University contact routes to verify whether any current public support information is available before visiting."
+        ? "If you are searching for physiotherapy or rehabilitation support near Hyderabad, use official St. Mary's University contact routes to verify whether any current public support information is available before visiting."
         : kind === "course"
-          ? `${course?.seoName || seed.keyword} should be checked through official St.Marys University course and admissions routes. Final fee, intake, eligibility and approval details require official confirmation.`
+          ? `${course?.seoName || seed.keyword} should be checked through official St. Mary's University course and admissions routes. Final fee, intake, eligibility and approval details require official confirmation.`
           : kind === "compliance"
-            ? "Use official St.Marys University disclosure pages and evidence documents for verification. Items not publicly released should be treated as status-tracked, not claimed."
-            : "This page does not claim St.Marys University is the best, top or No.1. It explains what students should verify before trusting that type of search result.",
+            ? "Use official St. Mary's University disclosure pages and evidence documents for verification. Items not publicly released should be treated as status-tracked, not claimed."
+            : "This page does not claim St. Mary's University is the best, top or No.1. It explains what students should verify before trusting that type of search result.",
     keyFacts:
       kind === "patient"
         ? [
-            { label: "Institution", value: "St.Marys University" },
+            { label: "Institution", value: "St. Mary's University" },
             { label: "Location", value: "Hyderabad, Telangana" },
             { label: "Use", value: "Patient enquiry and public verification" },
             { label: "Before visiting", value: "Use official contact routes and do not assume treatment availability" },
@@ -428,14 +428,14 @@ const makePage = (seed: Seed): SeoPage => {
         : kind === "course"
           ? [
               { label: "Course name", value: course?.seoName || seed.keyword },
-              { label: "School area", value: course?.school || "Official St.Marys University school route" },
+              { label: "School area", value: course?.school || "Official St. Mary's University school route" },
               { label: "Verification", value: "Admissions and disclosure routes" },
               { label: "Held for proof", value: "Fee, intake, duration, eligibility, approvals and outcomes" },
             ]
           : [
               { label: "Official website", value: "https://smru.edu.in" },
-              { label: "Legal name", value: "St.Marys University" },
-              { label: "Public brand", value: "St.Marys University" },
+              { label: "Legal name", value: "St. Mary's Rehabilitation University" },
+              { label: "Public brand", value: "St. Mary's University" },
               { label: "Verification route", value: "Official disclosures and contact channels" },
             ],
     faqTopics:
@@ -448,7 +448,7 @@ const makePage = (seed: Seed): SeoPage => {
             : ["rankings", "recognition", "fees", "placements", "official documents"],
     schema: schemaFor(kind, seed),
     internalLinks: internalLinksFor(kind, seed),
-    cta: kind === "patient" ? "Contact St.Marys University to confirm current support before visiting." : "Use official St.Marys University links to verify details before applying.",
+    cta: kind === "patient" ? "Contact St. Mary's University to confirm current support before visiting." : "Use official St. Mary's University links to verify details before applying.",
     indexingNote: seed.risk === "High" ? "Index after content QA; no unsupported claims." : "Index after standard QA.",
     aiOptimizationNote: "Use a short direct answer, facts table, FAQ block and official links for answer engines.",
     ugcNaacNote:
@@ -576,14 +576,14 @@ const seeds: Seed[] = [
   { no: 113, bucket: "C. Course-specific keywords", keyword: "Inclusive education courses", slug: "inclusive-education-courses", routeGroup: "admission-guides", intent: "Course category", pageType: "Course index", risk: "Medium" },
   { no: 114, bucket: "C. Course-specific keywords", keyword: "CSE specialisation courses", slug: "cse-specialisation-courses", routeGroup: "admission-guides", intent: "Course category", pageType: "Course index", risk: "Medium" },
   { no: 115, bucket: "C. Course-specific keywords", keyword: "Integrated law courses", slug: "integrated-law-courses", routeGroup: "admission-guides", intent: "Course category", pageType: "Course index", risk: "Medium" },
-  { no: 116, bucket: "D. Admission-intent keywords", keyword: "St.Marys University admissions 2026", slug: "smru-admissions-2026", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Medium" },
+  { no: 116, bucket: "D. Admission-intent keywords", keyword: "St. Mary's University admissions 2026", slug: "smru-admissions-2026", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Medium" },
   { no: 117, bucket: "D. Admission-intent keywords", keyword: "UG admissions 2026", slug: "ug-admissions-2026", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Medium" },
   { no: 118, bucket: "D. Admission-intent keywords", keyword: "PG admissions 2026", slug: "pg-admissions-2026", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Medium" },
   { no: 119, bucket: "D. Admission-intent keywords", keyword: "Diploma admissions 2026", slug: "diploma-admissions-2026", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Medium" },
   { no: 120, bucket: "D. Admission-intent keywords", keyword: "SMCET 2026 guide", slug: "smcet-2026-guide", routeGroup: "admission-guides", intent: "Entrance", pageType: "Admission guide", risk: "Medium" },
-  { no: 121, bucket: "D. Admission-intent keywords", keyword: "Entrance exam for St.Marys University", slug: "smru-entrance-exam", routeGroup: "admission-guides", intent: "Entrance", pageType: "Admission guide", risk: "Medium" },
-  { no: 122, bucket: "D. Admission-intent keywords", keyword: "Direct admission St.Marys University", slug: "direct-admission-smru-checklist", routeGroup: "admission-guides", intent: "Admission", pageType: "Caution guide", risk: "High" },
-  { no: 123, bucket: "D. Admission-intent keywords", keyword: "St.Marys University application form", slug: "application-form-guide", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Low" },
+  { no: 121, bucket: "D. Admission-intent keywords", keyword: "Entrance exam for St. Mary's University", slug: "smru-entrance-exam", routeGroup: "admission-guides", intent: "Entrance", pageType: "Admission guide", risk: "Medium" },
+  { no: 122, bucket: "D. Admission-intent keywords", keyword: "Direct admission St. Mary's University", slug: "direct-admission-smru-checklist", routeGroup: "admission-guides", intent: "Admission", pageType: "Caution guide", risk: "High" },
+  { no: 123, bucket: "D. Admission-intent keywords", keyword: "St. Mary's University application form", slug: "application-form-guide", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Low" },
   { no: 124, bucket: "D. Admission-intent keywords", keyword: "Admission counselling guide", slug: "admission-counselling-guide", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Low" },
   { no: 125, bucket: "D. Admission-intent keywords", keyword: "Admission document checklist", slug: "document-checklist", routeGroup: "admission-guides", intent: "Admission", pageType: "Checklist", risk: "Low" },
   { no: 126, bucket: "D. Admission-intent keywords", keyword: "Fee confirmation before admission", slug: "fee-confirmation-before-admission", routeGroup: "admission-guides", intent: "Admission", pageType: "Caution guide", risk: "High" },
@@ -591,7 +591,7 @@ const seeds: Seed[] = [
   { no: 128, bucket: "D. Admission-intent keywords", keyword: "Hostel admission questions", slug: "hostel-admission-questions", routeGroup: "student-guides", intent: "Student", pageType: "Student guide", risk: "Medium" },
   { no: 129, bucket: "D. Admission-intent keywords", keyword: "Campus visit before admission", slug: "campus-visit-before-admission", routeGroup: "student-guides", intent: "Local admission", pageType: "Student guide", risk: "Low" },
   { no: 130, bucket: "D. Admission-intent keywords", keyword: "Parents admission checklist", slug: "parents-admission-checklist", routeGroup: "student-guides", intent: "Admission", pageType: "Parent guide", risk: "Low" },
-  { no: 131, bucket: "D. Admission-intent keywords", keyword: "Apply online St.Marys University guide", slug: "apply-online-smru", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Low" },
+  { no: 131, bucket: "D. Admission-intent keywords", keyword: "Apply online St. Mary's University guide", slug: "apply-online-smru", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Low" },
   { no: 132, bucket: "D. Admission-intent keywords", keyword: "Admission last date check", slug: "admission-last-date-check", routeGroup: "admission-guides", intent: "Admission", pageType: "Caution guide", risk: "High" },
   { no: 133, bucket: "D. Admission-intent keywords", keyword: "Admission helpline guide", slug: "admission-helpline-guide", routeGroup: "admission-guides", intent: "Admission", pageType: "Admission guide", risk: "Low" },
   { no: 134, bucket: "D. Admission-intent keywords", keyword: "Course selection before applying", slug: "course-selection-before-applying", routeGroup: "student-guides", intent: "Decision", pageType: "Student guide", risk: "Low" },
@@ -601,7 +601,7 @@ const seeds: Seed[] = [
   { no: 138, bucket: "D. Admission-intent keywords", keyword: "BTech admissions guide", slug: "btech-admissions-guide", routeGroup: "admission-guides", intent: "Admission course", pageType: "Admission guide", risk: "Medium" },
   { no: 139, bucket: "D. Admission-intent keywords", keyword: "Health sciences admissions guide", slug: "health-sciences-admissions-guide", routeGroup: "admission-guides", intent: "Admission course", pageType: "Admission guide", risk: "Medium" },
   { no: 140, bucket: "D. Admission-intent keywords", keyword: "Nursing admissions guide", slug: "nursing-admissions-guide", routeGroup: "admission-guides", intent: "Admission course", pageType: "Admission guide", risk: "Medium" },
-  { no: 141, bucket: "E. Comparison/decision keywords", keyword: "Compare St.Marys University with other universities", slug: "compare-smru-with-other-universities", routeGroup: "student-guides", intent: "Decision", pageType: "Comparison", risk: "Medium" },
+  { no: 141, bucket: "E. Comparison/decision keywords", keyword: "Compare St. Mary's University with other universities", slug: "compare-smru-with-other-universities", routeGroup: "student-guides", intent: "Decision", pageType: "Comparison", risk: "Medium" },
   { no: 142, bucket: "E. Comparison/decision keywords", keyword: "Private university vs college", slug: "private-university-vs-college", routeGroup: "student-guides", intent: "Decision", pageType: "Comparison", risk: "Low" },
   { no: 143, bucket: "E. Comparison/decision keywords", keyword: "University vs college admission", slug: "university-vs-college-admission", routeGroup: "student-guides", intent: "Decision", pageType: "Comparison", risk: "Low" },
   { no: 144, bucket: "E. Comparison/decision keywords", keyword: "BPT vs BOT", slug: "bpt-vs-bot", routeGroup: "student-guides", intent: "Course decision", pageType: "Comparison", risk: "Medium" },
@@ -636,29 +636,29 @@ const seeds: Seed[] = [
   { no: 173, bucket: "F. Local/high-conversion keywords", keyword: "Allied health campus Hyderabad", slug: "allied-health-campus-hyderabad", routeGroup: "student-guides", intent: "Local conversion", pageType: "Local guide", risk: "Medium" },
   { no: 174, bucket: "F. Local/high-conversion keywords", keyword: "Student counselling Hyderabad university", slug: "student-counselling-hyderabad-university", routeGroup: "student-guides", intent: "Local conversion", pageType: "Student guide", risk: "Low" },
   { no: 175, bucket: "F. Local/high-conversion keywords", keyword: "Weekend campus visit Hyderabad", slug: "weekend-campus-visit-hyderabad", routeGroup: "student-guides", intent: "Local conversion", pageType: "Local guide", risk: "Medium" },
-  { no: 176, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What is St.Marys University", slug: "what-is-smru", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
-  { no: 177, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Is St.Marys University same as St.Marys University", slug: "is-st-marys-university-same-as-smru", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
-  { no: 221, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St.Marys University", slug: "Stmarys-university", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
-  { no: 222, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St.Marys University hyderabad", slug: "Stmarys-university-hyderabad", routeGroup: "student-guides", intent: "Local FAQ", pageType: "AEO FAQ", risk: "Low" },
-  { no: 223, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St.Marys University", slug: "Stmarys-rehabilitation-university", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
-  { no: 178, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Where is St.Marys University located", slug: "where-is-smru-located", routeGroup: "student-guides", intent: "Local FAQ", pageType: "AEO FAQ", risk: "Low" },
-  { no: 179, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Is St.Marys University UGC recognized", slug: "is-smru-ugc-recognized", routeGroup: "student-guides", intent: "Trust FAQ", pageType: "AEO FAQ", risk: "Medium" },
-  { no: 180, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "How to apply to St.Marys University", slug: "how-to-apply-to-smru", routeGroup: "student-guides", intent: "Admission FAQ", pageType: "AEO FAQ", risk: "Low" },
-  { no: 181, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What courses does St.Marys University offer", slug: "what-courses-does-smru-offer", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium" },
-  { no: 182, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St.Marys University offer BPT", slug: "does-smru-offer-bpt", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium", officialCourseSlug: "bpt" },
-  { no: 183, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St.Marys University offer BSc Nursing", slug: "does-smru-offer-bsc-nursing", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium", officialCourseSlug: "bsc-nursing" },
-  { no: 184, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St.Marys University offer law courses", slug: "does-smru-offer-law-courses", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium" },
-  { no: 185, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St.Marys University offer BTech CSE", slug: "does-smru-offer-btech-cse", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium", officialCourseSlug: "btech-cse" },
+  { no: 176, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What is St. Mary's University", slug: "what-is-smru", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
+  { no: 177, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Is St. Mary's University same as St. Mary's University", slug: "is-st-marys-university-same-as-smru", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
+  { no: 221, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St. Mary's University", slug: "Stmarys-university", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
+  { no: 222, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St. Mary's University hyderabad", slug: "Stmarys-university-hyderabad", routeGroup: "student-guides", intent: "Local FAQ", pageType: "AEO FAQ", risk: "Low" },
+  { no: 223, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "St. Mary's University", slug: "Stmarys-rehabilitation-university", routeGroup: "student-guides", intent: "Informational", pageType: "AEO FAQ", risk: "Low" },
+  { no: 178, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Where is St. Mary's University located", slug: "where-is-smru-located", routeGroup: "student-guides", intent: "Local FAQ", pageType: "AEO FAQ", risk: "Low" },
+  { no: 179, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Is St. Mary's University UGC recognized", slug: "is-smru-ugc-recognized", routeGroup: "student-guides", intent: "Trust FAQ", pageType: "AEO FAQ", risk: "Medium" },
+  { no: 180, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "How to apply to St. Mary's University", slug: "how-to-apply-to-smru", routeGroup: "student-guides", intent: "Admission FAQ", pageType: "AEO FAQ", risk: "Low" },
+  { no: 181, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What courses does St. Mary's University offer", slug: "what-courses-does-smru-offer", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium" },
+  { no: 182, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St. Mary's University offer BPT", slug: "does-smru-offer-bpt", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium", officialCourseSlug: "bpt" },
+  { no: 183, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St. Mary's University offer BSc Nursing", slug: "does-smru-offer-bsc-nursing", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium", officialCourseSlug: "bsc-nursing" },
+  { no: 184, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St. Mary's University offer law courses", slug: "does-smru-offer-law-courses", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium" },
+  { no: 185, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St. Mary's University offer BTech CSE", slug: "does-smru-offer-btech-cse", routeGroup: "student-guides", intent: "Course FAQ", pageType: "AEO FAQ", risk: "Medium", officialCourseSlug: "btech-cse" },
   { no: 186, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What should I check before admission", slug: "what-to-check-before-admission", routeGroup: "student-guides", intent: "Admission FAQ", pageType: "AEO FAQ", risk: "Low" },
   { no: 187, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "How to verify university recognition", slug: "how-to-verify-university-recognition", routeGroup: "student-guides", intent: "Trust FAQ", pageType: "AEO FAQ", risk: "Medium" },
-  { no: 188, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What documents prove St.Marys University status", slug: "documents-prove-smru-status", routeGroup: "student-guides", intent: "Trust FAQ", pageType: "AEO FAQ", risk: "Medium" },
-  { no: 189, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St.Marys University have hostel", slug: "does-smru-have-hostel", routeGroup: "student-guides", intent: "Student FAQ", pageType: "AEO FAQ", risk: "Medium" },
-  { no: 190, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "How to contact St.Marys University admissions", slug: "contact-smru-admissions", routeGroup: "student-guides", intent: "Admission FAQ", pageType: "AEO FAQ", risk: "Low" },
-  { no: 191, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "UGC disclosure St.Marys University", slug: "ugc-disclosure", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },
-  { no: 192, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "Mandatory disclosure St.Marys University", slug: "index", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure index", risk: "Medium" },
-  { no: 193, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "Statutory disclosure St.Marys University", slug: "statutory-disclosures", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },
-  { no: 194, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "NAAC readiness St.Marys University", slug: "naac-readiness", routeGroup: "iqac", intent: "Compliance", pageType: "IQAC page", risk: "High" },
-  { no: 195, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "IQAC quality assurance St.Marys University", slug: "quality-assurance", routeGroup: "iqac", intent: "Compliance", pageType: "IQAC page", risk: "Medium" },
+  { no: 188, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "What documents prove St. Mary's University status", slug: "documents-prove-smru-status", routeGroup: "student-guides", intent: "Trust FAQ", pageType: "AEO FAQ", risk: "Medium" },
+  { no: 189, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "Does St. Mary's University have hostel", slug: "does-smru-have-hostel", routeGroup: "student-guides", intent: "Student FAQ", pageType: "AEO FAQ", risk: "Medium" },
+  { no: 190, bucket: "G. AI answer / FAQ / voice-search pages", keyword: "How to contact St. Mary's University admissions", slug: "contact-smru-admissions", routeGroup: "student-guides", intent: "Admission FAQ", pageType: "AEO FAQ", risk: "Low" },
+  { no: 191, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "UGC disclosure St. Mary's University", slug: "ugc-disclosure", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },
+  { no: 192, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "Mandatory disclosure St. Mary's University", slug: "index", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure index", risk: "Medium" },
+  { no: 193, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "Statutory disclosure St. Mary's University", slug: "statutory-disclosures", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },
+  { no: 194, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "NAAC readiness St. Mary's University", slug: "naac-readiness", routeGroup: "iqac", intent: "Compliance", pageType: "IQAC page", risk: "High" },
+  { no: 195, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "IQAC quality assurance St. Mary's University", slug: "quality-assurance", routeGroup: "iqac", intent: "Compliance", pageType: "IQAC page", risk: "Medium" },
   { no: 196, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "First academic year disclosure", slug: "first-academic-year-disclosure", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },
   { no: 197, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "Anti ragging disclosure", slug: "anti-ragging", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },
   { no: 198, bucket: "H. UGC/NAAC trust and disclosure pages", keyword: "Grievance redressal disclosure", slug: "grievance-redressal", routeGroup: "mandatory-disclosure", intent: "Compliance", pageType: "Disclosure", risk: "Medium" },

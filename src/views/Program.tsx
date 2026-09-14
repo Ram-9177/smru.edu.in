@@ -49,9 +49,9 @@ const buildProgramDirectAnswer = ({
   eligibility?: string;
 }) => {
   const parts = [
-    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "St.Mary's University"}`,
+    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "St. Mary's University"}`,
     departmentName ? `under ${departmentName}` : "",
-    "at St.Mary's University Hyderabad",
+    "at St. Mary's University Hyderabad",
     duration ? `Duration: ${duration}` : "",
     eligibility ? `Eligibility: ${eligibility}` : "",
   ].filter(Boolean);
@@ -130,7 +130,7 @@ const getRegulatoryStatus = (prog: any) => {
   ];
   const risky = riskyTerms.some((term) => normalized.includes(term.toLowerCase()));
   if (risky) {
-    return "St.Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.";
+    return "St. Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.";
   }
   return raw
     ? `${raw} Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.`
@@ -168,7 +168,7 @@ export default function Program() {
     const programPartners = getEduPartners(prog);
     const visiblePartners = programPartners.length
       ? programPartners
-      : [EDU_PARTNERS["St.Mary's University"]];
+      : [EDU_PARTNERS["St. Mary's University"]];
 
     return visiblePartners
       .map((partner) => ({ ...partner, leadUrl: partner?.landingUrl || getEduPartnerLandingUrl(prog) }))

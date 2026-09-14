@@ -3,8 +3,8 @@ import AboutPage from "../../../src/views/About";
 import { buildMetadata } from "../../../src/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Leadership | St.Mary's University",
-  description: "Meet the leaders, governing council, and academic teams steering St.Mary's University.",
+  title: "Leadership | St. Mary's University",
+  description: "Meet the leaders, governing council, and academic teams steering St. Mary's University.",
   pathname: "/leadership/all",
 });
 

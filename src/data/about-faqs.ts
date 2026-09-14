@@ -1,16 +1,16 @@
 export const ABOUT_FAQS = [
   {
-    question: "Who governs St.Mary's University?",
+    question: "Who governs St. Mary's University?",
     answer:
-      "St.Mary's University is guided by institutional governing bodies including the Governing Council, Board of Management, and Sponsor Body.",
+      "St. Mary's University is guided by institutional governing bodies including the Governing Council, Board of Management, and Sponsor Body.",
   },
   {
-    question: "What are the governing bodies of St.Mary's University?",
+    question: "What are the governing bodies of St. Mary's University?",
     answer:
-      "The governance section lists the Governing Council, Board of Management, and Sponsor Body for St.Mary's University.",
+      "The governance section lists the Governing Council, Board of Management, and Sponsor Body for St. Mary's University.",
   },
   {
-    question: "Who is the Vice-Chancellor of St.Mary's University?",
+    question: "Who is the Vice-Chancellor of St. Mary's University?",
     answer:
       "Lt. Gen. (Dr.) Pradeep C. Nair is listed as Vice-Chancellor in the governing bodies section.",
   },
@@ -25,7 +25,7 @@ export const ABOUT_FAQS = [
       "Applicants and parents should use the Approvals & Recognitions and Mandatory Disclosure pages for officially published verification documents.",
   },
   {
-    question: "Is St.Mary's University recognized?",
+    question: "Is St. Mary's University recognized?",
     answer:
       "Applicants are advised to refer to the Approvals & Recognitions and Mandatory Disclosure pages for officially published verification documents.",
   },
@@ -35,9 +35,9 @@ export const ABOUT_FAQS = [
       "Programs are designed with practical learning, laboratory exposure, clinical orientation, and rehabilitation-focused training components.",
   },
   {
-    question: "What makes St.Mary's University different?",
+    question: "What makes St. Mary's University different?",
     answer:
-      "St.Mary's University focuses on rehabilitation sciences, allied health education, clinical readiness, and inclusive healthcare impact.",
+      "St. Mary's University focuses on rehabilitation sciences, allied health education, clinical readiness, and inclusive healthcare impact.",
   },
   {
     question: "Where is the campus located?",

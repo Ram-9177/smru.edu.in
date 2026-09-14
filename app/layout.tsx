@@ -3,10 +3,10 @@ import Script from "next/script";
 import { Cinzel, Inter, Outfit } from "next/font/google";
 import "../src/styles/globals.css";
 import AppShell from "../src/components/AppShell";
+import StructuredData from "../src/components/seo/StructuredData";
 import { absoluteUrl } from "../src/lib/metadata";
 import { UNIVERSITY_INFO } from "../src/lib/shared/university";
 import { SITE_IDENTITY } from "../src/lib/seo/site";
-import { serializeJsonLd } from "../src/lib/seo/json-ld";
 
 import { buildUniversitySchema, buildWebSiteSchema } from "../src/lib/seo/schema";
 
@@ -39,28 +39,6 @@ export const metadata: Metadata = {
   verification: {
     google: "MNlkKsQJcg3Cv14G_CeV3L_C7f2A3MpdPNSYNdDtdfU",
   },
-  keywords: [
-    "St.Mary's University",
-    "St.Mary's University Hyderabad",
-    "St.Mary's University",
-    "St.Mary's University",
-    "stmarys",
-    "st marys",
-    "st. marys",
-    "St.Mary's",
-    "UGC-recognized university",
-    "six schools",
-    "rehabilitation sciences",
-    "health and allied health sciences",
-    "psychology",
-    "nursing",
-    "engineering and emerging technologies",
-    "law",
-    "academic programmes",
-    "admissions",
-    "student support",
-    "official disclosures",
-  ],
   // NOTE: No root-level canonical here — each page sets its own via buildMetadata()
   // to prevent every page from pointing to "/" as canonical (duplicate content).
   openGraph: {
@@ -188,18 +166,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
         {/* End Meta Pixel Code */}
-        <Script
-          id="smru-university-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(universitySchema) }}
-        />
-        <Script
-          id="smru-website-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteSchema) }}
-        />
+        {/* Plain script tags so the Organization/WebSite graph is present in the static HTML for every crawler,
+            not injected client-side via next/script. */}
+        <StructuredData id="smru-university-schema" data={universitySchema} />
+        <StructuredData id="smru-website-schema" data={websiteSchema} />
         <AppShell>{children}</AppShell>
       </body>
     </html>

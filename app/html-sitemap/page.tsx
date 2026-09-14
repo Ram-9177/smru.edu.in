@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
   title: "HTML Sitemap",
-  description: "Browse the main academic, admissions, campus, governance, and support pages on the St.Mary's University website.",
+  description: "Browse the main academic, admissions, campus, governance, and support pages on the St. Mary's University website.",
   pathname: "/html-sitemap",
 });
 
@@ -55,7 +55,7 @@ export default function HtmlSitemapPage() {
       <div className="smru-container">
         <h1 className="text-4xl font-black tracking-tight text-[#0d315c] md:text-6xl">HTML Sitemap</h1>
         <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-          Browse the primary public sections of the St.Mary's University website.
+          Browse the primary public sections of the St. Mary's University website.
         </p>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {sections.map((section) => (

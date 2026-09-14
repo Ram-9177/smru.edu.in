@@ -63,7 +63,7 @@ export const leadershipGroups = {
     {
       name: "Mr. Rajesh Yerramasu",
       role: "Member",
-      about: "Co-Founder,CEO - M/s. Zestwings (India UAE), Solutions Architect (Digital, IT & Cyber Governance) For St.Mary's University"
+      about: "Co-Founder,CEO - M/s. Zestwings (India UAE), Solutions Architect (Digital, IT & Cyber Governance) For St. Mary's University"
     },
     {
       name: "Mr. Sravanth Gajula",
@@ -73,7 +73,7 @@ export const leadershipGroups = {
     {
       name: "Smt. K. Indu Aparna",
       role: "Member",
-      about: "Chief Operating Officer, St.Mary's University"
+      about: "Chief Operating Officer, St. Mary's University"
     },
     {
       name: "Dr. B. Valli",
@@ -106,7 +106,7 @@ export const leadershipGroups = {
     {
       name: "K. Sri Harsha",
       role: "Secretary",
-      about: "Chief Executive Officer, St.Mary's University"
+      about: "Chief Executive Officer, St. Mary's University"
     },
     {
       name: "K. Indraja",
@@ -116,7 +116,7 @@ export const leadershipGroups = {
     {
       name: "K. Indu Aparna",
       role: "Vice-President",
-      about: "Chief Operating Officer, St.Mary's University"
+      about: "Chief Operating Officer, St. Mary's University"
     }
   ]
 };
@@ -126,13 +126,13 @@ export const leaders = [
     slug: "founder",
     name: "Dr. K.V.K. Rao",
     role: "Founder, Chairman & Chancellor",
-    about: "Founder & Chairman of JSMI Educational Society. Visionary behind St.Mary's University and umbrella rehabilitation focus.",
+    about: "Founder & Chairman of JSMI Educational Society. Visionary behind St. Mary's University and umbrella rehabilitation focus.",
   },
   {
     slug: "co-founder",
     name: "Smt. C.V.N.V Bharathi",
     role: "Co-Founder & Pro-Chancellor",
-    about: "Co-Founder of St.Mary's University and Pro-Chancellor supporting the university's academic and institutional vision.",
+    about: "Co-Founder of St. Mary's University and Pro-Chancellor supporting the university's academic and institutional vision.",
   },
   {
     slug: "ceo",

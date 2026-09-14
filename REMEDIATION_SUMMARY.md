@@ -58,6 +58,42 @@ This is the single markdown control file to maintain for every change cycle. Kee
   - Pages with `Course` schema (deep walk): 94 (shallow walker reported 71) · FAQPage: 333
   - Multiple `<h1>`: `/explore/` · missing canonical: `/360/hostel/` (+ the verification file)
 
+### Phase 1: Entity and identity (14 September 2026)
+- Naming standard applied mechanically: `St. Mary's University (SMRU)` public, `SMRU` short,
+  `St. Mary's Rehabilitation University` legal. 1,077 occurrences of `St.Mary's` / `St.Marys` /
+  `Stmarys University` replaced across 141 files (visible copy, titles, descriptions, data, llms
+  files; slugs and asset paths untouched). `update_brand.js` deleted. Guard now fails on any
+  reappearance; the raw partner HTML archive `src/Partners - Codes/` is the only exclusion.
+- Rename-induced false facts corrected: "The official/legal name is St. Mary's University" and
+  "short-name alias" statements in `src/lib/seo/info-pages.ts`, `data/seo-pages.ts`,
+  `src/views/StmarysFacts.tsx` now state the legal name and SMRU.
+- `src/lib/shared/university.ts`, `src/lib/seo/site.ts`: identity constants, canonical bridge
+  sentence (verbatim), `foundingDate` 2025-07-24, sponsor society, geo, Google Maps URL; aliases cut
+  from 16 fuzzy spellings to the five in the naming standard.
+- Homepage: title `St. Mary's University Hyderabad (SMRU) – Official Site`, 152-char description,
+  H1 `St. Mary's University (SMRU), Hyderabad`, legal name moved from `sr-only` into a visible
+  sub-heading, bridge sentence visible in the hero.
+- Organization schema (`CollegeOrUniversity`): `description` = bridge sentence, `foundingDate`,
+  `parentOrganization`, `geo`, `areaServed` India, `sameAs` socials + Google Maps. **Both the
+  Organization and WebSite graphs were previously injected client-side via `next/script`
+  (`self.__next_s`) and absent from the static HTML**; `app/layout.tsx` now emits plain
+  `<script type="application/ld+json">` tags, so every page carries them for every crawler.
+- New `/smru/` canonical identity page: bridge sentence, three-names table, Act/UGC PDF links,
+  sponsor, "Not to be confused with" (St. Mary's College Hyderabad, St. Mary's Group, Texas /
+  Twickenham / Halifax / Calgary), six schools, contacts, 12 FAQs with `FAQPage`; tier-1 sitemap;
+  footer link replaces `/Stmarys-facts`.
+- `keywords` meta tag removed from `buildMetadata` and the root layout (0 pages emit it; was 443).
+  `buildProgramTypoSearchTerms`, `typoPhrase`, `TYPO_KEYWORD_SUPPORT`, `COURSE_TYPO_SUPPORT` and
+  25 misspelled backend keyword literals deleted; guard inverted to assert their absence.
+- `public/llms.txt`, `public/llms-full.txt`: correct names on line one, bridge sentence verbatim,
+  establishment instruments, campus address, sponsor, disambiguation block, `/smru/` route, dead
+  `/iqac/` reference → `/iqac-quality-assurance/`.
+- Side fix: `src/lib/developer/seed.ts` hidden-partner set updated to the standard spelling (the
+  rename had un-hidden a placeholder partner whose name became a `/partner/` slug).
+- Metrics after Phase 1 (seo-gates): visible `St.Mary` 0 (was 6,676 on 443 pages) · keywords meta
+  0 (was 443) · Organization graph in static HTML on 451/451 pages (was 0) · sitemap 324.
+  Unchanged until Phase 2: titles > 65 = 71, duplicate titles 12 groups, cut-mid-phrase 9.
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel

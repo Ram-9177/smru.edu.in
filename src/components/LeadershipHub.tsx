@@ -31,7 +31,7 @@ export default function LeadershipHub() {
           Leadership
         </h1>
         <p className="mt-2 text-slate-600">
-          Meet the team guiding St.Mary's University's vision, governance, and academic growth.
+          Meet the team guiding St. Mary's University's vision, governance, and academic growth.
         </p>
 
         <div className="mt-6 bg-[#0d315c]/5 cut-corner-panel overflow-hidden">

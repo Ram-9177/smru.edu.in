@@ -37,7 +37,7 @@ const review = {
 
 const pending = "Pending official document/data from university office.";
 const defaultDisclaimer =
-  "This page is a compliance status page. It must not be used to infer approvals, fees, intake, eligibility, duration, accreditation, rankings, placements or officer names unless St.Marys University publishes official evidence.";
+  "This page is a compliance status page. It must not be used to infer approvals, fees, intake, eligibility, duration, accreditation, rankings, placements or officer names unless St. Mary's University publishes official evidence.";
 
 const officialEvidence = [
   { href: "/assets/SMRU%20Act%2010%20of%202026.pdf", label: "University Establishment Act" },
@@ -97,14 +97,14 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     section: "mandatory-disclosure",
     slug: "ugc-disclosure",
     title: "UGC Recognition Disclosure",
-    description: "Public route for St.Marys University university-level UGC recognition document verification.",
+    description: "Public route for St. Mary's University university-level UGC recognition document verification.",
     h1: "UGC Recognition Disclosure",
     status: "Published",
     ownerOffice: "Registrar Office",
     sourceDocumentNeeded: "Public UGC recognition letter and establishment act are linked. Programme-level approvals remain separate where applicable.",
     evidenceLinks: officialEvidence,
     directAnswer:
-      "St.Marys University provides public document routes for university-level UGC recognition verification. This does not create or imply programme-level approval claims.",
+      "St. Mary's University provides public document routes for university-level UGC recognition verification. This does not create or imply programme-level approval claims.",
     disclosureNote:
       "Do not infer professional council approvals, course intake, eligibility, duration, fees, accreditation or ranking from university-level recognition documents.",
     disclaimer: defaultDisclaimer,
@@ -117,7 +117,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     section: "mandatory-disclosure",
     slug: "statutory-disclosures",
     title: "Statutory Disclosure Index",
-    description: "Index of verified and pending St.Marys University mandatory disclosure status pages.",
+    description: "Index of verified and pending St. Mary's University mandatory disclosure status pages.",
     h1: "Statutory Disclosure Index",
     status: "Published",
     ownerOffice: "Registrar Office",
@@ -142,7 +142,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     ownerOffice: "Registrar Office",
     sourceDocumentNeeded: pending,
     evidenceLinks: contactEvidence,
-    directAnswer: "Statutory body names, members, terms and minutes must remain pending until St.Marys University publishes official data.",
+    directAnswer: "Statutory body names, members, terms and minutes must remain pending until St. Mary's University publishes official data.",
     disclosureNote: "Do not invent statutory body names, memberships, dates, meeting minutes or approval references.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["statutory bodies", "governing records", "official publication", "pending data"],
@@ -182,7 +182,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
       { href: "/academic-structure", label: "Academic Structure" },
     ],
     directAnswer:
-      "Programme discovery should use official St.Marys University school and academic-structure routes. A mandatory disclosure programme document is still required for indexing this page.",
+      "Programme discovery should use official St. Mary's University school and academic-structure routes. A mandatory disclosure programme document is still required for indexing this page.",
     disclosureNote: "Do not add unverified course duration, intake, eligibility, fee, approval or accreditation data.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["programmes offered", "course verification", "academic office", "pending programme document"],
@@ -218,7 +218,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     ownerOffice: "Accounts Office",
     sourceDocumentNeeded: pending,
     evidenceLinks: contactEvidence,
-    directAnswer: "Fee details must be confirmed through official St.Marys University documents or contact routes until a public fee disclosure is published.",
+    directAnswer: "Fee details must be confirmed through official St. Mary's University documents or contact routes until a public fee disclosure is published.",
     disclosureNote: "Do not publish or infer programme fees, payment schedules, scholarships, refunds or charges without official proof.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["fees", "accounts office", "refunds", "official proof"],
@@ -254,7 +254,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     ownerOffice: "Student Affairs Office",
     sourceDocumentNeeded: pending,
     evidenceLinks: contactEvidence,
-    directAnswer: "Student support details should be verified through official St.Marys University contact routes until public support documents are released.",
+    directAnswer: "Student support details should be verified through official St. Mary's University contact routes until public support documents are released.",
     disclosureNote: "Do not invent counselling cells, support officers, helplines, facilities or service guarantees.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["student support", "student affairs", "support contacts", "pending publication"],
@@ -266,13 +266,13 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     section: "mandatory-disclosure",
     slug: "grievance-redressal",
     title: "Grievance Redressal Disclosure",
-    description: "Grievance redressal status page pending official public details from St.Marys University.",
+    description: "Grievance redressal status page pending official public details from St. Mary's University.",
     h1: "Grievance Redressal Disclosure",
     status: "Being updated",
     ownerOffice: "Student Affairs Office",
     sourceDocumentNeeded: pending,
     evidenceLinks: contactEvidence,
-    directAnswer: "Grievance redressal details must remain status-tracked until St.Marys University publishes official public data.",
+    directAnswer: "Grievance redressal details must remain status-tracked until St. Mary's University publishes official public data.",
     disclosureNote: "Do not name officers, committees, escalation contacts or timelines without approved evidence.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["grievance redressal", "student affairs", "official contact", "pending data"],
@@ -326,7 +326,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     ownerOffice: "Registrar Office",
     sourceDocumentNeeded: "Official contact route is linked for verification and document requests.",
     evidenceLinks: contactEvidence,
-    directAnswer: "Disclosure verification requests should use the official St.Marys University contact route unless a specific public document is already linked.",
+    directAnswer: "Disclosure verification requests should use the official St. Mary's University contact route unless a specific public document is already linked.",
     disclosureNote: "Do not publish private officer details or unofficial phone numbers on this page.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["contact", "document request", "official route", "verification"],
@@ -364,7 +364,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     sourceDocumentNeeded: "Official public document or contact-route confirmation is required for item-specific requests.",
     evidenceLinks: contactEvidence,
     directAnswer:
-      "Public verification questions should be routed through official St.Marys University contact channels unless a specific document is already published.",
+      "Public verification questions should be routed through official St. Mary's University contact channels unless a specific document is already published.",
     disclosureNote: "Public information must stay aligned with official university release status.",
     disclaimer: defaultDisclaimer,
     faqTopics: ["public information", "verification contact", "admissions contact", "disclosure route"],
@@ -375,9 +375,9 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
   {
     section: "iqac",
     slug: "naac-readiness",
-    title: "NAAC Readiness at St.Marys University",
+    title: "NAAC Readiness at St. Mary's University",
     description: "NAAC readiness status page using official-record and accreditation-process language only.",
-    h1: "NAAC Readiness at St.Marys University",
+    h1: "NAAC Readiness at St. Mary's University",
     status: pending,
     ownerOffice: "Quality Assurance Office",
     sourceDocumentNeeded: pending,
@@ -394,7 +394,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     section: "iqac",
     slug: "quality-assurance",
     title: "IQAC and Quality Assurance",
-    description: "Quality assurance readiness and publication-status route for St.Marys University.",
+    description: "Quality assurance readiness and publication-status route for St. Mary's University.",
     h1: "IQAC and Quality Assurance",
     status: pending,
     ownerOffice: "Quality Assurance Office",
@@ -534,7 +534,7 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
       { href: "/rehabilitation-sciences", label: "Rehabilitation Sciences" },
     ],
     directAnswer:
-      `Clinical exposure should be framed as part of St.Marys University's rehabilitation education ecosystem and patient-care-linked learning. Service availability must be publicly verified. ${naacSafeStatusLine}`,
+      `Clinical exposure should be framed as part of St. Mary's University's rehabilitation education ecosystem and patient-care-linked learning. Service availability must be publicly verified. ${naacSafeStatusLine}`,
     disclosureNote:
       "Do not claim hospital accreditation, treatment availability, doctors, timings, OPD/IPD, emergency care or outcomes without official proof.",
     disclaimer: naacDisclaimer,

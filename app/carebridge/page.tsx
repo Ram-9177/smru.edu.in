@@ -5,9 +5,9 @@ import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Carebridge Global Healthcare Pathways | St.Mary's University",
+  title: "Carebridge Global Healthcare Pathways | St. Mary's University",
   description:
-    "Explore Carebridge healthcare degree programs, international licensing pathways, clinical rotations from Year 1, and career opportunities at St.Mary's University.",
+    "Explore Carebridge healthcare degree programs, international licensing pathways, clinical rotations from Year 1, and career opportunities at St. Mary's University.",
   pathname: "/carebridge",
   keywords: [
     "Carebridge",
@@ -39,9 +39,9 @@ export default function CarebridgePage() {
       <StructuredData
         id="carebridge-page-schema"
         data={buildWebPageSchema({
-          title: "Carebridge Global Healthcare Pathways | St.Mary's University",
+          title: "Carebridge Global Healthcare Pathways | St. Mary's University",
           description:
-            "Explore Carebridge healthcare degree programs, international licensing pathways, clinical rotations from Year 1, and career opportunities at St.Mary's University.",
+            "Explore Carebridge healthcare degree programs, international licensing pathways, clinical rotations from Year 1, and career opportunities at St. Mary's University.",
           pathname: "/carebridge",
         })}
       />

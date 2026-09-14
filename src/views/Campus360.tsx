@@ -51,7 +51,7 @@ const UI_TEXT = {
     te: "మరిన్ని చూడటానికి స్క్రోల్ చేయండి →",
   },
   introLabel: {
-    en: "St.Mary's University Campus Tour",
+    en: "St. Mary's University Campus Tour",
     hi: "सेंट मैरीज़ यूनिवर्सिटी परिसर भ्रमण",
     te: "సెయింట్ మేరీస్ యూనివర్సిటీ క్యాంపస్ టూర్",
   },
@@ -114,7 +114,7 @@ function viewerPanorama(location: CampusTourLocation, language: CampusTourLangua
     lowResSrc: location.lowResSrc,
     thumb: location.thumbSrc,
     preview: location.previewSrc,
-    alt: `${title} at St.Mary's University`,
+    alt: `${title} at St. Mary's University`,
     caption: title,
     projection: location.projection,
     initialZoom: 0,
@@ -251,7 +251,7 @@ export default function Campus360() {
 
   const handleShare = async () => {
     const shareData = {
-      title: `${selectedTitle} - St.Mary's University Virtual Tour`,
+      title: `${selectedTitle} - St. Mary's University Virtual Tour`,
       url: window.location.href,
     };
 
@@ -274,8 +274,8 @@ export default function Campus360() {
       data-audio-state={!audioSrc ? "unavailable" : isMuted ? "muted" : audioState}
     >
       <SEO
-        title="Campus 360° Virtual Tour | St.Mary's University"
-        description="Explore St.Mary's University campus in an immersive multilingual 360° virtual tour."
+        title="Campus 360° Virtual Tour | St. Mary's University"
+        description="Explore St. Mary's University campus in an immersive multilingual 360° virtual tour."
       />
 
       <div className="absolute inset-0 z-0">
@@ -296,17 +296,17 @@ export default function Campus360() {
           <div className="pointer-events-auto flex items-center gap-3">
             <Link
               href="/explore"
-              aria-label="Back to Explore St.Mary's University"
+              aria-label="Back to Explore St. Mary's University"
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-md transition hover:bg-white/20 md:h-12 md:w-12"
             >
               <FaChevronLeft className="-ml-0.5 text-sm" />
             </Link>
             <Link
               href="/"
-              aria-label="Open St.Mary's University homepage"
+              aria-label="Open St. Mary's University homepage"
               className="hidden rounded-xl bg-white px-3 py-2 shadow-2xl transition hover:scale-[1.02] sm:block"
             >
-              <img src="/assets/Logo.webp" alt="Stmarys University" className="h-9 w-auto" />
+              <img src="/assets/Logo.webp" alt="St. Mary's University" className="h-9 w-auto" />
             </Link>
           </div>
 

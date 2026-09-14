@@ -4,13 +4,13 @@ import { buildMetadata } from "@/lib/metadata";
 import { buildBreadcrumbSchema, buildFaqSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import ExamNotification from "@/views/ExamNotification";
 
-const title = "Entrance Exam Updates | St.Mary's University";
+const title = "Entrance Exam Updates | St. Mary's University";
 const description =
   "No university entrance exam is currently announced. Future exam dates, eligibility, applications and official instructions will be published here.";
 
 const faqs = [
   {
-    question: "Is a St.Mary's University entrance exam currently announced?",
+    question: "Is a St. Mary's University entrance exam currently announced?",
     answer:
       "No. There is no active university entrance-exam announcement at this time.",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = buildMetadata({
   description,
   pathname: "/exam-notification",
   keywords: [
-    "St.Mary's University entrance exam updates",
+    "St. Mary's University entrance exam updates",
     "university entrance exam announcement",
     "admissions updates Hyderabad",
   ],

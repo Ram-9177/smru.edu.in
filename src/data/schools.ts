@@ -33,9 +33,9 @@ export const EDU_PARTNERS = {
     iframeUrl: "https://carebridge.education",
     embedCode: ""
   },
-  "St.Mary's University": {
-    code: "St.Mary's University",
-    name: "St.Mary's University",
+  "St. Mary's University": {
+    code: "St. Mary's University",
+    name: "St. Mary's University",
     landingUrl: "https://apply.smru.edu.in/",
     logo: smruLogo,
     embedCode: ""
@@ -225,7 +225,7 @@ const schoolsSeed: SchoolData[] = [
             fieldExposure: "Clinical rotations at leading ENT hospitals and rehabilitation centers in Hyderabad.",
             careerOpportunities: ["Audiologist", "Speech-Language Pathologist", "Clinical Supervisor", "Rehab Consultant"],
             outcomes: text("Graduates find placement in ENT clinics and specialized schools, where they manage diagnostic testing and long-term speech therapy for pediatric and geriatric populations."),
-            accreditation: "St.Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
+            accreditation: "St. Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
           },
           { slug: "msc-audiology", name: "M.Sc. Audiology", level: "PG Program" }
         ]
@@ -255,7 +255,7 @@ const schoolsSeed: SchoolData[] = [
     slug: "health-allied-health-sciences",
     name: "School of Health & Allied Health Sciences",
     short: "Health & Allied Health Sciences",
-    about: text("The School of Health and Allied Health Sciences at St.Mary's University is a multidisciplinary center of excellence dedicated to training health and allied health professionals who play a vital role in diagnostics, therapy, patient care, and health system management. The school integrates scientific knowledge with hands-on training to support advanced clinical services and rehabilitation care across various healthcare domains."),
+    about: text("The School of Health and Allied Health Sciences at St. Mary's University is a multidisciplinary center of excellence dedicated to training health and allied health professionals who play a vital role in diagnostics, therapy, patient care, and health system management. The school integrates scientific knowledge with hands-on training to support advanced clinical services and rehabilitation care across various healthcare domains."),
     departments: [
       {
         slug: "physiotherapy",
@@ -268,16 +268,16 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "5 Years (10 Semesters) – Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "₹8 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             overview: text(
               "The Bachelor's in Physiotherapy is a five-year undergraduate program that trains students in the assessment, diagnosis, and treatment of musculoskeletal, neurological, cardiovascular, and respiratory conditions through evidence-based physical therapy interventions. The program covers functional anatomy, exercise therapy, electrotherapy, manual therapy, sports rehabilitation, and community rehabilitation — equipping graduates with clinical reasoning and hands-on therapeutic skills required by hospitals, rehabilitation centres, and sports medicine facilities."
             ),
-            schoolTitle: "School of Health & Allied Health Sciences - St.Mary's University",
+            schoolTitle: "School of Health & Allied Health Sciences - St. Mary's University",
             schoolDescription: text(
-              "Delivered through a partnership model: St.Mary's University provides the academic and degree framework while Emversity supplies industry-skilling, AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement support."
+              "Delivered through a partnership model: St. Mary's University provides the academic and degree framework while Emversity supplies industry-skilling, AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement support."
             ),
             highlights: [
               "Comprehensive five-year physiotherapy curriculum",
@@ -287,7 +287,7 @@ const schoolsSeed: SchoolData[] = [
             ],
             durationNote: text("10 semesters combining foundational sciences, clinical skills, and a full-time internship in the final year."),
             eligibilityNote: text(
-              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; selection based on St.Mary's University entrance or merit as applicable."
+              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; selection based on St. Mary's University entrance or merit as applicable."
             ),
             specializations: [
               "Neuro Physiotherapy",
@@ -316,11 +316,11 @@ const schoolsSeed: SchoolData[] = [
             labs: text("Electrotherapy, Biomechanics & Motion Analysis, Manual Therapy and Exercise Therapy labs."),
             fieldExposure: text("Clinical postings in hospitals, ICU & post-surgical units, sports rehab centres, and community-based rehabilitation projects."),
             feeNotes: [
-              "Total program fee: ₹8 Lakhs payable to St.Mary's University",
+              "Total program fee: ₹8 Lakhs payable to St. Mary's University",
               "Scholarships and education loans available as per university policy"
             ],
             accreditation: text(
-              "St.Mary's University, legally established as St.Mary's University, is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Strong clinical exposure and simulation-based training",
@@ -356,16 +356,16 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "5 Years (10 Semesters) – Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "₹8 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             overview: text(
               "The Bachelor's in Occupational Therapy is a five-year undergraduate program that trains students to assess, plan, and deliver therapeutic interventions that enable individuals with physical, cognitive, developmental, or psychosocial challenges to participate meaningfully in daily activities. The program covers human occupation theory, functional anatomy, neuroscience, paediatric and geriatric rehabilitation, mental health practice, assistive technology, and community-based rehabilitation — equipping graduates with clinical reasoning and therapeutic skills required by rehabilitation centres, hospitals, and inclusive education settings."
             ),
-            schoolTitle: "School of Rehabilitation & Allied Health Sciences - St.Mary's University",
+            schoolTitle: "School of Rehabilitation & Allied Health Sciences - St. Mary's University",
             schoolDescription: text(
-              "This program is delivered through a partnership model: St.Mary's University provides the academic framework and degree conferral while Emversity delivers industry-skilling, AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance."
+              "This program is delivered through a partnership model: St. Mary's University provides the academic framework and degree conferral while Emversity delivers industry-skilling, AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance."
             ),
             highlights: [
               "Integrated academic degree with industry-skilling",
@@ -375,7 +375,7 @@ const schoolsSeed: SchoolData[] = [
             ],
             durationNote: text("10 semesters combining foundational sciences, clinical rotations, and practicum leading to a full-time internship in the final year."),
             eligibilityNote: text(
-              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; minimum aggregate as per St.Mary's University norms. Admissions are conducted by St.Mary's University through the official admissions portal."
+              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; minimum aggregate as per St. Mary's University norms. Admissions are conducted by St. Mary's University through the official admissions portal."
             ),
             specializations: [
               "Neuro Rehabilitation",
@@ -404,11 +404,11 @@ const schoolsSeed: SchoolData[] = [
               "Community-Based Rehabilitation Coordinator"
             ],
             feeNotes: [
-              "Total program fee: ₹8 Lakhs payable to St.Mary's University",
+              "Total program fee: ₹8 Lakhs payable to St. Mary's University",
               "Scholarships and education loans available as per university policy"
             ],
             accreditation: text(
-              "St.Mary's University, legally established as St.Mary's University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded by St.Mary's University. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded by St. Mary's University. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Comprehensive clinical exposure and simulation-led training",
@@ -429,7 +429,7 @@ const schoolsSeed: SchoolData[] = [
             overview: text("This advanced program focuses on specialized recovery strategies for pediatric and neurological cases. You will lead research-driven interventions, using assistive technologies to manage complex patient profiles and advocating for inclusive healthcare delivery across specialized wards."),
             specializations: ["Neuro Science", "Mental Health", "Orthopaedics", "Hand Therapy", "Paediatrics", "Sensory Integration", "Oncology", "Rehabilitation"],
             outcomes: text("Graduates move into clinical leadership and rehabilitation management, overseeing multidisciplinary therapy teams in specialized medical centers."),
-            accreditation: text("St.Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.")
+            accreditation: text("St. Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.")
           }
         ]
       },
@@ -444,23 +444,23 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "4 Years (8 Semesters) - Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "Rs. 7.2 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Medical Laboratory Technology is a four-year undergraduate program that trains students in clinical pathology, microbiology, biochemistry, haematology, histopathology, and molecular diagnostics. The program covers the scientific principles, laboratory techniques, and quality assurance protocols essential for accurate disease diagnosis, equipping graduates with the technical competencies required by diagnostic laboratories, hospitals, and research institutions. This program at St.Mary's University, Hyderabad is delivered through a partnership model: St.Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in clinical pathology laboratories, hospital diagnostic departments, blood banks, public health laboratories, pharmaceutical companies, and biomedical research institutions."
+              "The Bachelor of Medical Laboratory Technology is a four-year undergraduate program that trains students in clinical pathology, microbiology, biochemistry, haematology, histopathology, and molecular diagnostics. The program covers the scientific principles, laboratory techniques, and quality assurance protocols essential for accurate disease diagnosis, equipping graduates with the technical competencies required by diagnostic laboratories, hospitals, and research institutions. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in clinical pathology laboratories, hospital diagnostic departments, blood banks, public health laboratories, pharmaceutical companies, and biomedical research institutions."
             ),
             eligibilityDetails: text(
-              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St.Mary's University, with relaxation for SC/ST/OBC as per university norms."
+              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
             ),
             admissionProcess: [
-              "Visit the St.Mary's University official website and complete the online application form",
+              "Visit the St. Mary's University official website and complete the online application form",
               "Submit required documents (10+2 marksheet, ID proof, photographs, category certificate if applicable)",
               "Appear for the university entrance examination or merit-based selection as applicable",
-              "Receive admission offer from St.Mary's University and complete fee payment through the university portal",
+              "Receive admission offer from St. Mary's University and complete fee payment through the university portal",
               "Enroll in the Head Start Programme, a zero-cost online bridge course to build foundational skills before classes begin",
             ],
             curriculum: [
@@ -563,18 +563,18 @@ const schoolsSeed: SchoolData[] = [
               "Supervised clinical and operational exposure across hospital diagnostic laboratories, blood banks, research institutions, and related healthcare settings."
             ),
             accreditation: text(
-              "St.Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St.Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St. Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
-              "Partnership model combining St.Mary's University academics with Emversity industry-skilling",
+              "Partnership model combining St. Mary's University academics with Emversity industry-skilling",
               "Laboratory-focused curriculum with clinical and simulation training",
               "Placement support and internships through a large employer network",
               "Bridge course support before classes begin",
             ],
             feeNotes: [
               "Total program fee: Rs. 7.2 Lakhs",
-              "Fees are payable directly to St.Mary's University as per the university schedule",
-              "Scholarships may be available on merit and category basis as per St.Mary's University norms",
+              "Fees are payable directly to St. Mary's University as per the university schedule",
+              "Scholarships may be available on merit and category basis as per St. Mary's University norms",
             ],
           },
           {
@@ -583,23 +583,23 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "4 Years (8 Semesters) - Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "Rs. 7.2 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Anaesthesia & OT Technology is a four-year undergraduate program that prepares students for careers as anaesthesia technologists and operation theatre technicians. The program covers anaesthesia principles, airway management, patient monitoring, OT protocols, sterilisation, emergency care, and perioperative patient management, equipping graduates with the clinical and technical competencies required by modern hospitals and surgical centres. This program at St.Mary's University, Hyderabad is delivered through a partnership model: St.Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in operation theatres, intensive care units, pain management clinics, cardiac catheterisation labs, and emergency departments across hospitals, medical colleges, and specialised surgical centres."
+              "The Bachelor of Anaesthesia & OT Technology is a four-year undergraduate program that prepares students for careers as anaesthesia technologists and operation theatre technicians. The program covers anaesthesia principles, airway management, patient monitoring, OT protocols, sterilisation, emergency care, and perioperative patient management, equipping graduates with the clinical and technical competencies required by modern hospitals and surgical centres. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in operation theatres, intensive care units, pain management clinics, cardiac catheterisation labs, and emergency departments across hospitals, medical colleges, and specialised surgical centres."
             ),
             eligibilityDetails: text(
-              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St.Mary's University, with relaxation for SC/ST/OBC as per university norms."
+              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
             ),
             admissionProcess: [
-              "Visit the St.Mary's University official website and complete the online application form",
+              "Visit the St. Mary's University official website and complete the online application form",
               "Submit required documents (10+2 marksheet, ID proof, photographs, category certificate if applicable)",
               "Appear for the university entrance examination or merit-based selection as applicable",
-              "Receive admission offer from St.Mary's University and complete fee payment through the university portal",
+              "Receive admission offer from St. Mary's University and complete fee payment through the university portal",
               "Enroll in the Head Start Programme, a zero-cost online bridge course to build foundational skills before classes begin",
             ],
             curriculum: [
@@ -702,18 +702,18 @@ const schoolsSeed: SchoolData[] = [
               "Supervised clinical and operational exposure across operation theatres, intensive care units, surgical centres, and related healthcare settings."
             ),
             accreditation: text(
-              "St.Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St.Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St. Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
-              "Partnership model combining St.Mary's University academics with Emversity industry-skilling",
+              "Partnership model combining St. Mary's University academics with Emversity industry-skilling",
               "Anaesthesia and OT-focused curriculum with clinical and simulation training",
               "Placement support and internships through a large employer network",
               "Bridge course support before classes begin",
             ],
             feeNotes: [
               "Total program fee: Rs. 7.2 Lakhs",
-              "Fees are payable directly to St.Mary's University as per the university schedule",
-              "Scholarships may be available on merit and category basis as per St.Mary's University norms",
+              "Fees are payable directly to St. Mary's University as per the university schedule",
+              "Scholarships may be available on merit and category basis as per St. Mary's University norms",
             ],
           },
           {
@@ -722,23 +722,23 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "4 Years (8 Semesters) - Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "Rs. 7.2 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Cardiovascular Technology is a four-year undergraduate program that trains students in the diagnosis, monitoring, and treatment support of cardiovascular diseases. The program covers cardiac anatomy, echocardiography, cardiac catheterisation, electrophysiology, vascular technology, and cardiac rehabilitation, equipping graduates with the technical expertise required by cardiology departments, cardiac catheterisation labs, and cardiovascular research centres. This program at St.Mary's University, Hyderabad is delivered through a partnership model: St.Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in cardiology departments, cardiac catheterisation laboratories, echocardiography units, electrophysiology labs, cardiac rehabilitation centres, and cardiovascular research institutions."
+              "The Bachelor of Cardiovascular Technology is a four-year undergraduate program that trains students in the diagnosis, monitoring, and treatment support of cardiovascular diseases. The program covers cardiac anatomy, echocardiography, cardiac catheterisation, electrophysiology, vascular technology, and cardiac rehabilitation, equipping graduates with the technical expertise required by cardiology departments, cardiac catheterisation labs, and cardiovascular research centres. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in cardiology departments, cardiac catheterisation laboratories, echocardiography units, electrophysiology labs, cardiac rehabilitation centres, and cardiovascular research institutions."
             ),
             eligibilityDetails: text(
-              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St.Mary's University, with relaxation for SC/ST/OBC as per university norms."
+              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
             ),
             admissionProcess: [
-              "Visit the St.Mary's University official website and complete the online application form",
+              "Visit the St. Mary's University official website and complete the online application form",
               "Submit required documents (10+2 marksheet, ID proof, photographs, category certificate if applicable)",
               "Appear for the university entrance examination or merit-based selection as applicable",
-              "Receive admission offer from St.Mary's University and complete fee payment through the university portal",
+              "Receive admission offer from St. Mary's University and complete fee payment through the university portal",
               "Enroll in the Head Start Programme, a zero-cost online bridge course to build foundational skills before classes begin",
             ],
             curriculum: [
@@ -841,18 +841,18 @@ const schoolsSeed: SchoolData[] = [
               "Supervised clinical and operational exposure across cardiology departments, cath labs, echo labs, rehabilitation centres, and related healthcare settings."
             ),
             accreditation: text(
-              "St.Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St.Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St. Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
-              "Partnership model combining St.Mary's University academics with Emversity industry-skilling",
+              "Partnership model combining St. Mary's University academics with Emversity industry-skilling",
               "Cardiovascular-focused curriculum with clinical and simulation training",
               "Placement support and internships through a large employer network",
               "Bridge course support before classes begin",
             ],
             feeNotes: [
               "Total program fee: Rs. 7.2 Lakhs",
-              "Fees are payable directly to St.Mary's University as per the university schedule",
-              "Scholarships may be available on merit and category basis as per St.Mary's University norms",
+              "Fees are payable directly to St. Mary's University as per the university schedule",
+              "Scholarships may be available on merit and category basis as per St. Mary's University norms",
             ],
           },
           {
@@ -861,23 +861,23 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "4 Years (8 Semesters) - Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "Rs. 7.2 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Emergency/Trauma Care Management System is a four-year undergraduate program designed to train students as emergency medical professionals capable of managing critical patients in emergency departments, trauma centres, and pre-hospital care settings. The program covers emergency medicine principles, trauma assessment, triage systems, advanced life support, disaster management, and critical care, equipping graduates with the rapid-response clinical skills demanded by hospitals, ambulance services, and disaster relief organisations. This program at St.Mary's University, Hyderabad is delivered through a partnership model: St.Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in hospital emergency departments, trauma centres, ambulance services, disaster response units, critical care units, and defence medical services."
+              "The Bachelor of Emergency/Trauma Care Management System is a four-year undergraduate program designed to train students as emergency medical professionals capable of managing critical patients in emergency departments, trauma centres, and pre-hospital care settings. The program covers emergency medicine principles, trauma assessment, triage systems, advanced life support, disaster management, and critical care, equipping graduates with the rapid-response clinical skills demanded by hospitals, ambulance services, and disaster relief organisations. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in hospital emergency departments, trauma centres, ambulance services, disaster response units, critical care units, and defence medical services."
             ),
             eligibilityDetails: text(
-              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St.Mary's University, with relaxation for SC/ST/OBC as per university norms."
+              "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
             ),
             admissionProcess: [
-              "Visit the St.Mary's University official website and complete the online application form",
+              "Visit the St. Mary's University official website and complete the online application form",
               "Submit required documents (10+2 marksheet, ID proof, photographs, category certificate if applicable)",
               "Appear for the university entrance examination or merit-based selection as applicable",
-              "Receive admission offer from St.Mary's University and complete fee payment through the university portal",
+              "Receive admission offer from St. Mary's University and complete fee payment through the university portal",
               "Enroll in the Head Start Programme, a zero-cost online bridge course to build foundational skills before classes begin",
             ],
             curriculum: [
@@ -980,18 +980,18 @@ const schoolsSeed: SchoolData[] = [
               "Supervised clinical and operational exposure across emergency departments, trauma centres, ambulance services, disaster response units, and related healthcare settings."
             ),
             accreditation: text(
-              "St.Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St.Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University is UGC 2(f) recognized at the university level. The degree is awarded solely by St. Mary's University, while Emversity handles the industry-skilling component. Students should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
-              "Partnership model combining St.Mary's University academics with Emversity industry-skilling",
+              "Partnership model combining St. Mary's University academics with Emversity industry-skilling",
               "Emergency and trauma-focused curriculum with clinical and simulation training",
               "Placement support and internships through a large employer network",
               "Bridge course support before classes begin",
             ],
             feeNotes: [
               "Total program fee: Rs. 7.2 Lakhs",
-              "Fees are payable directly to St.Mary's University as per the university schedule",
-              "Scholarships may be available on merit and category basis as per St.Mary's University norms",
+              "Fees are payable directly to St. Mary's University as per the university schedule",
+              "Scholarships may be available on merit and category basis as per St. Mary's University norms",
             ],
           },
           {
@@ -1000,16 +1000,16 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "5 Years (10 Semesters) – Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "₹8 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             overview: text(
               "The Bachelor of Optometry is a five-year undergraduate program that trains students in the examination, diagnosis, and management of visual disorders and eye diseases. The program covers ocular anatomy, refraction, contact lens fitting, binocular vision, low vision rehabilitation, paediatric optometry, and community eye care — equipping graduates with the clinical and optical skills required by eye hospitals, optical retail chains, vision research centres, and community eye health programmes."
             ),
-            schoolTitle: "School of Health & Allied Health Sciences - St.Mary's University",
+            schoolTitle: "School of Health & Allied Health Sciences - St. Mary's University",
             schoolDescription: text(
-              "The School of Health & Allied Health Sciences prepares students for applied clinical and rehabilitative careers across allied health fields. This program combines St.Mary's University academic framework with Emversity's industry-skilling modules to deliver practice-ready graduates."
+              "The School of Health & Allied Health Sciences prepares students for applied clinical and rehabilitative careers across allied health fields. This program combines St. Mary's University academic framework with Emversity's industry-skilling modules to deliver practice-ready graduates."
             ),
             highlights: [
               "Five-year clinical and professional optometry training",
@@ -1019,19 +1019,19 @@ const schoolsSeed: SchoolData[] = [
             ],
             durationNote: text("10 semesters combining foundational sciences, clinical rotations, and professional practicum."),
             eligibilityNote: text(
-              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; minimum aggregate and category-based relaxations as per St.Mary's University norms. Admissions processed by St.Mary's University through the official admissions portal."
+              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; minimum aggregate and category-based relaxations as per St. Mary's University norms. Admissions processed by St. Mary's University through the official admissions portal."
             ),
             eligibilityPoints: [
               "10+2 with Physics, Chemistry and Biology/Mathematics (PCB/PCMB)",
               "Selection based on university entrance / merit as applicable"
             ],
             feeNotes: [
-              "Total program fee: ₹8 Lakhs payable directly to St.Mary's University",
-              "Scholarships available as per St.Mary's University policy",
+              "Total program fee: ₹8 Lakhs payable directly to St. Mary's University",
+              "Scholarships available as per St. Mary's University policy",
               "Education loans available from leading banks and NBFCs"
             ],
             overviewDetails: text(
-              "St.Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers industry-skilling including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through a large network of healthcare employers."
+              "St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers industry-skilling including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through a large network of healthcare employers."
             ),
             semesterSummary: text(
               "The curriculum progresses from foundational health sciences and visual sciences (Years 1-2), through core optometric sciences and clinical refraction (Years 2-3), to advanced diagnostics, contact lens practice, low vision rehabilitation, and internships (Years 3-5), concluding with a capstone project and professional readiness preparation."
@@ -1055,7 +1055,7 @@ const schoolsSeed: SchoolData[] = [
               "Clinical rotations and internships in eye hospitals, outpatient departments, optical dispensing units, and community eye health camps."
             ),
             accreditation: text(
-              "St.Mary's University, legally established as St.Mary's University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded solely by St.Mary's University. Applicants should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Degree, examinations, and certificates are awarded solely by St. Mary's University. Applicants should verify current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Integrated academic degree with industry-skilling for workplace readiness",
@@ -1072,16 +1072,16 @@ const schoolsSeed: SchoolData[] = [
             partnerCode: "EMVERSITY",
             level: "UG Program",
             duration: "4 Years (8 Semesters) – Full-Time",
-            campus: "St.Mary's University Campus, Hyderabad, Telangana",
+            campus: "St. Mary's University Campus, Hyderabad, Telangana",
             eligibility: "12th Pass (10+2) with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB)",
             fees: "₹7.2 Lakhs (Total Program Fee)",
             intake: "July / August (as per university academic calendar)",
             overview: text(
               "The Bachelor of Radiotherapy Technology is a four-year undergraduate program that prepares students for careers as radiation therapy technologists who plan, deliver, and monitor radiation treatments for cancer patients. The program covers radiation physics, radiation biology, treatment planning systems, linear accelerator operations, brachytherapy, dosimetry, and radiation safety — equipping graduates with the clinical and technical competencies required by oncology centres, cancer hospitals, and radiation therapy departments."
             ),
-            schoolTitle: "School of Health & Allied Health Sciences - St.Mary's University",
+            schoolTitle: "School of Health & Allied Health Sciences - St. Mary's University",
             schoolDescription: text(
-              "This program combines St.Mary's University academic governance with Emversity's industry-skilling to deliver practice-ready radiotherapy technologists, emphasising simulation, clinical postings, and treatment planning skills."
+              "This program combines St. Mary's University academic governance with Emversity's industry-skilling to deliver practice-ready radiotherapy technologists, emphasising simulation, clinical postings, and treatment planning skills."
             ),
             highlights: [
               "Comprehensive radiotherapy technology curriculum",
@@ -1091,14 +1091,14 @@ const schoolsSeed: SchoolData[] = [
             ],
             durationNote: text("8 semesters combining foundational sciences, clinical training, and department rotations."),
             eligibilityNote: text(
-              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; selection based on St.Mary's University entrance or merit as applicable."
+              "Requires 10+2 with Physics, Chemistry and Biology/Mathematics; selection based on St. Mary's University entrance or merit as applicable."
             ),
             eligibilityPoints: [
               "10+2 with Physics, Chemistry and Biology/Mathematics (PCB/PCMB)",
-              "Minimum aggregate as per St.Mary's University guidelines"
+              "Minimum aggregate as per St. Mary's University guidelines"
             ],
             feeNotes: [
-              "Total program fee: ₹7.2 Lakhs payable directly to St.Mary's University",
+              "Total program fee: ₹7.2 Lakhs payable directly to St. Mary's University",
               "Scholarships and education loans available as per university policies"
             ],
             semesterSummary: text(
@@ -1123,7 +1123,7 @@ const schoolsSeed: SchoolData[] = [
               "Clinical rotations in radiation oncology departments, hands-on treatment planning, and supervised brachytherapy sessions."
             ),
             accreditation: text(
-              "St.Mary's University, legally established as St.Mary's University, is UGC 2(f) recognized at the university level. Degree and certifications are awarded by St.Mary's University. Applicants should confirm current programme-level professional permissions through published university notifications or relevant statutory council documents."
+              "St. Mary's University, legally established as St. Mary's University, is UGC 2(f) recognized at the university level. Degree and certifications are awarded by St. Mary's University. Applicants should confirm current programme-level professional permissions through published university notifications or relevant statutory council documents."
             ),
             whyChoose: [
               "Industry-skilling partnership with Emversity",
@@ -1143,7 +1143,7 @@ const schoolsSeed: SchoolData[] = [
             eligibility: "10+2 Science stream",
             fees: "1,50,000 per year",
             overview: text("Uncover the hidden truths of investigative science by mastering the chemical, biological, and digital analysis techniques that drive modern criminal justice. Students transition from foundational science to active crime scene simulation, learning to identify, preserve, and analyze evidence that bridges the gap between the lab and the courtroom."),
-            schoolTitle: "School of Health & Allied Health Sciences - St.Mary's University",
+            schoolTitle: "School of Health & Allied Health Sciences - St. Mary's University",
             schoolDescription: text("The School of Health & Allied Health Sciences focuses on the practical application of scientific discovery across investigative and creative domains. We prepare students with the analytical and technical skills required for modern scientific and professional fields."),
             highlights: [
               "Simulating crime scene investigation and evidence preservation",
@@ -1163,8 +1163,8 @@ const schoolsSeed: SchoolData[] = [
             salaryIndia: "3 LPA - 6 LPA",
             salaryInternational: "$40,000 - $80,000 annually",
             salaryNote: text("Reflects market demand for specialized scientific investigative talent."),
-            accreditation: text("Degree awarded by St.Mary's University; curriculum focus on contemporary forensic standards."),
-            accreditationPoints: ["Awarded by St.Mary's University", "Technical labs focused on experimental and investigative science"],
+            accreditation: text("Degree awarded by St. Mary's University; curriculum focus on contemporary forensic standards."),
+            accreditationPoints: ["Awarded by St. Mary's University", "Technical labs focused on experimental and investigative science"],
             whyChoose: [
               "Hands-on crime scene simulation and investigative drills",
               "Focus on practical lab analysis for high-stakes evidence detection",
@@ -1207,7 +1207,7 @@ const schoolsSeed: SchoolData[] = [
     slug: "psychology",
     name: "School of Psychology",
     short: "Psychology",
-    about: text("The School of Psychology at St.Mary's University serves as a specialized center for mental health education and clinical training. Programs are structured around practical research and rehabilitative strategies, preparing students to evaluate behavioral patterns and implement psychological interventions in diverse community and medical settings."),
+    about: text("The School of Psychology at St. Mary's University serves as a specialized center for mental health education and clinical training. Programs are structured around practical research and rehabilitative strategies, preparing students to evaluate behavioral patterns and implement psychological interventions in diverse community and medical settings."),
     departments: [
       {
         slug: "clinical-psychology",
@@ -1223,7 +1223,7 @@ const schoolsSeed: SchoolData[] = [
             fees: "1.5 Lakh per annum",
             overview: text("Students dive into the mechanics of human behavior by conducting controlled observations and learning the nuances of psychological testing. You will learn to map cognitive processes, assess emotional triggers, and participate in case-based discussions that reflect real-world clinical scenarios in mental health departments."),
             outcomes: text("Graduates transition into support roles within psychiatric clinics and rehabilitation centers, assisting in the implementation of therapeutic plans and behavioral monitoring for patients."),
-            accreditation: text("Degree awarded by St.Mary's University, a UGC 2(f) recognized university. Professional permissions for advanced regulated pathways, where required, are verified through official university notifications or relevant statutory council documents.")
+            accreditation: text("Degree awarded by St. Mary's University, a UGC 2(f) recognized university. Professional permissions for advanced regulated pathways, where required, are verified through official university notifications or relevant statutory council documents.")
           },
           {
             slug: "ma-clinical-psychology",
@@ -1234,7 +1234,7 @@ const schoolsSeed: SchoolData[] = [
             fees: "1.75 Lakh per annum",
             overview: text("This postgraduate track focuses on mastering complex diagnostic protocols and evidence-based psychotherapy techniques through intensive fieldwork. You will gain proficiency in managing specialized patient cases and designing psychological intervention programs that address severe psychopathology in diverse clinical settings."),
             outcomes: text("Prepares you for lead consulting roles in mental health services and faculty positions, with a focus on delivering specialized clinical care in high-pressure medical and social welfare environments."),
-            accreditation: text("Degree awarded by St.Mary's University, a UGC 2(f) recognized university. Eligibility for further regulated professional pathways should be verified through the applicable statutory council and published university documents.")
+            accreditation: text("Degree awarded by St. Mary's University, a UGC 2(f) recognized university. Eligibility for further regulated professional pathways should be verified through the applicable statutory council and published university documents.")
           },
           { slug: "professional-diploma-clinical-psychology", name: "Professional Diploma in clinical Psychology(PDCP)", level: "Diploma" }
         ]
@@ -1274,7 +1274,7 @@ const schoolsSeed: SchoolData[] = [
             overview: text("Master specialized domains like Neuropsychology and Forensic Psychology by applying research-driven approaches to understand complex behavioral patterns. The program involves using digital therapy frameworks and specialized assessment tools to navigate legal, corporate, and competitive landscapes in behavioral health."),
             specializations: ["Neuro Psychology", "Organizational Psychology", "Forensic Psychology", "School Psychology", "Sports Psychology", "Cyber Psychology", "Military Psychology"],
             outcomes: text("Career paths include roles as Behavioral Health Consultants and specialized investigators in legal and military settings, utilizing expert profiling and modification skills."),
-            accreditation: text("Degree awarded by St.Mary's University, a UGC 2(f) recognized university. Eligibility for further regulated professional pathways should be verified through published university notifications or relevant statutory council documents.")
+            accreditation: text("Degree awarded by St. Mary's University, a UGC 2(f) recognized university. Eligibility for further regulated professional pathways should be verified through published university notifications or relevant statutory council documents.")
           }
         ]
       }
@@ -1336,7 +1336,7 @@ const schoolsSeed: SchoolData[] = [
             eligibility: "10+2 with Physics, Chemistry, and Mathematics (PCM); entrance process as applicable",
             fees: "1,50,000 per year",
             overview: text("Students engineer scalable software architectures by mastering programming paradigms and system-level integration. You will implement computational models that drive digital health innovations and secure enterprise data infrastructures in the modern technology landscape."),
-            schoolTitle: "School of Engineering and Technology - St.Mary's University",
+            schoolTitle: "School of Engineering and Technology - St. Mary's University",
             schoolDescription: text("The School of Engineering is a center for technical advancement where computing power meets medical necessity. Focus is on creating digital tools that facilitate long-term patient recovery and streamline healthcare operations through data-driven engineering."),
             highlights: [
               "8-semester professional track in architectural software design",
@@ -1360,9 +1360,9 @@ const schoolsSeed: SchoolData[] = [
             salaryIndia: "4 LPA - 8 LPA",
             salaryInternational: "$60,000 - $100,000 annually",
             salaryNote: text("Reflects entry-level market trends for software engineering roles."),
-            accreditation: text("Degree awarded by St.Mary's University. Program aligned with global software engineering and architecture standards."),
+            accreditation: text("Degree awarded by St. Mary's University. Program aligned with global software engineering and architecture standards."),
             accreditationPoints: [
-              "Degree awarded by St.Mary's University",
+              "Degree awarded by St. Mary's University",
               "Aligned with modern technology architecture requirements",
               "Technical curriculum vetted by IT industry mentors"
             ],
@@ -1386,7 +1386,7 @@ const schoolsSeed: SchoolData[] = [
             eligibility: "10+2 with Physics, Chemistry, and Mathematics (PCM) and entrance process as applicable",
             fees: "1,50,000 per year",
             overview: text("Synthesize machine intelligence with core computing to architect autonomous software systems that learn and adapt in real-time. Students learn to build high-precision predictive engines and automate complex information processing tasks, focusing on the high-growth sectors of digital healthcare and automated industrial operations."),
-            schoolTitle: "School of Engineering and Technology - St.Mary's University",
+            schoolTitle: "School of Engineering and Technology - St. Mary's University",
             schoolDescription: text("The School of Engineering is a center for technical advancement where computing power meets medical necessity. Focus is on creating digital tools that facilitate long-term patient recovery and streamline healthcare operations through data-driven engineering."),
             highlights: [
               "Architecting autonomous agents and predictive software engines",
@@ -1406,9 +1406,9 @@ const schoolsSeed: SchoolData[] = [
             salaryIndia: "6 LPA - 12 LPA",
             salaryInternational: "$80,000 - $140,000 annually",
             salaryNote: text("Salary prospects depend on skills, projects, organization, experience, and specialization."),
-            accreditation: text("Degree awarded by St.Mary's University. Program offered under the School of Engineering and Technology. Curriculum aligned with modern artificial intelligence and computing industry requirements."),
+            accreditation: text("Degree awarded by St. Mary's University. Program offered under the School of Engineering and Technology. Curriculum aligned with modern artificial intelligence and computing industry requirements."),
             accreditationPoints: [
-              "Degree awarded by St.Mary's University",
+              "Degree awarded by St. Mary's University",
               "Program offered under the School of Engineering and Technology",
               "Curriculum aligned with modern artificial intelligence and computing industry requirements"
             ],
@@ -1480,7 +1480,7 @@ const schoolsSeed: SchoolData[] = [
     slug: "law",
     name: "School of Law",
     short: "Law",
-    about: text("The School of Law at St.Mary's University, Hyderabad, is designed around rigorous legal doctrine, real-world advocacy, and emerging technologies. Our curriculum is intentionally designed to transcend textbook learning, offering specialised training in critical future-facing domains such as AI Regulation, Data Sovereignty, and Forensic Jurisprudence. What truly sets St.Mary's University apart is our commitment to an immersive, practice-driven ecosystem - from our Moot Court Hall to a Legal Aid Cell that connects students directly with community justice needs."),
+    about: text("The School of Law at St. Mary's University, Hyderabad, is designed around rigorous legal doctrine, real-world advocacy, and emerging technologies. Our curriculum is intentionally designed to transcend textbook learning, offering specialised training in critical future-facing domains such as AI Regulation, Data Sovereignty, and Forensic Jurisprudence. What truly sets St. Mary's University apart is our commitment to an immersive, practice-driven ecosystem - from our Moot Court Hall to a Legal Aid Cell that connects students directly with community justice needs."),
     vision: [
       "To be a globally recognized center of excellence in legal education, research, and innovation.",
       "To cultivate a generation of legal professionals who are intellectually robust, ethically principled, and socially responsible.",
@@ -1762,7 +1762,7 @@ const mergeOfficialCourses = (seedSchools: SchoolData[]): SchoolData[] =>
           // Get all unique partner codes from the group
           const partnerCodes = [...new Set(
             groupRows
-              .map((row) => row.partnerCode || (groupRows.length > 1 ? "St.Mary's University" : undefined))
+              .map((row) => row.partnerCode || (groupRows.length > 1 ? "St. Mary's University" : undefined))
               .filter((code): code is string => Boolean(code))
           )];
 

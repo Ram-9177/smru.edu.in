@@ -59,7 +59,7 @@ export default function SchoolLandingComingSoon({ schoolSlug }: { schoolSlug: st
       });
   });
   const groupCounts = GROUP_ORDER.filter((key) => programmes.some((program) => program.group === key)).length || 1;
-  const pageDescription = `${toText(config.description, `${config.name} at St.Mary's University.`)} Explore departments, courses, programmes, admissions, and academic pathways.`;
+  const pageDescription = `${toText(config.description, `${config.name} at St. Mary's University.`)} Explore departments, courses, programmes, admissions, and academic pathways.`;
 
   return (
     <>
@@ -110,7 +110,7 @@ export default function SchoolLandingComingSoon({ schoolSlug }: { schoolSlug: st
                 </h1>
                 <div className="my-7 h-1.5 w-20 bg-[#ffaf3a]" />
                 <p className="max-w-3xl text-base font-semibold leading-8 text-white/80 md:text-lg">
-                  {toText(config.description, `${config.name} offers academic pathways at St.Mary's University.`)}
+                  {toText(config.description, `${config.name} offers academic pathways at St. Mary's University.`)}
                 </p>
 
                 <div className="mt-9 flex flex-wrap gap-3">

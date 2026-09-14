@@ -62,10 +62,10 @@ const colors = {
 };
 
 const smruSocialLinks = [
-  { icon: FaFacebookF, href: SITE_SOCIAL_LINKS.facebook, label: "St.Mary's University Facebook" },
-  { icon: FaInstagram, href: SITE_SOCIAL_LINKS.instagram, label: "St.Mary's University Instagram" },
-  { icon: FaYoutube, href: SITE_SOCIAL_LINKS.youtube, label: "St.Mary's University YouTube" },
-  { icon: FaLinkedinIn, href: SITE_SOCIAL_LINKS.linkedin, label: "St.Mary's University LinkedIn" },
+  { icon: FaFacebookF, href: SITE_SOCIAL_LINKS.facebook, label: "St. Mary's University Facebook" },
+  { icon: FaInstagram, href: SITE_SOCIAL_LINKS.instagram, label: "St. Mary's University Instagram" },
+  { icon: FaYoutube, href: SITE_SOCIAL_LINKS.youtube, label: "St. Mary's University YouTube" },
+  { icon: FaLinkedinIn, href: SITE_SOCIAL_LINKS.linkedin, label: "St. Mary's University LinkedIn" },
 ];
 
 export default function EdinboxForensicLandingV2() {
@@ -203,7 +203,7 @@ export default function EdinboxForensicLandingV2() {
               </div>
 
               <p className="text-white/85 text-lg md:text-xl max-w-xl leading-relaxed mb-10 font-light">
-                Build a career in one of India's most sought-after fields. St.Mary's University × AIFSET makes forensic science education accessible to every eligible student in India — via a single online entrance exam.
+                Build a career in one of India's most sought-after fields. St. Mary's University × AIFSET makes forensic science education accessible to every eligible student in India — via a single online entrance exam.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-14">
@@ -272,16 +272,16 @@ export default function EdinboxForensicLandingV2() {
       </div>
 
       {/* ══════════════════════
-           WHY St.Mary's University SECTION
+           WHY St. Mary's University SECTION
       ══════════════════════ */}
       <section className="py-24 bg-white" id="about">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-20 reveal">
             <p className="text-[#e8971f] font-black text-[12px] uppercase tracking-[0.25em] mb-4">Two Missions, One Purpose</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[#1a2e28] font-outfit mb-6 italic">Why Join <span className="text-[#1b5c48] not-italic">Stmarys University?</span></h2>
+            <h2 className="text-4xl md:text-5xl font-black text-[#1a2e28] font-outfit mb-6 italic">Why Join <span className="text-[#1b5c48] not-italic">St. Mary's University?</span></h2>
             <div className="w-16 h-1 bg-[#e8971f] mx-auto mb-8" />
             <p className="text-lg text-[#3d5a52] leading-relaxed">
-              St.Mary's University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India.
+              St. Mary's University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India.
             </p>
           </div>
 
@@ -320,7 +320,7 @@ export default function EdinboxForensicLandingV2() {
               <h2 className="text-4xl md:text-5xl font-black text-white font-outfit mb-6 italic">The <span className="text-[#f5b042] not-italic">AIFSET</span> Advantage</h2>
               <div className="w-16 h-1 bg-[#f5b042] mb-8" />
               <p className="text-lg text-white/75 leading-relaxed font-light">
-                The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to St.Mary's University.
+                The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to St. Mary's University.
               </p>
             </div>
             <a
@@ -405,7 +405,7 @@ export default function EdinboxForensicLandingV2() {
             <h2 className="text-4xl md:text-5xl font-black text-[#1a2e28] font-outfit mb-6 italic">Admission <span className="text-[#1b5c48] not-italic">Process</span></h2>
             <div className="w-16 h-1 bg-[#e8971f] mx-auto mb-8" />
             <p className="text-lg text-[#3d5a52] leading-relaxed">
-              A straightforward 5-step path from your home to a confirmed seat at St.Mary's University — fully guided by AIFSET counsellors.
+              A straightforward 5-step path from your home to a confirmed seat at St. Mary's University — fully guided by AIFSET counsellors.
             </p>
           </div>
 
@@ -414,7 +414,7 @@ export default function EdinboxForensicLandingV2() {
               { num: "1", title: "Register for AIFSET", desc: "Visit the portal, fill your details, and pay the application fee — done in under 10 minutes." },
               { num: "2", title: "Appear for Exam", desc: "Take the AIFSET fully online from home. Any device, any location, zero travel." },
               { num: "3", title: "Receive Score", desc: "Scores declared online. Up to 3 attempts per year — maximise your result." },
-              { num: "4", title: "Apply to St.Mary's University", desc: "Submit your AIFSET score directly to St.Mary's University via the AIFSET counselling portal." },
+              { num: "4", title: "Apply to St. Mary's University", desc: "Submit your AIFSET score directly to St. Mary's University via the AIFSET counselling portal." },
               { num: "5", title: "Confirm Seat", desc: "AIFSET counsellors guide you through docs, fee payment, and final seat confirmation." },
             ].map((step, idx) => (
               <div key={idx} className="reveal relative">
@@ -457,7 +457,7 @@ export default function EdinboxForensicLandingV2() {
               <h2 className="text-4xl md:text-5xl font-black text-[#1a2e28] font-outfit mb-6 italic">What You Can <span className="text-[#1b5c48] not-italic">Become</span></h2>
               <div className="w-16 h-1 bg-[#1b5c48] mb-8" />
               <p className="text-lg text-[#3d5a52] leading-relaxed mb-8">
-                A B.Sc Forensic Science from St.Mary's University opens doors across government labs, law enforcement, private agencies, and research — nationwide.
+                A B.Sc Forensic Science from St. Mary's University opens doors across government labs, law enforcement, private agencies, and research — nationwide.
               </p>
               <a
                 href="/admissions"
@@ -501,7 +501,7 @@ export default function EdinboxForensicLandingV2() {
         <div className="container mx-auto px-4 relative z-10">
           <p className="text-[#f5b042] font-black text-[12px] uppercase tracking-[0.4em] mb-6">Limited Opportunity</p>
           <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-8 font-outfit">
-            Scholarships at <span className="text-[#f5b042] italic">Stmarys University</span>
+            Scholarships at <span className="text-[#f5b042] italic">St. Mary's University</span>
           </h2>
           <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
             Merit-based scholarship seats available for early AIFSET applicants. Limited intake — first come, first served. Don't miss your window.
@@ -526,7 +526,7 @@ export default function EdinboxForensicLandingV2() {
           <div className="flex flex-wrap justify-center gap-8 text-white/50 text-[12px] font-black uppercase tracking-[0.15em]">
             {[
               "Forensic Biotechnology",
-              "St.Mary's Rehab University",
+              "St. Mary's Rehab University",
               "Forensic Science (B.Sc)",
               "AIFSET Counselled Intake"
             ].map((tag, idx) => (
@@ -545,11 +545,11 @@ export default function EdinboxForensicLandingV2() {
         <div className="container mx-auto px-4 relative z-10">
           <FaQuoteLeft className="text-[#e8971f] text-6xl mx-auto mb-10 opacity-30" />
           <blockquote className="text-2xl md:text-4xl font-black text-white italic max-w-4xl mx-auto leading-[1.3] tracking-tight font-outfit mb-12">
-            "At St.Mary's University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
+            "At St. Mary's University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
           </blockquote>
           <div className="flex flex-col items-center">
             <div className="text-[#f5b042] font-black uppercase tracking-[0.3em] text-sm">Dr. Shiva Deekshith</div>
-            <div className="text-white/40 text-[11px] font-bold uppercase tracking-[0.2em] mt-2">Dean, School of Forensic Sciences — Stmarys University</div>
+            <div className="text-white/40 text-[11px] font-bold uppercase tracking-[0.2em] mt-2">Dean, School of Forensic Sciences — St. Mary's University</div>
           </div>
         </div>
       </section>
@@ -584,12 +584,12 @@ export default function EdinboxForensicLandingV2() {
 
             <div className="space-y-3 reveal">
               {[
-                { q: "Is AIFSET recognised by St.Mary's University?", a: "Yes. St.Mary's University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership." },
+                { q: "Is AIFSET recognised by St. Mary's University?", a: "Yes. St. Mary's University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership." },
                 { q: "How many times can I take the AIFSET?", a: "You can take the AIFSET up to 3 times per year. This gives you multiple opportunities to achieve your best score without the pressure of a single attempt." },
-                { q: "Can I apply from outside Hyderabad?", a: "Absolutely. AIFSET is fully online and St.Mary's University admits students from all states across India. Your location is not a barrier — all you need is an internet connection and the right qualifications." },
+                { q: "Can I apply from outside Hyderabad?", a: "Absolutely. AIFSET is fully online and St. Mary's University admits students from all states across India. Your location is not a barrier — all you need is an internet connection and the right qualifications." },
                 { q: "Is there a scholarship available?", a: "Yes. Merit-based scholarships are available for eligible AIFSET applicants. Early registration significantly increases your chances of qualifying for the early-bird scholarship seats." },
                 { q: "What is the eligibility for AIFSET?", a: "Class 12 with Physics, Chemistry, and Biology or Mathematics. Minimum 50% aggregate from a recognised board. Age 17 years and above at the time of admission." },
-                { q: "What support does AIFSET provide?", a: "AIFSET provides free academic counselling, document guidance, regional on-ground support across India, and complete hand-holding through every step of the St.Mary's University admission process." },
+                { q: "What support does AIFSET provide?", a: "AIFSET provides free academic counselling, document guidance, regional on-ground support across India, and complete hand-holding through every step of the St. Mary's University admission process." },
               ].map((faq, idx) => (
                 <div key={idx} className="border border-[#d0ddd8] rounded-xl overflow-hidden shadow-sm">
                   <button
@@ -624,7 +624,7 @@ export default function EdinboxForensicLandingV2() {
         <div className="container mx-auto px-4 relative z-10">
           <p className="text-[#f5b042] font-black text-[12px] uppercase tracking-[0.4em] mb-6">Limited Seats Available</p>
           <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-10 font-outfit">
-            Register for AIFSET.<br /><span className="text-[#f5b042] italic">Choose Stmarys University. Build India.</span>
+            Register for AIFSET.<br /><span className="text-[#f5b042] italic">Choose St. Mary's University. Build India.</span>
           </h2>
           <p className="text-white/75 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
             India is training its next generation of forensic experts. Don't miss your admission window — seats are strictly limited per intake.
@@ -648,7 +648,7 @@ export default function EdinboxForensicLandingV2() {
           </div>
 
           <div className="mt-16 text-[10px] font-black uppercase tracking-[0.4em] text-white/30 space-x-4">
-            <span>St.Mary's University × AIFSET Partnership</span>
+            <span>St. Mary's University × AIFSET Partnership</span>
             <span className="hidden sm:inline">|</span>
             <span>Telangana State Act University</span>
             <span className="hidden sm:inline">|</span>
@@ -683,7 +683,7 @@ export default function EdinboxForensicLandingV2() {
             <div className="md:col-span-1">
               <h4 className="text-white text-[11px] font-black uppercase tracking-[0.2em] mb-8 border-b-2 border-[#e8971f] inline-block pb-1">Quick Routes</h4>
               <ul className="space-y-3 text-[14px]">
-                <li><a href="#about" className="hover:text-[#f5b042] transition-colors">About Stmarys University</a></li>
+                <li><a href="#about" className="hover:text-[#f5b042] transition-colors">About St. Mary's University</a></li>
                 <li><a href="#aifset" className="hover:text-[#f5b042] transition-colors">AIFSET Entrance</a></li>
                 <li><a href="/schools" className="hover:text-[#f5b042] transition-colors">Academic Schools</a></li>
                 <li><a href="/admissions" className="hover:text-[#f5b042] transition-colors">Admissions 2025</a></li>
@@ -720,7 +720,7 @@ export default function EdinboxForensicLandingV2() {
           </div>
 
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-bold uppercase tracking-widest">
-            <p>© 2026 St.Mary's University. All Rights Reserved.</p>
+            <p>© 2026 St. Mary's University. All Rights Reserved.</p>
             <p>Institutional Partner: <span className="text-white">Edinbox</span></p>
           </div>
         </div>

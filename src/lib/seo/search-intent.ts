@@ -138,50 +138,6 @@ const unique = (values: string[], limit = 36) =>
 
 const cleanName = (value = "") => value.replace(/\s*\/\s*.*/, "").replace(/\s+/g, " ").trim();
 
-const typoPhrase = (value = "") =>
-  value
-    .replace(/\badmissions\b/gi, "admisions")
-    .replace(/\badmission\b/gi, "admision")
-    .replace(/\beligibility\b/gi, "eligiblity")
-    .replace(/\bcourses\b/gi, "cources")
-    .replace(/\bcourse\b/gi, "cource")
-    .replace(/\bcollege\b/gi, "collage")
-    .replace(/\btechnology\b/gi, "tecnology")
-    .replace(/\bphysiotherapy\b/gi, "physiotheraphy")
-    .replace(/\boccupational therapy\b/gi, "occupational theraphy")
-    .replace(/\bpsychology\b/gi, "psycology")
-    .replace(/\bforensic science\b/gi, "forensic scince")
-    .replace(/\boptometry\b/gi, "optomitry")
-    .replace(/\bdialysis\b/gi, "dialisis")
-    .replace(/\bradiotherapy\b/gi, "radio therapy")
-    .replace(/\brespiratory\b/gi, "respitory")
-    .replace(/\bHyderabad\b/g, "hyderbad")
-    .replace(/\bhyderabad\b/g, "hyderbad");
-
-const buildProgramTypoSearchTerms = (name: string, subject: string, isDoctoral: boolean) => {
-  const baseTerms = [
-    `${name} course in Hyderabad`,
-    `${name} admission 2026`,
-    `${name} eligibility fees`,
-    `${subject} course Hyderabad`,
-    `${subject} college Hyderabad`,
-    isDoctoral ? `PhD ${subject} admission Hyderabad` : `${subject} courses after 12th`,
-  ];
-
-  return unique(
-    [
-      ...baseTerms.map(typoPhrase),
-      `${name} cource hyd`,
-      `${name} admision 2026`,
-      `${name} eligiblity fees`,
-      `${subject} cource hyd`,
-      `${subject} collage hyderabad`,
-      `${subject} fee structure hyd`,
-    ],
-    24
-  );
-};
-
 const clusterFor = (schoolSlug = "") =>
   SEARCH_CLUSTERS[schoolSlug] || {
     subject: "professional education",
@@ -265,7 +221,6 @@ export const getProgramSearchTerms = (
     isDoctoral ? `top PhD ${subject} programmes in Telangana` : `top ${subject} colleges in Telangana`,
     ...afterTwelfth,
     ...matchingTerms,
-    ...buildProgramTypoSearchTerms(name, subject, isDoctoral),
     ...getDepartmentSearchTerms(school, department).slice(0, 8),
   ], 72);
 };
@@ -281,7 +236,7 @@ export const buildSchoolComparisonFaqs = (school: AcademicEntity) => {
     {
       question: `Is ${school.name || "this school"} located in the Hyderabad region?`,
       answer:
-        `${school.name || "This school"} is part of St.Mary's University in Hyderabad, Telangana. Use the official campus and contact pages for the current address, map, and visit guidance.`,
+        `${school.name || "This school"} is part of St. Mary's University in Hyderabad, Telangana. Use the official campus and contact pages for the current address, map, and visit guidance.`,
     },
   ];
 };
@@ -312,7 +267,7 @@ export const buildProgramComparisonFaqs = (
     {
       question: `How should I compare the best ${comparisonPhrase}?`,
       answer:
-        `Compare the ${name} curriculum, eligibility, duration, practical or clinical exposure, faculty information, facilities, applicable approvals, fee disclosures, and career support. This page provides St.Mary's University programme information and does not claim an independent ranking.`,
+        `Compare the ${name} curriculum, eligibility, duration, practical or clinical exposure, faculty information, facilities, applicable approvals, fee disclosures, and career support. This page provides St. Mary's University programme information and does not claim an independent ranking.`,
     },
     {
       question: `Where can I check ${name} admission, eligibility, duration, and fees?`,

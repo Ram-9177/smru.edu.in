@@ -105,7 +105,7 @@ export const SEO_AUTHORITY_PAGES: SeoAuthorityPage[] = [
     label: "About",
     priority: "trust",
     primaryIntent: "Institutional background, identity, and official university context.",
-    anchors: ["About", "About St.Mary's University", "University Profile", "Institutional Background"],
+    anchors: ["About", "About St. Mary's University", "University Profile", "Institutional Background"],
   },
   {
     key: "examNotification",

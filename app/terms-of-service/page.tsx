@@ -4,8 +4,8 @@ import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Terms of Service | St.Mary's University",
-  description: "Terms of service for St.Mary's University website usage.",
+  title: "Terms of Service | St. Mary's University",
+  description: "Terms of service for St. Mary's University website usage.",
   pathname: "/terms-of-service",
 });
 
@@ -22,15 +22,15 @@ export default function TermsOfServicePage() {
       <StructuredData
         id="terms-of-service-webpage-schema"
         data={buildWebPageSchema({
-          title: "Terms of Service | St.Mary's University",
-          description: "Terms of service for St.Mary's University website usage.",
+          title: "Terms of Service | St. Mary's University",
+          description: "Terms of service for St. Mary's University website usage.",
           pathname: "/terms-of-service",
         })}
       />
       <main className="mx-auto max-w-4xl px-6 py-24 text-slate-800">
         <h1 className="text-4xl font-black text-[#0d315c]">Terms of Service</h1>
         <p className="mt-4 text-sm text-slate-600">
-          These terms govern access and usage of the St.Mary's University website and digital enquiry tools.
+          These terms govern access and usage of the St. Mary's University website and digital enquiry tools.
         </p>
         <p className="mt-8 text-base leading-7">
           All program information and admissions timelines are subject to official university updates. For the latest confirmation, contact

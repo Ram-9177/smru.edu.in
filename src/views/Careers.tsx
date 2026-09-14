@@ -115,9 +115,9 @@ export default function Careers() {
   return (
     <>
       <SEO
-        title="Careers | St.Mary's University"
-        description="Join St.Mary's University — careers in rehabilitation and allied health education. Faculty, clinical, technical roles and more."
-        keywords={["St.Mary's University careers","St.Mary's jobs","university jobs hyderabad","rehabilitation careers"]}
+        title="Careers | St. Mary's University"
+        description="Join St. Mary's University — careers in rehabilitation and allied health education. Faculty, clinical, technical roles and more."
+        keywords={["St. Mary's University careers","St. Mary's jobs","university jobs hyderabad","rehabilitation careers"]}
         canonical="https://smru.edu.in/careers"
         og={{ url: "https://smru.edu.in/careers" }}
       />
@@ -145,7 +145,7 @@ export default function Careers() {
           <h1 className="smru-h1 text-[#0d315c] flex flex-col items-center" data-reveal="fade-up">
             Careers 
             <span className="text-[#25b895] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
-              St.Mary's University
+              St. Mary's University
             </span>
           </h1>
           <div className="mt-4 h-1.5 w-20 cut-corner-badge bg-[#ffaf3a] mx-auto" data-reveal="fade-up" style={{ "--delay": "0.1s" }} />
@@ -154,7 +154,7 @@ export default function Careers() {
             data-reveal="fade-up"
             style={{ "--delay": "0.08s" }}
           >
-            Join St.Mary's University’s specialized academic ecosystem for rehabilitation, allied health, law, and professional education.
+            Join St. Mary's University’s specialized academic ecosystem for rehabilitation, allied health, law, and professional education.
           </p>
 
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 transition-all duration-700 opacity-100 translate-y-0" data-reveal="fade-up" style={{ "--delay": "0.12s" }}>
@@ -197,7 +197,7 @@ export default function Careers() {
             style={{ background: "linear-gradient(105deg, rgba(245,246,238,0.9) 0%, rgba(200,239,223,0.86) 55%, rgba(159,223,202,0.9) 100%)" }}
           />
           <div className="relative text-center">
-            <h2 className="text-3xl font-bold mb-4 tracking-tight">Why Join Stmarys University?</h2>
+            <h2 className="text-3xl font-bold mb-4 tracking-tight">Why Join St. Mary's University?</h2>
             <div className="mx-auto mt-2 h-1.5 w-20 cut-corner-underline bg-[#ffaf3a]" data-reveal="fade-up" style={{ "--delay": "0.05s" }} />
             <p className="mt-4 text-slate-600 max-w-2xl mx-auto" data-reveal="fade-up" style={{ "--delay": "0.1s" }}>
               Build your academic career in a purpose-driven university environment.
@@ -207,7 +207,7 @@ export default function Careers() {
             {[
               { icon: <FaHeartbeat />, title: "Rehab-Focused Curriculum", desc: "Specialized programs tailored to the needs of rehabilitation and allied health sciences." },
               { icon: <FaHandsHelping />, title: "Clinical Training & Outreach", desc: "Real-world training integrated with community outreach and clinical exposure." },
-              { icon: <FaAward />, title: "Educational Legacy", desc: "A purpose-driven academic environment with St.Mary's institutional foundation." },
+              { icon: <FaAward />, title: "Educational Legacy", desc: "A purpose-driven academic environment with St. Mary's institutional foundation." },
               { icon: <FaChartLine />, title: "Student Outcomes Focus", desc: "Work with teams focused on internships, clinical exposure, skill-building, and career support." },
             ].map((item, i) => (
               <article
@@ -251,7 +251,7 @@ export default function Careers() {
           
           <div className="mt-10 pt-8 border-t border-gray-100 w-full text-slate-600 text-sm">
             <p>
-              <strong>St.Mary's University</strong><br />
+              <strong>St. Mary's University</strong><br />
               Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.
             </p>
           </div>

@@ -6,7 +6,7 @@ import type { SeoPage } from "../../../data/seo-pages";
 const faqItemsFor = (page: SeoPage) =>
   page.faqTopics.map((topic) => ({
     question: `What should I know about ${topic}?`,
-    answer: `${topic} should be verified through official St.Mary's University links before applying or relying on the claim.`,
+    answer: `${topic} should be verified through official St. Mary's University links before applying or relying on the claim.`,
   }));
 
 export default function SeoRoutePage({ page }: { page: SeoPage }) {

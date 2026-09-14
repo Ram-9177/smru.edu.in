@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Page Not Found | St.Mary's University",
+  title: "Page Not Found | St. Mary's University",
   description: "The page you are looking for does not exist.",
   robots: "noindex,follow",
 };

@@ -56,7 +56,7 @@ export default function Leadership() {
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-[#019e6e] mb-2">Governance</p>
           <h1 className="text-[#0d315c] text-3xl md:text-5xl font-black font-outfit uppercase tracking-tight">Leadership</h1>
           <div className="mt-2 h-1 w-16 cut-corner-underline bg-[#ffaf3a]" />
-          <p className="mt-5 text-slate-500 font-bold max-w-2xl text-lg leading-relaxed">"Meet the visionaries guiding Stmarys University towards global excellence."</p>
+          <p className="mt-5 text-slate-500 font-bold max-w-2xl text-lg leading-relaxed">"Meet the visionaries guiding St. Mary's University towards global excellence."</p>
         </div>
       </section>
 

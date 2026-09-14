@@ -5,8 +5,8 @@ import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "Anti-Ragging Policy & Committee | St.Mary's University",
-  description: "Official Anti-Ragging regulations, Zero Tolerance policy, helpline contacts, and committee information for St.Mary's University.",
+  title: "Anti-Ragging Policy & Committee | St. Mary's University",
+  description: "Official Anti-Ragging regulations, Zero Tolerance policy, helpline contacts, and committee information for St. Mary's University.",
   alternates: {
     canonical: "https://smru.edu.in/anti-ragging",
   },
@@ -25,8 +25,8 @@ export default function AntiRaggingPage() {
       <StructuredData
         id="anti-ragging-webpage-schema"
         data={buildWebPageSchema({
-          title: "Anti-Ragging Policy & Committee | St.Mary's University",
-          description: "Official Anti-Ragging regulations, Zero Tolerance policy, helpline contacts, and committee information for St.Mary's University.",
+          title: "Anti-Ragging Policy & Committee | St. Mary's University",
+          description: "Official Anti-Ragging regulations, Zero Tolerance policy, helpline contacts, and committee information for St. Mary's University.",
           pathname: "/anti-ragging",
         })}
       />
@@ -45,7 +45,7 @@ export default function AntiRaggingPage() {
               <div className="w-20 h-1.5 bg-red-600 cut-corner-underline mb-8" />
               
               <p className="max-w-2xl text-slate-600 font-medium text-lg leading-relaxed mb-10">
-                St.Mary's University enforces a strict ZERO TOLERANCE policy against ragging in accordance with the UGC Regulations. Ragging is a criminal offense and will be dealt with utmost severity.
+                St. Mary's University enforces a strict ZERO TOLERANCE policy against ragging in accordance with the UGC Regulations. Ragging is a criminal offense and will be dealt with utmost severity.
               </p>
             </div>
           </div>

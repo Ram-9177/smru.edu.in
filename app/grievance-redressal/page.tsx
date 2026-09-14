@@ -6,8 +6,8 @@ import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import GrievanceTabs from "./GrievanceTabs";
 
 export const metadata: Metadata = {
-  title: "Grievance Redressal Cell | St.Mary's University",
-  description: "Official Grievance Redressal Cell and feedback mechanism at St.Mary's University, complying with UGC regulations.",
+  title: "Grievance Redressal Cell | St. Mary's University",
+  description: "Official Grievance Redressal Cell and feedback mechanism at St. Mary's University, complying with UGC regulations.",
   alternates: {
     canonical: "https://smru.edu.in/grievance-redressal",
   },
@@ -26,8 +26,8 @@ export default function GrievanceRedressalPage() {
       <StructuredData
         id="grievance-redressal-webpage-schema"
         data={buildWebPageSchema({
-          title: "Grievance Redressal Cell | St.Mary's University",
-          description: "Official Grievance Redressal Cell and feedback mechanism at St.Mary's University, complying with UGC regulations.",
+          title: "Grievance Redressal Cell | St. Mary's University",
+          description: "Official Grievance Redressal Cell and feedback mechanism at St. Mary's University, complying with UGC regulations.",
           pathname: "/grievance-redressal",
         })}
       />
@@ -45,7 +45,7 @@ export default function GrievanceRedressalPage() {
             <div className="w-20 h-1.5 bg-[#ffaf3a] cut-corner-underline mx-auto mb-8" />
             
             <p className="max-w-2xl mx-auto text-slate-600 font-medium text-lg leading-relaxed mb-10">
-              The Grievance Redressal mechanism at St.Mary's Rehabilitation University is established to ensure a fair, impartial, and consistent mechanism for redressal of various issues faced by students, staff, and faculty.
+              The Grievance Redressal mechanism at St. Mary's Rehabilitation University is established to ensure a fair, impartial, and consistent mechanism for redressal of various issues faced by students, staff, and faculty.
             </p>
           </div>
         </section>

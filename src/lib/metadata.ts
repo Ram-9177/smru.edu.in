@@ -4,7 +4,12 @@ import { UNIVERSITY_INFO } from "@/lib/shared/university";
 
 const siteUrl = SITE_IDENTITY.canonicalBaseUrl;
 const siteName = SITE_IDENTITY.siteName;
-export const SEO_TITLE_BRAND = "St.Mary's University";
+export const SEO_TITLE_BRAND = "St. Mary's University";
+// Pages whose <title> is fixed verbatim (entity pages); the brand suffix is not appended.
+const EXACT_TITLES: Record<string, string> = {
+  "/": "St. Mary's University Hyderabad (SMRU) – Official Site",
+  "/smru": "SMRU – St. Mary's Rehabilitation University, Hyderabad",
+};
 const TITLE_SEPARATOR = " | ";
 const MAX_SEO_TITLE_LENGTH = 60;
 const MAX_PROGRAM_SEO_TITLE_LENGTH = 82;
@@ -43,15 +48,12 @@ export const formatSeoTitle = (title: string, pathname = "/") => {
   const maxPrimaryLength = maxTitleLength - TITLE_SEPARATOR.length - SEO_TITLE_BRAND.length;
   const primary = trimAtWord(normalizePrimaryTitle(title), maxPrimaryLength);
 
-  // Keep the homepage as the broad brand-intent landing page.
-  // Brand-like subpages must retain their own intent-specific titles so that
-  // approvals, admissions, facts, and other official pages do not all collapse
-  // into the same SERP title.
-  if (
-    HOME_PATHNAMES.has(normalizedPathname) &&
-    /^(?:St\.?\s*Mary'?s|St.Mary's)\s+University/i.test(primary)
-  ) {
-    return "St.Mary's University | Private University in Hyderabad";
+  // Entity pages carry a fixed title; brand-like subpages keep their own
+  // intent-specific titles so approvals, admissions and facts pages do not all
+  // collapse into the same SERP title.
+  const exactTitle = EXACT_TITLES[normalizedPathname];
+  if (exactTitle && (HOME_PATHNAMES.has(normalizedPathname) ? /^(?:St\.?\s*Mary'?s\s+University|SMRU)/i.test(primary) : true)) {
+    return exactTitle;
   }
 
   if (primary.toLowerCase().endsWith(SEO_TITLE_BRAND.toLowerCase())) {
@@ -88,7 +90,9 @@ export function buildMetadata({
   description,
   pathname,
   robots = "index,follow",
-  keywords = [],
+  // Accepted for call-site compatibility but never emitted: no engine uses the
+  // keywords meta tag, and the old term lists leaked misspellings into markup.
+  keywords: _keywords = [],
   imagePath = UNIVERSITY_INFO.defaultOgImage,
 }: {
   title: string;
@@ -98,6 +102,7 @@ export function buildMetadata({
   keywords?: string[];
   imagePath?: string;
 }): Metadata {
+  void _keywords;
   const canonical = absoluteUrl(pathname);
   const normalizedTitle = normalizeTitle(title, pathname);
   const normalizedDescription = formatMetaDescription(description);
@@ -109,27 +114,9 @@ export function buildMetadata({
       : ogImageExtension === "jpg" || ogImageExtension === "jpeg"
         ? "image/jpeg"
         : "image/webp";
-  const baseKeywords = [
-    ...SITE_IDENTITY.alternateNames,
-    UNIVERSITY_INFO.brandName,
-    "private university in Telangana",
-    "university in Hyderabad",
-    "admissions",
-    "courses",
-    "programmes",
-    "eligibility",
-    "fees",
-    "health sciences",
-    "law",
-    "engineering",
-    "rehabilitation",
-    "emerging technologies",
-  ];
-
   return {
     title: normalizedTitle,
     description: normalizedDescription,
-    keywords: Array.from(new Set([...baseKeywords, ...keywords])),
     alternates: {
       canonical,
     },

@@ -7,7 +7,7 @@ import React, { useEffect, useRef } from "react";
  *
  * Renders the EXACT HTML provided by the user.
  * Uses an iframe with srcDoc to ensure perfect isolation and zero modifications to the provided code.
- * This also prevents CSS conflicts between St.Mary's University's Tailwind and Edinbox's Bootstrap.
+ * This also prevents CSS conflicts between St. Mary's University's Tailwind and Edinbox's Bootstrap.
  */
 export default function EdinboxRawLanding() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -17,7 +17,7 @@ export default function EdinboxRawLanding() {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B.Sc Forensic Science – St.Mary's University | Admission via AIFSET 2025</title>
+<title>B.Sc Forensic Science – St. Mary's University | Admission via AIFSET 2025</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -483,7 +483,7 @@ section { padding: 4.5rem 0; }
 }
 
 /* ═══════════════════════════════
-   WHY St.Mary's University — ICON CARDS
+   WHY St. Mary's University — ICON CARDS
 ═══════════════════════════════ */
 .why-section { background: #fff; }
 .why-card {
@@ -1047,10 +1047,10 @@ footer {
       <a href="/contact"><i class="fas fa-map-marker-alt mr-1"></i> Hyderabad, Telangana</a>
     </div>
     <div class="top-bar-right d-flex align-items-center">
-      <a href="https://www.facebook.com/SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/smruhyderabad" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.youtube.com/@SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.linkedin.com/company/smruhyderabad/" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.facebook.com/SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/smruhyderabad" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/company/smruhyderabad/" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       <a href="https://aifset.com/" class="btn-apply ml-2">Apply Now</a>
     </div>
   </div>
@@ -1063,7 +1063,7 @@ footer {
   <div class="container">
     <a href="/partner/edinbox/" class="navbar-brand-wrap">
       <div class="navbar-logo-text">
-        <span class="logo-main"> St.Mary's</span>
+        <span class="logo-main"> St. Mary's</span>
         <span class="logo-sub">Rehabilitation University</span>
       </div>
     </a>
@@ -1075,7 +1075,7 @@ footer {
       <li>
         <a href="/about">About <i class="fas fa-chevron-down"></i></a>
         <div class="dropdown-nav">
-          <a href="/about">About Stmarys University</a>
+          <a href="/about">About St. Mary's University</a>
           <a href="/about">Vision & Mission</a>
           <a href="/leadership">Leadership</a>
           <a href="/campus-location-hyderabad">Campus</a>
@@ -1125,7 +1125,7 @@ footer {
           B.Sc <em>Forensic</em><br>Science
         </h1>
         <p class="hero-desc fade-up delay-3">
-          Build a career in one of India's most sought-after fields. St.Mary's University × AIFSET makes forensic science education accessible to every eligible student in India — via a single online entrance exam.
+          Build a career in one of India's most sought-after fields. St. Mary's University × AIFSET makes forensic science education accessible to every eligible student in India — via a single online entrance exam.
         </p>
         <div class="fade-up delay-4">
           <a href="https://aifset.com/" class="btn-hero-primary">Register for AIFSET</a>
@@ -1173,15 +1173,15 @@ footer {
 </div>
 
 <!-- ══════════════════════
-     WHY St.Mary's University
+     WHY St. Mary's University
 ══════════════════════ -->
 <section class="why-section" id="about">
   <div class="container">
     <div class="text-center mb-5">
       <p class="section-tag">Two Missions, One Purpose</p>
-      <h2 class="section-heading">Why Join <em>St.Mary's University?</em></h2>
+      <h2 class="section-heading">Why Join <em>St. Mary's University?</em></h2>
       <span class="underline-accent"></span>
-      <p class="section-desc mx-auto">St.Mary's University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India.</p>
+      <p class="section-desc mx-auto">St. Mary's University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India.</p>
     </div>
     <div class="row">
       <div class="col-6 col-md-3 mb-4 reveal">
@@ -1257,7 +1257,7 @@ footer {
         <h2 class="section-heading" style="color:#fff;">The <span>AIFSET</span> Advantage</h2>
         <div class="underline-accent left" style="background:var(--orange-light);"></div>
         <p class="section-desc" style="color:rgba(255,255,255,0.78);">
-          The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to St.Mary's University.
+          The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to St. Mary's University.
         </p>
       </div>
       <div class="col-lg-5 offset-lg-1 text-center text-lg-right mt-4 mt-lg-0">
@@ -1357,7 +1357,7 @@ footer {
       <p class="section-tag">Step-by-Step</p>
       <h2 class="section-heading">Admission <em>Process</em></h2>
       <span class="underline-accent"></span>
-      <p class="section-desc mx-auto">A straightforward 5-step path from your home to a confirmed seat at St.Mary's University — fully guided by AIFSET counsellors.</p>
+      <p class="section-desc mx-auto">A straightforward 5-step path from your home to a confirmed seat at St. Mary's University — fully guided by AIFSET counsellors.</p>
     </div>
     <div class="row align-items-stretch justify-content-center">
       <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
@@ -1387,8 +1387,8 @@ footer {
       <div class="col-sm-6 col-md-4 col-lg mb-4 reveal">
         <div class="step-card">
           <div class="step-num-badge">4</div>
-          <h5>Apply to St.Mary's University</h5>
-          <p>Submit your AIFSET score directly to St.Mary's University via the AIFSET counselling portal.</p>
+          <h5>Apply to St. Mary's University</h5>
+          <p>Submit your AIFSET score directly to St. Mary's University via the AIFSET counselling portal.</p>
         </div>
       </div>
       <div class="col-auto d-none d-lg-flex align-items-center step-connector"><i class="fas fa-chevron-right"></i></div>
@@ -1416,7 +1416,7 @@ footer {
         <p class="section-tag">Career Scope</p>
         <h2 class="section-heading">What You Can <em>Become</em></h2>
         <div class="underline-accent left"></div>
-        <p class="section-desc">A B.Sc Forensic Science from St.Mary's University opens doors across government labs, law enforcement, private agencies, and research — nationwide.</p>
+        <p class="section-desc">A B.Sc Forensic Science from St. Mary's University opens doors across government labs, law enforcement, private agencies, and research — nationwide.</p>
         <a href="https://aifset.com/" class="btn-teal mt-4">Explore the Degree</a>
       </div>
       <div class="col-lg-7 reveal">
@@ -1480,7 +1480,7 @@ footer {
 <section class="scholarship-section">
   <div class="container" style="position:relative;z-index:2;">
     <p class="section-tag" style="color:var(--orange-light);">Limited Opportunity</p>
-    <h2>Scholarships at <span>St.Mary's University</span></h2>
+    <h2>Scholarships at <span>St. Mary's University</span></h2>
     <p>Merit-based scholarship seats available for early AIFSET applicants. Limited intake — first come, first served. Don't miss your window.</p>
     <div class="d-flex justify-content-center gap-3 flex-wrap" style="gap:1rem;">
       <a href="https://aifset.com/" class="btn-scholarship">Secure My Scholarship Seat</a>
@@ -1491,7 +1491,7 @@ footer {
         <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> Forensic Biotechnology
       </div>
       <div class="text-center" style="color:rgba(255,255,255,0.65);font-size:0.85rem;">
-        <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> St.Mary's Rehab University
+        <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> St. Mary's Rehab University
       </div>
       <div class="text-center" style="color:rgba(255,255,255,0.65);font-size:0.85rem;">
         <i class="fas fa-check-circle" style="color:var(--orange-light);margin-right:0.3rem;"></i> Forensic Science (B.Sc)
@@ -1510,11 +1510,11 @@ footer {
   <div class="container">
     <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
     <blockquote>
-      "At St.Mary's University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
+      "At St. Mary's University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
     </blockquote>
     <div class="author">
       Dr. Shiva Deekshith
-      <span style="display:block;font-weight:300;margin-top:0.2rem;">Dean, School of Forensic Sciences — St.Mary's University</span>
+      <span style="display:block;font-weight:300;margin-top:0.2rem;">Dean, School of Forensic Sciences — St. Mary's University</span>
     </div>
   </div>
 </section>
@@ -1547,10 +1547,10 @@ footer {
           <div class="col-md-8 faq-accordion">
             <div class="faq-item">
               <div class="faq-question active" onclick="toggleFaq(this)">
-                Is AIFSET recognised by St.Mary's University?
+                Is AIFSET recognised by St. Mary's University?
                 <div class="faq-icon"><i class="fas fa-plus"></i></div>
               </div>
-              <div class="faq-answer open">Yes. St.Mary's University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership.</div>
+              <div class="faq-answer open">Yes. St. Mary's University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership.</div>
             </div>
             <div class="faq-item">
               <div class="faq-question" onclick="toggleFaq(this)">
@@ -1564,7 +1564,7 @@ footer {
                 Can I apply from outside Hyderabad?
                 <div class="faq-icon"><i class="fas fa-plus"></i></div>
               </div>
-              <div class="faq-answer">Absolutely. AIFSET is fully online and St.Mary's University admits students from all states across India. Your location is not a barrier — all you need is an internet connection and the right qualifications.</div>
+              <div class="faq-answer">Absolutely. AIFSET is fully online and St. Mary's University admits students from all states across India. Your location is not a barrier — all you need is an internet connection and the right qualifications.</div>
             </div>
             <div class="faq-item">
               <div class="faq-question" onclick="toggleFaq(this)">
@@ -1585,7 +1585,7 @@ footer {
                 What support does AIFSET provide?
                 <div class="faq-icon"><i class="fas fa-plus"></i></div>
               </div>
-              <div class="faq-answer">AIFSET provides free academic counselling, document guidance, regional on-ground support across India, and complete hand-holding through every step of the St.Mary's University admission process.</div>
+              <div class="faq-answer">AIFSET provides free academic counselling, document guidance, regional on-ground support across India, and complete hand-holding through every step of the St. Mary's University admission process.</div>
             </div>
           </div>
         </div>
@@ -1600,7 +1600,7 @@ footer {
 <section class="final-cta" id="register">
   <div class="container">
     <p class="section-tag" style="color:var(--orange-light);">Limited Seats Available</p>
-    <h2>Register for AIFSET.<br><em>Choose St.Mary's University. Build India.</em></h2>
+    <h2>Register for AIFSET.<br><em>Choose St. Mary's University. Build India.</em></h2>
     <p>India is training its next generation of forensic experts. Don't miss your admission window — seats are strictly limited per intake.</p>
     <div class="cta-buttons">
       <a href="https://aifset.com/" target="_blank" rel="noopener noreferrer" class="btn-orange" style="font-size:1rem;padding:1rem 2.5rem;">
@@ -1611,7 +1611,7 @@ footer {
       </a>
     </div>
     <p class="mt-4" style="font-size:0.82rem;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;">
-      St.Mary's University × AIFSET Partnership &nbsp;·&nbsp; Telangana State Act University &nbsp;·&nbsp; 100% Online AIFSET Exam
+      St. Mary's University × AIFSET Partnership &nbsp;·&nbsp; Telangana State Act University &nbsp;·&nbsp; 100% Online AIFSET Exam
     </p>
   </div>
 </section>
@@ -1625,25 +1625,25 @@ footer {
       <div class="col-lg-4 mb-5">
         <div class="footer-logo-area">
           <div class="footer-brand-name">
-            St.Mary's
+            St. Mary's
             <span>Rehabilitation University</span>
           </div>
           <div class="footer-tagline">Established Under Telangana State Act</div>
         </div>
         <p class="footer-desc">A specialized university focused on rehabilitation sciences, supported by hospital and mental health facilities. Partnering with AIFSET to reach students across India.</p>
         <div class="footer-social">
-          <a href="https://www.facebook.com/SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/smruhyderabad" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.youtube.com/@SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University YouTube"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.linkedin.com/company/smruhyderabad/" target="_blank" rel="noopener noreferrer" aria-label="Stmarys University LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="/contact" aria-label="Contact Stmarys University"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.facebook.com/SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/smruhyderabad" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@SMRUniversity" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/company/smruhyderabad/" target="_blank" rel="noopener noreferrer" aria-label="St. Mary's University LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="/contact" aria-label="Contact St. Mary's University"><i class="fab fa-twitter"></i></a>
         </div>
       </div>
       <div class="col-6 col-md-4 col-lg-2 mb-5">
         <div class="footer-col-heading">Quick Links</div>
         <ul class="footer-links">
           <li><a href="/partner/edinbox/"><i class="fas fa-angle-right"></i> Home</a></li>
-          <li><a href="#about"><i class="fas fa-angle-right"></i> About Stmarys University</a></li>
+          <li><a href="#about"><i class="fas fa-angle-right"></i> About St. Mary's University</a></li>
           <li><a href="#aifset"><i class="fas fa-angle-right"></i> AIFSET Exam</a></li>
           <li><a href="#process"><i class="fas fa-angle-right"></i> Admission</a></li>
           <li><a href="#careers"><i class="fas fa-angle-right"></i> Career Scope</a></li>
@@ -1665,7 +1665,7 @@ footer {
         <div class="footer-col-heading">Get In Touch</div>
         <div class="footer-contact-item">
           <i class="fas fa-map-marker-alt"></i>
-          <span>St.Mary's University, Hyderabad, Telangana — 500 034, India</span>
+          <span>St. Mary's University, Hyderabad, Telangana — 500 034, India</span>
         </div>
         <div class="footer-contact-item">
           <i class="fas fa-phone-alt"></i>
@@ -1689,7 +1689,7 @@ footer {
   </div>
   <div class="footer-bottom">
     <div class="container d-flex justify-content-between flex-wrap align-items-center" style="gap:0.5rem;">
-      <span>&copy; 2025 St.Mary's University. All rights reserved.</span>
+      <span>&copy; 2025 St. Mary's University. All rights reserved.</span>
       <span>
         <a href="/privacy-policy">Privacy Policy</a> &nbsp;·&nbsp;
         <a href="/terms-of-service">Terms of Use</a> &nbsp;·&nbsp;

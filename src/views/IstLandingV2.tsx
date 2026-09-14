@@ -18,9 +18,9 @@ import {
 import useOpenApply from "@/hooks/useOpenApply";
 
 const THEME = {
-  primary: "#0d315c",    // St.Mary's University Deep Blue
-  secondary: "#019e6e",  // St.Mary's University Teal/Green
-  accent: "#ffaf3a",     // St.Mary's University Orange
+  primary: "#0d315c",    // St. Mary's University Deep Blue
+  secondary: "#019e6e",  // St. Mary's University Teal/Green
+  accent: "#ffaf3a",     // St. Mary's University Orange
   istBlue: "#1d4ed8",    // Intellipaat Blue
   istDark: "#061a2f",    // Intellipaat Dark
 };
@@ -55,7 +55,7 @@ const PROGRAMS = [
 const HIGHLIGHTS = [
   {
     title: "UGC Recognized Degree",
-    desc: "Earn a valid B.Tech degree from St.Mary's University.",
+    desc: "Earn a valid B.Tech degree from St. Mary's University.",
     icon: <FaCertificate />,
   },
   {
@@ -88,7 +88,7 @@ const TESTIMONIALS = [
 const FAQS = [
   {
     q: "Is the B.Tech degree UGC recognized?",
-    a: "Yes, the degree is awarded by St.Mary's University, which is established under the Telangana Gazette Act and recognized by the UGC.",
+    a: "Yes, the degree is awarded by St. Mary's University, which is established under the Telangana Gazette Act and recognized by the UGC.",
   },
   {
     q: "What certifications will I receive?",
@@ -248,7 +248,7 @@ const IstLandingV2 = () => {
         </div>
       </section>
 
-      {/* The St.Mary's University + Intellipaat Advantage */}
+      {/* The St. Mary's University + Intellipaat Advantage */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-6">
           <div className="bg-[#0d315c] cut-corner-panel overflow-hidden flex flex-col lg:flex-row">
@@ -262,7 +262,7 @@ const IstLandingV2 = () => {
 
               <div className="space-y-6">
                 {[
-                  "UGC Recognized B.Tech Degree from St.Mary's University",
+                  "UGC Recognized B.Tech Degree from St. Mary's University",
                   "Industry Mentorship from FAANG Experts",
                   "24/7 Support and Interactive Learning",
                   "Job Readiness through Live Capstone Projects"
@@ -391,7 +391,7 @@ const IstLandingV2 = () => {
                 </button>
               </div>
               <p className="mt-12 text-white/50 text-xs font-bold uppercase tracking-[0.2em]">
-                St.Mary's University × Intellipaat
+                St. Mary's University × Intellipaat
               </p>
             </div>
           </div>
@@ -401,8 +401,8 @@ const IstLandingV2 = () => {
       {/* Footer Branding */}
       <footer className="py-10 border-t border-slate-100">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-[#0d315c] font-black text-xl">Stmarys University × IST</div>
-          <div className="text-slate-400 text-sm">© 2025 Stmarys University. All Rights Reserved.</div>
+          <div className="text-[#0d315c] font-black text-xl">St. Mary's University × IST</div>
+          <div className="text-slate-400 text-sm">© 2025 St. Mary's University. All Rights Reserved.</div>
           <div className="flex gap-8 text-slate-400 text-xs font-bold uppercase tracking-widest">
             <a href="/privacy-policy" className="hover:text-[#1d4ed8]">Privacy</a>
             <a href="/terms-of-service" className="hover:text-[#1d4ed8]">Terms</a>

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getPartnerAliasRedirect } from "@/lib/shared/partner-alias-redirects";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-export const metadata = buildRedirectMetadata("BlackBucks | St.Mary's University", "/bb");
+export const metadata = buildRedirectMetadata("BlackBucks | St. Mary's University", "/bb");
 
 export default function Page() {
   redirect(getPartnerAliasRedirect("blackbucks"));

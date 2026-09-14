@@ -14,8 +14,8 @@ const NiatUpskilling = () => {
   return (
     <>
       <SEO 
-        title="NIAT Upskilling | St.Mary's University"
-        description="Explore the NIAT Upskilling programs in collaboration with St.Mary's University."
+        title="NIAT Upskilling | St. Mary's University"
+        description="Explore the NIAT Upskilling programs in collaboration with St. Mary's University."
         canonical="https://smru.edu.in/niat-upskilling"
       />
 
@@ -37,7 +37,7 @@ const NiatUpskilling = () => {
             >
               <motion.img 
                 src={resolveAssetSrc(logo)} 
-                alt="St.Mary's University Logo" 
+                alt="St. Mary's University Logo" 
                 className="h-24 md:h-32 w-auto object-contain mb-10"
                 animate={{ 
                   scale: [1, 1.02, 1],

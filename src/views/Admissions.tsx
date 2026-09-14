@@ -194,13 +194,13 @@ export default function Admissions() {
       <section className="scroll-mt-24 smru-section bg-slate-50 border-t border-slate-200">
          <div className="smru-container flex flex-col items-center text-center">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-200 text-[#0d315c] mb-6 p-3 overflow-hidden">
-              <img src="/assets/Stmarys-Logo.webp" alt="Stmarys University Logo" className="w-full h-full object-contain" />
+              <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
             </div>
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-[#0d315c] mb-6">
               Institutional Trust & Recognition
             </h2>
             <p className="text-slate-600 font-medium max-w-2xl leading-relaxed mb-10 text-lg">
-              Students and parents can review St.Mary's University’s official establishment and UGC recognition documents before applying.
+              Students and parents can review St. Mary's University’s official establishment and UGC recognition documents before applying.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full md:w-auto px-4">
               <a 
