@@ -11,6 +11,7 @@ import { SAFE_GUIDE_PAGES } from "./safe-guides";
 import { SHOW_PUBLIC_INFO_PAGES } from "./visibility";
 import { NOINDEX_COMPLIANCE_PATHS } from "../../../data/compliance-pages";
 import { INDEXABLE_SEO_PAGES } from "../../../data/seo-pages";
+import { CAREBRIDGE_DESTINATIONS, COUNTRIES } from "@/data/international";
 
 // Canonical sitemap host: HTTPS-only, non-www. HTTP and www are redirected in
 // public/.htaccess, so sitemap loc values must stay on this origin.
@@ -20,7 +21,7 @@ const base = "https://smru.edu.in";
 const LAST_MODIFIED = new Date("2026-05-15");
 
 // The sitemap is served as an index; each section is its own child file.
-export const SITEMAP_SECTIONS = ["pages", "schools", "programmes", "guides"] as const;
+export const SITEMAP_SECTIONS = ["pages", "schools", "programmes", "guides", "international"] as const;
 export type SitemapSection = (typeof SITEMAP_SECTIONS)[number];
 export const sitemapSectionPath = (section: SitemapSection | "images") => `/sitemap-${section}.xml`;
 
@@ -172,6 +173,12 @@ export function buildSitemapSections(): Record<SitemapSection, MetadataRoute.Sit
     schools: uniqueEntries(schoolEntries),
     programmes: uniqueEntries(programmeEntries),
     guides: uniqueEntries([...safeGuideEntries, ...templatedGuideEntries]),
+    international: uniqueEntries([
+      entry("/international", sourceMtime("src/data/international.ts", "app/international/page.tsx"), "monthly"),
+      entry("/international/nri-admissions", sourceMtime("src/data/international.ts")),
+      ...COUNTRIES.map((country) => entry(`/international/${country.slug}`, sourceMtime("src/data/international.ts"))),
+      ...CAREBRIDGE_DESTINATIONS.map((d) => entry(`/carebridge/${d.slug}`, sourceMtime("src/data/international.ts"))),
+    ]),
   };
 }
 

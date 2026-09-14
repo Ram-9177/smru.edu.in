@@ -237,6 +237,36 @@ This is the single markdown control file to maintain for every change cycle. Kee
   is ready; results are not fabricated here.
 - Guard: 5 new invariants → **39 checks**. `npm run seo:llms` / `seo:facts` added.
 
+### Phase 6: International — inbound + outbound (14 September 2026)
+- **`<html lang>` en-IN → en** and **hreflang** (`en-IN` / `en` / `x-default`, all → the page's own
+  canonical) now emitted on every `buildMetadata` page via `alternates.languages` — telling Google
+  the site serves English speakers everywhere, not India-only. One URL set, no translation split.
+- **`/international/` hub**: who can apply, qualification equivalence, English requirement, fees
+  (INR + indicative USD, no invented figures), application steps, documents, the Indian
+  student-visa + e-FRRO route, and arrival — with `WebPage` + `FAQPage` + `ContactPoint`
+  (`International Admissions`, areaServed the 8 countries) schema.
+- **8 country pages** `/international/{nepal,bangladesh,sri-lanka,bhutan,nigeria,kenya,uae,oman}/`
+  from `src/data/international.ts`: each maps the local 12th-grade qualification to the Indian 10+2,
+  gives the visa nuance, attestation/AIU route and a fee note — real public process facts only,
+  never SMRU-specific fees. `generateStaticParams` + `dynamicParams = false`.
+- **`/international/nri-admissions/`**: NRI / OCI / PIO route, documents, how it differs from the
+  domestic and foreign-national routes.
+- **`/carebridge/{destination}/` global-careers cluster** (6 pages: uk-nursing,
+  uk-physiotherapy-hcpc, australia-ahpra, gulf-dha-haad, canada, usa-nclex): the regulator, the
+  exam, a realistic timeline, what SMRU provides vs what the graduate must do, and the **mandatory
+  disclaimer** — registration is granted by the foreign regulator (NMC, HCPC, AHPRA, DHA/DoH/MOH,
+  NCLEX/state boards), never by SMRU — as the first block on every page.
+- **Organization schema** `areaServed` expanded from India-only to India + the 8 recruitment
+  countries (with `GeoCoordinates` already present).
+- **`/sitemap-international.xml`** added as a 5th sitemap-index child (16 URLs: hub + NRI + 8
+  countries + 6 carebridge destinations).
+- **`docs/seo/international-citations.md`**: ready-to-send listing brief for the marketing team
+  (StudyInIndia, StudyPortals, AIU, Yocket, Leverage Edu, EDUopinions, ICCR, country agent
+  directories) with the standard name + bridge sentence.
+- Guard sitemap-index check now requires the `international` child. Pages 258 → 274 routes;
+  hreflang on 256/273 built pages (the 17 without are static/partner-archive/redirect-shell files
+  that bypass `buildMetadata`). `langNotEn` warnings 252 → 1 (the standalone `/360/hostel/` viewer).
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel

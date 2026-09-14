@@ -40,7 +40,9 @@ export const buildOrganizationSchema = () => ({
     "@type": "GeoCoordinates",
     ...SITE_IDENTITY.geo,
   },
-  areaServed: { "@type": "Country", name: "India" },
+  areaServed: ["India", "Nepal", "Bangladesh", "Sri Lanka", "Bhutan", "Nigeria", "Kenya", "United Arab Emirates", "Oman"].map(
+    (country) => ({ "@type": "Country", name: country }),
+  ),
   contactPoint: SITE_IDENTITY.contactPoints.map((cp) => ({
     "@type": "ContactPoint",
     ...cp,
@@ -392,6 +394,18 @@ export const buildFaqSchema = (items: SeoFaqItem[]) => ({
       text: item.answer,
     },
   })),
+});
+
+export const buildInternationalContactPointSchema = (pathname: string) => ({
+  "@context": "https://schema.org",
+  "@type": "ContactPoint",
+  "@id": absoluteUrl(`${pathname}#international-admissions`),
+  contactType: "International Admissions",
+  email: SITE_IDENTITY.email,
+  telephone: SITE_IDENTITY.telephone,
+  url: absoluteUrl(pathname),
+  areaServed: ["Nepal", "Bangladesh", "Sri Lanka", "Bhutan", "Nigeria", "Kenya", "United Arab Emirates", "Oman"],
+  availableLanguage: ["English"],
 });
 
 export const buildContactPageSchema = (pathname: string) => ({

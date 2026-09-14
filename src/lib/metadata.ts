@@ -134,6 +134,14 @@ export function buildMetadata({
     description: normalizedDescription,
     alternates: {
       canonical,
+      // The site serves English speakers everywhere (one URL set, no translations).
+      // en-IN / en / x-default all point at the same canonical so Google treats the page
+      // as English-global rather than India-only.
+      languages: {
+        "en-IN": canonical,
+        en: canonical,
+        "x-default": canonical,
+      },
     },
     robots,
     openGraph: {

@@ -288,7 +288,7 @@ const checks = [
     name: "Sitemap is an index with per-section child sitemaps",
     pass: () =>
       read("app/sitemap.xml/route.ts").includes("buildSitemapIndexXml") &&
-      ["pages", "schools", "programmes", "guides", "images"].every((section) => exists(`app/sitemap-${section}.xml/route.ts`)) &&
+      ["pages", "schools", "programmes", "guides", "images", "international"].every((section) => exists(`app/sitemap-${section}.xml/route.ts`)) &&
       !read("src/lib/seo/sitemap.ts").includes('"/iqac"') &&
       !read("src/lib/seo/sitemap.ts").includes("indexableComplianceRoutes") &&
       !read("src/lib/seo/sitemap.ts").includes('"/niat"'),
