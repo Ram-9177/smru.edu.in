@@ -30,8 +30,8 @@ aggregator work (Phase 7); together they build the international-entity signal.
 
 ## Rules
 
-- Every listing links to `https://smru.edu.in/` and, for applicants, `https://smru.edu.in/international/`.
-- Never claim a foreign licence outcome — link the relevant `/carebridge/{destination}/` page, which
-  carries the "registration is granted by the foreign regulator, not SMRU" disclaimer.
+- Every listing links to `https://smru.edu.in/` and, for applicants, `https://smru.edu.in/international/` · **Global careers:** `https://smru.edu.in/global-careers/`.
+- Never claim a foreign licence outcome — link the relevant `/global-careers/{destination}/` page,
+  which carries the "registration is granted by the foreign regulator, not SMRU" disclaimer.
 - Never publish a fee figure that is not on the official site.
 - Keep the name exactly as above so engines reconcile every citation to one entity.

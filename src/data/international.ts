@@ -4,8 +4,9 @@
 // the Indian student-visa route, and attestation steps. They never assert SMRU-specific fees,
 // intake or scholarship figures — those carry the @@NEEDS_UNIVERSITY_INPUT@@ marker.
 //
-// Carebridge destination pages describe the foreign licensing pathway and carry the mandatory
-// disclaimer that registration is granted by the foreign regulator, never by SMRU.
+// Global-career pathway pages (SMRU's own outbound content — not the Carebridge partner) describe
+// the foreign licensing route and carry the mandatory disclaimer that registration is granted by the
+// foreign regulator, never by SMRU.
 
 export type CountryInfo = {
   slug: string;
@@ -138,7 +139,7 @@ export const COUNTRIES: CountryInfo[] = [
 
 export const getCountry = (slug: string) => COUNTRIES.find((country) => country.slug === slug);
 
-export type CarebridgeDestination = {
+export type GlobalCareerPathway = {
   slug: string;
   destination: string;
   profession: string;
@@ -150,11 +151,11 @@ export type CarebridgeDestination = {
   intro: string;
 };
 
-// The disclaimer is mandatory on every Carebridge destination page.
-export const CAREBRIDGE_DISCLAIMER =
+// The disclaimer is mandatory on every global-career pathway page.
+export const GLOBAL_CAREER_DISCLAIMER =
   "Registration and the licence to practise are granted by the destination country's own regulator after its own exams, checks and requirements — never by St. Mary's University. SMRU provides the qualifying Indian degree and pathway preparation; it does not guarantee a foreign licence, visa or job. Requirements change; always confirm current rules with the named regulator before relying on this page.";
 
-export const CAREBRIDGE_DESTINATIONS: CarebridgeDestination[] = [
+export const GLOBAL_CAREER_PATHWAYS: GlobalCareerPathway[] = [
   {
     slug: "uk-nursing",
     destination: "United Kingdom",
@@ -229,4 +230,4 @@ export const CAREBRIDGE_DESTINATIONS: CarebridgeDestination[] = [
   },
 ];
 
-export const getCarebridgeDestination = (slug: string) => CAREBRIDGE_DESTINATIONS.find((d) => d.slug === slug);
+export const getGlobalCareerPathway = (slug: string) => GLOBAL_CAREER_PATHWAYS.find((d) => d.slug === slug);

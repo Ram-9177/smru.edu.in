@@ -46,7 +46,7 @@ export default function Page() {
         relatedLinks={[
           { href: "/international/nri-admissions/", label: "NRI / OCI / PIO admissions", description: "Route for Indian-origin applicants abroad" },
           { href: "/programmes/", label: "All programmes (A–Z)", description: "Every course with level and duration" },
-          { href: "/carebridge/", label: "Global career pathways", description: "UK, Australia, Gulf, Canada, USA licensing routes" },
+          { href: "/global-careers/", label: "Global career pathways", description: "UK, Australia, Gulf, Canada, USA licensing routes" },
           ...COUNTRIES.map((c) => ({ href: `/international/${c.slug}/`, label: `From ${c.name}`, description: c.qualification })),
         ]}
       />

@@ -256,6 +256,7 @@ This is the single markdown control file to maintain for every change cycle. Kee
   exam, a realistic timeline, what SMRU provides vs what the graduate must do, and the **mandatory
   disclaimer** — registration is granted by the foreign regulator (NMC, HCPC, AHPRA, DHA/DoH/MOH,
   NCLEX/state boards), never by SMRU — as the first block on every page.
+  **[Corrected]** relocated to `/global-careers/` — see the note under Phase 7.
 - **Organization schema** `areaServed` expanded from India-only to India + the 8 recruitment
   countries (with `GeoCoordinates` already present).
 - **`/sitemap-international.xml`** added as a 5th sitemap-index child (16 URLs: hub + NRI + 8
@@ -284,6 +285,19 @@ This is the single markdown control file to maintain for every change cycle. Kee
   *utility* pages (brochure/360/handbook/html-sitemap/status) — functional pages, not content;
   the one partner phrase "100% Placement Assistance" on `/carebridge/` is partner content (not a
   job guarantee) and left untouched per the no-touch-partner-content rule.
+
+### Correction: global-careers moved out of the partner /carebridge/ namespace (14 September 2026)
+Carebridge is a third-party industry/skill **partner**, not SMRU's own programme. The Phase 6
+global-careers pathway pages had been placed under `/carebridge/{destination}/`, inside the partner's
+brand namespace — a violation of the "do not touch partner commercial content" rule. Corrected:
+- The 6 licensing-pathway pages moved to **`/global-careers/{destination}/`** (SMRU-owned) plus a new
+  **`/global-careers/`** hub with an `ItemList` of the pathways. None of them carry Carebridge
+  branding — they describe NMC / HCPC / AHPRA / DHA-DoH-MOH / NCLEX pathways in SMRU's own voice.
+- `/carebridge/` is left as the partner's landing page **only** (verified: no SMRU pathway sub-pages
+  under it in the build).
+- Data renamed `CAREBRIDGE_DESTINATIONS/DISCLAIMER` → `GLOBAL_CAREER_PATHWAYS`/`GLOBAL_CAREER_DISCLAIMER`;
+  sitemap-international, the `/international/` hub link, and the three docs updated. Regulator
+  disclaimer still leads every pathway page.
 
 ## Status: brief Phases 0–7 complete
 

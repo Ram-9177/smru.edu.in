@@ -11,7 +11,7 @@ import { SAFE_GUIDE_PAGES } from "./safe-guides";
 import { SHOW_PUBLIC_INFO_PAGES } from "./visibility";
 import { NOINDEX_COMPLIANCE_PATHS } from "../../../data/compliance-pages";
 import { INDEXABLE_SEO_PAGES } from "../../../data/seo-pages";
-import { CAREBRIDGE_DESTINATIONS, COUNTRIES } from "@/data/international";
+import { GLOBAL_CAREER_PATHWAYS, COUNTRIES } from "@/data/international";
 
 // Canonical sitemap host: HTTPS-only, non-www. HTTP and www are redirected in
 // public/.htaccess, so sitemap loc values must stay on this origin.
@@ -177,7 +177,8 @@ export function buildSitemapSections(): Record<SitemapSection, MetadataRoute.Sit
       entry("/international", sourceMtime("src/data/international.ts", "app/international/page.tsx"), "monthly"),
       entry("/international/nri-admissions", sourceMtime("src/data/international.ts")),
       ...COUNTRIES.map((country) => entry(`/international/${country.slug}`, sourceMtime("src/data/international.ts"))),
-      ...CAREBRIDGE_DESTINATIONS.map((d) => entry(`/carebridge/${d.slug}`, sourceMtime("src/data/international.ts"))),
+      entry("/global-careers", sourceMtime("src/data/international.ts", "app/global-careers/page.tsx"), "monthly"),
+      ...GLOBAL_CAREER_PATHWAYS.map((d) => entry(`/global-careers/${d.slug}`, sourceMtime("src/data/international.ts"))),
     ]),
   };
 }

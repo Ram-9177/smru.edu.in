@@ -46,7 +46,7 @@ correct — e.g. `/smru/`, `llms.txt`, Organization JSON-LD, a programme page).
 - **4, 5, 7:** SMRU should appear, linking to the matching programme page.
 - **6:** fees are not yet published — the honest answer is "confirmed at admissions counselling",
   and a wrong fee (e.g. an aggregator's) is a finding to fix by publishing the real figure.
-- **9, 10:** pathway/disclaimer answers (Phase 6 `/international/` + `/carebridge/*`); registration
+- **9, 10:** pathway/disclaimer answers (`/international/` + `/global-careers/*`); registration
   is granted by the foreign regulator, never by SMRU.
 - **11:** SMCET is SMRU's admission/entrance route (see `/admissions/`).
 - **13:** 71 live programmes across six schools (per `/programmes/`).
