@@ -267,6 +267,32 @@ This is the single markdown control file to maintain for every change cycle. Kee
   hreflang on 256/273 built pages (the 17 without are static/partner-archive/redirect-shell files
   that bypass `buildMetadata`). `langNotEn` warnings 252 → 1 (the standalone `/360/hostel/` viewer).
 
+### Phase 7: Off-site playbook + content QA (14 September 2026)
+- **`docs/seo/offsite-playbook.md`** — ready-to-send copy (humans execute): a single standard
+  copy block; Google Business Profile setup + review-request template; aggregator corrections
+  (Shiksha listing 246974 merge, Collegedunia year/course-count/fee fixes, Careers360/CollegeDekho/
+  GetMyUni/Justdial); Wikidata statements with citations; Wikipedia list rows; society + partner
+  link-request template (anchor "St. Mary's University (SMRU)", not "powered by {partner}");
+  smru.in certificate renewal + 301s; regulator listings; social display names; Search Console /
+  Bing / IndexNow + the monthly AI-audit routine. Priority-ordered.
+- **Content QA (full built site):** red-flag scan clean — 0 `St.Mary` no-space, 0 legal-name
+  tautology, 0 placeholder/lorem text; every "best/top/No.1/guaranteed placement" hit is inside
+  disclaimer copy that tells students *not* to trust such claims. 0 duplicate titles, 0 duplicate
+  descriptions across 208 indexable pages. All 6 `/carebridge/*` disclaimers present; all 8 country
+  pages carry the equivalence + visa facts; regulator/exam names (NMC, HCPC, AHPRA, NCLEX-RN,
+  DHA/DoH/MOH) verified accurate. Remaining minor items: 8 descriptions < 70 chars and ~20 thin
+  *utility* pages (brochure/360/handbook/html-sitemap/status) — functional pages, not content;
+  the one partner phrase "100% Placement Assistance" on `/carebridge/` is partner content (not a
+  job guarantee) and left untouched per the no-touch-partner-content rule.
+
+## Status: brief Phases 0–7 complete
+
+All seven phases of the Antigravity brief are implemented and verified (typecheck · lint · test ·
+seo:guard · links:internal · audit:checklist · build · seo-gates · seo:facts all pass). The one
+planned surface **not** in the brief — a dated **News/Blog** section (recommended in the diagnosis §8)
+— remains as optional follow-up. Outstanding facts requiring university input are tracked in
+`docs/seo/needs-input.md`; the off-site work is a human task list in `docs/seo/offsite-playbook.md`.
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel
