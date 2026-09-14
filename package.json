@@ -16,7 +16,9 @@
     "audit:frontend": "node scripts/frontend-audit.mjs",
     "audit:frontend:compare": "node scripts/compare-frontend-audit.mjs",
     "audit:visual": "node scripts/visual-baseline.mjs",
-    "audit:visual:compare": "node scripts/compare-visual-baselines.mjs"
+    "audit:visual:compare": "node scripts/compare-visual-baselines.mjs",
+    "seo:crawl": "node scripts/crawl-export.mjs",
+    "seo:gates": "node scripts/seo-gates.mjs"
   },
   "dependencies": {
     "@photo-sphere-viewer/core": "^5.14.1",

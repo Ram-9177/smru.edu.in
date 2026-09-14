@@ -29,6 +29,35 @@ This is the single markdown control file to maintain for every change cycle. Kee
   - Misspelled brand string occurrences ("St.Marys"): 278 occurrences in baseline export
 - Verification suite status: all checks verified passing on clean baseline.
 
+### Phase 0.1: Regression harness gates (14 September 2026)
+- Gate 0 review found the Phase 0 harness could not measure later gates: `Status` was hard-coded
+  (only `404.html` = 404), HTML entities were not decoded (`&#x27;` inflated every title length),
+  and the JSON-LD walker missed `Course` nested in `ListItem.item` / `hasOfferCatalog`.
+- The unverified Codex working-tree diff (Phases 1-6 mixed, 798 `St.Mary's` strings left, Phase 0
+  record deleted) was stashed untouched: `git stash list` → "codex/site-updates unverified Phase1-6
+  sweep (kept for reference)". Phase 1 restarts from `f956fb1`.
+- `scripts/crawl-helpers.mjs` (new, pure): entity decoding, order-independent attribute parsing,
+  depth-aware `<main>` extraction, recursive JSON-LD type collection, sitemap/sitemapindex parsing,
+  sitemap ↔ file cross-check, gate computation.
+- `scripts/crawl-export.mjs` (rewritten): `--out <dir>` / `--sitemap <file>`; reads `sitemap.xml`
+  (follows a sitemap index), marks `In Sitemap`, appends one synthetic `404` row per `<loc>` with no
+  built file. Non-index files map to `/x.html` (was `/x/`, which collided `404.html` with `/404/`).
+- `scripts/seo-gates.mjs` (new): threshold assertions, `--strict` exit code, report at
+  `output/seo-gates/<label>/seo-gates.json`. `npm run seo:crawl` / `npm run seo:gates` added; not in
+  the mandatory chain until the Phase 2 gate makes `--strict` pass.
+- `tests/crawl-helpers.test.mjs` (new, 13 tests).
+- Baseline regenerated from the clean `f956fb1` build: `docs/seo/baseline-2026-09.csv` now 456 rows
+  (450 HTML files + 6 sitemap-only 404 rows), 23 columns.
+- Corrected baseline metrics (entity-decoded, indexable pages unless stated):
+  - Sitemap URLs 323; sitemap `<loc>` with no file: 6 (`/iqac/`, 5 × `/mandatory-disclosure/*`)
+  - Sitemap URLs that are noindex / canonical elsewhere: 4 (`/bb/`, `/niat/`, `/qtst/`, `/skilgen/`)
+  - Titles > 65 chars: 71 · duplicate titles: 10 groups / 20 pages · "Guide Guide": 13
+  - Titles cut mid-phrase: 8 · descriptions > 155: 50 · descriptions < 120: 106 (warning)
+  - `St.Mary` (no space) occurrences in title/H1/body/description: 6,676 across 443 pages
+  - Keywords meta present: 443 pages · `<html lang>` ≠ `en`: 445 (warning until Phase 6)
+  - Pages with `Course` schema (deep walk): 94 (shallow walker reported 71) · FAQPage: 333
+  - Multiple `<h1>`: `/explore/` · missing canonical: `/360/hostel/` (+ the verification file)
+
 ## What changed (high-confidence completed work)
 
 ### 1. Analytics & Conversion Tracking: Meta Pixel
