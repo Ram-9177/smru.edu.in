@@ -1,17 +1,16 @@
 import React from "react";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { FaUserShield, FaBalanceScale, FaEnvelopeOpenText } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import GrievanceTabs from "./GrievanceTabs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Grievance Redressal Cell | St. Mary's University",
   description: "Official Grievance Redressal Cell and feedback mechanism at St. Mary's University, complying with UGC regulations.",
-  alternates: {
-    canonical: "https://smru.edu.in/grievance-redressal",
-  },
-};
+  pathname: "/grievance-redressal",
+});
 
 export default function GrievanceRedressalPage() {
   return (

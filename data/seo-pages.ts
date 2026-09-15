@@ -319,8 +319,8 @@ const internalLinksFor = (kind: keyof typeof h2ByIntent, seed: Seed): SeoPage["i
   ];
   if (kind === "patient") {
     return [
-      { href: "/health-allied-health-sciences", label: "Health & Allied Health Sciences" },
-      { href: "/rehabilitation-sciences", label: "Rehabilitation Sciences" },
+      { href: "/schools/health-allied-health-sciences", label: "Health & Allied Health Sciences" },
+      { href: "/schools/rehabilitation-sciences", label: "Rehabilitation Sciences" },
       { href: "/campus-location-hyderabad", label: "Campus Location" },
       { href: "/contact", label: "Contact St. Mary's University" },
     ];

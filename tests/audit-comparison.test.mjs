@@ -33,7 +33,7 @@ test("frontend audit comparison detects a removed duplicate link", async () => {
     await writeFile(currentPath, JSON.stringify({ ...emptyAudit, protectedLinkCount: 1, links: [link] }));
 
     const result = spawnSync(process.execPath, [compareScript, baselinePath, currentPath], {
-      encoding: "utf8",
+      encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000,
     });
 
     assert.equal(result.status, 1);
@@ -69,12 +69,12 @@ test("frontend audit comparison permits only explicitly approved route removals"
       baselinePath,
       currentPath,
       "--allow-removed-route=/developer/",
-    ], { encoding: "utf8" });
+    ], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000 });
     assert.equal(approved.status, 0);
     assert.equal(JSON.parse(approved.stdout).pass, true);
 
     const unapproved = spawnSync(process.execPath, [compareScript, baselinePath, currentPath], {
-      encoding: "utf8",
+      encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000,
     });
     assert.equal(unapproved.status, 1);
     assert.equal(JSON.parse(unapproved.stdout).pass, false);

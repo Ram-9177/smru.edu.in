@@ -10,7 +10,6 @@ import NursingLandingClient from "@/views/NursingLandingClient";
 import { getSchoolMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
-import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
 
 export function generateMetadata({ params }: { params: { schoolSlug: string } }): Metadata {
   return getSchoolMetadata(params);
@@ -25,9 +24,6 @@ export function generateStaticParams() {
 export default function Page({ params }: { params: { schoolSlug: string } }) {
   const school = resolveSchool(params.schoolSlug);
   const pathname = `/schools/${params.schoolSlug}`;
-  const searchTerms = school
-    ? getSchoolSearchTerms({ slug: params.schoolSlug, name: school.name })
-    : [];
   const courseListItems = school ? getSchoolCourseListItems(school) : [];
 
   return (
@@ -42,7 +38,6 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
           title: school?.name || "School",
           description: school?.about || "Explore school programs and departments at St. Mary's University.",
           pathname,
-          keywords: searchTerms,
         })}
       />
       <StructuredData

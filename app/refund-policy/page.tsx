@@ -1,16 +1,15 @@
 import React from "react";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { FaMoneyBillWave, FaPercentage } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Fee & Refund Policy | St. Mary's University",
   description: "Official Fee and Refund regulations of St. Mary's University, Hyderabad, structured in compliance with UGC prescribed refund tiers.",
-  alternates: {
-    canonical: "https://smru.edu.in/refund-policy",
-  },
-};
+  pathname: "/refund-policy",
+});
 
 export default function RefundPolicyPage() {
   return (

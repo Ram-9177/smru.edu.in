@@ -22,6 +22,9 @@ const partnerSlug = (partner: any) => {
   return isRemovedPartnerPageSlug(slug) ? "" : slug;
 };
 
+// Slugs whose partner-supplied copy asserts unverified claims about SMRU (see docs/seo/needs-input.md).
+const NOINDEX_PARTNER_LANDINGS = new Set(["edinbox", "qtst", "veloces"]);
+
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const partner = Object.values(EDU_PARTNERS || {}).find((item: any) => partnerSlug(item) === params.slug);
   if (!partner) {
@@ -37,6 +40,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: `${name} Partner | St. Mary's University`,
     description: `Explore ${name} education partner programs and pathways at St. Mary's University.`,
     pathname: `/partner/${params.slug}`,
+    // Partner-authored landings that publish unverified superlatives, hospital or fee claims about
+    // SMRU stay reachable but out of the index until the partner copy is corrected (content untouched).
+    robots: NOINDEX_PARTNER_LANDINGS.has(params.slug) ? "noindex,follow" : "index,follow",
   });
 }
 

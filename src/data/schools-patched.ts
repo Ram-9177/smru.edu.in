@@ -442,7 +442,7 @@ export const schoolsSeed: SchoolData[] = [
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Medical Laboratory Technology is a four-year undergraduate program that trains students in clinical pathology, microbiology, biochemistry, haematology, histopathology, and molecular diagnostics. The program covers the scientific principles, laboratory techniques, and quality assurance protocols essential for accurate disease diagnosis, equipping graduates with the technical competencies required by diagnostic laboratories, hospitals, and research institutions. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in clinical pathology laboratories, hospital diagnostic departments, blood banks, public health laboratories, pharmaceutical companies, and biomedical research institutions."
+              "The Bachelor of Medical Laboratory Technology is a four-year undergraduate program that trains students in clinical pathology, microbiology, biochemistry, haematology, histopathology, and molecular diagnostics. The program covers the scientific principles, laboratory techniques, and quality assurance protocols essential for accurate disease diagnosis, equipping graduates with the technical competencies required by diagnostic laboratories, hospitals, and research institutions. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of a network of healthcare employer partners. Graduates are equipped to work in clinical pathology laboratories, hospital diagnostic departments, blood banks, public health laboratories, pharmaceutical companies, and biomedical research institutions."
             ),
             eligibilityDetails: text(
               "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
@@ -530,7 +530,7 @@ export const schoolsSeed: SchoolData[] = [
               "AR/VR simulation labs",
               "Employer-co-designed modules",
               "Structured clinical internships",
-              "Placement assistance through 500+ healthcare employer partners",
+              "Placement assistance through a network of healthcare employer partners",
               "Head Start Programme as a zero-cost bridge course",
               "Complimentary laptop for students who complete the Head Start Programme",
             ],
@@ -581,7 +581,7 @@ export const schoolsSeed: SchoolData[] = [
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Anaesthesia & OT Technology is a four-year undergraduate program that prepares students for careers as anaesthesia technologists and operation theatre technicians. The program covers anaesthesia principles, airway management, patient monitoring, OT protocols, sterilisation, emergency care, and perioperative patient management, equipping graduates with the clinical and technical competencies required by modern hospitals and surgical centres. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in operation theatres, intensive care units, pain management clinics, cardiac catheterisation labs, and emergency departments across hospitals, medical colleges, and specialised surgical centres."
+              "The Bachelor of Anaesthesia & OT Technology is a four-year undergraduate program that prepares students for careers as anaesthesia technologists and operation theatre technicians. The program covers anaesthesia principles, airway management, patient monitoring, OT protocols, sterilisation, emergency care, and perioperative patient management, equipping graduates with the clinical and technical competencies required by modern hospitals and surgical centres. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of a network of healthcare employer partners. Graduates are equipped to work in operation theatres, intensive care units, pain management clinics, cardiac catheterisation labs, and emergency departments across hospitals, medical colleges, and specialised surgical centres."
             ),
             eligibilityDetails: text(
               "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
@@ -669,7 +669,7 @@ export const schoolsSeed: SchoolData[] = [
               "AR/VR simulation labs",
               "Employer-co-designed modules",
               "Structured clinical internships",
-              "Placement assistance through 500+ healthcare employer partners",
+              "Placement assistance through a network of healthcare employer partners",
               "Head Start Programme as a zero-cost bridge course",
               "Complimentary laptop for students who complete the Head Start Programme",
             ],
@@ -720,7 +720,7 @@ export const schoolsSeed: SchoolData[] = [
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Cardiovascular Technology is a four-year undergraduate program that trains students in the diagnosis, monitoring, and treatment support of cardiovascular diseases. The program covers cardiac anatomy, echocardiography, cardiac catheterisation, electrophysiology, vascular technology, and cardiac rehabilitation, equipping graduates with the technical expertise required by cardiology departments, cardiac catheterisation labs, and cardiovascular research centres. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in cardiology departments, cardiac catheterisation laboratories, echocardiography units, electrophysiology labs, cardiac rehabilitation centres, and cardiovascular research institutions."
+              "The Bachelor of Cardiovascular Technology is a four-year undergraduate program that trains students in the diagnosis, monitoring, and treatment support of cardiovascular diseases. The program covers cardiac anatomy, echocardiography, cardiac catheterisation, electrophysiology, vascular technology, and cardiac rehabilitation, equipping graduates with the technical expertise required by cardiology departments, cardiac catheterisation labs, and cardiovascular research centres. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of a network of healthcare employer partners. Graduates are equipped to work in cardiology departments, cardiac catheterisation laboratories, echocardiography units, electrophysiology labs, cardiac rehabilitation centres, and cardiovascular research institutions."
             ),
             eligibilityDetails: text(
               "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
@@ -808,7 +808,7 @@ export const schoolsSeed: SchoolData[] = [
               "AR/VR simulation labs",
               "Employer-co-designed modules",
               "Structured clinical internships",
-              "Placement assistance through 500+ healthcare employer partners",
+              "Placement assistance through a network of healthcare employer partners",
               "Head Start Programme as a zero-cost bridge course",
               "Complimentary laptop for students who complete the Head Start Programme",
             ],
@@ -859,7 +859,7 @@ export const schoolsSeed: SchoolData[] = [
             complimentaryLaptop: "Awarded to students who successfully complete the Head Start Programme",
             industrySkillingPartner: "Emversity (Beyond Odds Technologies Pvt. Ltd.)",
             overview: text(
-              "The Bachelor of Emergency/Trauma Care Management System is a four-year undergraduate program designed to train students as emergency medical professionals capable of managing critical patients in emergency departments, trauma centres, and pre-hospital care settings. The program covers emergency medicine principles, trauma assessment, triage systems, advanced life support, disaster management, and critical care, equipping graduates with the rapid-response clinical skills demanded by hospitals, ambulance services, and disaster relief organisations. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of 500+ healthcare employer partners. Graduates are equipped to work in hospital emergency departments, trauma centres, ambulance services, disaster response units, critical care units, and defence medical services."
+              "The Bachelor of Emergency/Trauma Care Management System is a four-year undergraduate program designed to train students as emergency medical professionals capable of managing critical patients in emergency departments, trauma centres, and pre-hospital care settings. The program covers emergency medicine principles, trauma assessment, triage systems, advanced life support, disaster management, and critical care, equipping graduates with the rapid-response clinical skills demanded by hospitals, ambulance services, and disaster relief organisations. This program at St. Mary's University, Hyderabad is delivered through a partnership model: St. Mary's University provides the academic framework, degree conferral, examinations, and campus infrastructure, while Emversity delivers the industry-skilling component including AR/VR simulation labs, employer-co-designed modules, structured clinical internships, and placement assistance through its network of a network of healthcare employer partners. Graduates are equipped to work in hospital emergency departments, trauma centres, ambulance services, disaster response units, critical care units, and defence medical services."
             ),
             eligibilityDetails: text(
               "Candidates must have passed 10+2 (or equivalent) from a recognised board with Physics, Chemistry, and Biology/Mathematics (PCB/PCMB) as principal subjects. Minimum aggregate marks are as prescribed by St. Mary's University, with relaxation for SC/ST/OBC as per university norms."
@@ -947,7 +947,7 @@ export const schoolsSeed: SchoolData[] = [
               "AR/VR simulation labs",
               "Employer-co-designed modules",
               "Structured clinical internships",
-              "Placement assistance through 500+ healthcare employer partners",
+              "Placement assistance through a network of healthcare employer partners",
               "Head Start Programme as a zero-cost bridge course",
               "Complimentary laptop for students who complete the Head Start Programme",
             ],

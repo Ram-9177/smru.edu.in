@@ -1,16 +1,15 @@
 import React from "react";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { FaCertificate, FaTasks, FaChartLine, FaUsers } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "IQAC & Quality Assurance | St. Mary's University",
   description: "Official portal of the Internal Quality Assurance Cell (IQAC) at St. Mary's University, managing quality standards and NAAC compliance.",
-  alternates: {
-    canonical: "https://smru.edu.in/iqac-quality-assurance",
-  },
-};
+  pathname: "/iqac-quality-assurance",
+});
 
 export default function IQACPage() {
   return (

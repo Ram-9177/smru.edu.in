@@ -7,6 +7,7 @@ export const metadata: Metadata = buildMetadata({
   description:
     "Choose a language and explore the St. Mary's University campus through a guided physical or virtual campus tour.",
   pathname: "/campus-guide",
+  robots: "noindex,follow",
   keywords: ["St. Mary's University campus guide", "St. Mary's University campus guide", "campus tour", "virtual campus tour", "physical campus tour"],
 });
 

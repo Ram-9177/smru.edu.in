@@ -27,7 +27,7 @@ export const sitemapSectionPath = (section: SitemapSection | "images") => `/site
 
 // Tier 1: conversion & trust pages. Tier 2: catalogue & campus. Tier 3: legal & utility.
 const tier1Routes = ["/smru", "/programmes", "/admissions", "/exam-notification", "/phd-admissions", "/schools", "/about", "/contact"];
-const tier2Routes = ["/academic-structure", "/campus-360", "/brochure", "/careers", "/partner", "/mandatory-disclosure", "/leadership/all"];
+const tier2Routes = ["/academic-structure", "/campus-360", "/explore", "/hostel-360", "/brochure", "/careers", "/partner", "/mandatory-disclosure", "/leadership", "/leadership/all"];
 const tier3Routes = [
   "/privacy-policy",
   "/terms-of-service",
@@ -41,15 +41,13 @@ const tier3Routes = [
   "/html-sitemap",
 ];
 
+// Info-page slugs that are served by their own explicit route (or are noindex placeholders) and so are
+// added to the sitemap via tier routes / excluded, rather than through the INFO_PAGES loop.
 const legacyComplianceInfoPageSlugs = new Set([
-  "ugc-disclosure",
   "mandatory-disclosure",
-  "statutory-disclosures",
   "naac",
-  "iqac-quality-assurance",
   "first-academic-year-disclosures",
   "anti-ragging",
-  "grievance-redressal",
   "ombudsperson",
   "public-information",
 ]);
@@ -71,9 +69,11 @@ const partnerPathFromLandingUrl = (landingUrl?: string | null) => {
   return slug && !isRemovedPartnerPageSlug(slug) ? `/partner/${slug}` : null;
 };
 
+// Partner landings that are noindex (unverified partner claims) never enter the sitemap.
+const NOINDEX_PARTNER_PATHS = new Set(["/partner/edinbox", "/partner/qtst", "/partner/veloces"]);
 const partnerRoutes = Object.values(EDU_PARTNERS || {})
   .map((partner: any) => partnerPathFromLandingUrl(partner.landingUrl))
-  .filter((path): path is string => Boolean(path));
+  .filter((path): path is string => Boolean(path) && !NOINDEX_PARTNER_PATHS.has(path as string));
 
 const safeGuideRoutes = SAFE_GUIDE_PAGES.map((page) => `/${page.slug}`);
 

@@ -554,7 +554,9 @@ export default function Home() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img 
                         src={resolveAssetSrc((partner as any).logo)} 
-                        alt="" 
+                        alt=""
+                        loading="lazy"
+                        decoding="async" 
                         aria-hidden="true"
                         className="max-h-full max-w-full object-contain transition-all duration-500 transform group-hover:scale-110 group-hover:grayscale" 
                       />

@@ -8,7 +8,6 @@ import Department from "@/views/Department";
 import { getDepartmentMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
-import { getDepartmentSearchTerms } from "@/lib/seo/search-intent";
 
 export function generateMetadata({ params }: { params: { schoolSlug: string; deptSlug: string } }): Metadata {
   return getDepartmentMetadata(params);
@@ -26,13 +25,6 @@ export function generateStaticParams() {
 export default function Page({ params }: { params: { schoolSlug: string; deptSlug: string } }) {
   const { school, department } = resolveDepartment(params.schoolSlug, params.deptSlug);
   const pathname = `/schools/${params.schoolSlug}/${params.deptSlug}`;
-  const searchTerms =
-    school && department
-      ? getDepartmentSearchTerms(
-          { slug: params.schoolSlug, name: school.name },
-          { slug: params.deptSlug, name: department.name }
-        )
-      : [];
   const courseListItems = school && department ? getDepartmentCourseListItems(school, department) : [];
 
   return (
@@ -47,7 +39,6 @@ export default function Page({ params }: { params: { schoolSlug: string; deptSlu
           title: department?.name || "Department",
           description: department?.about || "Explore department programs at St. Mary's University.",
           pathname,
-          keywords: searchTerms,
         })}
       />
       <StructuredData

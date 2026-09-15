@@ -53,7 +53,7 @@ const standards = [
 ];
 
 const clinical = [
-  ["Our Own Hospitals", FaHospital, "Daily clinical exposure from Year 1. Rehabilitation ward, mental health ward, general nursing, and community outreach."],
+  ["Clinical Training Sites", FaHospital, "Daily clinical exposure from Year 1 across rehabilitation, mental-health, general nursing and community-outreach placements. Partner facilities are confirmed at admissions counselling."],
   ["Multi-Speciality Partners", FaHeartbeat, "ICU, emergency, operation theatre, obstetrics and gynaecology, paediatrics, and oncology."],
   ["Government Rotations", FaUsers, "High patient-volume exposure, public health experience, and community health nursing."],
   ["Community Postings", FaHome, "Rural health centres, urban PHCs, home care, and disability outreach."],
@@ -61,7 +61,7 @@ const clinical = [
 
 const tracks = [
   ["Rehabilitation Nursing", "Train inside an active rehabilitation hospital alongside physiotherapists and rehab specialists. Focus on neuro-rehab, spinal care, and post-surgical recovery."],
-  ["Psychiatric & Mental Health", "Hospital-based training under psychiatrists and clinical psychologists in our own 50-bed mental health hospital."],
+  ["Psychiatric & Mental Health", "Hospital-based training under psychiatrists and clinical psychologists in mental-health clinical settings (placement sites confirmed at admissions counselling)."],
   ["Critical Care Nursing", "ICU, emergency, and trauma. Designed for students who thrive under pressure."],
   ["Geriatric & Long-Term Care", "The global growth specialty. Ageing populations across Japan, Germany, Canada, and the UK are hiring specifically for this."],
   ["Mother & Child Health", "Focused preparation in obstetrics, paediatrics, and neonatal care."],
@@ -275,7 +275,7 @@ export default function NursingLanding() {
               {standards.map(([title, description]) => (
                 <CutCard key={title} light={false} className="p-6">
                   <FaCheckCircle className="mb-4 text-2xl text-[#019e6e]" />
-                  <h4 className="text-sm font-bold uppercase tracking-wider text-white">{title}</h4>
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-white">{title}</h3>
                   <p className="mt-3 border-t border-white/15 pt-3 text-sm leading-relaxed text-white/70">{description}</p>
                 </CutCard>
               ))}
@@ -291,12 +291,12 @@ export default function NursingLanding() {
               </SectionHeading>
               <div className="space-y-4">
                 {[
-                  ["100-Bed Rehabilitation Hospital", "Post-surgical recovery, neurological rehabilitation, spinal injury care, physiotherapy-integrated nursing, and long-term patient management."],
-                  ["50-Bed Mental Health Hospital", "Psychiatric nursing, therapeutic communication, crisis response, medication management, and patient dignity in mental illness."],
+                  ["Rehabilitation Nursing Placements", "Post-surgical recovery, neurological rehabilitation, spinal injury care, physiotherapy-integrated nursing, and long-term patient management."],
+                  ["Mental Health Nursing Placements", "Psychiatric nursing, therapeutic communication, crisis response, medication management, and patient dignity in mental illness."],
                   ["Rehabilitation Centre & Special School", "Audiology, speech therapy, assistive technology, paediatric developmental care, disability support, and family counselling."],
                 ].map(([title, description]) => (
                   <div key={title} className="border border-[#dbe8f8] bg-white/70 p-6 shadow-sm">
-                    <h4 className="font-bold text-[#0d315c]">{title}</h4>
+                    <h3 className="font-bold text-[#0d315c]">{title}</h3>
                     <p className="mt-3 border-t border-slate-200 pt-3 text-sm leading-relaxed text-slate-600">{description}</p>
                   </div>
                 ))}
@@ -332,7 +332,7 @@ export default function NursingLanding() {
                 <CutCard key={title} light={false} className="group p-8 transition hover:-translate-y-1">
                   <div className="flex items-center gap-3">
                     <span className="h-2 w-2 rounded-full bg-[#ffaf3a] shadow-[0_0_10px_#ffaf3a]" />
-                    <h4 className="text-lg font-bold uppercase tracking-wider text-white">{title}</h4>
+                    <h3 className="text-lg font-bold uppercase tracking-wider text-white">{title}</h3>
                   </div>
                   <p className="mt-5 border-t border-white/20 pt-4 text-sm font-light leading-relaxed text-white/85">{description}</p>
                 </CutCard>
@@ -349,9 +349,9 @@ export default function NursingLanding() {
             <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
               {mobility.map(([title, description]) => (
                 <div key={title} className="group border border-[#dbe8f8] bg-white/80 p-6 shadow-sm transition hover:-translate-y-1 hover:border-[#ffaf3a]">
-                  <h4 className="flex items-center gap-4 text-lg font-bold text-[#0d315c]">
+                  <h3 className="flex items-center gap-4 text-lg font-bold text-[#0d315c]">
                     <span className="h-2 w-2 rounded-full bg-[#ffaf3a]" /> {title}
-                  </h4>
+                  </h3>
                   <p className="mt-5 border-t border-slate-200 pt-5 pl-6 text-sm leading-relaxed text-slate-600">{description}</p>
                 </div>
               ))}
@@ -375,7 +375,7 @@ export default function NursingLanding() {
                   <div key={title as string} className="flex gap-3 border-t border-slate-200 py-5">
                     <Icon className="mt-0.5 shrink-0 text-xl text-[#c43342]" />
                     <div>
-                      <h4 className="font-bold text-[#0d315c]">{title as string}</h4>
+                      <h3 className="font-bold text-[#0d315c]">{title as string}</h3>
                       <p className="mt-1 text-sm leading-relaxed text-slate-500">{description as string}</p>
                     </div>
                   </div>
@@ -394,7 +394,7 @@ export default function NursingLanding() {
                 <div key={title as string} className="flex items-start gap-4 border-t border-slate-200 py-5">
                   <span className="rounded-lg bg-[#019e6e]/10 p-3 text-[#019e6e]"><Icon /></span>
                   <div>
-                    <h4 className="font-bold text-[#0d315c]">{title as string}</h4>
+                    <h3 className="font-bold text-[#0d315c]">{title as string}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-slate-500">{description as string}</p>
                   </div>
                 </div>
@@ -463,7 +463,7 @@ export default function NursingLanding() {
           <h3 className="mb-6 text-xl font-bold uppercase tracking-widest text-[#ffaf3a]">Recognitions</h3>
           <h4 className="mb-4 font-semibold text-white">St. Mary&apos;s University, Hyderabad</h4>
           <ul className="max-w-4xl list-disc space-y-4 pl-5 text-sm font-light leading-relaxed text-white/70">
-            <li>Established under the Telangana State Private Universities (Establishment and Regulation) Act, 2018, vide Gazette Notification No. 2 dated 25 July 2025.</li>
+            <li>Established under Telangana Ordinance No. 2 of 2025 (promulgated 24 July 2025), enacted as Telangana Act No. 10 of 2026.</li>
             <li>Recognised by the University Grants Commission under Section 2(f) of the UGC Act, 1956.</li>
             <li>School of Nursing programmes are structured in alignment with Indian Nursing Council norms and NCLEX-RN international standards.</li>
             <li>Programme approvals, affiliations, and clinical partnerships are confirmed with counsellors at the time of admission.</li>

@@ -14,7 +14,7 @@ export const SITE_IDENTITY = {
   defaultTitle: "St. Mary's University Hyderabad (SMRU) – Official Site",
   titleTemplate: "%s | St. Mary's University",
   defaultDescription:
-    "St. Mary's University (SMRU), legally St. Mary's Rehabilitation University, is a UGC-recognised private university in Hyderabad offering 90+ programmes.",
+    "St. Mary's University (SMRU), legally St. Mary's Rehabilitation University, is a UGC-recognised private university in Hyderabad offering 70+ programmes.",
   defaultOpenGraphImage: UNIVERSITY_INFO.defaultOgImage,
   // Canonical bridge sentence — used verbatim on the homepage, /about/, /smru/, llms.txt and the Organization schema.
   bridgeSentence:

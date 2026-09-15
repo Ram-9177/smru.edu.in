@@ -530,8 +530,8 @@ export const COMPLIANCE_PAGES: CompliancePage[] = [
     ownerOffice: "Academic and Quality Offices",
     sourceDocumentNeeded: pending,
     evidenceLinks: [
-      { href: "/health-allied-health-sciences", label: "Health & Allied Health Sciences" },
-      { href: "/rehabilitation-sciences", label: "Rehabilitation Sciences" },
+      { href: "/schools/health-allied-health-sciences", label: "Health & Allied Health Sciences" },
+      { href: "/schools/rehabilitation-sciences", label: "Rehabilitation Sciences" },
     ],
     directAnswer:
       `Clinical exposure should be framed as part of St. Mary's University's rehabilitation education ecosystem and patient-care-linked learning. Service availability must be publicly verified. ${naacSafeStatusLine}`,

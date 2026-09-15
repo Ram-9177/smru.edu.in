@@ -1,16 +1,15 @@
 import React from "react";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { FaBan, FaPhoneAlt, FaEnvelope, FaExclamationTriangle } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Anti-Ragging Policy & Committee | St. Mary's University",
   description: "Official Anti-Ragging regulations, Zero Tolerance policy, helpline contacts, and committee information for St. Mary's University.",
-  alternates: {
-    canonical: "https://smru.edu.in/anti-ragging",
-  },
-};
+  pathname: "/anti-ragging",
+});
 
 export default function AntiRaggingPage() {
   return (

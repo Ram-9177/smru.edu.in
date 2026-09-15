@@ -1,16 +1,15 @@
 import React from "react";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { FaGraduationCap, FaCheckCircle } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Admission Regulations & Policy | St. Mary's University",
   description: "Official Admission Policy and academic regulations of St. Mary's University, Hyderabad, Telangana, in compliance with UGC guidelines.",
-  alternates: {
-    canonical: "https://smru.edu.in/admission-policy",
-  },
-};
+  pathname: "/admission-policy",
+});
 
 export default function AdmissionPolicyPage() {
   return (

@@ -81,7 +81,7 @@
     RewriteRule ^student-guides/(st-marys-university|Stmarys-university|stmarys-university|Stmarys-university-hyderabad|stmarys-university-hyderabad|Stmarys-rehabilitation-university|stmarys-rehabilitation-university|what-is-smru|is-st-marys-university-same-as-smru|where-is-smru-located)/?$ https://smru.edu.in/smru/ [L,R=301,NC]
 
     # --- Aliases ---
-    RewriteRule ^explore-(smru|stmarys)/?$ https://smru.edu.in/campus-guide/ [L,R=301,NC]
+    RewriteRule ^explore-(smru|stmarys)/?$ https://smru.edu.in/explore/ [L,R=301,NC]
     RewriteRule ^Hand-Book/?$ https://smru.edu.in/handbook/ [L,R=301,NC]
     RewriteRule ^Handbook/?$ https://smru.edu.in/handbook/ [L,R=301]
     RewriteRule ^Handbook/(.+\.pdf)$ https://smru.edu.in/assets/handbook/$1 [L,R=301]
@@ -102,6 +102,7 @@
 
 # Serve the branded 404 page instead of the bare server default.
 ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
 
 # SEO/security headers for the static export.
 # HSTS is sent on all responses, including www/non-www redirects, so HTTPS-only
@@ -109,6 +110,8 @@ ErrorDocument 404 /404.html
 <IfModule mod_setenvif.c>
     SetEnvIf Request_URI "^/(developer|api)(/|$)" STMARYS_PRIVATE_NOINDEX=1
     SetEnvIf Request_URI "^/thank-you(/|$)" STMARYS_THANKYOU_NOINDEX=1
+    # Raw partner-supplied HTML (iframe sources) is partner content, not SMRU's statement: keep it out of the index.
+    SetEnvIf Request_URI "^/partners/.*\.html$" STMARYS_PARTNER_RAW_NOINDEX=1
 </IfModule>
 
 <IfModule mod_headers.c>
@@ -118,6 +121,7 @@ ErrorDocument 404 /404.html
     # Public compliance routes, including /mandatory-disclosure/, are not matched here.
     Header always set X-Robots-Tag "noindex, nofollow" env=STMARYS_PRIVATE_NOINDEX
     Header always set X-Robots-Tag "noindex, follow" env=STMARYS_THANKYOU_NOINDEX
+    Header always set X-Robots-Tag "noindex, follow" env=STMARYS_PARTNER_RAW_NOINDEX
 </IfModule>
 
 # Caching Policy
@@ -132,7 +136,12 @@ AddType image/webp .webp
 
 # Block sensitive files
 <FilesMatch "(\.env|\.pkg|package\.json|package-lock\.json|vite\.config\.js|tailwind\.config\.js)$">
-    Order deny,allow
-    Deny from all
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
 </FilesMatch>
 

@@ -20,7 +20,7 @@ export const UNIVERSITY_INFO = {
   secondaryPhone: SITE_CONTACT.secondaryPhone,
   whatsapp: `https://wa.me/${SITE_CONTACT.whatsappNumberIntl}`,
   logoPath: "/assets/Logo.webp",
-  defaultOgImage: "/assets/hero-campus.webp",
+  defaultOgImage: "/assets/og-default.jpg",
   officeHours: "Mon - Sat: 9:30 AM - 5:00 PM",
   emergencyPhone: "9010455591/90",
   mapEmbedUrl: "https://maps.google.com/maps?q=St.%20Mary%27s%20Rehabilitation%20University%2C%20Deshmukhi&output=embed",

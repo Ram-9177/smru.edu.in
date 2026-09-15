@@ -6,6 +6,7 @@ export const metadata: Metadata = buildMetadata({
   title: "NIAT Upskilling",
   description: "Explore the NIAT Upskilling route published on the St. Mary's University website.",
   pathname: "/niat-upskilling",
+  robots: "noindex,follow",
 });
 
 export default function NiatUpskillingPage() {

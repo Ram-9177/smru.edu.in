@@ -9,7 +9,7 @@ const TITLE = "International Admissions | St. Mary's University";
 const DESCRIPTION =
   "International students can apply to St. Mary's University (SMRU), Hyderabad — qualification equivalence, English requirement, fees, student-visa route, documents and arrival support across six schools.";
 const INTRO =
-  "St. Mary's University (SMRU), Hyderabad welcomes international students to its 71 programmes across six schools. This page explains who can apply, how your qualification maps to the Indian 10+2, the English requirement, fees in INR with an indicative USD guide, the Indian student-visa and e-FRRO route, the documents you need, and arrival support at the Deshmukhi campus near Ramoji Film City.";
+  "St. Mary's University (SMRU), Hyderabad welcomes international students to its 70+ programmes across six schools. This page explains who can apply, how your qualification maps to the Indian 10+2, the English requirement, fees in INR with an indicative USD guide, the Indian student-visa and e-FRRO route, the documents you need, and arrival support at the Deshmukhi campus near Ramoji Film City.";
 
 export const metadata: Metadata = buildMetadata({ title: TITLE, description: DESCRIPTION, pathname: "/international" });
 

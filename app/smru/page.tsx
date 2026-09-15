@@ -12,7 +12,7 @@ import { UNIVERSITY_INFO } from "@/lib/shared/university";
 // institution — and which similarly named institutions they are not.
 const TITLE = "SMRU – St. Mary's Rehabilitation University, Hyderabad";
 const DESCRIPTION =
-  "SMRU is St. Mary's Rehabilitation University, publicly St. Mary's University — a UGC-recognised private university in Hyderabad, Telangana, with six schools and 90+ programmes.";
+  "SMRU is St. Mary's Rehabilitation University, publicly St. Mary's University — a UGC-recognised private university in Hyderabad, Telangana, with six schools and 70+ programmes.";
 
 export const metadata: Metadata = buildMetadata({
   title: TITLE,
@@ -69,7 +69,7 @@ const FAQS = [
   {
     question: "What courses does St. Mary's University offer?",
     answer:
-      "SMRU offers 90+ undergraduate, postgraduate, diploma and doctoral programmes across six schools: Rehabilitation Sciences, Health & Allied Health Sciences, Psychology, Nursing, Engineering & Emerging Technologies, and Law. Every programme is listed under its school on the Schools page.",
+      "SMRU offers 70+ undergraduate, postgraduate, diploma and doctoral programmes across six schools: Rehabilitation Sciences, Health & Allied Health Sciences, Psychology, Nursing, Engineering & Emerging Technologies, and Law. Every programme is listed under its school on the Schools page.",
   },
   {
     question: "How do I apply to SMRU?",
@@ -128,7 +128,7 @@ export default function SmruIdentityPage() {
             {/* Answer-first paragraph: the passage answer engines quote. Bridge sentence is verbatim. */}
             <p className="mt-8 text-lg font-medium leading-8 text-slate-700">
               {SITE_IDENTITY.bridgeSentence} The campus is at Deshmukhi, near Ramoji Film City, and the university
-              offers more than 90 programmes across six schools — rehabilitation sciences, health and allied health
+              offers more than 70 programmes across six schools — rehabilitation sciences, health and allied health
               sciences, psychology, nursing, engineering and emerging technologies, and law. Its only official website is{" "}
               <strong>smru.edu.in</strong>.
             </p>

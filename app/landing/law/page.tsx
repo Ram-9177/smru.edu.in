@@ -7,6 +7,7 @@ export const metadata: Metadata = buildMetadata({
   title: "School of Law Admissions | St. Mary's University",
   description: lawMetaDescription,
   pathname: "/landing/law",
+  robots: "noindex,follow",
   keywords: [
     "School of Law admissions",
     "Law brochure",

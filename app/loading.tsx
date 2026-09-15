@@ -14,7 +14,7 @@ export default function Loading() {
         {/* Institutional Logo with Pulse */}
         <div className="relative flex flex-col items-center">
           <img 
-            src="/assets/Logo.png" 
+            src="/assets/Logo.webp" 
             alt="St. Mary's University" 
             className="h-20 sm:h-28 w-auto object-contain animate-premium-pulse"
           />

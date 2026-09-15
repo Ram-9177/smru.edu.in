@@ -299,6 +299,59 @@ brand namespace — a violation of the "do not touch partner commercial content"
   sitemap-international, the `/international/` hub link, and the three docs updated. Regulator
   disclaimer still leads every pathway page.
 
+### Production-readiness pass (15 September 2026)
+An 8-dimension adversarial audit (build/config, on-page meta, structured data, redirects/links/
+assets, content & rules, performance, accessibility, crawl/indexation — 40 raw findings, 34
+confirmed after independent re-verification) was run against the built export and every real
+issue fixed:
+
+- **Blocker — fabricated facts removed.** The Nursing hub asserted "100-Bed Rehabilitation
+  Hospital", "50-Bed Mental Health Hospital" and "our own hospitals" (no source) and cited a wrong
+  legal basis ("Act 2018 … Gazette No. 2 dated 25 July 2025"). Replaced with unquantified
+  clinical-placement wording ("confirmed at admissions counselling") and the canonical Ordinance
+  No. 2 of 2025 / Act No. 10 of 2026 sentence; card sub-headings h4→h3 (no skipped level).
+- **Blocker — partner pages publishing unverified claims about SMRU** (`/partner/edinbox/`
+  "India's First Rehabilitation University", "100-bedded hospital", "50+ years / 5,000 graduates";
+  `/partner/qtst/` "India's pioneering"; `/partner/veloces/` hard B.Tech fee figures) are now
+  **noindex,follow** and out of the sitemap — reachable, content untouched (partner rule), but no
+  longer SMRU's indexed statement. Raw partner iframe HTML under `/partners/*.html` gets an
+  `X-Robots-Tag: noindex` header. Logged in `needs-input.md` for the partners to correct their copy.
+- **Programme count reconciled**: "90+ / more than 90" (brief figure) → "70+" in all prose; the
+  catalogue's computed 71 stands. `/schools/` "71+ Programs" → "70+".
+- "500+ healthcare employer partners" (an Emversity claim quoted in 4 programme overviews +
+  bullets) → "a network of healthcare employer partners" (SMRU cannot verify a partner's count).
+- **Structured data**: the `keywords` list (with "best/top … in Hyderabad" strings) stripped from
+  all 21 school/department `CollectionPage` nodes — no superlatives left in SMRU's own JSON-LD.
+- **Indexation**: `/niat-upskilling/` (9-word placeholder), `/campus-guide/` (6-word client shell)
+  and `/landing/law/` (PPC duplicate of `/schools/law/`) → noindex; `/explore-smru|stmarys/` now
+  301 to `/explore/` (real content) instead of the empty shell; orphaned/missing indexable pages
+  (`/explore/`, `/hostel-360/`, `/leadership/`, `/ugc-disclosure/`, `/statutory-disclosures/`,
+  `/grievance-redressal/`, `/iqac-quality-assurance/`) added to the sitemap; `/ist/` shell now
+  points at `/partner/` (ist is a removed partner). 6 internal links that routed through school
+  301s repointed to `/schools/…`. Indexable 208 → 202, sitemap 202, all resolve.
+- **Performance**: the loading splash used the 379 KB `Logo.png` (→ 30 KB `Logo.webp`); 12
+  partner logos (301 KB) were eagerly preloaded on the homepage because React Float hoists plain
+  `<img>` in the SSR shell — now `loading="lazy"` (below the fold, no preload); unused Google
+  Fonts preconnects removed (fonts are self-hosted); `campus-life.webp` 579 → 322 KB; a proper
+  1200×630 **JPG** OG image (`/assets/og-default.jpg`, 189 KB) replaces the 560 KB WebP that
+  LinkedIn/WhatsApp render inconsistently.
+- **Apache**: `Order/Deny` → `Require all denied` (2.4) with a 2.2 compat fallback;
+  `ErrorDocument 500 /500.html` added.
+- **Accessibility**: the standalone `/360/hostel/` viewer gains `lang="en"` and allows pinch-zoom.
+- 5 policy pages (`admission-policy`, `refund-policy`, `grievance-redressal`, `anti-ragging`,
+  `iqac-quality-assurance`) routed through `buildMetadata` — page-specific OG + hreflang.
+- The flaky `tests/audit-comparison.test.mjs` (spawnSync `status:null` under load) hardened with
+  `maxBuffer` + `timeout`.
+- **Deliberately not done**: pruning ~19 MB of unreferenced `out/assets` originals (the audit's
+  230 MB figure over-counted dynamically-referenced files; a prune risks a hidden reference) —
+  left for the team to clean `public/` at source. 45 stub programmes still lack
+  `coursePrerequisites` (data gap, tracked). Runtime: the `Failed to fetch RSC payload` console
+  line is the benign `output: export` soft-nav fallback (hard navigation works); the
+  `ERR_CONNECTION_REFUSED` seen locally is the single-threaded test server, not Apache.
+- Final: typecheck · lint 0 · test 35/35 · seo:guard 39/39 · build 277 · links 0 broken ·
+  audit (0 broken/hashes/dupIds/invalidJsonLd/missingAssets/secrets, release gate pass) ·
+  seo-gates 0 failures · seo:facts 29/29 · coverage 71/71 — **ready to deploy**.
+
 ## Status: brief Phases 0–7 complete
 
 All seven phases of the Antigravity brief are implemented and verified (typecheck · lint · test ·
