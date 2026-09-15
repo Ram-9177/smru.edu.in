@@ -218,13 +218,11 @@ export default function Home() {
                 <h1 className="text-[clamp(1.5rem,5.5vw,3.5rem)] font-black text-white drop-shadow-2xl [text-shadow:_0_8px_40px_rgba(0,0,0,0.8)] font-[family-name:var(--font-cinzel)] leading-[1.15] tracking-tight uppercase">
                   <span className="text-[#ffaf3a]">St. Mary&apos;s University</span> (SMRU), Hyderabad
                 </h1>
-                <p className="mt-3 text-white/95 text-sm md:text-lg font-bold tracking-wide drop-shadow-lg">
-                  St. Mary&apos;s Rehabilitation University &middot; UGC-recognised private university
-                </p>
               </div>
 
-              <p className="text-white/90 text-[12px] md:text-[15px] font-medium max-w-4xl mx-auto drop-shadow-lg leading-relaxed">
-                {SITE_IDENTITY.bridgeSentence}
+              {/* One compact line: legal name + recognition. The full bridge sentence lives in the trust strip below. */}
+              <p className="text-white/90 text-[10px] md:text-[13px] font-black uppercase tracking-[0.4em] max-w-4xl mx-auto drop-shadow-lg leading-relaxed">
+                St. Mary&apos;s Rehabilitation University &middot; UGC 2(f) Recognised
               </p>
             </div> 
           </div>
@@ -299,7 +297,7 @@ export default function Home() {
       <section id="trust-strip" className="bg-[#0d315c] text-white py-8 border-y border-white/10 relative z-20">
         <div className="smru-container text-center">
           <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white/90 leading-relaxed max-w-5xl mx-auto">
-            St. Mary's University, legally established as St. Mary&apos;s Rehabilitation University in Hyderabad, Telangana, was established through Telangana Gazette Act No. 10 of 2026 and recognized by the University Grants Commission under Section 2(f) of the UGC Act, 1956.
+            {SITE_IDENTITY.bridgeSentence}
           </p>
         </div>
       </section>
