@@ -34,6 +34,37 @@ const formatLevel = (lvl = "") => {
   return l.toUpperCase();
 };
 
+
+// One sentence on who you become and who you help — true of the discipline, no institutional claims.
+const getProgramPurpose = (schoolName = "", programName = "") => {
+  const n = `${schoolName} ${programName}`.toLowerCase();
+  if (/audiolog|speech|baslp/.test(n)) return "prepares you to help people hear, speak and communicate — from newborn hearing screening to rehabilitation after stroke.";
+  if (/prosthetic|orthotic|bpo|mpo/.test(n)) return "prepares you to design and fit the artificial limbs and braces that give people their mobility and independence back.";
+  if (/inclusive|special/.test(n)) return "prepares you to teach and support children with disabilities so they learn alongside everyone else.";
+  if (/rehabilitation/.test(n)) return "prepares you to help people regain movement, communication and independence after injury, illness or disability.";
+  if (/physiotherap|bpt|mpt/.test(n)) return "prepares you to relieve pain and restore movement — the professional patients turn to after injury, surgery, stroke or on the sports field.";
+  if (/occupational|bot|mot/.test(n)) return "prepares you to help people get back to the everyday activities that matter to them — work, school, self-care — after illness, injury or disability.";
+  if (/nursing/.test(n)) return "prepares you for the profession at the centre of every hospital and community health team, caring for patients from the first day of clinical practice.";
+  if (/psycholog/.test(n)) return "prepares you to understand the mind and help people through mental-health, developmental and neurological challenges.";
+  if (/law|ll\.?b|llm/.test(n)) return "prepares you to argue, advise and shape the rules society lives by — in courtrooms, companies, government and public-interest work.";
+  if (/nutrition|dietet/.test(n)) return "prepares you to use food and nutrition as medicine, from hospital wards to sports and community health.";
+  if (/forensic/.test(n)) return "prepares you to turn physical evidence into answers — at the crime scene and in the laboratory.";
+  if (/optometr/.test(n)) return "prepares you to protect and correct people's sight as a primary eye-care professional.";
+  if (/imaging|radiolog|radiotherap|mrit|bmit|brt/.test(n)) return "prepares you to run the imaging and radiation technology that diagnoses and treats disease, working alongside radiologists and oncologists.";
+  if (/dialysis|renal/.test(n)) return "prepares you to run the life-sustaining dialysis care that people with kidney failure depend on.";
+  if (/respirator|pulmon/.test(n)) return "prepares you to manage breathing and ventilation for critically ill patients in ICUs and respiratory units.";
+  if (/emergency|trauma|betcms/.test(n)) return "prepares you to be the calm, skilled first responder in emergencies and trauma care.";
+  if (/anaesth|operation theatre|aott/.test(n)) return "prepares you to keep the operation theatre running safely, supporting surgeons and anaesthetists through every procedure.";
+  if (/cardio|cardiac|bcvt/.test(n)) return "prepares you to run the tests and cath-lab procedures that diagnose and treat heart disease.";
+  if (/lab|mlt|pathology/.test(n)) return "prepares you to produce the laboratory results almost every diagnosis depends on.";
+  if (/physician assistant|bpa/.test(n)) return "prepares you to work alongside doctors in patient assessment, care coordination and procedures.";
+  if (/health information|him\b/.test(n)) return "prepares you to manage the clinical records and health data modern hospitals run on.";
+  if (/public health/.test(n)) return "prepares you to improve the health of whole communities through epidemiology, policy and programmes.";
+  if (/ai|artificial|machine learning|data science|cse|computer|software|engineering|tech/.test(n)) return "prepares you to build the software and intelligent systems shaping healthcare and industry — including technology that helps people with disabilities.";
+  if (/business|management|mba|commerce/.test(n)) return "prepares you to lead and manage organisations with a grounding in finance, marketing and strategy.";
+  return "";
+};
+
 const buildProgramDirectAnswer = ({
   programName,
   levelFull,
@@ -49,16 +80,21 @@ const buildProgramDirectAnswer = ({
   duration?: string;
   eligibility?: string;
 }) => {
-  // Answer-first: the one paragraph an answer engine can lift verbatim — what it is, where, how long,
-  // who can apply, and the single honest next step for the fee. No navigational filler.
-  const home = departmentName
-    ? `${schoolName || "St. Mary's University"} (${departmentName})`
-    : schoolName || "St. Mary's University";
+  // Answer-first, written for the aspirant: open with who you become and who you help (true for the
+  // discipline), then the facts a parent checks, then the one honest fee line. No hype, no invented figures.
+  const purpose = getProgramPurpose(schoolName, programName);
+  // "School of Nursing (Nursing)" reads badly — only name the department when it adds information.
+  const school = schoolName || "St. Mary's University";
+  const deptAdds = departmentName && !school.toLowerCase().includes(departmentName.toLowerCase().replace(/^department of /i, ""));
+  const home = deptAdds ? `the ${school} (${departmentName})` : `the ${school}`;
+  const level = (levelFull || "programme").replace(/\bProgram(me)?\b/i, "programme").toLowerCase();
+  const article = /^[aeiou]/i.test(level) ? "an" : "a";
+  const cleanDuration = duration ? duration.replace(/\s*[–-]\s*Full-Time$/i, "") : "";
   const sentences = [
-    `${programName} is ${/^[aeiou]/i.test(levelFull || "programme") ? "an" : "a"} ${levelFull || "programme"} offered by ${home} at St. Mary's University (SMRU), Hyderabad — a UGC-recognised private university at Deshmukhi, near Ramoji Film City.`,
-    duration ? `The programme runs for ${duration.replace(/\s*[–-]\s*Full-Time$/i, "")}.` : "",
-    eligibility ? `Applicants need ${eligibility.replace(/^(\d+\+\d)/, "$1")}.` : "",
-    "The current fee, intake and scholarship terms are confirmed at official admissions counselling.",
+    purpose ? `${programName} ${purpose}` : "",
+    `It is ${article} ${level} in ${home} at St. Mary's University (SMRU), Hyderabad — a UGC-recognised private university on a residential campus at Deshmukhi, near Ramoji Film City${cleanDuration ? `, and runs for ${cleanDuration}` : ""}.`,
+    eligibility ? `You can apply with ${eligibility}.` : "",
+    "The current fee, intake and scholarship terms are confirmed with you at admissions counselling.",
   ].filter(Boolean);
   return sentences.join(" ");
 };
@@ -67,51 +103,51 @@ const getProgramPositioning = (schoolSlug: string, progName: string) => {
   const slug = (schoolSlug || "").toLowerCase();
   if (slug.includes('rehabilitation')) {
     return {
-      overview: `This programme trains practitioners who restore communication, mobility and learning: the assessment and management of hearing, speech and language disorders, the design and fitting of prostheses and orthoses, and inclusive education for children with disabilities.`,
-      study: "Anatomy and physiology relevant to the discipline, assessment methods, therapeutic and assistive-device techniques, rehabilitation planning, and professional ethics.",
-      experience: "Supervised clinical practice in the university's rehabilitation labs and clinical postings, building from observation to independent case management."
+      overview: `You train to restore communication, mobility and learning: assessing and managing hearing, speech and language disorders, designing and fitting prostheses and orthoses, and teaching children with disabilities in inclusive classrooms.`,
+      study: "You study the anatomy and physiology behind your discipline, assessment methods, therapeutic and assistive-device techniques, rehabilitation planning, and professional ethics.",
+      experience: "You practise in the university's rehabilitation labs and on supervised clinical postings, progressing from observation to managing your own cases."
     };
   }
   if (slug.includes('health')) {
     return {
-      overview: `This programme prepares allied-health professionals for diagnostic, therapeutic and operation-theatre roles — the clinical staff who run laboratories, imaging, anaesthesia support, emergency care and rehabilitation therapy alongside doctors and nurses.`,
-      study: "Human anatomy and physiology, the science behind the discipline's instruments and procedures, patient safety and infection control, clinical documentation, and professional practice.",
-      experience: "Skills-lab training followed by supervised clinical postings, with the final year focused on hands-on practice in the relevant department."
+      overview: `You join the allied-health professionals every hospital depends on — the people who run its laboratories, imaging, anaesthesia support, emergency care and therapy alongside doctors and nurses.`,
+      study: "You study human anatomy and physiology, the science behind your discipline's instruments and procedures, patient safety and infection control, clinical documentation, and professional practice.",
+      experience: "You start in the skills lab, move on to supervised clinical postings, and spend your final year practising hands-on in the relevant hospital department."
     };
   }
   if (slug.includes('psychology')) {
     return {
-      overview: `This programme studies human behaviour and mental health, and trains students to assess, support and rehabilitate people living with psychological, developmental and neurological conditions.`,
-      study: "Psychological assessment, developmental and abnormal psychology, counselling and behavioural intervention, rehabilitation psychology, research methods, and professional ethics.",
-      experience: "Supervised counselling practice, psychological assessment labs, case-study work, and community and clinical placements."
+      overview: `You study human behaviour and mental health, and train to assess, support and rehabilitate people living with psychological, developmental and neurological conditions.`,
+      study: "You study psychological assessment, developmental and abnormal psychology, counselling and behavioural intervention, rehabilitation psychology, research methods, and professional ethics.",
+      experience: "You gain supervised counselling practice, work in psychological-assessment labs, build case studies, and complete community and clinical placements."
     };
   }
   if (slug.includes('nursing')) {
     return {
-      overview: `This programme prepares registered nurses for hospital, community and specialist settings, combining nursing science with supervised clinical practice from the early semesters.`,
-      study: "Anatomy, physiology and pharmacology; medical-surgical, paediatric, mental-health and community-health nursing; patient safety; and nursing research and ethics.",
-      experience: "Skills-lab practice followed by supervised clinical postings across medical, surgical, mental-health and community settings."
+      overview: `You train as a registered nurse for hospital, community and specialist settings, combining nursing science with supervised clinical practice from the early semesters.`,
+      study: "You study anatomy, physiology and pharmacology; medical-surgical, paediatric, mental-health and community-health nursing; patient safety; and nursing research and ethics.",
+      experience: "You practise first in the skills lab, then on supervised clinical postings across medical, surgical, mental-health and community settings."
     };
   }
   if (slug.includes('engineering') || slug.includes('technology') || slug.includes('tech')) {
     return {
-      overview: `This programme builds engineering and computing skills with a focus on where technology meets people — including assistive and rehabilitation engineering, artificial intelligence, data science and software systems.`,
-      study: "Programming and software engineering, data structures and algorithms, mathematics for computing, the chosen specialisation (AI, data science, biomedical or assistive technology), and project work.",
-      experience: "Lab-based coursework, semester projects, and a capstone project, with industry-partner modules where the programme includes them."
+      overview: `You build engineering and computing skills where technology meets people — including assistive and rehabilitation engineering, artificial intelligence, data science and software systems.`,
+      study: "You study programming and software engineering, data structures and algorithms, mathematics for computing, your chosen specialisation (AI, data science, biomedical or assistive technology), and project work.",
+      experience: "You learn through lab-based coursework, semester projects and a capstone project, with industry-partner modules where the programme includes them."
     };
   }
   if (slug.includes('law')) {
     return {
-      overview: `This programme provides a rigorous legal education grounded in the Constitution, rights and ethics, with particular depth in disability rights, health law and public policy — preparing graduates for practice, research and public service.`,
-      study: "Constitutional, criminal, civil and contract law; jurisprudence; procedural law; and specialised areas such as disability rights, healthcare law and technology law.",
-      experience: "Moot court, legal-aid clinic work, internships with courts and law firms, and supervised legal research."
+      overview: `You receive a rigorous legal education grounded in the Constitution, rights and ethics, with particular depth in disability rights, health law and public policy — preparing you for practice, research and public service.`,
+      study: "You study constitutional, criminal, civil and contract law; jurisprudence; procedural law; and specialised areas such as disability rights, healthcare law and technology law.",
+      experience: "You argue in moot court, work in the legal-aid clinic, intern with courts and law firms, and carry out supervised legal research."
     };
   }
 
   return {
-    overview: `This programme provides a structured academic pathway combining foundational theory with applied, profession-oriented skills.`,
-    study: "Core disciplinary subjects, applied methods, and the professional competencies the field requires.",
-    experience: "Practical workshops, supervised projects, and applied learning aligned to the discipline."
+    overview: `You follow a structured pathway that combines foundational theory with the applied, profession-oriented skills the field requires.`,
+    study: "You study the core subjects of the discipline, its applied methods, and the professional competencies it requires.",
+    experience: "You learn through practical workshops, supervised projects and applied work aligned to the discipline."
   };
 };
 
@@ -246,7 +282,7 @@ export default function Program() {
     eligibility: prog.eligibility,
   });
   const programDirectAnswer = healthAlliedSeo
-    ? `${healthAlliedSeo.directAnswer}${prog.duration ? ` The programme runs for ${String(prog.duration).replace(/\s*[–-]\s*Full-Time$/i, "")}.` : ""}${prog.eligibility ? ` Applicants need ${prog.eligibility}.` : ""} The current fee, intake and scholarship terms are confirmed at official admissions counselling.`
+    ? `${healthAlliedSeo.directAnswer}${prog.duration ? ` The programme runs for ${String(prog.duration).replace(/\s*[–-]\s*Full-Time$/i, "")}.` : ""}${prog.eligibility ? ` You can apply with ${prog.eligibility}.` : ""} The current fee, intake and scholarship terms are confirmed with you at admissions counselling.`
     : fallbackProgramDirectAnswer;
 
   const programBreadcrumbs = [
