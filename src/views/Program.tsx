@@ -49,66 +49,69 @@ const buildProgramDirectAnswer = ({
   duration?: string;
   eligibility?: string;
 }) => {
-  const parts = [
-    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "St. Mary's University"}`,
-    departmentName ? `under ${departmentName}` : "",
-    "at St. Mary's University Hyderabad",
-    duration ? `Duration: ${duration}` : "",
-    eligibility ? `Eligibility: ${eligibility}` : "",
+  // Answer-first: the one paragraph an answer engine can lift verbatim — what it is, where, how long,
+  // who can apply, and the single honest next step for the fee. No navigational filler.
+  const home = departmentName
+    ? `${schoolName || "St. Mary's University"} (${departmentName})`
+    : schoolName || "St. Mary's University";
+  const sentences = [
+    `${programName} is ${/^[aeiou]/i.test(levelFull || "programme") ? "an" : "a"} ${levelFull || "programme"} offered by ${home} at St. Mary's University (SMRU), Hyderabad — a UGC-recognised private university at Deshmukhi, near Ramoji Film City.`,
+    duration ? `The programme runs for ${duration.replace(/\s*[–-]\s*Full-Time$/i, "")}.` : "",
+    eligibility ? `Applicants need ${eligibility.replace(/^(\d+\+\d)/, "$1")}.` : "",
+    "The current fee, intake and scholarship terms are confirmed at official admissions counselling.",
   ].filter(Boolean);
-
-  return `${parts.join(". ")}. This page also helps students review course details, admission route, fee guidance, career pathways, FAQs, and recommended related courses before applying.`;
+  return sentences.join(" ");
 };
 
 const getProgramPositioning = (schoolSlug: string, progName: string) => {
   const slug = (schoolSlug || "").toLowerCase();
   if (slug.includes('rehabilitation')) {
     return {
-      overview: `This programme focuses on clinical learning and rehabilitation care. Students gain foundational and advanced knowledge in communication disorders, prosthetics, orthotics, inclusive education, and assistive support according to professional practice requirements.`,
-      study: "Students engage in evidence-based academic modules focused on rehabilitative care, therapeutic interventions, and patient-centric communication methodologies.",
-      experience: "Clinical laboratory exposure and supervised therapeutic practice."
+      overview: `This programme trains practitioners who restore communication, mobility and learning: the assessment and management of hearing, speech and language disorders, the design and fitting of prostheses and orthoses, and inclusive education for children with disabilities.`,
+      study: "Anatomy and physiology relevant to the discipline, assessment methods, therapeutic and assistive-device techniques, rehabilitation planning, and professional ethics.",
+      experience: "Supervised clinical practice in the university's rehabilitation labs and clinical postings, building from observation to independent case management."
     };
   }
   if (slug.includes('health')) {
     return {
-      overview: `This programme prepares students for the dynamic patient-care ecosystem, focusing on healthcare delivery, diagnostics, emergency care, and critical operation theatre support.`,
-      study: "Students explore advanced diagnostic methodologies, healthcare delivery protocols, and clinical technologies essential for modern medical environments.",
-      experience: "Hands-on diagnostic laboratory work, clinical rotations, and emergency care simulations."
+      overview: `This programme prepares allied-health professionals for diagnostic, therapeutic and operation-theatre roles — the clinical staff who run laboratories, imaging, anaesthesia support, emergency care and rehabilitation therapy alongside doctors and nurses.`,
+      study: "Human anatomy and physiology, the science behind the discipline's instruments and procedures, patient safety and infection control, clinical documentation, and professional practice.",
+      experience: "Skills-lab training followed by supervised clinical postings, with the final year focused on hands-on practice in the relevant department."
     };
   }
   if (slug.includes('psychology')) {
     return {
-      overview: `This programme offers an in-depth study of human behaviour, mental health, and behavioural health interventions, preparing students for roles in clinical psychology and counselling.`,
-      study: "Coursework covers psychological assessment, rehabilitation psychology, behavioral intervention strategies, and professional ethics.",
-      experience: "Supervised counseling practice, behavioral observation, and psychological assessment labs."
+      overview: `This programme studies human behaviour and mental health, and trains students to assess, support and rehabilitate people living with psychological, developmental and neurological conditions.`,
+      study: "Psychological assessment, developmental and abnormal psychology, counselling and behavioural intervention, rehabilitation psychology, research methods, and professional ethics.",
+      experience: "Supervised counselling practice, psychological assessment labs, case-study work, and community and clinical placements."
     };
   }
   if (slug.includes('nursing')) {
     return {
-      overview: `This programme focuses on patient care, clinical responsibility, and nursing practice, equipping students to become essential members of hospital and community healthcare teams.`,
-      study: "Students master clinical nursing procedures, healthcare ethics, patient safety protocols, and advanced health monitoring.",
-      experience: "Extensive hospital rotations, community healthcare outreach, and rigorous clinical skills training."
+      overview: `This programme prepares registered nurses for hospital, community and specialist settings, combining nursing science with supervised clinical practice from the early semesters.`,
+      study: "Anatomy, physiology and pharmacology; medical-surgical, paediatric, mental-health and community-health nursing; patient safety; and nursing research and ethics.",
+      experience: "Skills-lab practice followed by supervised clinical postings across medical, surgical, mental-health and community settings."
     };
   }
   if (slug.includes('engineering') || slug.includes('technology') || slug.includes('tech')) {
     return {
-      overview: `This programme merges technical proficiency with emerging technologies. Students explore fields like assistive technology, rehabilitation engineering, computer science, AI, machine learning, and data science.`,
-      study: "Core subjects include software development, data analysis, algorithm design, and the application of emerging technologies to solve real-world problems.",
-      experience: "Project-based learning in advanced computing labs, software simulations, and industry-aligned technical workshops."
+      overview: `This programme builds engineering and computing skills with a focus on where technology meets people — including assistive and rehabilitation engineering, artificial intelligence, data science and software systems.`,
+      study: "Programming and software engineering, data structures and algorithms, mathematics for computing, the chosen specialisation (AI, data science, biomedical or assistive technology), and project work.",
+      experience: "Lab-based coursework, semester projects, and a capstone project, with industry-partner modules where the programme includes them."
     };
   }
   if (slug.includes('law')) {
     return {
-      overview: `This programme delivers comprehensive legal education rooted in constitutional values, rights, and ethics. It prepares students for advocacy, legal research, and public policy.`,
-      study: "The curriculum spans foundational law, disability rights, healthcare law, public policy, and rigorous legal research methodologies.",
-      experience: "Moot court practice, policy analysis, and legal advocacy internships."
+      overview: `This programme provides a rigorous legal education grounded in the Constitution, rights and ethics, with particular depth in disability rights, health law and public policy — preparing graduates for practice, research and public service.`,
+      study: "Constitutional, criminal, civil and contract law; jurisprudence; procedural law; and specialised areas such as disability rights, healthcare law and technology law.",
+      experience: "Moot court, legal-aid clinic work, internships with courts and law firms, and supervised legal research."
     };
   }
-  
+
   return {
-    overview: `This programme provides a structured academic pathway focusing on professional excellence, critical thinking, and industry-relevant skill development.`,
-    study: "A balanced curriculum covering foundational theories, applied knowledge, and professional competencies.",
-    experience: "Practical workshops, academic projects, and industry-focused learning activities."
+    overview: `This programme provides a structured academic pathway combining foundational theory with applied, profession-oriented skills.`,
+    study: "Core disciplinary subjects, applied methods, and the professional competencies the field requires.",
+    experience: "Practical workshops, supervised projects, and applied learning aligned to the discipline."
   };
 };
 
@@ -131,16 +134,16 @@ const getRegulatoryStatus = (prog: any) => {
   ];
   const risky = riskyTerms.some((term) => normalized.includes(term.toLowerCase()));
   if (risky) {
-    return "St. Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.";
+    return "St. Mary's University is recognised by the UGC under Section 2(f) of the UGC Act, 1956. Where a professional council approval applies to this programme, it is published on the Approvals & Recognitions page.";
   }
   return raw
-    ? `${raw} Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.`
+    ? `${raw} Where a professional council approval applies to this programme, it is published on the Approvals & Recognitions page.`
     : APPROVAL_SAFETY_NOTE;
 };
 
 const getAdmissionRoute = (prog: any, isPhd: boolean) => {
-  if (isPhd) return "Ph.D. cycle status is maintained on the Ph.D. page for notices and next-cycle interest.";
-  return prog?.admissionRoute || "Apply through the official admissions and counselling route; entrance test/counselling applies where notified.";
+  if (isPhd) return "Ph.D. admissions run in cycles; the current status and next-cycle notice are on the Ph.D. Admissions page.";
+  return prog?.admissionRoute || "Apply online, then complete admissions counselling to confirm eligibility and your seat. No entrance exam is currently announced; any future test is published only through an official university notice.";
 };
 
 const EMVERSITY_ABOUT =
@@ -243,7 +246,7 @@ export default function Program() {
     eligibility: prog.eligibility,
   });
   const programDirectAnswer = healthAlliedSeo
-    ? `${healthAlliedSeo.directAnswer}${prog.duration ? ` Duration: ${prog.duration}.` : ""}${prog.eligibility ? ` Eligibility: ${prog.eligibility}.` : ""} Fee, intake, placement, salary, and council recognition details should be verified with the university before application.`
+    ? `${healthAlliedSeo.directAnswer}${prog.duration ? ` The programme runs for ${String(prog.duration).replace(/\s*[–-]\s*Full-Time$/i, "")}.` : ""}${prog.eligibility ? ` Applicants need ${prog.eligibility}.` : ""} The current fee, intake and scholarship terms are confirmed at official admissions counselling.`
     : fallbackProgramDirectAnswer;
 
   const programBreadcrumbs = [
@@ -264,24 +267,6 @@ export default function Program() {
       onApply={handleApplyClick}
     >
       <div className="space-y-12">
-        {/* Regulatory Note */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-[#f8fafc] to-white border border-slate-200 p-4 cut-corner-panel flex items-start gap-4">
-          <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(to_right,rgba(13,49,92,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(13,49,92,0.06)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-          <div className="relative z-10 flex items-start gap-4">
-            <div className="bg-[#019e6e]/10 p-2 rounded-full shrink-0 mt-0.5">
-              <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain" alt="Regulatory" />
-            </div>
-            <div>
-              <h3 className="text-[12px] font-black uppercase tracking-widest text-[#0d315c] mb-1">
-                Recognition & Verification
-              </h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                {regulatoryStatus}
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* 1. Overview & Quick Facts */}
         <section className="flex flex-col lg:flex-row gap-10">
           <div className="flex-1 space-y-8">
@@ -357,6 +342,24 @@ export default function Program() {
              </div>
           </div>
         </section>
+
+        {/* Regulatory Note — placed after the overview so the answer-first paragraph leads the page */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#f8fafc] to-white border border-slate-200 p-4 cut-corner-panel flex items-start gap-4">
+          <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(to_right,rgba(13,49,92,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(13,49,92,0.06)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+          <div className="relative z-10 flex items-start gap-4">
+            <div className="bg-[#019e6e]/10 p-2 rounded-full shrink-0 mt-0.5">
+              <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain" alt="Regulatory" />
+            </div>
+            <div>
+              <h3 className="text-[12px] font-black uppercase tracking-widest text-[#0d315c] mb-1">
+                Recognition & Verification
+              </h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                {regulatoryStatus}
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* ================= CURRICULUM & ADMISSIONS ================= */}
         {(prog.curriculum || prog.admissionProcess) && (

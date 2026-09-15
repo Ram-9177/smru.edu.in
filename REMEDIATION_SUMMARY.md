@@ -387,6 +387,42 @@ differences** (titles, descriptions, canonicals, robots, H1s, JSON-LD types, wor
   Program) and `framer-motion` on `/academic-structure` / `/campus-guide` — a larger refactor;
   the 360-tour libs (527 KB) are already code-split to the tour pages only.
 
+### Content pass — sensitive surfaces, written plainly (16 September 2026)
+A content-expert rewrite of the copy that carries the most risk and the most reader intent. No
+fact was added that the university has not published; every caveat is now said once, with the one
+useful next step, instead of repeated as deflection.
+- **Programme pages (71):** the answer-first paragraph now leads with substance — what the
+  programme is, school/department, campus, duration, eligibility, and the single honest fee line —
+  instead of ending in navigational filler; the small "Recognition & Verification" card moved below
+  the overview so the answer paragraph is the first thing engines read (`answerFirstProgramme`
+  warnings **57 → 0**). The six discipline fallbacks (`getProgramPositioning`) rewritten as concrete
+  descriptions of what the field covers ("dynamic patient-care ecosystem" → what allied-health
+  professionals actually do). "a Undergraduate" grammar fixed.
+- **24 health-allied `directAnswer`s** rewritten from "…for students comparing X, Y and admission
+  guidance" SEO-speak into one clear sentence each on what the discipline is and trains you to do.
+- **Programme / school / department FAQs (705 Q/A pairs):** natural questions ("How long is BPO?",
+  "Who is eligible for…?") replace robotic ones ("What overview is available for…?"); the
+  fallback that answered factual questions with an unrelated UGC-recognition note is gone —
+  missing facts get an honest "confirmed at admissions counselling — call / email" answer in the
+  visible Quick Answers, and are **dropped from FAQPage schema** rather than published as
+  non-answers (**0 non-answers** across all 71 pages, was widespread). The recognition line is one
+  plain sentence with the university/programme distinction.
+- **`/fee-structure/`:** the policy stated once (fee shared per applicant at counselling, and why),
+  what a fee comprises (tuition, application, exam, caution deposit, lab/clinical, hostel & mess —
+  heads, not amounts), how to get the figure, scholarships and refunds. The seven-row "confirmed at
+  counselling" padding table removed.
+- **`/approvals-recognitions/`:** "Statutory Trust & Compliance", "Academic Context: St. Mary's
+  Legacy", "Verified Digital Repository", "Legacy of Trust" replaced with plain headings and the
+  canonical establishment/recognition sentence; the sponsoring society named; the university-vs-
+  programme approval distinction explained once; a disambiguation FAQ added.
+- **`/admissions/`:** "Backed by St. Mary's educational legacy…" → the concrete facts (UGC-recognised,
+  70+ programmes, six schools) and what the admissions team actually helps with.
+- `docs/seo/ai-audit.md` anchor for "What is SMCET?" corrected: no entrance exam is currently
+  announced (the official `/exam-notification/` page), so an engine asserting an active SMCET is
+  repeating retired copy.
+- Verified: typecheck · lint 0 · test 35/35 · guard 39/39 · build 277 · links 0 broken · audit
+  clean · gates PASS · facts 29/29 · coverage 71/71.
+
 ## Status: brief Phases 0–7 complete
 
 All seven phases of the Antigravity brief are implemented and verified (typecheck · lint · test ·

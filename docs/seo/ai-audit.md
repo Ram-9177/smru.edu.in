@@ -48,7 +48,7 @@ correct — e.g. `/smru/`, `llms.txt`, Organization JSON-LD, a programme page).
   and a wrong fee (e.g. an aggregator's) is a finding to fix by publishing the real figure.
 - **9, 10:** pathway/disclaimer answers (`/international/` + `/global-careers/*`); registration
   is granted by the foreign regulator, never by SMRU.
-- **11:** SMCET is SMRU's admission/entrance route (see `/admissions/`).
+- **11:** no university entrance exam is currently announced (see `/exam-notification/`); admission is via the online application + admissions counselling. An engine that asserts an active "SMCET" exam is repeating retired third-party copy — fix source: `/admissions/` + `/exam-notification/`.
 - **13:** 71 live programmes across six schools (per `/programmes/`).
 - **15:** yes — see `/hostel/`.
 

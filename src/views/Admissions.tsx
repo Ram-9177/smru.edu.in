@@ -62,7 +62,7 @@ export default function Admissions() {
           </div>
  
           <p className="max-w-3xl mx-auto text-base md:text-lg text-slate-600 font-medium leading-relaxed md:text-center">
-            Backed by St. Mary’s educational legacy and UGC 2(f) recognized university status, our admissions team helps students and parents understand programmes, eligibility, applications, scholarships, and official university information before applying.
+            St. Mary&apos;s University (SMRU), Hyderabad is a UGC-recognised private university offering 70+ programmes across six schools — rehabilitation sciences, allied health, nursing, psychology, engineering and law. Our admissions team walks you through programme choice, eligibility, the online application, scholarships and fees, so you can decide with the facts in hand.
           </p>
           <p className="mt-6 text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
             Last updated: {ADMISSIONS_CONTENT_LAST_UPDATED}

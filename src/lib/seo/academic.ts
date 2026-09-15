@@ -5,7 +5,7 @@ import {
   getCanonicalProgramKey,
   safeSlug,
 } from "@/lib/shared/program-utils";
-import { MANUAL_VERIFICATION_LABEL, SEO_UPDATE_NOTE, UNIVERSITY_INFO } from "@/lib/shared/university";
+import { UNIVERSITY_INFO } from "@/lib/shared/university";
 import {
   buildDepartmentComparisonFaqs,
   buildProgramComparisonFaqs,
@@ -119,62 +119,69 @@ export const buildProgramBreadcrumbs = (school: any, department: any, program: a
   },
 ];
 
+// When a fact is not yet published, say so and give the reader the one useful next step —
+// never answer a factual question with an unrelated recognition note. FAQ entries whose answer
+// would be NOT_YET are dropped so FAQPage schema never carries a non-answer.
+const ASK_ADMISSIONS = `confirmed at official admissions counselling — call ${UNIVERSITY_INFO.phone} or email ${UNIVERSITY_INFO.email}.`;
+const NOT_YET = "__not_yet_published__";
+const withoutNotYet = <T extends { answer?: string }>(items: T[]) => items.filter((item) => item.answer && item.answer !== NOT_YET);
+
 export const buildSchoolAnswers = (school: any): SeoAnswerItem[] => {
   const departmentCount = (school?.departments || []).length;
   const programCount = uniquePrograms((school?.departments || []).flatMap((department: any) => department.programs || [])).length;
   return [
     {
       question: `What is ${school?.name || "this school"}?`,
-      answer: school?.about || SEO_UPDATE_NOTE,
+      answer: school?.about || `${school?.name || "This school"} is one of the six schools of St. Mary's University (SMRU), Hyderabad. Its full profile is ${ASK_ADMISSIONS}`,
     },
     {
       question: "Which departments are listed under this school?",
       answer:
         departmentCount > 0
-          ? `${departmentCount} department${departmentCount === 1 ? "" : "s"} are listed on this school page.`
-          : SEO_UPDATE_NOTE,
+          ? `${school?.name || "This school"} has ${departmentCount} department${departmentCount === 1 ? "" : "s"}; each is listed below with its programmes.`
+          : `The department structure is ${ASK_ADMISSIONS}`,
     },
     {
       question: "How many programs can I explore here?",
       answer:
         programCount > 0
-          ? `${programCount} distinct program pathways are currently listed under this school section on the website.`
-          : SEO_UPDATE_NOTE,
+          ? `${programCount} programme${programCount === 1 ? "" : "s"} are offered under ${school?.name || "this school"}, each with its own page covering eligibility, duration and admissions.`
+          : `The programme list is ${ASK_ADMISSIONS}`,
     },
     {
       question: "How do I apply for a program under this school?",
       answer:
-        "Use the official admissions and program links shown on this page. Any future entrance test or counselling requirement will apply only where officially notified.",
+        "Choose a programme below, then apply online at apply.smru.edu.in and complete admissions counselling. No entrance exam is currently announced; any future test is published only through an official university notice.",
     },
   ];
 };
 
 export const buildSchoolFaqs = (school: any) => {
   const departments = (school?.departments || []).map((department: any) => department.name).filter(Boolean);
-  return [
+  return withoutNotYet([
     {
       question: `What does ${school?.name || "this school"} focus on?`,
-      answer: school?.about || SEO_UPDATE_NOTE,
+      answer: school?.about || NOT_YET,
     },
     {
-      question: `Which departments are available in ${school?.name || "this school"}?`,
-      answer: departments.length ? departments.join("; ") : SEO_UPDATE_NOTE,
+      question: `Which departments are in ${school?.name || "this school"}?`,
+      answer: departments.length ? `${school?.name || "The school"} comprises: ${departments.join("; ")}.` : NOT_YET,
     },
     {
-      question: `How can I compare programs in ${school?.name || "this school"}?`,
+      question: `How do I compare programmes in ${school?.name || "this school"}?`,
       answer:
-        "Open the department and program links from this school page to review individual program details, eligibility, admissions status, and application routes.",
+        "Each programme page states its level, duration, eligibility and practical training; compare those side by side, then confirm the current fee at admissions counselling.",
     },
     {
-      question: `Is an entrance exam currently announced for ${school?.name || "this school"}?`,
-      answer: "No university entrance exam is currently announced. Any future entrance test or counselling requirement will be published through an official notice.",
+      question: `Is there an entrance exam for ${school?.name || "this school"}?`,
+      answer: "No university entrance exam is currently announced; admission is through the online application and admissions counselling. Any future test will be published only through an official university notice.",
     },
     {
-      question: `Are fees, intake, and statutory approvals listed for ${school?.name || "this school"}?`,
-      answer: `${MANUAL_VERIFICATION_LABEL}. Refer to the public disclosure, fee, and admissions pages for confirmed updates.`,
+      question: `Is ${school?.name || "this school"} at St. Mary's University recognised?`,
+      answer: "St. Mary's University is recognised by the UGC under Section 2(f) of the UGC Act, 1956. Where a professional council approval applies to a programme, it is published on the Approvals & Recognitions page.",
     },
     ...buildSchoolComparisonFaqs(school),
-  ];
+  ]);
 };
 
 export const buildDepartmentAnswers = (school: any, department: any): SeoAnswerItem[] => {
@@ -182,52 +189,52 @@ export const buildDepartmentAnswers = (school: any, department: any): SeoAnswerI
   return [
     {
       question: `What is the ${department?.name || "department"}?`,
-      answer: department?.about || SEO_UPDATE_NOTE,
+      answer: department?.about || `${department?.name || "This department"} is part of ${school?.name || "St. Mary's University"} at SMRU, Hyderabad; its programmes are listed below.`,
     },
     {
       question: "How many programs are listed on this department page?",
       answer:
         programCount > 0
-          ? `${programCount} program option${programCount === 1 ? "" : "s"} are currently listed under this department.`
-          : SEO_UPDATE_NOTE,
+          ? `${department?.name || "This department"} offers ${programCount} programme${programCount === 1 ? "" : "s"}, each with its own page.`
+          : `The programme list is ${ASK_ADMISSIONS}`,
     },
     {
       question: "Which school is this department part of?",
-      answer: school?.name ? `${department?.name || "This department"} is listed under ${school.name}.` : SEO_UPDATE_NOTE,
+      answer: school?.name ? `${department?.name || "This department"} is part of ${school.name} at St. Mary's University (SMRU), Hyderabad.` : `${department?.name || "This department"} is part of St. Mary's University (SMRU), Hyderabad.`,
     },
     {
       question: "How do I proceed with admissions from this department page?",
       answer:
-        "Use the program detail links and admissions CTA to move to the relevant route. Any future entrance test or counselling requirement will apply only where officially notified.",
+        "Open the programme you want, then apply online at apply.smru.edu.in and complete admissions counselling. No entrance exam is currently announced.",
     },
   ];
 };
 
 export const buildDepartmentFaqs = (school: any, department: any) => {
   const programs = uniquePrograms(department?.programs || []).map((program) => cleanProgramName(program.name || "", { trailingOnly: true }));
-  return [
+  return withoutNotYet([
     {
-      question: `What academic focus is shown for ${department?.name || "this department"}?`,
-      answer: department?.about || SEO_UPDATE_NOTE,
+      question: `What does ${department?.name || "this department"} focus on?`,
+      answer: department?.about || NOT_YET,
     },
     {
-      question: `Which programs are listed under ${department?.name || "this department"}?`,
-      answer: programs.length ? programs.join("; ") : SEO_UPDATE_NOTE,
+      question: `Which programmes does ${department?.name || "this department"} offer?`,
+      answer: programs.length ? `${department?.name || "The department"} offers: ${programs.join("; ")}.` : NOT_YET,
     },
     {
-      question: `Where can I find the parent school for ${department?.name || "this department"}?`,
-      answer: school?.name ? `This department belongs to ${school.name}.` : SEO_UPDATE_NOTE,
+      question: `Which school does ${department?.name || "this department"} belong to?`,
+      answer: school?.name ? `${department?.name || "This department"} belongs to ${school.name} at St. Mary's University (SMRU), Hyderabad.` : NOT_YET,
     },
     {
-      question: `Is an entrance exam currently announced for ${department?.name || "this department"}?`,
-      answer: "No university entrance exam is currently announced. Future requirements will be published through an official university notice.",
+      question: `Is there an entrance exam for ${department?.name || "this department"}?`,
+      answer: "No university entrance exam is currently announced; admission is through the online application and admissions counselling. Any future test will be published only through an official university notice.",
     },
     {
-      question: `Are fee, intake, and approval details confirmed for ${department?.name || "this department"}?`,
-      answer: `${MANUAL_VERIFICATION_LABEL}. Check the admissions and disclosure pages for confirmed public updates.`,
+      question: `Are ${department?.name || "this department"} programmes at St. Mary's University recognised?`,
+      answer: "St. Mary's University is recognised by the UGC under Section 2(f) of the UGC Act, 1956. Where a professional council approval applies to a programme, it is published on the Approvals & Recognitions page.",
     },
     ...buildDepartmentComparisonFaqs(school, department),
-  ];
+  ]);
 };
 
 export const buildProgramRecommendationLinks = (
@@ -291,38 +298,35 @@ export const buildProgramAnswers = (school: any, department: any, program: any):
     textValue(program?.labs) ||
     textValue(program?.fieldExposure) ||
     healthAlliedSeo?.experience ||
-    "Practical exposure depends on the approved programme structure; confirm the current laboratory, clinical, internship, or project requirements through official admissions guidance.";
+    `The practical, clinical, internship or project components of ${programName} follow the approved curriculum; the current structure is ${ASK_ADMISSIONS}`;
   const careerAnswer =
     Array.isArray(program?.careerOpportunities) && program.careerOpportunities.length
       ? `Listed pathways include ${program.careerOpportunities.filter(Boolean).join("; ")}. Professional requirements and current opportunities should be confirmed before application.`
       : textValue(program?.outcomes) ||
-        "Career and higher-study pathways depend on programme level, eligibility, professional requirements, and applicable regulations.";
+        `Graduates of ${programName} typically progress into practice roles in the discipline or into postgraduate study; the professional-registration requirements for a given role are set by the relevant council.`;
   const curriculumAnswer =
     curriculumSummary(program?.curriculum) ||
     textValue(program?.overview) ||
-    "Review the approved curriculum and semester structure through the official university admissions route.";
+    `The semester-wise curriculum for ${programName} is ${ASK_ADMISSIONS}`;
   const locationAnswer = program?.campus
     ? textValue(program.campus)
     : `${programName} is listed under ${department?.name || "the academic department"} at ${UNIVERSITY_INFO.city}, ${UNIVERSITY_INFO.state}. Confirm the current teaching or clinical location with admissions.`;
   return [
     {
       question: `What is ${programName}?`,
-      answer: program?.overview || healthAlliedSeo?.directAnswer || SEO_UPDATE_NOTE,
+      answer: program?.overview || healthAlliedSeo?.directAnswer || `${programName} is offered by ${school?.name || "St. Mary's University"} at St. Mary's University (SMRU), Hyderabad. The full programme outline is ${ASK_ADMISSIONS}`,
     },
     {
       question: "Who can apply to this program?",
-      answer: program?.eligibility || SEO_UPDATE_NOTE,
+      answer: program?.eligibility || `The current eligibility for ${programName} is ${ASK_ADMISSIONS}`,
     },
     {
       question: "What is the duration of this program?",
-      answer: program?.duration || SEO_UPDATE_NOTE,
+      answer: program?.duration || `The duration of ${programName} is ${ASK_ADMISSIONS}`,
     },
     {
       question: "How do I apply for this program?",
-      answer:
-        school && department
-          ? `Use the admissions or enquiry actions shown on this program page. This program is listed under ${department.name} in ${school.name}; entrance test or counselling applies only where officially notified.`
-          : SEO_UPDATE_NOTE,
+      answer: `Apply online at apply.smru.edu.in, then complete admissions counselling to confirm eligibility and your seat. No entrance exam is currently announced; any future test is published only through an official university notice.`,
     },
     {
       question: "Which related courses should I compare?",
@@ -332,11 +336,11 @@ export const buildProgramAnswers = (school: any, department: any, program: any):
     },
     {
       question: "What are the fees for this program?",
-      answer: "Programme-wise fees are confirmed through official admissions counselling and university communication. Check the official fee route before paying.",
+      answer: `The current annual fee, hostel and other charges for ${programName} are ${ASK_ADMISSIONS} Pay only against the official fee schedule you receive there.`,
     },
     {
       question: "Are scholarships available for this program?",
-      answer: "Scholarship availability, eligibility, and current terms are confirmed through the official admissions route and applicable university policy.",
+      answer: "Scholarship eligibility and the current terms are assessed during admissions counselling, alongside the fee.",
     },
     {
       question: "What does the curriculum cover?",
@@ -363,6 +367,10 @@ export const buildProgramAnswers = (school: any, department: any, program: any):
 
 export const buildProgramFaqs = (school: any, department: any, program: any) => {
   const recommendations = buildProgramRecommendationLinks(school, department, program, 5);
+  return withoutNotYet(buildProgramFaqEntries(school, department, program, recommendations));
+};
+
+const buildProgramFaqEntries = (school: any, department: any, program: any, recommendations: ReturnType<typeof buildProgramRecommendationLinks>) => {
   const healthAlliedFaqs = buildHealthAlliedCourseFaqs({
     schoolSlug: school?.slug,
     departmentSlug: department?.slug,
@@ -371,34 +379,34 @@ export const buildProgramFaqs = (school: any, department: any, program: any) => 
   });
   return [
     {
-      question: `What overview is available for ${cleanProgramName(program?.name || "this program")}?`,
-      answer: program?.overview || SEO_UPDATE_NOTE,
+      question: `What is ${cleanProgramName(program?.name || "this program")}?`,
+      answer: program?.overview || NOT_YET,
     },
     {
-      question: `What eligibility is listed for ${cleanProgramName(program?.name || "this program")}?`,
-      answer: program?.eligibility || SEO_UPDATE_NOTE,
+      question: `Who is eligible for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: program?.eligibility || NOT_YET,
     },
     {
-      question: `How long does ${cleanProgramName(program?.name || "this program")} take?`,
-      answer: program?.duration || SEO_UPDATE_NOTE,
+      question: `How long is ${cleanProgramName(program?.name || "this program")}?`,
+      answer: program?.duration || NOT_YET,
     },
     {
-      question: `Which courses are recommended with ${cleanProgramName(program?.name || "this program")}?`,
+      question: `Which programmes should I compare with ${cleanProgramName(program?.name || "this program")}?`,
       answer: recommendations.length
-        ? `Students can compare ${recommendations.map((item) => item.label).join("; ")} from the recommended related courses section on this page.`
-        : "Students can use the parent department and school pages to compare related programmes.",
+        ? `Related options at SMRU include ${recommendations.map((item) => item.label).join("; ")} — compare eligibility, duration and clinical or practical exposure before choosing.`
+        : NOT_YET,
     },
     {
-      question: `Are intake, fees, and statutory approvals confirmed for ${cleanProgramName(program?.name || "this program")}?`,
-      answer: `${MANUAL_VERIFICATION_LABEL}. Review official fee, disclosure, and admissions pages for confirmed updates.`,
+      question: `Is ${cleanProgramName(program?.name || "this program")} at St. Mary's University recognised?`,
+      answer: "St. Mary's University is recognised by the UGC under Section 2(f) of the UGC Act, 1956. Where a professional council approval applies to this programme, it is published on the Approvals & Recognitions page.",
     },
     {
-      question: `Is an entrance exam currently announced for ${cleanProgramName(program?.name || "this program")}?`,
-      answer: "No university entrance exam is currently announced. Future requirements will be published through an official university notice.",
+      question: `Is there an entrance exam for ${cleanProgramName(program?.name || "this program")}?`,
+      answer: "No university entrance exam is currently announced; admission is through the online application and admissions counselling. Any future test will be published only through an official university notice.",
     },
     {
-      question: `What are the fees and scholarship options for ${cleanProgramName(program?.name || "this program")}?`,
-      answer: "Programme-wise fees, scholarship availability, eligibility, and current terms should be confirmed through official admissions counselling and university policy.",
+      question: `What does ${cleanProgramName(program?.name || "this program")} cost, and are scholarships available?`,
+      answer: `The current fee and any scholarship terms are ${ASK_ADMISSIONS}`,
     },
     {
       question: `What curriculum and practical training does ${cleanProgramName(program?.name || "this program")} include?`,
@@ -406,15 +414,14 @@ export const buildProgramFaqs = (school: any, department: any, program: any) => 
         curriculumSummary(program?.curriculum) ||
         textValue(program?.labs) ||
         textValue(program?.fieldExposure) ||
-        "Review the approved curriculum and confirm current practical, clinical, internship, or project requirements through official admissions guidance.",
+        NOT_YET,
     },
     {
       question: `What career pathways can ${cleanProgramName(program?.name || "this program")} support?`,
       answer:
         Array.isArray(program?.careerOpportunities) && program.careerOpportunities.length
-          ? `Listed pathways include ${program.careerOpportunities.filter(Boolean).join("; ")}. Confirm professional requirements and current opportunities before application.`
-          : textValue(program?.outcomes) ||
-            "Career and higher-study pathways depend on programme level, eligibility, professional requirements, and applicable regulations.",
+          ? `Graduates typically work as ${program.careerOpportunities.filter(Boolean).join("; ")}. Professional registration for a given role is granted by the relevant council.`
+          : textValue(program?.outcomes) || NOT_YET,
     },
     ...healthAlliedFaqs,
     ...buildProgramComparisonFaqs(school, department, program),

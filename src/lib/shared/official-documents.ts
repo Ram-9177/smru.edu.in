@@ -35,7 +35,7 @@ export const FIRST_ACADEMIC_YEAR_NOTE =
   "St. Mary's University carries forward St. Mary's educational legacy while operating as St. Mary's University in its first university academic cycle. Items such as university alumni data, placement outcomes, annual reports, audited annual accounts, ranking submissions, and accreditation-cycle outputs are tracked for future publication when they become applicable or are cleared for public release.";
 
 export const APPROVAL_SAFETY_NOTE =
-  "Programme-level professional council permissions, where required, are verified through official university notifications or relevant statutory council documents.";
+  "St. Mary's University is recognised by the UGC under Section 2(f) of the UGC Act, 1956. Where a professional council approval applies to a programme, it is published on the Approvals & Recognitions page.";
 
 const commonReview = {
   lastReviewed: DISCLOSURE_LAST_REVIEWED,
