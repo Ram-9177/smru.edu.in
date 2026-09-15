@@ -352,6 +352,41 @@ issue fixed:
   audit (0 broken/hashes/dupIds/invalidJsonLd/missingAssets/secrets, release gate pass) ·
   seo-gates 0 failures · seo:facts 29/29 · coverage 71/71 — **ready to deploy**.
 
+### Performance pass (15 September 2026)
+Delivery-only optimisation: a crawl of all 275 pages before and after shows **0 semantic
+differences** (titles, descriptions, canonicals, robots, H1s, JSON-LD types, word counts identical).
+
+- **Compression (biggest win, server-side).** `public/.htaccess` had no `mod_deflate`/`mod_brotli`
+  config — every HTML/JS/CSS byte shipped uncompressed. Now brotli (when the module exists) else gzip
+  for text/html, css, js, json, xml, svg, RSC `.txt`; images/woff2/mp4 excluded. Measured on the
+  wire: homepage 196 KB → **25 KB brotli** (34 KB gzip); `/schools/law/` 183 → 22 KB; the 315 KB
+  three.js chunk → 62 KB.
+- **Cache-Control** made explicit: hashed `/_next/static/*` → `max-age=31536000, immutable`;
+  media/fonts 30 d; other js/css 1 d; HTML, RSC `index.txt`, sitemaps, robots → `max-age=0,
+  must-revalidate` so deploys propagate. `mod_expires` kept as a fallback.
+- **Link prefetch burst.** Every page prefetched the RSC payload of every visible `<Link>` — the
+  Navbar + Footer alone are 46 links → **~993 KB raw (~248 KB brotli) fetched speculatively on every
+  visit**, mostly wasted on mobile. `prefetch={false}` on the 46 nav/footer links: viewport
+  prefetch off, hover prefetch still on, so navigation stays instant. Homepage on-load RSC
+  prefetches 49 → **1**; total requests 1,670+ → 73.
+- **Soft navigation verified working** (`output: export`): Next appends `index.txt` and accepts
+  `text/plain`, so Apache serves it natively — a real click to `/admissions/` kept a JS marker alive
+  (true client-side navigation). The `ERR_CONNECTION_REFUSED` / "Failed to fetch RSC payload" seen
+  earlier was the single-process local test server dropping the prefetch burst, now gone.
+- **LCP hero**: `<picture>` serves an 820 w variant (**78 KB**) to viewports ≤768 px instead of the
+  1600 w file (317 KB, re-encoded from 379 KB) — viewport-based so DPR cannot defeat it; React
+  Float does not auto-preload `<img>` inside `<picture>`, so phones never fetch the desktop file.
+  Hero removed from the hover-prefetch media map.
+- **School hub route**: `/schools/[schoolSlug]` statically imported the Law, Nursing *and* generic
+  views (a Phase 2 regression) — Law and Nursing are now `next/dynamic`, so Law is its own 62 KB
+  chunk loaded only on `/schools/law/`.
+- Meta Pixel `<noscript><img>` was being preloaded by React Float on every page → `loading="lazy"`.
+- `tests/audit-comparison.test.mjs`: child-process runs retry once on `status === null` (load
+  hiccup) — 35/35 three consecutive full runs.
+- Not changed (out of "don't break anything" scope): `"use client"` page views (Home, School,
+  Program) and `framer-motion` on `/academic-structure` / `/campus-guide` — a larger refactor;
+  the 360-tour libs (527 KB) are already code-split to the tour pages only.
+
 ## Status: brief Phases 0–7 complete
 
 All seven phases of the Antigravity brief are implemented and verified (typecheck · lint · test ·

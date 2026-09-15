@@ -8,6 +8,7 @@ const canteenImg = "/assets/canteen-CZmCaPgx.webp";
 const hostelImg1 = "/assets/Hostel1-CfcW80Kf.webp";
 const hostelImg2 = "/assets/Hostel2-C_Z6DObd.webp";
 const PRIMARY_HERO_IMAGE = "/assets/hero-campus-fast.webp";
+const MOBILE_HERO_IMAGE = "/assets/hero-campus-mobile.webp";
 import { buildFaqSchema } from "@/lib/seo/schema";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import { useOpenApply } from "../context/ApplyModalContext";
@@ -182,15 +183,18 @@ export default function Home() {
         {/* Campus Drone View Static Hero */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <div className="absolute inset-0 h-full w-full">
-            <Image
-              src={PRIMARY_HERO_IMAGE}
-              alt="St. Mary's University Campus Drone View in Hyderabad"
-              fill
-              priority
-              fetchPriority="high"
-              sizes="100vw"
-              className="object-cover object-center hero-campus-image"
-            />
+            {/* LCP image: phones get the 820w variant (78 KB) instead of the 1600w file (317 KB). */}
+            <picture>
+              <source media="(max-width: 768px)" srcSet={MOBILE_HERO_IMAGE} type="image/webp" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PRIMARY_HERO_IMAGE}
+                alt="St. Mary's University Campus Drone View in Hyderabad"
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center hero-campus-image"
+              />
+            </picture>
           </div>
         </div>
 

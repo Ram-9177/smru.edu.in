@@ -4,9 +4,13 @@ import { buildBreadcrumbSchema, buildCollectionPageSchema, buildFaqSchema, build
 import { buildCourseItemListSchema, getSchoolCourseListItems } from "@/lib/seo/course-list";
 import { buildSchoolBreadcrumbs, buildSchoolFaqs, resolveSchool } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
+import dynamic from "next/dynamic";
 import School from "@/views/School";
-import LawHubPage from "@/views/LawHubPage";
-import NursingLandingClient from "@/views/NursingLandingClient";
+
+// Only the matching school's rich view is bundled into its page chunk; the other five schools
+// must not pay for the Law and Nursing landings.
+const LawHubPage = dynamic(() => import("@/views/LawHubPage"));
+const NursingLandingClient = dynamic(() => import("@/views/NursingLandingClient"));
 import { getSchoolMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";

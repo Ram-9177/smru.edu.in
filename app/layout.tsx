@@ -149,6 +149,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=1582040940369832&ev=PageView&noscript=1"
             alt=""
+            loading="lazy"
           />
         </noscript>
         {/* End Meta Pixel Code */}

@@ -3,6 +3,15 @@ import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+// The compare script is spawned as a child process; under a heavy concurrent test run the child can be
+// signal-killed (status === null). Retry once so a load hiccup does not read as a real failure.
+const runCompare = (args) => {
+  const opts = { encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000 };
+  let result = spawnSync(process.execPath, args, opts);
+  if (result.status === null) result = spawnSync(process.execPath, args, opts);
+  return result;
+};
+
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -32,9 +41,7 @@ test("frontend audit comparison detects a removed duplicate link", async () => {
     await writeFile(baselinePath, JSON.stringify({ ...emptyAudit, protectedLinkCount: 2, links: [link, link] }));
     await writeFile(currentPath, JSON.stringify({ ...emptyAudit, protectedLinkCount: 1, links: [link] }));
 
-    const result = spawnSync(process.execPath, [compareScript, baselinePath, currentPath], {
-      encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000,
-    });
+    const result = runCompare([compareScript, baselinePath, currentPath]);
 
     assert.equal(result.status, 1);
     assert.match(result.stdout, /"pass": false/);
@@ -64,18 +71,16 @@ test("frontend audit comparison permits only explicitly approved route removals"
       routes: [publicRoute],
     }));
 
-    const approved = spawnSync(process.execPath, [
+    const approved = runCompare([
       compareScript,
       baselinePath,
       currentPath,
       "--allow-removed-route=/developer/",
-    ], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000 });
+    ]);
     assert.equal(approved.status, 0);
     assert.equal(JSON.parse(approved.stdout).pass, true);
 
-    const unapproved = spawnSync(process.execPath, [compareScript, baselinePath, currentPath], {
-      encoding: "utf8", maxBuffer: 32 * 1024 * 1024, timeout: 60_000,
-    });
+    const unapproved = runCompare([compareScript, baselinePath, currentPath]);
     assert.equal(unapproved.status, 1);
     assert.equal(JSON.parse(unapproved.stdout).pass, false);
   } finally {

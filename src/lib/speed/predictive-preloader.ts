@@ -7,7 +7,6 @@ const prefetchedUrls = new Set<string>();
 
 const ROUTE_MEDIA_MAP: Record<string, string[]> = {
   "/": [
-    "/assets/hero-campus-fast.webp",
     "/assets/Stmarys-Logo.webp",
     "/assets/Logo.webp",
   ],
