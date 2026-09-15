@@ -531,7 +531,6 @@ export default function About() {
           </div>
 
           <WindingRoadTimeline
-            className="mx-auto"
             items={journeyData.map((e) => ({ meta: e.year, title: e.title, desc: e.description, impact: e.impact, icon: e.icon }))}
           />
         </div>

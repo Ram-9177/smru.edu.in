@@ -25,7 +25,10 @@ type StepItem = {
   icon?: React.ReactNode;
 };
 
-const cx = (...classes: Array<string | false | null | undefined>) => classes.filter(Boolean).join(" ");
+const cx = (...classes: Array<string | false | null | undefined>) =>
+  Array.from(new Set(classes.filter(Boolean).join(" ").split(/\s+/)))
+    .filter(Boolean)
+    .join(" ");
 
 export function BigNumberGrid({ items, dark = false, className = "", showOrdinal = true }: { items: StatItem[]; dark?: boolean; className?: string; showOrdinal?: boolean }) {
   return (

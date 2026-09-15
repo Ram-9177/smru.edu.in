@@ -1,4 +1,19 @@
 {
   "css.lint.unknownAtRules": "ignore",
-  "html.validate.scripts": false
+  "html.validate.scripts": false,
+  "tailwindCSS.files.exclude": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/.next/**",
+    "**/out/**",
+    "**/output/**"
+  ],
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/.next/**": true,
+    "**/out/**": true,
+    "**/output/**": true
+  }
 }

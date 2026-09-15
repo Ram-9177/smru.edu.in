@@ -122,7 +122,19 @@ export function initPredictiveNavigation(router?: { prefetch: (url: string) => v
   let idleHandle: number;
 
   const handleInteraction = (event: Event) => {
-    const target = (event.target as HTMLElement | null)?.closest("a, button, [data-href]");
+    const rawTarget = event.target as Node | null;
+    if (!rawTarget) return;
+
+    const element =
+      rawTarget instanceof Element
+        ? rawTarget
+        : rawTarget.parentElement instanceof Element
+        ? rawTarget.parentElement
+        : null;
+
+    if (!element || typeof element.closest !== "function") return;
+
+    const target = element.closest("a, button, [data-href]");
     if (!target) return;
 
     const href =
