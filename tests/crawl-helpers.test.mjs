@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   analyzeHtml,
+  collectCourseNames,
   collectJsonLdRootTypes,
   collectJsonLdTypes,
   computeGates,
@@ -11,6 +12,8 @@ import {
   extractJsonLdBlocks,
   getLinks,
   getMetaContent,
+  isCourseNameAbbreviationOnly,
+  isDescriptionCutMidSentence,
   outerMain,
   parseAttributes,
   parseSitemapLocs,
@@ -88,6 +91,59 @@ test("countBrandNoSpace catches the misspelling and not the standard spelling", 
   assert.equal(countBrandNoSpace("St. Mary's University (SMRU)"), 0);
 });
 
+test("isDescriptionCutMidSentence accepts finished sentences and rejects truncated ones", () => {
+  for (const finished of [
+    "B.Sc. Nursing at SMRU.",
+    "Study B.Sc. Nursing at St. Mary's University, Hyderabad!",
+    "Is BPT right for you?",
+    "Fees are confirmed at admissions counselling (see the fee page).",
+    'Students call it "the practical route."',
+    "Students call it “the practical route.”",
+    "Four years of study &amp; one year of internship.",
+    "Applied in Hyderabad.",
+    "",
+  ]) {
+    assert.equal(isDescriptionCutMidSentence(finished), false, `expected PASS: ${finished}`);
+  }
+  for (const cut of [
+    "Four years of clinical learning, and",
+    "Four years of clinical learning and",
+    "Study physiotherapy in Hyderabad with",
+    "The BPT programme covers anatomy, biomechanics",
+    "The BPT programme covers anatomy, biomechanics -",
+    "The BPT programme covers anatomy, biomechanics —",
+    "The BPT programme covers anatomy:",
+    "The BPT programme covers anatomy;",
+    "Compare B.Sc. Nursing vs",
+    "Learn more about SMRU &amp;",
+    "Programme details (fees, intake and)",
+    "Hear from students on “what it is like to study at”",
+  ]) {
+    assert.equal(isDescriptionCutMidSentence(cut), true, `expected FAIL: ${cut}`);
+  }
+});
+
+test("isCourseNameAbbreviationOnly flags bare acronyms and accepts expanded programme names", () => {
+  for (const bare of ["BPT", "LL.B.", "PDCP", "M.B.B.S.", " BBA "]) {
+    assert.equal(isCourseNameAbbreviationOnly(bare), true, `expected FAIL: ${bare}`);
+  }
+  for (const expanded of ["B.Sc. Nursing", "Bachelor of Physiotherapy (BPT)", "BPT (Physiotherapy)", "LL.B. (Hons.)", "bpt", "B", "", null, undefined]) {
+    assert.equal(isCourseNameAbbreviationOnly(expanded), false, `expected PASS: ${expanded}`);
+  }
+});
+
+test("collectCourseNames reaches Course nodes at any depth, honours @type arrays and de-duplicates", () => {
+  const data = {
+    "@graph": [
+      { "@type": "Course", name: "BPT" },
+      { "@type": "ItemList", itemListElement: [{ "@type": "ListItem", item: { "@type": ["Course", "Thing"], name: "B.Sc. Nursing" } }] },
+      { "@type": "Organization", name: "SMRU", hasOfferCatalog: { "@type": "OfferCatalog", itemListElement: [{ "@type": "Offer", itemOffered: { "@type": "Course", name: "BPT" } }] } },
+      { "@type": "Course" },
+    ],
+  };
+  assert.deepEqual(collectCourseNames(data), ["BPT", "B.Sc. Nursing"]);
+});
+
 test("analyzeHtml decodes the title, counts h1s, reads lang, hreflang, robots and keywords", () => {
   const html = `<!DOCTYPE html><html lang="en"><head><title>St.Mary&#x27;s University | Private University</title>
     <meta name="description" content="A &amp; B"><meta content="index, follow" name="robots"><meta name="keywords" content="a, b">
@@ -107,7 +163,14 @@ test("analyzeHtml decodes the title, counts h1s, reads lang, hreflang, robots an
   assert.equal(result.canonical, "https://smru.edu.in/x/");
   assert.equal(result.brandNoSpaceCount, 2);
   assert.deepEqual(result.jsonLdTypes, ["FAQPage", "Question"]);
+  assert.deepEqual(result.courseNames, []);
   assert.equal(result.mainWordCount, 5);
+});
+
+test("analyzeHtml collects Course names across JSON-LD blocks", () => {
+  const html = `<html><head><script type="application/ld+json">{"@type":"Course","name":"Bachelor of Physiotherapy (BPT)"}</script>
+    <script type="application/ld+json">{"@graph":[{"@type":"ListItem","item":{"@type":"Course","name":"BPT"}}]}</script></head><body><main></main></body></html>`;
+  assert.deepEqual(analyzeHtml(html).courseNames, ["Bachelor of Physiotherapy (BPT)", "BPT"]);
 });
 
 test("urlPathFromRelativeFile and sitemapLocToRelativeFile agree on the served path mapping", () => {
@@ -141,7 +204,7 @@ const record = (overrides) => ({
   inSitemap: true,
   title: "Fine title | Brand",
   titleLength: 18,
-  description: "x".repeat(130),
+  description: `${"x".repeat(129)}.`,
   descriptionLength: 130,
   canonical: "https://smru.edu.in/p/",
   robots: "index,follow",
@@ -157,6 +220,7 @@ const record = (overrides) => ({
   jsonLdRootTypes: ["WebPage"],
   jsonLdBlocks: 1,
   jsonLdErrors: 0,
+  courseNames: [],
   file: "p/index.html",
   ...overrides,
 });
@@ -174,14 +238,20 @@ test("computeGates names every failing gate on a dirty record set", () => {
     record({ url: "https://smru.edu.in/dup1/", path: "/dup1/", file: "dup1/index.html", canonical: "https://smru.edu.in/dup1/", title: "Same" }),
     record({ url: "https://smru.edu.in/dup2/", path: "/dup2/", file: "dup2/index.html", canonical: "https://smru.edu.in/dup2/", title: "Same" }),
     record({ url: "https://smru.edu.in/g/", path: "/g/", file: "g/index.html", canonical: "https://smru.edu.in/g/", title: "BPO Course Guide Guide", brandNoSpaceCount: 3, h1Count: 0, lang: "en-IN", keywordsMeta: true }),
-    record({ url: "https://smru.edu.in/n/", path: "/n/", file: "n/index.html", canonical: "https://smru.edu.in/other/", robots: "noindex,follow" }),
+    record({ url: "https://smru.edu.in/n/", path: "/n/", file: "n/index.html", canonical: "https://smru.edu.in/other/", robots: "noindex,follow", description: "Noindex pages are skipped, and", courseNames: ["BPT"] }),
     record({ url: "https://smru.edu.in/missing/", path: "/missing/", file: "", status: 404, title: "", titleLength: 0 }),
+    record({ url: "https://smru.edu.in/cut/", path: "/cut/", file: "cut/index.html", canonical: "https://smru.edu.in/cut/", title: "Cut | Brand", description: "Four years of clinical learning, and", descriptionLength: 36 }),
+    record({ url: "https://smru.edu.in/abbr/", path: "/abbr/", file: "abbr/index.html", canonical: "https://smru.edu.in/abbr/", title: "Abbr | Brand", jsonLdTypes: ["Course"], jsonLdRootTypes: ["Course"], courseNames: ["Bachelor of Physiotherapy (BPT)", "BPT", "LL.B."] }),
   ];
-  const { failures, warnings } = computeGates(dirty);
+  const { failures, warnings, metrics } = computeGates(dirty);
   const gates = failures.map((failure) => failure.gate);
-  for (const expected of ["sitemapMissing", "sitemapNoindex", "sitemapCanonicalMismatch", "titlesOver65", "duplicateTitles", "guideGuide", "truncatedTitles", "brandNoSpace", "missingH1"]) {
+  for (const expected of ["sitemapMissing", "sitemapNoindex", "sitemapCanonicalMismatch", "titlesOver65", "duplicateTitles", "guideGuide", "truncatedTitles", "brandNoSpace", "missingH1", "descriptionsCutMidSentence", "courseNameAbbreviationOnly"]) {
     assert.ok(gates.includes(expected), `expected gate ${expected} in ${gates.join(",")}`);
   }
+  assert.deepEqual(failures.find((failure) => failure.gate === "descriptionsCutMidSentence"), { gate: "descriptionsCutMidSentence", count: 1, examples: ["/cut/"] });
+  assert.deepEqual(failures.find((failure) => failure.gate === "courseNameAbbreviationOnly"), { gate: "courseNameAbbreviationOnly", count: 1, examples: ["/abbr/ (BPT, LL.B.)"] });
+  assert.equal(metrics.descriptionsCutMidSentence, 1);
+  assert.equal(metrics.courseNameAbbreviationOnly, 1);
   assert.ok(warnings.some((warning) => warning.gate === "keywordsMetaPresent"));
   assert.ok(warnings.some((warning) => warning.gate === "langNotEn"), "lang is a warning until Phase 6");
   assert.ok(computeGates(dirty, { strictLang: true }).failures.some((failure) => failure.gate === "langNotEn"));

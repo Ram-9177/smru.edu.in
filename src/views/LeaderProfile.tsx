@@ -74,7 +74,7 @@ export default function LeaderProfile() {
           {/* Left panel (no image; quick facts only) */}
           <aside className="lg:col-span-1">
             <div className="cut-corner-panel bg-white ring-1 ring-slate-200 p-5">
-              <h3 className="text-[#0d315c] font-bold">Quick Facts</h3>
+              <h2 className="text-[#0d315c] font-bold">Quick Facts</h2>
               <ul className="mt-3 space-y-2 text-slate-700 text-sm">
                 <li>
                   <strong>Role:</strong> {leader.role}

@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
 import LeaderProfile from "../../../src/views/LeaderProfile";
+import StructuredData from "../../../src/components/seo/StructuredData";
 import { leaderBySlug, leaders } from "../../../src/data/leaders";
 import { buildMetadata } from "../../../src/lib/metadata";
+import { buildBreadcrumbSchema, buildPersonSchema, buildWebPageSchema } from "../../../src/lib/seo/schema";
+
+type Leader = (typeof leaders)[number];
+
+const leaderTitle = (leader: Leader) => `${leader.name} | Leadership | St. Mary's University`;
+
+// One sentence of identity, then the leader's own summary; buildMetadata trims at a sentence boundary.
+const leaderDescription = (leader: Leader) =>
+  `${leader.name}, ${leader.role} of St. Mary's University (SMRU), Hyderabad.${leader.about ? ` ${leader.about}` : ""}`;
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const leader = leaderBySlug[params.slug as keyof typeof leaderBySlug];
@@ -15,8 +25,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
 
   return buildMetadata({
-    title: `${leader.name} | Leadership | St. Mary's University`,
-    description: `${leader.name} — ${leader.role} at St. Mary's University.`,
+    title: leaderTitle(leader),
+    description: leaderDescription(leader),
     pathname: `/leadership/${params.slug}`,
   });
 }
@@ -25,6 +35,42 @@ export function generateStaticParams() {
   return (leaders || []).map((leader) => ({ slug: leader.slug }));
 }
 
-export default function Page() {
-  return <LeaderProfile />;
+export default function Page({ params }: { params: { slug: string } }) {
+  const leader = leaderBySlug[params.slug as keyof typeof leaderBySlug];
+  const pathname = `/leadership/${params.slug}`;
+
+  return (
+    <>
+      {leader && (
+        <>
+          <StructuredData
+            id="leader-breadcrumb"
+            data={buildBreadcrumbSchema([
+              { name: "Home", path: "/" },
+              { name: "Leadership", path: "/leadership" },
+              { name: leader.name, path: pathname },
+            ])}
+          />
+          <StructuredData
+            id="leader-webpage"
+            data={buildWebPageSchema({
+              title: leaderTitle(leader),
+              description: leaderDescription(leader),
+              pathname,
+            })}
+          />
+          <StructuredData
+            id="leader-person"
+            data={buildPersonSchema({
+              name: leader.name,
+              jobTitle: leader.role,
+              description: leader.about || undefined,
+              pathname,
+            })}
+          />
+        </>
+      )}
+      <LeaderProfile />
+    </>
+  );
 }

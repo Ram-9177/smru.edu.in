@@ -17,7 +17,7 @@ export function generateMetadata({ params }: { params: { country: string } }): M
   if (!country) return { title: "Page Not Found", robots: "noindex,follow" };
   return buildMetadata({
     title: `Study at SMRU from ${country.name} | St. Mary's University`,
-    description: `${country.demonym} students: apply to St. Mary's University (SMRU), Hyderabad with your ${country.qualification}. Eligibility mapping, visa route, documents and fees.`.slice(0, 155),
+    description: `${country.demonym} students: apply to St. Mary's University (SMRU), Hyderabad with your ${country.qualification}. Eligibility, visa route, documents and fees.`,
     pathname: `/international/${country.slug}`,
   });
 }

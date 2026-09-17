@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import AboutPage from "../../../src/views/About";
+import StructuredData from "../../../src/components/seo/StructuredData";
 import { buildMetadata } from "../../../src/lib/metadata";
+import { buildBreadcrumbSchema } from "../../../src/lib/seo/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "All Leadership Profiles | St. Mary's University",
@@ -9,5 +11,17 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function Page() {
-  return <AboutPage />;
+  return (
+    <>
+      <StructuredData
+        id="leadership-all-breadcrumb"
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Leadership", path: "/leadership" },
+          { name: "All members", path: "/leadership/all" },
+        ])}
+      />
+      <AboutPage />
+    </>
+  );
 }

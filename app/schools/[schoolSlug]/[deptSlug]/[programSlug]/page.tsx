@@ -8,6 +8,8 @@ import { getProgramMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { getProgrammeFee } from "@/data/programme-fees";
 import { safeSlug } from "@/lib/shared/program-utils";
+import { getProgrammeAnswerFirst } from "@/lib/seo/programme-answer";
+import { getProgrammeCredential, getProgrammeDisplayName, getProgrammeShortName } from "@/lib/shared/programme-names";
 
 import { notFound } from "next/navigation";
 
@@ -39,11 +41,22 @@ export default function Page({
   }
 
   const pathname = `/schools/${params.schoolSlug}/${params.deptSlug}/${params.programSlug}`;
-  const programName = program?.name || "Program";
+  const programName = getProgrammeDisplayName(program) || "Program";
+  const shortName = getProgrammeShortName(program);
   const recommendations = buildProgramRecommendationLinks(school, department, program, 8);
-  const description = program?.overview
-    ? `${program.overview} Check admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`
-    : `${programName} programme details at St. Mary's University Hyderabad with admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`;
+  // The schema describes the programme with the same answer-first paragraph the page opens with —
+  // substance, not a "check admissions, eligibility, syllabus…" keyword list.
+  const description = getProgrammeAnswerFirst({
+    school,
+    department,
+    program,
+    schoolSlug: params.schoolSlug,
+    departmentSlug: params.deptSlug,
+    programSlug: params.programSlug,
+  });
+  const metadata = getProgramMetadata(params);
+  const pageTitle = typeof metadata.title === "string" ? metadata.title : `${programName} Admissions 2026`;
+  const pageDescription = typeof metadata.description === "string" ? metadata.description : description;
 
   return (
     <>
@@ -54,8 +67,8 @@ export default function Page({
       <StructuredData
         id={`${params.schoolSlug}-${params.deptSlug}-${params.programSlug}-page-schema`}
         data={buildWebPageSchema({
-          title: `${programName} Admissions 2026`,
-          description,
+          title: pageTitle,
+          description: pageDescription,
           pathname,
         })}
       />
@@ -65,6 +78,7 @@ export default function Page({
           program
             ? buildCourseSchema({
                 name: programName,
+                alternateName: shortName && shortName !== programName ? shortName : undefined,
                 description,
                 pathname,
                 schoolName: school?.name,
@@ -73,6 +87,7 @@ export default function Page({
                 eligibility: program?.eligibility,
                 identifier: program?.courseCode,
                 fee: getProgrammeFee(pathname),
+                credentialAwarded: getProgrammeCredential(program),
               })
             : null
         }

@@ -11,7 +11,7 @@ import { resolveAssetSrc } from "@/lib/shared/media";
 import { LinkGridSection } from "@/components/seo/PageSections";
 import { TRUST_LINKS } from "@/lib/seo/info-pages";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
+import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
 
 const CARD_TONES = [
   {
@@ -132,7 +132,8 @@ export default function Partner() {
       .map((partner, idx) => {
         const tone = CARD_TONES[idx % CARD_TONES.length];
         const internalRedirect = partner.redirectUrl?.startsWith("/");
-        const partnerRoute = partner.slug ? `/partner/${partner.slug}` : "/partner";
+        // "/carebridge" links to its own page, not the /partner/carebridge duplicate of the same view.
+        const partnerRoute = partner.slug ? getPartnerLandingHref(partner.slug) : "/partner";
         const partnerSlug = (partner.slug || "").toLowerCase();
         const configuredExternalUrl =
           (partner.redirectUrl?.startsWith("http") && partner.redirectUrl) ||

@@ -115,7 +115,7 @@ export const buildWebPageSchema = ({
   url: absoluteUrl(pathname),
   isPartOf: { "@id": SITE_IDENTITY.websiteId },
   about: { "@id": SITE_IDENTITY.id },
-  inLanguage: "en-IN",
+  inLanguage: "en",
   ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
 });
 
@@ -235,6 +235,7 @@ export type CourseFeeOffer = { annualINR?: number; totalINR?: number; annualUSD?
 
 export const buildCourseSchema = ({
   name,
+  alternateName,
   description,
   pathname,
   schoolName,
@@ -248,6 +249,7 @@ export const buildCourseSchema = ({
   keywords = [],
 }: {
   name: string;
+  alternateName?: string;
   description: string;
   pathname: string;
   schoolName?: string;
@@ -293,6 +295,7 @@ export const buildCourseSchema = ({
     "@type": "Course",
     "@id": `${url}#course`,
     name,
+    ...(alternateName ? { alternateName } : {}),
     description,
     url,
     provider: { "@id": SITE_IDENTITY.id },
@@ -343,7 +346,7 @@ export const buildEducationEventSchema = ({
     "@type": "VirtualLocation",
     url: absoluteUrl(pathname),
   },
-  inLanguage: "en-IN",
+  inLanguage: "en",
 });
 
 export const buildItemListSchema = (items: { name: string; url: string }[]) => ({
@@ -462,7 +465,7 @@ export const buildCollectionPageSchema = ({
   url: absoluteUrl(pathname),
   isPartOf: { "@id": SITE_IDENTITY.websiteId },
   about: { "@id": SITE_IDENTITY.id },
-  inLanguage: "en-IN",
+  inLanguage: "en",
   ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
 });
 

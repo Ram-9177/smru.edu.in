@@ -1,6 +1,7 @@
 import { schools } from "@/data/schools";
 import { getProgrammeFee, formatINR } from "@/data/programme-fees";
 import { safeSlug, detectProgramCategory } from "@/lib/shared/program-utils";
+import { getProgrammeDisplayName } from "@/lib/shared/programme-names";
 
 export type CatalogueProgramme = {
   name: string;
@@ -44,7 +45,7 @@ export function getCatalogueProgrammes(): CatalogueProgramme[] {
         const path = `/schools/${schoolSlug}/${deptSlug}/${progSlug}`;
         const category = detectProgramCategory(program) as CatalogueProgramme["category"];
         items.push({
-          name: program.name,
+          name: getProgrammeDisplayName(program),
           path,
           schoolName: school.name,
           schoolSlug,

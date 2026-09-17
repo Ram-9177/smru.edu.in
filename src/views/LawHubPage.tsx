@@ -1,5 +1,6 @@
 import StructuredData from "@/components/seo/StructuredData";
-import { buildItemListSchema } from "@/lib/seo/schema";
+import { buildItemListSchema, toIsoDuration } from "@/lib/seo/schema";
+import { getProgrammeCredential, getProgrammeDisplayName, getProgrammeShortName } from "@/lib/shared/programme-names";
 import { absoluteUrl } from "@/lib/metadata";
 import SchoolOfLaw from "@/views/SchoolOfLaw";
 import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
@@ -9,13 +10,14 @@ const lawMetaDescription =
 const lawPathname = "/schools/law";
 const lawSearchTerms = getSchoolSearchTerms({ slug: "law", name: "School of Law" });
 
+// Slugs match the programme routes under /schools/law/legal-studies/ so the shared name rule applies.
 const lawProgrammes = [
-  { name: "B.A. LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate" },
-  { name: "B.B.A. LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate" },
-  { name: "B.Sc. LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate Science" },
-  { name: "B.Sc. (Forensic) LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate Science" },
-  { name: "LL.B. (Hons.)", level: "UG", duration: "3 Years", eligibility: "Bachelor's Degree with 45%" },
-  { name: "LL.B.", level: "UG", duration: "3 Years", eligibility: "Bachelor's Degree with 45%" },
+  { slug: "ba-llb-hons", name: "B.A. LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate" },
+  { slug: "bba-llb-hons", name: "B.B.A. LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate" },
+  { slug: "bsc-llb-hons", name: "B.Sc. LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate Science" },
+  { slug: "bsc-forensic-llb-hons", name: "B.Sc. (Forensic) LL.B. (Hons.)", level: "Integrated UG", duration: "5 Years", eligibility: "10+2 with 45% aggregate Science" },
+  { slug: "llb-hons", name: "LL.B. (Hons.)", level: "UG", duration: "3 Years", eligibility: "Bachelor's Degree with 45%" },
+  { slug: "llb", name: "LL.B.", level: "UG", duration: "3 Years", eligibility: "Bachelor's Degree with 45%" },
 ];
 
 const lawSchoolSchema = {
@@ -50,10 +52,12 @@ const lawSchoolSchema = {
       "@type": "Offer",
       itemOffered: {
         "@type": "Course",
-        name: program.name,
+        // Same full-name / credential / ISO-duration rule as the programme pages' own Course nodes.
+        name: getProgrammeDisplayName(program),
+        ...(getProgrammeShortName(program) !== getProgrammeDisplayName(program) ? { alternateName: getProgrammeShortName(program) } : {}),
         provider: { "@id": absoluteUrl(`${lawPathname}#school-of-law`) },
-        educationalCredentialAwarded: program.level,
-        timeRequired: program.duration,
+        educationalCredentialAwarded: getProgrammeCredential(program) || program.level,
+        ...(toIsoDuration(program.duration) ? { timeRequired: toIsoDuration(program.duration) } : {}),
         coursePrerequisites: program.eligibility,
       },
     })),
@@ -69,7 +73,7 @@ export default function LawHubPage() {
       <StructuredData id="law-school-schema" data={lawSchoolSchema} />
       <StructuredData
         id="law-programmes-schema"
-        data={buildItemListSchema(lawProgrammes.map((program) => ({ name: program.name, url: `${lawPathname}#programmes` })))}
+        data={buildItemListSchema(lawProgrammes.map((program) => ({ name: getProgrammeDisplayName(program), url: `${lawPathname}#programmes` })))}
       />
       <SchoolOfLaw />
     </>

@@ -47,7 +47,7 @@ import { LinkGridSection } from "@/components/seo/PageSections";
 import { GLOBAL_TRUST_CTA_LINKS, LOCATION_LINKS } from "@/lib/seo/info-pages";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 import { getSchoolLandingPath } from "@/lib/shared/school-landing";
-import { isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
+import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
 import { PHD_ADMISSIONS_STATUS_MESSAGE } from "@/lib/shared/site-constants";
 import { serializeJsonLd } from "@/lib/seo/json-ld";
 
@@ -539,10 +539,8 @@ export default function Home() {
                 { bg: "bg-[#ffaf3a]", text: "text-[#0d315c]", border: "hover:border-[#ffaf3a]", glow: "hover:shadow-[0_10px_30px_rgba(255,175,58,0.3)]", lightBg: "bg-[#ffaf3a]/10" },
               ];
               const theme = colors[i % colors.length];
-              const rawLandingUrl = String(partner.landingUrl || "").trim();
-              const partnerHref = /^https?:\/\//i.test(rawLandingUrl)
-                ? rawLandingUrl
-                : `/partner/${rawLandingUrl.replace(/^\/+/, "").replace(/\/$/, "")}`;
+              // "/carebridge" links to its own page, not the /partner/carebridge duplicate.
+              const partnerHref = getPartnerLandingHref(partner.landingUrl);
 
               return (
                 <Link 

@@ -5,14 +5,13 @@ import { FaFileAlt, FaUniversity, FaUserTie, FaMoneyCheckAlt, FaBookOpen, FaDown
 import UniversitySectionHeader from "@/components/UniversitySectionHeader";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Mandatory Disclosure | St. Mary's University",
   description: "Official mandatory self-disclosure portal of St. Mary's University (SMRU), Hyderabad — institutional compliance information under UGC regulations.",
-  alternates: {
-    canonical: "https://smru.edu.in/mandatory-disclosure",
-  },
-};
+  pathname: "/mandatory-disclosure",
+});
 
 export default function MandatoryDisclosure() {
   const disclosures = [

@@ -25,6 +25,10 @@ const partnerSlug = (partner: any) => {
 // Slugs whose partner-supplied copy asserts unverified claims about SMRU (see docs/seo/needs-input.md).
 const NOINDEX_PARTNER_LANDINGS = new Set(["edinbox", "qtst", "veloces"]);
 
+// Slugs rendered by an SMRU-authored view. Every other partner landing is a PartnerIframePage shell
+// whose crawlable text is only the loader caption, so it stays reachable but out of the index.
+const isSmruAuthoredPartnerView = (slug: string) => slug === "edinbox" || slug === "carebridge";
+
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const partner = Object.values(EDU_PARTNERS || {}).find((item: any) => partnerSlug(item) === params.slug);
   if (!partner) {
@@ -36,13 +40,26 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     });
   }
   const name = (partner as any)?.name || params.slug.toUpperCase();
+  // /partner/carebridge/ renders the same CarebridgeLanding as /carebridge/, so it canonicalises there:
+  // buildMetadata derives canonical, og:url and hreflang from pathname, hence the canonical path is passed.
+  if (params.slug === "carebridge") {
+    return buildMetadata({
+      title: `${name} Partner | St. Mary's University`,
+      description: `Explore ${name} education partner programs and pathways at St. Mary's University.`,
+      pathname: "/carebridge",
+    });
+  }
   return buildMetadata({
     title: `${name} Partner | St. Mary's University`,
     description: `Explore ${name} education partner programs and pathways at St. Mary's University.`,
     pathname: `/partner/${params.slug}`,
     // Partner-authored landings that publish unverified superlatives, hospital or fee claims about
     // SMRU stay reachable but out of the index until the partner copy is corrected (content untouched).
-    robots: NOINDEX_PARTNER_LANDINGS.has(params.slug) ? "noindex,follow" : "index,follow",
+    // Iframe shells are noindex too: the partner's site is the content, not this page.
+    robots:
+      NOINDEX_PARTNER_LANDINGS.has(params.slug) || !isSmruAuthoredPartnerView(params.slug)
+        ? "noindex,follow"
+        : "index,follow",
   });
 }
 
@@ -76,7 +93,7 @@ export default function PartnerDetailPage({ params }: { params: { slug: string }
           pathname: `/partner/${params.slug}`,
         })}
       />
-      {params.slug !== "edinbox" && params.slug !== "carebridge" && (
+      {!isSmruAuthoredPartnerView(params.slug) && (
         <h1 className="sr-only">{name} Partner Programs | St. Mary&apos;s University</h1>
       )}
       {params.slug === "edinbox" ? (

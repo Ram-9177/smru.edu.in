@@ -17,7 +17,7 @@ export function generateMetadata({ params }: { params: { destination: string } }
   if (!d) return { title: "Page Not Found", robots: "noindex,follow" };
   return buildMetadata({
     title: `${d.destination} ${d.profession} Pathway | St. Mary's University`,
-    description: `${d.profession} graduates from SMRU: the ${d.regulator} pathway — exam, timeline, and what SMRU provides. Registration is granted by the regulator, not SMRU.`.slice(0, 155),
+    description: `${d.profession} graduates from SMRU: the ${d.regulator} pathway – exam, timeline and what SMRU provides. Registration is granted by the regulator, not SMRU.`,
     pathname: `/global-careers/${d.slug}`,
   });
 }

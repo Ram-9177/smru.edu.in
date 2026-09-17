@@ -135,6 +135,7 @@ export function crawlRecords({ outDir = path.join(rootDir, "out"), sitemapPath }
       jsonLdBlocks: 0,
       jsonLdErrors: 0,
       answerFirstWords: 0,
+      courseNames: [],
       file: "",
     });
   }

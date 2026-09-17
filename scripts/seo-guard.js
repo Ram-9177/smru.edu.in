@@ -104,10 +104,17 @@ const checks = [
     },
   },
   {
-    name: "Program pages include direct-answer intro",
+    name: "Program pages include direct-answer intro (shared with Course.description)",
     pass: () => {
-      const file = read("src/views/Program.tsx");
-      return file.includes("buildProgramDirectAnswer") && file.includes("programDirectAnswer");
+      const view = read("src/views/Program.tsx");
+      const route = read("app/schools/[schoolSlug]/[deptSlug]/[programSlug]/page.tsx");
+      const shared = read("src/lib/seo/programme-answer.ts");
+      return (
+        shared.includes("export const getProgrammeAnswerFirst") &&
+        view.includes("getProgrammeAnswerFirst") &&
+        view.includes("programDirectAnswer") &&
+        route.includes("getProgrammeAnswerFirst")
+      );
     },
   },
   {
@@ -125,10 +132,20 @@ const checks = [
     },
   },
   {
-    name: "Program metadata targets course detail intent",
+    name: "Program metadata targets course detail intent with the full degree name",
     pass: () => {
       const file = read("src/lib/shared/dynamic-route-metadata.ts");
-      return file.includes("in Hyderabad: Fees, Eligibility 2026") && file.includes("pickTitleCandidate") && file.includes("recommended related courses");
+      const names = read("src/lib/shared/programme-names.ts");
+      return (
+        file.includes("in Hyderabad: Fees, Eligibility 2026") &&
+        file.includes("pickTitleCandidate") &&
+        file.includes("getProgrammeDisplayName") &&
+        // The keyword-list description template ("…syllabus, career pathways, and recommended related
+        // courses") is what produced descriptions cut mid-sentence; it must not come back.
+        !file.includes("recommended related courses") &&
+        !file.includes(".slice(0, 155)") &&
+        names.includes('bpt: { display: "Bachelor of Physiotherapy (BPT)"')
+      );
     },
   },
   {

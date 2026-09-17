@@ -156,6 +156,43 @@ export function collectJsonLdTypes(node, out = new Set()) {
   return out;
 }
 
+const hasType = (node, wanted) => (Array.isArray(node["@type"]) ? node["@type"].includes(wanted) : node["@type"] === wanted);
+
+// Course.name at any depth (same walk as collectJsonLdTypes), document order, de-duplicated.
+export function collectCourseNames(node, out = []) {
+  if (Array.isArray(node)) {
+    node.forEach((entry) => collectCourseNames(entry, out));
+  } else if (node && typeof node === "object") {
+    if (hasType(node, "Course") && typeof node.name === "string" && !out.includes(node.name)) out.push(node.name);
+    for (const [key, value] of Object.entries(node)) {
+      if (key !== "@type" && value && typeof value === "object") collectCourseNames(value, out);
+    }
+  }
+  return out;
+}
+
+// "BPT", "LL.B.", "PDCP" — a bare acronym with no expansion; "B.Sc. Nursing" and "BPT (Physiotherapy)" pass.
+const COURSE_NAME_ABBREVIATION = /^[A-Z][A-Z.]{1,7}$/;
+export function isCourseNameAbbreviationOnly(name) {
+  return COURSE_NAME_ABBREVIATION.test(String(name ?? "").trim());
+}
+
+const DESCRIPTION_TERMINAL = /[.!?)"”]$/;
+const DESCRIPTION_TRAILING_JOINER = /[,\-–—:;]$/;
+const DESCRIPTION_DANGLING_WORDS = new Set(["and", "or", "with", "for", "to", "of", "in", "the", "a", "an", "at", "by", "from", "on", "&", "vs"]);
+
+// A description that stops mid-sentence: no terminal punctuation, a trailing joiner ("…learning, and"),
+// or a dangling conjunction/preposition even inside closing quotes/parens. Empty descriptions are not "cut"
+// (descriptionsUnder120 reports those). "B.Sc. Nursing at SMRU." passes.
+export function isDescriptionCutMidSentence(description) {
+  const text = decodeEntities(description).replace(/\s+/g, " ").trim();
+  if (!text) return false;
+  if (DESCRIPTION_TRAILING_JOINER.test(text)) return true;
+  const lastWord = text.split(" ").pop().replace(/[)"”]+$/, "").toLowerCase();
+  if (DESCRIPTION_DANGLING_WORDS.has(lastWord)) return true;
+  return !DESCRIPTION_TERMINAL.test(text);
+}
+
 // Top-level and @graph members only — the shape the page author intended as its primary entities.
 export function collectJsonLdRootTypes(node, out = new Set()) {
   if (Array.isArray(node)) {
@@ -188,10 +225,12 @@ export function analyzeHtml(html) {
   const jsonLd = extractJsonLdBlocks(source);
   const types = new Set();
   const rootTypes = new Set();
+  const courseNames = [];
   jsonLd.forEach((block) => {
     if (block.data !== null) {
       collectJsonLdTypes(block.data, types);
       collectJsonLdRootTypes(block.data, rootTypes);
+      collectCourseNames(block.data, courseNames);
     }
   });
 
@@ -216,6 +255,7 @@ export function analyzeHtml(html) {
     jsonLdRootTypes: [...rootTypes].sort(),
     jsonLdBlocks: jsonLd.length,
     jsonLdErrors: jsonLd.filter((block) => block.error).length,
+    courseNames,
     answerFirstWords,
   };
 }
@@ -313,6 +353,10 @@ export function computeGates(records, thresholds = GATE_THRESHOLDS) {
   push(failures, "brandNoSpace", pages.filter((record) => record.brandNoSpaceCount > 0 || countBrandNoSpace(record.description) > 0));
   push(failures, "descriptionsOver155", indexable.filter((record) => record.descriptionLength > limits.maxDescriptionLength));
   push(warnings, "descriptionsUnder120", indexable.filter((record) => record.descriptionLength < limits.minDescriptionLength));
+  push(failures, "descriptionsCutMidSentence", indexable.filter((record) => isDescriptionCutMidSentence(record.description)));
+  // Course.name must be the expanded programme name; the example carries the offending abbreviation(s).
+  const abbreviationOnlyNames = (record) => (record.courseNames ?? []).filter(isCourseNameAbbreviationOnly);
+  push(failures, "courseNameAbbreviationOnly", indexable.filter((record) => abbreviationOnlyNames(record).length > 0), (record) => `${example(record)} (${abbreviationOnlyNames(record).join(", ")})`);
   push(failures, "missingH1", indexable.filter((record) => record.h1Count === 0));
   push(failures, "multipleH1", indexable.filter((record) => record.h1Count > 1));
   push(failures, "missingCanonical", indexable.filter((record) => !record.canonical));
@@ -337,6 +381,8 @@ export function computeGates(records, thresholds = GATE_THRESHOLDS) {
     guideGuide: pages.filter((record) => /Guide Guide/.test(record.title)).length,
     brandNoSpaceOccurrences: pages.reduce((sum, record) => sum + record.brandNoSpaceCount + countBrandNoSpace(record.description), 0),
     keywordsMetaPages: pages.filter((record) => record.keywordsMeta).length,
+    descriptionsCutMidSentence: indexable.filter((record) => isDescriptionCutMidSentence(record.description)).length,
+    courseNameAbbreviationOnly: indexable.filter((record) => abbreviationOnlyNames(record).length > 0).length,
     coursePages: pages.filter((record) => (record.jsonLdTypes ?? []).includes("Course")).length,
     faqPages: pages.filter((record) => (record.jsonLdTypes ?? []).includes("FAQPage")).length,
   };

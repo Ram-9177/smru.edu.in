@@ -1,29 +1,27 @@
 import type { SeoFaqItem } from "@/lib/seo/schema";
 import { PHD_ADMISSIONS_STATUS_MESSAGE } from "@/lib/shared/site-constants";
 
+// Homepage FAQ, written in the university's own voice. Categories are ordered by
+// reader intent (who we are → what we teach → how to join → cost → campus → outcomes → research)
+// and the flattened list feeds the homepage FAQPage schema in the same order.
 export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> = [
   {
-    label: "Student Aspirants",
+    label: "About SMRU",
     faqs: [
       {
-        question: "How do I compare the right course at St. Mary's University?",
+        question: "What is St. Mary's University (SMRU), and is it UGC-recognised?",
         answer:
-          "Open the program pages and compare duration, eligibility, learning focus, and career pathways. For the latest fee or intake confirmation, contact the official admissions team.",
+          "St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a private university established by the Government of Telangana under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026. We are recognised by the University Grants Commission under Section 2(f) of the UGC Act, 1956.",
       },
       {
-        question: "Can I see eligibility and duration before applying?",
+        question: "Where is St. Mary's University located?",
         answer:
-          "Yes. The website publishes duration and eligibility details on many program pages so students can shortlist courses before submitting an application.",
+          "Our campus is at Deshmukhi, Pochampally Mandal, near Ramoji Film City, Hyderabad, Telangana 508284. We are a private university in Hyderabad, Telangana.",
       },
       {
-        question: "Where should I check fees and scholarships first?",
+        question: "Which schools and programmes does St. Mary's University offer?",
         answer:
-          "Use the admissions, fee structure, and scholarship information on the website together so you can compare the likely total cost before applying.",
-      },
-      {
-        question: "What if I am not sure which program fits my background?",
-        answer:
-          "Review the program requirements, career focus, and department details, then contact admissions for guidance on the best-fit route.",
+          "We have six schools: Rehabilitation Sciences, Health & Allied Health Sciences, Psychology, Nursing, Engineering & Emerging Technologies, and Law, offering 70+ programmes between them. Our health and rehabilitation programmes use clinical and simulation-based teaching; each programme page lists duration, eligibility and career pathways.",
       },
     ],
   },
@@ -33,81 +31,32 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
       {
         question: "How do I apply to St. Mary's University?",
         answer:
-          "You can apply directly at apply.smru.edu.in or fill the Quick Enquiry form on the website. The admissions team will guide you through the next steps.",
+          "Apply online at apply.smru.edu.in or send us the enquiry form on this site. Our admissions team then contacts you to complete counselling and document verification.",
       },
       {
-        question: "Is St. Mary's University a recognized university?",
+        question: "Is there an entrance exam for admission?",
         answer:
-          "Yes. St. Mary's University is established by the Government of Telangana through Act No. 10 of 2026 and is recognized by the UGC under Section 2(f) of the UGC Act, 1956.",
+          "No entrance exam is currently announced. If we introduce a test for any programme, we will publish it only through an official university notice.",
       },
       {
-        question: "What is the status of Ph.D. admissions for 2026-27?",
-        answer: PHD_ADMISSIONS_STATUS_MESSAGE,
-      },
-      {
-        question: "What is the last date to apply for UG and PG programs?",
+        question: "What are the eligibility requirements?",
         answer:
-          "The website currently states that admissions are open and recommends applying early to secure a seat and scholarship consideration.",
+          "Eligibility differs by programme and is listed on each programme page. If you are unsure whether your qualification fits, our admissions team confirms it at counselling.",
       },
     ],
   },
   {
-    label: "Programs",
+    label: "Fees & Scholarships",
     faqs: [
       {
-        question: "What makes St. Mary's University different from other universities?",
+        question: "What are the fees at St. Mary's University?",
         answer:
-          "The website presents St. Mary's University as a multi-disciplinary institution with six schools, spanning Health, Law, Engineering, Psychology, Nursing, and Rehabilitation, backed by St. Mary's educational legacy.",
+          "We confirm programme fees, intake and hostel charges at admissions counselling rather than publishing a single figure here. Apply online or contact admissions to receive the fee confirmation for your programme.",
       },
-      {
-        question: "Is St. Mary's University a private university in Hyderabad?",
-        answer:
-          "St. Mary's University is a private university in the Hyderabad region of Telangana. Its official website publishes university recognition, schools, programmes, admissions, campus, and contact information.",
-      },
-      {
-        question: "How should students compare the best private universities in Hyderabad?",
-        answer:
-          "Compare verified UGC recognition, programme depth, curriculum, faculty information, practical exposure, campus facilities, eligibility, fee disclosures, scholarships, and career support. This website provides official St. Mary's University information and does not claim an independent ranking.",
-      },
-      {
-        question: "Which schools and programs does St. Mary's University offer?",
-        answer:
-          "The website lists schools covering rehabilitation sciences, health and allied health sciences, psychology, nursing sciences, engineering and emerging technologies, management and computer applications, and applied sciences and designing.",
-      },
-      {
-        question: "What teaching methods are used at St. Mary's University?",
-        answer:
-          "The website refers to activity-based therapy, simulation-based practice, multisensory learning, and peer-led case discussions across relevant programs.",
-      },
-      {
-        question: "Is clinical training part of the curriculum?",
-        answer:
-          "The website states that real-world clinical training and community outreach are integrated into programs where applicable.",
-      },
-    ],
-  },
-  {
-    label: "Financial Aid",
-    faqs: [
       {
         question: "What scholarships does St. Mary's University offer?",
         answer:
-          "The website lists multiple scholarships including merit, founder, minority, girl student, defence ward, single parent, chancellor's excellence, SC/ST empowerment, and early bird scholarships.",
-      },
-      {
-        question: "Are merit scholarships available?",
-        answer:
-          "Merit scholarship support is available for eligible applicants, subject to university norms, admissions verification, and official approval.",
-      },
-      {
-        question: "What is the hostel fee?",
-        answer:
-          "Hostel and accommodation charges are confirmed through the official admissions and counselling route.",
-      },
-      {
-        question: "How do I check my scholarship eligibility?",
-        answer:
-          "Use the scholarship action on the website or contact admissions for guidance on eligibility and documentation.",
+          "We offer merit, founder, minority, girl student, defence ward, single parent, chancellor's excellence and SC/ST empowerment scholarships. Eligibility, amounts and documentation are confirmed at admissions counselling.",
       },
     ],
   },
@@ -115,27 +64,36 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
     label: "Campus Life",
     faqs: [
       {
-        question: "What hostel facilities are available?",
+        question: "Does St. Mary's University have hostels?",
         answer:
-          "The website mentions secure on-campus hostels with surveillance, study-friendly spaces, and Wi-Fi. Admissions can confirm current room options and policy details.",
+          "Yes. We have on-campus hostels for students, and our admissions team confirms current room options and hostel charges at counselling.",
       },
       {
-        question: "What recreational facilities does the campus have?",
+        question: "What facilities are on campus?",
         answer:
-          "The website highlights a sports complex, meditation gardens, green spaces, and on-campus bike rental.",
-      },
-      {
-        question: "Is there a canteen on campus?",
-        answer:
-          "Yes. The website describes a hygienic campus canteen with balanced meals and convenient access near academic blocks and hostels.",
-      },
-      {
-        question: "What placement support does St. Mary's University provide?",
-        answer:
-          "The website states that a dedicated placement cell offers career guidance, internships, and recruitment support, with university-cycle outcomes published after eligible batches progress.",
+          "Our campus has a canteen, a sports complex, green spaces and on-campus bike rental alongside the academic blocks and hostels.",
       },
     ],
   },
-] ;
+  {
+    label: "Placements",
+    faqs: [
+      {
+        question: "What placement support does St. Mary's University provide?",
+        answer:
+          "Our placement cell offers career guidance, internships and recruitment support. We publish placement outcomes for each university cycle once eligible batches progress.",
+      },
+    ],
+  },
+  {
+    label: "Research",
+    faqs: [
+      {
+        question: "What is the status of Ph.D. admissions for 2026-27?",
+        answer: PHD_ADMISSIONS_STATUS_MESSAGE,
+      },
+    ],
+  },
+];
 
 export const HOME_FAQS: SeoFaqItem[] = HOME_FAQ_CATEGORIES.flatMap((category) => category.faqs);

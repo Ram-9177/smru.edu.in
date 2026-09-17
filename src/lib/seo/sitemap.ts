@@ -69,11 +69,21 @@ const partnerPathFromLandingUrl = (landingUrl?: string | null) => {
   return slug && !isRemovedPartnerPageSlug(slug) ? `/partner/${slug}` : null;
 };
 
-// Partner landings that are noindex (unverified partner claims) never enter the sitemap.
+// Only partner landings that are indexable in app/(Partners)/partner/[slug]/page.tsx enter the sitemap.
+// Mirrors that route's rules: iframe shells (every slug not rendered by an SMRU-authored view) and
+// unverified-claim landings are noindex; /partner/carebridge canonicalises to /carebridge (tier 3 above).
+const SMRU_AUTHORED_PARTNER_PATHS = new Set(["/partner/edinbox", "/partner/carebridge"]);
 const NOINDEX_PARTNER_PATHS = new Set(["/partner/edinbox", "/partner/qtst", "/partner/veloces"]);
+const CANONICALISED_PARTNER_PATHS = new Set(["/partner/carebridge"]);
 const partnerRoutes = Object.values(EDU_PARTNERS || {})
   .map((partner: any) => partnerPathFromLandingUrl(partner.landingUrl))
-  .filter((path): path is string => Boolean(path) && !NOINDEX_PARTNER_PATHS.has(path as string));
+  .filter(
+    (path): path is string =>
+      Boolean(path) &&
+      SMRU_AUTHORED_PARTNER_PATHS.has(path as string) &&
+      !NOINDEX_PARTNER_PATHS.has(path as string) &&
+      !CANONICALISED_PARTNER_PATHS.has(path as string),
+  );
 
 const safeGuideRoutes = SAFE_GUIDE_PAGES.map((page) => `/${page.slug}`);
 

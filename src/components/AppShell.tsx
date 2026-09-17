@@ -154,6 +154,14 @@ function AppShellContent({
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Skip link (WCAG 2.4.1): first focusable element on every page, visible only on keyboard focus. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[3000] focus:rounded-md focus:bg-[#0d315c] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0d315c]"
+      >
+        Skip to main content
+      </a>
+
       {/* Institutional Loading Bar */}
       {isNavLoading && (
         <div className="fixed top-0 left-0 right-0 z-[3000] h-1 overflow-hidden pointer-events-none">
@@ -237,7 +245,9 @@ function AppShellContent({
       <ScrollToTop />
 
       <main
-        className={`flex-1 ${
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 outline-none ${
           isDeveloperPage
             ? ""
             : `${shouldHideLayoutChrome ? "" : "pt-[104px] lg:pt-[116px]"}`

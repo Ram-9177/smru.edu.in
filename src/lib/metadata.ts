@@ -72,8 +72,27 @@ export const formatSeoTitle = (title: string, pathname = "/") => {
   return `${standardPrimary}${TITLE_SEPARATOR}${SEO_TITLE_BRAND}`;
 };
 
-export const formatMetaDescription = (description: string) =>
-  trimAtWord((description || "").replace(/\s*\.\.\.$/, ""), MAX_META_DESCRIPTION_LENGTH);
+// A description must read as a finished thought in the SERP: it ends at a sentence boundary when a
+// sentence of useful length fits, otherwise at a whole word, never on a preposition/conjunction/comma,
+// and always with terminal punctuation. (A hard character cap produced "…clinical learning, and".)
+const MIN_SENTENCE_CUT = 80;
+export const formatMetaDescription = (description: string) => {
+  const normalized = normalizeWhitespace((description || "").replace(/\s*\.\.\.$/, ""));
+  if (!normalized) return "";
+  const finish = (value: string) => (/[.!?]$/.test(value) ? value : `${value.replace(/[,;:\-–—(\s]+$/, "")}.`);
+  if (normalized.length <= MAX_META_DESCRIPTION_LENGTH) return finish(normalized);
+  // A sentence ending at index i yields i+1 chars, so the search window is exactly the cap.
+  const window = normalized.slice(0, MAX_META_DESCRIPTION_LENGTH);
+  let sentenceEnd = -1;
+  for (const match of window.matchAll(/[.!?](?=\s|$)/g)) {
+    // Skip abbreviations ("B.Sc.", "St.", "Ph.D.", "Hons.") — a sentence ends after a real word.
+    const before = window.slice(0, match.index);
+    if (/(?:^|[\s(])(?:[A-Z][A-Za-z]?|Mrs|Prof|Hons|Ph\.D|[BM]\.?[A-Z][a-z]*|LL\.?[BM]|No|vs|etc)$/.test(before)) continue;
+    if (match.index !== undefined && match.index + 1 >= MIN_SENTENCE_CUT) sentenceEnd = match.index + 1;
+  }
+  if (sentenceEnd > 0) return normalized.slice(0, sentenceEnd).trim();
+  return finish(trimAtWord(normalized, MAX_META_DESCRIPTION_LENGTH - 1));
+};
 
 /** First candidate that fits the primary-title budget (41 chars); falls back to a word-safe trim of the last one. */
 export const pickTitleCandidate = (candidates: string[]) => {
