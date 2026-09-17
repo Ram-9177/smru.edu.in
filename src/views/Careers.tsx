@@ -118,9 +118,9 @@ export default function Careers() {
   return (
     <section className="w-full bg-gray-50">
       <SEO
-        title="Careers | Stmarys University"
-        description="Join Stmarys University — careers in rehabilitation and allied health education. Faculty, clinical, technical roles and more."
-        keywords={["Stmarys University careers","Stmarys jobs","university jobs hyderabad","rehabilitation careers"]}
+        title="Careers | St.Mary's University"
+        description="Join St.Mary's University — careers in rehabilitation and allied health education. Faculty, clinical, technical roles and more."
+        keywords={["St.Mary's University careers","St.Mary's jobs","university jobs hyderabad","rehabilitation careers"]}
         canonical="https://smru.edu.in/careers"
         og={{ url: "https://smru.edu.in/careers" }}
       />
@@ -149,7 +149,7 @@ export default function Careers() {
           <h1 className="text-[clamp(3.1rem,9.5vw,9.2rem)] font-black font-outfit uppercase leading-[0.85] tracking-tighter text-[#0d315c] flex flex-col items-center">
             Careers 
             <span className="text-[#25b895] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
-              Stmarys University
+              St.Mary's University
             </span>
           </h1>
           <div className="mt-4 h-1.5 w-20 cut-corner-underline bg-[#ffaf3a] mx-auto" />
@@ -157,7 +157,7 @@ export default function Careers() {
             className="mt-6 max-w-4xl text-[#0f1736] text-[clamp(0.95rem,1.45vw,1.5rem)] leading-[1.35] font-semibold"
             style={{ "--delay": "0.08s" }}
           >
-            Join Stmarys University’s specialized academic ecosystem for rehabilitation, allied health, law, and professional education.
+            Join St.Mary's University’s specialized academic ecosystem for rehabilitation, allied health, law, and professional education.
           </p>
 
           <div className="mt-6 flex flex-col md:flex-row items-center justify-center gap-3 transition-all duration-700 opacity-100 translate-y-0">
@@ -210,7 +210,7 @@ export default function Careers() {
             {[
               { icon: <FaHeartbeat />, title: "Rehab-Focused Curriculum", desc: "Specialized programs tailored to the needs of rehabilitation and allied health sciences." },
               { icon: <FaHandsHelping />, title: "Clinical Training & Outreach", desc: "Real-world training integrated with community outreach and clinical exposure." },
-              { icon: <FaAward />, title: "Educational Legacy", desc: "A purpose-driven academic environment with Stmarys institutional foundation." },
+              { icon: <FaAward />, title: "Educational Legacy", desc: "A purpose-driven academic environment with St.Mary's institutional foundation." },
               { icon: <FaChartLine />, title: "Student Outcomes Focus", desc: "Work with teams focused on internships, clinical exposure, skill-building, and career support." },
             ].map((item, i) => (
               <article
@@ -374,7 +374,7 @@ export default function Careers() {
               </a>
           </p>
           <p className="text-base text-[#0d315c]">
-            Stmarys University
+            St.Mary's University
             <br />
              Near Ramoji Film City, Deshmukhi Village,
              <br />

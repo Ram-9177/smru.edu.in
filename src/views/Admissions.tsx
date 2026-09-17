@@ -200,7 +200,7 @@ export default function Admissions() {
               Institutional Trust & Recognition
             </h2>
             <p className="text-slate-600 font-medium max-w-2xl leading-relaxed mb-10 text-lg">
-              Students and parents can review Stmarys University’s official establishment and UGC recognition documents before applying.
+              Students and parents can review St.Mary's University’s official establishment and UGC recognition documents before applying.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full md:w-auto px-4">
               <a 

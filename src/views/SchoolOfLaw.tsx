@@ -186,12 +186,12 @@ const facilities = [
 ];
 
 const entranceTabs = {
-  "5-Year Integrated UG Programmes": ["CLAT UG", "AILET UG", "LSAT India", "LAW CET Telangana / Andhra Pradesh", "CUET Law Domain", "Stmarys University-LAT"],
-  "3-Year LL.B. Programmes": ["CLAT UG", "AILET UG", "LSAT India", "LAW CET Telangana / Andhra Pradesh", "CUET Law Domain", "Stmarys University-LAT"],
+  "5-Year Integrated UG Programmes": ["CLAT UG", "AILET UG", "LSAT India", "LAW CET Telangana / Andhra Pradesh", "CUET Law Domain", "St.Mary's University-LAT"],
+  "3-Year LL.B. Programmes": ["CLAT UG", "AILET UG", "LSAT India", "LAW CET Telangana / Andhra Pradesh", "CUET Law Domain", "St.Mary's University-LAT"],
 };
 const admissionFlow = [
   ["01", "Choose Programme", "Select integrated law or LL.B. pathways."],
-  ["02", "Entrance Test", "Submit valid national, state, or Stmarys University-LAT score."],
+  ["02", "Entrance Test", "Submit valid national, state, or St.Mary's University-LAT score."],
   ["03", "Documents", "Upload academic records and required certificates."],
   ["04", "Admission Review", "Complete counselling, verification, and final confirmation."],
 ];
@@ -210,7 +210,7 @@ const methodologyCards = [
 const facultyProfiles = [
   {
     name: "Prof. Dr. M. Satyanarayana",
-    designation: "Registrar, Stmarys University, Hyderabad",
+    designation: "Registrar, St.Mary's University, Hyderabad",
     image: "/assets/law/faculty/m-satyanarayana.webp",
     education: ["LL.B. - Osmania University", "LL.M. - Osmania University", "Ph.D. in Law - Osmania University", "M.A. (Public Personnel Management) - Osmania University", "Postgraduate Diploma in PMIR & LW - A.P. Productivity Council"],
     focus: "Higher education governance, institutional policy, accreditation, faculty development, strategic development, and legal education.",
@@ -218,7 +218,7 @@ const facultyProfiles = [
     highlights: [
       "Distinguished academic leader and administrator with over 35 years of experience in higher education, institutional governance, accreditation, and strategic development.",
       "Plays a key role in shaping institutional policies, advancing faculty development, and supporting transformative research initiatives.",
-      "Former Principal of leading law colleges, Associate Professor & Vice - Principal of FCPGC, and Director at Stmarys Group of Institutions.",
+      "Former Principal of leading law colleges, Associate Professor & Vice - Principal of FCPGC, and Director at St.Mary's Group of Institutions.",
       "Organized more than 60 national and international seminars and conferences on critical topics, including emerging technologies.",
       "Published research on the legal framework of cybersecurity under the IT Act, 2000 in an international journal.",
       "Guided over 200 MBA and LL.M. students in project research.",
@@ -235,7 +235,7 @@ const facultyProfiles = [
     focus: "Legal aspects of business, equity and trusts, competition law, arbitration in technology industries, and Insolvency & Bankruptcy Law.",
     research: "Competition law, consumer law, IPR, AI's impact on labor markets, and dispute resolution.",
     highlights: [
-      "Founding In-Charge of the School of Law at Stmarys University, responsible for establishing the legal education framework, curriculum design, and academic leadership.",
+      "Founding In-Charge of the School of Law at St.Mary's University, responsible for establishing the legal education framework, curriculum design, and academic leadership.",
       "Former I/C Head of Department and Assistant Professor of Law at Aurora University Hyderabad.",
       "Former Assistant Professor of Law at NIMS University, Rajasthan.",
       "Visiting faculty at NMIMS School of Law, Hyderabad, teaching Insolvency & Bankruptcy Law.",
@@ -254,7 +254,7 @@ const facultyProfiles = [
     education: ["LL.M. - National Law School of India University (NLSIU), Bengaluru", "B.A. LL.B. (Hons.) - Faculty of Law, University of Lucknow", "UGC NET-JRF Qualified"],
     focus: "Constitutional Law, Family Law, Arbitration, International Law",
     research: "Constitutional Law, Family Law, Arbitration, International Law",
-    highlights: ["Assistant Professor at Stmarys University, Hyderabad.", "Invited judge for moot court competitions at T.S. Mishra Law School and Amity Law School, Lucknow.", "Published and presented research on Indian space law; winner of multiple constitutional law quizzes."],
+    highlights: ["Assistant Professor at St.Mary's University, Hyderabad.", "Invited judge for moot court competitions at T.S. Mishra Law School and Amity Law School, Lucknow.", "Published and presented research on Indian space law; winner of multiple constitutional law quizzes."],
   },
   {
     name: "Prof. B. Lalitha Kameswari",
@@ -543,7 +543,7 @@ export default function SchoolOfLaw() {
             <div>
               <UniversitySectionHeader align="left" title="About School of Law" />
               <div className="mt-6 space-y-4 text-sm leading-relaxed text-slate-700 sm:mt-8 sm:text-base sm:space-y-5">
-                <p>The School of Law at Stmarys University, Hyderabad, stands distinct for combining rigorous legal doctrine with real-world advocacy and emerging legal technologies. The curriculum is designed to go beyond textbook learning, with specialised exposure to AI Regulation, Data Sovereignty, and Forensic Jurisprudence.</p>
+                <p>The School of Law at St.Mary's University, Hyderabad, stands distinct for combining rigorous legal doctrine with real-world advocacy and emerging legal technologies. The curriculum is designed to go beyond textbook learning, with specialised exposure to AI Regulation, Data Sovereignty, and Forensic Jurisprudence.</p>
                 <p>The School promotes an immersive, practice-driven learning ecosystem through moot court training, legal aid engagement, community justice exposure, ethical reasoning, and professional skill development. The goal is to prepare legal professionals who are practice-ready, purpose-driven, and capable of responding to contemporary legal challenges.</p>
               </div>
               
@@ -828,7 +828,7 @@ export default function SchoolOfLaw() {
       <section id="facilities" className={`${sectionScrollOffset} px-3 py-16 md:py-24 bg-[#f8fbff] relative`}>
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#dbe8f8] to-transparent" />
         <div className="mx-auto max-w-7xl">
-          <UniversitySectionHeader title="Facilities at Stmarys School of Law" />
+          <UniversitySectionHeader title="Facilities at St.Mary's School of Law" />
           <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[
               { title: "Moot Court Hall", desc: "Real courtroom-style training space for simulated proceedings, advocacy practice, oral arguments, and moot court competitions.", img: "/assets/law/moot-court.webp" },
@@ -865,7 +865,7 @@ export default function SchoolOfLaw() {
 
       <section id="faculty" className={`${sectionScrollOffset} bg-white px-3 py-16 md:py-24`}>
         <div className="mx-auto max-w-7xl">
-          <UniversitySectionHeader title="Faculty" subtitle="Faculty of Stmarys University - School of Law." subtitleClassName="max-w-2xl" />
+          <UniversitySectionHeader title="Faculty" subtitle="Faculty of St.Mary's University - School of Law." subtitleClassName="max-w-2xl" />
           {facultyProfiles.length > 0 ? (
             <div className="mx-auto mt-10 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {facultyProfiles.map((faculty) => (
@@ -964,7 +964,7 @@ export default function SchoolOfLaw() {
       <section id="admissions" className={`${sectionScrollOffset} bg-white px-3 py-16 md:py-24 relative`}>
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#dbe8f8] to-transparent" />
         <div className="mx-auto max-w-7xl">
-          <UniversitySectionHeader title="Admissions" subtitle="Admissions at Stmarys School of Law are conducted with a process designed around fairness, transparency, and merit-based selection in alignment with statutory frameworks." subtitleClassName="max-w-2xl" />
+          <UniversitySectionHeader title="Admissions" subtitle="Admissions at St.Mary's School of Law are conducted with a process designed around fairness, transparency, and merit-based selection in alignment with statutory frameworks." subtitleClassName="max-w-2xl" />
           <p className="cut-corner-panel mx-auto mt-4 max-w-3xl border border-[#dbe8f8] border-l-4 border-l-[#019e6e] bg-[#f8fbff] p-4 text-center text-xs font-medium leading-relaxed text-slate-700 sm:mt-6 sm:p-5 sm:text-sm">The School accepts recognized national and state-level entrance examinations and also conducts Stmarys University-LAT for candidates who do not have valid national entrance scores.</p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {admissionFlow.map(([step, title, desc], index) => (

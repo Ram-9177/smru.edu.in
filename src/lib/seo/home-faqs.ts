@@ -6,7 +6,7 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
     label: "Student Aspirants",
     faqs: [
       {
-        question: "How do I compare the right course at Stmarys University?",
+        question: "How do I compare the right course at St.Mary's University?",
         answer:
           "Open the program pages and compare duration, eligibility, learning focus, and career pathways. For the latest fee or intake confirmation, contact the official admissions team.",
       },
@@ -31,14 +31,14 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
     label: "Admissions",
     faqs: [
       {
-        question: "How do I apply to Stmarys University?",
+        question: "How do I apply to St.Mary's University?",
         answer:
           "You can apply directly at apply.smru.edu.in or fill the Quick Enquiry form on the website. The admissions team will guide you through the next steps.",
       },
       {
-        question: "Is Stmarys University a recognized university?",
+        question: "Is St.Mary's University a recognized university?",
         answer:
-          "Yes. Stmarys University is established by the Government of Telangana through Act No. 10 of 2026 and is recognized by the UGC under Section 2(f) of the UGC Act, 1956.",
+          "Yes. St.Mary's University is established by the Government of Telangana through Act No. 10 of 2026 and is recognized by the UGC under Section 2(f) of the UGC Act, 1956.",
       },
       {
         question: "What is the status of Ph.D. admissions for 2026-27?",
@@ -55,27 +55,27 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
     label: "Programs",
     faqs: [
       {
-        question: "What makes Stmarys University different from other universities?",
+        question: "What makes St.Mary's University different from other universities?",
         answer:
-          "The website presents Stmarys University as a multi-disciplinary institution with six schools, spanning Health, Law, Engineering, Psychology, Nursing, and Rehabilitation, backed by Stmarys educational legacy.",
+          "The website presents St.Mary's University as a multi-disciplinary institution with six schools, spanning Health, Law, Engineering, Psychology, Nursing, and Rehabilitation, backed by St.Mary's educational legacy.",
       },
       {
-        question: "Is Stmarys University a private university in Hyderabad?",
+        question: "Is St.Mary's University a private university in Hyderabad?",
         answer:
-          "Stmarys University is a private university in the Hyderabad region of Telangana. Its official website publishes university recognition, schools, programmes, admissions, campus, and contact information.",
+          "St.Mary's University is a private university in the Hyderabad region of Telangana. Its official website publishes university recognition, schools, programmes, admissions, campus, and contact information.",
       },
       {
         question: "How should students compare the best private universities in Hyderabad?",
         answer:
-          "Compare verified UGC recognition, programme depth, curriculum, faculty information, practical exposure, campus facilities, eligibility, fee disclosures, scholarships, and career support. This website provides official Stmarys University information and does not claim an independent ranking.",
+          "Compare verified UGC recognition, programme depth, curriculum, faculty information, practical exposure, campus facilities, eligibility, fee disclosures, scholarships, and career support. This website provides official St.Mary's University information and does not claim an independent ranking.",
       },
       {
-        question: "Which schools and programs does Stmarys University offer?",
+        question: "Which schools and programs does St.Mary's University offer?",
         answer:
           "The website lists schools covering rehabilitation sciences, health and allied health sciences, psychology, nursing sciences, engineering and emerging technologies, management and computer applications, and applied sciences and designing.",
       },
       {
-        question: "What teaching methods are used at Stmarys University?",
+        question: "What teaching methods are used at St.Mary's University?",
         answer:
           "The website refers to activity-based therapy, simulation-based practice, multisensory learning, and peer-led case discussions across relevant programs.",
       },
@@ -90,7 +90,7 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
     label: "Financial Aid",
     faqs: [
       {
-        question: "What scholarships does Stmarys University offer?",
+        question: "What scholarships does St.Mary's University offer?",
         answer:
           "The website lists multiple scholarships including merit, founder, minority, girl student, defence ward, single parent, chancellor's excellence, SC/ST empowerment, and early bird scholarships.",
       },
@@ -130,7 +130,7 @@ export const HOME_FAQ_CATEGORIES: Array<{ label: string; faqs: SeoFaqItem[] }> =
           "Yes. The website describes a hygienic campus canteen with balanced meals and convenient access near academic blocks and hostels.",
       },
       {
-        question: "What placement support does Stmarys University provide?",
+        question: "What placement support does St.Mary's University provide?",
         answer:
           "The website states that a dedicated placement cell offers career guidance, internships, and recruitment support, with university-cycle outcomes published after eligible batches progress.",
       },

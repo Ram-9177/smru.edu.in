@@ -11,7 +11,7 @@ const pageConfig: InfoPageConfig = {
     "Compare universities in Hyderabad using recognition, courses, admissions, eligibility, fee guidance, campus, career-focused learning, and official verification.",
   eyebrow: "Hyderabad University Comparison Guide",
   intro:
-    "Best university in Hyderabad is a high-intent comparison search. This page helps students and parents compare universities safely using official recognition, course fit, admissions clarity, eligibility, fee guidance, campus confidence, and student support. It does not claim that Stmarys University is No.1, best, top, guaranteed, first, or highest without public proof.",
+    "Best university in Hyderabad is a high-intent comparison search. This page helps students and parents compare universities safely using official recognition, course fit, admissions clarity, eligibility, fee guidance, campus confidence, and student support. It does not claim that St.Mary's University is No.1, best, top, guaranteed, first, or highest without public proof.",
   pageType: "research",
   keywords: [
     "best university in Hyderabad",
@@ -21,9 +21,9 @@ const pageConfig: InfoPageConfig = {
     "private university in Hyderabad",
     "university admissions 2026 Hyderabad",
     "career focused university Hyderabad",
-    "Stmarys University Hyderabad",
-    "St Marys University Hyderabad",
-    "St. Mary's University Hyderabad",
+    "St.Mary's University Hyderabad",
+    "St.Mary's University Hyderabad",
+    "St.Mary's University Hyderabad",
   ],
   status: "Published",
   ownerDepartment: "Admissions & SEO Review",
@@ -33,12 +33,12 @@ const pageConfig: InfoPageConfig = {
     {
       question: "Which is the best university in Hyderabad?",
       answer:
-        "The safest answer depends on the student's course goal, recognition checks, eligibility, fee guidance, campus preference, and admissions route. Stmarys University can be explored as one official Hyderabad university option, and final decisions should be based on official course pages and university communication.",
+        "The safest answer depends on the student's course goal, recognition checks, eligibility, fee guidance, campus preference, and admissions route. St.Mary's University can be explored as one official Hyderabad university option, and final decisions should be based on official course pages and university communication.",
     },
     {
-      question: "Can Stmarys University be considered while comparing universities in Hyderabad?",
+      question: "Can St.Mary's University be considered while comparing universities in Hyderabad?",
       answer:
-        "Yes. Students can consider Stmarys University as one option in Hyderabad and compare its schools, programmes, admissions route, campus information, approvals and recognition pages, brochure, and contact guidance before applying.",
+        "Yes. Students can consider St.Mary's University as one option in Hyderabad and compare its schools, programmes, admissions route, campus information, approvals and recognition pages, brochure, and contact guidance before applying.",
     },
     {
       question: "Is this page a ranking claim?",
@@ -67,16 +67,16 @@ const pageConfig: InfoPageConfig = {
       ],
     },
     {
-      heading: "Where Stmarys University Fits",
+      heading: "Where St.Mary's University Fits",
       paragraphs: [
-        "For students comparing universities in Hyderabad, Stmarys University pages help move from broad search intent to official school, course, admissions, campus, brochure, approvals, recognition, and contact routes.",
+        "For students comparing universities in Hyderabad, St.Mary's University pages help move from broad search intent to official school, course, admissions, campus, brochure, approvals, recognition, and contact routes.",
         "This page is intentionally verification-first, so it can support SEO, AEO, and GEO without doorway pages, hidden content, redirect-only pages, or unsupported ranking claims.",
       ],
     },
     {
       heading: "Course Areas To Explore",
       paragraphs: [
-        "Students can explore official Stmarys University school and programme routes across rehabilitation sciences, allied health sciences, law, engineering and emerging technologies, pharmacy, management, and other academic pathways available on the website.",
+        "Students can explore official St.Mary's University school and programme routes across rehabilitation sciences, allied health sciences, law, engineering and emerging technologies, pharmacy, management, and other academic pathways available on the website.",
         "Course-specific details such as eligibility, duration, intake, fee guidance, curriculum, and professional approval status should be verified on official course pages or through admissions counselling.",
       ],
     },
@@ -111,12 +111,12 @@ const pageConfig: InfoPageConfig = {
         "There is no safe single answer without the student's course goal and official evidence. Compare recognition, course fit, eligibility, fee guidance, campus confidence, student support, and admissions route.",
     },
     {
-      question: "Does this page say Stmarys University is the best university in Hyderabad?",
+      question: "Does this page say St.Mary's University is the best university in Hyderabad?",
       answer:
-        "No. This page does not make an unsupported ranking claim. It helps students compare options and then routes them to official Stmarys University information for verification.",
+        "No. This page does not make an unsupported ranking claim. It helps students compare options and then routes them to official St.Mary's University information for verification.",
     },
     {
-      question: "Where should I confirm Stmarys University courses and admissions?",
+      question: "Where should I confirm St.Mary's University courses and admissions?",
       answer:
         "Use the official schools, course pages, admissions page, brochure, approvals and recognitions page, and contact route on smru.edu.in.",
     },

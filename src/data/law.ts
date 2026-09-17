@@ -1,7 +1,7 @@
 export const lawPathname = "/law";
 
 export const lawMetaDescription =
-  "Explore the School of Law at Stmarys University, Hyderabad with LL.B., integrated LL.B. (Hons.), LL.M., Ph.D. in Law, moot court training, legal aid, legal research, and admissions guidance.";
+  "Explore the School of Law at St.Mary's University, Hyderabad with LL.B., integrated LL.B. (Hons.), LL.M., Ph.D. in Law, moot court training, legal aid, legal research, and admissions guidance.";
 
 export const lawProgrammes = [
   { slug: "llb", name: "LL.B.", level: "UG", duration: "3 Years", eligibility: "Bachelor's Degree with 45%" },

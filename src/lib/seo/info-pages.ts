@@ -101,20 +101,20 @@ const officialRequestParagraph = (owner: string) =>
   `The ${owner} maintains this record and guides stakeholders through the official contact route where direct office confirmation is appropriate.`;
 
 const universityReferenceAnswers = [
-  { question: "What is the official/legal name?", answer: "The official/legal name is Stmarys University." },
-  { question: "What is the public brand?", answer: "The public brand used on the website is Stmarys University." },
+  { question: "What is the official/legal name?", answer: "The official/legal name is St.Mary's University." },
+  { question: "What is the public brand?", answer: "The public brand used on the website is St.Mary's University." },
   { question: "Where is official information published?", answer: "Official public information is published at https://smru.edu.in." },
 ];
 
 export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "Stmarys-university",
-    title: "Stmarys University",
-    description: "Stmarys University is the public brand used for Stmarys University, Hyderabad, Telangana.",
+    title: "St.Mary's University",
+    description: "St.Mary's University is the public brand used for St.Mary's University, Hyderabad, Telangana.",
     eyebrow: "Brand Reference",
     intro: SITE_IDENTITY.bridgeSentence,
     pageType: "trust",
-    keywords: ["Stmarys University", "Stmarys University Hyderabad", "Stmarys University", "Stmarys University Hyderabad", "Stmarys University"],
+    keywords: ["St.Mary's University", "St.Mary's University Hyderabad", "St.Mary's University", "St.Mary's University Hyderabad", "St.Mary's University"],
     ...defaultStatus,
     answers: universityReferenceAnswers,
     sections: [
@@ -122,55 +122,55 @@ export const INFO_PAGES: InfoPageConfig[] = [
         heading: "Official Identity",
         paragraphs: [
           "Official website: https://smru.edu.in.",
-          "Public brand: Stmarys University.",
-          "Official/legal name: Stmarys University.",
-          "Display name: Stmarys University.",
-          "Short name: Stmarys University.",
+          "Public brand: St.Mary's University.",
+          "Official/legal name: St.Mary's University.",
+          "Display name: St.Mary's University.",
+          "Short name: St.Mary's University.",
           "Location: Hyderabad, Telangana.",
         ],
       },
     ],
     faqItems: [
-      { question: "Is Stmarys University the same institution as Stmarys University?", answer: SITE_IDENTITY.bridgeSentence },
+      { question: "Is St.Mary's University the same institution as St.Mary's University?", answer: SITE_IDENTITY.bridgeSentence },
       { question: "Where should official course and school information be checked?", answer: "Official school and course information should be checked on smru.edu.in pages." },
     ],
     relatedLinks: corePublicLinks,
   },
   {
     slug: "Stmarys-university-official",
-    title: "Stmarys University Official Name | Stmarys University",
-    description: "Stmarys University is the official/legal name of Stmarys University, Hyderabad, Telangana.",
+    title: "St.Mary's University Official Name | St.Mary's University",
+    description: "St.Mary's University is the official/legal name of St.Mary's University, Hyderabad, Telangana.",
     eyebrow: "Official Name",
     intro: SITE_IDENTITY.bridgeSentence,
     pageType: "trust",
-    keywords: ["Stmarys University", "Stmarys University", "Stmarys University", "Stmarys University"],
+    keywords: ["St.Mary's University", "St.Mary's University", "St.Mary's University", "St.Mary's University"],
     ...defaultStatus,
     answers: universityReferenceAnswers,
     sections: [
       {
         heading: "University Reference",
         paragraphs: [
-          "Stmarys University is the official/legal name used for Stmarys University.",
-          "Stmarys University remains the short-name alias used for search and statutory references.",
-          "The public brand used for the university is Stmarys University.",
-          "Stmarys University is located in Hyderabad, Telangana.",
+          "St.Mary's University is the official/legal name used for St.Mary's University.",
+          "St.Mary's University remains the short-name alias used for search and statutory references.",
+          "The public brand used for the university is St.Mary's University.",
+          "St.Mary's University is located in Hyderabad, Telangana.",
         ],
       },
     ],
     faqItems: [
-      { question: "What does Stmarys University stand for?", answer: "Stmarys University stands for Stmarys University." },
+      { question: "What does St.Mary's University stand for?", answer: "St.Mary's University stands for St.Mary's University." },
       { question: "Which website should be used for official information?", answer: "Use https://smru.edu.in for official university information." },
     ],
     relatedLinks: corePublicLinks,
   },
   {
     slug: "Stmarys-hyderabad",
-    title: "Stmarys University Hyderabad | Stmarys University",
-    description: "Stmarys University Hyderabad refers to Stmarys University, publicly known as Stmarys University, located in Hyderabad, Telangana.",
+    title: "St.Mary's University Hyderabad | St.Mary's University",
+    description: "St.Mary's University Hyderabad refers to St.Mary's University, publicly known as St.Mary's University, located in Hyderabad, Telangana.",
     eyebrow: "Location Reference",
     intro: SITE_IDENTITY.bridgeSentence,
     pageType: "trust",
-    keywords: ["Stmarys University Hyderabad", "Stmarys University", "Stmarys University Hyderabad", "Stmarys University Hyderabad", "Stmarys University"],
+    keywords: ["St.Mary's University Hyderabad", "St.Mary's University", "St.Mary's University Hyderabad", "St.Mary's University Hyderabad", "St.Mary's University"],
     ...defaultStatus,
     answers: universityReferenceAnswers,
     sections: [
@@ -178,34 +178,34 @@ export const INFO_PAGES: InfoPageConfig[] = [
         heading: "Factual Summary",
         paragraphs: [
           "Official website: https://smru.edu.in.",
-          "Public brand: Stmarys University.",
-          "Official/legal name: Stmarys University.",
-          "Short name: Stmarys University.",
+          "Public brand: St.Mary's University.",
+          "Official/legal name: St.Mary's University.",
+          "Short name: St.Mary's University.",
           "Location: Hyderabad, Telangana.",
         ],
       },
     ],
     faqItems: [
-      { question: "Is Stmarys University located in Hyderabad?", answer: "Stmarys University is located in Hyderabad, Telangana." },
-      { question: "Where are Stmarys University schools and programmes listed?", answer: "Schools and programme information are listed on smru.edu.in pages including /schools and /academic-structure." },
+      { question: "Is St.Mary's University located in Hyderabad?", answer: "St.Mary's University is located in Hyderabad, Telangana." },
+      { question: "Where are St.Mary's University schools and programmes listed?", answer: "Schools and programme information are listed on smru.edu.in pages including /schools and /academic-structure." },
     ],
     relatedLinks: corePublicLinks,
   },
   {
     slug: "rehabilitation-university-hyderabad",
     title: "Rehabilitation University Hyderabad",
-    description: "Reference page for Stmarys University, Hyderabad, Telangana, publicly known as Stmarys University.",
+    description: "Reference page for St.Mary's University, Hyderabad, Telangana, publicly known as St.Mary's University.",
     eyebrow: "University Reference",
     intro: SITE_IDENTITY.bridgeSentence,
     pageType: "trust",
-    keywords: ["Rehabilitation University Hyderabad", "Stmarys University", "Stmarys University Hyderabad", "Stmarys University Hyderabad"],
+    keywords: ["Rehabilitation University Hyderabad", "St.Mary's University", "St.Mary's University Hyderabad", "St.Mary's University Hyderabad"],
     ...defaultStatus,
     answers: universityReferenceAnswers,
     sections: [
       {
         heading: "Official Reference",
         paragraphs: [
-          "Stmarys University is a rehabilitation-led university established in Telangana.",
+          "St.Mary's University is a rehabilitation-led university established in Telangana.",
           "The university uses public disclosure pages to help students, parents, and stakeholders verify published information.",
           APPROVAL_SAFETY_NOTE,
         ],
@@ -218,44 +218,44 @@ export const INFO_PAGES: InfoPageConfig[] = [
   },
   {
     slug: "Stmarys-facts",
-    title: "Stmarys University Facts | Stmarys University",
-    description: "Factual reference for Stmarys University: official website, public brand, legal name, short-name alias, location, and important public routes.",
+    title: "St.Mary's University Facts | St.Mary's University",
+    description: "Factual reference for St.Mary's University: official website, public brand, legal name, short-name alias, location, and important public routes.",
     eyebrow: "Factual Reference",
-    intro: "This page provides factual reference information for Stmarys University and its official/legal name.",
+    intro: "This page provides factual reference information for St.Mary's University and its official/legal name.",
     pageType: "trust",
-    keywords: ["Stmarys University facts", "Stmarys University facts", "Stmarys University", "Stmarys University facts"],
+    keywords: ["St.Mary's University facts", "St.Mary's University facts", "St.Mary's University", "St.Mary's University facts"],
     ...defaultStatus,
     answers: [
       { question: "What is the official website?", answer: "The official website is https://smru.edu.in." },
-      { question: "What is the official/legal name?", answer: "The official/legal name is Stmarys University." },
-      { question: "What display name is used on the website?", answer: "The website uses Stmarys University as the public display name." },
-      { question: "What is the short-name alias?", answer: "The short-name alias is Stmarys University." },
+      { question: "What is the official/legal name?", answer: "The official/legal name is St.Mary's University." },
+      { question: "What display name is used on the website?", answer: "The website uses St.Mary's University as the public display name." },
+      { question: "What is the short-name alias?", answer: "The short-name alias is St.Mary's University." },
     ],
     sections: [
       {
         heading: "Entity Facts",
         paragraphs: [
           "Official website: https://smru.edu.in.",
-          "Public brand: Stmarys University.",
-          "Official/legal name: Stmarys University.",
-          "Display name: Stmarys University.",
-          "Short name: Stmarys University.",
+          "Public brand: St.Mary's University.",
+          "Official/legal name: St.Mary's University.",
+          "Display name: St.Mary's University.",
+          "Short name: St.Mary's University.",
           "Location: Hyderabad, Telangana.",
         ],
       },
     ],
     faqItems: [
-      { question: "What source should be used for official Stmarys University course and school information?", answer: "Official course and school information should be taken only from smru.edu.in pages." },
-      { question: "What is the relationship between Stmarys University and Stmarys University?", answer: SITE_IDENTITY.bridgeSentence },
+      { question: "What source should be used for official St.Mary's University course and school information?", answer: "Official course and school information should be taken only from smru.edu.in pages." },
+      { question: "What is the relationship between St.Mary's University and St.Mary's University?", answer: SITE_IDENTITY.bridgeSentence },
     ],
     relatedLinks: corePublicLinks,
   },
   {
     slug: "approvals-recognitions",
     title: "Approvals & Recognitions",
-    description: "Official approvals, recognitions, and regulatory disclosure page for Stmarys University.",
+    description: "Official approvals, recognitions, and regulatory disclosure page for St.Mary's University.",
     eyebrow: "Trust & Compliance",
-    intro: "Stmarys University maintains this page as the public reference for official establishment, recognition, and statutory documents. Students, parents, and stakeholders may use the documents below for transparent verification.",
+    intro: "St.Mary's University maintains this page as the public reference for official establishment, recognition, and statutory documents. Students, parents, and stakeholders may use the documents below for transparent verification.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
@@ -281,13 +281,13 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "ugc-disclosure",
     title: "UGC Disclosure",
-    description: "UGC recognition and disclosure information page for Stmarys University.",
+    description: "UGC recognition and disclosure information page for St.Mary's University.",
     eyebrow: "UGC Status",
-    intro: "Stmarys University is recognized under Section 2(f) of the UGC Act, 1956. This page is the dedicated university-level UGC disclosure reference.",
+    intro: "St.Mary's University is recognized under Section 2(f) of the UGC Act, 1956. This page is the dedicated university-level UGC disclosure reference.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
-      { question: "Is Stmarys University recognized by the UGC?", answer: "Yes. The published letter confirms recognition under Section 2(f) of the UGC Act, 1956." },
+      { question: "Is St.Mary's University recognized by the UGC?", answer: "Yes. The published letter confirms recognition under Section 2(f) of the UGC Act, 1956." },
       { question: "How should professional permissions be checked?", answer: "Professional permissions should be checked programme-wise where required, using official university notifications or statutory council documents." },
     ],
     sections: [
@@ -307,14 +307,14 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "mandatory-disclosure",
     title: "Mandatory Disclosure",
-    description: "Master public disclosure dashboard for Stmarys University establishment, recognition, admissions, student support, and first university-cycle disclosure status.",
+    description: "Master public disclosure dashboard for St.Mary's University establishment, recognition, admissions, student support, and first university-cycle disclosure status.",
     eyebrow: "Mandatory Disclosure",
-    intro: "This page acts as the master public index for Stmarys University disclosures. Published documents are linked directly; first university-cycle or office-maintained items are shown with a clear status.",
+    intro: "This page acts as the master public index for St.Mary's University disclosures. Published documents are linked directly; first university-cycle or office-maintained items are shown with a clear status.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
       { question: "What is this page?", answer: "It is the public dashboard for official university disclosures, documents, and status notes." },
-      { question: "How are disclosure items maintained?", answer: "Stmarys University carries an educational legacy and is now in its first university academic cycle. University-cycle records are maintained through formal verification before publication." },
+      { question: "How are disclosure items maintained?", answer: "St.Mary's University carries an educational legacy and is now in its first university academic cycle. University-cycle records are maintained through formal verification before publication." },
     ],
     sections: [
       {
@@ -368,7 +368,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "statutory-disclosures",
     title: "Statutory Disclosures",
-    description: "Public statutory disclosure index for Stmarys University approvals, recognition, policies, and institutional information.",
+    description: "Public statutory disclosure index for St.Mary's University approvals, recognition, policies, and institutional information.",
     eyebrow: "Public Disclosure",
     intro: "This page organizes statutory disclosure routes for students, parents, regulators, and institutional stakeholders.",
     pageType: "trust",
@@ -403,7 +403,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     title: "University Academic Cycle Disclosure Note",
     description: "Verified status note for first university-cycle disclosures such as alumni, placements, annual reports, audited accounts, NAAC, and NIRF outputs.",
     eyebrow: "University Academic Cycle",
-    intro: "Stmarys University brings forward Stmarys educational legacy and is now operating in its first university academic cycle. This page explains how university-cycle disclosure items are tracked for verified public release.",
+    intro: "St.Mary's University brings forward St.Mary's educational legacy and is now operating in its first university academic cycle. This page explains how university-cycle disclosure items are tracked for verified public release.",
     pageType: "trust",
     ...firstYearStatus,
     answers: [
@@ -428,7 +428,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "public-information",
     title: "Public Information",
-    description: "Public information desk and compliance contacts for Stmarys University.",
+    description: "Public information desk and compliance contacts for St.Mary's University.",
     eyebrow: "Public Information",
     intro: "The university provides public contact routes for institutional information, admissions support, and disclosure verification.",
     pageType: "trust",
@@ -451,9 +451,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "anti-ragging",
     title: "Anti-Ragging",
-    description: "Anti-ragging policy and reporting status page for Stmarys University.",
+    description: "Anti-ragging policy and reporting status page for St.Mary's University.",
     eyebrow: "Student Welfare",
-    intro: "Stmarys University maintains a zero-tolerance position towards ragging and student harassment. Public committee details are released through the official university publication workflow.",
+    intro: "St.Mary's University maintains a zero-tolerance position towards ragging and student harassment. Public committee details are released through the official university publication workflow.",
     pageType: "trust",
     ...processStatus("Student Affairs Office"),
     answers: [
@@ -478,9 +478,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "grievance-redressal",
     title: "Grievance Redressal",
-    description: "Student and staff grievance redressal status page for Stmarys University.",
+    description: "Student and staff grievance redressal status page for St.Mary's University.",
     eyebrow: "Student Welfare",
-    intro: "Stmarys University maintains formal grievance support through university contact routes while public cell details are released through the official university publication workflow.",
+    intro: "St.Mary's University maintains formal grievance support through university contact routes while public cell details are released through the official university publication workflow.",
     pageType: "trust",
     ...processStatus("Student Affairs Office"),
     answers: [
@@ -528,9 +528,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "iqac-quality-assurance",
     title: "IQAC & Quality Assurance",
-    description: "Internal quality assurance and quality-cycle readiness status for Stmarys University.",
+    description: "Internal quality assurance and quality-cycle readiness status for St.Mary's University.",
     eyebrow: "Quality Cycles",
-    intro: "Stmarys University uses an internal quality framework to support academic planning, disclosure discipline, and future accreditation readiness.",
+    intro: "St.Mary's University uses an internal quality framework to support academic planning, disclosure discipline, and future accreditation readiness.",
     pageType: "trust",
     ...processStatus("Quality Assurance Office"),
     answers: [
@@ -540,7 +540,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
       {
         heading: "Quality Framework",
         paragraphs: [
-          "Stmarys University is building university-level quality assurance systems from its first academic cycle.",
+          "St.Mary's University is building university-level quality assurance systems from its first academic cycle.",
           safeProcessParagraph("Quality Assurance Office"),
           "Formal NAAC accreditation is published only after the applicable accreditation process is completed.",
         ],
@@ -579,9 +579,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "faculty-directory",
     title: "Faculty Directory",
-    description: "Faculty directory status and public release page for Stmarys University academic departments.",
+    description: "Faculty directory status and public release page for St.Mary's University academic departments.",
     eyebrow: "Academics",
-    intro: "Stmarys University maintains faculty information through academic departments. Public profiles are released through verification, consent, and the approved publication workflow.",
+    intro: "St.Mary's University maintains faculty information through academic departments. Public profiles are released through verification, consent, and the approved publication workflow.",
     pageType: "trust",
     ...publicReleaseStatus("Academic Office"),
     answers: [
@@ -635,9 +635,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "refund-policy",
     title: "Refund Policy",
-    description: "Fee refund and withdrawal policy status for Stmarys University.",
+    description: "Fee refund and withdrawal policy status for St.Mary's University.",
     eyebrow: "Fees & Policies",
-    intro: "Stmarys University tracks fee refund and withdrawal policy information through admissions and finance review before public release.",
+    intro: "St.Mary's University tracks fee refund and withdrawal policy information through admissions and finance review before public release.",
     pageType: "trust",
     ...processStatus("Finance and Admissions Offices"),
     answers: [
@@ -658,9 +658,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "fee-structure",
     title: "Fee Structure",
-    description: "Academic fee structure information page for Stmarys University.",
+    description: "Academic fee structure information page for St.Mary's University.",
     eyebrow: "Fees & Policies",
-    intro: "Stmarys University maintains programme-wise fee information through the Admissions and Finance offices. Applicants receive current fee guidance through official admissions counselling and university communication.",
+    intro: "St.Mary's University maintains programme-wise fee information through the Admissions and Finance offices. Applicants receive current fee guidance through official admissions counselling and university communication.",
     pageType: "trust",
     status: "Published",
     ownerDepartment: "Admissions Office",
@@ -705,9 +705,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "admission-policy",
     title: "Admission Policy",
-    description: "Admission policy and application guidance for Stmarys University.",
+    description: "Admission policy and application guidance for St.Mary's University.",
     eyebrow: "Admissions",
-    intro: "Admissions at Stmarys University are conducted through a transparent, documented process with programme-wise eligibility, counselling, document verification, and fee confirmation.",
+    intro: "Admissions at St.Mary's University are conducted through a transparent, documented process with programme-wise eligibility, counselling, document verification, and fee confirmation.",
     pageType: "trust",
     ...processStatus("Admissions Office"),
     answers: [
@@ -732,9 +732,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "naac",
     title: "NAAC Quality-Cycle Readiness",
-    description: "NAAC quality-cycle readiness information for Stmarys University.",
+    description: "NAAC quality-cycle readiness information for St.Mary's University.",
     eyebrow: "Quality Cycle",
-    intro: "Stmarys University is building university-level quality systems from its first academic cycle, backed by the broader Stmarys educational legacy. This page presents quality-cycle readiness while formal accreditation material is published through the official route when applicable.",
+    intro: "St.Mary's University is building university-level quality systems from its first academic cycle, backed by the broader St.Mary's educational legacy. This page presents quality-cycle readiness while formal accreditation material is published through the official route when applicable.",
     pageType: "trust",
     ...firstYearStatus,
     answers: [
@@ -762,9 +762,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "nirf",
     title: "NIRF Disclosure Status",
-    description: "NIRF participation and ranking-data status for the first university academic cycle at Stmarys University.",
+    description: "NIRF participation and ranking-data status for the first university academic cycle at St.Mary's University.",
     eyebrow: "Rankings",
-    intro: "Stmarys University tracks ranking-related outputs through the first university academic cycle and publishes verified NIRF data through the official route when applicable.",
+    intro: "St.Mary's University tracks ranking-related outputs through the first university academic cycle and publishes verified NIRF data through the official route when applicable.",
     pageType: "trust",
     ...firstYearStatus,
     answers: [
@@ -788,9 +788,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "sponsor-society",
     title: "Sponsor Society & Legacy",
-    description: "Sponsor body and public legacy reference for Joseph Sriharsha & Mary Indraja Educational Society and Stmarys University.",
+    description: "Sponsor body and public legacy reference for Joseph Sriharsha & Mary Indraja Educational Society and St.Mary's University.",
     eyebrow: "Sponsor Legacy",
-    intro: "Stmarys University is promoted by the Joseph Sriharsha & Mary Indraja Educational Society. Public legacy information is presented through verified website facts and university-cleared context.",
+    intro: "St.Mary's University is promoted by the Joseph Sriharsha & Mary Indraja Educational Society. Public legacy information is presented through verified website facts and university-cleared context.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
@@ -808,7 +808,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
       {
         heading: "Legacy Context",
         paragraphs: [
-          "The Stmarys educational journey is presented on the About page through a public timeline from 1996 onward.",
+          "The St.Mary's educational journey is presented on the About page through a public timeline from 1996 onward.",
           "The current university positioning is rehabilitation-led, statutory, UGC 2(f) recognized, and admissions active for the first university academic cycle.",
         ],
       },
@@ -817,7 +817,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
       { question: "How are sponsor body records presented?", answer: "The website presents university-cleared public facts and keeps internal sponsor body records within official governance channels." },
     ],
     relatedLinks: [
-      { href: "/about", label: "About Stmarys University", description: "Institutional journey and leadership context." },
+      { href: "/about", label: "About St.Mary's University", description: "Institutional journey and leadership context." },
       { href: "/leadership/all", label: "Leadership", description: "Public leadership and governance pages." },
       { href: "/approvals-recognitions", label: "Approvals & Recognitions", description: "Published establishment and UGC recognition documents." },
     ],
@@ -825,19 +825,19 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "accessibility-statement",
     title: "Accessibility Statement",
-    description: "Accessibility commitment and public feedback route for the Stmarys University rehabilitation-led website.",
+    description: "Accessibility commitment and public feedback route for the St.Mary's University rehabilitation-led website.",
     eyebrow: "Inclusion",
-    intro: "As a rehabilitation-led university, Stmarys University treats accessibility as part of institutional trust. The website will continue to improve toward accessible content, navigation, forms, and public documents.",
+    intro: "As a rehabilitation-led university, St.Mary's University treats accessibility as part of institutional trust. The website will continue to improve toward accessible content, navigation, forms, and public documents.",
     pageType: "trust",
     ...processStatus("Digital and Student Support Teams"),
     answers: [
-      { question: "Why is accessibility important for Stmarys University?", answer: "Accessibility aligns with the university's rehabilitation and inclusion identity and supports students, parents, and public stakeholders." },
+      { question: "Why is accessibility important for St.Mary's University?", answer: "Accessibility aligns with the university's rehabilitation and inclusion identity and supports students, parents, and public stakeholders." },
     ],
     sections: [
       {
         heading: "Accessibility Commitment",
         paragraphs: [
-          "Stmarys University aims to maintain meaningful alt text, clear headings, keyboard-friendly navigation, readable contrast, labelled forms, and accessible public documents wherever feasible.",
+          "St.Mary's University aims to maintain meaningful alt text, clear headings, keyboard-friendly navigation, readable contrast, labelled forms, and accessible public documents wherever feasible.",
           "Accessibility feedback can be sent through the official contact route while improvements continue through the website maintenance process.",
         ],
       },
@@ -851,9 +851,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "research",
     title: "Research & Doctoral Disclosure",
-    description: "Research and doctoral disclosure status for the first university academic cycle at Stmarys University.",
+    description: "Research and doctoral disclosure status for the first university academic cycle at St.Mary's University.",
     eyebrow: "Research",
-    intro: "Stmarys University doctoral information is published through the Ph.D. admissions page. Broader research-cell disclosures are maintained through the university-cycle publication workflow.",
+    intro: "St.Mary's University doctoral information is published through the Ph.D. admissions page. Broader research-cell disclosures are maintained through the university-cycle publication workflow.",
     pageType: "research",
     ...processStatus("Research Office"),
     answers: [
@@ -880,17 +880,17 @@ export const INFO_PAGES: InfoPageConfig[] = [
     title: "University in Telangana",
     description: "State private university in Telangana with a rehabilitation-led academic focus.",
     eyebrow: "Regional Excellence",
-    intro: "Stmarys University is established in Telangana with a rehabilitation-led academic identity and public disclosure approach.",
+    intro: "St.Mary's University is established in Telangana with a rehabilitation-led academic identity and public disclosure approach.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
-      { question: "Is Stmarys University a private university in Telangana?", answer: "Stmarys University is established through the published Telangana Act and maintains public documents on the Approvals & Recognitions page." },
+      { question: "Is St.Mary's University a private university in Telangana?", answer: "St.Mary's University is established through the published Telangana Act and maintains public documents on the Approvals & Recognitions page." },
     ],
     sections: [
       {
         heading: "Educational Impact in Telangana",
         paragraphs: [
-          "Stmarys University focuses on rehabilitation, healthcare, allied sciences, technology, law, psychology, and inclusive education.",
+          "St.Mary's University focuses on rehabilitation, healthcare, allied sciences, technology, law, psychology, and inclusive education.",
           "Published establishment and UGC recognition documents are available for verification.",
         ],
       },
@@ -901,13 +901,13 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "physiotherapy-college-in-telangana",
     title: "Physiotherapy Programmes in Telangana",
-    description: "Public reference page for Stmarys University physiotherapy programmes, admissions, and regulatory-status verification.",
+    description: "Public reference page for St.Mary's University physiotherapy programmes, admissions, and regulatory-status verification.",
     eyebrow: "Clinical Expertise",
-    intro: "Stmarys University offers physiotherapy education pathways through its Health & Allied Health Sciences structure. Applicants should verify current admission, fee, and regulatory-status information through official university pages.",
+    intro: "St.Mary's University offers physiotherapy education pathways through its Health & Allied Health Sciences structure. Applicants should verify current admission, fee, and regulatory-status information through official university pages.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
-      { question: "Where can I check Stmarys University physiotherapy information?", answer: "Use the Department of Physiotherapy page and admissions pages for current programme information." },
+      { question: "Where can I check St.Mary's University physiotherapy information?", answer: "Use the Department of Physiotherapy page and admissions pages for current programme information." },
     ],
     sections: [
       {
@@ -924,13 +924,13 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "baslp-college-in-hyderabad",
     title: "BASLP Programme in Hyderabad",
-    description: "Public reference page for Stmarys University BASLP and speech-hearing science admissions information.",
+    description: "Public reference page for St.Mary's University BASLP and speech-hearing science admissions information.",
     eyebrow: "Specialized Sciences",
-    intro: "Stmarys University publishes BASLP and speech-hearing science information through its Rehabilitation Sciences pages. Applicants should verify professional permissions through published university or statutory council documents.",
+    intro: "St.Mary's University publishes BASLP and speech-hearing science information through its Rehabilitation Sciences pages. Applicants should verify professional permissions through published university or statutory council documents.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
-      { question: "Where can I study BASLP at Stmarys University?", answer: "Use the BASLP programme page under the School of Rehabilitation Sciences for current university information." },
+      { question: "Where can I study BASLP at St.Mary's University?", answer: "Use the BASLP programme page under the School of Rehabilitation Sciences for current university information." },
     ],
     sections: [
       {
@@ -947,9 +947,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "campus-near-ramoji-film-city",
     title: "Campus Near Ramoji Film City",
-    description: "Stmarys University Deshmukhi Campus location guide and directions near Ramoji Film City, Hyderabad.",
+    description: "St.Mary's University Deshmukhi Campus location guide and directions near Ramoji Film City, Hyderabad.",
     eyebrow: "Location Guide",
-    intro: "Stmarys University Deshmukhi campus is located near Ramoji Film City, Hyderabad, with public contact and visit guidance on the Contact page.",
+    intro: "St.Mary's University Deshmukhi campus is located near Ramoji Film City, Hyderabad, with public contact and visit guidance on the Contact page.",
     pageType: "trust",
     ...defaultStatus,
     answers: [
@@ -978,13 +978,13 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "campus-location-hyderabad",
     title: "Campus Location Hyderabad",
-    description: "Official Stmarys University Hyderabad campus address, map reference, and visitor location information.",
+    description: "Official St.Mary's University Hyderabad campus address, map reference, and visitor location information.",
     eyebrow: "Campus Location",
-    intro: `Stmarys University is located at ${SITE_CONTACT.address}`,
+    intro: `St.Mary's University is located at ${SITE_CONTACT.address}`,
     pageType: "local",
     ...defaultStatus,
     answers: [
-      { question: "Where is the Stmarys University campus located?", answer: SITE_CONTACT.address },
+      { question: "Where is the St.Mary's University campus located?", answer: SITE_CONTACT.address },
       { question: "What is the nearest landmark?", answer: "The campus is located near Ramoji Film City, Hyderabad." },
       { question: "Who should visitors contact before coming to campus?", answer: `Visitors may contact the university helpdesk at ${SITE_CONTACT.primaryPhone} or ${SITE_CONTACT.email}.` },
     ],
@@ -1005,7 +1005,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
       },
     ],
     faqItems: [
-      { question: "Is the campus location page public?", answer: "Yes. This page provides the public campus address and map reference for Stmarys University Hyderabad." },
+      { question: "Is the campus location page public?", answer: "Yes. This page provides the public campus address and map reference for St.Mary's University Hyderabad." },
     ],
     mapEmbedUrl: "https://maps.google.com/maps?q=St.%20Mary%27s%20Rehabilitation%20University%2C%20Deshmukhi&output=embed",
     relatedLinks: [
@@ -1017,9 +1017,9 @@ export const INFO_PAGES: InfoPageConfig[] = [
   {
     slug: "hostel",
     title: "Hostel Facilities",
-    description: "Public hostel facility information for students at Stmarys University.",
+    description: "Public hostel facility information for students at St.Mary's University.",
     eyebrow: "Student Life",
-    intro: "Stmarys University provides separate hostel facilities for boys and girls, subject to university norms, allotment rules, and availability.",
+    intro: "St.Mary's University provides separate hostel facilities for boys and girls, subject to university norms, allotment rules, and availability.",
     pageType: "trust",
     ...defaultStatus,
     answers: [

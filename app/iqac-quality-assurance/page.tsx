@@ -5,8 +5,8 @@ import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "IQAC & Quality Assurance | Stmarys University",
-  description: "Official portal of the Internal Quality Assurance Cell (IQAC) at Stmarys University, managing quality standards and NAAC compliance.",
+  title: "IQAC & Quality Assurance | St.Mary's University",
+  description: "Official portal of the Internal Quality Assurance Cell (IQAC) at St.Mary's University, managing quality standards and NAAC compliance.",
   alternates: {
     canonical: "https://smru.edu.in/iqac-quality-assurance",
   },
@@ -25,8 +25,8 @@ export default function IQACPage() {
       <StructuredData
         id="iqac-webpage-schema"
         data={buildWebPageSchema({
-          title: "IQAC & Quality Assurance | Stmarys University",
-          description: "Official portal of the Internal Quality Assurance Cell (IQAC) at Stmarys University, managing quality standards and NAAC compliance.",
+          title: "IQAC & Quality Assurance | St.Mary's University",
+          description: "Official portal of the Internal Quality Assurance Cell (IQAC) at St.Mary's University, managing quality standards and NAAC compliance.",
           pathname: "/iqac-quality-assurance",
         })}
       />
@@ -50,7 +50,7 @@ export default function IQACPage() {
             <div className="w-20 h-1.5 bg-[#ffaf3a] cut-corner-underline mx-auto mb-8" />
 
             <p className="max-w-2xl mx-auto text-slate-600 font-medium text-lg leading-relaxed mb-10">
-              The Internal Quality Assurance Cell (IQAC) at Stmarys Rehabilitation University is established to develop a system for conscious, consistent, and catalytic improvement in the overall performance of the institution.
+              The Internal Quality Assurance Cell (IQAC) at St.Mary's Rehabilitation University is established to develop a system for conscious, consistent, and catalytic improvement in the overall performance of the institution.
             </p>
           </div>
         </section>

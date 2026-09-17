@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/metadata";
 import { lawMetaDescription } from "@/data/law";
 
 export const metadata: Metadata = buildMetadata({
-  title: "School of Law Admissions | Stmarys University",
+  title: "School of Law Admissions | St.Mary's University",
   description: lawMetaDescription,
   pathname: "/landing/law",
   keywords: [
@@ -12,7 +12,7 @@ export const metadata: Metadata = buildMetadata({
     "Law brochure",
     "LLB admissions",
     "LLM admissions",
-    "Stmarys University law",
+    "St.Mary's University law",
   ],
 });
 

@@ -125,7 +125,7 @@ function LeadershipSection({ data, initial }) {
         <header className="text-center mb-10" data-reveal="fade-up">
           <h2 className="text-3xl font-extrabold text-[#0d315c] tracking-tight">Leadership</h2>
           <p className="mt-2 text-slate-600 max-w-3xl mx-auto">
-            A clear, organized view of the teams steering Stmarys University.
+            A clear, organized view of the teams steering St.Mary's University.
           </p>
         </header>
 
@@ -237,7 +237,7 @@ export default function About() {
     { year: "2009", title: "Integrated & Tech Leap", description: "Integrated Campus Hyderabad and CE&T Patancheru start; Sree Harsha Technologies training centre opens.", icon: <FaGraduationCap aria-hidden />, side: "left" },
     { year: "2011", title: "Pan-India Presence – Kolkata", description: "St. Mary’s Technical Campus Kolkata launches with Engineering, Management & MCA schools.", icon: <FaGlobe aria-hidden />, side: "right" },
     { year: "2020", title: "Creative & Digital Frontier", description: "Visual Arts & Design Degree College opens; tele-rehab and digital-health pilots roll out.", icon: <FaPaintBrush aria-hidden />, side: "left" },
-    { year: "2025", title: "Stmarys University", description: "A rehabilitation-focused private university dedicated to rehabilitation sciences.", icon: <FaUniversity aria-hidden />, side: "right" },
+    { year: "2025", title: "St.Mary's University", description: "A rehabilitation-focused private university dedicated to rehabilitation sciences.", icon: <FaUniversity aria-hidden />, side: "right" },
   ];
 
   /* ---- Leadership data (slugs match /leadership/:slug routes) ---- */
@@ -321,7 +321,7 @@ export default function About() {
           <h1 className="smru-h1 text-[#0d315c] flex flex-col items-center" data-reveal="fade-up">
             About 
             <span className="text-[#25b895] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
-              Stmarys University
+              St.Mary's University
             </span>
           </h1>
           <div className="mt-4 h-1.5 w-20 cut-corner-badge bg-[#ffaf3a] mx-auto" data-reveal="fade-up" style={{ "--delay": "0.1s" }} />
@@ -330,7 +330,7 @@ export default function About() {
             data-reveal="fade-up"
             style={{ "--delay": "0.08s" }}
           >
-            Stmarys University empowers healthcare professionals to transform lives through practice-led rehabilitation education, innovative research, and compassionate care.
+            St.Mary's University empowers healthcare professionals to transform lives through practice-led rehabilitation education, innovative research, and compassionate care.
           </p>
         </div>
       </section>
@@ -340,7 +340,7 @@ export default function About() {
         <div className="smru-container grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <UniversitySectionHeader
-              title="Who Stmarys University Is"
+              title="Who St.Mary's University Is"
               align="left"
               titleClassName="text-3xl font-extrabold tracking-tight"
               className="mb-0"
@@ -351,7 +351,7 @@ export default function About() {
               style={{ "--delay": "0.08s" }}
             >
               <p>
-                <strong>Stmarys University</strong> is an institution dedicated to preparing skilled, ethical, and practice-ready professionals across rehabilitation, healthcare, allied sciences, assistive technology, law, management, technology, and multidisciplinary fields.
+                <strong>St.Mary's University</strong> is an institution dedicated to preparing skilled, ethical, and practice-ready professionals across rehabilitation, healthcare, allied sciences, assistive technology, law, management, technology, and multidisciplinary fields.
               </p>
               <p>
                 Our <strong>six-school academic model</strong> focuses on delivering depth and specialisation. We blend rigorous clinical training, evidence-based research, and a culture of empathy to create a <strong>student-first learning</strong> environment. 
@@ -364,7 +364,7 @@ export default function About() {
           <div className="flex justify-center" data-reveal="fade-left">
             <img
               src={resolveAssetSrc(logo)}
-              alt="Stmarys University Logo"
+              alt="St.Mary's University Logo"
               className="w-full max-w-[420px] object-contain drop-shadow-2xl"
               loading="lazy"
             />
@@ -384,7 +384,7 @@ export default function About() {
           <div className="mx-auto mt-4 h-1.5 w-24 cut-corner-underline bg-[#ffaf3a]" />
           
           <p className="mt-8 text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed font-medium">
-            Stmarys University is established through Telangana Gazette Act No. 10 of 2026 and is recognized by the University Grants Commission under Section 2(f) of the UGC Act, 1956. We maintain strict transparency across all academic and institutional operations.
+            St.Mary's University is established through Telangana Gazette Act No. 10 of 2026 and is recognized by the University Grants Commission under Section 2(f) of the UGC Act, 1956. We maintain strict transparency across all academic and institutional operations.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -578,11 +578,11 @@ export default function About() {
         <div className="smru-container">
           <UniversitySectionHeader
             title="Institutional Governance"
-            subtitle="The leadership structure of Stmarys University ensures academic excellence, statutory compliance, and transparent governance."
+            subtitle="The leadership structure of St.Mary's University ensures academic excellence, statutory compliance, and transparent governance."
             className="mb-12"
           />
           <p className="text-[13px] font-bold text-[#0d315c] uppercase tracking-widest mb-6 opacity-60">
-            "Governance at Stmarys University is structured to support transparent academic leadership, institutional accountability, and statutory compliance."
+            "Governance at St.Mary's University is structured to support transparent academic leadership, institutional accountability, and statutory compliance."
           </p>
           <LeadershipBoards groups={leadershipGroups} />
         </div>

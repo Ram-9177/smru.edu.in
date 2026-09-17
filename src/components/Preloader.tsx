@@ -55,7 +55,7 @@ export default function Preloader() {
       >
         <Image
           src="/assets/Logo.webp"
-          alt="Stmarys University Logo"
+          alt="St.Mary's University Logo"
           width={450}
           height={240}
           priority={false}

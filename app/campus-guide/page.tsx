@@ -3,11 +3,11 @@ import CampusGuide from "@/views/CampusGuide";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Campus Guide | Physical & Virtual Tour | Stmarys University",
+  title: "Campus Guide | Physical & Virtual Tour | St.Mary's University",
   description:
-    "Choose a language and explore the Stmarys University campus through a guided physical or virtual campus tour.",
+    "Choose a language and explore the St.Mary's University campus through a guided physical or virtual campus tour.",
   pathname: "/campus-guide",
-  keywords: ["Stmarys University campus guide", "Stmarys University campus guide", "campus tour", "virtual campus tour", "physical campus tour"],
+  keywords: ["St.Mary's University campus guide", "St.Mary's University campus guide", "campus tour", "virtual campus tour", "physical campus tour"],
 });
 
 export default function CampusGuidePage() {

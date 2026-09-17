@@ -5,8 +5,8 @@ import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = {
-  title: "Admission Regulations & Policy | Stmarys University",
-  description: "Official Admission Policy and academic regulations of Stmarys University, Hyderabad, Telangana, in compliance with UGC guidelines.",
+  title: "Admission Regulations & Policy | St.Mary's University",
+  description: "Official Admission Policy and academic regulations of St.Mary's University, Hyderabad, Telangana, in compliance with UGC guidelines.",
   alternates: {
     canonical: "https://smru.edu.in/admission-policy",
   },
@@ -25,8 +25,8 @@ export default function AdmissionPolicyPage() {
       <StructuredData
         id="admission-policy-webpage-schema"
         data={buildWebPageSchema({
-          title: "Admission Regulations & Policy | Stmarys University",
-          description: "Official Admission Policy and academic regulations of Stmarys University, Hyderabad, Telangana, in compliance with UGC guidelines.",
+          title: "Admission Regulations & Policy | St.Mary's University",
+          description: "Official Admission Policy and academic regulations of St.Mary's University, Hyderabad, Telangana, in compliance with UGC guidelines.",
           pathname: "/admission-policy",
         })}
       />
@@ -48,7 +48,7 @@ export default function AdmissionPolicyPage() {
           <div className="smru-container max-w-4xl">
             <div className="p-8 border border-[#d8e8fb] bg-white cut-corner-panel shadow-sm mb-10 text-slate-600 leading-relaxed font-medium">
               <p className="mb-6 text-center text-lg max-w-3xl mx-auto">
-                Stmarys University follows a strictly merit-based, transparent admission process across all its programs. Our admission policies are fully compliant with the guidelines established by the University Grants Commission (UGC) and relevant statutory councils (such as the Rehabilitation Council of India, where applicable).
+                St.Mary's University follows a strictly merit-based, transparent admission process across all its programs. Our admission policies are fully compliant with the guidelines established by the University Grants Commission (UGC) and relevant statutory councils (such as the Rehabilitation Council of India, where applicable).
               </p>
               
               <h3 className="text-xl font-black text-[#0d315c] mt-10 mb-6 flex items-center gap-2 border-b border-[#eef4fb] pb-4">

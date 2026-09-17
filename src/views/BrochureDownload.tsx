@@ -38,9 +38,9 @@ export default function BrochureDownload() {
       {/* Cinematic Background Background */}
       <div className="absolute inset-0 bg-[radial-gradient(at_0%_0%,rgba(37,184,149,0.1)_0,transparent_55%),radial-gradient(at_100%_0%,rgba(13,49,92,0.06)_0,transparent_55%)]" />
       <SEO
-        title="Download Brochure | Stmarys University"
-        description="Download Stmarys University's official university flyer with programs, facilities, and admissions info."
-        keywords={["Stmarys University brochure","Stmarys flyer","university brochure download","rehabilitation university brochure"]}
+        title="Download Brochure | St.Mary's University"
+        description="Download St.Mary's University's official university flyer with programs, facilities, and admissions info."
+        keywords={["St.Mary's University brochure","St.Mary's flyer","university brochure download","rehabilitation university brochure"]}
         canonical="https://smru.edu.in/brochure"
         og={{ url: "https://smru.edu.in/brochure" }}
       />
@@ -56,7 +56,7 @@ export default function BrochureDownload() {
 
           {/* Download Message */}
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Download Stmarys University Flyer
+            Download St.Mary's University Flyer
           </h1>
           
           <p className="text-lg text-gray-600 mb-6">

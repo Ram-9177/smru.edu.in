@@ -114,7 +114,7 @@ const Navbar = ({
         <Link href="/" onClick={closeMenu} onMouseEnter={() => setActiveMenu(null)} className="flex h-full items-center justify-center shrink-0 bg-white cut-corner-badge shadow-md overflow-hidden transition-all duration-300 px-3 sm:px-4 lg:px-5 min-w-[112px] sm:min-w-[128px] lg:min-w-[140px]">
           <Image
             src="/assets/Logo.webp"
-            alt="Stmarys University Logo"
+            alt="St.Mary's University Logo"
             width={374}
             height={200}
             className="w-[86px] object-contain lg:w-[96px]"

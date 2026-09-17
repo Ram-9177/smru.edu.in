@@ -17,11 +17,11 @@ const clean = (value?: string) => String(value || "").replace(/\s+/g, " ").trim(
 
 const fallbackDescription = (item: SeoCourseListItem) => {
   const level = clean(item.level) || "Programme";
-  const school = clean(item.schoolName) || "Stmarys University";
+  const school = clean(item.schoolName) || "St.Mary's University";
   const department = clean(item.departmentName);
   const departmentSuffix = department ? ` in ${department}` : "";
 
-  return `${level} programme under ${school}${departmentSuffix} at Stmarys University Hyderabad.`;
+  return `${level} programme under ${school}${departmentSuffix} at St.Mary's University Hyderabad.`;
 };
 
 export const buildCourseItemListSchema = (items: SeoCourseListItem[]) => ({

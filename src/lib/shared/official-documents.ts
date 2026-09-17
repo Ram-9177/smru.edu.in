@@ -32,7 +32,7 @@ export const STATUS_DESCRIPTIONS: Record<DisclosureStatus, string> = {
 };
 
 export const FIRST_ACADEMIC_YEAR_NOTE =
-  "Stmarys University carries forward Stmarys educational legacy while operating as Stmarys University in its first university academic cycle. Items such as university alumni data, placement outcomes, annual reports, audited annual accounts, ranking submissions, and accreditation-cycle outputs are tracked for future publication when they become applicable or are cleared for public release.";
+  "St.Mary's University carries forward St.Mary's educational legacy while operating as St.Mary's University in its first university academic cycle. Items such as university alumni data, placement outcomes, annual reports, audited annual accounts, ranking submissions, and accreditation-cycle outputs are tracked for future publication when they become applicable or are cleared for public release.";
 
 export const APPROVAL_SAFETY_NOTE =
   "Programme-level professional council permissions, where required, are verified through official university notifications or relevant statutory council documents.";
@@ -98,7 +98,7 @@ export const OFFICIAL_DOCUMENTS = {
   admissionsBrochure: {
     id: "admissions-brochure",
     title: "Admissions Brochure / Flyer",
-    label: "Stmarys University Admissions Brochure",
+    label: "St.Mary's University Admissions Brochure",
     category: "Brochure",
     authority: "Admissions Office",
     status: "Published",

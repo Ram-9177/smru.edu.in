@@ -10,9 +10,9 @@ import { safeSlug } from "@/lib/shared/program-utils";
 
 export const metadata: Metadata = buildMetadata({
   title: "Departments",
-  description: "Browse the public department directory for Stmarys University schools and academic pathways.",
+  description: "Browse the public department directory for St.Mary's University schools and academic pathways.",
   pathname: "/departments",
-  keywords: ["departments", "academic departments", "Stmarys University departments", "Stmarys University departments"],
+  keywords: ["departments", "academic departments", "St.Mary's University departments", "St.Mary's University departments"],
 });
 
 export default function Page() {
@@ -39,7 +39,7 @@ export default function Page() {
         id="departments-page-schema"
         data={buildCollectionPageSchema({
           title: "Departments",
-          description: "Browse the public department directory for Stmarys University schools and academic pathways.",
+          description: "Browse the public department directory for St.Mary's University schools and academic pathways.",
           pathname: "/departments",
         })}
       />

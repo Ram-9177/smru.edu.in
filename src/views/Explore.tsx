@@ -53,7 +53,7 @@ export default function Explore() {
       <section className="relative overflow-hidden bg-[#0d315c]">
         <Image
           src="/assets/hero-campus.webp"
-          alt="Stmarys University campus"
+          alt="St.Mary's University campus"
           fill
           priority
           sizes="100vw"

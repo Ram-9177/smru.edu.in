@@ -5,11 +5,11 @@ import { buildMetadata } from "@/lib/metadata";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = buildMetadata({
-  title: "About Stmarys University | Leadership & Legacy",
+  title: "About St.Mary's University | Leadership & Legacy",
   description:
-    "Learn about the educational legacy, leadership, and vision of Stmarys University, Hyderabad, with official governance context.",
+    "Learn about the educational legacy, leadership, and vision of St.Mary's University, Hyderabad, with official governance context.",
   pathname: "/about",
-  keywords: ["About Stmarys University", "Stmarys University leadership", "Stmarys University"],
+  keywords: ["About St.Mary's University", "St.Mary's University leadership", "St.Mary's University"],
 });
 
 export default function Page() {
@@ -25,8 +25,8 @@ export default function Page() {
       <StructuredData
         id="about-page-schema"
         data={buildWebPageSchema({
-          title: "About Stmarys University",
-          description: "Read about the leadership, institutional journey, and academic direction of Stmarys University in Hyderabad.",
+          title: "About St.Mary's University",
+          description: "Read about the leadership, institutional journey, and academic direction of St.Mary's University in Hyderabad.",
           pathname: "/about",
           type: "AboutPage",
         })}

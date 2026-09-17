@@ -97,7 +97,7 @@ export default function EdinboxLanding() {
               </div>
 
               <p className="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed font-medium">
-                Build a career in one of India's most sought-after fields. Stmarys University × AIFSET makes forensic science education accessible to every eligible student in India via a single online entrance exam.
+                Build a career in one of India's most sought-after fields. St.Mary's University × AIFSET makes forensic science education accessible to every eligible student in India via a single online entrance exam.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-6">
@@ -163,13 +163,13 @@ export default function EdinboxLanding() {
       </div>
 
       {/* ══════════════════════
-           WHY Stmarys University SECTION
+           WHY St.Mary's University SECTION
       ══════════════════════ */}
       <section className="py-24 bg-white" id="about">
         <div className="container mx-auto px-4">
           <UniversitySectionHeader 
             title={<>Why Join <span className="text-[#019e6e] italic">Stmarys University?</span></>}
-            subtitle="Stmarys University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India."
+            subtitle="St.Mary's University and AIFSET eliminate the confusion around admissions — one exam, full support, and a university that stands alone in India."
             className="mb-16"
           />
         </div>
@@ -207,7 +207,7 @@ export default function EdinboxLanding() {
               <UniversitySectionHeader 
                 align="left"
                 title={<>The <span className="text-[#ffaf3a]">AIFSET</span> Advantage</>}
-                subtitle="The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to Stmarys University."
+                subtitle="The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to St.Mary's University."
                 titleClassName="text-white"
                 subtitleClassName="text-white/70"
               />
@@ -286,7 +286,7 @@ export default function EdinboxLanding() {
         <div className="container mx-auto px-4">
           <UniversitySectionHeader 
             title={<>Admission <span className="text-[#019e6e] italic">Process</span></>}
-            subtitle="A straightforward 5-step path from your home to a confirmed seat at Stmarys University — fully guided by AIFSET counsellors."
+            subtitle="A straightforward 5-step path from your home to a confirmed seat at St.Mary's University — fully guided by AIFSET counsellors."
             className="mb-16"
           />
         </div>
@@ -297,7 +297,7 @@ export default function EdinboxLanding() {
               { num: "1", title: "Register for AIFSET", desc: "Visit the portal, fill your details, and pay the application fee." },
               { num: "2", title: "Appear for Exam", desc: "Take the AIFSET fully online from home. Any device, zero travel." },
               { num: "3", title: "Receive Score", desc: "Scores declared online. Up to 3 attempts per year." },
-              { num: "4", title: "Apply to Stmarys University", desc: "Submit your AIFSET score directly to Stmarys University via the portal." },
+              { num: "4", title: "Apply to St.Mary's University", desc: "Submit your AIFSET score directly to St.Mary's University via the portal." },
               { num: "5", title: "Confirm Seat", desc: "Finalize documents, fee payment, and final seat confirmation." },
             ].map((step, idx, arr) => (
               <div key={idx} className="flex flex-col lg:flex-row items-center gap-6 flex-1 min-w-[240px]">
@@ -335,7 +335,7 @@ export default function EdinboxLanding() {
               <UniversitySectionHeader 
                 align="left"
                 title={<>What You Can <span className="text-[#019e6e] italic">Become</span></>}
-                subtitle="A B.Sc Forensic Science from Stmarys University opens doors across government labs, law enforcement, private agencies, and research — nationwide."
+                subtitle="A B.Sc Forensic Science from St.Mary's University opens doors across government labs, law enforcement, private agencies, and research — nationwide."
               />
               <button 
                 onClick={() => openApply("forensic")}
@@ -397,7 +397,7 @@ export default function EdinboxLanding() {
           </div>
 
           <div className="mt-16 flex flex-wrap justify-center gap-8 text-white/50 text-xs font-black uppercase tracking-widest">
-            {["Forensic Biotechnology", "Stmarys Rehab University", "Forensic Science (B.Sc)", "AIFSET Counselled Intake"].map((tag) => (
+            {["Forensic Biotechnology", "St.Mary's Rehab University", "Forensic Science (B.Sc)", "AIFSET Counselled Intake"].map((tag) => (
               <div key={tag} className="flex items-center gap-2">
                 <FaCheckCircle className="text-[#ffaf3a]" /> {tag}
               </div>
@@ -413,7 +413,7 @@ export default function EdinboxLanding() {
         <div className="container mx-auto px-4">
           <FaQuoteLeft className="text-[#ffaf3a] text-6xl mx-auto mb-10 opacity-30" />
           <blockquote className="text-2xl md:text-4xl font-black text-white italic max-w-4xl mx-auto leading-tight tracking-tight">
-            "At Stmarys University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
+            "At St.Mary's University, I help learners find their voice — combining cutting-edge forensic science education with hands-on investigative training to transform every graduate into a highly sought-after professional."
           </blockquote>
           <div className="mt-12">
             <div className="text-[#ffaf3a] font-black uppercase tracking-[0.3em] text-sm">Dr. Shiva Deekshith</div>
@@ -449,9 +449,9 @@ export default function EdinboxLanding() {
 
               <div className="space-y-4">
                 {[
-                  { q: "Is AIFSET recognised by Stmarys University?", a: "Yes. Stmarys University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership." },
+                  { q: "Is AIFSET recognised by St.Mary's University?", a: "Yes. St.Mary's University accepts AIFSET scores as the primary admission pathway for B.Sc Forensic Science. It is the official and only entrance route for this programme through the AIFSET partnership." },
                   { q: "How many times can I take the AIFSET?", a: "You can take the AIFSET up to 3 times per year. This gives you multiple opportunities to achieve your best score without the pressure of a single attempt." },
-                  { q: "Can I apply from outside Hyderabad?", a: "Absolutely. AIFSET is fully online and Stmarys University admits students from all states across India. Your location is not a barrier — all you need is an internet connection." },
+                  { q: "Can I apply from outside Hyderabad?", a: "Absolutely. AIFSET is fully online and St.Mary's University admits students from all states across India. Your location is not a barrier — all you need is an internet connection." },
                   { q: "Is there a scholarship available?", a: "Yes. Merit-based scholarships are available for eligible AIFSET applicants. Early registration significantly increases your chances of qualifying for scholarship seats." },
                   { q: "What is the eligibility for AIFSET?", a: "Class 12 with Physics, Chemistry, and Biology or Mathematics. Minimum 50% aggregate from a recognised board. Age 17 years and above." },
                   { q: "What support does AIFSET provide?", a: "AIFSET provides free academic counselling, document guidance, regional on-ground support across India, and complete hand-holding through every step." },
@@ -510,7 +510,7 @@ export default function EdinboxLanding() {
           </div>
           
           <div className="mt-12 text-[10px] font-black uppercase tracking-[0.4em] text-white/30">
-            Stmarys University × AIFSET Partnership &nbsp;·&nbsp; Telangana State Act University &nbsp;·&nbsp; 100% Online AIFSET Exam
+            St.Mary's University × AIFSET Partnership &nbsp;·&nbsp; Telangana State Act University &nbsp;·&nbsp; 100% Online AIFSET Exam
           </div>
         </div>
       </section>

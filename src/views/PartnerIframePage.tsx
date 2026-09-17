@@ -70,8 +70,8 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
   return (
     <>
       <SEO
-        title={`${partner.name || "Partner"} | Stmarys University`}
-        description={partner.shortDescription || `Explore ${partner.name || "our partner"} at Stmarys University.`}
+        title={`${partner.name || "Partner"} | St.Mary's University`}
+        description={partner.shortDescription || `Explore ${partner.name || "our partner"} at St.Mary's University.`}
         canonical={`https://smru.edu.in/partner/${partner.slug || slug}`}
       />
 
@@ -94,7 +94,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
             >
               <motion.img 
                 src={resolveAssetSrc(logo)} 
-                alt="Stmarys University Logo" 
+                alt="St.Mary's University Logo" 
                 className="h-20 md:h-28 w-auto object-contain mb-10 drop-shadow-xl"
                 animate={{ 
                   scale: [1, 1.05, 1],

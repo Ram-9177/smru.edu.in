@@ -4,7 +4,7 @@ import { UNIVERSITY_INFO } from "@/lib/shared/university";
 
 const siteUrl = SITE_IDENTITY.canonicalBaseUrl;
 const siteName = SITE_IDENTITY.siteName;
-export const SEO_TITLE_BRAND = "Stmarys University";
+export const SEO_TITLE_BRAND = "St.Mary's University";
 const TITLE_SEPARATOR = " | ";
 const MAX_SEO_TITLE_LENGTH = 60;
 const MAX_META_DESCRIPTION_LENGTH = 160;
@@ -40,9 +40,9 @@ export const formatSeoTitle = (title: string, pathname = "/") => {
   // into the same SERP title.
   if (
     HOME_PATHNAMES.has(normalizedPathname) &&
-    /^(?:St\.?\s*Mary'?s|Stmarys)\s+University/i.test(primary)
+    /^(?:St\.?\s*Mary'?s|St.Mary's)\s+University/i.test(primary)
   ) {
-    return "Stmarys University | Private University in Hyderabad";
+    return "St.Mary's University | Private University in Hyderabad";
   }
 
   if (primary.toLowerCase().endsWith(SEO_TITLE_BRAND.toLowerCase())) {

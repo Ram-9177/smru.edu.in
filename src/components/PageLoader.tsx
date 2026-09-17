@@ -37,7 +37,7 @@ const PageLoader = () => {
         <div className="relative flex flex-col items-center">
           <img 
             src={resolveAssetSrc(logo)} 
-            alt="Stmarys University Logo" 
+            alt="St.Mary's University Logo" 
             className="h-28 md:h-36 w-auto object-contain animate-pulse will-change-transform"
           />
         </div>

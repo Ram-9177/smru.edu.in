@@ -78,7 +78,7 @@ const getPartnerMeta = (partner) => {
   if (partner.redirectUrl?.startsWith("/")) {
     return {
       typeLabel: "Internal Route",
-      typeNote: "Structured partner page inside the Stmarys University ecosystem",
+      typeNote: "Structured partner page inside the St.Mary's University ecosystem",
       icon: <FaLink />,
     };
   }
@@ -184,8 +184,8 @@ export default function Partner() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Our Edupartners | Stmarys University"
-        description="Explore strategic education and technology partners powering future-ready learning at Stmarys University."
+        title="Our Edupartners | St.Mary's University"
+        description="Explore strategic education and technology partners powering future-ready learning at St.Mary's University."
       />
 
       <section className="relative overflow-hidden border-b border-slate-100 bg-white pt-10">

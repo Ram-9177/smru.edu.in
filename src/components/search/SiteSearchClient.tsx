@@ -59,10 +59,10 @@ const normalize = (value = "") =>
 const compact = (value = "") => normalize(value).replace(/\s+/g, "");
 
 const QUERY_SYNONYMS: Record<string, string[]> = {
-  Stmarys: ["Stmarys University", "Stmarys University hyderabad"],
-  "Stmarys University": ["Stmarys", "Stmarys University hyderabad"],
-  Stmaryshyderabad: ["Stmarys University hyderabad"],
-  Stmarysuniversity: ["Stmarys", "Stmarys University"],
+  "St.Mary's": ["St.Mary's University", "St.Mary's University hyderabad"],
+  "St.Mary's University": ["St.Mary's", "St.Mary's University hyderabad"],
+  Stmaryshyderabad: ["St.Mary's University hyderabad"],
+  Stmarysuniversity: ["St.Mary's", "St.Mary's University"],
 };
 
 const queryVariants = (query: string) => {
@@ -146,7 +146,7 @@ const scoreSearchItem = (item: SearchItem, query: string) => {
 };
 
 const staticItems: SearchItem[] = [
-  { title: "Home", description: "University overview, admissions highlights, campus, schools, and student support.", href: "/", type: "Page", keywords: "home Stmarys University admissions campus" },
+  { title: "Home", description: "University overview, admissions highlights, campus, schools, and student support.", href: "/", type: "Page", keywords: "home St.Mary's University admissions campus" },
   { title: "About", description: "Institutional profile, leadership, journey, and university context.", href: "/about", type: "Page", keywords: "about leadership university profile" },
   { title: "Admissions", description: "UG, PG, diploma, and doctoral admissions guidance.", href: "/admissions", type: "Admissions", keywords: "admission apply eligibility fee scholarship" },
   { title: "Ph.D. Admissions", description: "Doctoral admissions status, notices, research routes, and next-cycle support.", href: "/phd-admissions", type: "Admissions", keywords: "phd doctoral research entrance" },
@@ -182,7 +182,7 @@ function buildSearchItems(): SearchItem[] {
       };
       const programmeItems: SearchItem[] = (department.programs || []).map((program) => ({
         title: program.name || "Program",
-        description: program.overview || `${department.name || "Department"} programme under ${school.name || "Stmarys University"}.`,
+        description: program.overview || `${department.name || "Department"} programme under ${school.name || "St.Mary's University"}.`,
         href: `${deptHref}/${safeSlug(program.slug, program.name)}`,
         type: "Programme",
         keywords: `${school.name || ""} ${department.name || ""} ${program.name || ""} ${program.level || ""} ${program.eligibility || ""} ${program.duration || ""}`

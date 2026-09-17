@@ -7,16 +7,16 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const leader = leaderBySlug[params.slug as keyof typeof leaderBySlug];
   if (!leader) {
     return buildMetadata({
-      title: "Leadership | Stmarys University",
-      description: "Leadership profile at Stmarys University.",
+      title: "Leadership | St.Mary's University",
+      description: "Leadership profile at St.Mary's University.",
       pathname: `/leadership/${params.slug}`,
       robots: "noindex,follow",
     });
   }
 
   return buildMetadata({
-    title: `${leader.name} | Leadership | Stmarys University`,
-    description: `${leader.name} — ${leader.role} at Stmarys University.`,
+    title: `${leader.name} | Leadership | St.Mary's University`,
+    description: `${leader.name} — ${leader.role} at St.Mary's University.`,
     pathname: `/leadership/${params.slug}`,
   });
 }

@@ -7,13 +7,13 @@ import { ADMISSIONS_FAQS } from "@/lib/seo/static-page-faqs";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Admissions Open 2026 | Stmarys University",
-  description: "Explore 2026 admissions at Stmarys University. Compare programmes, eligibility, scholarships, counselling support, and doctoral status before applying.",
+  title: "Admissions Open 2026 | St.Mary's University",
+  description: "Explore 2026 admissions at St.Mary's University. Compare programmes, eligibility, scholarships, counselling support, and doctoral status before applying.",
   pathname: "/admissions",
   keywords: [
     "Direct Admission 2026",
     "University Application Hyderabad",
-    "Stmarys University Admissions",
+    "St.Mary's University Admissions",
     "Eligibility",
     "Fees",
     "Scholarships",
@@ -40,7 +40,7 @@ export default function Page() {
         id="admissions-page-schema"
         data={buildWebPageSchema({
           title: "Admissions",
-          description: "Admissions for UG, PG, diploma, and doctoral pathways at Stmarys University.",
+          description: "Admissions for UG, PG, diploma, and doctoral pathways at St.Mary's University.",
           pathname: "/admissions",
         })}
       />

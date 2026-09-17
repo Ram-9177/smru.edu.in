@@ -39,11 +39,11 @@ const PhdAdmission = () => {
   ];
 
   const promise = [
-    { title: "Structured Supervision", desc: "Every scholar is matched with a research supervisor aligned to their area of inquiry. Supervision at Stmarys University follows a structured mentoring framework with regular progress reviews." },
+    { title: "Structured Supervision", desc: "Every scholar is matched with a research supervisor aligned to their area of inquiry. Supervision at St.Mary's University follows a structured mentoring framework with regular progress reviews." },
     { title: "Coursework That Sharpens Research Capability", desc: "Doctoral coursework is not a formality. It builds research methodology competence, domain depth, statistical rigour, and publication readiness." },
     { title: "Interdisciplinary Research Culture", desc: "The university’s architecture naturally creates opportunities for scholars across rehabilitation, engineering, psychology, nursing, and management to collaborate." },
-    { title: "Publication & Conference Support", desc: "Stmarys University encourages scholars to publish in indexed journals and present at national and international conferences. We provide guidance on ethics and manuscript development." },
-    { title: "A Community, Not Just a Programme", desc: "From seminar series and research colloquia to informal mentorship, Stmarys University's scholars become part of a vibrant research community." }
+    { title: "Publication & Conference Support", desc: "St.Mary's University encourages scholars to publish in indexed journals and present at national and international conferences. We provide guidance on ethics and manuscript development." },
+    { title: "A Community, Not Just a Programme", desc: "From seminar series and research colloquia to informal mentorship, St.Mary's University's scholars become part of a vibrant research community." }
   ];
 
   const domains = [
@@ -112,7 +112,7 @@ const PhdAdmission = () => {
     { title: "Confirm Application Fee", desc: "Confirm the current application fee through the official admissions/research office before payment." },
     { title: "Complete Online Application", desc: "Fill in academic, professional, and research interest details at apply.smru.edu.in." },
     { title: "Upload Required Documents", desc: "Certificates (SSC, UG, PG), proof of UGC-NET/GATE/SLET/M.Phil, and 5% exemption proof." },
-    { title: "Appear for Entrance Examination", desc: "Qualify in the Stmarys University Ph.D. entrance examination (Exempted for JRF/GATE)." },
+    { title: "Appear for Entrance Examination", desc: "Qualify in the St.Mary's University Ph.D. entrance examination (Exempted for JRF/GATE)." },
     { title: "Attend Personal Interview", desc: "Present your research proposal and academic background to the selection committee." },
     { title: "Receive Admission Decision", desc: "Final selection based on credentials, proposal, and interview." }
   ];
@@ -315,7 +315,7 @@ const PhdAdmission = () => {
       </nav>
 
       {/* -------------------------------------------------------------------
-          VISION & WHY Stmarys University (Textured Background)
+          VISION & WHY St.Mary's University (Textured Background)
           ------------------------------------------------------------------- */}
       <section id="vision" className="smru-section bg-[#f8faff] relative overflow-hidden scroll-mt-40">
          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
@@ -323,13 +323,13 @@ const PhdAdmission = () => {
             <div className="flex flex-col lg:flex-row gap-24 items-start">
                <div className="lg:w-1/3">
                   <h2 className="text-4xl font-extrabold tracking-tighter text-[#0d315c] leading-tight uppercase">
-                     Why Pursue Your <br />Doctorate at Stmarys University
+                     Why Pursue Your <br />Doctorate at St.Mary's University
                   </h2>
                   <div className="w-16 h-1 mt-6 bg-[#ffaf3a]" />
                </div>
                <div className="lg:w-2/3 space-y-10 text-[18px] text-gray-500 font-medium leading-relaxed">
                   <p>
-                     India’s rehabilitation, allied health, and inclusive-care sectors face a critical shortage of research leaders. Stmarys University’s doctoral programme exists to develop exactly these professionals within a rehabilitation-focused academic ecosystem.
+                     India’s rehabilitation, allied health, and inclusive-care sectors face a critical shortage of research leaders. St.Mary's University’s doctoral programme exists to develop exactly these professionals within a rehabilitation-focused academic ecosystem.
                   </p>
                   <p className="border-l-4 border-[#ffaf3a] pl-8 italic text-gray-400">
                      "Your doctoral research here is not just academic — it is part of a national capacity-building mission."
@@ -340,7 +340,7 @@ const PhdAdmission = () => {
       </section>
 
       {/* -------------------------------------------------------------------
-          THE Stmarys University EDGE (Refined Cards)
+          THE St.Mary's University EDGE (Refined Cards)
           ------------------------------------------------------------------- */}
       <section id="promise" className="smru-section bg-white scroll-mt-40">
          <div className="smru-container">

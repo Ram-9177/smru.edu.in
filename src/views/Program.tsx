@@ -34,7 +34,7 @@ const formatLevel = (lvl = "") => {
 const compact = (value = "") => value.replace(/\s+/g, " ").trim();
 
 const buildProgramSeoTitle = (programName: string) =>
-  `${compact(programName)} Admissions 2026, Eligibility, Fees & Syllabus at Stmarys University Hyderabad`;
+  `${compact(programName)} Admissions 2026, Eligibility, Fees & Syllabus at St.Mary's University Hyderabad`;
 
 const buildProgramDirectAnswer = ({
   programName,
@@ -52,9 +52,9 @@ const buildProgramDirectAnswer = ({
   eligibility?: string;
 }) => {
   const parts = [
-    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "Stmarys University"}`,
+    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "St.Mary's University"}`,
     departmentName ? `under ${departmentName}` : "",
-    "at Stmarys University Hyderabad",
+    "at St.Mary's University Hyderabad",
     duration ? `Duration: ${duration}` : "",
     eligibility ? `Eligibility: ${eligibility}` : "",
   ].filter(Boolean);
@@ -133,7 +133,7 @@ const getRegulatoryStatus = (prog: any) => {
   ];
   const risky = riskyTerms.some((term) => normalized.includes(term.toLowerCase()));
   if (risky) {
-    return "Stmarys University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.";
+    return "St.Mary's University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.";
   }
   return raw
     ? `${raw} Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.`

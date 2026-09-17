@@ -33,7 +33,7 @@ import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 
 const navLinks = [
   ["Programmes", "#programmes"],
-  ["Why Stmarys University Law", "#why"],
+  ["Why St.Mary's University Law", "#why"],
   ["Facilities", "#facilities"],
   ["Careers", "#careers"],
   ["Admissions", "#admissions"],
@@ -55,7 +55,7 @@ const facilityImages = ["/assets/law/moot-court.webp", "/assets/law/digital-libr
 
 const admissionSteps = [
   ["01", "Choose Programme", "Select your integrated law or LL.B. pathway."],
-  ["02", "Apply Online", "Submit details through the Stmarys University admissions portal."],
+  ["02", "Apply Online", "Submit details through the St.Mary's University admissions portal."],
   ["03", "Counselling", "Complete eligibility review and admissions counselling."],
   ["04", "Confirm Seat", "Finish documentation and begin your law journey."],
 ];
@@ -132,7 +132,7 @@ export default function LawLanding() {
               Approved by the Bar Council of India
             </p>
             <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-white/78 sm:text-lg">
-              Build advocacy, legal reasoning, research, ethics, and courtroom confidence through practice-driven law education at Stmarys University.
+              Build advocacy, legal reasoning, research, ethics, and courtroom confidence through practice-driven law education at St.Mary's University.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ApplyButton className="inline-flex items-center justify-center gap-3 bg-[#c43342] px-7 py-4 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[0_18px_40px_rgba(196,51,66,0.34)] transition-transform hover:-translate-y-1">
@@ -325,7 +325,7 @@ export default function LawLanding() {
 
       <footer className="bg-[#071a32] px-4 py-8 text-white sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-xs font-semibold text-white/60 md:flex-row">
-          <p>Stmarys University, Hyderabad, Telangana</p>
+          <p>St.Mary's University, Hyderabad, Telangana</p>
           <p>{SITE_CONTACT.email} | {SITE_CONTACT.primaryPhone}</p>
         </div>
       </footer>

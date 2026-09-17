@@ -74,7 +74,7 @@ export default function CinematicIntro({ onComplete, logoUrl }: CinematicIntroPr
               {logoUrl && (
                 <motion.img
                   src={logoUrl}
-                  alt="Stmarys University Logo"
+                  alt="St.Mary's University Logo"
                   className="h-20 w-auto drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                   initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -93,7 +93,7 @@ export default function CinematicIntro({ onComplete, logoUrl }: CinematicIntroPr
               transition={{ delay: 0.5 }}
             >
               <h1 className="text-white text-3xl md:text-5xl font-black uppercase tracking-[0.4em] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
-                Stmarys <br /> 
+                St.Mary's <br /> 
                 <span className="text-[#019e6e] text-2xl md:text-4xl mt-2 block">Rehabilitation University</span>
               </h1>
               <div className="mt-8 flex items-center justify-center gap-4">

@@ -99,7 +99,7 @@ export default function Home() {
       return {
         icon: icons[i % icons.length],
         title: p,
-        desc: existing?.desc || "Experience excellence and innovation at Stmarys University."
+        desc: existing?.desc || "Experience excellence and innovation at St.Mary's University."
       };
     });
   }, [getCmsContent]);
@@ -136,7 +136,7 @@ export default function Home() {
       { href: "/campus-location-hyderabad", label: "Campus Location", description: "Deshmukhi campus address, map access, and visit guidance near Hyderabad." },
       { href: "/contact", label: "Contact Helpdesk", description: "Admissions, campus visit, and student support contact routes." },
       { href: "/campus-360", label: "Visit Campus", description: "Campus tour, facilities preview, and location guidance." },
-      { href: "/careers", label: "Careers", description: "Explore faculty and institutional job opportunities at Stmarys University." },
+      { href: "/careers", label: "Careers", description: "Explore faculty and institutional job opportunities at St.Mary's University." },
     ].filter(Boolean),
     []
   );
@@ -186,7 +186,7 @@ export default function Home() {
   const next = useCallback(() => setIndex((p) => (p + 1) % total), [total]);
   const prev = useCallback(() => setIndex((p) => (p - 1 + total) % total), [total]);
 
-  const collegeNameLines = ["Stmarys", "Rehabilitation", "University"];
+  const collegeNameLines = ["St.Mary's", "Rehabilitation", "University"];
 
   return (
     <>
@@ -225,7 +225,7 @@ export default function Home() {
               <Image
                 key={src}
                 src={src}
-                alt="Stmarys University Campus View in Hyderabad"
+                alt="St.Mary's University Campus View in Hyderabad"
                 fill
                 priority={i === 0}
                 sizes="100vw"
@@ -336,17 +336,17 @@ export default function Home() {
       <section id="trust-strip" className="bg-[#0d315c] text-white py-8 border-y border-white/10 relative z-20">
         <div className="smru-container text-center">
           <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white/90 leading-relaxed max-w-5xl mx-auto">
-            Stmarys University, legally established as St. Mary&apos;s Rehabilitation University in Hyderabad, Telangana, was established through Telangana Gazette Act No. 10 of 2026 and recognized by the University Grants Commission under Section 2(f) of the UGC Act, 1956.
+            St.Mary's University, legally established as St. Mary&apos;s Rehabilitation University in Hyderabad, Telangana, was established through Telangana Gazette Act No. 10 of 2026 and recognized by the University Grants Commission under Section 2(f) of the UGC Act, 1956.
           </p>
         </div>
       </section>
 
-      {/* ===================== WHY Stmarys University ====================== */}
+      {/* ===================== WHY St.Mary's University ====================== */}
       <section id="why-smru" className="scroll-mt-24 smru-section bg-[#f8fbff]">
         <div className="smru-container">
           <UniversitySectionHeader
-            title="Why Join Stmarys University?"
-            subtitle="Stmarys University brings together rehabilitation, healthcare, allied sciences, assistive technology, law, management, technology, and multidisciplinary education through a student-first academic ecosystem."
+            title="Why Join St.Mary's University?"
+            subtitle="St.Mary's University brings together rehabilitation, healthcare, allied sciences, assistive technology, law, management, technology, and multidisciplinary education through a student-first academic ecosystem."
             subtitleClassName="max-w-3xl"
           />
           <BentoTrustGrid
@@ -459,7 +459,7 @@ export default function Home() {
       <section id="experience" className="scroll-mt-24 smru-section bg-[#f8fbff]">
         <div className="smru-container">
           <UniversitySectionHeader
-            title="Teaching Techniques at Stmarys University"
+            title="Teaching Techniques at St.Mary's University"
             subtitle="We employ advanced, practice-based teaching methods to ensure students gain hands-on experience and a profound understanding of their fields."
             subtitleClassName="max-w-3xl"
           />
@@ -535,7 +535,7 @@ export default function Home() {
           </div>
           <UniversitySectionHeader
             title="Our Industrial Partners"
-            subtitle="Stmarys University collaborates with leading healthcare and technology organizations to ensure our students graduate industry-ready."
+            subtitle="St.Mary's University collaborates with leading healthcare and technology organizations to ensure our students graduate industry-ready."
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {(() => {
@@ -556,7 +556,7 @@ export default function Home() {
               return Object.values(EDU_PARTNERS)
                 .filter(p => {
                   const slug = String(p.landingUrl || "").replace(/^\/+/, "").replace(/\/$/, "").toLowerCase();
-                  return p.code !== "Stmarys University" && 'logo' in p && p.landingUrl && !isRemovedPartnerPageSlug(slug);
+                  return p.code !== "St.Mary's University" && 'logo' in p && p.landingUrl && !isRemovedPartnerPageSlug(slug);
                 })
                 .sort((a, b) => {
                   const slugA = (a.landingUrl || "").replace(/^\//, "").toLowerCase();
@@ -687,7 +687,7 @@ export default function Home() {
       <section id="gallery" className="relative scroll-mt-24 bg-white overflow-hidden">
         <div className="smru-container py-12 md:py-16">
           <UniversitySectionHeader
-            title="Life at Stmarys University"
+            title="Life at St.Mary's University"
             subtitle="Explore our vibrant campus life through state-of-the-art labs, sports facilities, and modern learning spaces."
           />
         </div>
@@ -698,7 +698,7 @@ export default function Home() {
             <div className="relative aspect-video md:aspect-square lg:aspect-auto md:col-span-2 lg:col-span-2 cut-corner-panel overflow-hidden group shadow-xl border border-slate-100">
               <Image 
                 src="/assets/campus-gallery/drone.webp" 
-                alt="Stmarys University Drone View" 
+                alt="St.Mary's University Drone View" 
                 fill 
                 className="object-cover object-center group-hover:scale-105 transition-all duration-1000" 
               />
@@ -776,8 +776,8 @@ export default function Home() {
       <section id="scholarships" className="relative scroll-mt-24 smru-section bg-white border-b border-slate-100 overflow-hidden bg-[radial-gradient(at_50%_0%,rgba(255,175,58,0.08)_0,transparent_55%)]">
         <div className="smru-container">
           <UniversitySectionHeader
-            title="Scholarships at Stmarys University"
-            subtitle="We believe that quality education should be accessible. Stmarys University offers robust scholarship programs for meritorious and deserving students."
+            title="Scholarships at St.Mary's University"
+            subtitle="We believe that quality education should be accessible. St.Mary's University offers robust scholarship programs for meritorious and deserving students."
           />
           <div className="flex flex-wrap justify-center gap-3 md:gap-5 mt-12">
             {scholarshipNames.map((scholarship, i) => (
@@ -794,7 +794,7 @@ export default function Home() {
         <div className="smru-container">
           <UniversitySectionHeader
             title="University Events"
-            subtitle="Latest campus activities, institutional initiatives, and student life updates from Stmarys University."
+            subtitle="Latest campus activities, institutional initiatives, and student life updates from St.Mary's University."
           />
 
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -854,7 +854,7 @@ export default function Home() {
             <div className="relative min-h-[300px] overflow-hidden lg:min-h-[480px]">
               <Image
                 src="/assets/campus-gallery/campus-aerial.webp"
-                alt="Aerial view of Stmarys University campus"
+                alt="Aerial view of St.Mary's University campus"
                 fill
                 sizes="(max-width: 1024px) 100vw, 52vw"
                 className="object-cover transition-transform duration-700 hover:scale-[1.03]"
@@ -870,7 +870,7 @@ export default function Home() {
               <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#019e6e]/10 blur-3xl" />
               <div className="relative">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#019e6e]">
-                  Explore Stmarys
+                  Explore St.Mary's
                 </p>
                 <h2 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight text-[#0d315c] sm:text-4xl lg:text-5xl">
                   Experience the campus in 360°
@@ -918,7 +918,7 @@ export default function Home() {
           <div className="mx-auto mt-6 h-1.5 w-24 cut-corner-underline bg-[#ffaf3a]" />
           
           <p className="mt-8 text-lg text-slate-600 font-medium leading-relaxed">
-            Stmarys University is legally established as St. Mary’s Rehabilitation University by the Government of Telangana and recognized by the UGC under Section 2(f). Students and parents can verify university-level recognition through the published official documents.
+            St.Mary's University is legally established as St. Mary’s Rehabilitation University by the Government of Telangana and recognized by the UGC under Section 2(f). Students and parents can verify university-level recognition through the published official documents.
           </p>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -1008,7 +1008,7 @@ export default function Home() {
               Built for inclusive professional education
             </h2>
             <p className="mt-5 max-w-3xl text-base font-medium leading-7 text-white/78 md:text-lg">
-              Stmarys University combines rehabilitation, health sciences, psychology, technology, law, and management to prepare ethical professionals who can serve real communities.
+              St.Mary's University combines rehabilitation, health sciences, psychology, technology, law, and management to prepare ethical professionals who can serve real communities.
             </p>
           </div>
 

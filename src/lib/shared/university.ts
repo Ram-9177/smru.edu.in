@@ -4,10 +4,10 @@ const siteUrl = "https://smru.edu.in";
 
 export const UNIVERSITY_INFO = {
   siteUrl,
-  brandName: "Stmarys University",
-  shortName: "Stmarys University",
-  legalName: "Stmarys University",
-  legacyBrandName: "Stmarys University",
+  brandName: "St.Mary's University",
+  shortName: "St.Mary's University",
+  legalName: "St.Mary's University",
+  legacyBrandName: "St.Mary's University",
   city: "Hyderabad",
   state: "Telangana",
   country: "India",

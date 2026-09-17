@@ -67,7 +67,7 @@ function LeadershipBoards({ groups }: { groups?: Record<string, any[]> }) {
             GOVERNING BODIES
           </h3>
           <p className="mx-auto mt-5 max-w-4xl text-sm font-semibold leading-7 text-[#0d315c]/75 md:text-base">
-            Stmarys University is guided by statutory and institutional governing bodies including the Governing Council, Board of Management, and Sponsor Body. These bodies support academic leadership, transparent governance, institutional accountability, and compliance-driven university administration.
+            St.Mary's University is guided by statutory and institutional governing bodies including the Governing Council, Board of Management, and Sponsor Body. These bodies support academic leadership, transparent governance, institutional accountability, and compliance-driven university administration.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3 text-[11px] font-black uppercase tracking-[0.16em]">
             <Link href="/leadership/all" className="text-[#0d315c] hover:text-[#25b895]">Leadership</Link>

@@ -14,7 +14,7 @@ const UniversityPortal = () => {
   return (
     <>
       <SEO 
-        title="IIAT Portal | Stmarys University"
+        title="IIAT Portal | St.Mary's University"
         description="Access the Indian Institute of Advanced Technology (IIAT) portal for specialist technical education."
         canonical="https://smru.edu.in/iiat"
       />
@@ -38,7 +38,7 @@ const UniversityPortal = () => {
             >
               <motion.img 
                 src={resolveAssetSrc(logo)} 
-                alt="Stmarys University Logo" 
+                alt="St.Mary's University Logo" 
                 className="h-24 md:h-32 w-auto object-contain mb-10 drop-shadow-xl"
                 animate={{ 
                   scale: [1, 1.05, 1],
@@ -82,7 +82,7 @@ const UniversityPortal = () => {
           ref={iframeRef}
           id="universityIframe"
           src="https://iiath.com/university/smru/"
-          title="Stmarys University IIAT Portal"
+          title="St.Mary's University IIAT Portal"
           loading="eager"
           scrolling={iframeScrolling}
           onLoad={() => {

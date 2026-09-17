@@ -3,8 +3,8 @@ import LeadershipHub from "../../src/components/LeadershipHub";
 import { buildMetadata } from "../../src/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Leadership | Stmarys University",
-  description: "Explore the leadership team guiding Stmarys University.",
+  title: "Leadership | St.Mary's University",
+  description: "Explore the leadership team guiding St.Mary's University.",
   pathname: "/leadership",
 });
 

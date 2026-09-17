@@ -45,7 +45,7 @@ export default function Page({ params }: { params: { schoolSlug: string; deptSlu
         id={`${params.schoolSlug}-${params.deptSlug}-page-schema`}
         data={buildCollectionPageSchema({
           title: department?.name || "Department",
-          description: department?.about || "Explore department programs at Stmarys University.",
+          description: department?.about || "Explore department programs at St.Mary's University.",
           pathname,
           keywords: searchTerms,
         })}

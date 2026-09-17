@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
 export const metadata = buildRedirectMetadata(
-  "University Events | Stmarys University",
+  "University Events | St.Mary's University",
   "/#events"
 );
 

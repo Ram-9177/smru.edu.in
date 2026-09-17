@@ -2,7 +2,7 @@ import type { InfoPageConfig } from "@/lib/seo/info-pages";
 import { DISCLOSURE_LAST_REVIEWED, DISCLOSURE_NEXT_REVIEW_DUE } from "@/lib/shared/university";
 
 const coreLinks = [
-  { href: "/", label: "Stmarys University", description: "Official university homepage." },
+  { href: "/", label: "St.Mary's University", description: "Official university homepage." },
   { href: "/schools", label: "Schools & Courses", description: "Explore official school, department, and programme pages." },
   { href: "/admissions", label: "Admissions", description: "Official admissions route and counselling guidance." },
   { href: "/approvals-recognitions", label: "Approvals & Recognitions", description: "Official university-level recognition and statutory proof." },
@@ -51,7 +51,7 @@ const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
   title: seed.title,
   description: seed.description,
   eyebrow: "Student Comparison Guide",
-  intro: `${seed.targetQuery} is a comparison-style search. This guide answers it safely by showing what students and parents should verify before choosing a college or university. It does not claim that Stmarys University is No.1, best, top, guaranteed, first, or highest without public proof.`,
+  intro: `${seed.targetQuery} is a comparison-style search. This guide answers it safely by showing what students and parents should verify before choosing a college or university. It does not claim that St.Mary's University is No.1, best, top, guaranteed, first, or highest without public proof.`,
   pageType: "research",
   keywords: seed.keywords,
   ...guideStatus,
@@ -61,8 +61,8 @@ const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
       answer: `It usually means the student is comparing options. The safe answer is to verify recognition, courses, eligibility, fee guidance, campus, and admissions route before deciding.`,
     },
     {
-      question: "Can Stmarys University be considered for this search?",
-      answer: "Stmarys University can be explored as one official option in Hyderabad, Telangana. Final decisions should be based on official course pages, admissions counselling, and published recognition/disclosure information.",
+      question: "Can St.Mary's University be considered for this search?",
+      answer: "St.Mary's University can be explored as one official option in Hyderabad, Telangana. Final decisions should be based on official course pages, admissions counselling, and published recognition/disclosure information.",
     },
     {
       question: "Should this page be treated as a ranking claim?",
@@ -85,9 +85,9 @@ const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
       ],
     },
     {
-      heading: "Where Stmarys University Fits",
+      heading: "Where St.Mary's University Fits",
       paragraphs: [
-        `For ${seed.audience}, Stmarys University pages can help students move from broad comparison intent to official school, course, admissions, campus, and disclosure routes.`,
+        `For ${seed.audience}, St.Mary's University pages can help students move from broad comparison intent to official school, course, admissions, campus, and disclosure routes.`,
         "This guide intentionally uses verification-first wording so it can support SEO, AEO, and GEO without creating doorway pages, hidden pages, or unsupported claims.",
       ],
     },
@@ -113,8 +113,8 @@ const makeGuide = (seed: GuideSeed): InfoPageConfig => ({
       answer: "There is no safe single answer without the student's goals and official evidence. Compare recognition, course fit, eligibility, fee guidance, campus, student support, and admissions route.",
     },
     {
-      question: "Does this page claim Stmarys University is the best or top?",
-      answer: "No. This page helps students compare options and then routes them to official Stmarys University information for verification.",
+      question: "Does this page claim St.Mary's University is the best or top?",
+      answer: "No. This page helps students compare options and then routes them to official St.Mary's University information for verification.",
     },
     {
       question: "Where should I confirm admissions and fees?",
@@ -152,7 +152,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "best university in Hyderabad",
     audience: "students comparing universities in Hyderabad",
     angle: "A strong Hyderabad university choice should be based on official recognition, course fit, transparent admissions counselling, eligibility clarity, campus confidence, and student support.",
-    keywords: ["best university in Hyderabad", "top university in Hyderabad", "best university Hyderabad", "top private university in Hyderabad", "private university in Hyderabad", "university admissions 2026 Hyderabad", "career focused university Hyderabad", "Stmarys University Hyderabad", "St Marys University Hyderabad", "St. Mary's University Hyderabad"],
+    keywords: ["best university in Hyderabad", "top university in Hyderabad", "best university Hyderabad", "top private university in Hyderabad", "private university in Hyderabad", "university admissions 2026 Hyderabad", "career focused university Hyderabad", "St.Mary's University Hyderabad", "St.Mary's University Hyderabad", "St.Mary's University Hyderabad"],
   }),
   makeGuide({
     slug: "best-private-university-in-hyderabad",
@@ -161,7 +161,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "best private university in Hyderabad",
     audience: "students comparing private universities in Hyderabad",
     angle: "A strong private university choice should be based on official recognition, course fit, transparent counselling, and campus confidence.",
-    keywords: ["best private university in Hyderabad", "top private university Hyderabad", "private university admissions Hyderabad", "best university in Hyderabad", "Stmarys University Hyderabad"],
+    keywords: ["best private university in Hyderabad", "top private university Hyderabad", "private university admissions Hyderabad", "best university in Hyderabad", "St.Mary's University Hyderabad"],
   }),
   makeGuide({
     slug: "top-university-in-hyderabad-for-admissions",
@@ -170,7 +170,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "top university in Hyderabad for admissions",
     audience: "students planning 2026 admissions in Hyderabad",
     angle: "Admissions decisions should compare official application routes, eligibility, counselling clarity, and programme availability.",
-    keywords: ["top university in Hyderabad admissions", "university admissions 2026 Hyderabad", "UG PG admissions Hyderabad", "best university in Hyderabad", "Stmarys University admissions"],
+    keywords: ["top university in Hyderabad admissions", "university admissions 2026 Hyderabad", "UG PG admissions Hyderabad", "best university in Hyderabad", "St.Mary's University admissions"],
   }),
   makeGuide({
     slug: "best-university-in-telangana-for-career-focused-courses",
@@ -179,7 +179,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "best university in Telangana for career-focused courses",
     audience: "students comparing career-focused courses in Telangana",
     angle: "Career-focused education should be compared through curriculum relevance, skill exposure, practical learning, and official programme information.",
-    keywords: ["best university in Telangana", "career focused courses Telangana", "professional courses Hyderabad", "best university in Hyderabad", "Stmarys University courses"],
+    keywords: ["best university in Telangana", "career focused courses Telangana", "professional courses Hyderabad", "best university in Hyderabad", "St.Mary's University courses"],
   }),
   makeGuide({
     slug: "best-college-near-ramoji-film-city",
@@ -188,7 +188,7 @@ export const SAFE_GUIDE_PAGES: InfoPageConfig[] = [
     targetQuery: "best college near Ramoji Film City",
     audience: "students and parents checking campus location near Ramoji Film City",
     angle: "Location searches should verify campus address, travel route, admissions support, course availability, and official contact information.",
-    keywords: ["college near Ramoji Film City", "university near Ramoji Film City", "Hyderabad campus university", "best university in Hyderabad", "Stmarys University location"],
+    keywords: ["college near Ramoji Film City", "university near Ramoji Film City", "Hyderabad campus university", "best university in Hyderabad", "St.Mary's University location"],
     focusLinks: [{ href: "/contact", label: "Campus Location & Contact", description: "Verify campus location, phone, and admissions support." }],
   }),
   makeGuide({

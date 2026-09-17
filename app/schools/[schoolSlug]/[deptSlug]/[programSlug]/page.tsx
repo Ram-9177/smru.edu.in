@@ -60,7 +60,7 @@ export default function Page({
   const recommendations = buildProgramRecommendationLinks(school, department, program, 8);
   const description = program?.overview
     ? `${program.overview} Check admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`
-    : `${programName} programme details at Stmarys University Hyderabad with admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`;
+    : `${programName} programme details at St.Mary's University Hyderabad with admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`;
 
   return (
     <>

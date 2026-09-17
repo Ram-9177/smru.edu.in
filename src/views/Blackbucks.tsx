@@ -14,8 +14,8 @@ const BlackbucksPortal = () => {
   return (
     <>
       <SEO 
-        title="BlackBucks Portal | Stmarys University"
-        description="Access the Stmarys University BlackBucks education portal for advanced technical training."
+        title="BlackBucks Portal | St.Mary's University"
+        description="Access the St.Mary's University BlackBucks education portal for advanced technical training."
         canonical="https://smru.edu.in/bb"
       />
       
@@ -38,7 +38,7 @@ const BlackbucksPortal = () => {
             >
               <motion.img 
                 src={resolveAssetSrc(logo)} 
-                alt="Stmarys University Logo" 
+                alt="St.Mary's University Logo" 
                 className="h-24 md:h-32 w-auto object-contain mb-10 drop-shadow-xl"
                 animate={{ 
                   scale: [1, 1.05, 1],
@@ -82,7 +82,7 @@ const BlackbucksPortal = () => {
           ref={iframeRef}
           id="blackbucksIframe"
           src="https://smru.theblackbucks.com/"
-          title="Stmarys University BlackBucks Portal"
+          title="St.Mary's University BlackBucks Portal"
           loading="eager"
           scrolling={iframeScrolling}
           onLoad={() => {

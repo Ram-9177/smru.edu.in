@@ -10,7 +10,7 @@ type RedirectFallbackProps = {
 };
 
 export const buildRedirectMetadata = (targetUrl = "/law/", description = "This page has moved."): Metadata => ({
-  title: "Page Moved | Stmarys University",
+  title: "Page Moved | St.Mary's University",
   description,
   robots: "noindex,follow",
   alternates: {

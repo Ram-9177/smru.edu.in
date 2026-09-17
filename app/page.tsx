@@ -7,13 +7,19 @@ import { buildFaqSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Stmarys University | Private University in Hyderabad",
+  title: "St.Mary's University | Top Private University in Hyderabad",
   description:
-    "Explore Stmarys University in Hyderabad, Telangana: schools, courses, admissions, campus life, and official university updates.",
+    "Welcome to St.Mary's University in Hyderabad, Telangana. Explore top-ranked schools, courses, admissions, and campus life at St.Mary's.",
   pathname: "/",
   keywords: [
-    "Stmarys University",
-    "Stmarys University Hyderabad",
+    "St.Mary's University",
+    "St.Mary's University Hyderabad",
+    "St.Mary's University",
+    "St.Mary's University",
+    "stmarys",
+    "st marys",
+    "st. marys",
+    "St.Mary's",
     "private university in Hyderabad",
     "private university in Telangana",
     "UGC recognized university in Hyderabad",
@@ -31,9 +37,9 @@ export default function Page() {
       <StructuredData
         id="home-webpage-schema"
         data={buildWebPageSchema({
-          title: "Stmarys University | Private University in Hyderabad",
+          title: "St.Mary's University | Top Private University in Hyderabad",
           description:
-            "Explore Stmarys University in Hyderabad, Telangana: schools, courses, admissions, campus life, and official university updates.",
+            "Welcome to St.Mary's University in Hyderabad, Telangana. Explore top-ranked schools, courses, admissions, and campus life at St.Mary's.",
           pathname: "/",
         })}
       />

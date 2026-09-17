@@ -224,9 +224,9 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
         data-panorama-state="ready"
       >
         <img
-          src={panorama.src}
+          src={panorama.preview || panorama.src}
           alt=""
-          className="absolute inset-0 h-full w-full scale-110 object-cover blur-3xl opacity-50"
+          className="absolute inset-0 h-full w-full scale-105 object-cover blur-md opacity-50"
         />
         <img
           src={panorama.src}
@@ -246,9 +246,9 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
       {/* Blurred background image to fill black areas for non-360 photos */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
         <img 
-          src={panorama.src} 
+          src={panorama.preview || panorama.src} 
           alt="" 
-          className="h-full w-full object-cover blur-3xl scale-125 opacity-60 brightness-75 transition-opacity duration-1000"
+          className="h-full w-full object-cover blur-md scale-105 opacity-60 brightness-75 transition-opacity duration-1000"
         />
       </div>
 

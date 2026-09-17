@@ -8,7 +8,7 @@ import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
 
 const school = resolveSchool("law");
 const lawMetaDescription =
-  "Explore the School of Law at Stmarys University, Hyderabad with integrated law programmes, LL.B., moot court, legal aid, legal research, and admissions.";
+  "Explore the School of Law at St.Mary's University, Hyderabad with integrated law programmes, LL.B., moot court, legal aid, legal research, and admissions.";
 const lawPathname = "/law";
 const lawSearchTerms = getSchoolSearchTerms({ slug: "law", name: "School of Law" });
 
@@ -64,12 +64,12 @@ const lawSchoolSchema = {
 };
 
 export const metadata: Metadata = buildMetadata({
-  title: "School of Law | Stmarys University, Hyderabad",
+  title: "School of Law | St.Mary's University, Hyderabad",
   description: lawMetaDescription,
   pathname: lawPathname,
   keywords: [
     "School of Law",
-    "Stmarys University Law",
+    "St.Mary's University Law",
     "Integrated law programmes",
     "LL.B.",
     "Moot court",

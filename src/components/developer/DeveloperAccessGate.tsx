@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import DeveloperDashboardClient from "@/components/developer/DeveloperDashboardClient";
 
 const AUTH_KEY = "smru_developer_auth_v1";
-const AUTH_USER = "Stmarys University";
-const AUTH_PASS = "Stmarys University@9177";
+const AUTH_USER = "St.Mary's University";
+const AUTH_PASS = "St.Mary's University@9177";
 
 export default function DeveloperAccessGate() {
   const [username, setUsername] = useState("");
@@ -49,7 +49,7 @@ export default function DeveloperAccessGate() {
           Internal Access
         </p>
         <h1 style={{ margin: "8px 0 0", fontSize: 40, lineHeight: 1.1, fontWeight: 900, color: "#0d315c", fontFamily: "Outfit, Inter, sans-serif" }}>
-          Stmarys University Developer CMS
+          St.Mary's University Developer CMS
         </h1>
         <p style={{ margin: "10px 0 0", fontSize: 14, color: "#64748b" }}>
           Enter credentials to open the internal CMS panel.

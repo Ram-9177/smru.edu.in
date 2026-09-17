@@ -71,14 +71,14 @@ const Footer = () => {
             <div className="space-y-2">
               <div>
                 <h3 className="text-3xl md:text-4xl font-black italic tracking-tight text-[#ffaf3a] leading-none">
-                  Stmarys
+                  St.Mary's
                 </h3>
                 <p className="mt-1 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-white/70">
                   University
                 </p>
               </div>
               <p className="max-w-xs text-[13px] md:text-[14px] font-medium leading-relaxed text-white/40">
-                Stmarys University educational legacy, now advancing rehabilitation-led professional education.
+                St.Mary's University educational legacy, now advancing rehabilitation-led professional education.
               </p>
             </div>
 
@@ -221,11 +221,11 @@ const Footer = () => {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="py-4">
               <p className="text-[13px] font-black uppercase tracking-[0.42em] text-white/40">
-                Official Stmarys University Website
+                Official St.Mary's University Website
               </p>
               <p className="mt-3 text-[12px] font-bold uppercase tracking-[0.08em] text-white/25">
-                Stmarys University is officially established as St. Mary’s Rehabilitation University under Telangana Gazette Act No. 10 of 2026.<br />
-                Copyrights © 2026 Stmarys University. All rights reserved.
+                St.Mary's University is officially established as St. Mary’s Rehabilitation University under Telangana Gazette Act No. 10 of 2026.<br />
+                Copyrights © 2026 St.Mary's University. All rights reserved.
               </p>
             </div>
 

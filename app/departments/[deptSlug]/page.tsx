@@ -23,8 +23,8 @@ export function generateMetadata({ params }: { params: { deptSlug: string } }): 
   const department = findDepartment(params.deptSlug);
   const targetPath = department ? `/schools/${department.schoolSlug}/${department.deptSlug}` : "/schools";
   return buildMetadata({
-    title: `${department?.name || "Department"} | Stmarys University`,
-    description: department?.about || "Explore department programs at Stmarys University.",
+    title: `${department?.name || "Department"} | St.Mary's University`,
+    description: department?.about || "Explore department programs at St.Mary's University.",
     pathname: targetPath,
     robots: "noindex,follow",
   });

@@ -5,8 +5,8 @@ import { buildMetadata } from "@/lib/metadata";
 import { buildBreadcrumbSchema, buildCollectionPageSchema } from "@/lib/seo/schema";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Institutional Partners | Industry & Academic Alliances | Stmarys University",
-  description: "Explore industry and academic partner routes connected with Stmarys University and career-ready learning pathways.",
+  title: "Institutional Partners | Industry & Academic Alliances | St.Mary's University",
+  description: "Explore industry and academic partner routes connected with St.Mary's University and career-ready learning pathways.",
   pathname: "/partner",
 });
 
@@ -24,7 +24,7 @@ export default function Page() {
         id="partner-page-schema"
         data={buildCollectionPageSchema({
           title: "Education Partners",
-          description: "Explore public education and industry partner routes published on the Stmarys University website.",
+          description: "Explore public education and industry partner routes published on the St.Mary's University website.",
           pathname: "/partner",
         })}
       />

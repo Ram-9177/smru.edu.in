@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
   title: "NIAT Upskilling",
-  description: "Explore the NIAT Upskilling route published on the Stmarys University website.",
+  description: "Explore the NIAT Upskilling route published on the St.Mary's University website.",
   pathname: "/niat-upskilling",
 });
 

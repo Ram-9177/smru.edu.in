@@ -37,9 +37,9 @@ export default function LeaderProfile() {
   return (
     <>
       <SEO
-        title={`${leader.name} | Leadership | Stmarys University`}
-        description={`${leader.name} — ${leader.role} at Stmarys University.`}
-        keywords={["Stmarys leadership","Stmarys leadership","university leaders","rehabilitation university leadership", leader.name, leader.role]}
+        title={`${leader.name} | Leadership | St.Mary's University`}
+        description={`${leader.name} — ${leader.role} at St.Mary's University.`}
+        keywords={["St.Mary's leadership","St.Mary's leadership","university leaders","rehabilitation university leadership", leader.name, leader.role]}
       />
       {/* Banner */}
       <section className="relative w-full min-h-[35vh] overflow-hidden flex items-center">

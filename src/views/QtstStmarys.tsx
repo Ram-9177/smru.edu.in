@@ -19,7 +19,7 @@ export default function QtstStmarys() {
 
   return (
     <div className="bg-white min-h-screen">
-      <SEO title="QTST | Stmarys University" description="Quality Thought School of Technology (QTST) at Stmarys University." />
+      <SEO title="QTST | St.Mary's University" description="Quality Thought School of Technology (QTST) at St.Mary's University." />
 
       <AnimatePresence mode="wait">
         {!isIframeLoaded && (
@@ -39,7 +39,7 @@ export default function QtstStmarys() {
             >
               <motion.img
                 src={resolveAssetSrc(logo)}
-                alt="Stmarys University Logo"
+                alt="St.Mary's University Logo"
                 className="h-24 md:h-32 w-auto object-contain mb-10 drop-shadow-xl"
                 animate={{
                   scale: [1, 1.05, 1],
@@ -85,7 +85,7 @@ export default function QtstStmarys() {
           <div className="overflow-hidden bg-white">
             <iframe
               ref={iframeRef}
-              title="QTST at Stmarys University"
+              title="QTST at St.Mary's University"
               src={QTST_PAGE_URL}
               loading="eager"
               scrolling={iframeScrolling}

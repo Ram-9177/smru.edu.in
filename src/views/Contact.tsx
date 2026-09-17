@@ -53,7 +53,7 @@ const Contact = () => {
           >
             Contact 
             <span className="text-[#019e6e] text-[0.4em] tracking-normal mt-4 block font-bold capitalize">
-              Stmarys University
+              St.Mary's University
             </span>
           </h1>
           <div className="mt-4 h-1.5 w-20 cut-corner-badge bg-[#ffaf3a] mx-auto" data-reveal="fade-up" style={{ "--delay": "0.1s" }} />
@@ -87,7 +87,7 @@ const Contact = () => {
                     <div>
                       <p className="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-1">Campus Address</p>
                       <address className="text-[14px] font-bold text-[#0d315c] not-italic leading-relaxed mt-2">
-                        <strong>Stmarys University</strong><br />
+                        <strong>St.Mary's University</strong><br />
                         <span className="text-slate-600 font-medium">Main Campus & Administrative Headquarters</span><br />
                         Near Ramoji Film City, Deshmukhi Village,<br />
                         Pochampally Mandal, Yadadri Bhuvanagiri District,<br />
@@ -160,7 +160,7 @@ const Contact = () => {
             >
               <div className="h-[400px] w-full">
                 <iframe
-                  title="Stmarys University Campus Location"
+                  title="St.Mary's University Campus Location"
                   loading="lazy"
                   className="w-full h-full border-0 grayscale-[0.2] contrast-[1.1] hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -169,7 +169,7 @@ const Contact = () => {
                 />
               </div>
               <div className="absolute left-6 bottom-6 px-4 py-2 bg-[#0d315c] text-white cut-corner-badge text-[10px] font-black uppercase tracking-widest shadow-xl">
-                Stmarys University Deshmukhi Campus
+                St.Mary's University Deshmukhi Campus
               </div>
             </div>
           </div>
@@ -233,7 +233,7 @@ const Contact = () => {
               items={[
                 { href: "/campus-location-hyderabad", label: "Campus Location Hyderabad", description: "Verified campus address and location details published on the site." },
                 { href: "/campus-360", label: "Visit Campus", description: "Campus tour page with contact guidance." },
-                { href: "/campus-location-hyderabad", label: "How to Reach Stmarys University", description: "Public route and campus access guidance through the verified campus location page." },
+                { href: "/campus-location-hyderabad", label: "How to Reach St.Mary's University", description: "Public route and campus access guidance through the verified campus location page." },
                 { href: "/contact-directory", label: "Contact Directory", description: "Public contact routes listed on the website." },
                 { href: "/grievance-redressal", label: "Grievance Redressal", description: "Student support route with official contact guidance." },
                 { href: "/approvals-recognitions", label: "Approvals & Recognitions", description: "Trust and public disclosure page for verified documents." },
