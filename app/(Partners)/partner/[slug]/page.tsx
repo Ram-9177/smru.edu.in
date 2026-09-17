@@ -1,8 +1,9 @@
 import PartnerIframePage from "@/views/PartnerIframePage";
 import EdinboxForensicLandingV2 from "@/views/EdinboxForensicLandingV2";
-import CarebridgeLanding from "@/views/CarebridgeLanding";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { EDU_PARTNERS } from "@/data/schools";
 import { buildMetadata } from "@/lib/metadata";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import {
@@ -27,7 +28,11 @@ const NOINDEX_PARTNER_LANDINGS = new Set(["edinbox", "qtst", "veloces"]);
 
 // Slugs rendered by an SMRU-authored view. Every other partner landing is a PartnerIframePage shell
 // whose crawlable text is only the loader caption, so it stays reachable but out of the index.
-const isSmruAuthoredPartnerView = (slug: string) => slug === "edinbox" || slug === "carebridge";
+const isSmruAuthoredPartnerView = (slug: string) => slug === "edinbox";
+
+// Carebridge's landing lives at the top-level /carebridge/ (TOP_LEVEL_PARTNER_LANDINGS); this alias is a
+// redirect shell to it, mirrored by a 301 in public/.htaccess.
+const CAREBRIDGE_TARGET = "/carebridge/";
 
 export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const params = await props.params;
@@ -41,14 +46,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     });
   }
   const name = (partner as any)?.name || params.slug.toUpperCase();
-  // /partner/carebridge/ renders the same CarebridgeLanding as /carebridge/, so it canonicalises there:
-  // buildMetadata derives canonical, og:url and hreflang from pathname, hence the canonical path is passed.
   if (params.slug === "carebridge") {
-    return buildMetadata({
-      title: `${name} Partner | St. Mary's University`,
-      description: `Explore ${name} education partner programs and pathways at St. Mary's University.`,
-      pathname: "/carebridge",
-    });
+    return buildRedirectMetadata(`${name} | St. Mary's University`, CAREBRIDGE_TARGET);
   }
   return buildMetadata({
     title: `${name} Partner | St. Mary's University`,
@@ -77,6 +76,7 @@ export default async function PartnerDetailPage(props: { params: Promise<{ slug:
   const partner = Object.values(EDU_PARTNERS || {}).find((item: any) => partnerSlug(item) === params.slug);
   if (!partner) notFound();
   const name = (partner as any)?.name || params.slug.toUpperCase();
+  if (params.slug === "carebridge") return <RedirectFallback targetUrl={CAREBRIDGE_TARGET} />;
   return (
     <>
       <StructuredData
@@ -100,8 +100,6 @@ export default async function PartnerDetailPage(props: { params: Promise<{ slug:
       )}
       {params.slug === "edinbox" ? (
         <EdinboxForensicLandingV2 />
-      ) : params.slug === "carebridge" ? (
-        <CarebridgeLanding />
       ) : (
         <PartnerIframePage slug={params.slug} />
       )}

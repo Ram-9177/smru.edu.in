@@ -30,7 +30,7 @@ export const EDU_PARTNERS = {
     name: "Carebridge",
     landingUrl: "/carebridge",
     logo: carebridgeLogo,
-    iframeUrl: "https://carebridge.education",
+    iframeUrl: "/partners/carebridge/index.html",
     embedCode: ""
   },
   "St. Mary's University": {

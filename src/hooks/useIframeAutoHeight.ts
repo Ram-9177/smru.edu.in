@@ -82,6 +82,8 @@ type UseIframeAutoHeightOptions = {};
 
 export function useIframeAutoHeight(initialHeight = 1400, options: UseIframeAutoHeightOptions = {}) {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
+  const observedDocRef = useRef<Document | null>(null);
   const [iframeHeight, setIframeHeight] = useState(initialHeight);
   const [hasDynamicHeight, setHasDynamicHeight] = useState(false);
   const [allowIframeScroll, setAllowIframeScroll] = useState(false);
@@ -123,10 +125,27 @@ export function useIframeAutoHeight(initialHeight = 1400, options: UseIframeAuto
         setHasDynamicHeight(true);
         setAllowIframeScroll(false);
       }
+
+      // Same-origin documents keep growing after load (font swap, lazy images, <details> opening);
+      // observe them so the frame never clips the partner's footer. One observer per document.
+      if (observedDocRef.current !== doc && typeof ResizeObserver !== "undefined") {
+        resizeObserverRef.current?.disconnect();
+        const observer = new ResizeObserver(() => {
+          const next = Math.max(doc.body?.scrollHeight || 0, doc.documentElement?.scrollHeight || 0);
+          if (next > 0) setIframeHeight(clampHeight(next));
+        });
+        if (doc.documentElement) observer.observe(doc.documentElement);
+        if (doc.body) observer.observe(doc.body);
+        resizeObserverRef.current = observer;
+        observedDocRef.current = doc;
+        (doc as Document & { fonts?: FontFaceSet }).fonts?.ready.then(() => measureSameOriginHeight()).catch(() => {});
+      }
     } catch {
       // Cross-origin iframe cannot be measured directly.
     }
   }, []);
+
+  useEffect(() => () => resizeObserverRef.current?.disconnect(), []);
 
   const handleIframeLoad = useCallback(() => {
     measureSameOriginHeight();

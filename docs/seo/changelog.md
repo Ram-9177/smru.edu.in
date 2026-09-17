@@ -4,6 +4,28 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-09-17 — /carebridge/ mirrors the partner's home page (branch `feat/carebridge-homepage`)
+
+- `/carebridge/` swaps the 912-line SMRU-authored landing for Carebridge Education's own home page, iframed from
+  `public/partners/carebridge/` like the other raw partner landings. `scripts/sync-carebridge-homepage.mjs`
+  (`npm run partners:carebridge -- <export>`) is the repeatable procedure: copies `dist/index.html` plus its 16
+  referenced assets (22.9 MB), rewrites the 46 page links to `https://carebridge.education/…` with `target="_top"`,
+  sets the copy to noindex. The partner's copy, canonical and analytics are untouched.
+- Consequences applied per the partner rule: `/carebridge/` is `noindex,follow` and out of the sitemap;
+  `/partner/carebridge/` is a redirect shell + Apache 301 + register row; `isSmruAuthoredPartnerView` is edinbox only;
+  `EDU_PARTNERS.CAREBRIDGE.iframeUrl` points at the mirror (the live site forbids framing); AppShell treats
+  `/carebridge` as a partner route (footer and sticky CTAs hidden).
+- The partner page asserts claims SMRU's own pages do not ("120-acre campus", "14+ rehab clinics", "100% rotations
+  from Year 1", "NCAHP & RCI approved", "5–8× salary uplift", and a 2018-Act founding that contradicts the bridge
+  sentence); logged in `docs/seo/needs-input.md` for the partner to align.
+- Two shared `PartnerIframePage` bugs fixed: (1) a same-origin frame that finishes loading before hydration never
+  fired `onLoad`, leaving the "Securing Partner Gateway" overlay up and the frame at opacity 0 — readiness is now
+  read directly with a 6 s safety; (2) the height hook measured once and stopped, clipping content that grew after
+  load — a ResizeObserver now follows the framed document.
+- Verified: headless Chrome cold load and cached reload both dismiss the overlay, frame height = document height,
+  a click navigates the top window to `https://carebridge.education/pathway.html`; `npm run verify` green
+  (276 routes, 47 shells, register consistent, audit pass, gates pass, facts 29/29).
+
 ## 2026-09-17 — Handbook hardened against a vibe-coding test (branch `docs/project-handbook`)
 
 - Nine reviewers attempted six realistic tasks (new page, new programme, retire a URL, publish a fee, partner
