@@ -122,7 +122,7 @@ export const buildProgramBreadcrumbs = (school: any, department: any, program: a
 // When a fact is not yet published, say so and give the reader the one useful next step —
 // never answer a factual question with an unrelated recognition note. FAQ entries whose answer
 // would be NOT_YET are dropped so FAQPage schema never carries a non-answer.
-const ASK_ADMISSIONS = `confirmed at official admissions counselling — call ${UNIVERSITY_INFO.phone} or email ${UNIVERSITY_INFO.email}.`;
+export const ASK_ADMISSIONS = `confirmed at official admissions counselling — call ${UNIVERSITY_INFO.phone} or email ${UNIVERSITY_INFO.email}.`;
 const NOT_YET = "__not_yet_published__";
 const withoutNotYet = <T extends { answer?: string }>(items: T[]) => items.filter((item) => item.answer && item.answer !== NOT_YET);
 

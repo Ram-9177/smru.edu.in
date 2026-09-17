@@ -117,6 +117,21 @@ export function verifyApacheRows(lines) {
   return missing;
 }
 
+// Every RewriteRule (other than the canonical-host rule) must be recorded by at least one Apache row.
+export function verifyRulesHaveRows(lines) {
+  const htaccess = readFileSync(htaccessPath, "utf8");
+  const rules = [...htaccess.matchAll(/^\s*RewriteRule\s+(\S+)\s+(\S+)/gm)]
+    .map((m) => m[1])
+    .filter((p) => !/^\^\(\.\*\)\$/.test(p));
+  const sources = lines.map((line) => parseRow(line)).filter((r) => r[3] === "public/.htaccess").map((r) => r[0]);
+  return rules.filter((pattern) => {
+    const bare = pattern.replace(/^\^/, "");
+    if (sources.some((s) => s === bare || htaccess.includes(s) && pattern.includes(s))) return false;
+    let re; try { re = new RegExp(pattern, "i"); } catch { return false; }
+    return !sources.some((s) => re.test(s.replace(/\/\?\$/, "").replace(/\\-/g, "-")));
+  });
+}
+
 export function main() {
   const existing = readFileSync(csvPath, "utf8").split(/\r?\n/).filter(Boolean);
   if (existing[0] !== HEADER) throw new Error(`unexpected header in REDIRECT_MAP.csv: ${existing[0]}`);
@@ -124,9 +139,18 @@ export function main() {
   const shellRows = collectShellRows().map((row) => row.map(csvField).join(","));
   const next = [HEADER, ...apacheRows, ...shellRows].join("\n") + "\n";
   const missing = verifyApacheRows(apacheRows);
+  const shellObjects = collectShellRows();
+  const clientOnly = shellObjects.filter((row) => row[5].startsWith("client only")).map((row) => row[0]);
+  const homepageTargets = shellObjects.filter((row) => /^(\/|https:\/\/smru\.edu\.in\/?)$/.test(row[1])).map((row) => row[0]);
+  const ruleWithoutRow = verifyRulesHaveRows(apacheRows);
   const current = readFileSync(csvPath, "utf8");
   const stale = current !== next;
-  const summary = { apacheRows: apacheRows.length, shellRows: shellRows.length, apacheRowsMissingFromHtaccess: missing.length, stale };
+  const summary = { apacheRows: apacheRows.length, shellRows: shellRows.length, apacheRowsMissingFromHtaccess: missing.length, shellsWithoutApacheRule: clientOnly.length, shellsTargetingHomepage: homepageTargets.length, rulesWithoutRegisterRow: ruleWithoutRow.length, stale };
+  const problems = [];
+  if (missing.length) problems.push(`Apache rows with no matching RewriteRule: ${missing.join(", ")}`);
+  if (clientOnly.length) problems.push(`shells with no Apache 301 (add a RewriteRule + register row): ${clientOnly.join(", ")}`);
+  if (homepageTargets.length) problems.push(`shells redirecting to the homepage (pick a specific target): ${homepageTargets.join(", ")}`);
+  if (ruleWithoutRow.length) problems.push(`RewriteRules with no register row (add the hand-kept Apache row): ${ruleWithoutRow.join(", ")}`);
   if (check) {
     console.log(JSON.stringify(summary));
     if (missing.length) console.error("Apache rows with no matching RewriteRule:", missing.join(", "));

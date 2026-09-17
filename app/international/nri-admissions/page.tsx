@@ -21,9 +21,9 @@ const FAQS = [
 export default function Page() {
   return (
     <>
-      <StructuredData id="nri-breadcrumb" data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "International", path: "/international" }, { name: "NRI Admissions", path: "/international/nri-admissions" }])} />
-      <StructuredData id="nri-webpage" data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/international/nri-admissions" })} />
-      <StructuredData id="nri-faq" data={buildFaqSchema(FAQS)} />
+      <StructuredData id="nri-breadcrumb-schema" data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "International", path: "/international" }, { name: "NRI Admissions", path: "/international/nri-admissions" }])} />
+      <StructuredData id="nri-webpage-schema" data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/international/nri-admissions" })} />
+      <StructuredData id="nri-faq-schema" data={buildFaqSchema(FAQS)} />
       <InternationalPage
         eyebrow="International · NRI / OCI / PIO"
         title="NRI, OCI & PIO Admissions"

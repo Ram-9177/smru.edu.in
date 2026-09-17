@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
 import RedirectFallback from "@/components/seo/RedirectFallback";
-import { buildMetadata } from "@/lib/metadata";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Entrance Exam Updates | St. Mary's University",
-  description: "Redirect to the official page for future St. Mary's University entrance exam announcements.",
-  pathname: "/exam-notification",
-  robots: "noindex,follow",
-  keywords: ["St. Mary's University entrance exam updates"],
-});
+// Legacy URL; no university entrance exam is currently announced (see /exam-notification/).
+const TARGET_PATH = "/exam-notification/";
+
+export const metadata = buildRedirectMetadata("Entrance Exam Updates | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  return <RedirectFallback targetUrl="/exam-notification" />;
+  return <RedirectFallback targetUrl={TARGET_PATH} />;
 }

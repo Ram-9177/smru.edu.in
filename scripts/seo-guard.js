@@ -449,6 +449,46 @@ const checks = [
     },
   },
   {
+    // JSON-LD goes through one component so escaping, ids and null-suppression are uniform.
+    name: "JSON-LD is emitted only through <StructuredData> and every id ends in -schema",
+    pass: () => {
+      const tsx = (dir) => fs.readdirSync(path.join(root, dir), { recursive: true }).map(String).filter((f) => /\.tsx$/.test(f)).map((f) => path.join(dir, f));
+      const files = [...tsx("app"), ...tsx("src")];
+      const rawScripts = files.filter((f) => f !== "src/components/seo/StructuredData.tsx" && /application\/ld\+json/.test(read(f)));
+      const idPattern = /<StructuredData\b[^>]*?\bid=(?:"([^"]+)"|\{`([^`]+)`\})/g;
+      const badIds = files.flatMap((f) => [...read(f).matchAll(idPattern)].map((m) => m[1] ?? m[2]).filter((id) => !/-schema$/.test(id)).map((id) => f + ": " + id));
+      if (rawScripts.length) console.error("  raw ld+json scripts:", rawScripts.join(", "));
+      if (badIds.length) console.error("  StructuredData ids without -schema suffix:", badIds.join(", "));
+      return rawScripts.length === 0 && badIds.length === 0;
+    },
+  },
+  {
+    // A shell's canonical and refresh target come from one constant via the lib helper; the component
+    // must not grow a second metadata helper again.
+    name: "Every RedirectFallback page builds its metadata with buildRedirectMetadata from lib/shared",
+    pass: () => {
+      const pages = fs.readdirSync(path.join(root, "app"), { recursive: true }).map(String).filter((f) => /(^|[\\/])page\.tsx$/.test(f)).map((f) => path.join("app", f));
+      const shells = pages.filter((f) => /<RedirectFallback\b/.test(read(f)));
+      const offenders = shells.filter((f) => { const src = read(f); return !/from "@\/lib\/shared\/redirect-metadata"/.test(src) || !/buildRedirectMetadata\(/.test(src); });
+      const componentHasHelper = /buildRedirectMetadata|export const metadata/.test(read("src/components/seo/RedirectFallback.tsx"));
+      if (offenders.length) console.error("  shells not using lib buildRedirectMetadata:", offenders.join(", "));
+      return offenders.length === 0 && !componentHasHelper && shells.length > 0;
+    },
+  },
+  {
+    // app/ is routes only. Anything else (a dropped-in site export, a stray component tree) breaks the
+    // one-folder-per-URL rule; the single colocated client island is listed explicitly.
+    name: "app/ contains only route files (page, layout, route, not-found) and route folders",
+    pass: () => {
+      const allowedFiles = new Set(["page.tsx", "layout.tsx", "route.ts", "not-found.tsx", "GrievanceTabs.tsx"]);
+      const strays = fs.readdirSync(path.join(root, "app"), { recursive: true, withFileTypes: true })
+        .filter((entry) => entry.isFile() && !allowedFiles.has(entry.name))
+        .map((entry) => path.relative(root, path.join(entry.parentPath ?? entry.path, entry.name)));
+      if (strays.length) console.error("  non-route files under app/:", strays.slice(0, 10).join(", "));
+      return strays.length === 0;
+    },
+  },
+  {
     // The root is an allowlist: tooling, one-off scripts, reports and scratch folders were removed once and
     // must not come back. Scratch space is tmp/ and scratch/ (gitignored); scripts go in scripts/ with an
     // npm entry; prose goes in docs/.

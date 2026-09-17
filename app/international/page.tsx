@@ -24,10 +24,10 @@ const FAQS = [
 export default function Page() {
   return (
     <>
-      <StructuredData id="international-breadcrumb" data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "International", path: "/international" }])} />
-      <StructuredData id="international-webpage" data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/international" })} />
-      <StructuredData id="international-contact" data={buildInternationalContactPointSchema("/international")} />
-      <StructuredData id="international-faq" data={buildFaqSchema(FAQS)} />
+      <StructuredData id="international-breadcrumb-schema" data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "International", path: "/international" }])} />
+      <StructuredData id="international-webpage-schema" data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/international" })} />
+      <StructuredData id="international-contact-schema" data={buildInternationalContactPointSchema("/international")} />
+      <StructuredData id="international-faq-schema" data={buildFaqSchema(FAQS)} />
       <InternationalPage
         eyebrow="International admissions"
         title="International Admissions at SMRU"

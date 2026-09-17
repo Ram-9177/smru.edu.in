@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - seo-hardening-phase-1
   # Every pull request, whatever its base: stacked PRs (a branch based on another open PR) must run
   # the same gate as PRs into main.
   pull_request:
@@ -58,13 +57,24 @@ jobs:
           grep -Fq '<loc>https://smru.edu.in/' out/sitemap.xml
           grep -Fq 'Sitemap: https://smru.edu.in/sitemap.xml' out/robots.txt
 
+      - name: Redirect register matches the export and .htaccess
+        run: npm run redirects:check
+
       - name: Frontend release audit
         run: npm run audit:checklist -- ci --strict
+
+      - name: SEO gates on the export
+        run: npm run seo:gates -- ci --strict
+
+      - name: Fact consistency across site.ts, llms files and built pages
+        run: npm run seo:facts -- --strict
 
       - name: Preserve audit evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: frontend-audit
-          path: output/frontend-audit/ci/checklist-audit.json
+          path: |
+            output/frontend-audit/ci/checklist-audit.json
+            output/seo-gates/ci/seo-gates.json
           if-no-files-found: ignore
