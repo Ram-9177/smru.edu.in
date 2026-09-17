@@ -1,3 +1,5 @@
+> **Historical.** This is the brief that built the site (Sep 2026). The living rules, structure and workflow are in `PROJECT.md` at the repository root; where this document and `PROJECT.md` differ (control-file name, `@@NEEDS_UNIVERSITY_INPUT@@` token, verification order), `PROJECT.md` wins.
+
 # Antigravity brief — SMRU (smru.edu.in) end-to-end SEO · AEO · GEO rebuild
 
 > **How to use this:** paste the whole file as the opening prompt in Antigravity with the repo `/Volumes/Ram - MAC/SMRU.EDU.IN` open. It is self-contained — it carries the audit findings, the rules, the phase plan and the acceptance tests, so the agent needs no prior conversation. Work through the phases in order and stop at each gate.

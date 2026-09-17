@@ -414,20 +414,66 @@ const checks = [
       exists("docs/seo/ai-audit.md"),
   },
   {
-    name: "Master remediation control log exists",
-    pass: () =>
-      exists("REMEDIATION_SUMMARY.md") &&
-      read("REMEDIATION_SUMMARY.md").includes("Status date:") &&
-      read("REMEDIATION_SUMMARY.md").includes("Release Decision"),
+    // PROJECT.md is the handbook and the control file (rules, sources of truth, loop, current state).
+    name: "PROJECT.md is the single root handbook and carries every required section",
+    pass: () => {
+      if (!exists("PROJECT.md")) return false;
+      const file = read("PROJECT.md");
+      const required = [
+        "## 1. What this is",
+        "## 2. Repository structure",
+        "## 3. How a page is built",
+        "## 4. Sources of truth",
+        "## 5. Redirects and retired URLs",
+        "## 6. Assets",
+        "## 7. Tooling and verification",
+        "## 8. Workflow — the loop",
+        "## 9. Known debt and open decisions",
+        "## 10. Current state",
+        "Status date:",
+        "Release Decision",
+        "npm run check",
+        "npm run verify",
+      ];
+      return required.every((needle) => file.includes(needle));
+    },
   },
   {
-    name: "Repository keeps a single markdown source of truth",
+    name: "Repository keeps a single markdown source of truth (PROJECT.md); history lives in docs/seo/changelog.md",
     pass: () => {
-      const files = require("fs")
-        .readdirSync(process.cwd(), { withFileTypes: true })
+      const files = fs
+        .readdirSync(root, { withFileTypes: true })
         .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
         .map((entry) => entry.name);
-      return files.length === 1 && files[0] === "REMEDIATION_SUMMARY.md";
+      return files.length === 1 && files[0] === "PROJECT.md" && exists("docs/seo/changelog.md");
+    },
+  },
+  {
+    // The root is an allowlist: tooling, one-off scripts, reports and scratch folders were removed once and
+    // must not come back. Scratch space is tmp/ and scratch/ (gitignored); scripts go in scripts/ with an
+    // npm entry; prose goes in docs/.
+    name: "Repository root contains only the allowed entries",
+    pass: () => {
+      const allowed = new Set([
+        ".claude", ".DS_Store", ".eslintrc.json", ".git", ".github", ".gitignore", ".next", ".next-dev", ".nvmrc",
+        ".playwright-cli", ".vscode", "app", "docs", "next-env.d.ts", "next.config.mjs", "node_modules", "out",
+        "output", "package-lock.json", "package.json", "postcss.config.js", "PROJECT.md", "public", "REDIRECT_MAP.csv",
+        "scratch", "scripts", "src", "tailwind.config.js", "tests", "tmp", "tools", "tsconfig.json",
+      ]);
+      const offenders = fs.readdirSync(root).filter((name) => !allowed.has(name));
+      if (offenders.length) console.error("  unexpected root entries:", offenders.join(", "));
+      return offenders.length === 0;
+    },
+  },
+  {
+    // No hand-run mutation scripts or reports at the root or under src/: every script is an npm entry.
+    name: "No stray scripts or report files outside scripts/ and tests/",
+    pass: () => {
+      const rootStrays = fs.readdirSync(root).filter((name) => /\.(js|mjs|cjs|py|sh|csv|txt|log|json)$/.test(name) && !new Set(["package.json", "package-lock.json", "tsconfig.json", "next.config.mjs", "postcss.config.js", "tailwind.config.js", ".eslintrc.json", "REDIRECT_MAP.csv"]).has(name));
+      const srcStrays = fs.readdirSync(path.join(root, "src")).filter((name) => /\.(js|mjs|cjs|py|sh)$/.test(name));
+      const strays = [...rootStrays, ...srcStrays.map((name) => `src/${name}`)];
+      if (strays.length) console.error("  stray files:", strays.join(", "));
+      return strays.length === 0;
     },
   },
   {
