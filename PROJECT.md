@@ -99,6 +99,8 @@ src/ — facts and rules (the sources of truth, §4)
                   exported ASK_ADMISSIONS sentence), programme-answer.ts, programme-catalogue.ts, course-list.ts,
                   search-intent.ts, health-allied-course-seo.ts, home-faqs.ts, static-page-faqs.ts, visibility.ts.
   lib/metadata.ts The ONLY way a page gets <title>, description, canonical, OG, hreflang (buildMetadata).
+  types/images.d.ts  Static image module types, committed so `tsc` passes on a fresh checkout before any build
+                  (next-env.d.ts is generated and gitignored). Keep it module-free (no import/export).
   lib/developer/, data/developer/static-seed.ts, types/developer.ts
                   Developer-CMS state and seed. useDeveloperCms is still read by 11 components/views; the
                   static seed is a frozen inventory — do not update it for route changes (§9).
@@ -455,7 +457,7 @@ audit. Lint warnings do not fail; there are 4 known `react-hooks/exhaustive-deps
 | Gate | Fails when |
 |---|---|
 | `scripts/seo-guard.js` (45 named checks) | an architecture invariant is broken: naming standard, bridge sentence, single root `.md` with its required sections, root allowlist, no stray scripts, `app/` holds only route files, no `loading.tsx`, no `redirect()` in pages, JSON-LD only via `<StructuredData>` with `-schema` ids, shells use the lib `buildRedirectMetadata`, sitemap index shape, guarded `.htaccess` rules, Course schema plumbing, programme-page standard, health-allied profiles, AI-crawler robots policy. Change a guarded string → update the guard **in the same commit** and say so. |
-| `tsc --noEmit` | type errors (tsconfig is non-strict) |
+| `tsc --noEmit` | type errors (tsconfig is non-strict). CI runs it before `build` on a fresh checkout, so it must not depend on generated files: image modules are declared in `src/types/images.d.ts`. To reproduce CI locally: `mv next-env.d.ts /tmp && npm run typecheck; mv /tmp/next-env.d.ts .` |
 | `node --test tests/*.test.mjs` | route-collision sets drift, JSON-LD escaping breaks, developer route reappears, crawl gates or visual-audit registries misbehave |
 | `next lint` | ESLint errors (`next/core-web-vitals`); `<a>` for internal routes is an error |
 | `next build` | any route fails to prerender; also re-runs type and lint checks |

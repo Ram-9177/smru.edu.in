@@ -19,8 +19,10 @@ history. Each entry: what changed, why, what was verified, what was deliberately
   a page (authority map, link registries, llms route list, view deletion), partner landings (`EDU_PARTNERS` shape,
   alias chain, never in the sitemap); generator order (build first); CI stated exactly; commit subject rule
   reconciled with practice.
-- Verified at head: seo-guard 45/45; tests 39/39; typecheck clean; lint 0 errors (4 warnings); build 275 routes;
-  redirects:check ok; audit:checklist pass; seo:gates pass; seo:facts 29/29.
+- CI caught that untracking `next-env.d.ts` removed the only ambient `.webp` module types on a fresh checkout
+  (typecheck runs before build). `src/types/images.d.ts` now declares them; verified with the generated file absent.
+- Verified at head: seo-guard 45/45; tests 39/39; typecheck clean (with and without next-env.d.ts); lint 0 errors
+  (4 warnings); build 275 routes; redirects:check ok; audit:checklist pass; seo:gates pass; seo:facts 29/29.
 
 ## 2026-09-17 — Repository discipline: handbook, cleanup, redirect register (branch `docs/project-handbook`)
 
