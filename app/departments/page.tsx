@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
 import { LinkGridSection } from "@/components/seo/PageSections";
@@ -47,7 +48,7 @@ export default function Page() {
         <section className="px-4">
           <div className="mx-auto max-w-6xl rounded-[2.5rem] border border-[#dce7f3] bg-white px-6 py-12 shadow-[0_24px_44px_rgba(13,49,92,0.08)] md:px-12">
             <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-[11px] font-black uppercase tracking-[0.28em] text-slate-400">
-              <a href="/" className="transition-colors hover:text-[#019e6e]">Home</a>
+              <Link href="/" className="transition-colors hover:text-[#019e6e]">Home</Link>
               <span>/</span>
               <span className="text-[#0d315c]">Departments</span>
             </nav>

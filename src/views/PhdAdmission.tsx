@@ -1,5 +1,6 @@
 // @ts-nocheck
 "use client";
+import Link from "next/link";
 import React, { useEffect } from "react";
 import {
   FaGraduationCap, FaFlask, FaCalendarAlt, FaClipboardCheck,
@@ -204,12 +205,12 @@ const PhdAdmission = () => {
                   >
                     Download Addendum <FaFileDownload />
                   </a>
-                  <a
+                  <Link
                     href="/contact"
                     className="flex min-h-12 items-center justify-center gap-3 border border-slate-200 px-5 text-[10px] font-black uppercase tracking-[0.16em] text-[#0d315c] transition-colors hover:border-[#019e6e] hover:text-[#019e6e]"
                   >
                     Next Cycle Updates <FaEnvelope />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </aside>
@@ -631,9 +632,9 @@ const PhdAdmission = () => {
              </div>
 
              <div className="mt-32 text-center">
-                <a href="/contact" className="inline-block px-14 py-7 bg-[#ffaf3a] text-[#0d315c] font-black text-xl uppercase tracking-widest cut-corner-badge shadow-2xl hover:bg-white transition-all transform hover:-translate-y-1">
+                <Link href="/contact" className="inline-block px-14 py-7 bg-[#ffaf3a] text-[#0d315c] font-black text-xl uppercase tracking-widest cut-corner-badge shadow-2xl hover:bg-white transition-all transform hover:-translate-y-1">
                    Register Interest for Next Ph.D. Cycle
-                </a>
+                </Link>
              </div>
           </div>
        </section>

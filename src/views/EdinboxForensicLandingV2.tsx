@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import {
@@ -122,10 +123,10 @@ export default function EdinboxForensicLandingV2() {
                 </a>
               ))}
             </div>
-            <a href="/admissions"
+            <Link href="/admissions"
               onClick={handleLandingApply} className="bg-[#e8971f] text-white px-4 py-1 rounded font-bold hover:bg-[#f5b042] transition-colors">
               Apply Now
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -149,7 +150,7 @@ export default function EdinboxForensicLandingV2() {
           </div>
 
           <ul className={`lg:flex items-stretch h-full font-bold text-[14px] text-white/90 gap-1 ${isNavOpen ? 'absolute top-full left-0 w-full bg-[#1b5c48] flex-col p-4 space-y-2 h-auto shadow-xl' : 'hidden'}`}>
-            <li className="flex"><a href="/partner/edinbox" className="flex items-center px-4 hover:bg-[#133d30] hover:border-b-4 hover:border-[#e8971f] active">Home</a></li>
+            <li className="flex"><Link href="/partner/edinbox" className="flex items-center px-4 hover:bg-[#133d30] hover:border-b-4 hover:border-[#e8971f] active">Home</Link></li>
             <li className="relative group flex items-center px-4 cursor-pointer hover:bg-[#133d30]">
               About <FaChevronRight className="ml-1.5 text-[10px] rotate-90" />
             </li>
@@ -160,14 +161,14 @@ export default function EdinboxForensicLandingV2() {
               Admissions <FaChevronRight className="ml-1.5 text-[10px] rotate-90" />
             </li>
             <li className="flex"><a href="#careers" className="flex items-center px-4 hover:bg-[#133d30]">Careers</a></li>
-            <li className="flex"><a href="/contact" className="flex items-center px-4 hover:bg-[#133d30]">Contact</a></li>
+            <li className="flex"><Link href="/contact" className="flex items-center px-4 hover:bg-[#133d30]">Contact</Link></li>
           </ul>
 
           <div className="hidden lg:flex items-center ml-auto pl-4">
-            <a href="/admissions"
+            <Link href="/admissions"
               onClick={handleLandingApply} className="bg-[#e8971f] text-white px-6 py-2.5 rounded font-black text-[13px] uppercase tracking-wider hover:bg-[#f5b042] transform hover:-translate-y-0.5 transition-all flex items-center gap-2 shadow-lg">
               Register for AIFSET <FaArrowRight />
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
@@ -207,13 +208,13 @@ export default function EdinboxForensicLandingV2() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-14">
-                <a
+                <Link
                   href="/admissions"
               onClick={handleLandingApply}
                   className="bg-[#e8971f] text-white px-10 py-5 font-black text-[14px] uppercase tracking-wider rounded text-center shadow-[0_10px_30px_rgba(232,151,31,0.4)] hover:bg-[#f5b042] transform hover:-translate-y-1 transition-all"
                 >
                   Register for AIFSET
-                </a>
+                </Link>
                 <a
                   href="#about"
                   className="bg-transparent border-2 border-white/40 text-white px-10 py-5 font-black text-[14px] uppercase tracking-wider rounded text-center hover:border-white hover:bg-white/5 transition-all"
@@ -261,13 +262,13 @@ export default function EdinboxForensicLandingV2() {
             </span>
             <span className="text-[15px] font-black text-[#1a2e28] tracking-tight">Registration Open for B.Sc Forensic Science 2025–26</span>
           </div>
-          <a
+          <Link
             href="/admissions"
               onClick={handleLandingApply}
             className="bg-[#1b5c48] text-white px-6 py-2 rounded font-black text-[12px] uppercase tracking-wider hover:bg-[#227055] transition-all flex items-center gap-2 shadow-md"
           >
             Explore Eligibility <FaArrowRight />
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -323,13 +324,13 @@ export default function EdinboxForensicLandingV2() {
                 The All India Forensic Science Entrance Test is conducted online, multiple times a year, and designed to be accessible to every eligible student in India. One exam — seamless admission to St. Mary's University.
               </p>
             </div>
-            <a
+            <Link
               href="/admissions"
               onClick={handleLandingApply}
               className="reveal bg-[#e8971f] text-white px-12 py-5 font-black text-[15px] uppercase tracking-wider rounded shadow-2xl hover:bg-[#f5b042] transform hover:scale-105 transition-all flex items-center gap-3"
             >
               Register for AIFSET <FaArrowRight />
-            </a>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -363,13 +364,13 @@ export default function EdinboxForensicLandingV2() {
               <p className="text-lg text-[#3d5a52] leading-relaxed mb-10">
                 AIFSET is open to science students across India who meet these straightforward requirements — from any recognised board.
               </p>
-              <a
+              <Link
                 href="/admissions"
               onClick={handleLandingApply}
                 className="bg-[#1b5c48] text-white px-10 py-5 font-black text-[14px] uppercase tracking-wider rounded shadow-xl hover:bg-[#227055] transition-all inline-block"
               >
                 Check My Eligibility
-              </a>
+              </Link>
             </div>
 
             <div className="reveal space-y-4">
@@ -435,13 +436,13 @@ export default function EdinboxForensicLandingV2() {
           </div>
 
           <div className="text-center mt-16 reveal">
-            <a
+            <Link
               href="/admissions"
               onClick={handleLandingApply}
               className="bg-[#e8971f] text-white px-12 py-5 font-black text-[15px] uppercase tracking-wider rounded shadow-2xl hover:bg-[#f5b042] transform hover:-translate-y-1 transition-all inline-flex items-center gap-3"
             >
               Start My Application <FaArrowRight />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -459,13 +460,13 @@ export default function EdinboxForensicLandingV2() {
               <p className="text-lg text-[#3d5a52] leading-relaxed mb-8">
                 A B.Sc Forensic Science from St. Mary's University opens doors across government labs, law enforcement, private agencies, and research — nationwide.
               </p>
-              <a
+              <Link
                 href="/admissions"
               onClick={handleLandingApply}
                 className="bg-[#1b5c48] text-white px-10 py-5 font-black text-[14px] uppercase tracking-wider rounded shadow-xl hover:bg-[#227055] transition-all inline-block"
               >
                 Explore the Degree
-              </a>
+              </Link>
             </div>
 
             <div className="grid gap-3 reveal">
@@ -508,19 +509,19 @@ export default function EdinboxForensicLandingV2() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-            <a
+            <Link
               href="/admissions"
               onClick={handleLandingApply}
               className="bg-[#e8971f] text-white px-12 py-5 font-black text-[15px] uppercase tracking-wider rounded shadow-[0_10px_30px_rgba(232,151,31,0.3)] hover:bg-[#f5b042] transform hover:scale-105 transition-all"
             >
               Secure My Scholarship Seat
-            </a>
-            <a
+            </Link>
+            <Link
               href="/schools"
               className="bg-transparent border-2 border-white/30 text-white px-12 py-5 font-black text-[15px] uppercase tracking-wider rounded hover:border-white hover:bg-white/5 transition-all"
             >
               View All Programmes
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-wrap justify-center gap-8 text-white/50 text-[12px] font-black uppercase tracking-[0.15em]">
@@ -631,20 +632,20 @@ export default function EdinboxForensicLandingV2() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a
+            <Link
               href="/admissions"
               onClick={handleLandingApply}
               className="bg-[#e8971f] text-white px-12 py-6 font-black text-[15px] uppercase tracking-wider rounded shadow-2xl hover:bg-[#f5b042] transform hover:scale-105 transition-all flex items-center gap-3 justify-center"
             >
               <FaPenAlt /> Register for AIFSET
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               onClick={handleLandingApply}
               className="bg-transparent border-2 border-white/40 text-white px-12 py-6 font-black text-[15px] uppercase tracking-wider rounded hover:border-white hover:bg-white/5 transition-all flex items-center gap-3 justify-center"
             >
               <FaPhone /> Book Free Consultation
-            </a>
+            </Link>
           </div>
 
           <div className="mt-16 text-[10px] font-black uppercase tracking-[0.4em] text-white/30 space-x-4">
@@ -685,18 +686,18 @@ export default function EdinboxForensicLandingV2() {
               <ul className="space-y-3 text-[14px]">
                 <li><a href="#about" className="hover:text-[#f5b042] transition-colors">About St. Mary's University</a></li>
                 <li><a href="#aifset" className="hover:text-[#f5b042] transition-colors">AIFSET Entrance</a></li>
-                <li><a href="/schools" className="hover:text-[#f5b042] transition-colors">Academic Schools</a></li>
-                <li><a href="/admissions" className="hover:text-[#f5b042] transition-colors">Admissions 2025</a></li>
+                <li><Link href="/schools" className="hover:text-[#f5b042] transition-colors">Academic Schools</Link></li>
+                <li><Link href="/admissions" className="hover:text-[#f5b042] transition-colors">Admissions 2025</Link></li>
               </ul>
             </div>
 
             <div className="md:col-span-1">
               <h4 className="text-white text-[11px] font-black uppercase tracking-[0.2em] mb-8 border-b-2 border-[#e8971f] inline-block pb-1">Legal Route</h4>
               <ul className="space-y-3 text-[14px]">
-                <li><a href="/privacy-policy" className="hover:text-[#f5b042] transition-colors">Privacy Policy</a></li>
-                <li><a href="/terms-of-service" className="hover:text-[#f5b042] transition-colors">Terms of Service</a></li>
-                <li><a href="/mandatory-disclosure" className="hover:text-[#f5b042] transition-colors">Mandatory Disclosure</a></li>
-                <li><a href="/contact" className="hover:text-[#f5b042] transition-colors">Contact Support</a></li>
+                <li><Link href="/privacy-policy" className="hover:text-[#f5b042] transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/terms-of-service" className="hover:text-[#f5b042] transition-colors">Terms of Service</Link></li>
+                <li><Link href="/mandatory-disclosure" className="hover:text-[#f5b042] transition-colors">Mandatory Disclosure</Link></li>
+                <li><Link href="/contact" className="hover:text-[#f5b042] transition-colors">Contact Support</Link></li>
               </ul>
             </div>
 
