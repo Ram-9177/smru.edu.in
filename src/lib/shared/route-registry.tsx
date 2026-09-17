@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { JSX } from "react";
 import { buildMetadata } from "@/lib/metadata";
 
 import Home from "@/views/Home";

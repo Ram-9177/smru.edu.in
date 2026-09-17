@@ -12,7 +12,8 @@ export function generateStaticParams() {
     .filter(({ slug }) => !EXPLICIT_GUIDE_SLUGS.has(slug));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const config = SAFE_GUIDE_PAGE_MAP.get(params.slug);
   if (!config) {
     return {
@@ -29,7 +30,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   });
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const config = SAFE_GUIDE_PAGE_MAP.get(params.slug);
   if (!config) notFound();
   return <InformationPage config={config} />;

@@ -12,7 +12,8 @@ export function generateStaticParams() {
   return COUNTRIES.map((country) => ({ country: country.slug }));
 }
 
-export function generateMetadata({ params }: { params: { country: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ country: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const country = getCountry(params.country);
   if (!country) return { title: "Page Not Found", robots: "noindex,follow" };
   return buildMetadata({
@@ -22,7 +23,8 @@ export function generateMetadata({ params }: { params: { country: string } }): M
   });
 }
 
-export default function Page({ params }: { params: { country: string } }) {
+export default async function Page(props: { params: Promise<{ country: string }> }) {
+  const params = await props.params;
   const country = getCountry(params.country);
   if (!country) notFound();
 

@@ -366,7 +366,7 @@ export default function CampusGuide() {
   const [audioDuration, setAudioDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioKindRef = useRef<AudioKind>("point");
-  const audioPointIdRef = useRef<string | undefined>();
+  const audioPointIdRef = useRef<string | undefined>(undefined);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isScriptOpen, setIsScriptOpen] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);

@@ -13,7 +13,10 @@ import { getProgrammeCredential, getProgrammeDisplayName, getProgrammeShortName 
 
 import { notFound } from "next/navigation";
 
-export function generateMetadata({ params }: { params: { schoolSlug: string; deptSlug: string; programSlug: string } }): Metadata {
+export async function generateMetadata(
+  props: { params: Promise<{ schoolSlug: string; deptSlug: string; programSlug: string }> }
+): Promise<Metadata> {
+  const params = await props.params;
   return getProgramMetadata(params);
 }
 
@@ -29,13 +32,14 @@ export function generateStaticParams() {
   );
 }
 
-export default function Page({
-  params,
-}: {
-  params: { schoolSlug: string; deptSlug: string; programSlug: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ schoolSlug: string; deptSlug: string; programSlug: string }>;
+  }
+) {
+  const params = await props.params;
   const { school, department, program } = resolveProgram(params.schoolSlug, params.deptSlug, params.programSlug);
-  
+
   if (!school || !department || !program) {
     notFound();
   }

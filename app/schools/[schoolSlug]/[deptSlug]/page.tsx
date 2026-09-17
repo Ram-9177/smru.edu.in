@@ -9,7 +9,8 @@ import { getDepartmentMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
 
-export function generateMetadata({ params }: { params: { schoolSlug: string; deptSlug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ schoolSlug: string; deptSlug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   return getDepartmentMetadata(params);
 }
 
@@ -22,7 +23,8 @@ export function generateStaticParams() {
   );
 }
 
-export default function Page({ params }: { params: { schoolSlug: string; deptSlug: string } }) {
+export default async function Page(props: { params: Promise<{ schoolSlug: string; deptSlug: string }> }) {
+  const params = await props.params;
   const { school, department } = resolveDepartment(params.schoolSlug, params.deptSlug);
   const pathname = `/schools/${params.schoolSlug}/${params.deptSlug}`;
   const courseListItems = school && department ? getDepartmentCourseListItems(school, department) : [];

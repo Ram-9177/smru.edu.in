@@ -12,7 +12,8 @@ export function generateStaticParams() {
   return GLOBAL_CAREER_PATHWAYS.map((d) => ({ destination: d.slug }));
 }
 
-export function generateMetadata({ params }: { params: { destination: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ destination: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const d = getGlobalCareerPathway(params.destination);
   if (!d) return { title: "Page Not Found", robots: "noindex,follow" };
   return buildMetadata({
@@ -22,7 +23,8 @@ export function generateMetadata({ params }: { params: { destination: string } }
   });
 }
 
-export default function Page({ params }: { params: { destination: string } }) {
+export default async function Page(props: { params: Promise<{ destination: string }> }) {
+  const params = await props.params;
   const d = getGlobalCareerPathway(params.destination);
   if (!d) notFound();
 
