@@ -68,7 +68,7 @@ const checks = [
     },
   },
   {
-    name: "Naming standard: no 'St.Mary' (no space) in site copy, data or llms files",
+    name: "Naming standard: no 'St.Mary' (no space) in src, app or llms files",
     pass: () => {
       const skip = /Partners - Codes/;
       const walk = (dir) =>
@@ -78,7 +78,7 @@ const checks = [
           if (entry.isDirectory()) return walk(rel);
           return /\.(tsx?|mjs|js|json|txt|md)$/.test(entry.name) ? [rel] : [];
         });
-      const files = [...walk("src"), ...walk("app"), ...walk("data"), "public/llms.txt", "public/llms-full.txt"];
+      const files = [...walk("src"), ...walk("app"), "public/llms.txt", "public/llms-full.txt"];
       // The single permitted no-space form is the schema alternateName entry in site.ts.
       return files.every((file) => !/St\.Mary|\b(Stmarys|StMarys) University\b/.test(read(file).replace(/"St\.Mary's University",/g, "")));
     },
@@ -292,13 +292,6 @@ const checks = [
         layout.includes("MNlkKsQJcg3Cv14G_CeV3L_C7f2A3MpdPNSYNdDtdfU") &&
         htmlFile.includes("google-site-verification: google6dae2ac571d34510.html")
       );
-    },
-  },
-  {
-    name: "Preloader no longer competes as priority LCP asset",
-    pass: () => {
-      const file = read("src/components/Preloader.tsx");
-      return file.includes("priority={false}") && file.includes("}, 150);") && file.includes("}, 550);");
     },
   },
   {

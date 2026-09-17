@@ -16,7 +16,6 @@ import {
   FaVolumeMute,
   FaVolumeUp,
 } from "react-icons/fa";
-import SEO from "../components/SEO";
 import {
   CAMPUS_TOUR_INTRO_LOCATION,
   CAMPUS_TOUR_LANGUAGES,
@@ -273,11 +272,6 @@ export default function Campus360() {
       data-audio-src={audioSrc}
       data-audio-state={!audioSrc ? "unavailable" : isMuted ? "muted" : audioState}
     >
-      <SEO
-        title="Campus 360° Virtual Tour | St. Mary's University"
-        description="Explore St. Mary's University campus in an immersive multilingual 360° virtual tour."
-      />
-
       <div className="absolute inset-0 z-0">
         {hasLoadedQuery ? (
           <Campus360Viewer

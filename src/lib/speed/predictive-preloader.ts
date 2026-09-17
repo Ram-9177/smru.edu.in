@@ -1,7 +1,7 @@
 // Predictive Smart Preloader & Intent-Based Zero-Latency Accelerator
 
-import { prefetchAndDecode, warmUpHostelTiles, warmUpTourTextures } from "@/lib/campus-360/texture-cache";
-import { CAMPUS_TOUR_LOCATIONS } from "@/data/campus-tour";
+import { prefetchAndDecode, warmUpHostelTiles, warmUpTourTextures } from "../campus-360/texture-cache";
+import { CAMPUS_TOUR_LOCATIONS } from "../../data/campus-tour";
 
 const prefetchedUrls = new Set<string>();
 
@@ -112,11 +112,55 @@ export function predictivePrefetch(targetUrl: string) {
   }
 }
 
+export const SPECULATION_RULES = {
+  prerender: [
+    {
+      source: "list",
+      urls: [
+        "/explore/",
+        "/campus-360/",
+        "/schools/",
+        "/admissions/",
+        "/about/",
+        "/contact/",
+        "/explore/hostel-360/",
+      ],
+      eagerness: "moderate",
+    },
+  ],
+};
+
+/**
+ * Dynamically injects W3C Speculation Rules for Chromium browsers post-hydration.
+ * Prevents React hydration mismatch collisions with third-party browser extensions
+ * (e.g. Bitdefender executors/200.js) while maintaining lightning-fast prerendering.
+ */
+export function injectSpeculationRules() {
+  if (typeof document === "undefined") return;
+  if (document.getElementById("smru-speculation-rules")) return;
+
+  try {
+    if (
+      typeof HTMLScriptElement !== "undefined" &&
+      HTMLScriptElement.supports &&
+      HTMLScriptElement.supports("speculationrules")
+    ) {
+      const script = document.createElement("script");
+      script.id = "smru-speculation-rules";
+      script.type = "speculationrules";
+      script.textContent = JSON.stringify(SPECULATION_RULES);
+      document.head.appendChild(script);
+    }
+  } catch (_) {}
+}
+
 /**
  * Initialize global intent listeners on user hover, touch, and focus
  */
 export function initPredictiveNavigation(router?: { prefetch: (url: string) => void }) {
   if (typeof window === "undefined") return () => {};
+
+  injectSpeculationRules();
 
   let idleHandle: number;
 

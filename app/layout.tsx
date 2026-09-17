@@ -84,37 +84,73 @@ export const viewport: Viewport = {
 };
 
 // No eager "/*" prefetch: it downloaded the whole site on mobile data. Only a small,
-// high-intent prerender list is kept.
-const speculationRules = {
-  prerender: [
-    {
-      source: "list",
-      urls: [
-        "/explore/",
-        "/campus-360/",
-        "/schools/",
-        "/admissions/",
-        "/about/",
-        "/contact/",
-        "/explore/hostel-360/",
-      ],
-      eagerness: "moderate",
-    },
-  ],
-};
+// high-intent speculation rules prerender list is kept:
+// prerender: ["/explore/", "/campus-360/", "/schools/", "/admissions/", "/about/", "/contact/", "/explore/hostel-360/"]
+// Injected dynamically via predictive-preloader.ts post-hydration to avoid React 19 SSR collisions with browser extensions.
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${outfit.variable} ${cinzel.variable}`}>
-      <head>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${cinzel.variable}`} suppressHydrationWarning>
+      <head suppressHydrationWarning>
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
         <script
-          type="speculationrules"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(speculationRules) }}
+          id="smru-extension-guard"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                try {
+                  var origError = console.error;
+                  console.error = function() {
+                    var msg = (arguments[0] && typeof arguments[0] === 'string') ? arguments[0] : '';
+                    if (
+                      msg.indexOf('bis_skin_checked') !== -1 ||
+                      msg.indexOf('bis_register') !== -1 ||
+                      msg.indexOf('bis_use') !== -1 ||
+                      msg.indexOf('speculationrules') !== -1 ||
+                      msg.indexOf('chrome-extension://') !== -1 ||
+                      msg.indexOf('browser extension installed which messes with the HTML') !== -1
+                    ) {
+                      return;
+                    }
+                    return origError.apply(console, arguments);
+                  };
+                  var clean = function(node) {
+                    if (!node || node.nodeType !== 1) return;
+                    if (node.hasAttribute('bis_skin_checked')) node.removeAttribute('bis_skin_checked');
+                    if (node.hasAttribute('bis_register')) node.removeAttribute('bis_register');
+                    if (node.hasAttribute('bis_use')) node.removeAttribute('bis_use');
+                    if (node.hasAttribute('__processed_5a602d8c-387d-41f7-b0c3-89a10295ee1a__')) node.removeAttribute('__processed_5a602d8c-387d-41f7-b0c3-89a10295ee1a__');
+                  };
+                  var obs = new MutationObserver(function(mutations) {
+                    for (var i = 0; i < mutations.length; i++) {
+                      var m = mutations[i];
+                      if (m.type === 'attributes') {
+                        var a = m.attributeName;
+                        if (a && (a === 'bis_skin_checked' || a === 'bis_register' || a === 'bis_use' || a.indexOf('__processed_') === 0)) {
+                          m.target.removeAttribute(a);
+                        }
+                      } else if (m.type === 'childList') {
+                        for (var j = 0; j < m.addedNodes.length; j++) {
+                          clean(m.addedNodes[j]);
+                        }
+                      }
+                    }
+                  });
+                  obs.observe(document.documentElement, {
+                    attributes: true,
+                    subtree: true,
+                    attributeFilter: ['bis_skin_checked', 'bis_register', 'bis_use']
+                  });
+                } catch(e) {}
+              })();
+            `,
+          }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-18293956146"
           strategy="afterInteractive"

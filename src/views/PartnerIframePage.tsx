@@ -2,7 +2,6 @@
 
 import { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import SEO from "@/components/SEO";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import { useIframeAutoHeight } from "@/hooks/useIframeAutoHeight";
 import { motion, AnimatePresence } from "framer-motion";
@@ -92,12 +91,6 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
 
   return (
     <>
-      <SEO
-        title={`${partner.name || "Partner"} | St. Mary's University`}
-        description={partner.shortDescription || `Explore ${partner.name || "our partner"} at St. Mary's University.`}
-        canonical={`https://smru.edu.in/partner/${partner.slug || slug}`}
-      />
-
       {/* Cinematic Transition Loader Overlay */}
       <AnimatePresence mode="wait">
         {!isIframeLoaded && iframeSrc && (

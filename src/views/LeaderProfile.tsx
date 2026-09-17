@@ -9,7 +9,6 @@ import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { leaderBySlug } from "../data/leaders";
-import SEO from "../components/SEO";
 
 export default function LeaderProfile() {
   const params = useParams();
@@ -36,11 +35,6 @@ export default function LeaderProfile() {
 
   return (
     <>
-      <SEO
-        title={`${leader.name} | Leadership | St. Mary's University`}
-        description={`${leader.name} — ${leader.role} at St. Mary's University.`}
-        keywords={["St. Mary's leadership","St. Mary's leadership","university leaders","rehabilitation university leadership", leader.name, leader.role]}
-      />
       {/* Banner */}
       <section className="relative w-full min-h-[35vh] overflow-hidden flex items-center">
         {/* Premium Atmospheric 'Mesh' Gradient */}

@@ -1,7 +1,6 @@
 // @ts-nocheck
 "use client";
 import React, { useState, useEffect, useMemo } from "react";
-import SEO from "../components/SEO";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 import cls1 from "../assets/Cls1.webp";
 import cls2 from "../assets/cls2.webp";
@@ -114,13 +113,6 @@ export default function Careers() {
   // ---- UI ----
   return (
     <>
-      <SEO
-        title="Careers | St. Mary's University"
-        description="Join St. Mary's University — careers in rehabilitation and allied health education. Faculty, clinical, technical roles and more."
-        keywords={["St. Mary's University careers","St. Mary's jobs","university jobs hyderabad","rehabilitation careers"]}
-        canonical="https://smru.edu.in/careers"
-        og={{ url: "https://smru.edu.in/careers" }}
-      />
       {/* ===== HERO ===== */}
       <section
         id="careers-hero"

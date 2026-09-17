@@ -2,9 +2,24 @@
 import React from "react";
 import Link from "next/link";
 import { schools } from "../data/schools";
-import abstractHeroBg from "../assets/education-pattern.webp";
-import { safeSlug } from "@/lib/shared/program-utils";
-import { resolveAssetSrc } from "@/lib/shared/media";
+import { safeSlug } from "../lib/shared/program-utils";
+
+export interface BreadcrumbItem {
+  label: string;
+  path?: string;
+}
+
+export interface SchoolLayoutProps {
+  breadcrumbs?: BreadcrumbItem[];
+  title?: string;
+  subtitle?: string;
+  activeSchoolSlug?: string;
+  sectionLabel?: string;
+  heading?: string;
+  children: React.ReactNode;
+  onApply?: ((target?: any) => void) | null;
+  partner?: { name: string } | null;
+}
 
 export default function SchoolLayout({ 
   breadcrumbs = [], 
@@ -16,7 +31,7 @@ export default function SchoolLayout({
   children,
   onApply = null,
   partner = null
-}) {
+}: SchoolLayoutProps) {
   const allSchools = (schools || []).map((s) => ({
     name: s.name,
     short: s.short || s.name,
@@ -125,12 +140,18 @@ export default function SchoolLayout({
             <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(rgba(13,49,92,0.08)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
             <div>
                {sectionLabel && (
-                 <div className="text-[11px] font-black text-[#1f9a79] uppercase tracking-[0.4em] mb-2">
+                 <div
+                   className="text-[11px] font-black text-[#1f9a79] uppercase tracking-[0.4em] mb-2"
+                   suppressHydrationWarning
+                 >
                    {sectionLabel}
                  </div>
                )}
                {heading && (
-                 <h2 className="text-2xl md:text-3xl font-black text-[#133f71] font-outfit mb-8">
+                 <h2
+                   className="text-2xl md:text-3xl font-black text-[#133f71] font-outfit mb-8"
+                   suppressHydrationWarning
+                 >
                    {heading}
                  </h2>
                )}

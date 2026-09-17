@@ -7,7 +7,12 @@ out/
 output/
 server.log
 *.log
-*_Error.txt
 Campus Tour - SMRU/
 __Campus Tour - SMRU/
 node_modules
+
+# Local tooling and scratch space (never committed)
+.claude/
+tmp/
+scratch/
+*_Error*.txt

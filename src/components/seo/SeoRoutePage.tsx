@@ -1,7 +1,7 @@
 import Link from "next/link";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
-import type { SeoPage } from "../../../data/seo-pages";
+import type { SeoPage } from "@/data/seo-pages";
 
 export default function SeoRoutePage({ page }: { page: SeoPage }) {
 

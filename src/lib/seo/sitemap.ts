@@ -9,8 +9,8 @@ import { SEO_AUTHORITY_PAGES } from "./authority-map";
 import { INFO_PAGES } from "./info-pages";
 import { SAFE_GUIDE_PAGES } from "./safe-guides";
 import { SHOW_PUBLIC_INFO_PAGES } from "./visibility";
-import { NOINDEX_COMPLIANCE_PATHS } from "../../../data/compliance-pages";
-import { INDEXABLE_SEO_PAGES } from "../../../data/seo-pages";
+import { NOINDEX_COMPLIANCE_PATHS } from "@/data/compliance-pages";
+import { INDEXABLE_SEO_PAGES } from "@/data/seo-pages";
 import { GLOBAL_CAREER_PATHWAYS, COUNTRIES } from "@/data/international";
 
 // Canonical sitemap host: HTTPS-only, non-www. HTTP and www are redirected in

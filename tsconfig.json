@@ -29,18 +29,6 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "lib/*": [
-        "./lib/*",
-        "./src/lib/*"
-      ],
-      "data/*": [
-        "./data/*",
-        "./src/data/*"
-      ],
-      "components/*": [
-        "./components/*",
-        "./src/components/*"
       ]
     }
   },
@@ -52,7 +40,6 @@
     ".next-dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "Nurseing Landing Page"
+    "node_modules"
   ]
 }

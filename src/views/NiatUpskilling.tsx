@@ -1,7 +1,6 @@
 // @ts-nocheck
 "use client";
 import React, { useState } from "react";
-import SEO from "../components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/Logo.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
@@ -13,12 +12,6 @@ const NiatUpskilling = () => {
 
   return (
     <>
-      <SEO 
-        title="NIAT Upskilling | St. Mary's University"
-        description="Explore the NIAT Upskilling programs in collaboration with St. Mary's University."
-        canonical="https://smru.edu.in/niat-upskilling"
-      />
-
       <AnimatePresence mode="wait">
         {!isIframeLoaded && (
           <motion.div
