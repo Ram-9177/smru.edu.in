@@ -89,13 +89,34 @@
     RewriteRule ^mandatory-disclosure/(ugc-disclosure|statutory-disclosures|contact|first-academic-year-disclosure|public-information)/?$ https://smru.edu.in/mandatory-disclosure/ [L,R=301]
     RewriteRule ^(niat|bb|skilgen|qtst)/?$ https://smru.edu.in/partner/$1/ [L,R=301]
 
+    # --- Legacy aliases that also have a client shell under app/ (kept in sync by scripts/redirect-map.mjs) ---
+    RewriteRule ^(blackbucks)/?$ https://smru.edu.in/partner/bb/ [L,R=301]
+    RewriteRule ^(bytexl)/?$ https://smru.edu.in/partner/bytexl/ [L,R=301]
+    RewriteRule ^(carrer)/?$ https://smru.edu.in/careers/ [L,R=301]
+    RewriteRule ^(ctpl)/?$ https://apply.smru.edu.in/ [L,R=301]
+    RewriteRule ^(edinbox)/?$ https://smru.edu.in/partner/edinbox/ [L,R=301]
+    RewriteRule ^(edridge)/?$ https://smru.edu.in/partner/edridge/ [L,R=301]
+    RewriteRule ^(emversity)/?$ https://smru.edu.in/partner/emversity/ [L,R=301]
+    RewriteRule ^(entrancetest)/?$ https://smru.edu.in/exam-notification/ [L,R=301]
+    RewriteRule ^(iiat|ist|mjiollnir|onnbikes|university)/?$ https://smru.edu.in/partner/ [L,R=301]
+    RewriteRule ^(nst)/?$ https://smru.edu.in/partner/nst/ [L,R=301]
+    RewriteRule ^(qtst-smru)/?$ https://smru.edu.in/partner/qtst/ [L,R=301]
+    RewriteRule ^(veloces)/?$ https://smru.edu.in/partner/veloces/ [L,R=301]
+    # Legacy /departments/{dept}/ -> canonical /schools/{school}/{dept}/
+    RewriteRule ^departments/(allied-health-sciences|occupational-therapy|physiotherapy)/?$ https://smru.edu.in/schools/health-allied-health-sciences/$1/ [L,R=301]
+    RewriteRule ^departments/(applied-psychology-behavioural-health|clinical-psychology|rehabilitation-psychology)/?$ https://smru.edu.in/schools/psychology/$1/ [L,R=301]
+    RewriteRule ^departments/(audiology-speech-sciences|inclusive-education|prosthetics-orthotics)/?$ https://smru.edu.in/schools/rehabilitation-sciences/$1/ [L,R=301]
+    RewriteRule ^departments/(business-administration-computer-applications|computer-science-engineering|rehabilitation-engineering-assistive-technologies|sciences-humanities)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/$1/ [L,R=301]
+    RewriteRule ^departments/(legal-studies)/?$ https://smru.edu.in/schools/law/$1/ [L,R=301]
+    RewriteRule ^departments/(nursing)/?$ https://smru.edu.in/schools/nursing-sciences/$1/ [L,R=301]
+
     # --- Duplicate school landings -> canonical /schools/{slug}/ ---
     RewriteRule ^(rehabilitation-sciences|health-allied-health-sciences|psychology|nursing-sciences|engineering-emerging-technologies|law)/?$ https://smru.edu.in/schools/$1/ [L,R=301]
 
     # 1b. Retired law URLs
-    RewriteRule ^schools/law/legal-studies/llb-general/?$ https://smru.edu.in/schools/law/ [L,R=301]
-    RewriteRule ^llm/?$ https://smru.edu.in/schools/law/ [L,R=301]
-    RewriteRule ^phd-law/?$ https://smru.edu.in/schools/law/ [L,R=301]
+    RewriteRule ^schools/law/legal-studies/llb-general/?$ https://smru.edu.in/schools/law/legal-studies/llb/ [L,R=301]
+    RewriteRule ^llm/?$ https://smru.edu.in/schools/law/legal-studies/llm/ [L,R=301]
+    RewriteRule ^phd-law/?$ https://smru.edu.in/schools/law/legal-studies/phd-law/ [L,R=301]
 
     # 2. Maintenance Mode Switch (OFF)
 </IfModule>

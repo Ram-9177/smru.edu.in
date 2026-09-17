@@ -1,15 +1,11 @@
-import RedirectFallback, { buildRedirectMetadata } from "@/components/seo/RedirectFallback";
+import RedirectFallback from "@/components/seo/RedirectFallback";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-const targetUrl = "/schools/law/legal-studies/llb/";
+// "LL.B. (General)" was folded into the single LL.B. programme page.
+const TARGET_PATH = "/schools/law/legal-studies/llb/";
 
-export const metadata = buildRedirectMetadata(targetUrl, "LL.B. (General) now maps to the current LL.B. programme page.");
+export const metadata = buildRedirectMetadata("Bachelor of Laws (LL.B.) | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  return (
-    <RedirectFallback
-      targetUrl={targetUrl}
-      description="LL.B. (General) now maps to the current official LL.B. programme page."
-      linkLabel="Go to LL.B. Programme"
-    />
-  );
+  return <RedirectFallback targetUrl={TARGET_PATH} linkLabel="Go to the LL.B. programme" />;
 }

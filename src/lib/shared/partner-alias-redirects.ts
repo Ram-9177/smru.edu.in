@@ -1,6 +1,6 @@
 export const PARTNER_ALIAS_REDIRECTS: Record<string, string> = {
-  blackbucks: "/bb",
-  "qtst-smru": "/qtst",
+  blackbucks: "/partner/bb",
+  "qtst-smru": "/partner/qtst",
   university: "/partner",
   bytexl: "/partner/bytexl",
   edinbox: "/partner/edinbox",

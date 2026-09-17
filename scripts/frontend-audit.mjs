@@ -44,7 +44,7 @@ const protectedMarkers = [
   "partner-alias-redirects",
 ];
 
-const sourceRoots = ["app", "components", "lib", "src"];
+const sourceRoots = ["app", "src"];
 const sourceExtensions = new Set([".js", ".jsx", ".ts", ".tsx", ".html"]);
 
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");

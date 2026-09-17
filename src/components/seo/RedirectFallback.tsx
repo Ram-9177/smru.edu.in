@@ -3,9 +3,7 @@
 // in the Next 15 export), the exported file is an <html id="__next_error__"> shell with no layout,
 // no <html lang> and no meta refresh. Rendering the redirect gives crawlers and no-JS clients a
 // complete document: React 19 hoists the <meta http-equiv="refresh"> into <head>.
-import type { Metadata } from "next";
 import Link from "next/link";
-import { absoluteUrl } from "@/lib/metadata";
 
 type RedirectFallbackProps = {
   targetUrl?: string;
@@ -13,17 +11,6 @@ type RedirectFallbackProps = {
   description?: string;
   linkLabel?: string;
 };
-
-export const buildRedirectMetadata = (targetUrl = "/schools/law/", description = "This page has moved."): Metadata => ({
-  title: "Page Moved | St. Mary's University",
-  description,
-  robots: "noindex,follow",
-  alternates: {
-    canonical: absoluteUrl(targetUrl),
-  },
-});
-
-export const metadata: Metadata = buildRedirectMetadata("/schools/law/", "This page has moved to the School of Law page.");
 
 export default function RedirectPage({
   targetUrl = "/schools/law/",

@@ -5,11 +5,15 @@
   "scripts": {
     "dev": "next dev -p 4000",
     "build": "next build",
-    "start": "next start",
+    "serve:out": "node scripts/serve-out.mjs",
+    "check": "npm run seo:guard && npm run typecheck && npm test && npm run lint",
+    "verify": "npm run check && npm run build && npm run redirects:check && npm run audit:checklist -- ci --strict && npm run seo:gates -- ci --strict && npm run seo:facts -- --strict",
     "lint": "next lint",
     "typecheck": "tsc --noEmit --pretty false",
     "test": "node --test tests/*.test.mjs",
     "seo:guard": "node scripts/seo-guard.js",
+    "redirects:map": "node scripts/redirect-map.mjs",
+    "redirects:check": "node scripts/redirect-map.mjs --check",
     "links:internal": "node scripts/check-internal-links.mjs",
     "audit:checklist": "node scripts/checklist-audit.mjs",
     "audit:integrations": "node scripts/protected-integration-manifest.mjs",
@@ -52,5 +56,8 @@
     "@next/eslint-plugin-next": {
       "glob": "10.5.0"
     }
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

@@ -223,7 +223,7 @@ for (const file of exportFiles.filter((item) => item.endsWith(".css"))) {
   }
 }
 
-const sourceRoots = ["app", "components", "src", "public"];
+const sourceRoots = ["app", "src", "public"];
 const sourceFiles = (await Promise.all(sourceRoots.map((directory) => walk(path.join(root, directory))))).flat();
 const searchableSource = sourceFiles.filter((file) => sourceExtensions.has(path.extname(file)));
 const extendedSecurityRoots = ["scripts", "tests"];
