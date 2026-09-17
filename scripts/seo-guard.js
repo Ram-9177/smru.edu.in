@@ -347,7 +347,7 @@ const checks = [
       const shells = ["rehabilitation-sciences", "health-allied-health-sciences", "psychology", "nursing-sciences", "engineering-emerging-technologies", "law"];
       return (
         landing.includes('law: "/schools/law"') &&
-        shells.every((slug) => read(`app/${slug}/page.tsx`).includes(`redirect(TARGET_PATH)`) && read(`app/${slug}/page.tsx`).includes(`/schools/${slug}`)) &&
+        shells.every((slug) => read(`app/${slug}/page.tsx`).includes("<RedirectFallback targetUrl={TARGET_PATH} />") && read(`app/${slug}/page.tsx`).includes(`/schools/${slug}`)) &&
         read("app/schools/[schoolSlug]/page.tsx").includes("LawHubPage")
       );
     },
@@ -435,6 +435,31 @@ const checks = [
         .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
         .map((entry) => entry.name);
       return files.length === 1 && files[0] === "REMEDIATION_SUMMARY.md";
+    },
+  },
+  {
+    // Next 15 static export renders every loading.tsx boundary as a pending Suspense marker: the
+    // fallback sits inside <main> and the page is streamed into a hidden div (vercel/next.js#76651).
+    name: "No loading.tsx boundaries under app/ (static export would hide page content behind the fallback)",
+    pass: () =>
+      !fs
+        .readdirSync(path.join(root, "app"), { recursive: true })
+        .some((entry) => /(^|[\\/])loading\.tsx$/.test(String(entry))),
+  },
+  {
+    // redirect() from next/navigation throws during prerender; with no boundary above the page the
+    // exported file is an <html id="__next_error__"> shell with no layout, no lang and no meta refresh.
+    name: "Alias routes render RedirectFallback (complete document + meta refresh) instead of calling redirect()",
+    pass: () => {
+      const pages = fs
+        .readdirSync(path.join(root, "app"), { recursive: true })
+        .map(String)
+        .filter((entry) => /(^|[\\/])page\.tsx$/.test(entry));
+      const offenders = pages.filter((entry) => {
+        const source = read(path.join("app", entry));
+        return /\b(permanentRedirect|redirect)\(/.test(source);
+      });
+      return offenders.length === 0 && read("src/components/seo/RedirectFallback.tsx").includes('httpEquiv="refresh"');
     },
   },
 ];

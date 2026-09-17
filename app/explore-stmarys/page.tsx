@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
 export const metadata = buildRedirectMetadata(
@@ -7,5 +7,5 @@ export const metadata = buildRedirectMetadata(
 );
 
 export default function Page() {
-  redirect("/explore");
+  return <RedirectFallback targetUrl="/explore" />;
 }

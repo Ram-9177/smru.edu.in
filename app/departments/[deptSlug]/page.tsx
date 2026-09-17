@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { schools } from "@/data/schools";
 import { buildMetadata } from "@/lib/metadata";
 import { safeSlug } from "@/lib/shared/program-utils";
@@ -35,5 +35,5 @@ export default async function Page(props: { params: Promise<{ deptSlug: string }
   const params = await props.params;
   const department = findDepartment(params.deptSlug);
   const target = department ? `/schools/${department.schoolSlug}/${department.deptSlug}/` : "/schools/";
-  redirect(target);
+  return <RedirectFallback targetUrl={target} />;
 }
