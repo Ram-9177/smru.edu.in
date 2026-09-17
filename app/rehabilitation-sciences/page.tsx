@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
 // Retired short-form school URL: canonical hub is /schools/{slug}/ (301 in public/.htaccess).
@@ -7,5 +7,5 @@ const TARGET_PATH = "/schools/rehabilitation-sciences";
 export const metadata = buildRedirectMetadata("School of Rehabilitation Sciences | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  redirect(TARGET_PATH);
+  return <RedirectFallback targetUrl={TARGET_PATH} />;
 }

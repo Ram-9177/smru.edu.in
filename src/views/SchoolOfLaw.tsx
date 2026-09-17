@@ -1008,12 +1008,12 @@ export default function SchoolOfLaw() {
           <h2 className="text-2xl md:text-4xl font-black text-[#0d315c] uppercase tracking-tight">Explore the Law Portal</h2>
           <p className="mt-4 text-slate-600 max-w-2xl mx-auto font-medium">Access the complete legal education ecosystem, resources, and official student portal for the School of Law.</p>
           <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-6">
-            <a 
+            <Link 
               href="/schools/law/" 
               className="inline-flex items-center gap-3 px-10 py-5 bg-[#0d315c] text-white font-black text-[13px] uppercase tracking-[0.25em] cut-corner-badge shadow-xl hover:scale-105 transition-all transform active:scale-95"
             >
               Visit Law Portal <FaArrowRight />
-            </a>
+            </Link>
             <button 
               onClick={() => openApply("law")}
               className="inline-flex items-center gap-3 px-10 py-5 bg-[#019e6e] text-white font-black text-[13px] uppercase tracking-[0.25em] cut-corner-badge shadow-xl hover:scale-105 transition-all transform active:scale-95"

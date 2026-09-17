@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -404,9 +405,9 @@ const IstLandingV2 = () => {
           <div className="text-[#0d315c] font-black text-xl">St. Mary's University × IST</div>
           <div className="text-slate-400 text-sm">© 2025 St. Mary's University. All Rights Reserved.</div>
           <div className="flex gap-8 text-slate-400 text-xs font-bold uppercase tracking-widest">
-            <a href="/privacy-policy" className="hover:text-[#1d4ed8]">Privacy</a>
-            <a href="/terms-of-service" className="hover:text-[#1d4ed8]">Terms</a>
-            <a href="/contact" className="hover:text-[#1d4ed8]">Contact</a>
+            <Link href="/privacy-policy" className="hover:text-[#1d4ed8]">Privacy</Link>
+            <Link href="/terms-of-service" className="hover:text-[#1d4ed8]">Terms</Link>
+            <Link href="/contact" className="hover:text-[#1d4ed8]">Contact</Link>
           </div>
         </div>
       </footer>

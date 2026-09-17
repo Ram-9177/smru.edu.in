@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { getPartnerAliasRedirect } from "@/lib/shared/partner-alias-redirects";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
 export const metadata = buildRedirectMetadata("Edridge Partner | St. Mary's University", "/partner/edridge");
 
 export default function Page() {
-  redirect(getPartnerAliasRedirect("edridge"));
+  return <RedirectFallback targetUrl={getPartnerAliasRedirect("edridge")} />;
 }

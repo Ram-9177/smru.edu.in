@@ -29,7 +29,8 @@ const NOINDEX_PARTNER_LANDINGS = new Set(["edinbox", "qtst", "veloces"]);
 // whose crawlable text is only the loader caption, so it stays reachable but out of the index.
 const isSmruAuthoredPartnerView = (slug: string) => slug === "edinbox" || slug === "carebridge";
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const partner = Object.values(EDU_PARTNERS || {}).find((item: any) => partnerSlug(item) === params.slug);
   if (!partner) {
     return buildMetadata({
@@ -70,7 +71,8 @@ export function generateStaticParams() {
     .map((slug) => ({ slug }));
 }
 
-export default function PartnerDetailPage({ params }: { params: { slug: string } }) {
+export default async function PartnerDetailPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   if (isRemovedPartnerPageSlug(params.slug)) notFound();
   const partner = Object.values(EDU_PARTNERS || {}).find((item: any) => partnerSlug(item) === params.slug);
   if (!partner) notFound();

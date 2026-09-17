@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import NextTopLoader from "nextjs-toploader";
 import { Cinzel, Inter, Outfit } from "next/font/google";
 import "../src/styles/globals.css";
 import AppShell from "../src/components/AppShell";
@@ -157,6 +158,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             not injected client-side via next/script. */}
         <StructuredData id="smru-university-schema" data={universitySchema} />
         <StructuredData id="smru-website-schema" data={websiteSchema} />
+        {/* Route-transition indicator. Replaces the loading.tsx boundaries, which in Next 15 static
+            export put the fallback inside <main> and streamed the page into a hidden div. */}
+        <NextTopLoader color="#019e6e" height={3} showSpinner={false} shadow={false} />
         <AppShell>{children}</AppShell>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
@@ -11,5 +11,5 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function Page() {
-  redirect("/exam-notification");
+  return <RedirectFallback targetUrl="/exam-notification" />;
 }

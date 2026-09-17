@@ -13,7 +13,8 @@ const leaderTitle = (leader: Leader) => `${leader.name} | Leadership | St. Mary'
 const leaderDescription = (leader: Leader) =>
   `${leader.name}, ${leader.role} of St. Mary's University (SMRU), Hyderabad.${leader.about ? ` ${leader.about}` : ""}`;
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const leader = leaderBySlug[params.slug as keyof typeof leaderBySlug];
   if (!leader) {
     return buildMetadata({
@@ -35,7 +36,8 @@ export function generateStaticParams() {
   return (leaders || []).map((leader) => ({ slug: leader.slug }));
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const leader = leaderBySlug[params.slug as keyof typeof leaderBySlug];
   const pathname = `/leadership/${params.slug}`;
 
