@@ -2,13 +2,15 @@
 
 The one file to read before changing anything, and the one file to update after. It is the only
 Markdown allowed at the repository root (enforced by `npm run seo:guard`). Everything else that is
-prose lives under `docs/`. If a rule here and the code disagree, the code is wrong or this file is
-stale; fix one in the same commit.
+prose lives under `docs/`. If a rule here and the code disagree, one of them is wrong; fix it in the
+same commit.
 
-**Give this file to an AI assistant before asking it to change the site.** Every recipe below is
-written so that following it produces work the verification chain accepts.
+**Give this file to an AI assistant before asking it to change the site.** The recipes in §3–§6 name
+every file a task touches; following them literally produces work that `npm run verify` and CI accept.
+Every count in this file was re-derived from the tree on the status date; copy counts from real
+command output, never from here.
 
-Status date: 17 September 2026 · Release Decision: see [Current state](#current-state)
+Status date: 17 September 2026 · Release Decision: see [§10 Current state](#10-current-state)
 
 ---
 
@@ -24,72 +26,88 @@ Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.
 | Output | **Static export** (`next.config.mjs`: `output: "export"`, `trailingSlash: true`). No Node server in production. |
 | Hosting | Apache. Deploy `out/` **together with** `public/.htaccess` (redirects, headers, caching, 404). |
 | Node | 20 (`.nvmrc`, CI). `package.json` declares `engines.node >= 20`. |
-| Repository | `github.com/Ram-9177/smru.edu.in`, default branch `main`. There is no other remote. |
-| Live pages | 275 exported HTML pages: 71 programme pages across 6 schools, hubs, guides, compliance, international, partner landings, 46 redirect shells. |
+| Repository | `github.com/Ram-9177/smru.edu.in`, default branch `main`. There is no other remote. `main` has no branch protection; "CI green before merge" is a team rule. |
+| Export | 275 statically generated routes: 266 HTML pages + the 404 page + `/robots.txt` + 7 sitemap XMLs. The pages are 71 programme pages across 6 schools, hubs, guides, compliance, international, partner landings and 46 redirect shells. |
 
 The site exists to be **found, trusted and cited**: by Google, by AI answer engines, and by
-students and parents checking facts. Most rules in this file come from that goal. The reasoning
-behind them is in `docs/seo/SMRU_SEO_AEO_GEO_Diagnosis_and_Plan.md` (the diagnosis) and
-`docs/seo/ANTIGRAVITY_PROMPT_SMRU_SEO.md` (the phased brief that built the current site).
+students and parents checking facts. Most rules here come from that goal. The reasoning is in
+`docs/seo/SMRU_SEO_AEO_GEO_Diagnosis_and_Plan.md` (diagnosis) and
+`docs/seo/ANTIGRAVITY_PROMPT_SMRU_SEO.md` (the phased brief that built the site; historical).
 
 ---
 
 ## 2. Repository structure
 
-Only these entries may exist at the root. Anything else fails `npm run seo:guard`.
+Only these entries, plus the gitignored ones listed after, may exist at the root. The allowlist itself
+is the guard check "Repository root contains only the allowed entries" in `scripts/seo-guard.js`.
 
 ```
-app/            Next.js App Router routes — one folder per URL, thin page.tsx files (§3)
-src/            All application source (§3). The only import alias is "@/*" → "src/*".
-public/         URL-addressed static files served verbatim (§6)
-scripts/        Verification, audit and generation tooling (§7). ESM .mjs; node: built-ins only.
-tests/          node:test suites, one file per subject: tests/<subject>.test.mjs
-docs/seo/       Plans, playbooks, trackers, generated CSVs, the changelog. Prose goes here, never at root.
-tools/          Local-only developer tools (campus map calibrator). Never shipped.
-.github/        One workflow: seo-hardening-ci.yml
-PROJECT.md      This file. The only root-level .md.
+app/              Next.js App Router — one folder per URL, thin page.tsx files (§3). Route groups:
+                  app/(Partners)/ holds /partner/, /partner/[slug] and every partner alias shell;
+                  app/(seo-pages)/[slug] is the info-page catch-all. Only page.tsx, layout.tsx, route.ts,
+                  not-found.tsx (and the one colocated client island GrievanceTabs.tsx) may live here (guarded).
+src/              All application source (§2 "src/ layout"). The only import alias is "@/*" → "src/*".
+public/           URL-addressed static files served verbatim (§6)
+scripts/          Verification, audit and generation tooling (§7). ESM .mjs (seo-guard.js is the one CommonJS
+                  file); node: built-ins only, except the image/visual tools which use sharp and puppeteer.
+tests/            node:test suites, one file per subject: tests/<subject>.test.mjs (nested folders are not discovered)
+docs/seo/         Plans, playbooks, trackers, generated CSVs, changelog.md. Prose goes here, never at root.
+tools/            Local-only developer tools (campus map calibrator). Never shipped; a test requires it to exist.
+.github/          One workflow: seo-hardening-ci.yml
+.vscode/          settings.json — the only committed IDE file
+PROJECT.md        This file. The only root-level .md (guarded).
 REDIRECT_MAP.csv  The redirect register (§5). Shell rows are generated; Apache rows are hand-kept.
 package.json  package-lock.json  next.config.mjs  tsconfig.json  tailwind.config.js
-postcss.config.js  .eslintrc.json  .nvmrc  .gitignore  next-env.d.ts
+postcss.config.js  .eslintrc.json  .nvmrc  .gitignore
 ```
 
-Ignored, never committed: `node_modules/`, `.next/`, `.next-dev/`, `out/`, `output/` (audit
-reports), `.claude/`, `tmp/`, `scratch/`, `*.log`. Scratch work goes in `scratch/` or `tmp/`;
-they are gitignored on purpose. One-off scripts are not committed at all; if a script is worth
-keeping it gets a header comment, an `npm run` entry and lives in `scripts/`.
+Gitignored, never committed: `node_modules/`, `.next/`, `.next-dev/`, `out/`, `output/` (audit
+reports), `.claude/`, `.playwright-cli/`, `tmp/`, `scratch/`, `next-env.d.ts` (regenerated by Next;
+its reference path flips between `.next` and `.next-dev`), `.DS_Store`, `*.log`, `*_Error*.txt`.
+Scratch work goes in `scratch/` or `tmp/`. One-off scripts are never committed; a script worth keeping
+gets a header comment, an `npm run` entry and lives in `scripts/` (guarded: no stray scripts at root or
+directly under `src/`).
 
 ### `src/` layout
 
 ```
-src/app-facing code
-  views/         One default-exported component per route body, named after the route (Home, Program, Contact…).
-                 37 of 41 are "use client". A view is imported by exactly one app/**/page.tsx (LawHubPage wraps SchoolOfLaw).
-  components/    Reusable pieces used by ≥1 view/page or by AppShell.
-    seo/         Server templating primitives: StructuredData, InformationPage, SeoRoutePage, PageSections,
-                 RelatedLinks, RedirectFallback. (PageSections/RelatedLinks are "use client".)
-    search/      Client search island.
-    developer/   Local-only CMS dashboard. Has NO route (a test forbids app/developer). Do not wire it into pages.
-    AppShell.tsx Owns all layout chrome: skip link, ticker, Navbar, MobileMenu, sticky CTA, Footer, ApplyModal provider.
+src/ — app-facing code
+  views/          One default-exported component per route body, named after the route. 31 files; 27 are
+                  "use client" (server views: Explore, Hostel360Page, InternationalPage, LawHubPage). Most are
+                  imported by one page; shared: About, CarebridgeLanding, Hostel360Page, InternationalPage.
+  components/     Reusable pieces used by ≥1 view/page or by AppShell.
+    seo/          Server templating primitives: StructuredData, InformationPage, SeoRoutePage, PageSections,
+                  RelatedLinks, RedirectFallback (PageSections/RelatedLinks are "use client").
+    search/       Client search island (SiteSearchClient — also the hand-kept search index `staticItems`).
+    developer/    Local-only CMS dashboard. Has NO route (a test forbids app/developer). Do not wire it into pages.
+    AppShell.tsx  All layout chrome: skip link, ticker (FLASH_UPDATES), Navbar, MobileMenu, sticky CTA, Footer,
+                  ApplyModal provider, hide-chrome rules for partner/landing/360 routes.
   context/, hooks/  ApplyModalContext (Meritto/CTPL apply flow), useOpenApply, useIframeAutoHeight.
-  styles/globals.css  The only stylesheet. House classes live in @layer components (.smru-*, .cut-corner-*).
+  styles/globals.css  The only stylesheet. House classes in @layer components (.smru-*, .cut-corner-*).
+  lib/speed/predictive-preloader.ts  Per-route asset preload lists.   lib/campus-360/texture-cache.ts  Panorama cache.
 
-src/facts and rules (the sources of truth, §4)
-  data/          Catalogue and content data: schools.ts, official-courses.ts, programme-fees.ts, leaders.ts,
-                 international.ts, events.ts, careers.ts, law.ts, law-brochures.ts, seo-pages.ts,
-                 compliance-pages.ts, course-seo.ts, home-data.ts, about-faqs.ts, campus-tour.ts, course-codes.ts.
-  lib/shared/    Identity + URL rules: university.ts, site-constants.ts, programme-names.ts, program-utils.ts,
-                 redirect-metadata.ts, partner-alias-redirects.ts, partner-pages.ts, school-landing.ts,
-                 dynamic-route-metadata.ts, official-documents.ts, media.ts, gtag.ts.
-  lib/seo/       Search/answer-engine layer: site.ts (SITE_IDENTITY), schema.ts (all JSON-LD builders), json-ld.ts,
-                 sitemap.ts, authority-map.ts, info-pages.ts, safe-guides.ts, academic.ts, programme-answer.ts,
-                 programme-catalogue.ts, course-list.ts, search-intent.ts, health-allied-course-seo.ts,
-                 home-faqs.ts, static-page-faqs.ts, visibility.ts.
-  lib/metadata.ts  buildMetadata — the ONLY way a page gets <title>, description, canonical, OG, hreflang.
+src/ — facts and rules (the sources of truth, §4)
+  data/           schools.ts, official-courses.ts, programme-fees.ts, leaders.ts, international.ts, events.ts,
+                  careers.ts, law.ts, law-brochures.ts, seo-pages.ts, compliance-pages.ts, course-seo.ts,
+                  home-data.ts, about-faqs.ts, campus-tour.ts, course-codes.ts (the university course-code register).
+  lib/shared/     university.ts, site-constants.ts, programme-names.ts, program-utils.ts, redirect-metadata.ts,
+                  partner-alias-redirects.ts, partner-pages.ts, school-landing.ts, official-documents.ts, media.ts,
+                  gtag.ts, dynamic-route-metadata.ts (composes every school / department / programme <title> and
+                  description: getSchoolMetadata, getDepartmentMetadata, getProgramMetadata).
+  lib/seo/        site.ts (SITE_IDENTITY), schema.ts (all JSON-LD builders), json-ld.ts, sitemap.ts, authority-map.ts,
+                  info-pages.ts, safe-guides.ts, academic.ts (programme FAQs, breadcrumbs, related links, the
+                  exported ASK_ADMISSIONS sentence), programme-answer.ts, programme-catalogue.ts, course-list.ts,
+                  search-intent.ts, health-allied-course-seo.ts, home-faqs.ts, static-page-faqs.ts, visibility.ts.
+  lib/metadata.ts The ONLY way a page gets <title>, description, canonical, OG, hreflang (buildMetadata).
+  lib/developer/, data/developer/static-seed.ts, types/developer.ts
+                  Developer-CMS state and seed. useDeveloperCms is still read by 11 components/views; the
+                  static seed is a frozen inventory — do not update it for route changes (§9).
 
-src/binary and archive trees (see §6 — these are the known debt)
-  assets/        Webpack-imported images (logo, leader portraits, partner logos). Imported relatively: ../assets/x.webp
+src/ — binary and archive trees (known debt, §9)
+  assets/         Webpack-imported images: only the root files and partner-logos/ are imported (24 distinct .webp
+                  files). Law/, Building Images/, Campusimages/, Files/ and the .png/.jpg originals are unreferenced.
   360/, Audio/, Law_Brouchers/, "Partners - Codes"/, "Syllabus For SMCET"/
-                 Archives of originals, ~800 MB. Not read by any code. Do not add to them; see §9 for their fate.
+                  Archives of originals, ~800 MB, read by nothing. Do not add to them.
 ```
 
 ### Naming
@@ -97,12 +115,11 @@ src/binary and archive trees (see §6 — these are the known debt)
 - Folders and route slugs: `kebab-case`. Programme slugs are derived with `safeSlug(slug, name)` from
   `src/lib/shared/program-utils.ts` and nowhere else.
 - Components and views: `PascalCase.tsx`, default export, file named after the export.
-- Library modules: `kebab-case.ts`, named exports; data registries `UPPER_SNAKE` consts with a lookup helper
-  beside them (`leaderBySlug`, `getProgrammeFee`, `INFO_PAGE_MAP`).
-- Scripts: `kebab-case.mjs`; tests: `tests/<subject>.test.mjs` (nested folders are not discovered).
-- New files under `public/`: `kebab-case`, no spaces, no capitals. (Legacy files with spaces exist; do not add more.)
-- Never create a second file that does what an existing module does. Grep first; the repo has been
-  cleaned of duplicates once and the guard now watches the root.
+- Library modules: `kebab-case.ts`, named exports; data registries as `UPPER_SNAKE` consts with a lookup
+  helper beside them (`leaderBySlug`, `getProgrammeFee`, `INFO_PAGE_MAP`).
+- Scripts: `kebab-case.mjs`; tests: `tests/<subject>.test.mjs`.
+- New files under `public/`: `kebab-case`, no spaces, no capitals. Legacy files with spaces exist; do not add more.
+- Never create a second module that does what an existing one does. Grep first.
 
 ---
 
@@ -118,8 +135,8 @@ import { buildMetadata } from "@/lib/metadata";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import Example from "@/views/Example";
 
-const title = "Example | St. Mary's University";
-const description = "One or two full sentences, factual, ends with a full stop.";
+const title = "Example | St. Mary's University";              // primary ≤ 41 chars; must not end on in/for/with/of/and/to/at/on/by/or
+const description = "Two full sentences, 120–155 characters, factual, ending with a full stop.";
 
 export const metadata: Metadata = buildMetadata({ title, description, pathname: "/example" });
 
@@ -134,52 +151,113 @@ export default function Page() {
 }
 ```
 
-Rules, each enforced by a guard check, a test or the build unless marked *(convention)*:
+### Rules
 
-1. **Metadata only via `buildMetadata`** (`src/lib/metadata.ts`) with an explicit `pathname`. It caps the
-   title at 65 chars (41-char primary + ` | St. Mary's University`), cuts the description at a sentence
-   boundary ≤155 chars, sets canonical/og:url/hreflang from the pathname. The root layout sets no canonical.
-   Redirect shells use `buildRedirectMetadata(title, targetPath)` from `src/lib/shared/redirect-metadata.ts`.
-2. **JSON-LD only via `<StructuredData>`** with builders from `src/lib/seo/schema.ts`. Ids are
-   `<slug>-<kind>-schema`. Organization and WebSite nodes are emitted once in `app/layout.tsx`; page nodes
-   reference them by `@id`. Pass `null` to suppress a block.
-3. **Dynamic segments** (`[slug]`) export `generateStaticParams()` over a data module, an async
-   `generateMetadata(props: { params: Promise<…> })`, an async default `Page` that awaits `props.params`,
-   and call `notFound()` on a miss. `params` is a Promise in Next 15; the codemod already converted all 13.
-4. **Explicit route + catch-all collision:** if you add `app/<slug>/page.tsx` and `<slug>` also exists in
-   `src/lib/seo/info-pages.ts`, add it to `EXPLICIT_PAGE_SLUGS` in `app/(seo-pages)/[slug]/page.tsx`
-   (guides: `EXPLICIT_GUIDE_SLUGS` in `app/guides/[slug]/page.tsx`). Keep them literal `new Set([...])`; a
-   test parses them.
-5. **No `loading.tsx` anywhere under `app/`.** In a Next 15 static export the fallback is written inside
-   `<main>` and the real page streamed into a hidden div; non-JS crawlers see a spinner. Navigation
-   feedback comes from `nextjs-toploader` in the root layout.
-6. **No `redirect()` / `permanentRedirect()` in a page.** They export an `<html id="__next_error__">`
-   shell with no layout, no `lang`, no meta refresh. Aliases render `<RedirectFallback targetUrl=… />` (§5).
-7. **Route links use `<Link>`** from `next/link`, never `<a href="/…">` (ESLint error under Next 15).
-8. **Sitemap membership is opt-in.** A new static page is added to `tier1Routes`/`tier2Routes`/`tier3Routes`
-   in `src/lib/seo/sitemap.ts`. Data-driven routes enter through the loops there. Utility pages pass
-   `robots: "noindex,follow"` to `buildMetadata` and stay out.
-9. **Every page has one `<h1>`.** If the view has none, the page adds `<h1 className="sr-only">`.
-10. *(convention)* Client components start with `"use client"` on line 1. Heavy views are code-split with
-    `next/dynamic`. A client component is colocated in `app/` only when tiny and route-specific.
-11. *(convention)* Styling is Tailwind utilities plus the house classes in `src/styles/globals.css`. Brand colours:
-    `#0d315c` navy, `#019e6e` green, `#ffaf3a` amber, `#f8fbff` surface. Fonts via `next/font` variables
-    (`--font-inter`, `--font-outfit`, `--font-cinzel`). Do not add a stylesheet or a CSS-in-JS library.
+Each rule names what enforces it. **guard** = `scripts/seo-guard.js` (runs in `check`); **test** = `npm test`;
+**build** = `next build` / `tsc`; **lint** = ESLint; **gates** = `seo:gates` on the export (runs in `verify`
+and CI, not in `check`); **audit** = the release audit; *(convention)* = reviewed by hand.
+
+1. **Metadata only via `buildMetadata`** with an explicit `pathname`. Title ≤ 65 chars = 41-char primary +
+   ` | St. Mary's University`; the trim is word-safe and strips a dangling preposition. Description cut at a
+   sentence boundary ≤ 155; aim for 120–155 (under 120 is a gates warning). Canonical/og:url/hreflang come
+   from the pathname; the root layout sets no canonical. Redirect shells use `buildRedirectMetadata`
+   (§5). — gates `titlesOver65`, `truncatedTitles`, `duplicateTitles`, `descriptionsOver155`,
+   `descriptionsCutMidSentence`, `missingCanonical` (indexable pages only).
+2. **JSON-LD only via `<StructuredData id="<slug>-<kind>-schema" data={build…()} />`** with builders from
+   `src/lib/seo/schema.ts`; pass `null` to suppress a block. Organization and WebSite nodes are emitted once
+   in `app/layout.tsx`; page nodes reference them by `@id`. — guard "JSON-LD is emitted only through
+   <StructuredData> and every id ends in -schema"; audit `invalidJsonLd`, duplicate JSON-LD.
+3. **Dynamic segments** export `generateStaticParams()` over a data module, an async
+   `generateMetadata(props: { params: Promise<…> })` and an async default `Page` that awaits `props.params`
+   (build + tsc). Call `notFound()` on a miss *(convention — four legacy routes render a fallback instead)*.
+4. **Explicit route + catch-all collision:** a new `app/<slug>/page.tsx` whose slug also exists in
+   `src/lib/seo/info-pages.ts` must be added to `EXPLICIT_PAGE_SLUGS` in `app/(seo-pages)/[slug]/page.tsx`
+   (guides: `EXPLICIT_GUIDE_SLUGS` in `app/guides/[slug]/page.tsx`). Keep them literal `new Set([...])`.
+   — test "dynamic static params exclude every explicit route collision".
+5. **No `loading.tsx` under `app/`.** In a Next 15 static export the fallback is written inside `<main>` and the
+   page streamed into a hidden div; non-JS crawlers see a spinner. — guard.
+6. **No `redirect()` / `permanentRedirect()` in a page.** They export an error shell with no layout, no `lang`,
+   no meta refresh. Aliases render `<RedirectFallback>` (§5). — guard.
+7. **Route links use `<Link>`** from `next/link`, never `<a href="/…">`. — lint `no-html-link-for-pages` (error).
+8. **Sitemap membership is opt-in.** Add the root-relative path without trailing slash (`"/example"`) to
+   `tier1Routes` (conversion & trust, weekly), `tier2Routes` (catalogue & campus, monthly) or `tier3Routes`
+   (legal & utility, yearly) in `src/lib/seo/sitemap.ts`. **Every `SEO_AUTHORITY_PAGES` entry
+   (`src/lib/seo/authority-map.ts`) is also emitted into the sitemap**, so a page is often listed twice.
+   Data-driven routes enter through the loops there. Noindex pages (utility, iframe partner landings) are
+   never added. — gates `sitemapMissing`, `sitemapNoindex`, `sitemapCanonicalMismatch`.
+9. **Every indexable page has exactly one `<h1>`**; add `<h1 className="sr-only">` when the view has none. — gates.
+10. **Every indexable page is linked from somewhere.** Add it to at least one of: `SEO_AUTHORITY_PAGES`
+    (nav/footer), `staticItems` in `src/components/search/SiteSearchClient.tsx`, `sections` in
+    `app/html-sitemap/page.tsx`, the ticker `FLASH_UPDATES` in `src/components/AppShell.tsx`, or a related-links
+    block. Then `grep -i <topic> REDIRECT_MAP.csv public/.htaccess docs/seo/phase3-retirement-map.md` — a
+    retired URL on the same topic should be retargeted to the new page (§5). *(convention)*
+11. *(convention)* Client components start with `"use client"` on line 1. Heavy views are code-split with
+    `next/dynamic`. Styling is Tailwind utilities plus the house classes in `src/styles/globals.css`. Brand
+    colours: `#0d315c` navy, `#019e6e` green, `#ffaf3a` amber, `#f8fbff` surface. Fonts via `next/font`
+    variables (`--font-inter`, `--font-outfit`, `--font-cinzel`). Don't add `// @ts-nocheck` (10 legacy files
+    still carry it) or a second stylesheet.
 
 ### Programme pages (`/schools/{school}/{dept}/{programme}/`)
 
-The most important 71 pages. They are generated from data, not written by hand:
+Route: `app/schools/[schoolSlug]/[deptSlug]/[programSlug]/page.tsx` → view `src/views/Program.tsx`;
+metadata from `getProgramMetadata` in `src/lib/shared/dynamic-route-metadata.ts`. Pages are generated
+from data. **Adding a programme touches these files, in this order:**
 
-- Which programmes exist, their slug, official name, level, duration and course code: `src/data/official-courses.ts`.
-  Editorial fields (overview, eligibility, labs, careers, curriculum): `src/data/schools.ts`. The two are merged
-  at module load; a programme that is not in `src/data/official-courses.ts` is **not routable**.
-- Full display name, ≤41-char title name, credential: `src/lib/shared/programme-names.ts`. Always read names
-  through `getProgrammeDisplayName / getProgrammeTitleName / getProgrammeShortName / getProgrammeCredential`.
-- The answer-first opening paragraph: `src/lib/seo/programme-answer.ts` — used by both the view (visible copy)
-  and the route (`Course.description`) so they cannot drift. Guarded.
-- Fees: `src/data/programme-fees.ts`, keyed by programme path. Empty by design until the Registrar supplies
-  figures. `Course.offers` is emitted only when a real fee exists. Guarded.
-- Titles follow `"{Full name} in Hyderabad: Fees, Eligibility 2026"`, dropping suffixes until 41 chars fit.
+1. `src/data/official-courses.ts` — append a row to `OFFICIAL_COURSE_ROWS`, copying an existing one and keeping
+   the key order `schoolSlug, departmentSlug, departmentName, slug, name, level, duration, courseCode[, partnerCode]`
+   (the guard parses rows by regex in that order). `departmentName` must equal the department's `name` in
+   `src/data/schools.ts`. `name` is the short form used in breadcrumbs and FAQ questions (`"BPT"`, `"M.Sc. Audiology"`).
+   `level` is one of `UG Program · PG Program · Ph.D. Program · Diploma · PG Diploma · Integrated UG Program`
+   (rendered verbatim). `duration` like `"2 Years (4 Semesters)"` or `"3-4 Years"`. `courseCode` is the
+   university register's 10-character code (see `src/data/course-codes.ts`) — **never invent one**; if the
+   Registrar has not issued it, hold the row and add a needs-input item. A programme not in this file is
+   **not routable**.
+2. `src/lib/shared/programme-names.ts` — add `slug: { display: "Full Name (ABBR)", credential: "Full Name" }`.
+   Required whenever `name` is an abbreviation (gates `courseNameAbbreviationOnly` fails otherwise). `title` is
+   an optional fallback used only when `display` exceeds 41 chars; it cannot shorten a display that already fits.
+3. `src/data/schools.ts` — under the department's `programs`, the editorial seed: `slug`, `name`, `level`,
+   `duration`, `eligibility`, `overview`, and optionally `labs`, `fieldExposure`, `careerOpportunities: string[]`,
+   `outcomes`, `intake`/`intakeDisplay`, `accreditation`, `admissionProcess`, `curriculum` (`string[]` or
+   `{ year, semesters: string[] }[]`). `programs` is typed `any[]`, so a misspelt key is silently ignored.
+4. **Health & Allied Health Sciences only:** `src/lib/seo/health-allied-course-seo.ts` needs a
+   `"{deptSlug}/{slug}": profile({ subject, h1, metaTitle, directAnswer, study, experience, careerAnswer, keywords })`
+   entry (guard "Health Allied courses have high-intent SEO profiles"). Its `directAnswer` is the visible opening
+   paragraph and `Course.description`.
+5. `npm run build`, then `npm run seo:coverage && npm run seo:llms` (both read `out/`), review the diff, then
+   `npm run verify`. The new row in `docs/seo/course-coverage.csv` is the definition of done: Title ≤ 65,
+   answer-first ≥ 40 words, Course + CourseInstance schema, eligibility, duration, FAQs; `NEEDS_INPUT` cells are
+   acceptable only for facts tracked in `docs/seo/needs-input.md`.
+
+How the pieces combine:
+
+- Names: always read through `getProgrammeDisplayName / getProgrammeTitleName / getProgrammeShortName /
+  getProgrammeCredential`; never string-manipulate `name`.
+- Title ladder (`withSuffixes` in `src/lib/shared/dynamic-route-metadata.ts`, resolved by `pickTitleCandidate`):
+  `"{Full name} in Hyderabad: Fees, Eligibility 2026"` → `"… in Hyderabad – Fees 2026"` → `"… in Hyderabad"` →
+  `"…: Fees, Eligibility 2026"` → `"… Fees 2026"` → name; first rung that fits 41 chars wins. The literal
+  `"in Hyderabad: Fees, Eligibility 2026"`, `pickTitleCandidate`, `getProgrammeDisplayName` and the `bpt`
+  entry in `src/lib/shared/programme-names.ts` are guarded strings. 65 is a character ceiling, not a SERP guarantee: Google
+  truncates at ~600 px (≈ 55–60 chars); a title that "looks cut" in Google is pixel truncation, not a bug.
+- Answer-first paragraph: `getProgrammeAnswerFirst` in `src/lib/seo/programme-answer.ts` (health-allied profiles
+  supply theirs) — used by both the view and `Course.description` (guarded).
+- Seed-only programmes `bmit`, `bsc-him`, `bsc-public-health` in `src/data/schools.ts` are intentionally unroutable and
+  guarded; do not add them to `src/data/official-courses.ts` or reuse their slugs.
+
+### Publishing a confirmed fee
+
+Fees live in `src/data/programme-fees.ts`, keyed by the canonical programme path **without trailing slash**:
+
+```ts
+"/schools/nursing-sciences/nursing/bsc-nursing": { annualINR: 125000, totalINR: 500000, source: "Registrar letter, 17 Sep 2026" },
+```
+
+Integers in rupees; `source` is mandatory (who confirmed, when). An entry with `source: "@@NEEDS_UNIVERSITY_INPUT@@"`
+or no INR figure is ignored. Then: (1) `buildCourseSchema` emits an `Offer` per `annualINR` (and `annualUSD`);
+`totalINR` appears in copy only, not JSON-LD. (2) The counselling sentence in `src/lib/seo/programme-answer.ts`
+and the fee FAQ in `buildProgramFaqs` (`src/lib/seo/academic.ts`, question text guarded) are not fee-aware:
+make them read `getProgrammeFee` when publishing the first fee. (3) `npm run build && npm run seo:coverage`
+(the Fee column derives from the built JSON-LD) and update the aggregate row in `docs/seo/needs-input.md`
+("Fee gaps: N/71", from the coverage JSON `feeGaps`) — never delete the row while any programme is open.
 
 ---
 
@@ -189,30 +267,40 @@ Edit the fact in exactly one place. Everything else derives from it.
 
 | Fact | File |
 |---|---|
-| Public name, short name, legal name, address, logo, OG image | `src/lib/shared/university.ts` |
+| Public name, short name, legal name, address parts, logo, OG image | `src/lib/shared/university.ts` |
+| Full postal address string (footer, contact), phones, email, apply URLs, Meritto keys, social links, hidden-CTA routes | `src/lib/shared/site-constants.ts` (`SITE_CONTACT`, `SITE_CTA_LINKS`) |
 | Bridge sentence, founding date, sponsor, geo, `@id`s, schema `alternateName`s, Organization phone | `src/lib/seo/site.ts` |
-| Contact phones, email, apply URLs, Meritto keys, social links, hidden-CTA routes | `src/lib/shared/site-constants.ts` |
+| Title/description budgets (65 / 41 / 155) | `MAX_SEO_TITLE_LENGTH` in `src/lib/metadata.ts`; mirrored by the `<= 41` in `getProgrammeTitleName` and `GATE_THRESHOLDS.maxTitleLength` in `scripts/crawl-helpers.mjs` — change all three together |
 | Schools, departments, programme editorial text, `EDU_PARTNERS` registry | `src/data/schools.ts` |
 | Routable programme register (slug, code, level, duration) | `src/data/official-courses.ts` |
+| University course-code register | `src/data/course-codes.ts` |
 | Programme names and credentials | `src/lib/shared/programme-names.ts` |
 | Programme fees (the only place a figure may be entered) | `src/data/programme-fees.ts` |
+| Health & Allied per-programme SEO profiles (h1, meta title, direct answer, keywords) | `src/lib/seo/health-allied-course-seo.ts` |
+| Programme FAQs, breadcrumbs, related links, `ASK_ADMISSIONS` | `src/lib/seo/academic.ts` |
+| Programme answer-first paragraph | `src/lib/seo/programme-answer.ts` |
+| School / department / programme `<title>` and description formulas | `src/lib/shared/dynamic-route-metadata.ts` |
+| School hub paths, legacy short paths, coming-soon schools | `src/lib/shared/school-landing.ts` |
 | Leaders, governance bodies | `src/data/leaders.ts` |
 | Partner alias → canonical partner path | `src/lib/shared/partner-alias-redirects.ts` |
 | Removed partner slugs, top-level partner landings | `src/lib/shared/partner-pages.ts` |
-| Which partner landings are indexable | `app/(Partners)/partner/[slug]/page.tsx` (mirrored in `src/lib/seo/sitemap.ts`) |
+| Which partner landings are indexable (`isSmruAuthoredPartnerView`, `NOINDEX_PARTNER_LANDINGS`) | `app/(Partners)/partner/[slug]/page.tsx`, mirrored by the three sets in `src/lib/seo/sitemap.ts` |
+| Partner iframe URLs and external fallbacks | `src/views/PartnerIframePage.tsx` |
 | Trust / compliance / local info pages | `src/lib/seo/info-pages.ts` |
 | "Best/top" comparison guides | `src/lib/seo/safe-guides.ts` |
-| Templated `/seo`, `/admission-guides`, `/student-guides` pages and their retirement targets | `src/data/seo-pages.ts` |
+| Templated `/seo`, `/admission-guides`, `/student-guides` pages and `RETIRED_SEO_PAGE_TARGETS` | `src/data/seo-pages.ts` |
 | Compliance page registry, `NOINDEX_COMPLIANCE_PATHS` | `src/data/compliance-pages.ts` |
 | International countries, global-career pathways | `src/data/international.ts` |
-| Events, careers, home content, about FAQs, campus tour locations | `src/data/{events,careers,home-data,about-faqs,campus-tour}.ts` |
-| Official documents (Act, UGC 2(f) letter, notices) | `src/lib/shared/official-documents.ts` |
-| Nav/footer authority pages and anchor text | `src/lib/seo/authority-map.ts` |
+| Events, careers, home content, about FAQs, campus tour locations and 360 audio map | `src/data/{events,careers,home-data,about-faqs,campus-tour}.ts` |
+| Home / admissions / contact / Ph.D. FAQs | `src/lib/seo/home-faqs.ts`, `src/lib/seo/static-page-faqs.ts` |
+| Official documents (Act, UGC 2(f) letter, notices, flyer) | `src/lib/shared/official-documents.ts` |
+| Nav/footer authority pages and anchor text (also emitted into the sitemap) | `src/lib/seo/authority-map.ts` |
 | Sitemap tiers, image sitemap, lastmod | `src/lib/seo/sitemap.ts` |
+| Search index, HTML sitemap, ticker (hand-kept link lists) | `src/components/search/SiteSearchClient.tsx`, `app/html-sitemap/page.tsx`, `src/components/AppShell.tsx` |
 | robots.txt policy and AI-crawler allowlist | `app/robots.txt/route.ts` |
 | Server 301s, headers, caching, 404 document | `public/.htaccess` |
-| Redirect register | `REDIRECT_MAP.csv` (shell rows generated by `npm run redirects:map`) |
-| LLM-facing identity text and programme block | `public/llms.txt`, `public/llms-full.txt` (block generated by `npm run seo:llms`) |
+| Redirect register | `REDIRECT_MAP.csv` (shell rows generated by `npm run redirects:map`; Apache rows hand-kept) |
+| LLM-facing identity text; "Verified public routes" list (hand-kept); programme block (generated) | `public/llms.txt`, `public/llms-full.txt` |
 | Facts the university still owes us | `docs/seo/needs-input.md` |
 | Architecture invariants | `scripts/seo-guard.js` |
 
@@ -223,60 +311,92 @@ Edit the fact in exactly one place. Everything else derives from it.
 | First mention on a page | **St. Mary's University (SMRU)** — with the space and the apostrophe |
 | Later mentions | St. Mary's University *or* SMRU |
 | Legal name (footer, `legalName`, statutory pages) | **St. Mary's Rehabilitation University** |
-| Bridge sentence, verbatim, on `/`, `/about/`, `/smru/`, `public/llms.txt`, Organization `description` | *St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a UGC-recognised private university in Hyderabad, Telangana, established under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.* |
-| Campus | Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, near Ramoji Film City, Hyderabad, Telangana 508284 |
+| Bridge sentence — verbatim as visible copy on `/` and `/smru/`, in `public/llms.txt`, and in the Organization `description` on every page | *St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a UGC-recognised private university in Hyderabad, Telangana, established under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.* |
+| Campus address | Use `SITE_CONTACT.address` verbatim (footer on every page). `/smru/` and the llms files carry a reordered variant — align to the constant when next touched. |
 | **Never** | `St.Mary's` (no space), `St.Marys`, `Stmarys`, "St. Mary's University powered by {partner}" as an institution name |
 
-The guard scans `src/`, `app/` and both llms files for the forbidden forms and checks the bridge
-sentence is byte-identical everywhere it must appear.
+Enforcement: guard rejects `St.Mary*` anywhere in `src/`, `app/` and both llms files and `Stmarys/StMarys
+University`; guard checks the bridge sentence is byte-identical in `site.ts` and both llms files;
+`seo:facts` checks the built `/`, `/smru/`, `/international/` pages. Bare `Stmarys` and "powered by" are
+reviewed by hand.
 
 ### Facts that must never be invented
 
-Fees, intake numbers, council approvals (RCI/INC/NCAHP/BCI/PCI), NAAC/NIRF status, placement figures,
-salaries, faculty names, hospital partners, foreign licensing outcomes, superlatives ("best", "#1",
+Fees, intake numbers, course codes, council approvals (RCI/INC/NCAHP/BCI/PCI), NAAC/NIRF status, placement
+figures, salaries, faculty names, hospital partners, foreign licensing outcomes, superlatives ("best", "#1",
 "India's first"). University-level UGC Section 2(f) recognition is the only approval asserted.
 
-When a fact is missing, do all four, in the same commit:
+When a fact is missing, do all four in the same commit:
 
-1. Visible copy says *"confirmed at admissions counselling"* (see `ASK_ADMISSIONS` in `src/lib/seo/academic.ts`).
+1. Visible copy uses the counselling sentence: import `ASK_ADMISSIONS` from `@/lib/seo/academic`
+   ("confirmed at official admissions counselling — call … or email …"), or the programme form
+   "The current fee, intake and scholarship terms are confirmed with you at admissions counselling."
 2. The schema field is omitted (never a placeholder value in JSON-LD).
 3. `docs/seo/course-coverage.csv` shows `NEEDS_INPUT` for that cell (regenerated, not hand-edited).
-4. A row is added to `docs/seo/needs-input.md`: item, page(s), why, who can answer.
+4. A row in `docs/seo/needs-input.md`: `| Item | Page(s) | Why needed | Who can answer |`. To close an item,
+   update its count from the generator JSON and note what was published, by whom, when; delete the row only
+   when nothing is open.
 
-Partner-supplied content is never edited. An unverifiable partner claim about SMRU on our domain is
-handled with `noindex,follow`, removal from the sitemap, and a needs-input row asking the partner to
-align to the bridge sentence.
+Partner-supplied content is never edited. An iframe partner landing is `noindex,follow` and out of the sitemap
+**by construction**; an SMRU-authored partner page with an unverifiable claim about SMRU additionally goes into
+`NOINDEX_PARTNER_LANDINGS` and `NOINDEX_PARTNER_PATHS`, with a needs-input row asking the partner to align to
+the bridge sentence.
+
+### Partner landings (`/partner/{slug}/`)
+
+A partner landing is not a page file. Add one entry to `EDU_PARTNERS` in `src/data/schools.ts`:
+`KEY: { code: "KEY", name, landingUrl: "/<alias>", logo, iframeUrl, embedCode: "" }`. `landingUrl` is the
+**short alias** (`"/skilgen"`), from which `/partner/[slug]` derives its static params; `logo` is a bundled
+import from `src/assets/partner-logos/NN_<partner>.webp`; raw partner HTML goes under `public/partners/<slug>/`
+and is mapped in `src/views/PartnerIframePage.tsx`. Then add the alias: `PARTNER_ALIAS_REDIRECTS` in
+`src/lib/shared/partner-alias-redirects.ts` (`alias: "/partner/<slug>"`), the shell `app/(Partners)/<alias>/page.tsx`
+(§5, title `"<Partner name> | St. Mary's University"`), and the Apache rule + register row (§5). Do **not** add
+the landing to the sitemap tiers. Removed partners go into `REMOVED_PARTNER_PAGE_SLUGS`; their aliases redirect
+to `/partner`.
 
 ---
 
 ## 5. Redirects and retired URLs
 
-Every removed or renamed URL gets **a specific target**, never the homepage, implemented twice:
+Every removed or renamed URL gets **a specific target**, never the homepage, implemented twice, plus cleanup:
 
-1. **Server:** a `RewriteRule … [L,R=301]` in `public/.htaccess` (the real redirect for browsers and Googlebot).
-2. **Shell:** `app/<old>/page.tsx` renders `<RedirectFallback targetUrl={TARGET_PATH} />` with
-   `buildRedirectMetadata(title, TARGET_PATH)` so nothing 404s without Apache and crawlers still see a
-   complete document (noindex, canonical → target, meta refresh, visible link).
+1. **Server 301** in `public/.htaccess`, absolute target with trailing slash, under the section
+   `# --- Legacy aliases that also have a client shell under app/` (inside `<IfModule mod_rewrite.c>`, before
+   `# 2. Maintenance Mode Switch`):
+   `RewriteRule ^<old-slug>/?$ https://smru.edu.in/<target>/ [L,R=301]`
+2. **Shell** `app/<old>/page.tsx` (partner aliases: `app/(Partners)/<alias>/page.tsx`) so nothing 404s without
+   Apache and crawlers see a complete document (noindex, canonical → target, meta refresh, visible link):
 
-```tsx
-// app/old-url/page.tsx — the only acceptable shape for an alias
-import RedirectFallback from "@/components/seo/RedirectFallback";
-import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
+   ```tsx
+   import RedirectFallback from "@/components/seo/RedirectFallback";
+   import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-const TARGET_PATH = "/new-url/";                 // or getPartnerAliasRedirect("slug") for partner aliases
+   const TARGET_PATH = "/new-url/";                 // partner aliases: getPartnerAliasRedirect("slug")
 
-export const metadata = buildRedirectMetadata("New Page | St. Mary's University", TARGET_PATH);
+   export const metadata = buildRedirectMetadata("New Page | St. Mary's University", TARGET_PATH);
 
-export default function Page() {
-  return <RedirectFallback targetUrl={TARGET_PATH} />;
-}
-```
+   export default function Page() {
+     return <RedirectFallback targetUrl={TARGET_PATH} />;
+   }
+   ```
 
-One `TARGET_PATH` feeds both the canonical and the refresh so they cannot disagree. After `npm run build`,
-`npm run redirects:map` rewrites the shell rows of `REDIRECT_MAP.csv` from the export and
-`npm run redirects:check` fails if the register is stale or an Apache row has no matching rule. Both run
-inside `npm run verify`. Retirement rationale for templated pages is recorded in
-`docs/seo/phase3-retirement-map.md`; their targets live in `RETIRED_SEO_PAGE_TARGETS` (`src/data/seo-pages.ts`).
+   One `TARGET_PATH` feeds canonical and refresh (guard "Every RedirectFallback page builds its metadata with
+   buildRedirectMetadata from lib/shared"). Exception: a shell whose target is an external URL (only `/ctpl/`)
+   gets canonical `/`; it stays noindex and relies on the 301.
+3. **Register**: hand-add the Apache row to `REDIRECT_MAP.csv` above the shell rows:
+   `"<pattern without ^>","https://smru.edu.in/<target>/","301","public/.htaccess","active","<why>"`.
+   After `npm run build`, `npm run redirects:map` regenerates the shell rows from the export.
+   `npm run redirects:check` (in `verify` and CI) fails when the register is stale, an Apache row has no rule,
+   a rule has no row, a shell has no Apache 301, or a shell targets the homepage.
+4. **Sitemap and links**: remove the old path from the tier arrays **and** from `SEO_AUTHORITY_PAGES` (it is
+   emitted into the sitemap from both; a noindex shell left in the sitemap fails gates `sitemapNoindex`). Then
+   `grep -rn '/<old>' app src public/llms.txt public/llms-full.txt` and repoint every link: Navbar/MobileMenu
+   (`authorityPath(key, fallback)` — the fallback literal too), html-sitemap `sections`, `staticItems`,
+   info-page `relatedLinks`, compliance `evidenceLinks`, the "Verified public routes" list in both llms files.
+5. **Delete the view** the retired page rendered (`src/views/<Name>.tsx`) and anything only it imported;
+   `grep -rn '<Name>' app src` must return only the shell.
+6. **Record why** in the changelog entry. `docs/seo/phase3-retirement-map.md` is only for the templated
+   `/seo`, `/admission-guides`, `/student-guides` set, whose targets live in `RETIRED_SEO_PAGE_TARGETS`.
 
 ---
 
@@ -286,19 +406,25 @@ Two planes, chosen by how the file is consumed:
 
 | Plane | Where | Referenced how | Use for |
 |---|---|---|---|
-| URL-addressed | `public/…` | root-absolute string `"/assets/x.webp"`, `resolveAssetSrc()` accepts either plane | panoramas, tiles, audio, video, PDFs, iframe HTML, OG image, sitemap images, favicons |
+| URL-addressed | `public/…` | root-absolute string `"/assets/x.webp"`; `resolveAssetSrc()` accepts either plane | panoramas, tiles, audio, video, PDFs, iframe HTML, OG image, sitemap images, favicons |
 | Bundled | `src/assets/…` | relative import `../assets/x.webp` → hashed `/_next/static/media/…` | site logo, leader portraits, partner logos, small fixed visuals |
 
 Rules:
 
-- Every raster ships as `.webp`; keep the original only if regeneration is needed. `scripts/optimize-images-webp.mjs`
-  creates the twin and rewrites references (it edits committed files; review the diff).
+- Rasters ship as `.webp`. Deliberate exceptions: the OG image (`/assets/og-default.jpg`), favicons/PWA icons
+  (`.png`), panorama originals (`panorama.jpg`, `preview.jpg`), the hostel 360 tile set, and the legacy nursing
+  landing's `/images/hero-campus.jpg` and `/images/nursing_hero.png` (convert when next touched).
+  `scripts/optimize-images-webp.mjs` creates `.webp` twins and rewrites references in committed files; review the diff.
 - Public media is not content-hashed and is cached 30 days by `.htaccess`. **A changed asset gets a new file name.**
-- A campus-360 location is `public/campus-360/<slug>/` with `panorama.jpg` + four derived `.webp`
-  (`scripts/generate-campus360-optimized.mjs`) and a `location("<slug>", …)` entry in `src/data/campus-tour.ts`.
-- Campus-guide narration: `public/campus-guide/audio/<en|hi|te>/common/<slug>.mp3`, bound in
-  `public/campus-guide/data/guide.json`.
-- Official PDFs: `public/assets/` (or `public/assets/handbook/`), registered in `src/lib/shared/official-documents.ts`.
+- A campus-360 location is `public/campus-360/<slug>/` with originals `panorama.jpg` + `preview.jpg` and four derived
+  `.webp` (`panorama`, `panorama-low`, `preview`, `thumb` — `scripts/generate-campus360-optimized.mjs`) plus a
+  `location("<slug>", …)` entry in `src/data/campus-tour.ts`. `full-campus-360-image/` is used only by the campus guide.
+- Narration audio: `public/campus-guide/audio/<en|hi|te>/common/<file>.mp3`. The campus-guide walkthrough binds
+  files in `public/campus-guide/data/guide.json`; the campus-360 tour binds them in `CAMPUS_TOUR_AUDIO_FILES`
+  (`src/data/campus-tour.ts`). Add a clip to whichever consumer plays it.
+- Official documents (PDF/DOCX): `public/assets/`, registered in `src/lib/shared/official-documents.ts`
+  (`/SMG-Flyer.pdf` at the public root is the legacy exception). The student handbook PDF lives in
+  `public/assets/handbook/` and is linked from `app/handbook/page.tsx`.
 - Law brochures: `public/law-brochures/`, mapped in `src/data/law-brochures.ts`.
 - Raw partner HTML: `public/partners/<slug>/`, iframed via `src/views/PartnerIframePage.tsx`, kept out of the
   index by the `.htaccess` `X-Robots-Tag` rule.
@@ -318,41 +444,46 @@ Run everything from the repository root. Every script prints one JSON summary li
 | `npm run verify` | before every push (≈4 min) | `check` → `build` → `redirects:check` → `audit:checklist -- ci --strict` → `seo:gates -- ci --strict` → `seo:facts -- --strict` |
 
 CI (`.github/workflows/seo-hardening-ci.yml`) runs on every pull request and on pushes to `main`:
-`npm audit --audit-level=critical`, then the same steps as `verify` (the audit step is CI-only because it
-needs the lockfile). CI green is required to merge. Lint warnings do not fail; there are 5 known
-`react-hooks/exhaustive-deps` warnings.
+`npm ci`, `npm audit --audit-level=critical`, then `seo:guard`, `typecheck`, `test`, `lint`, `build`, a
+static-export contract check (`out/sitemap.xml` and `out/robots.txt` exist and reference smru.edu.in),
+`redirects:check`, `audit:checklist -- ci --strict`, `seo:gates -- ci --strict`, `seo:facts -- --strict`, and
+uploads the checklist and gates reports as the `frontend-audit` artifact. CI is `verify` plus the dependency
+audit. Lint warnings do not fail; there are 4 known `react-hooks/exhaustive-deps` warnings.
 
 ### What each gate protects
 
 | Gate | Fails when |
 |---|---|
-| `scripts/seo-guard.js` (≈40 named checks) | an architecture invariant is broken: naming standard, bridge sentence, single root `.md`, allowed root entries, no `loading.tsx`, no `redirect()` in pages, sitemap index shape, guarded `.htaccess` rules, Course schema plumbing, programme-page standard, AI-crawler robots policy… Change a guarded string → update the guard **in the same commit** and say so in the message. |
-| `tsc --noEmit` | type errors (tsconfig is non-strict; don't add `// @ts-nocheck`, 17 legacy files still carry it) |
+| `scripts/seo-guard.js` (45 named checks) | an architecture invariant is broken: naming standard, bridge sentence, single root `.md` with its required sections, root allowlist, no stray scripts, `app/` holds only route files, no `loading.tsx`, no `redirect()` in pages, JSON-LD only via `<StructuredData>` with `-schema` ids, shells use the lib `buildRedirectMetadata`, sitemap index shape, guarded `.htaccess` rules, Course schema plumbing, programme-page standard, health-allied profiles, AI-crawler robots policy. Change a guarded string → update the guard **in the same commit** and say so. |
+| `tsc --noEmit` | type errors (tsconfig is non-strict) |
 | `node --test tests/*.test.mjs` | route-collision sets drift, JSON-LD escaping breaks, developer route reappears, crawl gates or visual-audit registries misbehave |
 | `next lint` | ESLint errors (`next/core-web-vitals`); `<a>` for internal routes is an error |
 | `next build` | any route fails to prerender; also re-runs type and lint checks |
-| `redirects:check` | `REDIRECT_MAP.csv` disagrees with the export or `.htaccess` |
-| `audit:checklist -- ci --strict` | any release blocker > 0: broken internal links, broken hashes, duplicate ids, invalid or duplicate JSON-LD, missing assets, secrets or credentials in source or bundle, source maps, debug routes, non-production metadata |
-| `seo:gates -- ci --strict` | on the export: titles > 65, duplicate titles, descriptions cut mid-sentence, missing/multiple `<h1>`, missing canonical, sitemap lists a noindex or 404 page, entity pages open with < 35 words |
-| `seo:facts -- --strict` | bridge sentence, legal name, ordinance/act, UGC 2(f), sponsor, email, postcode or the six school names differ between `src/lib/seo/site.ts`, the llms files and the built pages |
+| `redirects:check` | `REDIRECT_MAP.csv` stale; Apache row without rule; rule without row; shell without Apache 301; shell targeting `/` |
+| `audit:checklist -- ci --strict` | any of 19 release blockers > 0: broken internal links or hashes, duplicate ids, invalid/duplicate JSON-LD, missing assets, unsafe link schemes, secrets or credentials in source or bundle, source maps, unexpected or unsafe-SVG public files, debug routes, developer bundles, non-production metadata |
+| `seo:gates -- ci --strict` | on **indexable** pages of the export: `titlesOver65`, `duplicateTitles`, `truncatedTitles` (primary ends on a preposition/conjunction), `guideGuide`, `brandNoSpace`, `descriptionsOver155`, `descriptionsCutMidSentence`, `courseNameAbbreviationOnly`, `missingH1`, `multipleH1`, `missingCanonical`, `jsonLdErrors`, `sitemapMissing`, `sitemapNoindex`, `sitemapCanonicalMismatch`, `answerFirstEntity` (`/`, `/smru/`, `/about/`, `/schools/`, `/programmes/` open with < 35 words). Warnings: `descriptionsUnder120`, `answerFirstProgramme` (< 40 words). Noindex shells and iframe landings are exempt from the page checks. |
+| `seo:facts -- --strict` | bridge sentence, legal name, ordinance/act, UGC 2(f), sponsor, email, postcode or the six school names differ between `src/lib/seo/site.ts`, the llms files and the built `/`, `/smru/`, `/international/`, `/schools/`, `/about/` pages |
 
-### Generators (they overwrite committed files — run, review the diff, commit)
+### Generators (they overwrite committed files)
 
-| Command | Writes |
-|---|---|
-| `npm run redirects:map` | shell rows of `REDIRECT_MAP.csv` (from `out/`) |
-| `npm run seo:llms` | the programme block of `public/llms-full.txt` |
-| `npm run seo:coverage` | `docs/seo/course-coverage.csv` |
-| `npm run seo:crawl -- <path.csv>` | a crawl CSV. **Always pass a path**; the default target is the frozen live-site baseline `docs/seo/baseline-2026-09.csv`, which must not be regenerated. |
+All three read `out/`. **Order: edit → `npm run build` → generators → review the diff → `npm run verify`.**
 
-Run the first three whenever programme data, names, fees, aliases or `.htaccess` change, then re-run `verify`.
+| Command | Writes | Run after changing |
+|---|---|---|
+| `npm run redirects:map` | shell rows of `REDIRECT_MAP.csv` | any shell, alias or `.htaccess` rule |
+| `npm run seo:llms` | the programme block of `public/llms-full.txt` | programme data, names or fees |
+| `npm run seo:coverage` | `docs/seo/course-coverage.csv` | programme data, names or fees |
+| `npm run seo:crawl -- <path.csv>` | a crawl CSV. **Always pass a path**: the default target is the frozen live-site baseline `docs/seo/baseline-2026-09.csv`, which must never be regenerated. | (analysis only) |
 
 ### Other tools
 
-`npm run serve:out` serves `out/` at `http://127.0.0.1:4173` the way Apache does (directories → index.html,
-404 → `404.html`). `npm run audit:frontend` and `npm run audit:visual` need it running and need puppeteer
-(not available in CI). Labels for audit scripts go after `--`: `npm run audit:visual -- my-label`.
-`npm run links:internal` is a standalone link checker; the release audit covers the same ground in CI.
+- `npm run dev` — dev server on `http://localhost:4000` (writes to `.next-dev/`).
+- `npm run serve:out` — serves `out/` at `http://127.0.0.1:4173` the way Apache does (directories → `index.html`,
+  unknown → `404.html`). `npm run audit:frontend -- <label>` and `npm run audit:visual -- <label>` need it running
+  and need puppeteer (not in CI); `npm run audit:frontend:compare -- <a> <b>` and `audit:visual:compare -- <a> <b>`
+  diff two labelled runs under `output/frontend-audit/`. Labels go after `--`.
+- `npm run audit:integrations -- <label>` — manifest of the protected third-party tags (apply links, Ads, Pixel).
+- `npm run links:internal` — standalone link checker; the release audit covers the same ground in CI.
 
 ---
 
@@ -361,16 +492,18 @@ Run the first three whenever programme data, names, fees, aliases or `.htaccess`
 Every change, however small, goes through this loop. An AI assistant working from this file follows it too.
 
 ```
-1. Branch      git switch -c <type>/<slug>          from origin/main (or from the PR branch you stack on)
-2. Read        the relevant §3–§6 rules and the source-of-truth row for the fact you are touching
-3. Change      code + data + guard (if a guarded string changes) + generators (§7) in one coherent unit
+1. Branch      git switch -c <type>/<slug>          from origin/main (or the PR branch you stack on)
+2. Read        the §3–§6 recipe for the kind of change and the §4 row for the fact you touch
+3. Change      code + data + guard (if a guarded string changes); note which generators you will need
 4. check       npm run check                        fix until clean
-5. verify      npm run verify                       fix until clean; read the JSON lines, not just the exit code
-6. Record      update PROJECT.md §10 "Current state" and, for anything a future reader must know,
-               append a dated entry to docs/seo/changelog.md; add needs-input rows for missing facts
-7. Commit      one logical change per commit, message format below; PROJECT.md/changelog in the SAME commit
-8. Push + PR   gh pr create --base main …           body format below; CI must be green
-9. After merge git switch main && git pull; delete the branch
+5. build+gen   npm run build, then the generators from §7 that your change needs; review their diff
+6. verify      npm run verify                       fix until clean; read the JSON lines, not just the exit code
+7. Record      update §10 "Current state" of PROJECT.md; prepend a dated entry to docs/seo/changelog.md
+               (newest first); add or update docs/seo/needs-input.md rows for missing facts
+8. Commit      one logical change per commit, format below, with PROJECT.md/changelog IN THE SAME COMMIT;
+               copy every count in the Verified line from real output
+9. Push + PR   gh pr create --base main …           body format below; CI must be green before merge
+10. After merge git switch main && git pull; delete the branch
 ```
 
 ### Branches
@@ -388,15 +521,16 @@ One or two paragraphs: what was wrong and why (cause, not symptom), then what ch
 - bullets for the concrete edits, naming files or counts
 - note anything deliberately NOT done and where it is tracked
 
-Verified: seo-guard 40/40; tests 39/39; typecheck clean; lint 0 errors; build 275 pages;
-redirects:check ok; audit:checklist pass; seo:gates pass; seo:facts 29/29
+Verified: seo-guard 45/45; tests 39/39; typecheck clean; lint 0 errors; build 275 routes;
+redirects:check ok; audit:checklist pass; seo:gates pass; seo:facts 29/29   ← from real output
 
 Co-Authored-By: <assistant name> <noreply@anthropic.com>   ← when an AI wrote most of it
 ```
 
-Types: `feat`, `fix`, `perf`, `content`, `docs`, `chore`, `build`, `ci`, `test`, `seo`. Scope is the
-area (`programmes`, `partners`, `redirects`, `deps`, `repo`, `home`…). The `Verified:` line is not
-decoration; it is the record that the loop was run. Upstream issues are cited as `vercel/next.js#76651`.
+Types: `feat`, `fix`, `perf`, `content`, `docs`, `chore`, `build`, `ci`, `test`, `seo`. Scope is the area
+(`programmes`, `partners`, `redirects`, `deps`, `repo`, `home`…); optional for repo-wide `ci`, `seo`,
+`content` changes. Recent history runs long on subjects; from here on, keep the subject ≤ 72 and move the
+clause into the body. Upstream issues are cited as `vercel/next.js#76651`.
 
 ### Pull request body
 
@@ -408,15 +542,16 @@ decoration; it is the record that the loop was run. Upstream issues are cited as
 ## Deploy note    "deploy out/ together with public/.htaccess" plus anything else the deployer must know
 ```
 
-PR titles are plain sentences with a colon, not commit-typed. Stacked PRs name the merge order.
+PR titles are plain sentences with a colon. Stacked PRs name the merge order.
 
 ### Working with an AI assistant
 
 Paste this file (or point the assistant at it) and ask for the change. Then hold it to §8: it must run
-`check` and `verify`, quote the JSON results, update §10, and write the commit in the format above. If
-it proposes a fact (a fee, an approval, a ranking), the answer is §4: it goes in `docs/seo/needs-input.md`, not the
-site. If it proposes a new folder at the root, a `loading.tsx`, a `redirect()` call, a second metadata
-helper or a hand-written `<script type="application/ld+json">`, the guard will refuse it; so should you.
+`check` and `verify`, quote the JSON results, update §10, and write the commit in the format above. If it
+proposes a fact (a fee, a course code, an approval, a ranking), the answer is §4: it goes in
+`docs/seo/needs-input.md`, not the site. If it proposes a new root folder, a `loading.tsx`, a `redirect()`
+call, a raw `<script type="application/ld+json">`, a second metadata helper or a file under `app/` that is not
+a route, the guard refuses it; so should you.
 
 ---
 
@@ -427,27 +562,30 @@ Deliberately not fixed yet. Each has an owner decision attached; do not "fix" th
 | Item | State | Decision needed |
 |---|---|---|
 | `src/360/`, `src/Audio/`, `src/Law_Brouchers/`, `src/Partners - Codes/`, `src/Syllabus For SMCET/` | ~800 MB of originals and byte-identical duplicates of `public/` trees, read by nothing | Move originals to LFS/external storage or delete; keep `public/` as the single served copy. Requires confirming where the master files live. |
-| `src/assets/` | 111 of 138 files never imported (~105 MB) | Prune to the 27 imported `.webp` files after the decision above. |
-| `public/assets/campus_video.{mp4,webm}` (81 MB) and ~30 unreferenced files | shipped, unreferenced | Delete once confirmed no external link depends on them. |
-| `src/components/developer/` + `src/lib/developer/` | local CMS with no route; `useDeveloperCms` still read by Navbar, Footer, Program, Partner | Decide whether the CMS returns as a local tool or is removed. |
+| `src/assets/` | 114 of 138 files never imported (~105 MB) | Prune to the 24 imported `.webp` files after the decision above. |
+| `scratch/Care_Bridge/` (untracked, 258 MB, its own `.git`) | a static site export that was sitting inside `app/(Partners)/`; moved to the gitignored `scratch/` on 17 Sep 2026 | Decide whether it is a partner deliverable to archive elsewhere, or delete it. |
+| `public/assets/campus_video.{mp4,webm}` (81 MB) and ~30 unreferenced files; `public/images/` duplicates | shipped, unreferenced | Delete once confirmed no external link depends on them. |
+| `src/components/developer/` + `src/lib/developer/` | local CMS with no route; `useDeveloperCms` read by 11 components/views; `src/data/developer/static-seed.ts` is a frozen inventory | Decide whether the CMS returns as a local tool or is removed. |
 | Content-heavy pages written inline in `app/` (`/smru`, compliance pages, `/departments`, `/events`) | work, but break the thin-page convention | Move markup to `src/views/` or `INFO_PAGES` (`src/lib/seo/info-pages.ts`) when next touched. |
+| Four dynamic routes render a fallback instead of `notFound()` | `app/schools/[schoolSlug]`, `…/[deptSlug]`, `app/leadership/[slug]`, `app/departments/[deptSlug]` | Convert when next touched; rule 3 stays *(convention)* until then. |
+| Fee-awareness of copy | counselling sentence and fee FAQ are hard-coded regardless of `src/data/programme-fees.ts` | Make both read `getProgrammeFee` when the first real fee is published (§3). |
 | `next lint` | deprecated in Next 15, removed in 16 | Migrate to the ESLint CLI before any Next 16 move. |
 | `npm audit`: 5 high (puppeteer 24, postcss pinned by next) | 0 critical; CI gate is critical-only | puppeteer 25 (dev tooling only); postcss with the Next 16 bump. |
-| `@@NEEDS_UNIVERSITY_INPUT@@` token in the brief | practice uses the counselling sentence + `NEEDS_INPUT` cells (§4) | The brief is historical; this file is the rule. |
+| Seed-only programmes `bmit`, `bsc-him`, `bsc-public-health` | intentionally unroutable, guarded | Leave as is; do not reuse the slugs. |
 | Fees for 71 programmes, eligibility for 45, per-programme council approvals, GBP/Wikidata/aggregator URLs, Ordinance PDF, square logo | waiting on the university | `docs/seo/needs-input.md` — never closed by guessing. |
 
 ---
 
 ## 10. Current state
 
-Updated by the loop (§8 step 6). Keep it to facts a reader needs today; history goes to `docs/seo/changelog.md`.
+Updated by the loop (§8 step 7). Facts a reader needs today; history is in `docs/seo/changelog.md`.
 
 | | |
 |---|---|
 | Status date | 17 September 2026 |
 | Release Decision | **PASS** — `npm run verify` green at the head of `docs/project-handbook`; deploy `out/` + `public/.htaccess` |
-| Open PRs | [#8](https://github.com/Ram-9177/smru.edu.in/pull/8) `seo/entity-and-architecture` → `main` (the SEO rebuild, 19 commits). [#9](https://github.com/Ram-9177/smru.edu.in/pull/9) `chore/next-15` → `seo/entity-and-architecture` (Next 15 + React 19, CI green). `docs/project-handbook` stacks on `chore/next-15`. Merge order: #9 → #8 → main. |
-| Gates at head | seo-guard 40/40 · tests 39/39 · typecheck clean · lint 0 errors (5 known warnings) · build 275 pages · redirects:check ok (203 Apache rows, 46 shells, 0 client-only) · audit:checklist pass · seo:gates pass (1 warning: 53 descriptions under 120 chars) · seo:facts 29/29 |
-| Last structural change | Repository cleanup: dead root trees, one-off scripts, scratch and reports removed; root `data/` → `src/data`; single `@/*` alias; every alias shell now has a server 301 and a canonical equal to its target; `REDIRECT_MAP.csv` shell rows generated from the export. |
-| Deferred, low priority | 8 meta descriptions < 70 chars; ~20 thin utility pages (brochure, 360, handbook, html-sitemap, status). |
+| Open PRs | [#8](https://github.com/Ram-9177/smru.edu.in/pull/8) `seo/entity-and-architecture` → `main` (the SEO rebuild). [#9](https://github.com/Ram-9177/smru.edu.in/pull/9) `chore/next-15` → `seo/entity-and-architecture` (Next 15 + React 19, CI green). `docs/project-handbook` stacks on `chore/next-15`. Merge order: #9 → #8 → main; `docs/project-handbook` after #9. |
+| Gates at head | seo-guard 45/45 · tests 39/39 · typecheck clean · lint 0 errors (4 known warnings) · build 275 routes · redirects:check ok (221 Apache rows, 46 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (1 warning: 53 descriptions under 120 chars) · seo:facts 29/29 |
+| Last structural change | Repository discipline pass: dead root trees, one-off scripts, scratch and reports removed; root `data/` → `src/data`; single `@/*` alias; every alias shell has a server 301 and canonical = target; register generated from the export and checked both ways; JSON-LD only via `<StructuredData>`; CI now equals `verify`. |
+| Deferred, low priority | 4 meta descriptions < 70 chars (`/handbook/`, `/leadership/`, `/privacy-policy/`, `/terms-of-service/`); 25 thin indexable pages under 200 words (handbook, the leadership profiles, privacy/terms, html-sitemap, brochure, exam-notification, campus-360, compliance pages…). |
 | Do not touch | apply.smru.edu.in links, Google Ads / Meta Pixel tags, the Google verification token, `/developer/` and `/api/` disallows, partner-supplied HTML. |

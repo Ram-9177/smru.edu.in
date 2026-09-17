@@ -4,6 +4,24 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-09-17 — Handbook hardened against a vibe-coding test (branch `docs/project-handbook`)
+
+- Nine reviewers attempted six realistic tasks (new page, new programme, retire a URL, publish a fee, partner
+  landing + alias, fix a title bug) from `PROJECT.md` alone, then graded their plans against the repo: five
+  of six were insufficient. 109 findings, deduplicated into two buckets.
+- Repo fixed where the handbook stated a rule the code did not keep (commit `fix(repo)`): raw JSON-LD scripts →
+  `<StructuredData>`; 19 schema ids suffixed; two hand-built shells normalised; register check now two-way and
+  fails on client-only or homepage shells; CI equals `verify`; a stray 258 MB site export moved out of `app/`;
+  `next-env.d.ts` untracked. Three new guard checks (45 total), each proven against a planted violation.
+- Handbook rewritten where it was stale or incomplete: every count re-derived; every rule names its enforcer;
+  recipes added for adding a programme (file order, row shape, level vocabulary, course codes never invented,
+  health-allied profile), publishing a fee (key shape, what reaches JSON-LD, what is still hard-coded), retiring
+  a page (authority map, link registries, llms route list, view deletion), partner landings (`EDU_PARTNERS` shape,
+  alias chain, never in the sitemap); generator order (build first); CI stated exactly; commit subject rule
+  reconciled with practice.
+- Verified at head: seo-guard 45/45; tests 39/39; typecheck clean; lint 0 errors (4 warnings); build 275 routes;
+  redirects:check ok; audit:checklist pass; seo:gates pass; seo:facts 29/29.
+
 ## 2026-09-17 — Repository discipline: handbook, cleanup, redirect register (branch `docs/project-handbook`)
 
 - `PROJECT.md` replaces `REMEDIATION_SUMMARY.md` as the single root Markdown: structure, sources of truth,
