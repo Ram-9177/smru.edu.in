@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SeoRoutePage from "@/components/seo/SeoRoutePage";
 import { buildMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
-import { getSeoPageByRoute, getSeoPagesByRouteGroup } from "../../../data/seo-pages";
+import { getSeoPageByRoute, getSeoPagesByRouteGroup } from "@/data/seo-pages";
 
 const routeGroup = "seo" as const;
 

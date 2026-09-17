@@ -1,4 +1,5 @@
 "use client";
+import StructuredData from "@/components/seo/StructuredData";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +10,8 @@ const hostelImg1 = "/assets/Hostel1-CfcW80Kf.webp";
 const hostelImg2 = "/assets/Hostel2-C_Z6DObd.webp";
 const PRIMARY_HERO_IMAGE = "/assets/hero-campus-fast.webp";
 const MOBILE_HERO_IMAGE = "/assets/hero-campus-mobile.webp";
-import { buildFaqSchema } from "@/lib/seo/schema";
-import { resolveAssetSrc } from "@/lib/shared/media";
+import { buildFaqSchema } from "../lib/seo/schema";
+import { resolveAssetSrc } from "../lib/shared/media";
 import { useOpenApply } from "../context/ApplyModalContext";
 import UniversitySectionHeader from "../components/UniversitySectionHeader";
 import { BentoTrustGrid, HalfRingStepRail, PillBand, TechniqueModernGrid, RingStepFlow, StairHighlightStrips } from "../components/InfographicSections";
@@ -41,15 +42,14 @@ import {
   FaDna,
 } from "react-icons/fa";
 import { GiBrain, GiMedicalPack, GiRunningShoe } from "react-icons/gi";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { HOME_FAQ_CATEGORIES } from "@/lib/seo/home-faqs";
-import { LinkGridSection } from "@/components/seo/PageSections";
-import { GLOBAL_TRUST_CTA_LINKS, LOCATION_LINKS } from "@/lib/seo/info-pages";
-import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { getSchoolLandingPath } from "@/lib/shared/school-landing";
-import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
-import { PHD_ADMISSIONS_STATUS_MESSAGE } from "@/lib/shared/site-constants";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
+import { useDeveloperCms } from "../lib/developer/useDeveloperCms";
+import { HOME_FAQ_CATEGORIES } from "../lib/seo/home-faqs";
+import { LinkGridSection } from "../components/seo/PageSections";
+import { GLOBAL_TRUST_CTA_LINKS, LOCATION_LINKS } from "../lib/seo/info-pages";
+import { SHOW_PUBLIC_SEO_SECTIONS } from "../lib/seo/visibility";
+import { getSchoolLandingPath } from "../lib/shared/school-landing";
+import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "../lib/shared/partner-pages";
+import { PHD_ADMISSIONS_STATUS_MESSAGE } from "../lib/shared/site-constants";
 
 import { EDU_PARTNERS, schools as staticSchools } from "../data/schools";
 import FAQSection from "../components/FAQSection";
@@ -61,11 +61,26 @@ import {
   DEFAULT_CAMPUS_ITEMS, 
   DEFAULT_CANTEEN_HIGHLIGHTS, 
   TESTIMONIAL_DATA 
-} from "@/data/home-data";
-import { UNIVERSITY_EVENTS } from "@/data/events";
-import { SITE_IDENTITY } from "@/lib/seo/site";
+} from "../data/home-data";
+import { UNIVERSITY_EVENTS } from "../data/events";
+import { SITE_IDENTITY } from "../lib/seo/site";
 
 const admissionsApplyUrl = "https://apply.smru.edu.in";
+
+const PARTNER_ORDER = [
+  "nst",
+  "emversity",
+  "niat",
+  "carebridge",
+  "qtst",
+  "bytexl",
+  "skilgen",
+  "edinbox",
+  "veloces",
+  "bb",
+  "edridge",
+  "nextgen"
+];
 
 /* =============================== Page =============================== */
 export default function Home() {
@@ -172,12 +187,7 @@ export default function Home() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: serializeJsonLd(buildFaqSchema(HOME_FAQ_CATEGORIES.flatMap(c => c.faqs)))
-        }}
-      />
+      <StructuredData id="home-faq-schema" data={buildFaqSchema(HOME_FAQ_CATEGORIES.flatMap(c => c.faqs))} />
       {/* ========================= HERO ======================== */}
       <section id="hero" className="relative w-full h-[calc(100svh-112px)] md:h-[90svh] min-h-[560px] md:min-h-[620px] overflow-hidden">
         {/* Campus Drone View Static Hero */}
@@ -500,21 +510,6 @@ export default function Home() {
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {(() => {
-              const PARTNER_ORDER = [
-                "carebridge",
-                "nst",
-                "emversity",
-                "niat",
-                "qtst",
-                "bytexl",
-                "skilgen",
-                "edinbox",
-                "veloces",
-                "bb",
-                "edridge",
-                "nextgen"
-              ];
-              
               return Object.values(EDU_PARTNERS)
                 .filter(p => {
                   const slug = String(p.landingUrl || "").replace(/^\/+/, "").replace(/\/$/, "").toLowerCase();

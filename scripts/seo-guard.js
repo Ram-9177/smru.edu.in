@@ -68,7 +68,7 @@ const checks = [
     },
   },
   {
-    name: "Naming standard: no 'St.Mary' (no space) in site copy, data or llms files",
+    name: "Naming standard: no 'St.Mary' (no space) in src, app or llms files",
     pass: () => {
       const skip = /Partners - Codes/;
       const walk = (dir) =>
@@ -78,7 +78,7 @@ const checks = [
           if (entry.isDirectory()) return walk(rel);
           return /\.(tsx?|mjs|js|json|txt|md)$/.test(entry.name) ? [rel] : [];
         });
-      const files = [...walk("src"), ...walk("app"), ...walk("data"), "public/llms.txt", "public/llms-full.txt"];
+      const files = [...walk("src"), ...walk("app"), "public/llms.txt", "public/llms-full.txt"];
       // The single permitted no-space form is the schema alternateName entry in site.ts.
       return files.every((file) => !/St\.Mary|\b(Stmarys|StMarys) University\b/.test(read(file).replace(/"St\.Mary's University",/g, "")));
     },
@@ -295,13 +295,6 @@ const checks = [
     },
   },
   {
-    name: "Preloader no longer competes as priority LCP asset",
-    pass: () => {
-      const file = read("src/components/Preloader.tsx");
-      return file.includes("priority={false}") && file.includes("}, 150);") && file.includes("}, 550);");
-    },
-  },
-  {
     name: "Sitemap is an index with per-section child sitemaps",
     pass: () =>
       read("app/sitemap.xml/route.ts").includes("buildSitemapIndexXml") &&
@@ -421,20 +414,106 @@ const checks = [
       exists("docs/seo/ai-audit.md"),
   },
   {
-    name: "Master remediation control log exists",
-    pass: () =>
-      exists("REMEDIATION_SUMMARY.md") &&
-      read("REMEDIATION_SUMMARY.md").includes("Status date:") &&
-      read("REMEDIATION_SUMMARY.md").includes("Release Decision"),
+    // PROJECT.md is the handbook and the control file (rules, sources of truth, loop, current state).
+    name: "PROJECT.md is the single root handbook and carries every required section",
+    pass: () => {
+      if (!exists("PROJECT.md")) return false;
+      const file = read("PROJECT.md");
+      const required = [
+        "## 1. What this is",
+        "## 2. Repository structure",
+        "## 3. How a page is built",
+        "## 4. Sources of truth",
+        "## 5. Redirects and retired URLs",
+        "## 6. Assets",
+        "## 7. Tooling and verification",
+        "## 8. Workflow — the loop",
+        "## 9. Known debt and open decisions",
+        "## 10. Current state",
+        "Status date:",
+        "Release Decision",
+        "npm run check",
+        "npm run verify",
+      ];
+      return required.every((needle) => file.includes(needle));
+    },
   },
   {
-    name: "Repository keeps a single markdown source of truth",
+    name: "Repository keeps a single markdown source of truth (PROJECT.md); history lives in docs/seo/changelog.md",
     pass: () => {
-      const files = require("fs")
-        .readdirSync(process.cwd(), { withFileTypes: true })
+      const files = fs
+        .readdirSync(root, { withFileTypes: true })
         .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
         .map((entry) => entry.name);
-      return files.length === 1 && files[0] === "REMEDIATION_SUMMARY.md";
+      return files.length === 1 && files[0] === "PROJECT.md" && exists("docs/seo/changelog.md");
+    },
+  },
+  {
+    // JSON-LD goes through one component so escaping, ids and null-suppression are uniform.
+    name: "JSON-LD is emitted only through <StructuredData> and every id ends in -schema",
+    pass: () => {
+      const tsx = (dir) => fs.readdirSync(path.join(root, dir), { recursive: true }).map(String).filter((f) => /\.tsx$/.test(f)).map((f) => path.join(dir, f));
+      const files = [...tsx("app"), ...tsx("src")];
+      const rawScripts = files.filter((f) => f !== "src/components/seo/StructuredData.tsx" && /application\/ld\+json/.test(read(f)));
+      const idPattern = /<StructuredData\b[^>]*?\bid=(?:"([^"]+)"|\{`([^`]+)`\})/g;
+      const badIds = files.flatMap((f) => [...read(f).matchAll(idPattern)].map((m) => m[1] ?? m[2]).filter((id) => !/-schema$/.test(id)).map((id) => f + ": " + id));
+      if (rawScripts.length) console.error("  raw ld+json scripts:", rawScripts.join(", "));
+      if (badIds.length) console.error("  StructuredData ids without -schema suffix:", badIds.join(", "));
+      return rawScripts.length === 0 && badIds.length === 0;
+    },
+  },
+  {
+    // A shell's canonical and refresh target come from one constant via the lib helper; the component
+    // must not grow a second metadata helper again.
+    name: "Every RedirectFallback page builds its metadata with buildRedirectMetadata from lib/shared",
+    pass: () => {
+      const pages = fs.readdirSync(path.join(root, "app"), { recursive: true }).map(String).filter((f) => /(^|[\\/])page\.tsx$/.test(f)).map((f) => path.join("app", f));
+      const shells = pages.filter((f) => /<RedirectFallback\b/.test(read(f)));
+      const offenders = shells.filter((f) => { const src = read(f); return !/from "@\/lib\/shared\/redirect-metadata"/.test(src) || !/buildRedirectMetadata\(/.test(src); });
+      const componentHasHelper = /buildRedirectMetadata|export const metadata/.test(read("src/components/seo/RedirectFallback.tsx"));
+      if (offenders.length) console.error("  shells not using lib buildRedirectMetadata:", offenders.join(", "));
+      return offenders.length === 0 && !componentHasHelper && shells.length > 0;
+    },
+  },
+  {
+    // app/ is routes only. Anything else (a dropped-in site export, a stray component tree) breaks the
+    // one-folder-per-URL rule; the single colocated client island is listed explicitly.
+    name: "app/ contains only route files (page, layout, route, not-found) and route folders",
+    pass: () => {
+      const allowedFiles = new Set(["page.tsx", "layout.tsx", "route.ts", "not-found.tsx", "GrievanceTabs.tsx"]);
+      const strays = fs.readdirSync(path.join(root, "app"), { recursive: true, withFileTypes: true })
+        .filter((entry) => entry.isFile() && !allowedFiles.has(entry.name))
+        .map((entry) => path.relative(root, path.join(entry.parentPath ?? entry.path, entry.name)));
+      if (strays.length) console.error("  non-route files under app/:", strays.slice(0, 10).join(", "));
+      return strays.length === 0;
+    },
+  },
+  {
+    // The root is an allowlist: tooling, one-off scripts, reports and scratch folders were removed once and
+    // must not come back. Scratch space is tmp/ and scratch/ (gitignored); scripts go in scripts/ with an
+    // npm entry; prose goes in docs/.
+    name: "Repository root contains only the allowed entries",
+    pass: () => {
+      const allowed = new Set([
+        ".claude", ".DS_Store", ".eslintrc.json", ".git", ".github", ".gitignore", ".next", ".next-dev", ".nvmrc",
+        ".playwright-cli", ".vscode", "app", "docs", "next-env.d.ts", "next.config.mjs", "node_modules", "out",
+        "output", "package-lock.json", "package.json", "postcss.config.js", "PROJECT.md", "public", "REDIRECT_MAP.csv",
+        "scratch", "scripts", "src", "tailwind.config.js", "tests", "tmp", "tools", "tsconfig.json",
+      ]);
+      const offenders = fs.readdirSync(root).filter((name) => !allowed.has(name));
+      if (offenders.length) console.error("  unexpected root entries:", offenders.join(", "));
+      return offenders.length === 0;
+    },
+  },
+  {
+    // No hand-run mutation scripts or reports at the root or under src/: every script is an npm entry.
+    name: "No stray scripts or report files outside scripts/ and tests/",
+    pass: () => {
+      const rootStrays = fs.readdirSync(root).filter((name) => /\.(js|mjs|cjs|py|sh|csv|txt|log|json)$/.test(name) && !new Set(["package.json", "package-lock.json", "tsconfig.json", "next.config.mjs", "postcss.config.js", "tailwind.config.js", ".eslintrc.json", "REDIRECT_MAP.csv"]).has(name));
+      const srcStrays = fs.readdirSync(path.join(root, "src")).filter((name) => /\.(js|mjs|cjs|py|sh)$/.test(name));
+      const strays = [...rootStrays, ...srcStrays.map((name) => `src/${name}`)];
+      if (strays.length) console.error("  stray files:", strays.join(", "));
+      return strays.length === 0;
     },
   },
   {

@@ -4,28 +4,29 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { EDU_PARTNERS, schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
-import { getProgrammeFee, formatINR } from "@/data/programme-fees";
+import { getProgrammeFee, formatINR } from "../data/programme-fees";
 import useOpenApply from "../hooks/useOpenApply";
 import SchoolLayout from "../components/SchoolLayout";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
+import { useDeveloperCms } from "../lib/developer/useDeveloperCms";
+import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "../lib/developer/academic-data";
 import {
   findBySlugOrName,
   safeSlug,
-} from "@/lib/shared/program-utils";
-import { AnswerGridSection, FaqSection, LinkGridSection } from "@/components/seo/PageSections";
-import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRecommendationLinks } from "@/lib/seo/academic";
-import { getHealthAlliedCourseSeoProfile } from "@/lib/seo/health-allied-course-seo";
-import { formatLevel, getProgrammeAnswerFirst } from "@/lib/seo/programme-answer";
-import { getProgrammeDisplayName, getProgrammeShortName } from "@/lib/shared/programme-names";
-import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { APPROVAL_SAFETY_NOTE } from "@/lib/shared/university";
+} from "../lib/shared/program-utils";
+import { AnswerGridSection, FaqSection, LinkGridSection } from "../components/seo/PageSections";
+import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRecommendationLinks } from "../lib/seo/academic";
+import { getHealthAlliedCourseSeoProfile } from "../lib/seo/health-allied-course-seo";
+import { formatLevel, getProgrammeAnswerFirst } from "../lib/seo/programme-answer";
+import { getProgrammeDisplayName, getProgrammeShortName } from "../lib/shared/programme-names";
+import { SHOW_PUBLIC_SEO_SECTIONS } from "../lib/seo/visibility";
+import { APPROVAL_SAFETY_NOTE } from "../lib/shared/university";
 import { 
   FaClock, FaUserGraduate, FaCheckCircle,
   FaBriefcase, FaFileDownload, FaUsers, FaArrowRight, FaShieldAlt 
 } from "react-icons/fa";
-import { resolveAssetSrc } from "@/lib/shared/media";
-import CampusLife360Section from "@/components/CampusLife360Section";
+import { resolveAssetSrc } from "../lib/shared/media";
+import CampusLife360Section from "../components/CampusLife360Section";
+import MandatoryAttendanceNotice from "../components/MandatoryAttendanceNotice";
 
 const getProgramPositioning = (schoolSlug: string, progName: string) => {
   const slug = (schoolSlug || "").toLowerCase();
@@ -149,10 +150,10 @@ export default function Program() {
       : [EDU_PARTNERS["St. Mary's University"]];
 
     return visiblePartners
-      .map((partner) => ({ ...partner, leadUrl: partner?.landingUrl || getEduPartnerLandingUrl(prog) }))
-      .filter(p => p.code);
+      .map((partner: any) => ({ ...partner, leadUrl: partner?.landingUrl || getEduPartnerLandingUrl(prog) }))
+      .filter((p: any) => p.code);
   }, [prog]);
-  const hasEmversityPartner = useMemo(() => partners.some((partner) => partner.code === "EMVERSITY"), [partners]);
+  const hasEmversityPartner = useMemo(() => partners.some((partner: any) => partner.code === "EMVERSITY"), [partners]);
 
   const isPhd = useMemo(() => {
     if (!prog) return false;
@@ -213,11 +214,18 @@ export default function Program() {
     programSlug,
   });
 
-  const programBreadcrumbs = [
-    { name: school.short || school.name, path: `/schools/${schoolSlugSafe}` },
-    { name: dept.short || dept.name, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}` },
-    { name: programShortName, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}/${programSlugSafe}` }
+  const programBreadcrumbs: Array<{ label: string; path?: string }> = [
+    { label: school.short || school.name, path: `/schools/${schoolSlugSafe}` },
+    { label: dept.short || dept.name, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}` },
+    { label: programShortName, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}/${programSlugSafe}` }
   ];
+
+  const isMptOrMot = useMemo(() => {
+    const s = String(programSlugSafe || "").toLowerCase();
+    const p = String(prog?.slug || "").toLowerCase();
+    const n = String(prog?.name || "").toLowerCase();
+    return s === "mpt" || s === "mot" || p === "mpt" || p === "mot" || n.includes("master of physiotherapy") || n.includes("master of occupational therapy");
+  }, [programSlugSafe, prog?.slug, prog?.name]);
 
   return (
     <>
@@ -225,12 +233,14 @@ export default function Program() {
       activeSchoolSlug={schoolSlugSafe}
       title={programDisplayName}
       subtitle={levelFull}
-      breadcrumbs={programBreadcrumbs.map(b => ({ label: b.name, path: b.path }))}
+      breadcrumbs={programBreadcrumbs}
       sectionLabel={levelFull.toUpperCase()}
       heading={`About the ${programShortName} programme`}
       onApply={handleApplyClick}
     >
       <div className="space-y-12">
+        {isMptOrMot && <MandatoryAttendanceNotice />}
+
         {/* 1. Overview & Quick Facts */}
         <section className="flex flex-col lg:flex-row gap-10">
           <div className="flex-1 space-y-8">

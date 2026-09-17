@@ -104,17 +104,17 @@ export default function SmruIdentityPage() {
   return (
     <>
       <StructuredData
-        id="smru-identity-breadcrumb"
+        id="smru-identity-breadcrumb-schema"
         data={buildBreadcrumbSchema([
           { name: "Home", path: "/" },
           { name: "SMRU", path: "/smru" },
         ])}
       />
       <StructuredData
-        id="smru-identity-webpage"
+        id="smru-identity-webpage-schema"
         data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/smru" })}
       />
-      <StructuredData id="smru-identity-faq" data={buildFaqSchema(FAQS)} />
+      <StructuredData id="smru-identity-faq-schema" data={buildFaqSchema(FAQS)} />
 
       <div className="min-h-screen bg-[linear-gradient(180deg,#f4f9ff_0%,#f9fbff_100%)] pt-[120px] lg:pt-[136px] pb-20">
         <section className="px-4">

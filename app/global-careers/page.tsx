@@ -22,10 +22,10 @@ const FAQS = [
 export default function Page() {
   return (
     <>
-      <StructuredData id="gc-breadcrumb" data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Global Careers", path: "/global-careers" }])} />
-      <StructuredData id="gc-webpage" data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/global-careers" })} />
-      <StructuredData id="gc-itemlist" data={buildItemListSchema(GLOBAL_CAREER_PATHWAYS.map((d) => ({ name: `${d.destination} — ${d.profession}`, url: `/global-careers/${d.slug}/` })))} />
-      <StructuredData id="gc-faq" data={buildFaqSchema(FAQS)} />
+      <StructuredData id="gc-breadcrumb-schema" data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "Global Careers", path: "/global-careers" }])} />
+      <StructuredData id="gc-webpage-schema" data={buildWebPageSchema({ title: TITLE, description: DESCRIPTION, pathname: "/global-careers" })} />
+      <StructuredData id="gc-itemlist-schema" data={buildItemListSchema(GLOBAL_CAREER_PATHWAYS.map((d) => ({ name: `${d.destination} — ${d.profession}`, url: `/global-careers/${d.slug}/` })))} />
+      <StructuredData id="gc-faq-schema" data={buildFaqSchema(FAQS)} />
       <InternationalPage
         eyebrow="Global careers"
         title="Global Career Pathways for SMRU Graduates"

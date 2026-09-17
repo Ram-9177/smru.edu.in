@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import { FaDownload, FaFilePdf, FaHome, FaArrowLeft } from "react-icons/fa";
-import SEO from "../components/SEO";
 import useOpenApply from "../hooks/useOpenApply";
 import { SITE_CONTACT, SITE_CTA_LINKS } from "@/lib/shared/site-constants";
 
@@ -37,13 +36,6 @@ export default function BrochureDownload() {
     <div className="relative min-h-screen bg-[#f8fafc] flex items-center justify-center px-4 overflow-hidden">
       {/* Cinematic Background Background */}
       <div className="absolute inset-0 bg-[radial-gradient(at_0%_0%,rgba(37,184,149,0.1)_0,transparent_55%),radial-gradient(at_100%_0%,rgba(13,49,92,0.06)_0,transparent_55%)]" />
-      <SEO
-        title="Download Brochure | St. Mary's University"
-        description="Download St. Mary's University's official university flyer with programs, facilities, and admissions info."
-        keywords={["St. Mary's University brochure","St. Mary's flyer","university brochure download","rehabilitation university brochure"]}
-        canonical="https://smru.edu.in/brochure"
-        og={{ url: "https://smru.edu.in/brochure" }}
-      />
       <div className="max-w-2xl w-full">
         {/* Download Card */}
         <div className="bg-white cut-corner-panel shadow-2xl p-8 text-center">

@@ -116,7 +116,7 @@ for (const file of htmlFiles) {
 }
 
 const sourceExtensions = new Set([".html", ".js", ".jsx", ".mjs", ".ts", ".tsx"]);
-const sourceFiles = (await Promise.all(["app", "components", "src", "public"].map((dir) => walk(path.join(root, dir))))).flat();
+const sourceFiles = (await Promise.all(["app", "src", "public"].map((dir) => walk(path.join(root, dir))))).flat();
 const sourceReferences = [];
 for (const file of sourceFiles.filter((item) => sourceExtensions.has(path.extname(item)))) {
   const contents = await readFile(file, "utf8");

@@ -153,7 +153,7 @@ function AppShellContent({
   const shouldHideFooter = shouldHideLayoutChrome || isStickyHiddenRoute || isExploreStmarysPage;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" suppressHydrationWarning>
       {/* Skip link (WCAG 2.4.1): first focusable element on every page, visible only on keyboard focus. */}
       <a
         href="#main-content"

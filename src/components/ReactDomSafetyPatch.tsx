@@ -55,7 +55,36 @@ export default function ReactDomSafetyPatch() {
 
     window.addEventListener("error", handleGlobalError, true);
 
+    // 3. Suppress benign console error noise from browser extensions that mutate DOM attributes before React hydration (e.g. Bitdefender bis_skin_checked, bis_register, bis_use)
+    const originalConsoleError = console.error;
+    console.error = function (...args: any[]) {
+      const msg = typeof args[0] === "string" ? args[0] : "";
+      if (
+        msg.includes("bis_skin_checked") ||
+        msg.includes("bis_register") ||
+        msg.includes("bis_use") ||
+        msg.includes("speculationrules") ||
+        msg.includes("chrome-extension://") ||
+        msg.includes("browser extension installed which messes with the HTML")
+      ) {
+        return;
+      }
+      return originalConsoleError.apply(this, args);
+    };
+
+    // 4. Initial DOM sweep to remove any extension attributes that may have slipped in before hydration
+    try {
+      document.querySelectorAll("[bis_skin_checked]").forEach((el) => el.removeAttribute("bis_skin_checked"));
+      document.querySelectorAll("[bis_use]").forEach((el) => el.removeAttribute("bis_use"));
+      document.body?.removeAttribute("bis_register");
+    } catch (_) {}
+
     window.__smruRemoveChildGuarded = true;
+
+    return () => {
+      window.removeEventListener("error", handleGlobalError, true);
+      console.error = originalConsoleError;
+    };
   }, []);
 
   return null;

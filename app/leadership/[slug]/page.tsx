@@ -46,7 +46,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
       {leader && (
         <>
           <StructuredData
-            id="leader-breadcrumb"
+            id="leader-breadcrumb-schema"
             data={buildBreadcrumbSchema([
               { name: "Home", path: "/" },
               { name: "Leadership", path: "/leadership" },
@@ -54,7 +54,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             ])}
           />
           <StructuredData
-            id="leader-webpage"
+            id="leader-webpage-schema"
             data={buildWebPageSchema({
               title: leaderTitle(leader),
               description: leaderDescription(leader),
@@ -62,7 +62,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             })}
           />
           <StructuredData
-            id="leader-person"
+            id="leader-person-schema"
             data={buildPersonSchema({
               name: leader.name,
               jobTitle: leader.role,

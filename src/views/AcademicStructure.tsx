@@ -10,7 +10,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import useOpenApply from "../hooks/useOpenApply";
 import abstractHeroBg from "../assets/education-pattern.webp";
-import SEO from "../components/SEO";
 import RelatedLinks from "@/components/seo/RelatedLinks";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
@@ -88,11 +87,6 @@ export default function AcademicStructure() {
 
   return (
     <div className="min-h-screen bg-white font-outfit text-[#0d315c] selection:bg-[#019e6e]/10">
-      <SEO 
-        title="Academic Structure | St. Mary's University"
-        description="Explore the academic catalogue of St. Mary's University across rehabilitation, health sciences, nursing, psychology, engineering, law, and allied professional schools."
-      />
-
       {/* -------------------------------------------------------------------
           CINEMATIC HERO SECTION
           ------------------------------------------------------------------- */}

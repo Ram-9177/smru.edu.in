@@ -1,5 +1,6 @@
 "use client";
 
+import StructuredData from "@/components/seo/StructuredData";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -30,7 +31,6 @@ import { buildSchoolFaqs, buildSchoolAnswers } from "@/lib/seo/academic";
 import { FaqSection, AnswerGridSection } from "@/components/seo/PageSections";
 import { buildFaqSchema } from "@/lib/seo/schema";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { serializeJsonLd } from "@/lib/seo/json-ld";
 
 const navLinks = [
   ["Programmes", "#programmes"],
@@ -317,12 +317,7 @@ export default function LawLanding() {
         </div>
       )}
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: serializeJsonLd(buildFaqSchema(schoolFaqs))
-        }}
-      />
+      <StructuredData id="law-landing-faq-schema" data={buildFaqSchema(schoolFaqs)} />
 
       <footer className="bg-[#071a32] px-4 py-8 text-white sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-xs font-semibold text-white/60 md:flex-row">

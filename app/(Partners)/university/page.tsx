@@ -2,8 +2,10 @@ import RedirectFallback from "@/components/seo/RedirectFallback";
 import { getPartnerAliasRedirect } from "@/lib/shared/partner-alias-redirects";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-export const metadata = buildRedirectMetadata("Partner | St. Mary's University", "/partner");
+const TARGET_PATH = getPartnerAliasRedirect("university");
+
+export const metadata = buildRedirectMetadata("Partner | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  return <RedirectFallback targetUrl={getPartnerAliasRedirect("university")} />;
+  return <RedirectFallback targetUrl={TARGET_PATH} />;
 }

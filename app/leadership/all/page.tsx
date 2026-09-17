@@ -14,7 +14,7 @@ export default function Page() {
   return (
     <>
       <StructuredData
-        id="leadership-all-breadcrumb"
+        id="leadership-all-breadcrumb-schema"
         data={buildBreadcrumbSchema([
           { name: "Home", path: "/" },
           { name: "Leadership", path: "/leadership" },

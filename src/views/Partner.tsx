@@ -4,7 +4,6 @@
 import React, { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { FaArrowRight, FaExternalLinkAlt, FaGlobe, FaLayerGroup, FaLink } from "react-icons/fa";
-import SEO from "../components/SEO";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
@@ -90,6 +89,21 @@ const getPartnerMeta = (partner) => {
   };
 };
 
+const PARTNER_ORDER = [
+  "nst",
+  "emversity",
+  "niat",
+  "carebridge",
+  "qtst",
+  "bytexl",
+  "skilgen",
+  "edinbox",
+  "veloces",
+  "bb",
+  "edridge",
+  "nextgen"
+];
+
 export default function Partner() {
   const { state } = useDeveloperCms();
 
@@ -109,21 +123,6 @@ export default function Partner() {
     document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
-
-  const PARTNER_ORDER = [
-    "carebridge",
-    "nst",
-    "emversity",
-    "niat",
-    "qtst",
-    "bytexl",
-    "skilgen",
-    "edinbox",
-    "veloces",
-    "bb",
-    "edridge",
-    "nextgen"
-  ];
 
   const partners = useMemo(() => {
     return (state.partners || [])
@@ -182,11 +181,6 @@ export default function Partner() {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO
-        title="Our Edupartners | St. Mary's University"
-        description="Explore strategic education and technology partners powering future-ready learning at St. Mary's University."
-      />
-
       <section className="relative overflow-hidden border-b border-slate-100 bg-white pt-10">
         {/* Architectural Background Patterns */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(193,140,63,0.12),transparent_40%),radial-gradient(circle_at_100%_0%,rgba(15,159,122,0.1),transparent_40%)]" />

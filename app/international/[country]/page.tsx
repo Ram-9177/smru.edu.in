@@ -38,9 +38,9 @@ export default async function Page(props: { params: Promise<{ country: string }>
 
   return (
     <>
-      <StructuredData id={`intl-${country.slug}-breadcrumb`} data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "International", path: "/international" }, { name: country.name, path: pathname }])} />
-      <StructuredData id={`intl-${country.slug}-webpage`} data={buildWebPageSchema({ title: `Study at SMRU from ${country.name}`, description: country.intro, pathname })} />
-      <StructuredData id={`intl-${country.slug}-faq`} data={buildFaqSchema(faqs)} />
+      <StructuredData id={`intl-${country.slug}-breadcrumb-schema`} data={buildBreadcrumbSchema([{ name: "Home", path: "/" }, { name: "International", path: "/international" }, { name: country.name, path: pathname }])} />
+      <StructuredData id={`intl-${country.slug}-webpage-schema`} data={buildWebPageSchema({ title: `Study at SMRU from ${country.name}`, description: country.intro, pathname })} />
+      <StructuredData id={`intl-${country.slug}-faq-schema`} data={buildFaqSchema(faqs)} />
       <InternationalPage
         eyebrow={`International · ${country.name}`}
         title={`Study at St. Mary's University from ${country.name}`}

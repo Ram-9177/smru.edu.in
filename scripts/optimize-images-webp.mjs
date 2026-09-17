@@ -5,7 +5,7 @@ import sharp from "sharp";
 
 const cwd = process.cwd();
 const imageRoots = ["src", "public"];
-const textRoots = ["app", "components", "data", "lib", "src", "public"];
+const textRoots = ["app", "src", "public"];
 const imageExt = /\.(png|jpe?g)$/i;
 const textExt = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".html", ".css", ".json", ".md", ".txt", ".xml"]);
 const skipDirs = new Set([".git", ".next", ".next-dev", "node_modules", "out"]);
