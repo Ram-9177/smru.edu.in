@@ -4,6 +4,18 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-09-17 — Attendance notice behind a button on MPT/MOT (branch `feat/attendance-notice-button`)
+
+- The mandatory-attendance notice for MPT and MOT no longer occupies the top of both programme pages. A compact
+  amber call-out ("Caution / Important Notice — Mandatory attendance for students admitted to the MPT and MOT
+  programmes") with a **Read the notice** button opens the unchanged notice in a dialog.
+- `src/components/MandatoryAttendanceNoticeButton.tsx` wraps the existing `MandatoryAttendanceNotice`: dialog is
+  portalled to `<body>` (inside `<main>` it painted beneath the fixed header whatever its z-index), locks body
+  scroll, closes on Escape / backdrop / ×, focuses the close button on open and returns focus to the trigger.
+  The notice scrolls inside the viewport on small screens.
+- Verified in headless Chrome at 1280×900 and 390×844: heading and close button are the topmost painted
+  elements (hit-tested), button present on MPT and MOT and absent on BPT.
+
 ## 2026-09-17 — /carebridge/ mirrors the partner's home page (branch `feat/carebridge-homepage`)
 
 - `/carebridge/` swaps the 912-line SMRU-authored landing for Carebridge Education's own home page, iframed from

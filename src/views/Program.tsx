@@ -26,7 +26,7 @@ import {
 } from "react-icons/fa";
 import { resolveAssetSrc } from "../lib/shared/media";
 import CampusLife360Section from "../components/CampusLife360Section";
-import MandatoryAttendanceNotice from "../components/MandatoryAttendanceNotice";
+import MandatoryAttendanceNoticeButton from "../components/MandatoryAttendanceNoticeButton";
 
 const getProgramPositioning = (schoolSlug: string, progName: string) => {
   const slug = (schoolSlug || "").toLowerCase();
@@ -239,7 +239,7 @@ export default function Program() {
       onApply={handleApplyClick}
     >
       <div className="space-y-12">
-        {isMptOrMot && <MandatoryAttendanceNotice />}
+        {isMptOrMot && <MandatoryAttendanceNoticeButton />}
 
         {/* 1. Overview & Quick Facts */}
         <section className="flex flex-col lg:flex-row gap-10">
