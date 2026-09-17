@@ -7,10 +7,10 @@ import { CONTACT_FAQS } from "@/lib/seo/static-page-faqs";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Contact Us | Admissions Helpdesk & Location | Stmarys University Hyderabad",
-  description: "Reach out to the Stmarys University admissions team. Find our Hyderabad campus location, map, and contact directory.",
+  title: "Contact Us | Admissions Helpdesk & Location | St. Mary's University Hyderabad",
+  description: "Reach out to the St. Mary's University admissions team. Find campus location, corporate office visit address at LB Nagar, map, and contact directory.",
   pathname: "/contact",
-  keywords: ["Contact Stmarys University", "Hyderabad University Address", "Admissions Helpdesk"],
+  keywords: ["Contact St. Mary's University", "Hyderabad University Address", "Admissions Helpdesk", "St. Mary's University corporate office", "LB Nagar office"],
 });
 
 export default function Page() {

@@ -4,10 +4,11 @@ import SiteSearchClient from "@/components/search/SiteSearchClient";
 import { buildMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Search Stmarys University Website",
-  description: "Search Stmarys University website for schools, departments, programmes, admissions, campus information, law programmes, and public information pages.",
+  title: "Search St. Mary's University Website",
+  description: "Search St. Mary's University website for schools, departments, programmes, admissions, campus information, law programmes, and public information pages.",
   pathname: "/search",
-  keywords: ["Stmarys University search", "Stmarys University search", "programme search", "admissions search", "school search", "university search"],
+  robots: "noindex,follow",
+  keywords: ["St. Mary's University search", "St. Mary's University search", "programme search", "admissions search", "school search", "university search"],
 });
 
 export default function Page() {

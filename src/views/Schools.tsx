@@ -114,6 +114,11 @@ export default function Schools() {
           <p className="max-w-3xl mx-auto text-[14px] md:text-base text-[#0d315c]/50 font-black uppercase tracking-[0.4em] leading-relaxed">
             Choose the school that matches your career path
           </p>
+          <p className="max-w-3xl mx-auto mt-5 text-[14px] md:text-base text-[#0d315c]/80 font-medium leading-relaxed normal-case tracking-normal">
+            St. Mary&apos;s University (SMRU), Hyderabad organises its 70+ programmes across six schools —
+            Rehabilitation Sciences, Health &amp; Allied Health Sciences, Psychology, Nursing, Engineering &amp;
+            Emerging Technologies, and Law — each with its own departments, admissions route and programme pages.
+          </p>
           
           <div className="mt-8 flex flex-wrap gap-4 justify-center">
             <button
@@ -289,7 +294,7 @@ export default function Schools() {
             <div>
               <h2 className="text-3xl font-black uppercase tracking-tight mb-4 italic">Statutory Trust & <span className="text-[#ffaf3a]">Recognition</span></h2>
               <p className="text-white/70 font-medium leading-relaxed max-w-xl mb-6">
-                Stmarys University is a state private university established under the Telangana State Private Universities Act and recognized by UGC under Section 2(f). Programme-specific permissions, where required, are verified through official university or statutory council documents.
+                St. Mary's University is a state private university established under the Telangana State Private Universities Act and recognized by UGC under Section 2(f). Programme-specific permissions, where required, are verified through official university or statutory council documents.
               </p>
               <div className="flex flex-wrap gap-4">
                 {["UGC Recognized", "State Act Established", "Clinical Excellence"].map(badge => (
@@ -317,10 +322,10 @@ export default function Schools() {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { q: "How many academic schools does Stmarys University have?", a: `Stmarys University currently houses ${schoolStats.schoolsCount} specialized schools: Rehabilitation Sciences, Health & Allied Health Sciences, Psychology, Nursing, Engineering & Emerging Technologies, and Law.` },
+                { q: "How many academic schools does St. Mary's University have?", a: `St. Mary's University currently houses ${schoolStats.schoolsCount} specialized schools: Rehabilitation Sciences, Health & Allied Health Sciences, Psychology, Nursing, Engineering & Emerging Technologies, and Law.` },
                 { q: "How are programme-level permissions shown?", a: "Programme-level professional permissions are shown through published university notifications or relevant statutory council documents where required. Applicants should verify current details from the programme page and official disclosure pages." },
                 { q: "What is the admission mode for 2026-27?", a: "Admissions are based on merit and university-led entrance examinations for specific clinical tracks." },
-                { q: "Does Stmarys University offer Ph.D. programs?", a: "Yes. Ph.D. admissions cycle status and doctoral information are maintained on the dedicated Ph.D. admissions page." },
+                { q: "Does St. Mary's University offer Ph.D. programs?", a: "Yes. Ph.D. admissions cycle status and doctoral information are maintained on the dedicated Ph.D. admissions page." },
               ].map((faq, i) => (
                 <div key={i} className="bg-white p-6 cut-corner-panel border border-slate-100 shadow-sm">
                   <h3 className="font-black text-[#0d315c] text-[13px] uppercase tracking-wider mb-2">Q: {faq.q}</h3>

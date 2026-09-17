@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { schools } from "@/data/schools";
-import { buildMetadata } from "@/lib/metadata";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 import { safeSlug } from "@/lib/shared/program-utils";
 
 const departments = (schools || []).flatMap((school) =>
@@ -15,23 +15,23 @@ const departments = (schools || []).flatMap((school) =>
 
 const findDepartment = (deptSlug: string) => departments.find((item) => item.deptSlug === deptSlug);
 
+// One target for metadata and shell: the canonical department hub, or the schools index for an unknown slug.
+const targetPathFor = (deptSlug: string) => {
+  const department = findDepartment(deptSlug);
+  return department ? `/schools/${department.schoolSlug}/${department.deptSlug}/` : "/schools/";
+};
+
 export function generateStaticParams() {
   return departments.map((department) => ({ deptSlug: department.deptSlug }));
 }
 
-export function generateMetadata({ params }: { params: { deptSlug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ deptSlug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const department = findDepartment(params.deptSlug);
-  const targetPath = department ? `/schools/${department.schoolSlug}/${department.deptSlug}` : "/schools";
-  return buildMetadata({
-    title: `${department?.name || "Department"} | Stmarys University`,
-    description: department?.about || "Explore department programs at Stmarys University.",
-    pathname: targetPath,
-    robots: "noindex,follow",
-  });
+  return buildRedirectMetadata(`${department?.name || "Department"} | St. Mary's University`, targetPathFor(params.deptSlug));
 }
 
-export default function Page({ params }: { params: { deptSlug: string } }) {
-  const department = findDepartment(params.deptSlug);
-  const target = department ? `/schools/${department.schoolSlug}/${department.deptSlug}/` : "/schools/";
-  redirect(target);
+export default async function Page(props: { params: Promise<{ deptSlug: string }> }) {
+  const params = await props.params;
+  return <RedirectFallback targetUrl={targetPathFor(params.deptSlug)} />;
 }

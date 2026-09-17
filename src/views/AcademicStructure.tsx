@@ -10,7 +10,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import useOpenApply from "../hooks/useOpenApply";
 import abstractHeroBg from "../assets/education-pattern.webp";
-import SEO from "../components/SEO";
 import RelatedLinks from "@/components/seo/RelatedLinks";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
@@ -88,11 +87,6 @@ export default function AcademicStructure() {
 
   return (
     <div className="min-h-screen bg-white font-outfit text-[#0d315c] selection:bg-[#019e6e]/10">
-      <SEO 
-        title="Academic Structure | Stmarys University"
-        description="Explore the academic catalogue of Stmarys University across rehabilitation, health sciences, nursing, psychology, engineering, law, and allied professional schools."
-      />
-
       {/* -------------------------------------------------------------------
           CINEMATIC HERO SECTION
           ------------------------------------------------------------------- */}
@@ -123,7 +117,7 @@ export default function AcademicStructure() {
               Academic <span className="text-[#019e6e]">Structure</span>
             </h1>
             <p className="mt-8 text-lg md:text-2xl text-slate-500 font-medium italic leading-relaxed opacity-80 max-w-3xl mx-auto">
-              A career-focused catalogue across Stmarys University's schools, built around clinical exposure, professional skills, and interdisciplinary learning.
+              A career-focused catalogue across St. Mary's University's schools, built around clinical exposure, professional skills, and interdisciplinary learning.
             </p>
           </motion.div>
  

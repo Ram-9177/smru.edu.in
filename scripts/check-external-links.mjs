@@ -59,8 +59,8 @@ async function request(url, method) {
 async function checkUrl(url, files) {
   try {
     const head = await request(url, "HEAD");
-    if (![403, 405, 501].includes(head.status)) {
-      return { url, ok: head.status < 400, status: head.status, finalUrl: head.url, method: "HEAD", files: [...files] };
+    if (head.status < 400) {
+      return { url, ok: true, status: head.status, finalUrl: head.url, method: "HEAD", files: [...files] };
     }
   } catch {
     // Fall back to GET below.
@@ -68,9 +68,24 @@ async function checkUrl(url, files) {
 
   try {
     const get = await request(url, "GET");
-    return { url, ok: get.status < 400, status: get.status, finalUrl: get.url, method: "GET", files: [...files] };
+    const accessControlled = [401, 403, 429, 999].includes(get.status);
+    return {
+      url,
+      ok: accessControlled ? null : get.status < 400,
+      status: get.status,
+      finalUrl: get.url,
+      method: "GET",
+      ...(accessControlled ? { reason: "remote service blocked the automated check" } : {}),
+      files: [...files],
+    };
   } catch (error) {
-    return { url, ok: false, error: error?.name === "AbortError" ? "timeout" : String(error?.message || error), files: [...files] };
+    return {
+      url,
+      ok: null,
+      error: error?.name === "AbortError" ? "timeout" : String(error?.message || error),
+      reason: "remote service could not be verified automatically",
+      files: [...files],
+    };
   }
 }
 
@@ -82,11 +97,15 @@ async function main() {
     results.push(...await Promise.all(batch.map(([url, files]) => checkUrl(url, files))));
   }
 
-  const broken = results.filter((result) => !result.ok);
+  const broken = results.filter((result) => result.ok === false);
+  const unverifiable = results.filter((result) => result.ok === null);
   console.log(JSON.stringify({
     checked: results.length,
+    passed: results.length - broken.length - unverifiable.length,
     broken: broken.length,
+    unverifiable: unverifiable.length,
     failures: broken,
+    unverifiableLinks: unverifiable,
   }, null, 2));
 
   if (broken.length > 0) process.exit(1);

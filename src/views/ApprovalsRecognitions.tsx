@@ -37,7 +37,7 @@ export default function ApprovalsRecognitions() {
             {/* Trust Badge */}
             <div className="mb-8 inline-flex items-center gap-3 border border-[#0d315c]/10 bg-white/80 backdrop-blur-md px-5 py-2.5 cut-corner-badge shadow-sm animate-fade-in">
               <FaShieldAlt className="text-[#019e6e]" size={16} />
-              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#0d315c]/60">Statutory Trust & Compliance</span>
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#0d315c]/60">Approvals & Recognition</span>
             </div>
 
             <h1 className="smru-h1 max-w-4xl mb-6">
@@ -48,15 +48,14 @@ export default function ApprovalsRecognitions() {
             <div className="w-20 h-1.5 bg-[#ffaf3a] cut-corner-underline mb-8" />
 
             <p className="max-w-2xl text-slate-600 font-medium text-lg leading-relaxed mb-10">
-              Stmarys University is legally established as Stmarys Rehabilitation University under the Telangana State Private Universities Act and recognized by UGC under Section 2(f). This page keeps public verification documents, review dates, and university-cycle regulatory notes in one official place.
-            </p>
+              St. Mary&apos;s University (SMRU), Hyderabad — legally St. Mary&apos;s Rehabilitation University — was established by the Government of Telangana under Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026, and is recognised by the University Grants Commission under Section 2(f) of the UGC Act, 1956. Both official documents are published below so students, parents and employers can verify them directly. University recognition and programme-level council approval are separate; where a council approval applies to a programme, it is stated on that programme&apos;s page.</p>
 
             {/* Quick Stats/Trust Items */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl">
               {[
                 { icon: FaUniversity, label: "State Established", value: "Act No. 10 of 2026" },
                 { icon: FaCheckCircle, label: "UGC Recognized", value: "Under Section 2(f)" },
-                { icon: FaAward, label: "Academic Context", value: "Stmarys Legacy" },
+                { icon: FaAward, label: "Sponsoring Body", value: "Joseph Sriharsha & Mary Indraja Educational Society" },
               ].map((item, i) => (
                 <div key={i} className="bg-white border border-[#d8e8fb] cut-corner-panel p-5 shadow-sm flex flex-col items-center text-center">
                   <item.icon className="text-[#019e6e] mb-3" size={20} />
@@ -85,7 +84,7 @@ export default function ApprovalsRecognitions() {
             </div>
             <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
               <FaFileSignature className="text-[#ffaf3a]" />
-              Verified Digital Repository
+              Official Documents
             </div>
           </div>
 
@@ -272,7 +271,7 @@ export default function ApprovalsRecognitions() {
         </div>
         <div className="smru-container max-w-4xl text-center relative z-10">
           <h2 className="smru-h2 text-white italic mb-6">
-            Building a <span className="text-[#ffaf3a]">Legacy of Trust</span>
+            Recognition you can <span className="text-[#ffaf3a]">verify yourself</span>
           </h2>
           <p className="text-white/70 text-lg font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
             Questions regarding statutory status, disclosure documents, or programme-level public status? The registrar&apos;s office will route requests through the appropriate university office.

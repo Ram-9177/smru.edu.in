@@ -1,11 +1,11 @@
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
 export const metadata = buildRedirectMetadata(
-  "Explore Stmarys University",
-  "/explore-Stmarys"
+  "Explore St. Mary's University",
+  "/explore"
 );
 
 export default function Page() {
-  redirect("/explore-Stmarys");
+  return <RedirectFallback targetUrl="/explore" />;
 }

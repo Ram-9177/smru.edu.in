@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { schools } from "@/data/schools";
-import { buildMetadata } from "@/lib/metadata";
+import { buildMetadata, pickTitleCandidate } from "@/lib/metadata";
 import {
   getDepartmentSearchTerms,
   getProgramSearchSubject,
@@ -8,36 +8,50 @@ import {
   getSchoolSearchTerms,
 } from "@/lib/seo/search-intent";
 import { findBySlugOrName } from "@/lib/shared/program-utils";
+import { getProgrammeDisplayName, getProgrammeShortName, getProgrammeTitleName } from "@/lib/shared/programme-names";
 
-const trimText = (value: string, maxLength = 160) => {
-  const normalized = value.replace(/\s+/g, " ").trim();
-  if (normalized.length <= maxLength) return normalized;
-
-  const clipped = normalized.slice(0, maxLength - 3).replace(/\s+\S*$/, "");
-  return `${clipped}...`;
+// Descriptions are capped by buildMetadata (sentence-aware, ≤ 155, always a finished thought), so the
+// templates below are written short and factual rather than pre-trimmed here.
+const LEVEL_WORD: Array<[RegExp, string]> = [
+  [/integrated/i, "integrated undergraduate degree"],
+  [/ph\.?d/i, "doctoral programme"],
+  [/pg\s*diploma|post\s*graduate\s*diploma/i, "postgraduate diploma"],
+  [/diploma/i, "diploma"],
+  [/\bpg\b|postgraduate/i, "postgraduate degree"],
+  [/\bug\b|undergraduate/i, "undergraduate degree"],
+];
+const levelWord = (level = "") => LEVEL_WORD.find(([pattern]) => pattern.test(level))?.[1] || "programme";
+// "5 Years (10 Semesters)" → "5-year"; "3-4 Years" → "3–4-year"; "1 Year (2 Semesters)" → "1-year".
+const durationWord = (duration = "") => {
+  const match = duration.match(/(\d+(?:\s*[–-]\s*\d+)?)\s*years?/i);
+  return match ? `${match[1].replace(/\s*[–-]\s*/, "–")}-year` : "";
 };
 
-const buildProgramSummary = (program?: { duration?: string; eligibility?: string; overview?: string }) => {
-  const parts = [
-    program?.duration ? `Duration: ${program.duration}` : "",
-    program?.eligibility ? `Eligibility: ${program.eligibility}` : "",
-    "Fee status: confirm through official counselling",
-  ].filter(Boolean);
-
-  return parts.join(" | ");
+// Long school names are abbreviated so "{School} – Courses & Fees" fits the 41-char primary budget.
+const SCHOOL_TITLE_NAMES: Record<string, string> = {
+  "health-allied-health-sciences": "Allied Health Sciences",
+  "engineering-emerging-technologies": "Engineering & Emerging Tech",
+  "rehabilitation-sciences": "Rehabilitation Sciences",
+  "nursing-sciences": "Nursing",
+  psychology: "Psychology",
+  law: "Law",
 };
 
 export const getSchoolMetadata = (params: { schoolSlug: string }): Metadata => {
   const school = findBySlugOrName(schools, params.schoolSlug);
   const schoolName = school?.name || "Academic School";
   
-  // Authority Pattern: [School Name] Admissions 2026 | Stmarys University Hyderabad
-  const title = `${schoolName} Admissions 2026 | Stmarys University`;
-  const description = trimText(
-    school?.about
-      ? `Explore admissions 2026, courses, eligibility, and official application updates for ${schoolName}. ${school.about}`
-      : `Explore admissions 2026, courses, eligibility, and official application updates for ${schoolName} at Stmarys University.`
-  );
+  // Formula: "School of {X} – Courses & Fees" (abbreviated / shortened until it fits 41 chars).
+  const shortName = SCHOOL_TITLE_NAMES[params.schoolSlug] || school?.short || schoolName.replace(/^School of /, "");
+  const title = pickTitleCandidate([
+    `School of ${shortName} – Courses & Fees`,
+    `${shortName} – Courses & Fees`,
+    `${shortName} Courses & Fees`,
+    `${shortName} Courses`,
+  ]);
+  const description = school?.about
+    ? `${schoolName} at St. Mary's University (SMRU), Hyderabad: programmes, eligibility and 2026 admissions. ${school.about}`
+    : `${schoolName} at St. Mary's University (SMRU), Hyderabad: programmes, eligibility and 2026 admissions.`;
 
   const isLaw = params.schoolSlug === "law";
   const customKeywords = isLaw 
@@ -54,7 +68,7 @@ export const getSchoolMetadata = (params: { schoolSlug: string }): Metadata => {
       "admissions updates",
       "Hyderabad University",
       "College Telangana",
-      "Stmarys University",
+      "St. Mary's University",
       ...customKeywords,
       ...getSchoolSearchTerms({ slug: params.schoolSlug, name: schoolName }),
     ],
@@ -66,15 +80,19 @@ export const getDepartmentMetadata = (params: { schoolSlug: string; deptSlug: st
   const dept = findBySlugOrName(school?.departments as Array<{ slug?: string; name?: string; about?: string }> | undefined, params.deptSlug);
   
   const deptName = dept?.name || "Department";
-  const schoolName = school?.name || "Stmarys University";
+  const schoolName = school?.name || "St. Mary's University";
   
-  // Authority Pattern: [Department] Admissions | [School] | Stmarys University Hyderabad
-  const title = `${deptName} Admissions 2026 | ${schoolName} | Stmarys University Hyderabad`;
-  const description = trimText(
-    dept?.about
-      ? `${dept.about} Check admissions 2026, eligibility, and official application updates.`
-      : `Detailed curriculum and admissions 2026 information for ${deptName} under ${schoolName}.`
-  );
+  // Formula: "{Department} – Courses & Admissions 2026", shortened until it fits 41 chars.
+  const title = pickTitleCandidate([
+    `${deptName} – Courses & Admissions 2026`,
+    `${deptName} Courses & Admissions`,
+    `${deptName} Courses 2026`,
+    `${deptName} Courses`,
+    deptName,
+  ]);
+  const description = dept?.about
+    ? `${deptName}, ${schoolName}, St. Mary's University (SMRU), Hyderabad. ${dept.about}`
+    : `Programmes, eligibility and 2026 admissions for ${deptName} under ${schoolName} at St. Mary's University (SMRU), Hyderabad.`;
 
   return buildMetadata({
     title,
@@ -86,7 +104,7 @@ export const getDepartmentMetadata = (params: { schoolSlug: string; deptSlug: st
       schoolName,
       "admissions updates",
       "Hyderabad",
-      "Stmarys University",
+      "St. Mary's University",
       ...getDepartmentSearchTerms(
         { slug: params.schoolSlug, name: schoolName },
         { slug: params.deptSlug, name: deptName }
@@ -114,22 +132,43 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
   );
   const program = findBySlugOrName(dept?.programs, params.programSlug);
 
-  const programName = program?.name || "Program";
+  const programName = getProgrammeShortName(program) || "Program";
+  const displayName = getProgrammeDisplayName(program) || programName;
+  const titleName = getProgrammeTitleName(program) || programName;
   const deptName = dept?.name || "Department";
-  const schoolName = school?.name || "Stmarys University";
+  const schoolName = school?.name || "St. Mary's University";
   const subject = getProgramSearchSubject(
     { slug: params.programSlug, name: programName, level: program?.level },
     { slug: params.deptSlug, name: deptName }
   );
-  const programSummary = buildProgramSummary(program);
-  
-  // Authority Pattern: [Program Name] Admissions 2026, Eligibility, Fees & Syllabus | Stmarys University
-  const title = `${programName} Admissions 2026, Eligibility, Fees & Syllabus | Stmarys University Hyderabad`;
-  const description = trimText(
-    program?.overview
-      ? `${programName} admissions 2026 at Stmarys University Hyderabad: eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses. ${programSummary ? `${programSummary}. ` : ""}${program.overview}`
-      : `${programName} at Stmarys University Hyderabad: admissions 2026, eligibility, duration, fee guidance, syllabus, career outcomes, and recommended related courses. ${programSummary ? `${programSummary}.` : ""}`
-  );
+
+  // Formula: full degree name first ("Bachelor of Physiotherapy (BPT)"), then the local modifier and
+  // the intent words, dropping from the right until the 41-char primary budget fits; the bare
+  // abbreviation is the last resort, never the first choice.
+  const withSuffixes = (name: string) => [
+    `${name} in Hyderabad: Fees, Eligibility 2026`,
+    `${name} in Hyderabad – Fees 2026`,
+    `${name} in Hyderabad`,
+    `${name}: Fees, Eligibility 2026`,
+    `${name} Fees 2026`,
+    name,
+  ];
+  const title = pickTitleCandidate([
+    ...withSuffixes(displayName),
+    ...(titleName !== displayName ? withSuffixes(titleName) : []),
+    ...withSuffixes(programName),
+  ]);
+
+  const level = levelWord(program?.level);
+  const years = durationWord(program?.duration);
+  // Eligibility strings can be long, so they come last and are the first thing the sentence-aware cap drops.
+  const description = [
+    `${displayName} at St. Mary's University (SMRU), Hyderabad – ${years ? `${years} ` : ""}${level}.`,
+    "Fees, 2026 admissions and career paths.",
+    program?.eligibility ? `Eligibility: ${program.eligibility}.` : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return buildMetadata({
     title,
@@ -157,7 +196,7 @@ export const getProgramMetadata = (params: { schoolSlug: string; deptSlug: strin
       "University Fees",
       "Eligibility",
       "Duration",
-      "Stmarys University",
+      "St. Mary's University",
       ...getProgramSearchTerms(
         { slug: params.schoolSlug, name: schoolName },
         { slug: params.deptSlug, name: deptName },

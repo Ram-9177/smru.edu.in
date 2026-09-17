@@ -4,7 +4,19 @@ import { buildMetadata } from "@/lib/metadata";
 import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
 import { findBySlugOrName, safeSlug } from "@/lib/shared/program-utils";
 
+// Canonical school hub is always /schools/{slug}. The former short-form landings
+// (/law, /nursing-sciences, ...) 301 to these in public/.htaccess and keep a client
+// redirect shell so nothing 404s without Apache.
 export const SCHOOL_LANDING_PATHS: Record<string, string> = {
+  law: "/schools/law",
+  "rehabilitation-sciences": "/schools/rehabilitation-sciences",
+  "health-allied-health-sciences": "/schools/health-allied-health-sciences",
+  psychology: "/schools/psychology",
+  "nursing-sciences": "/schools/nursing-sciences",
+  "engineering-emerging-technologies": "/schools/engineering-emerging-technologies",
+};
+
+export const LEGACY_SCHOOL_SHORT_PATHS: Record<string, string> = {
   law: "/law",
   "rehabilitation-sciences": "/rehabilitation-sciences",
   "health-allied-health-sciences": "/health-allied-health-sciences",
@@ -50,7 +62,7 @@ export const getSchoolLandingConfig = (schoolSlug: string) => {
     shortName: school.short || school.name,
     description:
       school.about ||
-      `${school.name} at Stmarys University with admissions, departments, and programme information.`,
+      `${school.name} at St. Mary's University with admissions, departments, and programme information.`,
     imagePath: SCHOOL_LANDING_IMAGES[slug] || "/assets/hero-campus.webp",
   };
 };
@@ -61,7 +73,7 @@ export const buildSchoolLandingMetadata = (schoolSlug: string): Metadata => {
   const pathname = config?.pathname || `/${schoolSlug}`;
   const description =
     config?.description ||
-    `${name} at Stmarys University with departments, programmes, admissions 2026, and academic pathway information.`;
+    `${name} at St. Mary's University with departments, programmes, admissions 2026, and academic pathway information.`;
 
   return buildMetadata({
     title: `${name} | Departments, Courses & Admissions 2026`,
@@ -71,8 +83,8 @@ export const buildSchoolLandingMetadata = (schoolSlug: string): Metadata => {
       name,
       `${name} admissions`,
       `${name} programmes`,
-      "Stmarys University schools",
-      "Stmarys University",
+      "St. Mary's University schools",
+      "St. Mary's University",
       ...getSchoolSearchTerms({ slug: schoolSlug, name }),
     ],
   });

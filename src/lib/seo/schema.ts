@@ -24,18 +24,30 @@ export const buildOrganizationSchema = () => ({
     "@type": "ImageObject",
     url: SITE_IDENTITY.logoUrl,
   },
-  description: SITE_IDENTITY.defaultDescription,
+  description: SITE_IDENTITY.bridgeSentence,
+  foundingDate: SITE_IDENTITY.foundingDate,
+  parentOrganization: {
+    "@type": "Organization",
+    name: SITE_IDENTITY.parentOrganizationName,
+  },
   telephone: SITE_IDENTITY.telephone,
   email: SITE_IDENTITY.email,
   address: {
     "@type": "PostalAddress",
     ...SITE_IDENTITY.address,
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    ...SITE_IDENTITY.geo,
+  },
+  areaServed: ["India", "Nepal", "Bangladesh", "Sri Lanka", "Bhutan", "Nigeria", "Kenya", "United Arab Emirates", "Oman"].map(
+    (country) => ({ "@type": "Country", name: country }),
+  ),
   contactPoint: SITE_IDENTITY.contactPoints.map((cp) => ({
     "@type": "ContactPoint",
     ...cp,
   })),
-  sameAs: SITE_IDENTITY.socialLinks,
+  sameAs: [...SITE_IDENTITY.socialLinks, SITE_IDENTITY.googleMapsUrl],
 });
 
 export const buildUniversitySchema = () => ({
@@ -103,7 +115,7 @@ export const buildWebPageSchema = ({
   url: absoluteUrl(pathname),
   isPartOf: { "@id": SITE_IDENTITY.websiteId },
   about: { "@id": SITE_IDENTITY.id },
-  inLanguage: "en-IN",
+  inLanguage: "en",
   ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
 });
 
@@ -209,42 +221,94 @@ export const buildBreadcrumbSchema = (items: SeoBreadcrumbItem[]) => ({
 });
 
 // 4. Academic Schema
+// "4 Years (3 Academic + 1 Internship)" / "18 Months" -> ISO 8601 (P4Y / P18M). Undefined when unparseable.
+export const toIsoDuration = (duration?: string): string | undefined => {
+  if (!duration) return undefined;
+  const year = duration.match(/(\d+(?:\.\d+)?)\s*year/i);
+  if (year) return `P${Math.round(parseFloat(year[1]))}Y`;
+  const month = duration.match(/(\d+)\s*month/i);
+  if (month) return `P${month[1]}M`;
+  return undefined;
+};
+
+export type CourseFeeOffer = { annualINR?: number; totalINR?: number; annualUSD?: number };
+
 export const buildCourseSchema = ({
   name,
+  alternateName,
   description,
   pathname,
   schoolName,
   level,
   duration,
   eligibility,
-  offers,
+  identifier,
+  fee,
+  credentialAwarded,
+  occupationalCredential,
   keywords = [],
 }: {
   name: string;
+  alternateName?: string;
   description: string;
   pathname: string;
   schoolName?: string;
   level?: string;
   duration?: string;
   eligibility?: string;
-  offers?: any;
+  identifier?: string;
+  fee?: CourseFeeOffer;
+  credentialAwarded?: string;
+  occupationalCredential?: string;
   keywords?: string[];
 }) => {
   const url = absoluteUrl(pathname);
+  const iso = toIsoDuration(duration);
+  const campusLocation = {
+    "@type": "Place" as const,
+    name: `${SITE_IDENTITY.publicName} (SMRU) campus`,
+    address: { "@type": "PostalAddress" as const, ...SITE_IDENTITY.address },
+    geo: { "@type": "GeoCoordinates" as const, ...SITE_IDENTITY.geo },
+  };
+  // Required for Course rich results. courseMode is always onsite; courseWorkload carries the ISO duration
+  // when known. Never invent a startDate.
+  const courseInstance = {
+    "@type": "CourseInstance" as const,
+    courseMode: "onsite",
+    location: campusLocation,
+    ...(iso ? { courseWorkload: iso } : {}),
+  };
+  // Emit `offers` only when a real annual/total fee exists (never a placeholder price).
+  const offers =
+    fee && (fee.annualINR || fee.totalINR)
+      ? [
+          ...(fee.annualINR
+            ? [{ "@type": "Offer" as const, category: "Annual tuition", price: String(fee.annualINR), priceCurrency: "INR", availability: "https://schema.org/InStock", url: "https://apply.smru.edu.in" }]
+            : []),
+          ...(fee.annualUSD
+            ? [{ "@type": "Offer" as const, category: "Annual tuition (international)", price: String(fee.annualUSD), priceCurrency: "USD", availability: "https://schema.org/InStock", url: "https://apply.smru.edu.in" }]
+            : []),
+        ]
+      : undefined;
   return {
     "@context": "https://schema.org",
     "@type": "Course",
     "@id": `${url}#course`,
     name,
+    ...(alternateName ? { alternateName } : {}),
     description,
     url,
     provider: { "@id": SITE_IDENTITY.id },
-    inLanguage: "en-IN",
+    inLanguage: "en",
+    availableLanguage: "en",
+    hasCourseInstance: courseInstance,
     ...(schoolName ? { isPartOf: { "@type": "EducationalOrganization", name: schoolName } } : {}),
-    ...(level ? { educationalCredentialAwarded: level } : {}),
-    ...(duration ? { timeRequired: duration } : {}),
+    ...(credentialAwarded || level ? { educationalCredentialAwarded: credentialAwarded || level } : {}),
+    ...(occupationalCredential ? { occupationalCredentialAwarded: occupationalCredential } : {}),
+    ...(iso ? { timeRequired: iso } : {}),
     ...(eligibility ? { coursePrerequisites: eligibility } : {}),
-    ...(offers ? { offers: { "@type": "Offer", ...offers } } : {}),
+    ...(identifier ? { identifier: { "@type": "PropertyValue", name: "Course Code", value: identifier } } : {}),
+    ...(offers ? { offers } : {}),
     ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
   };
 };
@@ -282,7 +346,7 @@ export const buildEducationEventSchema = ({
     "@type": "VirtualLocation",
     url: absoluteUrl(pathname),
   },
-  inLanguage: "en-IN",
+  inLanguage: "en",
 });
 
 export const buildItemListSchema = (items: { name: string; url: string }[]) => ({
@@ -333,6 +397,18 @@ export const buildFaqSchema = (items: SeoFaqItem[]) => ({
       text: item.answer,
     },
   })),
+});
+
+export const buildInternationalContactPointSchema = (pathname: string) => ({
+  "@context": "https://schema.org",
+  "@type": "ContactPoint",
+  "@id": absoluteUrl(`${pathname}#international-admissions`),
+  contactType: "International Admissions",
+  email: SITE_IDENTITY.email,
+  telephone: SITE_IDENTITY.telephone,
+  url: absoluteUrl(pathname),
+  areaServed: ["Nepal", "Bangladesh", "Sri Lanka", "Bhutan", "Nigeria", "Kenya", "United Arab Emirates", "Oman"],
+  availableLanguage: ["English"],
 });
 
 export const buildContactPageSchema = (pathname: string) => ({
@@ -389,7 +465,7 @@ export const buildCollectionPageSchema = ({
   url: absoluteUrl(pathname),
   isPartOf: { "@id": SITE_IDENTITY.websiteId },
   about: { "@id": SITE_IDENTITY.id },
-  inLanguage: "en-IN",
+  inLanguage: "en",
   ...(keywords.length ? { keywords: keywords.join(", ") } : {}),
 });
 

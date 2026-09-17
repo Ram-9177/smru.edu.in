@@ -12,13 +12,118 @@
     RewriteCond %{HTTP_HOST} ^www\. [NC]
     RewriteRule ^(.*)$ https://smru.edu.in/$1 [L,R=301]
 
+    # --- Phase 3: templated doorway pages consolidated into authoritative targets ---
+    RewriteRule ^(admission\-guides/phd\-next\-cycle\-updates|seo/best\-college\-in\-hyderabad\-checklist|seo/best\-college\-in\-india\-checklist|seo/best\-college\-in\-telangana\-checklist|seo/best\-university\-in\-hyderabad\-checklist|seo/best\-university\-in\-india\-checklist|seo/best\-university\-in\-telangana\-checklist|seo/best\-university\-near\-hyderabad\-india)/?$ https://smru.edu.in/about/ [L,R=301]
+    RewriteRule ^(seo/fastest\-growing\-university\-india\-checklist|seo/highest\-salary\-package\-college\-checklist|seo/indias\-first\-university\-claim\-checklist|seo/no1\-college\-in\-india\-checklist|seo/no1\-private\-university\-india\-checklist|seo/placement\-guarantee\-college\-checklist|seo/private\-university\-in\-hyderabad|seo/private\-university\-in\-telangana)/?$ https://smru.edu.in/about/ [L,R=301]
+    RewriteRule ^(seo/top\-college\-in\-hyderabad\-checklist|seo/top\-college\-in\-india\-checklist|seo/top\-college\-in\-telangana\-checklist|seo/top\-university\-healthcare\-courses\-india|seo/top\-university\-in\-hyderabad\-checklist|seo/top\-university\-in\-india\-checklist|seo/top\-university\-in\-telangana\-checklist|student\-guides/course\-fees\-comparison\-checklist)/?$ https://smru.edu.in/about/ [L,R=301]
+    RewriteRule ^(student\-guides/is\-st\-marys\-university\-same\-as\-smru|student\-guides/placement\-claims\-comparison\-checklist|student\-guides/professional\-approval\-checklist|student\-guides/what\-is\-smru|student\-guides/where\-is\-smru\-located)/?$ https://smru.edu.in/about/ [L,R=301]
+    RewriteRule ^(admission\-guides/admission\-last\-date\-check|admission\-guides/apply\-online\-smru|admission\-guides/diploma\-admissions\-2026|admission\-guides/direct\-admission\-smru\-checklist|admission\-guides/fee\-confirmation\-before\-admission|admission\-guides/pg\-admissions\-2026|admission\-guides/refund\-withdrawal\-questions|admission\-guides/smru\-entrance\-exam)/?$ https://smru.edu.in/admissions/ [L,R=301]
+    RewriteRule ^(admission\-guides/ug\-admissions\-2026|seo/admissions\-open\-college\-hyderabad|seo/best\-college\-scholarships\-india|seo/top\-private\-university\-admissions\-india|student\-guides/admissions\-office\-hyderabad\-university|student\-guides/course\-selection\-before\-applying|student\-guides/parents\-admission\-checklist|student\-guides/scholarship\-comparison\-checklist)/?$ https://smru.edu.in/admissions/ [L,R=301]
+    RewriteRule ^(student\-guides/student\-counselling\-hyderabad\-university|student\-guides/what\-to\-check\-before\-admission)/?$ https://smru.edu.in/admissions/ [L,R=301]
+    RewriteRule ^(seo/ugc\-recognized\-university\-hyderabad|seo/ugc\-recognized\-university\-telangana|student\-guides/how\-to\-verify\-university\-recognition|student\-guides/ugc\-recognition\-comparison\-checklist)/?$ https://smru.edu.in/approvals-recognitions/ [L,R=301]
+    RewriteRule ^(seo/best\-university\-campus\-facilities\-india|seo/campus\-tour\-university\-hyderabad|student\-guides/campus\-facilities\-comparison\-checklist|student\-guides/campus\-visit\-before\-admission|student\-guides/university\-campus\-visit\-hyderabad|student\-guides/weekend\-campus\-visit\-hyderabad)/?$ https://smru.edu.in/campus-guide/ [L,R=301]
+    RewriteRule ^(seo/college\-in\-deshmukhi\-hyderabad|seo/colleges\-near\-ramoji\-film\-city|seo/university\-in\-yadadri\-bhuvanagiri|seo/university\-near\-ramoji\-film\-city|student\-guides/campus\-near\-ramoji\-film\-city\-admissions|student\-guides/college\-near\-deshmukhi|student\-guides/college\-near\-yadadri\-bhuvanagiri|student\-guides/physiotherapy\-near\-ramoji\-film\-city)/?$ https://smru.edu.in/campus-location-hyderabad/ [L,R=301]
+    RewriteRule ^(student\-guides/rehabilitation\-hospital\-near\-deshmukhi|student\-guides/university\-near\-pochampally\-mandal)/?$ https://smru.edu.in/campus-location-hyderabad/ [L,R=301]
+    RewriteRule ^(student\-guides/campus\-with\-hostel\-hyderabad|student\-guides/hostel\-admission\-questions|student\-guides/hostel\-facilities\-hyderabad)/?$ https://smru.edu.in/hostel/ [L,R=301]
+    RewriteRule ^(guides/best\-mba\-college\-in\-hyderabad|guides/best\-pharmacy\-college\-in\-hyderabad)/?$ https://smru.edu.in/schools/ [L,R=301]
+    RewriteRule ^(admission\-guides/btech\-admissions\-guide|admission\-guides/cse\-specialisation\-courses|admission\-guides/engineering\-emerging\-technologies\-courses|seo/best\-engineering\-university\-india|student\-guides/engineering\-college\-campus\-hyderabad)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/ [L,R=301]
+    RewriteRule ^(admission\-guides/btech\-cse\-admission\-guide|admission\-guides/btech\-cse\-course\-hyderabad|student\-guides/does\-smru\-offer\-btech\-cse)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse/ [L,R=301]
+    RewriteRule ^(admission\-guides/btech\-cse\-ai\-ds\-course)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-ai-ds/ [L,R=301]
+    RewriteRule ^(admission\-guides/btech\-cse\-ai\-ml\-course)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/computer-science-engineering/btech-cse-aiml/ [L,R=301]
+    RewriteRule ^(admission\-guides/btech\-rehabilitation\-engineering\-admission|admission\-guides/btech\-rehabilitation\-engineering\-course)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/rehabilitation-engineering-assistive-technologies/btech-rehabilitation-engineering-prosthetics-orthotics-assistive-technologies/ [L,R=301]
+    RewriteRule ^(admission\-guides/allied\-health\-technology\-courses|admission\-guides/health\-allied\-health\-sciences\-courses|admission\-guides/health\-sciences\-admissions\-guide|seo/allied\-health\-sciences\-college\-hyderabad|seo/best\-allied\-health\-sciences\-university\-india|seo/best\-health\-sciences\-university\-india|seo/health\-sciences\-university\-hyderabad|student\-guides/allied\-health\-campus\-hyderabad)/?$ https://smru.edu.in/schools/health-allied-health-sciences/ [L,R=301]
+    RewriteRule ^(admission\-guides/optometry\-course\-hyderabad)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/b-optometry/ [L,R=301]
+    RewriteRule ^(admission\-guides/cardiovascular\-technology\-course)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bcvt/ [L,R=301]
+    RewriteRule ^(admission\-guides/emergency\-medical\-technology\-course)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/betcms/ [L,R=301]
+    RewriteRule ^(admission\-guides/medical\-lab\-technology\-course)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bmlt/ [L,R=301]
+    RewriteRule ^(admission\-guides/radiotherapy\-technology\-course)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/brt/ [L,R=301]
+    RewriteRule ^(admission\-guides/anesthesia\-operation\-theatre\-technology)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bsc-anaesthesia-ot/ [L,R=301]
+    RewriteRule ^(admission\-guides/bsc\-forensic\-science\-admission|admission\-guides/bsc\-forensic\-science\-course|seo/best\-forensic\-science\-university\-india)/?$ https://smru.edu.in/schools/health-allied-health-sciences/allied-health-sciences/bsc-forensic-science/ [L,R=301]
+    RewriteRule ^(admission\-guides/bot\-admission\-guide|admission\-guides/bot\-course\-hyderabad)/?$ https://smru.edu.in/schools/health-allied-health-sciences/occupational-therapy/bot/ [L,R=301]
+    RewriteRule ^(admission\-guides/mot\-course\-hyderabad)/?$ https://smru.edu.in/schools/health-allied-health-sciences/occupational-therapy/mot/ [L,R=301]
+    RewriteRule ^(admission\-guides/bpt\-admission\-guide|admission\-guides/bpt\-course\-hyderabad|student\-guides/does\-smru\-offer\-bpt)/?$ https://smru.edu.in/schools/health-allied-health-sciences/physiotherapy/bpt/ [L,R=301]
+    RewriteRule ^(admission\-guides/mpt\-course\-hyderabad)/?$ https://smru.edu.in/schools/health-allied-health-sciences/physiotherapy/mpt/ [L,R=301]
+    RewriteRule ^(admission\-guides/ba\-llb\-hons\-course|admission\-guides/bba\-llb\-hons\-course|admission\-guides/bsc\-llb\-hons\-course|admission\-guides/integrated\-law\-courses|admission\-guides/law\-admissions\-guide|admission\-guides/law\-courses|admission\-guides/llb\-course\-hyderabad|admission\-guides/llb\-hons\-course)/?$ https://smru.edu.in/schools/law/ [L,R=301]
+    RewriteRule ^(seo/best\-law\-university\-india|student\-guides/law\-college\-campus\-hyderabad)/?$ https://smru.edu.in/schools/law/ [L,R=301]
+    RewriteRule ^(admission\-guides/nursing\-admissions\-guide|admission\-guides/nursing\-courses|seo/best\-nursing\-university\-india|student\-guides/nursing\-college\-campus\-hyderabad)/?$ https://smru.edu.in/schools/nursing-sciences/ [L,R=301]
+    RewriteRule ^(admission\-guides/bsc\-nursing\-admission\-guide|admission\-guides/bsc\-nursing\-course\-hyderabad|student\-guides/does\-smru\-offer\-bsc\-nursing)/?$ https://smru.edu.in/schools/nursing-sciences/nursing/bsc-nursing/ [L,R=301]
+    RewriteRule ^(admission\-guides/msc\-nursing\-course\-hyderabad)/?$ https://smru.edu.in/schools/nursing-sciences/nursing/msc-nursing/ [L,R=301]
+    RewriteRule ^(admission\-guides/clinical\-psychology\-courses|admission\-guides/psychology\-courses|seo/best\-psychology\-university\-india)/?$ https://smru.edu.in/schools/psychology/ [L,R=301]
+    RewriteRule ^(admission\-guides/b\-psychology\-course)/?$ https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/b-psychology-applied-behavioural/ [L,R=301]
+    RewriteRule ^(admission\-guides/m\-psychology\-course)/?$ https://smru.edu.in/schools/psychology/applied-psychology-behavioural-health/m-psychology-applied-behavioural/ [L,R=301]
+    RewriteRule ^(admission\-guides/bsc\-clinical\-psychology\-course)/?$ https://smru.edu.in/schools/psychology/clinical-psychology/bsc-clinical-psychology/ [L,R=301]
+    RewriteRule ^(admission\-guides/ma\-clinical\-psychology\-course)/?$ https://smru.edu.in/schools/psychology/clinical-psychology/ma-clinical-psychology/ [L,R=301]
+    RewriteRule ^(admission\-guides/professional\-diploma\-clinical\-psychology)/?$ https://smru.edu.in/schools/psychology/clinical-psychology/professional-diploma-clinical-psychology/ [L,R=301]
+    RewriteRule ^(admission\-guides/pg\-diploma\-rehabilitation\-psychology)/?$ https://smru.edu.in/schools/psychology/rehabilitation-psychology/pg-diploma-rehabilitation-psychology/ [L,R=301]
+    RewriteRule ^(admission\-guides/inclusive\-education\-courses|admission\-guides/postgraduate\-rehabilitation\-courses|admission\-guides/rehabilitation\-sciences\-courses|admission\-guides/undergraduate\-rehabilitation\-courses|seo/best\-inclusive\-education\-university\-india|seo/best\-rehabilitation\-university\-india|seo/rehabilitation\-university\-hyderabad|seo/top\-rehabilitation\-university\-india)/?$ https://smru.edu.in/schools/rehabilitation-sciences/ [L,R=301]
+    RewriteRule ^(student\-guides/assistive\-technology\-rehabilitation\-hyderabad|student\-guides/audiology\-services\-hyderabad|student\-guides/cardiopulmonary\-rehabilitation\-hyderabad|student\-guides/community\-rehabilitation\-hyderabad|student\-guides/geriatric\-rehabilitation\-hyderabad|student\-guides/mental\-health\-rehabilitation\-hyderabad|student\-guides/neuro\-rehabilitation\-hyderabad|student\-guides/occupational\-therapy\-services\-hyderabad)/?$ https://smru.edu.in/schools/rehabilitation-sciences/ [L,R=301]
+    RewriteRule ^(student\-guides/orthopedic\-physiotherapy\-hyderabad|student\-guides/pediatric\-rehabilitation\-hyderabad|student\-guides/physiotherapy\-treatment\-hyderabad|student\-guides/post\-surgery\-rehabilitation\-hyderabad|student\-guides/prosthetics\-orthotics\-services\-hyderabad|student\-guides/rehab\-centre\-hyderabad|student\-guides/rehabilitation\-hospital\-hyderabad|student\-guides/rehabilitation\-university\-campus\-hyderabad)/?$ https://smru.edu.in/schools/rehabilitation-sciences/ [L,R=301]
+    RewriteRule ^(student\-guides/speech\-therapy\-services\-hyderabad|student\-guides/sports\-physiotherapy\-hyderabad|student\-guides/water\-therapy\-rehabilitation\-hyderabad)/?$ https://smru.edu.in/schools/rehabilitation-sciences/ [L,R=301]
+    RewriteRule ^(admission\-guides/baslp\-admission\-guide|admission\-guides/baslp\-course\-hyderabad)/?$ https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/baslp/ [L,R=301]
+    RewriteRule ^(admission\-guides/msc\-audiology\-course)/?$ https://smru.edu.in/schools/rehabilitation-sciences/audiology-speech-sciences/msc-audiology/ [L,R=301]
+    RewriteRule ^(admission\-guides/ba\-bed\-special\-inclusive\-education)/?$ https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/ba-bed-special-inclusive-education/ [L,R=301]
+    RewriteRule ^(admission\-guides/bcom\-bed\-special\-inclusive\-education)/?$ https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/bcom-bed-special-inclusive-education/ [L,R=301]
+    RewriteRule ^(admission\-guides/bsc\-bed\-special\-inclusive\-education)/?$ https://smru.edu.in/schools/rehabilitation-sciences/inclusive-education/bsc-bed-special-inclusive-education/ [L,R=301]
+    RewriteRule ^(admission\-guides/bpo\-course\-guide)/?$ https://smru.edu.in/schools/rehabilitation-sciences/prosthetics-orthotics/bpo/ [L,R=301]
+    RewriteRule ^(admission\-guides/mpo\-course\-guide)/?$ https://smru.edu.in/schools/rehabilitation-sciences/prosthetics-orthotics/mpo/ [L,R=301]
+    RewriteRule ^(seo/best\-baslp\-college\-india)/?$ https://smru.edu.in/seo/baslp-college-hyderabad/ [L,R=301]
+    RewriteRule ^(seo/best\-bpt\-college\-india)/?$ https://smru.edu.in/seo/bpt-college-hyderabad/ [L,R=301]
+    RewriteRule ^(seo/best\-btech\-cse\-college\-india|seo/btech\-cse\-college\-hyderabad)/?$ https://smru.edu.in/seo/engineering-college-hyderabad/ [L,R=301]
+    RewriteRule ^(seo/best\-law\-college\-india|seo/llb\-college\-hyderabad)/?$ https://smru.edu.in/seo/law-college-hyderabad/ [L,R=301]
+    RewriteRule ^(seo/best\-bsc\-nursing\-college\-india|seo/bsc\-nursing\-college\-hyderabad)/?$ https://smru.edu.in/seo/nursing-college-hyderabad/ [L,R=301]
+    RewriteRule ^(student\-guides/compare\-smru\-with\-other\-universities|student\-guides/contact\-smru\-admissions|student\-guides/documents\-prove\-smru\-status|student\-guides/does\-smru\-have\-hostel|student\-guides/does\-smru\-offer\-law\-courses|student\-guides/how\-to\-apply\-to\-smru|student\-guides/is\-smru\-ugc\-recognized|student\-guides/what\-courses\-does\-smru\-offer)/?$ https://smru.edu.in/smru/ [L,R=301]
+
+    # --- Brand reference consolidation -> /smru/ (Phase 2) ---
+    RewriteRule ^(smru-facts|Stmarys-facts|stmarys-facts)/?$ https://smru.edu.in/smru/ [L,R=301,NC]
+    RewriteRule ^(st-marys-university|Stmarys-university|stmarys-university|st-marys-rehabilitation-university|Stmarys-university-official|stmarys-university-official)/?$ https://smru.edu.in/smru/ [L,R=301,NC]
+    RewriteRule ^(smru-hyderabad|Stmarys-hyderabad|stmarys-hyderabad|rehabilitation-university-hyderabad)/?$ https://smru.edu.in/smru/ [L,R=301,NC]
+    RewriteRule ^seo/(st-marys-university|stmarys-university|smru-hyderabad|stmarys-hyderabad|st-marys-rehabilitation-university|stmarys-university-official|stmarys-rehabilitation-university)/?$ https://smru.edu.in/smru/ [L,R=301,NC]
+    RewriteRule ^student-guides/(st-marys-university|Stmarys-university|stmarys-university|Stmarys-university-hyderabad|stmarys-university-hyderabad|Stmarys-rehabilitation-university|stmarys-rehabilitation-university|what-is-smru|is-st-marys-university-same-as-smru|where-is-smru-located)/?$ https://smru.edu.in/smru/ [L,R=301,NC]
+
+    # --- Aliases ---
+    RewriteRule ^explore-(smru|stmarys)/?$ https://smru.edu.in/explore/ [L,R=301,NC]
+    RewriteRule ^Hand-Book/?$ https://smru.edu.in/handbook/ [L,R=301,NC]
+    RewriteRule ^Handbook/?$ https://smru.edu.in/handbook/ [L,R=301]
+    RewriteRule ^Handbook/(.+\.pdf)$ https://smru.edu.in/assets/handbook/$1 [L,R=301]
+    RewriteRule ^iqac/?$ https://smru.edu.in/iqac-quality-assurance/ [L,R=301]
+    RewriteRule ^mandatory-disclosure/(ugc-disclosure|statutory-disclosures|contact|first-academic-year-disclosure|public-information)/?$ https://smru.edu.in/mandatory-disclosure/ [L,R=301]
+    RewriteRule ^(niat|bb|skilgen|qtst)/?$ https://smru.edu.in/partner/$1/ [L,R=301]
+
+    # --- Legacy aliases that also have a client shell under app/ (kept in sync by scripts/redirect-map.mjs) ---
+    RewriteRule ^(blackbucks)/?$ https://smru.edu.in/partner/bb/ [L,R=301]
+    RewriteRule ^(bytexl)/?$ https://smru.edu.in/partner/bytexl/ [L,R=301]
+    RewriteRule ^(carrer)/?$ https://smru.edu.in/careers/ [L,R=301]
+    RewriteRule ^(ctpl)/?$ https://apply.smru.edu.in/ [L,R=301]
+    RewriteRule ^(edinbox)/?$ https://smru.edu.in/partner/edinbox/ [L,R=301]
+    RewriteRule ^(edridge)/?$ https://smru.edu.in/partner/edridge/ [L,R=301]
+    RewriteRule ^(emversity)/?$ https://smru.edu.in/partner/emversity/ [L,R=301]
+    RewriteRule ^(entrancetest)/?$ https://smru.edu.in/exam-notification/ [L,R=301]
+    RewriteRule ^(iiat|ist|mjiollnir|onnbikes|university)/?$ https://smru.edu.in/partner/ [L,R=301]
+    RewriteRule ^(nst)/?$ https://smru.edu.in/partner/nst/ [L,R=301]
+    RewriteRule ^(qtst-smru)/?$ https://smru.edu.in/partner/qtst/ [L,R=301]
+    RewriteRule ^(veloces)/?$ https://smru.edu.in/partner/veloces/ [L,R=301]
+    # Legacy /departments/{dept}/ -> canonical /schools/{school}/{dept}/
+    RewriteRule ^departments/(allied-health-sciences|occupational-therapy|physiotherapy)/?$ https://smru.edu.in/schools/health-allied-health-sciences/$1/ [L,R=301]
+    RewriteRule ^departments/(applied-psychology-behavioural-health|clinical-psychology|rehabilitation-psychology)/?$ https://smru.edu.in/schools/psychology/$1/ [L,R=301]
+    RewriteRule ^departments/(audiology-speech-sciences|inclusive-education|prosthetics-orthotics)/?$ https://smru.edu.in/schools/rehabilitation-sciences/$1/ [L,R=301]
+    RewriteRule ^departments/(business-administration-computer-applications|computer-science-engineering|rehabilitation-engineering-assistive-technologies|sciences-humanities)/?$ https://smru.edu.in/schools/engineering-emerging-technologies/$1/ [L,R=301]
+    RewriteRule ^departments/(legal-studies)/?$ https://smru.edu.in/schools/law/$1/ [L,R=301]
+    RewriteRule ^departments/(nursing)/?$ https://smru.edu.in/schools/nursing-sciences/$1/ [L,R=301]
+
+    # --- Duplicate school landings -> canonical /schools/{slug}/ ---
+    RewriteRule ^(rehabilitation-sciences|health-allied-health-sciences|psychology|nursing-sciences|engineering-emerging-technologies|law)/?$ https://smru.edu.in/schools/$1/ [L,R=301]
+
     # 1b. Retired law URLs
-    RewriteRule ^schools/law/legal-studies/llb-general/?$ https://smru.edu.in/schools/law/ [L,R=301]
-    RewriteRule ^llm/?$ https://smru.edu.in/schools/law/ [L,R=301]
-    RewriteRule ^phd-law/?$ https://smru.edu.in/schools/law/ [L,R=301]
+    RewriteRule ^schools/law/legal-studies/llb-general/?$ https://smru.edu.in/schools/law/legal-studies/llb/ [L,R=301]
+    RewriteRule ^llm/?$ https://smru.edu.in/schools/law/legal-studies/llm/ [L,R=301]
+    RewriteRule ^phd-law/?$ https://smru.edu.in/schools/law/legal-studies/phd-law/ [L,R=301]
 
     # 2. Maintenance Mode Switch (OFF)
 </IfModule>
+
+# Serve the branded 404 page instead of the bare server default.
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
 
 # SEO/security headers for the static export.
 # HSTS is sent on all responses, including www/non-www redirects, so HTTPS-only
@@ -26,30 +131,83 @@
 <IfModule mod_setenvif.c>
     SetEnvIf Request_URI "^/(developer|api)(/|$)" STMARYS_PRIVATE_NOINDEX=1
     SetEnvIf Request_URI "^/thank-you(/|$)" STMARYS_THANKYOU_NOINDEX=1
+    # Raw partner-supplied HTML (iframe sources) is partner content, not SMRU's statement: keep it out of the index.
+    SetEnvIf Request_URI "^/partners/.*\.html$" STMARYS_PARTNER_RAW_NOINDEX=1
 </IfModule>
 
 <IfModule mod_headers.c>
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 
+    # Baseline hardening. X-Frame-Options only governs who may frame smru.edu.in pages;
+    # the partner iframes we embed on our own pages are unaffected.
+    # Permissions-Policy deliberately leaves gyroscope/accelerometer/geolocation/fullscreen
+    # open: the 360 campus tour relies on device orientation.
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "camera=(), microphone=(), payment=(), usb=()"
+
     # Keep private utility routes out of the index at the HTTP header layer.
     # Public compliance routes, including /mandatory-disclosure/, are not matched here.
     Header always set X-Robots-Tag "noindex, nofollow" env=STMARYS_PRIVATE_NOINDEX
     Header always set X-Robots-Tag "noindex, follow" env=STMARYS_THANKYOU_NOINDEX
+    Header always set X-Robots-Tag "noindex, follow" env=STMARYS_PARTNER_RAW_NOINDEX
 </IfModule>
 
-# Caching Policy
+# ----------------------------------------------------------------------
+# Compression — text assets ship ~4-5x smaller (brotli when the module exists, else gzip).
+# Images, woff2, mp4 are already compressed and are deliberately excluded.
+# ----------------------------------------------------------------------
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/json application/xml application/rss+xml application/manifest+json image/svg+xml font/ttf font/otf application/vnd.ms-fontobject
+</IfModule>
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/json application/xml application/rss+xml application/manifest+json image/svg+xml font/ttf font/otf application/vnd.ms-fontobject
+    <IfModule mod_headers.c>
+        Header append Vary Accept-Encoding
+    </IfModule>
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Caching — explicit Cache-Control. Hashed Next.js assets are immutable for a year; media a month;
+# HTML, RSC payloads (index.txt), sitemaps and robots always revalidate so deploys propagate.
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+    <FilesMatch "\.(webp|png|jpe?g|gif|svg|ico|mp4|webm|mp3|pdf|woff2?|ttf|otf|eot)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+    <FilesMatch "\.(html|txt|xml|json|webmanifest)$">
+        Header set Cache-Control "public, max-age=0, must-revalidate"
+    </FilesMatch>
+</IfModule>
+<IfModule mod_setenvif.c>
+    SetEnvIf Request_URI "^/_next/static/" STMARYS_IMMUTABLE=1
+</IfModule>
+<IfModule mod_headers.c>
+    # Content-hashed build output: cache forever (last so it overrides the generic js/css rule).
+    Header set Cache-Control "public, max-age=31536000, immutable" env=STMARYS_IMMUTABLE
+</IfModule>
 <IfModule mod_expires.c>
+    # Fallback for hosts without mod_headers.
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
     ExpiresByType text/html "access plus 0 seconds"
-    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/plain "access plus 0 seconds"
 </IfModule>
 
 AddType image/webp .webp
 
 # Block sensitive files
 <FilesMatch "(\.env|\.pkg|package\.json|package-lock\.json|vite\.config\.js|tailwind\.config\.js)$">
-    Order deny,allow
-    Deny from all
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
 </FilesMatch>
 

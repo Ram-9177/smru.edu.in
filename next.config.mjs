@@ -1,5 +1,3 @@
-import path from "node:path";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -13,11 +11,11 @@ const nextConfig = {
   },
   compress: true,
   distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  webpack: (config) => {
-    config.resolve.alias["react-router-dom"] = path.resolve(process.cwd(), "src/lib/router.tsx");
+  webpack: (config, { dev }) => {
+    if (!dev) {
+      config.cache = false;
+      config.parallelism = 1;
+    }
     return config;
   },
 };

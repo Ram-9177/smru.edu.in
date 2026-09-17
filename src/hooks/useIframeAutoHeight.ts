@@ -145,7 +145,7 @@ export function useIframeAutoHeight(initialHeight = 1400, options: UseIframeAuto
       const expectedOrigin = getIframeOrigin(iframe);
       if (expectedOrigin && event.origin !== expectedOrigin) return;
 
-      // Handle specific Stmarys University message type
+      // Handle specific St. Mary's University message type
       if (event.data?.type === "SMRU_IFRAME_HEIGHT" && typeof event.data?.height === "number") {
         applyHeight(event.data.height);
         return;

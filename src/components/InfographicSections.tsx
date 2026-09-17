@@ -25,7 +25,10 @@ type StepItem = {
   icon?: React.ReactNode;
 };
 
-const cx = (...classes: Array<string | false | null | undefined>) => classes.filter(Boolean).join(" ");
+const cx = (...classes: Array<string | false | null | undefined>) =>
+  Array.from(new Set(classes.filter(Boolean).join(" ").split(/\s+/)))
+    .filter(Boolean)
+    .join(" ");
 
 export function BigNumberGrid({ items, dark = false, className = "", showOrdinal = true }: { items: StatItem[]; dark?: boolean; className?: string; showOrdinal?: boolean }) {
   return (
@@ -128,7 +131,7 @@ export function AdvantageConstellation({
 
         <div className="order-first mx-auto grid min-h-56 w-full max-w-60 place-items-center rounded-full border-[12px] border-white bg-[#0d315c] p-7 text-center shadow-xl lg:order-none">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.28em] text-white/45">Stmarys University</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.28em] text-white/45">St. Mary's University</p>
             <h3 className="mt-2 text-3xl font-black leading-none text-[#ffaf3a]">{centerTitle}</h3>
             {centerSubtitle ? <p className="mt-3 text-[10px] font-black uppercase tracking-[0.2em] text-white/65">{centerSubtitle}</p> : null}
           </div>
@@ -514,7 +517,7 @@ export function HalfRingStepRail({
            ) : (
              <div className="relative z-10 w-[200px] h-[200px] lg:w-[280px] lg:h-[280px] bg-white rounded-full border-[8px] border-[#ffaf3a] shadow-[0_0_40px_rgba(255,175,58,0.12)] flex items-center justify-center">
                 <div className="text-center p-6">
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#019e6e] mb-2 leading-tight text-center">Stmarys University Framework</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#019e6e] mb-2 leading-tight text-center">St. Mary's University Framework</p>
                   <h3 className="text-3xl lg:text-5xl xl:text-6xl font-black text-[#0d315c] leading-none tracking-tighter text-center">{centerTitle}</h3>
                   {centerSubtitle && <p className="text-[9px] font-bold uppercase tracking-[0.1em] text-slate-400 mt-3 leading-relaxed max-w-[180px] mx-auto text-center">{centerSubtitle}</p>}
                 </div>

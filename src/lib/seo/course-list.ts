@@ -1,9 +1,13 @@
 import { absoluteUrl } from "@/lib/metadata";
 import { SITE_IDENTITY } from "@/lib/seo/site";
 import { safeSlug } from "@/lib/shared/program-utils";
+import { getProgrammeCredential, getProgrammeDisplayName, getProgrammeShortName } from "@/lib/shared/programme-names";
+import { toIsoDuration } from "@/lib/seo/schema";
 
 export type SeoCourseListItem = {
   name: string;
+  alternateName?: string;
+  credential?: string;
   description?: string;
   url: string;
   level?: string;
@@ -17,11 +21,11 @@ const clean = (value?: string) => String(value || "").replace(/\s+/g, " ").trim(
 
 const fallbackDescription = (item: SeoCourseListItem) => {
   const level = clean(item.level) || "Programme";
-  const school = clean(item.schoolName) || "Stmarys University";
+  const school = clean(item.schoolName) || "St. Mary's University";
   const department = clean(item.departmentName);
   const departmentSuffix = department ? ` in ${department}` : "";
 
-  return `${level} programme under ${school}${departmentSuffix} at Stmarys University Hyderabad.`;
+  return `${level} programme under ${school}${departmentSuffix} at St. Mary's University Hyderabad.`;
 };
 
 export const buildCourseItemListSchema = (items: SeoCourseListItem[]) => ({
@@ -35,13 +39,14 @@ export const buildCourseItemListSchema = (items: SeoCourseListItem[]) => ({
       "@type": "Course",
       "@id": `${absoluteUrl(item.url)}#course`,
       name: clean(item.name),
+      ...(clean(item.alternateName) && clean(item.alternateName) !== clean(item.name) ? { alternateName: clean(item.alternateName) } : {}),
       description: clean(item.description) || fallbackDescription(item),
       url: absoluteUrl(item.url),
       provider: { "@id": SITE_IDENTITY.id },
-      inLanguage: "en-IN",
+      inLanguage: "en",
       ...(item.schoolName ? { isPartOf: { "@type": "EducationalOrganization", name: item.schoolName } } : {}),
-      ...(item.level ? { educationalCredentialAwarded: item.level } : {}),
-      ...(item.duration ? { timeRequired: item.duration } : {}),
+      ...(item.credential || item.level ? { educationalCredentialAwarded: item.credential || item.level } : {}),
+      ...(toIsoDuration(item.duration) ? { timeRequired: toIsoDuration(item.duration) } : {}),
       ...(item.eligibility ? { coursePrerequisites: item.eligibility } : {}),
     },
   })),
@@ -63,7 +68,10 @@ export const getDepartmentCourseListItems = (school: any, department: any, resol
   const schoolSlug = resolvedSchoolSlug || safeSlug(school.slug, school.name);
   const deptSlug = safeSlug(department.slug, department.name);
   return (department.programs || []).map((program: any) => ({
-    name: program.name,
+    // Same full-name / credential rule as the programme page's own Course node.
+    name: getProgrammeDisplayName(program),
+    alternateName: getProgrammeShortName(program),
+    credential: getProgrammeCredential(program),
     description: program.overview,
     url: `/schools/${schoolSlug}/${deptSlug}/${safeSlug(program.slug, program.name)}`,
     level: program.level,

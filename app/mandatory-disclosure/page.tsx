@@ -5,14 +5,13 @@ import { FaFileAlt, FaUniversity, FaUserTie, FaMoneyCheckAlt, FaBookOpen, FaDown
 import UniversitySectionHeader from "@/components/UniversitySectionHeader";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
+import { buildMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Mandatory Disclosure | Stmarys University",
-  description: "Official public mandatory self-disclosure portal of Stmarys University, Hyderabad, Telangana, maintaining institutional compliance with the UGC Regulations.",
-  alternates: {
-    canonical: "https://smru.edu.in/mandatory-disclosure",
-  },
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Mandatory Disclosure | St. Mary's University",
+  description: "Official mandatory self-disclosure portal of St. Mary's University (SMRU), Hyderabad — institutional compliance information under UGC regulations.",
+  pathname: "/mandatory-disclosure",
+});
 
 export default function MandatoryDisclosure() {
   const disclosures = [
@@ -65,8 +64,8 @@ export default function MandatoryDisclosure() {
       <StructuredData
         id="mandatory-disclosure-webpage-schema"
         data={buildWebPageSchema({
-          title: "Mandatory Disclosure | Stmarys University",
-          description: "Official public mandatory self-disclosure portal of Stmarys University, Hyderabad, Telangana, maintaining institutional compliance with the UGC Regulations.",
+          title: "Mandatory Disclosure | St. Mary's University",
+          description: "Official mandatory self-disclosure portal of St. Mary's University (SMRU), Hyderabad — institutional compliance information under UGC regulations.",
           pathname: "/mandatory-disclosure",
         })}
       />
@@ -93,7 +92,7 @@ export default function MandatoryDisclosure() {
               <div className="w-20 h-1.5 bg-[#ffaf3a] cut-corner-underline mb-8" />
 
               <p className="max-w-2xl text-slate-600 font-medium text-lg leading-relaxed mb-10">
-                In accordance with the University Grants Commission (UGC) Guidelines on Public Self-Disclosure, Stmarys University maintains this portal to ensure transparency, accountability, and unrestricted access to institutional records for our stakeholders.
+                In accordance with the University Grants Commission (UGC) Guidelines on Public Self-Disclosure, St. Mary's University maintains this portal to ensure transparency, accountability, and unrestricted access to institutional records for our stakeholders.
               </p>
             </div>
           </div>

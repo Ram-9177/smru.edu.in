@@ -2,13 +2,17 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Viewer } from "@photo-sphere-viewer/core";
+import { EquirectangularAdapter, Viewer } from "@photo-sphere-viewer/core";
 import { MarkersPlugin } from "@photo-sphere-viewer/markers-plugin";
 import { FaSyncAlt } from "react-icons/fa";
+
+import { decodedImageRegistry, prefetchAndDecode } from "@/lib/campus-360/texture-cache";
 
 interface Campus360ViewerProps {
   panorama: {
     src: string;
+    lowResSrc?: string;
+    thumb?: string;
     preview?: string;
     alt: string;
     caption?: string;
@@ -71,29 +75,92 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
   ) => {
     const requestId = ++loadRequestRef.current;
     setError(false);
-    setLoading(true);
 
+    if (nextPanorama.projection === "flat") {
+      setLoading(false);
+      return;
+    }
+
+    const lowResSrc = nextPanorama.lowResSrc || (
+      nextPanorama.src.includes("/campus-360/")
+        ? nextPanorama.src.replace(/\/(panorama|preview)\.(webp|jpg)/, "/panorama-low.webp")
+        : undefined
+    );
+
+    const isHighResReady = decodedImageRegistry.has(nextPanorama.src);
+    const canUseLowRes = !isHighResReady && Boolean(lowResSrc && lowResSrc !== nextPanorama.src && loadedPanoramaRef.current !== nextPanorama.src);
+
+    // 1. Progressive Stage 1: If high-res is not yet ready, load ultra-lightweight low-res 360 texture (~15-25 KB) first
+    if (canUseLowRes && lowResSrc) {
+      setLoading(true);
+      try {
+        await viewer.setPanorama(lowResSrc, {
+          position: {
+            yaw: nextPanorama.initialYaw || 0,
+            pitch: nextPanorama.initialPitch || 0,
+          },
+          zoom: nextPanorama.initialZoom || 0,
+          caption: nextPanorama.caption,
+          transition: false,
+          showLoader: false,
+        });
+
+        if (requestId === loadRequestRef.current) {
+          loadedPanoramaRef.current = lowResSrc;
+          const markersPlugin = viewer.getPlugin(MarkersPlugin) as MarkersPlugin;
+          markersPlugin?.setMarkers(viewerMarkers(nextPanorama.markers));
+          // Low-res is loaded and interactive! Instantly dismiss blocking screen
+          setLoading(false);
+        }
+      } catch {
+        // Fall through to full resolution load if low-res fails
+      }
+    } else if (loadedPanoramaRef.current !== nextPanorama.src) {
+      if (!isHighResReady) {
+        setLoading(true);
+      }
+    }
+
+    if (requestId !== loadRequestRef.current) return;
+
+    // 2. High-Res Stage: Load & upgrade/render high-res panorama
     try {
-      const completed = await viewer.setPanorama(nextPanorama.src, {
-        position: {
+      if (!isHighResReady) {
+        await prefetchAndDecode(nextPanorama.src, true);
+      }
+
+      if (requestId !== loadRequestRef.current) return;
+
+      // If user rotated while low-res was rendering, preserve current camera orientation
+      const currentPos = viewer ? viewer.getPosition() : null;
+      const currentZoom = viewer ? viewer.getZoomLevel() : null;
+      const isUpgrading = loadedPanoramaRef.current === lowResSrc;
+
+      await viewer.setPanorama(nextPanorama.src, {
+        position: isUpgrading && currentPos ? currentPos : {
           yaw: nextPanorama.initialYaw || 0,
           pitch: nextPanorama.initialPitch || 0,
         },
-        zoom: nextPanorama.initialZoom || 0,
+        zoom: isUpgrading && currentZoom !== null ? currentZoom : (nextPanorama.initialZoom || 0),
         caption: nextPanorama.caption,
-        transition,
+        transition: false,
+        showLoader: false,
       });
 
-      if (requestId !== loadRequestRef.current || completed === false) return;
+      if (requestId !== loadRequestRef.current) return;
 
       loadedPanoramaRef.current = nextPanorama.src;
+      decodedImageRegistry.add(nextPanorama.src);
       const markersPlugin = viewer.getPlugin(MarkersPlugin) as MarkersPlugin;
       markersPlugin?.setMarkers(viewerMarkers(nextPanorama.markers));
       setLoading(false);
-    } catch {
+    } catch (err) {
+      console.error("[Campus360Viewer] LoadPanorama error:", err);
       if (requestId !== loadRequestRef.current) return;
       setLoading(false);
-      setError(true);
+      if (!loadedPanoramaRef.current) {
+        setError(true);
+      }
     }
   }, []);
 
@@ -115,6 +182,7 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
       try {
         viewer = new Viewer({
           container: containerRef.current,
+          adapter: [EquirectangularAdapter, { useXmpData: false, resolution: 64 }],
           caption: panoramaRef.current.caption,
           defaultYaw: panoramaRef.current.initialYaw || 0,
           defaultPitch: panoramaRef.current.initialPitch || 0,
@@ -157,7 +225,8 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
         });
 
         void loadPanorama(viewer, panoramaRef.current, false);
-      } catch {
+      } catch (err) {
+        console.error("[Campus360Viewer] Mount error:", err);
         setLoading(false);
         setError(true);
       }
@@ -224,13 +293,17 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
         data-panorama-state="ready"
       >
         <img
-          src={panorama.src}
+          src={panorama.thumb || panorama.preview || panorama.src}
           alt=""
-          className="absolute inset-0 h-full w-full scale-110 object-cover blur-3xl opacity-50"
+          loading="eager"
+          decoding="async"
+          className="absolute inset-0 h-full w-full scale-105 object-cover blur-md opacity-50"
         />
         <img
           src={panorama.src}
           alt={panorama.alt || "Campus location"}
+          loading="eager"
+          decoding="async"
           className="relative z-10 h-full w-full object-contain"
         />
       </div>
@@ -246,9 +319,9 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
       {/* Blurred background image to fill black areas for non-360 photos */}
       <div className="absolute inset-0 z-0 select-none pointer-events-none overflow-hidden">
         <img 
-          src={panorama.src} 
+          src={panorama.thumb || panorama.preview || panorama.src} 
           alt="" 
-          className="h-full w-full object-cover blur-3xl scale-125 opacity-60 brightness-75 transition-opacity duration-1000"
+          className="h-full w-full object-cover blur-md scale-105 opacity-60 brightness-75 transition-opacity duration-1000"
         />
       </div>
 
@@ -288,26 +361,25 @@ export default function Campus360Viewer({ panorama, onMarkerClick, isAutoRotatin
 
       {/* Premium Glassmorphic Loading Screen Overlay */}
       {loading && !error && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden">
-          {/* Dark background overlay */}
-          <div className="absolute inset-0 z-0 bg-slate-950/80" />
+        <div className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 z-0 bg-slate-950/35 backdrop-blur-sm" />
 
           <div className="relative z-10 flex flex-col items-center justify-center p-8 rounded-[2.5rem] bg-slate-950/80 border border-white/10 shadow-[0_32px_64px_rgba(0,0,0,0.5)] backdrop-blur-xl max-w-xs text-center text-white">
             {/* Sleek rotating ring spinner with pulsed inner core */}
-            <div className="relative mb-6 h-16 w-16">
+            <div className="relative mb-6 h-14 w-14">
               <div className="absolute inset-0 rounded-full border-4 border-white/10"></div>
               <div className="absolute inset-0 rounded-full border-4 border-t-[#019e6e] border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
-              <div className="absolute inset-4 rounded-full bg-[#019e6e]/20 animate-pulse flex items-center justify-center">
+              <div className="absolute inset-3.5 rounded-full bg-[#019e6e]/20 animate-pulse flex items-center justify-center">
                 <div className="h-2.5 w-2.5 rounded-full bg-[#019e6e]"></div>
               </div>
             </div>
             
-            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">High Quality 360°</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">Campus 360°</h3>
             <p className="mt-2 text-sm font-black text-[#019e6e] uppercase tracking-wide truncate max-w-[220px]">
               {panorama.caption || "Campus Area"}
             </p>
-            <p className="mt-4 text-[9px] text-white/50 tracking-widest uppercase font-bold">
-              Initializing WebGL Canvas…
+            <p className="mt-3 text-[9px] text-white/50 tracking-widest uppercase font-bold">
+              Loading 360 View…
             </p>
           </div>
         </div>

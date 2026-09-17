@@ -62,7 +62,7 @@ export default function Admissions() {
           </div>
  
           <p className="max-w-3xl mx-auto text-base md:text-lg text-slate-600 font-medium leading-relaxed md:text-center">
-            Backed by St. Mary’s educational legacy and UGC 2(f) recognized university status, our admissions team helps students and parents understand programmes, eligibility, applications, scholarships, and official university information before applying.
+            St. Mary&apos;s University (SMRU), Hyderabad is a UGC-recognised private university offering 70+ programmes across six schools — rehabilitation sciences, allied health, nursing, psychology, engineering and law. Our admissions team walks you through programme choice, eligibility, the online application, scholarships and fees, so you can decide with the facts in hand.
           </p>
           <p className="mt-6 text-[10px] font-black uppercase tracking-[0.25em] text-slate-400">
             Last updated: {ADMISSIONS_CONTENT_LAST_UPDATED}
@@ -194,13 +194,13 @@ export default function Admissions() {
       <section className="scroll-mt-24 smru-section bg-slate-50 border-t border-slate-200">
          <div className="smru-container flex flex-col items-center text-center">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-200 text-[#0d315c] mb-6 p-3 overflow-hidden">
-              <img src="/assets/Stmarys-Logo.webp" alt="Stmarys University Logo" className="w-full h-full object-contain" />
+              <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
             </div>
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-[#0d315c] mb-6">
               Institutional Trust & Recognition
             </h2>
             <p className="text-slate-600 font-medium max-w-2xl leading-relaxed mb-10 text-lg">
-              Students and parents can review Stmarys University’s official establishment and UGC recognition documents before applying.
+              Students and parents can review St. Mary's University’s official establishment and UGC recognition documents before applying.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full md:w-auto px-4">
               <a 

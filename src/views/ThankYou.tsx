@@ -1,13 +1,32 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { FaDownload, FaCheckCircle, FaHome, FaArrowLeft } from "react-icons/fa";
 import useOpenApply from "../hooks/useOpenApply";
 import { SITE_CONTACT, SITE_CTA_LINKS } from "@/lib/shared/site-constants";
+import { trackConversion, GOOGLE_ADS_ID } from "@/lib/shared/gtag";
 
 
 export default function ThankYou() {
   const openApply = useOpenApply();
+
+  useEffect(() => {
+    // Force a pageview & conversion event specifically for the thank you page 
+    // in Next.js SPA environment.
+    if (typeof window !== "undefined") {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      function gtag(..._args: any[]){
+        (window as any).dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', GOOGLE_ADS_ID, {
+        page_path: '/thank-you',
+      });
+      // Fires Google Ads conversion event on thank you page
+      trackConversion();
+    }
+  }, []);
 
   const handleBrochureDownload = () => {
     try {

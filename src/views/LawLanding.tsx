@@ -1,5 +1,6 @@
 "use client";
 
+import StructuredData from "@/components/seo/StructuredData";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -33,7 +34,7 @@ import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
 
 const navLinks = [
   ["Programmes", "#programmes"],
-  ["Why Stmarys University Law", "#why"],
+  ["Why St. Mary's University Law", "#why"],
   ["Facilities", "#facilities"],
   ["Careers", "#careers"],
   ["Admissions", "#admissions"],
@@ -55,7 +56,7 @@ const facilityImages = ["/assets/law/moot-court.webp", "/assets/law/digital-libr
 
 const admissionSteps = [
   ["01", "Choose Programme", "Select your integrated law or LL.B. pathway."],
-  ["02", "Apply Online", "Submit details through the Stmarys University admissions portal."],
+  ["02", "Apply Online", "Submit details through the St. Mary's University admissions portal."],
   ["03", "Counselling", "Complete eligibility review and admissions counselling."],
   ["04", "Confirm Seat", "Finish documentation and begin your law journey."],
 ];
@@ -101,7 +102,7 @@ export default function LawLanding() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
             <span className="flex h-11 w-24 items-center justify-center bg-white px-2 shadow-sm" style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}>
-              <Image src="/assets/Logo.webp" alt="Stmarys University" width={86} height={36} className="h-auto w-full object-contain" style={{ height: "auto" }} priority />
+              <Image src="/assets/Logo.webp" alt="St. Mary's University" width={86} height={36} className="h-auto w-full object-contain" style={{ height: "auto" }} priority />
             </span>
             <span className="hidden text-[11px] font-black uppercase tracking-[0.24em] text-white md:inline">School of Law</span>
           </Link>
@@ -119,7 +120,7 @@ export default function LawLanding() {
       </header>
 
       <section className="relative flex min-h-[78svh] items-end overflow-hidden bg-[#071a32] pt-20 text-white sm:min-h-[82svh] lg:min-h-[84svh]">
-        <Image src="/assets/law/moot-court.webp" alt="Stmarys University School of Law moot court training" fill priority sizes="100vw" className="object-cover object-center" />
+        <Image src="/assets/law/moot-court.webp" alt="St. Mary's University School of Law moot court training" fill priority sizes="100vw" className="object-cover object-center" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,26,50,0.96)_0%,rgba(7,26,50,0.84)_35%,rgba(7,26,50,0.36)_72%,rgba(7,26,50,0.18)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-white via-white/50 to-transparent" />
         <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-4 pb-8 pt-10 sm:px-6 sm:pt-12 lg:grid-cols-[0.9fr_0.55fr] lg:pb-12">
@@ -132,7 +133,7 @@ export default function LawLanding() {
               Approved by the Bar Council of India
             </p>
             <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-white/78 sm:text-lg">
-              Build advocacy, legal reasoning, research, ethics, and courtroom confidence through practice-driven law education at Stmarys University.
+              Build advocacy, legal reasoning, research, ethics, and courtroom confidence through practice-driven law education at St. Mary's University.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <ApplyButton className="inline-flex items-center justify-center gap-3 bg-[#c43342] px-7 py-4 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[0_18px_40px_rgba(196,51,66,0.34)] transition-transform hover:-translate-y-1">
@@ -191,7 +192,7 @@ export default function LawLanding() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
             <div>
-              <h2 className="text-3xl font-black uppercase tracking-tight text-[#0d315c] sm:text-5xl">Why Stmarys University Law?</h2>
+              <h2 className="text-3xl font-black uppercase tracking-tight text-[#0d315c] sm:text-5xl">Why St. Mary's University Law?</h2>
               <p className="mt-5 text-base font-semibold leading-8 text-slate-600">
                 A conversion-focused learning environment built around advocacy practice, community justice, legal research, and professional readiness.
               </p>
@@ -272,8 +273,8 @@ export default function LawLanding() {
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={`tel:${SITE_CONTACT.primaryPhone}`} className="inline-flex items-center justify-center gap-3 border border-[#0d315c]/15 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.16em] text-[#0d315c]">
-                <FaPhoneAlt /> Call {SITE_CONTACT.primaryPhone}
+              <a href={`tel:${SITE_CONTACT.lawPhone}`} className="inline-flex items-center justify-center gap-3 border border-[#0d315c]/15 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.16em] text-[#0d315c]">
+                <FaPhoneAlt /> Call {SITE_CONTACT.lawPhone}
               </a>
               <a href={`mailto:${SITE_CONTACT.email}`} className="inline-flex items-center justify-center gap-3 border border-[#0d315c]/15 bg-white px-6 py-4 text-xs font-black uppercase tracking-[0.16em] text-[#0d315c]">
                 <FaEnvelope /> Email Admissions
@@ -294,7 +295,7 @@ export default function LawLanding() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-5 md:flex-row md:items-center">
           <div>
             <h2 className="text-2xl font-black uppercase tracking-tight">Your future in law begins here.</h2>
-            <p className="mt-2 text-sm font-semibold text-white/78">Apply for Stmarys University School of Law admissions.</p>
+            <p className="mt-2 text-sm font-semibold text-white/78">Apply for St. Mary's University School of Law admissions.</p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
             <ApplyButton className="inline-flex items-center justify-center gap-3 bg-[#c43342] px-7 py-4 text-xs font-black uppercase tracking-[0.18em] text-white">
@@ -316,17 +317,12 @@ export default function LawLanding() {
         </div>
       )}
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildFaqSchema(schoolFaqs))
-        }}
-      />
+      <StructuredData id="law-landing-faq-schema" data={buildFaqSchema(schoolFaqs)} />
 
       <footer className="bg-[#071a32] px-4 py-8 text-white sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-xs font-semibold text-white/60 md:flex-row">
-          <p>Stmarys University, Hyderabad, Telangana</p>
-          <p>{SITE_CONTACT.email} | {SITE_CONTACT.primaryPhone}</p>
+          <p>St. Mary's University, Hyderabad, Telangana</p>
+          <p>{SITE_CONTACT.email} | {SITE_CONTACT.lawPhone}</p>
         </div>
       </footer>
     </div>

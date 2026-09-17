@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import NextTopLoader from "nextjs-toploader";
+import { Cinzel, Inter, Outfit } from "next/font/google";
 import "../src/styles/globals.css";
 import AppShell from "../src/components/AppShell";
-import Preloader from "../src/components/Preloader";
+import StructuredData from "../src/components/seo/StructuredData";
 import { absoluteUrl } from "../src/lib/metadata";
 import { UNIVERSITY_INFO } from "../src/lib/shared/university";
 import { SITE_IDENTITY } from "../src/lib/seo/site";
@@ -12,6 +14,25 @@ import { buildUniversitySchema, buildWebSiteSchema } from "../src/lib/seo/schema
 const universitySchema = buildUniversitySchema();
 const websiteSchema = buildWebSiteSchema();
 
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cinzel",
+  weight: ["700", "900"],
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_IDENTITY.canonicalBaseUrl),
   title: SITE_IDENTITY.defaultTitle,
@@ -19,24 +40,6 @@ export const metadata: Metadata = {
   verification: {
     google: "MNlkKsQJcg3Cv14G_CeV3L_C7f2A3MpdPNSYNdDtdfU",
   },
-  keywords: [
-    "Stmarys University",
-    "Stmarys University Hyderabad",
-    "St. Mary's University",
-    "St Marys University",
-    "UGC-recognized university",
-    "six schools",
-    "rehabilitation sciences",
-    "health and allied health sciences",
-    "psychology",
-    "nursing",
-    "engineering and emerging technologies",
-    "law",
-    "academic programmes",
-    "admissions",
-    "student support",
-    "official disclosures",
-  ],
   // NOTE: No root-level canonical here — each page sets its own via buildMetadata()
   // to prevent every page from pointing to "/" as canonical (duplicate content).
   openGraph: {
@@ -64,10 +67,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
@@ -78,34 +83,123 @@ export const viewport: Viewport = {
   themeColor: "#0d315c",
 };
 
+// No eager "/*" prefetch: it downloaded the whole site on mobile data. Only a small,
+// high-intent speculation rules prerender list is kept:
+// prerender: ["/explore/", "/campus-360/", "/schools/", "/admissions/", "/about/", "/contact/", "/explore/hostel-360/"]
+// Injected dynamically via predictive-preloader.ts post-hydration to avoid React 19 SSR collisions with browser extensions.
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${cinzel.variable}`} suppressHydrationWarning>
+      <head suppressHydrationWarning>
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <script
+          id="smru-extension-guard"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                if (typeof window === 'undefined') return;
+                try {
+                  var origError = console.error;
+                  console.error = function() {
+                    var msg = (arguments[0] && typeof arguments[0] === 'string') ? arguments[0] : '';
+                    if (
+                      msg.indexOf('bis_skin_checked') !== -1 ||
+                      msg.indexOf('bis_register') !== -1 ||
+                      msg.indexOf('bis_use') !== -1 ||
+                      msg.indexOf('speculationrules') !== -1 ||
+                      msg.indexOf('chrome-extension://') !== -1 ||
+                      msg.indexOf('browser extension installed which messes with the HTML') !== -1
+                    ) {
+                      return;
+                    }
+                    return origError.apply(console, arguments);
+                  };
+                  var clean = function(node) {
+                    if (!node || node.nodeType !== 1) return;
+                    if (node.hasAttribute('bis_skin_checked')) node.removeAttribute('bis_skin_checked');
+                    if (node.hasAttribute('bis_register')) node.removeAttribute('bis_register');
+                    if (node.hasAttribute('bis_use')) node.removeAttribute('bis_use');
+                    if (node.hasAttribute('__processed_5a602d8c-387d-41f7-b0c3-89a10295ee1a__')) node.removeAttribute('__processed_5a602d8c-387d-41f7-b0c3-89a10295ee1a__');
+                  };
+                  var obs = new MutationObserver(function(mutations) {
+                    for (var i = 0; i < mutations.length; i++) {
+                      var m = mutations[i];
+                      if (m.type === 'attributes') {
+                        var a = m.attributeName;
+                        if (a && (a === 'bis_skin_checked' || a === 'bis_register' || a === 'bis_use' || a.indexOf('__processed_') === 0)) {
+                          m.target.removeAttribute(a);
+                        }
+                      } else if (m.type === 'childList') {
+                        for (var j = 0; j < m.addedNodes.length; j++) {
+                          clean(m.addedNodes[j]);
+                        }
+                      }
+                    }
+                  });
+                  obs.observe(document.documentElement, {
+                    attributes: true,
+                    subtree: true,
+                    attributeFilter: ['bis_skin_checked', 'bis_register', 'bis_use']
+                  });
+                } catch(e) {}
+              })();
+            `,
+          }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Script
-          id="smru-university-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(universitySchema) }}
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18293956146"
+          strategy="afterInteractive"
         />
-        <Script
-          id="smru-website-schema"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-
-        <Preloader />
+        <Script id="google-gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18293956146');
+          `}
+        </Script>
+        {/* Meta Pixel Code */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1582040940369832');
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1582040940369832&ev=PageView&noscript=1"
+            alt=""
+            loading="lazy"
+          />
+        </noscript>
+        {/* End Meta Pixel Code */}
+        {/* Plain script tags so the Organization/WebSite graph is present in the static HTML for every crawler,
+            not injected client-side via next/script. */}
+        <StructuredData id="smru-university-schema" data={universitySchema} />
+        <StructuredData id="smru-website-schema" data={websiteSchema} />
+        {/* Route-transition indicator. Replaces the loading.tsx boundaries, which in Next 15 static
+            export put the fallback inside <main> and streamed the page into a hidden div. */}
+        <NextTopLoader color="#019e6e" height={3} showSpinner={false} shadow={false} />
         <AppShell>{children}</AppShell>
       </body>
     </html>
   );
 }
+

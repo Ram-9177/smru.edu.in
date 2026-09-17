@@ -1,22 +1,23 @@
 "use client";
+import StructuredData from "@/components/seo/StructuredData";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
 
-const campusVideo = "/assets/campus_video_fallback.mp4";
-const campusPoster = "/assets/hero-campus.webp";
 const canteenImg = "/assets/canteen-CZmCaPgx.webp";
 const hostelImg1 = "/assets/Hostel1-CfcW80Kf.webp";
 const hostelImg2 = "/assets/Hostel2-C_Z6DObd.webp";
-import { buildFaqSchema } from "@/lib/seo/schema";
-import { resolveAssetSrc } from "@/lib/shared/media";
+const PRIMARY_HERO_IMAGE = "/assets/hero-campus-fast.webp";
+const MOBILE_HERO_IMAGE = "/assets/hero-campus-mobile.webp";
+import { buildFaqSchema } from "../lib/seo/schema";
+import { resolveAssetSrc } from "../lib/shared/media";
 import { useOpenApply } from "../context/ApplyModalContext";
 import UniversitySectionHeader from "../components/UniversitySectionHeader";
 import { BentoTrustGrid, HalfRingStepRail, PillBand, TechniqueModernGrid, RingStepFlow, StairHighlightStrips } from "../components/InfographicSections";
 import {
   FaArrowRight,
+  FaHospital,
   FaAward,
   FaHeartbeat,
   FaHandsHelping,
@@ -41,17 +42,18 @@ import {
   FaDna,
 } from "react-icons/fa";
 import { GiBrain, GiMedicalPack, GiRunningShoe } from "react-icons/gi";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { HOME_FAQ_CATEGORIES } from "@/lib/seo/home-faqs";
-import { LinkGridSection } from "@/components/seo/PageSections";
-import { GLOBAL_TRUST_CTA_LINKS, LOCATION_LINKS } from "@/lib/seo/info-pages";
-import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { getSchoolLandingPath } from "@/lib/shared/school-landing";
-import { isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
-import { PHD_ADMISSIONS_STATUS_MESSAGE } from "@/lib/shared/site-constants";
+import { useDeveloperCms } from "../lib/developer/useDeveloperCms";
+import { HOME_FAQ_CATEGORIES } from "../lib/seo/home-faqs";
+import { LinkGridSection } from "../components/seo/PageSections";
+import { GLOBAL_TRUST_CTA_LINKS, LOCATION_LINKS } from "../lib/seo/info-pages";
+import { SHOW_PUBLIC_SEO_SECTIONS } from "../lib/seo/visibility";
+import { getSchoolLandingPath } from "../lib/shared/school-landing";
+import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "../lib/shared/partner-pages";
+import { PHD_ADMISSIONS_STATUS_MESSAGE } from "../lib/shared/site-constants";
 
 import { EDU_PARTNERS, schools as staticSchools } from "../data/schools";
 import FAQSection from "../components/FAQSection";
+import CampusLife360Section from "../components/CampusLife360Section";
 
 import { 
   DEFAULT_SCHOLARSHIP_NAMES, 
@@ -59,23 +61,35 @@ import {
   DEFAULT_CAMPUS_ITEMS, 
   DEFAULT_CANTEEN_HIGHLIGHTS, 
   TESTIMONIAL_DATA 
-} from "@/data/home-data";
-import { UNIVERSITY_EVENTS } from "@/data/events";
+} from "../data/home-data";
+import { UNIVERSITY_EVENTS } from "../data/events";
+import { SITE_IDENTITY } from "../lib/seo/site";
 
 const admissionsApplyUrl = "https://apply.smru.edu.in";
+
+const PARTNER_ORDER = [
+  "nst",
+  "emversity",
+  "niat",
+  "carebridge",
+  "qtst",
+  "bytexl",
+  "skilgen",
+  "edinbox",
+  "veloces",
+  "bb",
+  "edridge",
+  "nextgen"
+];
 
 /* =============================== Page =============================== */
 export default function Home() {
   const router = useRouter();
   const openApply = useOpenApply();
-  const [showVideo, setShowVideo] = useState(false);
-  
-  const heroImages = useMemo(() => ["/assets/hero-campus.webp", "/assets/hero-campus-2.webp"], []);
   const latestEvents = useMemo(
     () => [...UNIVERSITY_EVENTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3),
     []
   );
-  const [heroIndex, setHeroIndex] = useState(0);
   const { state } = useDeveloperCms();
 
   const getCmsContent = useCallback((id: string, separator = " | ") => {
@@ -99,7 +113,7 @@ export default function Home() {
       return {
         icon: icons[i % icons.length],
         title: p,
-        desc: existing?.desc || "Experience excellence and innovation at Stmarys University."
+        desc: existing?.desc || "Experience excellence and innovation at St. Mary's University."
       };
     });
   }, [getCmsContent]);
@@ -108,7 +122,7 @@ export default function Home() {
     const features = getCmsContent("page-campus-hostel", ",");
     const iconMap: Record<string, React.ReactNode> = {
       // eslint-disable-next-line @next/next/no-img-element
-      hostel: <img src="/assets/Stmarys-Logo.webp" alt="Stmarys University" className="w-5 h-5 object-contain" />,
+      hostel: <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University" className="w-5 h-5 object-contain" />,
       sports: <GiRunningShoe />,
       labs: <FaBrain />,
       wellness: <FaStethoscope />,
@@ -136,7 +150,7 @@ export default function Home() {
       { href: "/campus-location-hyderabad", label: "Campus Location", description: "Deshmukhi campus address, map access, and visit guidance near Hyderabad." },
       { href: "/contact", label: "Contact Helpdesk", description: "Admissions, campus visit, and student support contact routes." },
       { href: "/campus-360", label: "Visit Campus", description: "Campus tour, facilities preview, and location guidance." },
-      { href: "/careers", label: "Careers", description: "Explore faculty and institutional job opportunities at Stmarys University." },
+      { href: "/careers", label: "Careers", description: "Explore faculty and institutional job opportunities at St. Mary's University." },
     ].filter(Boolean),
     []
   );
@@ -146,24 +160,7 @@ export default function Home() {
     return fromCms.length > 0 ? fromCms : DEFAULT_CANTEEN_HIGHLIGHTS;
   }, [getCmsContent]);
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (!showVideo) {
-      // Show images for a total of 6 seconds (3s each) then switch to video
-      timer = setTimeout(() => setShowVideo(true), 6000);
-    }
-    return () => clearTimeout(timer);
-  }, [showVideo]);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (!showVideo) {
-      interval = setInterval(() => {
-        setHeroIndex((prev) => (prev + 1) % heroImages.length);
-      }, 3000);
-    }
-    return () => clearInterval(interval);
-  }, [showVideo, heroImages.length]);
 
   useEffect(() => {
     const scrollToHash = () => {
@@ -186,54 +183,28 @@ export default function Home() {
   const next = useCallback(() => setIndex((p) => (p + 1) % total), [total]);
   const prev = useCallback(() => setIndex((p) => (p - 1 + total) % total), [total]);
 
-  const collegeNameLines = ["Stmarys", "Rehabilitation", "University"];
+  const collegeNameLines = ["St. Mary's", "Rehabilitation", "University"];
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(buildFaqSchema(HOME_FAQ_CATEGORIES.flatMap(c => c.faqs)))
-        }}
-      />
+      <StructuredData id="home-faq-schema" data={buildFaqSchema(HOME_FAQ_CATEGORIES.flatMap(c => c.faqs))} />
       {/* ========================= HERO ======================== */}
       <section id="hero" className="relative w-full h-[calc(100svh-112px)] md:h-[90svh] min-h-[560px] md:min-h-[620px] overflow-hidden">
-        {/* Cinematic Asset Cross-Dissolve Overlay */}
+        {/* Campus Drone View Static Hero */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Base Layer: Video (mounts/plays when showVideo is true) */}
-          {showVideo && (
-            <video
-              poster={campusPoster}
-              preload="none"
-              autoPlay
-              muted
-              playsInline
-              onEnded={() => setShowVideo(false)}
-              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${showVideo ? 'opacity-100' : 'opacity-0'}`}
-            >
-              <source src={campusVideo} type="video/mp4" />
-            </video>
-          )}
-
-          {/* Top Layer: Static Image Loop (fades out to reveal video) */}
-          <div className={`absolute inset-0 h-full w-full transition-all duration-[2500ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
-              showVideo 
-                ? 'opacity-0 scale-[1.02] blur-sm' 
-                : 'opacity-100 scale-110 blur-0'
-            }`}>
-            {heroImages.map((src, i) => (
-              <Image
-                key={src}
-                src={src}
-                alt="Stmarys University Campus View in Hyderabad"
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className={`object-cover object-center hero-campus-image transition-opacity duration-1000 ${
-                  heroIndex === i ? 'opacity-100' : 'opacity-0'
-                }`}
+          <div className="absolute inset-0 h-full w-full">
+            {/* LCP image: phones get the 820w variant (78 KB) instead of the 1600w file (317 KB). */}
+            <picture>
+              <source media="(max-width: 768px)" srcSet={MOBILE_HERO_IMAGE} type="image/webp" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PRIMARY_HERO_IMAGE}
+                alt="St. Mary's University Campus Drone View in Hyderabad"
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover object-center hero-campus-image"
               />
-            ))}
+            </picture>
           </div>
         </div>
 
@@ -254,21 +225,21 @@ export default function Home() {
               </div>
               
               <div className="space-y-0">
-                <h1 className="text-[clamp(1.5rem,5.5vw,3.5rem)] font-black text-white drop-shadow-2xl [text-shadow:_0_8px_40px_rgba(0,0,0,0.8)] font-['Cinzel'] leading-[1.15] tracking-tight uppercase">
-                  <span className="sr-only">St. Mary&apos;s University - </span>
-                  <span className="text-[#ffaf3a]">St. Mary&apos;s</span> Rehabilitation University
+                <h1 className="text-[clamp(1.5rem,5.5vw,3.5rem)] font-black text-white drop-shadow-2xl [text-shadow:_0_8px_40px_rgba(0,0,0,0.8)] font-[family-name:var(--font-cinzel)] leading-[1.15] tracking-tight uppercase">
+                  <span className="text-[#ffaf3a]">St. Mary&apos;s University</span> (SMRU), Hyderabad
                 </h1>
               </div>
 
+              {/* One compact line: legal name + recognition. The full bridge sentence lives in the trust strip below. */}
               <p className="text-white/90 text-[10px] md:text-[13px] font-black uppercase tracking-[0.4em] max-w-4xl mx-auto drop-shadow-lg leading-relaxed">
-                Established under the Telangana Private Universities Act, 2018 | UGC 2(f) Recognized
+                St. Mary&apos;s Rehabilitation University &middot; UGC 2(f) Recognised
               </p>
             </div> 
           </div>
         </div>
 
         {/* Subtle Scroll Indicator */}
-        <div className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-20 transition-opacity duration-1000 ${showVideo ? 'opacity-0' : 'opacity-100'}`}>
+        <div className="absolute bottom-10 left-1/2 z-20 -translate-x-1/2">
            <div className="w-[1px] h-12 bg-white/40 mx-auto" />
         </div>
       </section>
@@ -336,17 +307,17 @@ export default function Home() {
       <section id="trust-strip" className="bg-[#0d315c] text-white py-8 border-y border-white/10 relative z-20">
         <div className="smru-container text-center">
           <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-white/90 leading-relaxed max-w-5xl mx-auto">
-            Stmarys University, legally established as St. Mary&apos;s Rehabilitation University in Hyderabad, Telangana, was established through Telangana Gazette Act No. 10 of 2026 and recognized by the University Grants Commission under Section 2(f) of the UGC Act, 1956.
+            {SITE_IDENTITY.bridgeSentence}
           </p>
         </div>
       </section>
 
-      {/* ===================== WHY Stmarys University ====================== */}
+      {/* ===================== WHY St. Mary's University ====================== */}
       <section id="why-smru" className="scroll-mt-24 smru-section bg-[#f8fbff]">
         <div className="smru-container">
           <UniversitySectionHeader
-            title="Why Join Stmarys University?"
-            subtitle="Stmarys University brings together rehabilitation, healthcare, allied sciences, assistive technology, law, management, technology, and multidisciplinary education through a student-first academic ecosystem."
+            title="Why Join St. Mary's University?"
+            subtitle="St. Mary's University brings together rehabilitation, healthcare, allied sciences, assistive technology, law, management, technology, and multidisciplinary education through a student-first academic ecosystem."
             subtitleClassName="max-w-3xl"
           />
           <BentoTrustGrid
@@ -459,7 +430,7 @@ export default function Home() {
       <section id="experience" className="scroll-mt-24 smru-section bg-[#f8fbff]">
         <div className="smru-container">
           <UniversitySectionHeader
-            title="Teaching Techniques at Stmarys University"
+            title="Teaching Techniques at St. Mary's University"
             subtitle="We employ advanced, practice-based teaching methods to ensure students gain hands-on experience and a profound understanding of their fields."
             subtitleClassName="max-w-3xl"
           />
@@ -526,37 +497,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= OUR INDUSTRIAL PARTNERS ================= */}
+      {/* ================= OUR INDUSTRIAL SKILL PARTNERS ================= */}
       <section id="partners" className="relative scroll-mt-24 smru-section bg-[#f8fbff] overflow-hidden bg-[radial-gradient(circle_at_50%_50%,rgba(255,175,58,0.08)_0,transparent_60%)]">
         <div className="smru-container text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-[#0d315c] mb-8 shadow-sm border border-slate-100 overflow-hidden p-3 mx-auto">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/Stmarys-Logo.webp" alt="Stmarys University Logo" className="w-full h-full object-contain" />
+            <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
           </div>
           <UniversitySectionHeader
-            title="Our Industrial Partners"
-            subtitle="Stmarys University collaborates with leading healthcare and technology organizations to ensure our students graduate industry-ready."
+            title="Our Industrial Skill Partners"
+            subtitle="St. Mary's University collaborates with leading healthcare and technology organizations to ensure our students graduate industry-ready."
           />
           <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {(() => {
-              const PARTNER_ORDER = [
-                "nst",
-                "emversity",
-                "niat",
-                "qtst",
-                "bytexl",
-                "iiat",
-                "edinbox",
-                "veloces",
-                "bb",
-                "edridge",
-                "nextgen"
-              ];
-              
               return Object.values(EDU_PARTNERS)
                 .filter(p => {
                   const slug = String(p.landingUrl || "").replace(/^\/+/, "").replace(/\/$/, "").toLowerCase();
-                  return p.code !== "Stmarys University" && 'logo' in p && p.landingUrl && !isRemovedPartnerPageSlug(slug);
+                  return p.code !== "St. Mary's University" && 'logo' in p && p.landingUrl && !isRemovedPartnerPageSlug(slug);
                 })
                 .sort((a, b) => {
                   const slugA = (a.landingUrl || "").replace(/^\//, "").toLowerCase();
@@ -577,11 +534,13 @@ export default function Home() {
                 { bg: "bg-[#ffaf3a]", text: "text-[#0d315c]", border: "hover:border-[#ffaf3a]", glow: "hover:shadow-[0_10px_30px_rgba(255,175,58,0.3)]", lightBg: "bg-[#ffaf3a]/10" },
               ];
               const theme = colors[i % colors.length];
+              // "/carebridge" links to its own page, not the /partner/carebridge duplicate.
+              const partnerHref = getPartnerLandingHref(partner.landingUrl);
 
               return (
                 <Link 
 	                  key={partner.code} 
-	                  href={`/partner/${String(partner.landingUrl).replace(/^\/+/, "").replace(/\/$/, "")}`}
+	                  href={partnerHref}
                   className={`group relative overflow-hidden p-8 border border-slate-200 cut-corner-panel bg-white transition-all duration-500 hover:-translate-y-2 ${theme.border} ${theme.glow}`}
                 >
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${theme.lightBg} pointer-events-none`} />
@@ -590,7 +549,9 @@ export default function Home() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img 
                         src={resolveAssetSrc((partner as any).logo)} 
-                        alt="" 
+                        alt=""
+                        loading="lazy"
+                        decoding="async" 
                         aria-hidden="true"
                         className="max-h-full max-w-full object-contain transition-all duration-500 transform group-hover:scale-110 group-hover:grayscale" 
                       />
@@ -613,7 +574,7 @@ export default function Home() {
             <div className="flex-1 space-y-6">
               <div className="flex items-center justify-start h-20 mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/assets/Stmarys-Logo.webp" alt="Stmarys University Logo" className="h-full w-auto object-contain" />
+                <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="h-full w-auto object-contain" />
               </div>
               <h2 className="text-3xl md:text-5xl font-black font-outfit text-[#0d315c] tracking-tight uppercase leading-none">
                 Hostel Facilities at <br className="hidden md:block" /> <span className="text-[#019e6e]">St. Mary&apos;s University</span>
@@ -636,7 +597,7 @@ export default function Home() {
               
               {/* Study Area */}
               <div className="relative w-full md:w-[85%] aspect-[4/3] sm:aspect-video lg:aspect-[4/3] xl:aspect-[16/10] cut-corner-panel border-[6px] border-white overflow-hidden shadow-[0_20px_40px_-15px_rgba(13,49,92,0.25)] group">
-                <Image src={hostelImg1} alt="Stmarys University Hostel Study Area" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image src={hostelImg1} alt="St. Mary's University Hostel Study Area" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0d315c]/90 via-[#0d315c]/60 to-transparent p-5 md:p-6">
                    <p className="text-[#ffaf3a] font-black uppercase tracking-widest text-xs mb-1">Premium Facilities</p>
                    <p className="text-white font-bold text-lg md:text-xl drop-shadow-md">Dedicated Study Workspaces</p>
@@ -645,7 +606,7 @@ export default function Home() {
 
               {/* AC Room */}
               <div className="relative w-full md:w-[85%] self-end aspect-[4/3] sm:aspect-video lg:aspect-[4/3] xl:aspect-[16/10] cut-corner-panel border-[6px] border-white overflow-hidden shadow-[0_20px_40px_-15px_rgba(13,49,92,0.25)] group">
-                <Image src={hostelImg2} alt="Stmarys University Air Conditioned Rooms" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image src={hostelImg2} alt="St. Mary's University Air Conditioned Rooms" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0d315c]/90 via-[#0d315c]/60 to-transparent p-5 md:p-6 text-right">
                    <p className="text-[#ffaf3a] font-black uppercase tracking-widest text-xs mb-1">Comfort First</p>
                    <p className="text-white font-bold text-lg md:text-xl drop-shadow-md">Air-Conditioned Bedrooms</p>
@@ -677,7 +638,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex-1 w-full relative aspect-video cut-corner-panel border-[6px] border-white/10 overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]">
-              <Image src={canteenImg} alt="Stmarys University Campus Canteen" fill className="object-cover" />
+              <Image src={canteenImg} alt="St. Mary's University Campus Canteen" fill className="object-cover" />
             </div>
           </div>
         </div>
@@ -687,7 +648,7 @@ export default function Home() {
       <section id="gallery" className="relative scroll-mt-24 bg-white overflow-hidden">
         <div className="smru-container py-12 md:py-16">
           <UniversitySectionHeader
-            title="Life at Stmarys University"
+            title="Life at St. Mary's University"
             subtitle="Explore our vibrant campus life through state-of-the-art labs, sports facilities, and modern learning spaces."
           />
         </div>
@@ -698,7 +659,7 @@ export default function Home() {
             <div className="relative aspect-video md:aspect-square lg:aspect-auto md:col-span-2 lg:col-span-2 cut-corner-panel overflow-hidden group shadow-xl border border-slate-100">
               <Image 
                 src="/assets/campus-gallery/drone.webp" 
-                alt="Stmarys University Drone View" 
+                alt="St. Mary's University Drone View" 
                 fill 
                 className="object-cover object-center group-hover:scale-105 transition-all duration-1000" 
               />
@@ -772,12 +733,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= CAMPUS LIFE 360 ================= */}
+      <div className="bg-[#f5f9ff] py-12 md:py-20">
+        <div className="smru-container">
+          <CampusLife360Section />
+        </div>
+      </div>
+
       {/* ================= SCHOLARSHIPS ================= */}
       <section id="scholarships" className="relative scroll-mt-24 smru-section bg-white border-b border-slate-100 overflow-hidden bg-[radial-gradient(at_50%_0%,rgba(255,175,58,0.08)_0,transparent_55%)]">
         <div className="smru-container">
           <UniversitySectionHeader
-            title="Scholarships at Stmarys University"
-            subtitle="We believe that quality education should be accessible. Stmarys University offers robust scholarship programs for meritorious and deserving students."
+            title="Scholarships at St. Mary's University"
+            subtitle="We believe that quality education should be accessible. St. Mary's University offers robust scholarship programs for meritorious and deserving students."
           />
           <div className="flex flex-wrap justify-center gap-3 md:gap-5 mt-12">
             {scholarshipNames.map((scholarship, i) => (
@@ -794,7 +762,7 @@ export default function Home() {
         <div className="smru-container">
           <UniversitySectionHeader
             title="University Events"
-            subtitle="Latest campus activities, institutional initiatives, and student life updates from Stmarys University."
+            subtitle="Latest campus activities, institutional initiatives, and student life updates from St. Mary's University."
           />
 
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -823,7 +791,7 @@ export default function Home() {
                       <FaCalendarAlt className="text-[#019e6e]" /> {event.displayDate}
                     </span>
                     <span className="inline-flex items-center gap-2">
-                      <FaMapMarkerAlt className="text-[#ffaf3a]" /> Stmarys University Campus
+                      <FaMapMarkerAlt className="text-[#ffaf3a]" /> St. Mary's University Campus
                     </span>
                   </div>
                   <h3 className="text-2xl font-black text-[#0d315c] tracking-tight">{event.title}</h3>
@@ -854,7 +822,7 @@ export default function Home() {
             <div className="relative min-h-[300px] overflow-hidden lg:min-h-[480px]">
               <Image
                 src="/assets/campus-gallery/campus-aerial.webp"
-                alt="Aerial view of Stmarys University campus"
+                alt="Aerial view of St. Mary's University campus"
                 fill
                 sizes="(max-width: 1024px) 100vw, 52vw"
                 className="object-cover transition-transform duration-700 hover:scale-[1.03]"
@@ -870,7 +838,7 @@ export default function Home() {
               <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#019e6e]/10 blur-3xl" />
               <div className="relative">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#019e6e]">
-                  Explore Stmarys
+                  Explore St. Mary's
                 </p>
                 <h2 className="mt-4 text-3xl font-black uppercase leading-tight tracking-tight text-[#0d315c] sm:text-4xl lg:text-5xl">
                   Experience the campus in 360°
@@ -918,7 +886,7 @@ export default function Home() {
           <div className="mx-auto mt-6 h-1.5 w-24 cut-corner-underline bg-[#ffaf3a]" />
           
           <p className="mt-8 text-lg text-slate-600 font-medium leading-relaxed">
-            Stmarys University is legally established as St. Mary’s Rehabilitation University by the Government of Telangana and recognized by the UGC under Section 2(f). Students and parents can verify university-level recognition through the published official documents.
+            St. Mary's University is legally established as St. Mary’s Rehabilitation University by the Government of Telangana and recognized by the UGC under Section 2(f). Students and parents can verify university-level recognition through the published official documents.
           </p>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -1008,7 +976,7 @@ export default function Home() {
               Built for inclusive professional education
             </h2>
             <p className="mt-5 max-w-3xl text-base font-medium leading-7 text-white/78 md:text-lg">
-              Stmarys University combines rehabilitation, health sciences, psychology, technology, law, and management to prepare ethical professionals who can serve real communities.
+              St. Mary's University combines rehabilitation, health sciences, psychology, technology, law, and management to prepare ethical professionals who can serve real communities.
             </p>
           </div>
 

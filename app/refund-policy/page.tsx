@@ -1,16 +1,15 @@
 import React from "react";
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/metadata";
 import { FaMoneyBillWave, FaPercentage } from "react-icons/fa";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
-  title: "Fee & Refund Policy | Stmarys University",
-  description: "Official Fee and Refund regulations of Stmarys University, Hyderabad, structured in compliance with UGC prescribed refund tiers.",
-  alternates: {
-    canonical: "https://smru.edu.in/refund-policy",
-  },
-};
+export const metadata: Metadata = buildMetadata({
+  title: "Fee & Refund Policy | St. Mary's University",
+  description: "Official Fee and Refund regulations of St. Mary's University, Hyderabad, structured in compliance with UGC prescribed refund tiers.",
+  pathname: "/refund-policy",
+});
 
 export default function RefundPolicyPage() {
   return (
@@ -25,8 +24,8 @@ export default function RefundPolicyPage() {
       <StructuredData
         id="refund-policy-webpage-schema"
         data={buildWebPageSchema({
-          title: "Fee & Refund Policy | Stmarys University",
-          description: "Official Fee and Refund regulations of Stmarys University, Hyderabad, structured in compliance with UGC prescribed refund tiers.",
+          title: "Fee & Refund Policy | St. Mary's University",
+          description: "Official Fee and Refund regulations of St. Mary's University, Hyderabad, structured in compliance with UGC prescribed refund tiers.",
           pathname: "/refund-policy",
         })}
       />
@@ -48,7 +47,7 @@ export default function RefundPolicyPage() {
           <div className="smru-container max-w-4xl">
             <div className="prose prose-slate max-w-none prose-headings:text-[#0d315c] prose-a:text-[#019e6e]">
               <p className="text-lg font-medium text-slate-600 mb-8 text-center max-w-3xl mx-auto">
-                Stmarys University follows a transparent fee and refund policy structured in accordance with the guidelines prescribed by the University Grants Commission (UGC) for higher educational institutions.
+                St. Mary's University follows a transparent fee and refund policy structured in accordance with the guidelines prescribed by the University Grants Commission (UGC) for higher educational institutions.
               </p>
 
               <div className="p-8 border border-[#d8e8fb] bg-[#f8fbff] cut-corner-panel mb-10">

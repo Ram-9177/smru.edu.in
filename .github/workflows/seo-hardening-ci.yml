@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
-      - seo-hardening-phase-1
+  # Every pull request, whatever its base: stacked PRs (a branch based on another open PR) must run
+  # the same gate as PRs into main.
   pull_request:
-    branches:
-      - main
+
+permissions:
+  contents: read
 
 jobs:
   verify:
@@ -17,27 +19,62 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
         run: npm ci
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Dependency audit
+        run: npm audit --audit-level=critical
 
       - name: SEO guard
         run: npm run seo:guard
 
-      - name: Lint audit - historical repo issues are non-blocking
-        continue-on-error: true
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Tests
+        run: npm test
+
+      - name: Lint
         run: npm run lint
 
       - name: Build static export
         run: npm run build
 
-      - name: Verify generated sitemap exists
+      - name: Verify static-export contract
         run: |
-          test -f .next/server/app/sitemap.xml.body || test -f out/sitemap.xml || test -d .next
+          test -s out/sitemap.xml
+          test -s out/robots.txt
+          grep -Fq '<loc>https://smru.edu.in/' out/sitemap.xml
+          grep -Fq 'Sitemap: https://smru.edu.in/sitemap.xml' out/robots.txt
+
+      - name: Redirect register matches the export and .htaccess
+        run: npm run redirects:check
+
+      - name: Frontend release audit
+        run: npm run audit:checklist -- ci --strict
+
+      - name: SEO gates on the export
+        run: npm run seo:gates -- ci --strict
+
+      - name: Fact consistency across site.ts, llms files and built pages
+        run: npm run seo:facts -- --strict
+
+      - name: Preserve audit evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: frontend-audit
+          path: |
+            output/frontend-audit/ci/checklist-audit.json
+            output/seo-gates/ci/seo-gates.json
+          if-no-files-found: ignore

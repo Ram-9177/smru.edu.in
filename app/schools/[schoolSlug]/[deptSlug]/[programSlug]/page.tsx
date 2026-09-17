@@ -6,20 +6,17 @@ import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
 import Program from "@/views/Program";
 import { getProgramMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
+import { getProgrammeFee } from "@/data/programme-fees";
 import { safeSlug } from "@/lib/shared/program-utils";
-import { getProgramSearchTerms } from "@/lib/seo/search-intent";
+import { getProgrammeAnswerFirst } from "@/lib/seo/programme-answer";
+import { getProgrammeCredential, getProgrammeDisplayName, getProgrammeShortName } from "@/lib/shared/programme-names";
 
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
-const hasVelocesPartner = (program: any = {}) => {
-  const codes = Array.isArray(program.partnerCodes)
-    ? program.partnerCodes
-    : String(program.partnerCode || "").split(/[;,]/);
-
-  return codes.some((code) => String(code || "").trim().toUpperCase() === "VELOCES");
-};
-
-export function generateMetadata({ params }: { params: { schoolSlug: string; deptSlug: string; programSlug: string } }): Metadata {
+export async function generateMetadata(
+  props: { params: Promise<{ schoolSlug: string; deptSlug: string; programSlug: string }> }
+): Promise<Metadata> {
+  const params = await props.params;
   return getProgramMetadata(params);
 }
 
@@ -35,32 +32,35 @@ export function generateStaticParams() {
   );
 }
 
-export default function Page({
-  params,
-}: {
-  params: { schoolSlug: string; deptSlug: string; programSlug: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ schoolSlug: string; deptSlug: string; programSlug: string }>;
+  }
+) {
+  const params = await props.params;
   const { school, department, program } = resolveProgram(params.schoolSlug, params.deptSlug, params.programSlug);
-  
+
   if (!school || !department || !program) {
     notFound();
   }
 
-  if (hasVelocesPartner(program)) {
-    redirect("/partner/veloces");
-  }
-
   const pathname = `/schools/${params.schoolSlug}/${params.deptSlug}/${params.programSlug}`;
-  const programName = program?.name || "Program";
-  const searchTerms = getProgramSearchTerms(
-    { slug: params.schoolSlug, name: school.name },
-    { slug: params.deptSlug, name: department.name },
-    { slug: params.programSlug, name: programName, level: program.level }
-  );
+  const programName = getProgrammeDisplayName(program) || "Program";
+  const shortName = getProgrammeShortName(program);
   const recommendations = buildProgramRecommendationLinks(school, department, program, 8);
-  const description = program?.overview
-    ? `${program.overview} Check admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`
-    : `${programName} programme details at Stmarys University Hyderabad with admissions 2026, eligibility, duration, fee guidance, syllabus, career pathways, and recommended related courses.`;
+  // The schema describes the programme with the same answer-first paragraph the page opens with —
+  // substance, not a "check admissions, eligibility, syllabus…" keyword list.
+  const description = getProgrammeAnswerFirst({
+    school,
+    department,
+    program,
+    schoolSlug: params.schoolSlug,
+    departmentSlug: params.deptSlug,
+    programSlug: params.programSlug,
+  });
+  const metadata = getProgramMetadata(params);
+  const pageTitle = typeof metadata.title === "string" ? metadata.title : `${programName} Admissions 2026`;
+  const pageDescription = typeof metadata.description === "string" ? metadata.description : description;
 
   return (
     <>
@@ -71,10 +71,9 @@ export default function Page({
       <StructuredData
         id={`${params.schoolSlug}-${params.deptSlug}-${params.programSlug}-page-schema`}
         data={buildWebPageSchema({
-          title: `${programName} Admissions 2026`,
-          description,
+          title: pageTitle,
+          description: pageDescription,
           pathname,
-          keywords: searchTerms,
         })}
       />
       <StructuredData
@@ -83,13 +82,16 @@ export default function Page({
           program
             ? buildCourseSchema({
                 name: programName,
+                alternateName: shortName && shortName !== programName ? shortName : undefined,
                 description,
                 pathname,
                 schoolName: school?.name,
                 level: program?.level,
                 duration: program?.duration,
                 eligibility: program?.eligibility,
-                keywords: searchTerms,
+                identifier: program?.courseCode,
+                fee: getProgrammeFee(pathname),
+                credentialAwarded: getProgrammeCredential(program),
               })
             : null
         }

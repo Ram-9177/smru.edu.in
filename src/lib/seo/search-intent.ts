@@ -1,3 +1,8 @@
+import {
+  getHealthAlliedCourseSearchSubject,
+  getHealthAlliedCourseTerms,
+} from "@/lib/seo/health-allied-course-seo";
+
 type AcademicEntity = {
   slug?: string;
   name?: string;
@@ -25,7 +30,9 @@ const SEARCH_CLUSTERS: Record<string, SearchCluster> = {
     subject: "allied health sciences",
     keywords: [
       "allied health sciences college in Hyderabad",
+      "allied health sciences college in Andhra Pradesh",
       "paramedical courses in Hyderabad",
+      "paramedical courses in Vijayawada",
       "allied health courses after 12th",
       "healthcare courses in Hyderabad",
       "clinical courses after 12th",
@@ -169,7 +176,11 @@ export const getDepartmentSearchTerms = (school: AcademicEntity, department: Aca
 
 export const getProgramSearchSubject = (program: AcademicEntity, department?: AcademicEntity) => {
   const name = cleanName(program.name || "programme");
-  return PROGRAM_RULES.find((rule) => rule.pattern.test(name))?.subject || cleanName(department?.name || name);
+  return (
+    getHealthAlliedCourseSearchSubject(department?.slug, program.slug) ||
+    PROGRAM_RULES.find((rule) => rule.pattern.test(name))?.subject ||
+    cleanName(department?.name || name)
+  );
 };
 
 export const getProgramSearchTerms = (
@@ -190,9 +201,15 @@ export const getProgramSearchTerms = (
   const afterTwelfth = /ug|undergraduate|integrated/i.test(program.level || "")
     ? [`${subject} courses after 12th`]
     : [];
+  const healthAlliedTerms = getHealthAlliedCourseTerms({
+    schoolSlug: school.slug,
+    departmentSlug: department.slug,
+    programSlug: program.slug,
+  });
 
   return unique([
     name,
+    ...healthAlliedTerms,
     `${name} course in Hyderabad`,
     `${name} admission 2026`,
     `${name} eligibility`,
@@ -205,7 +222,7 @@ export const getProgramSearchTerms = (
     ...afterTwelfth,
     ...matchingTerms,
     ...getDepartmentSearchTerms(school, department).slice(0, 8),
-  ]);
+  ], 72);
 };
 
 export const buildSchoolComparisonFaqs = (school: AcademicEntity) => {
@@ -219,7 +236,7 @@ export const buildSchoolComparisonFaqs = (school: AcademicEntity) => {
     {
       question: `Is ${school.name || "this school"} located in the Hyderabad region?`,
       answer:
-        `${school.name || "This school"} is part of Stmarys University in Hyderabad, Telangana. Use the official campus and contact pages for the current address, map, and visit guidance.`,
+        `${school.name || "This school"} is part of St. Mary's University in Hyderabad, Telangana. Use the official campus and contact pages for the current address, map, and visit guidance.`,
     },
   ];
 };
@@ -250,7 +267,7 @@ export const buildProgramComparisonFaqs = (
     {
       question: `How should I compare the best ${comparisonPhrase}?`,
       answer:
-        `Compare the ${name} curriculum, eligibility, duration, practical or clinical exposure, faculty information, facilities, applicable approvals, fee disclosures, and career support. This page provides Stmarys University programme information and does not claim an independent ranking.`,
+        `Compare the ${name} curriculum, eligibility, duration, practical or clinical exposure, faculty information, facilities, applicable approvals, fee disclosures, and career support. This page provides St. Mary's University programme information and does not claim an independent ranking.`,
     },
     {
       question: `Where can I check ${name} admission, eligibility, duration, and fees?`,

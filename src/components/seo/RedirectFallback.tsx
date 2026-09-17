@@ -1,6 +1,9 @@
-import type { Metadata } from "next";
+// Static-export-safe redirect page. `redirect()` from next/navigation throws during prerender and,
+// with no Suspense boundary above the page (there is none: loading.tsx boundaries hide page content
+// in the Next 15 export), the exported file is an <html id="__next_error__"> shell with no layout,
+// no <html lang> and no meta refresh. Rendering the redirect gives crawlers and no-JS clients a
+// complete document: React 19 hoists the <meta http-equiv="refresh"> into <head>.
 import Link from "next/link";
-import { absoluteUrl } from "@/lib/metadata";
 
 type RedirectFallbackProps = {
   targetUrl?: string;
@@ -9,31 +12,21 @@ type RedirectFallbackProps = {
   linkLabel?: string;
 };
 
-export const buildRedirectMetadata = (targetUrl = "/law/", description = "This page has moved."): Metadata => ({
-  title: "Page Moved | Stmarys University",
-  description,
-  robots: "noindex,follow",
-  alternates: {
-    canonical: absoluteUrl(targetUrl),
-  },
-});
-
-export const metadata: Metadata = buildRedirectMetadata("/law/", "This page has moved to the School of Law page.");
-
 export default function RedirectPage({
-  targetUrl = "/law/",
+  targetUrl = "/schools/law/",
   title = "Page Has Moved",
   description = "The content you are looking for has been moved to the current official page.",
   linkLabel = "Go to Current Page",
 }: RedirectFallbackProps) {
-  const safeTargetUrl = targetUrl.startsWith("/") ? targetUrl : "/law/";
+  // Site-relative paths and absolute https URLs are allowed; anything else falls back to the home page.
+  const safeTargetUrl = /^(\/(?!\/)|https:\/\/)/.test(targetUrl) ? targetUrl : "/";
 
   const redirectScript = `
     window.location.replace(${JSON.stringify(safeTargetUrl)});
   `;
 
   return (
-    <main className="flex min-h-[70vh] items-center justify-center bg-slate-50 px-4 py-16">
+    <section className="flex min-h-[70vh] items-center justify-center bg-slate-50 px-4 py-16">
       <div className="cut-corner-panel w-full max-w-xl border border-slate-200 bg-white p-10 text-center shadow-xl md:p-16">
         <div className="mb-8">
           <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-yellow-50 text-yellow-600">
@@ -62,6 +55,6 @@ export default function RedirectPage({
         <script dangerouslySetInnerHTML={{ __html: redirectScript }} />
         <meta httpEquiv="refresh" content={`0;url=${safeTargetUrl}`} />
       </div>
-    </main>
+    </section>
   );
 };

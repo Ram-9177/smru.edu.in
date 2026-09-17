@@ -134,11 +134,11 @@ function localized(value: LocalizedText | undefined, language: Language, fallbac
 
 const UI_STRINGS: Record<string, LocalizedText> = {
   exitApp: { en: "Exit App", te: "బయటకు వెళ్లండి", hi: "ऐप से बाहर निकलें" },
-  explore: { en: "Explore Stmarys University", te: "సెయింట్ మేరీస్ యూనివర్సిటీని అన్వేషించండి", hi: "सेंट मैरीज़ यूनिवर्सिटी का अन्वेषण करें" },
+  explore: { en: "Explore St. Mary's University", te: "సెయింట్ మేరీస్ యూనివర్సిటీని అన్వేషించండి", hi: "सेंट मैरीज़ यूनिवर्सिटी का अन्वेषण करें" },
   immersive: { en: "Immersive Campus Experience", te: "లీనమయ్యే క్యాంపస్ అనుభవం", hi: "इमर्सिव कैंपस अनुभव" },
   begin: { en: "Begin Journey", te: "ప్రయాణాన్ని ప్రారంభించండి", hi: "यात्रा शुरू करें" },
   chooseMode: { en: "Choose Your Mode", te: "మీ మోడ్‌ను ఎంచుకోండి", hi: "अपना మోడ్ సంప్రదించండి" },
-  selectModeDesc: { en: "Select how you want to experience Stmarys University", te: "మీరు సెయింట్ మేరీస్ యూనివర్సిటీని ఎలా అనుభవించాలో ఎంచుకోండి", hi: "चुनें कि आप सेंट मैरीज़ यूनिवर्सिटी का अनुभव कैसे करना चाहते हैं" },
+  selectModeDesc: { en: "Select how you want to experience St. Mary's University", te: "మీరు సెయింట్ మేరీస్ యూనివర్సిటీని ఎలా అనుభవించాలో ఎంచుకోండి", hi: "चुनें कि आप सेंट मैरीज़ यूनिवर्सिटी का अनुभव कैसे करना चाहते हैं" },
   physical: { en: "Physical Tour", te: "ఫిజికల్ టూర్", hi: "फिजिकल टूर" },
   virtual: { en: "Virtual Tour", te: "వర్చువల్ టూర్", hi: "वर्चुअल टूर" },
   physicalDesc: { en: "For visitors currently on campus with audio navigation.", te: "ఆడియో నావిగేషన్‌తో ప్రస్తుతం క్యాంపస్‌లో ఉన్న సందర్శకుల కోసం.", hi: "ऑडियो नेविगेशन के साथ वर्तमान में कैंपस में मौजूद आगंतुकों के लिए।" },
@@ -210,7 +210,7 @@ function getCampusFacts(pointId: string): CampusFacts {
     case "point-1": // Main Entry Gate
       return {
         area: "Entry Security Plaza",
-        connectivity: "Stmarys University Guest WiFi",
+        connectivity: "St. Mary's University Guest WiFi",
         facilities: ["Visitor Verification Check", "CCTV Integration", "Visitor Parking Zone"],
         timing: "24/7 Security Operations",
         gate: "Gate 1 (Main Highway Gate)",
@@ -264,7 +264,7 @@ function getCampusFacts(pointId: string): CampusFacts {
     case "point-clock-tower":
       return {
         area: "Central Landmark Ring",
-        connectivity: "Stmarys University Hotspot Coverage",
+        connectivity: "St. Mary's University Hotspot Coverage",
         facilities: ["Heritage Brickwork", "Beautiful Landscape Gardens", "Night Illumination"],
         timing: "Open Public Landmark",
         gate: "Gate 1 (Central Pathway)",
@@ -366,7 +366,7 @@ export default function CampusGuide() {
   const [audioDuration, setAudioDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioKindRef = useRef<AudioKind>("point");
-  const audioPointIdRef = useRef<string | undefined>();
+  const audioPointIdRef = useRef<string | undefined>(undefined);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isScriptOpen, setIsScriptOpen] = useState(false);
   const [showTutorial, setShowTutorial] = useState(false);
@@ -437,24 +437,15 @@ export default function CampusGuide() {
   useEffect(() => {
     if (!guide || typeof window === "undefined") return;
 
-    // 1. Preload the primary overview panorama (both preview and high-res) immediately
+    // 1. Preload only the primary overview low-res panorama and thumbnail
     const overviewPoint = guide.points.find(p => p.id === 'point-overview');
     if (overviewPoint?.panorama360?.src) {
-      const overviewPreview = new Image();
-      overviewPreview.src = overviewPoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg');
+      const overviewThumb = new Image();
+      overviewThumb.src = overviewPoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/thumb.webp');
       
-      const overviewFull = new Image();
-      overviewFull.src = overviewPoint.panorama360.src;
+      const overviewLow = new Image();
+      overviewLow.src = overviewPoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/panorama-low.webp');
     }
-
-    // 2. Preload only the low-res preview images for all other points in the background
-    guide.points.forEach((point) => {
-      if (point.id !== 'point-overview' && point.panorama360?.src) {
-        const previewSrc = point.panorama360.src.replace('/panorama.jpg', '/preview.jpg');
-        const previewImg = new Image();
-        previewImg.src = previewSrc;
-      }
-    });
   }, [guide]);
 
   useEffect(() => {
@@ -774,9 +765,9 @@ export default function CampusGuide() {
                 <FaRegCompass className="animate-spin text-xs" style={{ animationDuration: '8s' }} /> Interactive Guide 2.0
               </span>
               
-              <h1 className="text-4xl font-black text-[#0d315c] sm:text-7xl tracking-tight leading-none uppercase">
+              <h2 className="text-4xl font-black text-[#0d315c] sm:text-7xl tracking-tight leading-none uppercase">
                 {localized(UI_STRINGS.explore, language).split(" ")[0]} <span className="text-[#019e6e]">St. Mary&apos;s</span>
-              </h1>
+              </h2>
               <h2 className="text-3xl font-black text-[#0d315c] sm:text-5xl mt-1 tracking-tight leading-none uppercase">
                 University
               </h2>
@@ -789,7 +780,7 @@ export default function CampusGuide() {
               <div className="mt-8 relative h-48 w-full max-w-lg overflow-hidden rounded-3xl border border-white/50 shadow-2xl group/gate">
                 <img 
                   src="/assets/Campus guide images/Main Gate.webp" 
-                  alt="Stmarys University Main Gate" 
+                  alt="St. Mary's University Main Gate" 
                   className="h-full w-full object-cover transition-transform duration-10000 group-hover/gate:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
@@ -904,7 +895,7 @@ export default function CampusGuide() {
               <div>
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#019e6e]">{localized(UI_STRINGS.ready, language)}</span>
                 <h2 className="mt-4 text-4xl font-black uppercase text-[#0d315c] md:text-5xl leading-none tracking-tight">
-                  {localized(guide.welcome.title, language, "Stmarys Campus Guide")}
+                  {localized(guide.welcome.title, language, "St. Mary's Campus Guide")}
                 </h2>
                 <p className="mt-6 text-sm font-semibold leading-relaxed text-slate-600 md:text-base">
                   {localized(guide.welcome.subtitle, language)}
@@ -1037,7 +1028,7 @@ export default function CampusGuide() {
                         <PointImage 
                           src={
                             activePoint.panorama360?.src
-                              ? activePoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg')
+                              ? activePoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/preview.webp')
                               : activePoint.image
                           } 
                           title={activeTitle} 
@@ -1355,7 +1346,7 @@ export default function CampusGuide() {
                   <PointImage 
                     src={
                       activePoint.panorama360?.src
-                        ? activePoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg')
+                        ? activePoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/thumb.webp')
                         : activePoint.image
                     } 
                     title={activeTitle} 
@@ -1410,7 +1401,7 @@ export default function CampusGuide() {
                       <PointImage 
                         src={
                           activePoint.panorama360?.src
-                            ? activePoint.panorama360.src.replace('/panorama.jpg', '/preview.jpg')
+                            ? activePoint.panorama360.src.replace(/\/(panorama|preview)\.(webp|jpg)/, '/preview.webp')
                             : activePoint.image
                         } 
                         title={activeTitle} 
@@ -1552,7 +1543,7 @@ export default function CampusGuide() {
               <div className="flex flex-col gap-1 p-1 pr-0">
                 {[
                   { icon: <FaWhatsapp />, label: "WHATSAPP", color: "#d1f9d6", text: "#1b5e20", href: "https://wa.me/919493321969" },
-                  { icon: <FaPhoneAlt />, label: "CALL US", color: "#fff9c4", text: "#827717", href: "tel:08065459645" },
+                  { icon: <FaPhoneAlt />, label: "CALL US", color: "#fff9c4", text: "#827717", href: "tel:7331119432" },
                   { icon: <FaPaperPlane />, label: "APPLY", color: "#e3f2fd", text: "#0d47a1", href: "https://apply.smru.edu.in" },
                   { icon: <FaQuestionCircle />, label: "ENQUIRY", color: "#ffe0b2", text: "#e65100", href: "https://smru.edu.in/contact" },
                   { icon: <FaFileDownload />, label: "BROCHURE", color: "#ffcdd2", text: "#b71c1c", href: "#" },
@@ -1670,7 +1661,7 @@ export default function CampusGuide() {
                       </button>
                       <div>
                         <p className="text-[9px] font-black uppercase tracking-widest text-white/80">Voice Narration</p>
-                        <p className="text-[7px] font-black text-slate-400 uppercase tracking-widest mt-0.5">Stmarys University Guide</p>
+                        <p className="text-[7px] font-black text-slate-400 uppercase tracking-widest mt-0.5">St. Mary's University Guide</p>
                       </div>
                     </div>
 

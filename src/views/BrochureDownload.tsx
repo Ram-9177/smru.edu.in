@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import { FaDownload, FaFilePdf, FaHome, FaArrowLeft } from "react-icons/fa";
-import SEO from "../components/SEO";
 import useOpenApply from "../hooks/useOpenApply";
 import { SITE_CONTACT, SITE_CTA_LINKS } from "@/lib/shared/site-constants";
 
@@ -37,13 +36,6 @@ export default function BrochureDownload() {
     <div className="relative min-h-screen bg-[#f8fafc] flex items-center justify-center px-4 overflow-hidden">
       {/* Cinematic Background Background */}
       <div className="absolute inset-0 bg-[radial-gradient(at_0%_0%,rgba(37,184,149,0.1)_0,transparent_55%),radial-gradient(at_100%_0%,rgba(13,49,92,0.06)_0,transparent_55%)]" />
-      <SEO
-        title="Download Brochure | Stmarys University"
-        description="Download Stmarys University's official university flyer with programs, facilities, and admissions info."
-        keywords={["Stmarys University brochure","Stmarys flyer","university brochure download","rehabilitation university brochure"]}
-        canonical="https://smru.edu.in/brochure"
-        og={{ url: "https://smru.edu.in/brochure" }}
-      />
       <div className="max-w-2xl w-full">
         {/* Download Card */}
         <div className="bg-white cut-corner-panel shadow-2xl p-8 text-center">
@@ -56,7 +48,7 @@ export default function BrochureDownload() {
 
           {/* Download Message */}
           <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            Download Stmarys University Flyer
+            Download St. Mary's University Flyer
           </h1>
           
           <p className="text-lg text-gray-600 mb-6">

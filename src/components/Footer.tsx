@@ -29,8 +29,12 @@ const Footer = () => {
   };
   const normalizePhoneDisplay = (value: string) => {
     const compact = value.replace(/[^\d+]/g, "");
-    if (compact === "08065459645" || compact === "+918065459645") return "08065459645";
-    if (compact === "+919493321969" || compact === "9493321969") return "9493321969";
+    if (compact === "7331119432" || compact === "+917331119432") return "7331119432";
+    if (
+      compact === "+919493321969" ||
+      compact === "9493321969" ||
+      compact === "901045559190"
+    ) return "9010455591/90";
     return value;
   };
 
@@ -71,14 +75,14 @@ const Footer = () => {
             <div className="space-y-2">
               <div>
                 <h3 className="text-3xl md:text-4xl font-black italic tracking-tight text-[#ffaf3a] leading-none">
-                  Stmarys
+                  St. Mary's
                 </h3>
                 <p className="mt-1 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-white/70">
                   University
                 </p>
               </div>
               <p className="max-w-xs text-[13px] md:text-[14px] font-medium leading-relaxed text-white/40">
-                Stmarys University educational legacy, now advancing rehabilitation-led professional education.
+                St. Mary's University educational legacy, now advancing rehabilitation-led professional education.
               </p>
             </div>
 
@@ -127,10 +131,10 @@ const Footer = () => {
             <h4 className="text-[12px] font-black uppercase tracking-widest text-[#ffaf3a]">Academics</h4>
             <nav aria-label="Academics">
               <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
-                <li><Link href={authority.schools} className="transition-colors hover:text-white">Schools</Link></li>
+                <li><Link prefetch={false} href={authority.schools} className="transition-colors hover:text-white">Schools</Link></li>
                 {academicLinks.map((school) => (
                   <li key={school.slug}>
-                    <Link
+                    <Link prefetch={false}
                       href={getSchoolLandingPath(school.slug)}
                       className="transition-colors hover:text-white"
                     >
@@ -149,11 +153,11 @@ const Footer = () => {
               <nav aria-label="Admissions">
                 <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
                   <li><a href={SITE_CTA_LINKS.apply} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">Apply Now</a></li>
-                  <li><Link href={authority.admissions} className="transition-colors hover:text-white">Admissions Overview</Link></li>
-                  <li><Link href={authority.phdAdmissions} className="transition-colors hover:text-white">Ph.D. Admissions</Link></li>
-                  <li><Link href={authority.brochure} className="transition-colors hover:text-white">Download Brochure</Link></li>
-                  <li><Link href="/fee-structure" className="transition-colors hover:text-white">Fee Structure</Link></li>
-                  <li><Link href="/admission-policy" className="transition-colors hover:text-white">Admission Policy</Link></li>
+                  <li><Link prefetch={false} href={authority.admissions} className="transition-colors hover:text-white">Admissions Overview</Link></li>
+                  <li><Link prefetch={false} href={authority.phdAdmissions} className="transition-colors hover:text-white">Ph.D. Admissions</Link></li>
+                  <li><Link prefetch={false} href={authority.brochure} className="transition-colors hover:text-white">Download Brochure</Link></li>
+                  <li><Link prefetch={false} href="/fee-structure" className="transition-colors hover:text-white">Fee Structure</Link></li>
+                  <li><Link prefetch={false} href="/admission-policy" className="transition-colors hover:text-white">Admission Policy</Link></li>
                 </ul>
               </nav>
             </div>
@@ -162,9 +166,9 @@ const Footer = () => {
               <h4 className="text-[12px] font-black uppercase tracking-widest text-[#ffaf3a]">Campus</h4>
               <nav aria-label="Campus">
                 <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
-                  <li><Link href="/campus-location-hyderabad" className="transition-colors hover:text-white">Campus Location</Link></li>
-                  <li><Link href={authority.campus360} className="transition-colors hover:text-white">Visit Campus</Link></li>
-                  <li><Link href="/hostel" className="transition-colors hover:text-white">Hostel Facilities</Link></li>
+                  <li><Link prefetch={false} href="/campus-location-hyderabad" className="transition-colors hover:text-white">Campus Location</Link></li>
+                  <li><Link prefetch={false} href={authority.campus360} className="transition-colors hover:text-white">Visit Campus</Link></li>
+                  <li><Link prefetch={false} href="/hostel" className="transition-colors hover:text-white">Hostel Facilities</Link></li>
                 </ul>
               </nav>
             </div>
@@ -175,13 +179,13 @@ const Footer = () => {
             <h4 className="text-[12px] font-black uppercase tracking-widest text-[#ffaf3a]">Student Support</h4>
             <nav aria-label="Student Support">
               <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
-                <li><Link href="/anti-ragging" className="transition-colors hover:text-white">Anti-Ragging</Link></li>
-                <li><Link href="/grievance-redressal" className="transition-colors hover:text-white">Grievance Redressal</Link></li>
-                <li><Link href="/ombudsperson" className="transition-colors hover:text-white">Ombudsperson</Link></li>
-                <li><Link href="/search" className="transition-colors hover:text-white">Site Search</Link></li>
-                <li><Link href={authority.admissions} className="transition-colors hover:text-white">Admissions</Link></li>
-                <li><Link href={authority.contact} className="transition-colors hover:text-white">Career Guidance</Link></li>
-                <li><Link href="/contact-directory" className="transition-colors hover:text-white">Contact Directory</Link></li>
+                <li><Link prefetch={false} href="/anti-ragging" className="transition-colors hover:text-white">Anti-Ragging</Link></li>
+                <li><Link prefetch={false} href="/grievance-redressal" className="transition-colors hover:text-white">Grievance Redressal</Link></li>
+                <li><Link prefetch={false} href="/ombudsperson" className="transition-colors hover:text-white">Ombudsperson</Link></li>
+                <li><Link prefetch={false} href="/search" className="transition-colors hover:text-white">Site Search</Link></li>
+                <li><Link prefetch={false} href={authority.admissions} className="transition-colors hover:text-white">Admissions</Link></li>
+                <li><Link prefetch={false} href={authority.contact} className="transition-colors hover:text-white">Career Guidance</Link></li>
+                <li><Link prefetch={false} href="/contact-directory" className="transition-colors hover:text-white">Contact Directory</Link></li>
               </ul>
             </nav>
           </div>
@@ -191,18 +195,18 @@ const Footer = () => {
             <h4 className="text-[12px] font-black uppercase tracking-widest text-[#ffaf3a]">Information & Disclosures</h4>
             <nav aria-label="University Information & Disclosures">
               <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
-                <li><Link href={authority.approvals} className="transition-colors hover:text-white">Approvals & Recognitions</Link></li>
-                <li><Link href={authority.leadership} className="transition-colors hover:text-white">Governance & Leadership</Link></li>
+                <li><Link prefetch={false} href={authority.approvals} className="transition-colors hover:text-white">Approvals & Recognitions</Link></li>
+                <li><Link prefetch={false} href={authority.leadership} className="transition-colors hover:text-white">Governance & Leadership</Link></li>
                 <li><a href="/assets/St.%20Marys%20Rehabilitation%20University%20UGC%20recognition%20letter%202(f).pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">UGC Recognition Letter</a></li>
                 <li><a href="/assets/SMRU%20Act%2010%20of%202026.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">University Establishment Act</a></li>
-                <li><Link href="/mandatory-disclosure" className="transition-colors hover:text-white">Mandatory Disclosure</Link></li>
-                <li><Link href="/public-information" className="transition-colors hover:text-white">Public Information</Link></li>
-                <li><Link href="/statutory-disclosures" className="transition-colors hover:text-white">Statutory Disclosures</Link></li>
-                <li><Link href="/iqac-quality-assurance" className="transition-colors hover:text-white">IQAC & Quality</Link></li>
-                <li><Link href="/first-academic-year-disclosures" className="transition-colors hover:text-white">University Cycle Note</Link></li>
-                <li><Link href="/sponsor-society" className="transition-colors hover:text-white">Sponsor Society</Link></li>
-                <li><Link href="/accessibility-statement" className="transition-colors hover:text-white">Accessibility Statement</Link></li>
-                <li><Link href="/stmarys-facts" className="transition-colors hover:text-[#019e6e] font-bold">Stmarys University Facts & AI Guidance</Link></li>
+                <li><Link prefetch={false} href="/mandatory-disclosure" className="transition-colors hover:text-white">Mandatory Disclosure</Link></li>
+                <li><Link prefetch={false} href="/public-information" className="transition-colors hover:text-white">Public Information</Link></li>
+                <li><Link prefetch={false} href="/statutory-disclosures" className="transition-colors hover:text-white">Statutory Disclosures</Link></li>
+                <li><Link prefetch={false} href="/iqac-quality-assurance" className="transition-colors hover:text-white">IQAC & Quality</Link></li>
+                <li><Link prefetch={false} href="/first-academic-year-disclosures" className="transition-colors hover:text-white">University Cycle Note</Link></li>
+                <li><Link prefetch={false} href="/sponsor-society" className="transition-colors hover:text-white">Sponsor Society</Link></li>
+                <li><Link prefetch={false} href="/accessibility-statement" className="transition-colors hover:text-white">Accessibility Statement</Link></li>
+                <li><Link prefetch={false} href="/smru" className="transition-colors hover:text-[#019e6e] font-bold">SMRU &mdash; Official Identity &amp; Facts</Link></li>
               </ul>
             </nav>
           </div>
@@ -221,22 +225,22 @@ const Footer = () => {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="py-4">
               <p className="text-[13px] font-black uppercase tracking-[0.42em] text-white/40">
-                Official Stmarys University Website
+                Official St. Mary's University Website
               </p>
               <p className="mt-3 text-[12px] font-bold uppercase tracking-[0.08em] text-white/25">
-                Stmarys University is officially established as St. Mary’s Rehabilitation University under Telangana Gazette Act No. 10 of 2026.<br />
-                Copyrights © 2026 Stmarys University. All rights reserved.
+                St. Mary's University is officially established as St. Mary’s Rehabilitation University under Telangana Gazette Act No. 10 of 2026.<br />
+                Copyrights © 2026 St. Mary's University. All rights reserved.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-6 text-[12px] font-semibold uppercase tracking-[0.16em] text-white/[0.35] md:justify-end">
-              <Link href="/privacy-policy" className="transition-colors hover:text-white/70">
+              <Link prefetch={false} href="/privacy-policy" className="transition-colors hover:text-white/70">
                 Privacy Policy
               </Link>
-              <Link href="/terms-of-service" className="transition-colors hover:text-white/70">
+              <Link prefetch={false} href="/terms-of-service" className="transition-colors hover:text-white/70">
                 Terms Of Service
               </Link>
-              <Link href={authority.schools} className="text-[#ffaf3a] transition-colors hover:text-white">
+              <Link prefetch={false} href={authority.schools} className="text-[#ffaf3a] transition-colors hover:text-white">
                 Academics
               </Link>
             </div>

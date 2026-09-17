@@ -1,9 +1,11 @@
-import { redirect } from "next/navigation";
+import RedirectFallback from "@/components/seo/RedirectFallback";
 import { getPartnerAliasRedirect } from "@/lib/shared/partner-alias-redirects";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-export const metadata = buildRedirectMetadata("Mjiollnir Partner | Stmarys University", "/partner/mjiollnir");
+const TARGET_PATH = getPartnerAliasRedirect("mjiollnir");
+
+export const metadata = buildRedirectMetadata("Mjiollnir Partner | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  redirect(getPartnerAliasRedirect("mjiollnir"));
+  return <RedirectFallback targetUrl={TARGET_PATH} />;
 }

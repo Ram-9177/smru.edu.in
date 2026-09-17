@@ -1,10 +1,15 @@
 export const SITE_CONTACT = {
   whatsappNumberIntl: "919493321969",
-  primaryPhone: "08065459645",
-  secondaryPhone: "9493321969",
+  primaryPhone: "7331119432",
+  lawPhone: "08065459645",
+  secondaryPhone: "9010455591/90",
+  corporateOfficePhone: "+91 87124 79133",
   email: "reach@smru.edu.in",
   address:
     "Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.",
+  corporateOfficeAddress:
+    "Corporate Office, Ground Floor, Prajay Princeton Towers, Opp. Metro Pillar No. 1650, LB Nagar, Hyderabad.",
+  corporateOfficeMapsUrl: "https://share.google/0eAqF4CKwBP3xTiHk",
 } as const;
 
 export const ADMISSIONS_CONTENT_LAST_UPDATED = "15 May 2026";
@@ -36,8 +41,6 @@ const MERITTO_LANDING_PATHS = [
   "/edinbox",
   "/edridge",
   "/emversity",
-  "/iiat",
-  "/ist",
   "/mjiollnir",
   "/niat",
   "/niat-upskilling",
@@ -45,6 +48,7 @@ const MERITTO_LANDING_PATHS = [
   "/onnbikes",
   "/qtst",
   "/qtst-Stmarys",
+  "/skilgen",
   "/university",
   "/veloces",
 ] as const;
@@ -78,9 +82,9 @@ export const PARTNER_HIDDEN_STICKY_ROUTES = [] as const;
 export const STICKY_CTA_HIDDEN_ROUTES = [
   "/partner",
   "/bb",
-  "/iiat",
   "/niat",
   "/qtst",
   "/niat-upskilling",
+  "/skilgen",
   "/campus-guide"
 ] as const;

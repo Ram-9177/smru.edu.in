@@ -13,7 +13,7 @@ const checks = [
   {
     name: "Sitemap includes authority pages",
     pass: () => {
-      const file = read("app/sitemap.ts");
+      const file = read("src/lib/seo/sitemap.ts");
       return file.includes("SEO_AUTHORITY_PAGES") && file.includes("authorityEntries") && file.includes("...authorityEntries");
     },
   },
@@ -49,33 +49,72 @@ const checks = [
     },
   },
   {
-    name: "Brand spelling aliases are protected in structured SEO identity",
+    name: "Naming standard: identity constants and bridge sentence",
     pass: () => {
+      const university = read("src/lib/shared/university.ts");
       const site = read("src/lib/seo/site.ts");
-      const metadata = read("src/lib/metadata.ts");
-      const aliases = [
-        "Stmarys University",
-        "St Marys University",
-        "St. Mary's University",
-        "St.Mary's University",
-        "StMarys University",
-        "stmarys university",
-        "Stmarys",
-        "St Marys",
-        "St. Mary's",
-        "St.Mary's",
-        "StMarys",
-        "stmarys",
-      ];
-
-      return aliases.every((alias) => site.includes(alias)) && metadata.includes("...SITE_IDENTITY.alternateNames");
+      const bridge =
+        "St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a UGC-recognised private university in Hyderabad, Telangana, established under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.";
+      return (
+        university.includes('brandName: "St. Mary\'s University"') &&
+        university.includes('shortName: "SMRU"') &&
+        university.includes('legalName: "St. Mary\'s Rehabilitation University"') &&
+        site.includes(bridge) &&
+        site.includes('foundingDate: "2025-07-24"') &&
+        ["Stmarys University", "StMarys University", "stmarys university", "Stmarys", "StMarys", "stmarys"].every(
+          (alias) => !site.includes(`"${alias}"`)
+        )
+      );
     },
   },
   {
-    name: "Program pages include direct-answer intro",
+    name: "Naming standard: no 'St.Mary' (no space) in src, app or llms files",
     pass: () => {
-      const file = read("src/views/Program.tsx");
-      return file.includes("buildProgramDirectAnswer") && file.includes("programDirectAnswer");
+      const skip = /Partners - Codes/;
+      const walk = (dir) =>
+        fs.readdirSync(path.join(root, dir), { withFileTypes: true }).flatMap((entry) => {
+          const rel = `${dir}/${entry.name}`;
+          if (skip.test(rel)) return [];
+          if (entry.isDirectory()) return walk(rel);
+          return /\.(tsx?|mjs|js|json|txt|md)$/.test(entry.name) ? [rel] : [];
+        });
+      const files = [...walk("src"), ...walk("app"), "public/llms.txt", "public/llms-full.txt"];
+      // The single permitted no-space form is the schema alternateName entry in site.ts.
+      return files.every((file) => !/St\.Mary|\b(Stmarys|StMarys) University\b/.test(read(file).replace(/"St\.Mary's University",/g, "")));
+    },
+  },
+  {
+    name: "Brand rewrite script and keywords meta are gone",
+    pass: () =>
+      !exists("update_brand.js") &&
+      !read("src/lib/metadata.ts").includes("keywords: Array.from") &&
+      !read("app/layout.tsx").includes("keywords: ["),
+  },
+  {
+    name: "Canonical identity page /smru/ exists with disambiguation and FAQ schema",
+    pass: () => {
+      const page = read("app/smru/page.tsx");
+      const sitemap = read("src/lib/seo/sitemap.ts");
+      return (
+        page.includes("SITE_IDENTITY.bridgeSentence") &&
+        page.includes("Not to be confused with") &&
+        page.includes("buildFaqSchema") &&
+        sitemap.includes('"/smru"')
+      );
+    },
+  },
+  {
+    name: "Program pages include direct-answer intro (shared with Course.description)",
+    pass: () => {
+      const view = read("src/views/Program.tsx");
+      const route = read("app/schools/[schoolSlug]/[deptSlug]/[programSlug]/page.tsx");
+      const shared = read("src/lib/seo/programme-answer.ts");
+      return (
+        shared.includes("export const getProgrammeAnswerFirst") &&
+        view.includes("getProgrammeAnswerFirst") &&
+        view.includes("programDirectAnswer") &&
+        route.includes("getProgrammeAnswerFirst")
+      );
     },
   },
   {
@@ -93,10 +132,121 @@ const checks = [
     },
   },
   {
-    name: "Program metadata targets course detail intent",
+    name: "Program metadata targets course detail intent with the full degree name",
     pass: () => {
       const file = read("src/lib/shared/dynamic-route-metadata.ts");
-      return file.includes("Eligibility, Fees & Syllabus") && file.includes("recommended related courses");
+      const names = read("src/lib/shared/programme-names.ts");
+      return (
+        file.includes("in Hyderabad: Fees, Eligibility 2026") &&
+        file.includes("pickTitleCandidate") &&
+        file.includes("getProgrammeDisplayName") &&
+        // The keyword-list description template ("…syllabus, career pathways, and recommended related
+        // courses") is what produced descriptions cut mid-sentence; it must not come back.
+        !file.includes("recommended related courses") &&
+        !file.includes(".slice(0, 155)") &&
+        names.includes('bpt: { display: "Bachelor of Physiotherapy (BPT)"')
+      );
+    },
+  },
+  {
+    name: "Programme pages expose workbook AEO intent blocks",
+    pass: () => {
+      const academic = read("src/lib/seo/academic.ts");
+      return [
+        "What are the fees for this program?",
+        "Are scholarships available for this program?",
+        "What does the curriculum cover?",
+        "What practical experience is included?",
+        "What career pathways can this program support?",
+        "Where is this program offered?",
+        "What recognition or approval applies to this program?",
+      ].every((question) => academic.includes(question));
+    },
+  },
+  {
+    name: "AI crawler access and llms references are configured",
+    pass: () => {
+      const robots = read("app/robots.txt/route.ts");
+      const llms = read("public/llms.txt");
+      return (
+        robots.includes('"OAI-SearchBot"') &&
+        robots.includes('"bingbot"') &&
+        llms.includes("Canonical academic URL pattern:") &&
+        llms.includes("St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University") &&
+        llms.includes("Source priority:")
+      );
+    },
+  },
+  {
+    name: "Internal and temporary routes are excluded from indexing",
+    pass: () => {
+      const search = read("app/search/page.tsx");
+      const update = read("app/under-update/layout.tsx");
+      return search.includes('robots: "noindex,follow"') && update.includes('robots: "noindex,follow"');
+    },
+  },
+  {
+    name: "Deliberate-misspelling keyword machinery is absent",
+    pass: () => {
+      const files = ["src/lib/seo/search-intent.ts", "src/lib/seo/health-allied-course-seo.ts"];
+      return files.every((file) => {
+        const text = read(file);
+        return (
+          !text.includes("buildProgramTypoSearchTerms") &&
+          !text.includes("typoPhrase") &&
+          !text.includes("TYPO_KEYWORD_SUPPORT") &&
+          !text.includes("COURSE_TYPO_SUPPORT") &&
+          !/cource|admision|collage|hyderbad|tecnology|theraphy|eligiblity|scince|optomitry/i.test(text)
+        );
+      });
+    },
+  },
+  {
+    name: "Health Allied courses have high-intent SEO profiles",
+    pass: () => {
+      const officialCourses = read("src/data/official-courses.ts");
+      const healthSeo = read("src/lib/seo/health-allied-course-seo.ts");
+      const canonicalSlug = (slug) => {
+        const s = slug.toLowerCase();
+        if (s === "bpt-emversity" || s === "bpt-edridge") return "bpt";
+        if (s === "bot-emversity" || s === "bot-edridge") return "bot";
+        if (s === "mpt-alt-code") return "mpt";
+        if (s === "bmls" || s === "bmlt-edridge") return "bmlt";
+        if (s === "bemt") return "betcms";
+        if (s === "baott" || s === "bsc-anaesthesia-ot-edridge") return "bsc-anaesthesia-ot";
+        if (s === "bcvt-edridge") return "bcvt";
+        if (s === "bmrit-edridge") return "bmit";
+        if (s === "brtt") return "brt";
+        return s;
+      };
+      const courseKeys = [
+        ...officialCourses.matchAll(
+          /\{\s*schoolSlug:\s*"health-allied-health-sciences",\s*departmentSlug:\s*"([^"]+)"[\s\S]*?slug:\s*"([^"]+)"/g
+        ),
+      ].map((match) => `${match[1]}/${canonicalSlug(match[2])}`);
+      const uniqueCourseKeys = [...new Set(courseKeys)];
+
+      return (
+        uniqueCourseKeys.length > 0 &&
+        uniqueCourseKeys.every((key) => healthSeo.includes(`"${key}": profile({`)) &&
+        healthSeo.includes("buildHighIntentMetaTitle") &&
+        healthSeo.includes("Admission 2026, Fees")
+      );
+    },
+  },
+  {
+    name: "Health Allied seed-only courses are not linked as live routes",
+    pass: () => {
+      const schools = read("src/data/schools.ts");
+      const officialCourses = read("src/data/official-courses.ts");
+      const liveRoutes = [
+        ...officialCourses.matchAll(
+          /\{\s*schoolSlug:\s*"health-allied-health-sciences",\s*departmentSlug:\s*"([^"]+)"[\s\S]*?slug:\s*"([^"]+)"/g
+        ),
+      ].map((match) => `${match[1]}/${match[2]}`);
+      const seedOnly = ["allied-health-sciences/bsc-him", "allied-health-sciences/bsc-public-health"];
+
+      return seedOnly.every((key) => schools.includes(`slug: "${key.split("/")[1]}"`) && !liveRoutes.includes(key));
     },
   },
   {
@@ -104,7 +254,7 @@ const checks = [
     pass: () => {
       const guides = read("src/lib/seo/safe-guides.ts");
       const route = read("app/guides/[slug]/page.tsx");
-      const sitemap = read("app/sitemap.ts");
+      const sitemap = read("src/lib/seo/sitemap.ts");
       return (
         guides.includes("SAFE_GUIDE_PAGES") &&
         guides.includes("best-private-university-in-hyderabad") &&
@@ -118,13 +268,17 @@ const checks = [
   {
     name: "Best university Hyderabad pillar page exists",
     pass: () => {
-      const file = read("app/guides/best-university-in-hyderabad/page.tsx");
+      const route = read("app/guides/best-university-in-hyderabad/page.tsx");
+      const guides = read("src/lib/seo/safe-guides.ts");
       return (
-        file.includes("Best University in Hyderabad") &&
-        file.includes("best university in Hyderabad") &&
-        file.includes("SEO, AEO, and GEO") &&
-        file.includes("InformationPage") &&
-        file.includes("does not claim")
+        route.includes('const slug = "best-university-in-hyderabad"') &&
+        route.includes("SAFE_GUIDE_PAGE_MAP.get(slug)") &&
+        route.includes("InformationPage") &&
+        guides.includes('slug: "best-university-in-hyderabad"') &&
+        guides.includes("Best University in Hyderabad") &&
+        guides.includes("best university in Hyderabad") &&
+        guides.includes("SEO, AEO, and GEO") &&
+        guides.includes("does not claim")
       );
     },
   },
@@ -141,23 +295,251 @@ const checks = [
     },
   },
   {
-    name: "Preloader no longer competes as priority LCP asset",
+    name: "Sitemap is an index with per-section child sitemaps",
+    pass: () =>
+      read("app/sitemap.xml/route.ts").includes("buildSitemapIndexXml") &&
+      ["pages", "schools", "programmes", "guides", "images", "international"].every((section) => exists(`app/sitemap-${section}.xml/route.ts`)) &&
+      !read("src/lib/seo/sitemap.ts").includes('"/iqac"') &&
+      !read("src/lib/seo/sitemap.ts").includes("indexableComplianceRoutes") &&
+      !read("src/lib/seo/sitemap.ts").includes('"/niat"'),
+  },
+  {
+    name: "Retired and duplicate URLs have server-side 301s and the branded 404 is served",
     pass: () => {
-      const file = read("src/components/Preloader.tsx");
-      return file.includes("priority={false}") && file.includes("}, 150);") && file.includes("}, 550);");
+      const htaccess = read("public/.htaccess");
+      const redirectMap = read("REDIRECT_MAP.csv");
+      return (
+        htaccess.includes("ErrorDocument 404 /404.html") &&
+        htaccess.includes("Stmarys-facts|stmarys-facts)/?$ https://smru.edu.in/smru/") &&
+        htaccess.includes("^Hand-Book/?$ https://smru.edu.in/handbook/") &&
+        htaccess.includes("^iqac/?$ https://smru.edu.in/iqac-quality-assurance/") &&
+        htaccess.includes("engineering-emerging-technologies|law)/?$ https://smru.edu.in/schools/$1/") &&
+        redirectMap.includes("Hand-Book/?$") &&
+        !exists("app/Hand-Book/page.tsx") &&
+        exists("app/handbook/page.tsx")
+      );
     },
   },
   {
-    name: "Backlink/citation execution sheet exists",
-    pass: () => exists("SEO_BACKLINK_CITATION_EXECUTION_SHEET.md"),
+    name: "Brand reference info pages are retired into /smru/ and placeholders are noindex",
+    pass: () => {
+      const info = read("src/lib/seo/info-pages.ts");
+      const retired = ["Stmarys-university", "Stmarys-university-official", "Stmarys-hyderabad", "rehabilitation-university-hyderabad", "Stmarys-facts"];
+      const placeholders = ["ombudsperson", "naac", "nirf", "first-academic-year-disclosures", "academic-calendar", "faculty-directory", "public-information", "contact-directory"];
+      return (
+        retired.every((slug) => !info.includes(`slug: "${slug}"`)) &&
+        placeholders.every((slug) => new RegExp(`\\{\\n\\s*robots: "noindex,follow",\\n\\s*slug: "${slug}"`).test(info)) &&
+        read("app/(seo-pages)/[slug]/page.tsx").includes("robots: config.robots")
+      );
+    },
   },
   {
-    name: "Phase status report exists",
-    pass: () => exists("SEO_HARDENING_PHASE_1_STATUS.md"),
+    name: "School hubs are canonical at /schools/{slug}; short forms are redirect shells",
+    pass: () => {
+      const landing = read("src/lib/shared/school-landing.ts");
+      const shells = ["rehabilitation-sciences", "health-allied-health-sciences", "psychology", "nursing-sciences", "engineering-emerging-technologies", "law"];
+      return (
+        landing.includes('law: "/schools/law"') &&
+        shells.every((slug) => read(`app/${slug}/page.tsx`).includes("<RedirectFallback targetUrl={TARGET_PATH} />") && read(`app/${slug}/page.tsx`).includes(`/schools/${slug}`)) &&
+        read("app/schools/[schoolSlug]/page.tsx").includes("LawHubPage")
+      );
+    },
   },
   {
-    name: "End-to-end execution master exists",
-    pass: () => exists("SEO_END_TO_END_EXECUTION_MASTER.md"),
+    name: "Programme catalogue /programmes/ exists and is in tier-1 sitemap",
+    pass: () => {
+      const page = read("app/programmes/page.tsx");
+      const sitemap = read("src/lib/seo/sitemap.ts");
+      const view = read("src/views/Programmes.tsx");
+      return (
+        page.includes("getCatalogueProgrammes") &&
+        page.includes("buildItemListSchema") &&
+        page.includes("buildCollectionPageSchema") &&
+        sitemap.includes('"/programmes"') &&
+        view.includes("<table")
+      );
+    },
+  },
+  {
+    name: "Course schema emits hasCourseInstance and gated Offer + fee plumbing exists",
+    pass: () => {
+      const schema = read("src/lib/seo/schema.ts");
+      const route = read("app/schools/[schoolSlug]/[deptSlug]/[programSlug]/page.tsx");
+      return (
+        schema.includes("hasCourseInstance") &&
+        schema.includes("CourseInstance") &&
+        schema.includes("toIsoDuration") &&
+        schema.includes("fee && (fee.annualINR || fee.totalINR)") &&
+        route.includes("getProgrammeFee(pathname)") &&
+        exists("src/data/programme-fees.ts")
+      );
+    },
+  },
+  {
+    name: "Bridge sentence is byte-identical across the fact sources",
+    pass: () => {
+      const bridge =
+        "St. Mary's University (SMRU) is the public name of St. Mary's Rehabilitation University, a UGC-recognised private university in Hyderabad, Telangana, established under Telangana Ordinance No. 2 of 2025 and Telangana Act No. 10 of 2026.";
+      return ["src/lib/seo/site.ts", "public/llms.txt", "public/llms-full.txt"].every((file) => read(file).includes(bridge));
+    },
+  },
+  {
+    name: "AI and answer-engine crawlers are explicitly allowed in robots.txt",
+    pass: () => {
+      const robots = read("app/robots.txt/route.ts");
+      return ["GPTBot", "OAI-SearchBot", "PerplexityBot", "ClaudeBot", "Claude-SearchBot", "Google-Extended", "CCBot", "Applebot-Extended", "bingbot"].every((agent) => robots.includes(`"${agent}"`)) &&
+        robots.includes('Disallow: ${path}') &&
+        robots.includes("/developer/");
+    },
+  },
+  {
+    name: "Eager /* speculation prefetch is removed; prerender list kept",
+    pass: () => {
+      const layout = read("app/layout.tsx");
+      return !layout.includes('href_matches: "/*"') && layout.includes("prerender:");
+    },
+  },
+  {
+    name: "llms-full.txt carries the full programme catalogue block",
+    pass: () => {
+      const llms = read("public/llms-full.txt");
+      return llms.includes("<!-- programmes:start -->") && llms.includes("<!-- programmes:end -->") && llms.includes("## Programme Catalogue");
+    },
+  },
+  {
+    name: "Fact-consistency and llms generators exist",
+    pass: () =>
+      exists("scripts/check-facts-consistency.mjs") &&
+      exists("scripts/generate-llms.mjs") &&
+      exists("docs/seo/ai-audit.md"),
+  },
+  {
+    // PROJECT.md is the handbook and the control file (rules, sources of truth, loop, current state).
+    name: "PROJECT.md is the single root handbook and carries every required section",
+    pass: () => {
+      if (!exists("PROJECT.md")) return false;
+      const file = read("PROJECT.md");
+      const required = [
+        "## 1. What this is",
+        "## 2. Repository structure",
+        "## 3. How a page is built",
+        "## 4. Sources of truth",
+        "## 5. Redirects and retired URLs",
+        "## 6. Assets",
+        "## 7. Tooling and verification",
+        "## 8. Workflow — the loop",
+        "## 9. Known debt and open decisions",
+        "## 10. Current state",
+        "Status date:",
+        "Release Decision",
+        "npm run check",
+        "npm run verify",
+      ];
+      return required.every((needle) => file.includes(needle));
+    },
+  },
+  {
+    name: "Repository keeps a single markdown source of truth (PROJECT.md); history lives in docs/seo/changelog.md",
+    pass: () => {
+      const files = fs
+        .readdirSync(root, { withFileTypes: true })
+        .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+        .map((entry) => entry.name);
+      return files.length === 1 && files[0] === "PROJECT.md" && exists("docs/seo/changelog.md");
+    },
+  },
+  {
+    // JSON-LD goes through one component so escaping, ids and null-suppression are uniform.
+    name: "JSON-LD is emitted only through <StructuredData> and every id ends in -schema",
+    pass: () => {
+      const tsx = (dir) => fs.readdirSync(path.join(root, dir), { recursive: true }).map(String).filter((f) => /\.tsx$/.test(f)).map((f) => path.join(dir, f));
+      const files = [...tsx("app"), ...tsx("src")];
+      const rawScripts = files.filter((f) => f !== "src/components/seo/StructuredData.tsx" && /application\/ld\+json/.test(read(f)));
+      const idPattern = /<StructuredData\b[^>]*?\bid=(?:"([^"]+)"|\{`([^`]+)`\})/g;
+      const badIds = files.flatMap((f) => [...read(f).matchAll(idPattern)].map((m) => m[1] ?? m[2]).filter((id) => !/-schema$/.test(id)).map((id) => f + ": " + id));
+      if (rawScripts.length) console.error("  raw ld+json scripts:", rawScripts.join(", "));
+      if (badIds.length) console.error("  StructuredData ids without -schema suffix:", badIds.join(", "));
+      return rawScripts.length === 0 && badIds.length === 0;
+    },
+  },
+  {
+    // A shell's canonical and refresh target come from one constant via the lib helper; the component
+    // must not grow a second metadata helper again.
+    name: "Every RedirectFallback page builds its metadata with buildRedirectMetadata from lib/shared",
+    pass: () => {
+      const pages = fs.readdirSync(path.join(root, "app"), { recursive: true }).map(String).filter((f) => /(^|[\\/])page\.tsx$/.test(f)).map((f) => path.join("app", f));
+      const shells = pages.filter((f) => /<RedirectFallback\b/.test(read(f)));
+      const offenders = shells.filter((f) => { const src = read(f); return !/from "@\/lib\/shared\/redirect-metadata"/.test(src) || !/buildRedirectMetadata\(/.test(src); });
+      const componentHasHelper = /buildRedirectMetadata|export const metadata/.test(read("src/components/seo/RedirectFallback.tsx"));
+      if (offenders.length) console.error("  shells not using lib buildRedirectMetadata:", offenders.join(", "));
+      return offenders.length === 0 && !componentHasHelper && shells.length > 0;
+    },
+  },
+  {
+    // app/ is routes only. Anything else (a dropped-in site export, a stray component tree) breaks the
+    // one-folder-per-URL rule; the single colocated client island is listed explicitly.
+    name: "app/ contains only route files (page, layout, route, not-found) and route folders",
+    pass: () => {
+      const allowedFiles = new Set(["page.tsx", "layout.tsx", "route.ts", "not-found.tsx", "GrievanceTabs.tsx"]);
+      const strays = fs.readdirSync(path.join(root, "app"), { recursive: true, withFileTypes: true })
+        .filter((entry) => entry.isFile() && !allowedFiles.has(entry.name))
+        .map((entry) => path.relative(root, path.join(entry.parentPath ?? entry.path, entry.name)));
+      if (strays.length) console.error("  non-route files under app/:", strays.slice(0, 10).join(", "));
+      return strays.length === 0;
+    },
+  },
+  {
+    // The root is an allowlist: tooling, one-off scripts, reports and scratch folders were removed once and
+    // must not come back. Scratch space is tmp/ and scratch/ (gitignored); scripts go in scripts/ with an
+    // npm entry; prose goes in docs/.
+    name: "Repository root contains only the allowed entries",
+    pass: () => {
+      const allowed = new Set([
+        ".claude", ".DS_Store", ".eslintrc.json", ".git", ".github", ".gitignore", ".next", ".next-dev", ".nvmrc",
+        ".playwright-cli", ".vscode", "app", "docs", "next-env.d.ts", "next.config.mjs", "node_modules", "out",
+        "output", "package-lock.json", "package.json", "postcss.config.js", "PROJECT.md", "public", "REDIRECT_MAP.csv",
+        "scratch", "scripts", "src", "tailwind.config.js", "tests", "tmp", "tools", "tsconfig.json",
+      ]);
+      const offenders = fs.readdirSync(root).filter((name) => !allowed.has(name));
+      if (offenders.length) console.error("  unexpected root entries:", offenders.join(", "));
+      return offenders.length === 0;
+    },
+  },
+  {
+    // No hand-run mutation scripts or reports at the root or under src/: every script is an npm entry.
+    name: "No stray scripts or report files outside scripts/ and tests/",
+    pass: () => {
+      const rootStrays = fs.readdirSync(root).filter((name) => /\.(js|mjs|cjs|py|sh|csv|txt|log|json)$/.test(name) && !new Set(["package.json", "package-lock.json", "tsconfig.json", "next.config.mjs", "postcss.config.js", "tailwind.config.js", ".eslintrc.json", "REDIRECT_MAP.csv"]).has(name));
+      const srcStrays = fs.readdirSync(path.join(root, "src")).filter((name) => /\.(js|mjs|cjs|py|sh)$/.test(name));
+      const strays = [...rootStrays, ...srcStrays.map((name) => `src/${name}`)];
+      if (strays.length) console.error("  stray files:", strays.join(", "));
+      return strays.length === 0;
+    },
+  },
+  {
+    // Next 15 static export renders every loading.tsx boundary as a pending Suspense marker: the
+    // fallback sits inside <main> and the page is streamed into a hidden div (vercel/next.js#76651).
+    name: "No loading.tsx boundaries under app/ (static export would hide page content behind the fallback)",
+    pass: () =>
+      !fs
+        .readdirSync(path.join(root, "app"), { recursive: true })
+        .some((entry) => /(^|[\\/])loading\.tsx$/.test(String(entry))),
+  },
+  {
+    // redirect() from next/navigation throws during prerender; with no boundary above the page the
+    // exported file is an <html id="__next_error__"> shell with no layout, no lang and no meta refresh.
+    name: "Alias routes render RedirectFallback (complete document + meta refresh) instead of calling redirect()",
+    pass: () => {
+      const pages = fs
+        .readdirSync(path.join(root, "app"), { recursive: true })
+        .map(String)
+        .filter((entry) => /(^|[\\/])page\.tsx$/.test(entry));
+      const offenders = pages.filter((entry) => {
+        const source = read(path.join("app", entry));
+        return /\b(permanentRedirect|redirect)\(/.test(source);
+      });
+      return offenders.length === 0 && read("src/components/seo/RedirectFallback.tsx").includes('httpEquiv="refresh"');
+    },
   },
 ];
 

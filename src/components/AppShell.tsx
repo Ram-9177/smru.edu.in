@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type Dispatch, type ReactNode, type SetStateAction } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -12,6 +12,7 @@ const MerittoApplyModal = dynamic(() => import("./MerittoApplyModal"));
 import ReactDomSafetyPatch from "./ReactDomSafetyPatch";
 import { ApplyModalContext } from "../context/ApplyModalContext";
 import type { MerittoModalPayload } from "../context/ApplyModalContext";
+import { initPredictiveNavigation } from "@/lib/speed/predictive-preloader";
 
 import { FaPaperPlane, FaPhoneAlt, FaFileDownload, FaWhatsapp, FaHeadset } from "react-icons/fa";
 import {
@@ -52,6 +53,7 @@ function AppShellContent({
   showEnquiryModal,
   setShowEnquiryModal,
 }: AppShellContentProps) {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const normalizedPathname = pathname?.replace(/\/+$/, "") || "/";
@@ -67,8 +69,6 @@ function AppShellContent({
       "edinbox",
       "edridge",
       "emversity",
-      "iiat",
-      "ist",
       "mjiollnir",
       "niat",
       "niat-upskilling",
@@ -76,6 +76,7 @@ function AppShellContent({
       "onnbikes",
       "qtst",
       "qtst-Stmarys",
+      "skilgen",
       "university",
       "veloces",
       "nextgen"
@@ -91,7 +92,11 @@ function AppShellContent({
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    const cleanupPredictive = initPredictiveNavigation(router);
+    return () => {
+      cleanupPredictive?.();
+    };
+  }, [router]);
 
 
 
@@ -129,6 +134,7 @@ function AppShellContent({
     isDeveloperPage ||
     isLandingPage ||
     normalizedPathname === "/campus-360" ||
+    normalizedPathname === "/nursing-sciences" ||
     PARTNER_HIDDEN_STICKY_ROUTES.some((route) => normalizedPathname === route || normalizedPathname.startsWith(`${route}/`));
 
   const isStickyHiddenRoute =
@@ -147,7 +153,15 @@ function AppShellContent({
   const shouldHideFooter = shouldHideLayoutChrome || isStickyHiddenRoute || isExploreStmarysPage;
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" suppressHydrationWarning>
+      {/* Skip link (WCAG 2.4.1): first focusable element on every page, visible only on keyboard focus. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[3000] focus:rounded-md focus:bg-[#0d315c] focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0d315c]"
+      >
+        Skip to main content
+      </a>
+
       {/* Institutional Loading Bar */}
       {isNavLoading && (
         <div className="fixed top-0 left-0 right-0 z-[3000] h-1 overflow-hidden pointer-events-none">
@@ -231,7 +245,9 @@ function AppShellContent({
       <ScrollToTop />
 
       <main
-        className={`flex-1 ${
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 outline-none ${
           isDeveloperPage
             ? ""
             : `${shouldHideLayoutChrome ? "" : "pt-[104px] lg:pt-[116px]"}`

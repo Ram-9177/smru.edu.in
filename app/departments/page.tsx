@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
 import { LinkGridSection } from "@/components/seo/PageSections";
@@ -10,9 +11,9 @@ import { safeSlug } from "@/lib/shared/program-utils";
 
 export const metadata: Metadata = buildMetadata({
   title: "Departments",
-  description: "Browse the public department directory for Stmarys University schools and academic pathways.",
+  description: "Browse the public department directory for St. Mary's University schools and academic pathways.",
   pathname: "/departments",
-  keywords: ["departments", "academic departments", "Stmarys University departments", "Stmarys University departments"],
+  keywords: ["departments", "academic departments", "St. Mary's University departments", "St. Mary's University departments"],
 });
 
 export default function Page() {
@@ -39,7 +40,7 @@ export default function Page() {
         id="departments-page-schema"
         data={buildCollectionPageSchema({
           title: "Departments",
-          description: "Browse the public department directory for Stmarys University schools and academic pathways.",
+          description: "Browse the public department directory for St. Mary's University schools and academic pathways.",
           pathname: "/departments",
         })}
       />
@@ -47,7 +48,7 @@ export default function Page() {
         <section className="px-4">
           <div className="mx-auto max-w-6xl rounded-[2.5rem] border border-[#dce7f3] bg-white px-6 py-12 shadow-[0_24px_44px_rgba(13,49,92,0.08)] md:px-12">
             <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-[11px] font-black uppercase tracking-[0.28em] text-slate-400">
-              <a href="/" className="transition-colors hover:text-[#019e6e]">Home</a>
+              <Link href="/" className="transition-colors hover:text-[#019e6e]">Home</Link>
               <span>/</span>
               <span className="text-[#0d315c]">Departments</span>
             </nav>

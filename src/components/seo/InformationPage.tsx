@@ -82,13 +82,13 @@ export default function InformationPage({ config }: { config: InfoPageConfig }) 
               <div className="h-11 w-11 overflow-hidden border border-slate-300 bg-white p-1.5 [clip-path:polygon(0_0,100%_0,100%_78%,78%_100%,0_100%)] md:[clip-path:polygon(0_0,100%_0,100%_76%,76%_100%,0_100%)]">
                 <img
                   src="/favicon.png"
-                  alt="Stmarys University official mark"
+                  alt="St. Mary's University official mark"
                   className="h-full w-full object-contain p-1.5 grayscale contrast-125"
                 />
               </div>
               <div className="leading-tight">
                 <p className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-500">Official University Page</p>
-                <p className="mt-1 text-xs font-black text-slate-700">Stmarys University</p>
+                <p className="mt-1 text-xs font-black text-slate-700">St. Mary's University</p>
               </div>
             </div>
 

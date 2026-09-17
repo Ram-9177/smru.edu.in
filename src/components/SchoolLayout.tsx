@@ -2,9 +2,24 @@
 import React from "react";
 import Link from "next/link";
 import { schools } from "../data/schools";
-import abstractHeroBg from "../assets/education-pattern.webp";
-import { safeSlug } from "@/lib/shared/program-utils";
-import { resolveAssetSrc } from "@/lib/shared/media";
+import { safeSlug } from "../lib/shared/program-utils";
+
+export interface BreadcrumbItem {
+  label: string;
+  path?: string;
+}
+
+export interface SchoolLayoutProps {
+  breadcrumbs?: BreadcrumbItem[];
+  title?: string;
+  subtitle?: string;
+  activeSchoolSlug?: string;
+  sectionLabel?: string;
+  heading?: string;
+  children: React.ReactNode;
+  onApply?: ((target?: any) => void) | null;
+  partner?: { name: string } | null;
+}
 
 export default function SchoolLayout({ 
   breadcrumbs = [], 
@@ -16,7 +31,7 @@ export default function SchoolLayout({
   children,
   onApply = null,
   partner = null
-}) {
+}: SchoolLayoutProps) {
   const allSchools = (schools || []).map((s) => ({
     name: s.name,
     short: s.short || s.name,
@@ -42,17 +57,17 @@ export default function SchoolLayout({
           <div className="mx-auto cut-corner-panel p-[1.5px] bg-gradient-to-br from-[#dbe8f8] via-[#e2eaf4] to-[#c4d7ec] shadow-[0_20px_50px_rgba(13,49,92,0.05)] hover:shadow-[0_24px_60px_rgba(13,49,92,0.09)] hover:scale-[1.01] transition-all duration-300">
             <div className="cut-corner-panel bg-white/85 backdrop-blur-md p-6 sm:p-8 md:p-12">
               {/* Breadcrumbs */}
-              <nav aria-label="Breadcrumb" className="flex items-center justify-center gap-2 mb-6 opacity-70">
-                <Link href="/schools" className="text-[10px] font-black uppercase tracking-[0.4em] hover:text-[#019e6e] transition-colors">Schools</Link>
+              <nav aria-label="Breadcrumb" className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mb-6 opacity-70 leading-none">
+                <Link href="/schools" className="inline-block max-w-[70vw] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] sm:text-[10px] font-black uppercase tracking-[0.22em] sm:tracking-[0.32em] md:tracking-[0.4em] hover:text-[#019e6e] transition-colors">Schools</Link>
                 {breadcrumbs.map((bc, i) => (
-                  <React.Fragment key={i}>
-                    <span className="text-[11px] font-black text-[#6c819e] leading-none">/</span>
+                  <span key={i} className="inline-flex items-center gap-2 whitespace-nowrap">
+                    <span className="text-[10px] sm:text-[11px] font-black text-[#6c819e] leading-none">/</span>
                     {bc.path ? (
-                      <Link href={bc.path} className="text-[10px] font-black uppercase tracking-[0.4em] hover:text-[#019e6e] transition-colors">{bc.label}</Link>
+                      <Link href={bc.path} className="inline-block max-w-[70vw] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] sm:text-[10px] font-black uppercase tracking-[0.22em] sm:tracking-[0.32em] md:tracking-[0.4em] hover:text-[#019e6e] transition-colors">{bc.label}</Link>
                     ) : (
-                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-500">{bc.label}</span>
+                      <span className="inline-block max-w-[70vw] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] sm:text-[10px] font-black uppercase tracking-[0.22em] sm:tracking-[0.32em] md:tracking-[0.4em] text-slate-500">{bc.label}</span>
                     )}
-                  </React.Fragment>
+                  </span>
                 ))}
               </nav>
               
@@ -125,12 +140,18 @@ export default function SchoolLayout({
             <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(rgba(13,49,92,0.08)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
             <div>
                {sectionLabel && (
-                 <div className="text-[11px] font-black text-[#1f9a79] uppercase tracking-[0.4em] mb-2">
+                 <div
+                   className="text-[11px] font-black text-[#1f9a79] uppercase tracking-[0.4em] mb-2"
+                   suppressHydrationWarning
+                 >
                    {sectionLabel}
                  </div>
                )}
                {heading && (
-                 <h2 className="text-2xl md:text-3xl font-black text-[#133f71] font-outfit mb-8">
+                 <h2
+                   className="text-2xl md:text-3xl font-black text-[#133f71] font-outfit mb-8"
+                   suppressHydrationWarning
+                 >
                    {heading}
                  </h2>
                )}

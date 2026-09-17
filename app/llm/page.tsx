@@ -1,13 +1,11 @@
-import RedirectFallback, { buildRedirectMetadata } from "@/components/seo/RedirectFallback";
+import RedirectFallback from "@/components/seo/RedirectFallback";
+import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 
-export const metadata = buildRedirectMetadata("/law/", "This older LL.M. Law URL has moved to the current School of Law page.");
+// Legacy short URL for the LL.M.; the programme page is live under the School of Law.
+const TARGET_PATH = "/schools/law/legal-studies/llm/";
+
+export const metadata = buildRedirectMetadata("Master of Laws (LL.M.) | St. Mary's University", TARGET_PATH);
 
 export default function Page() {
-  return (
-    <RedirectFallback
-      targetUrl="/law/#programmes"
-      description="This older LL.M. Law URL is no longer part of the current published course list. Please use the current School of Law programmes page."
-      linkLabel="Go to Law Programmes"
-    />
-  );
+  return <RedirectFallback targetUrl={TARGET_PATH} linkLabel="Go to the LL.M. programme" />;
 }

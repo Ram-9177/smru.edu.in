@@ -30,8 +30,12 @@ export default function ApplyModal({ open, onClose }) {
 
     const tryInit = (attempts = 0) => {
       const el = document.getElementById(CTPL_CONTAINER_ID);
-      if (el && typeof window.ctplTag === "function") {
-        window.ctplTag(ENQUIRY_CTPL_FORM_ID);
+      if (el && el.isConnected && typeof window.ctplTag === "function") {
+        try {
+          window.ctplTag(ENQUIRY_CTPL_FORM_ID);
+        } catch (e) {
+          console.warn("[ApplyModal] Handled ctplTag init:", e);
+        }
       } else if (attempts < 30) {
         setTimeout(() => tryInit(attempts + 1), 100);
       }

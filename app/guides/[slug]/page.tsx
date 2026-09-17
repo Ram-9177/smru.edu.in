@@ -4,11 +4,16 @@ import { buildMetadata } from "@/lib/metadata";
 import { SAFE_GUIDE_PAGE_MAP, SAFE_GUIDE_PAGES } from "@/lib/seo/safe-guides";
 import { notFound } from "next/navigation";
 
+const EXPLICIT_GUIDE_SLUGS = new Set(["best-university-in-hyderabad"]);
+
 export function generateStaticParams() {
-  return SAFE_GUIDE_PAGES.map((page) => ({ slug: page.slug.replace(/^guides\//, "") }));
+  return SAFE_GUIDE_PAGES
+    .map((page) => ({ slug: page.slug.replace(/^guides\//, "") }))
+    .filter(({ slug }) => !EXPLICIT_GUIDE_SLUGS.has(slug));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   const config = SAFE_GUIDE_PAGE_MAP.get(params.slug);
   if (!config) {
     return {
@@ -25,7 +30,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   });
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const config = SAFE_GUIDE_PAGE_MAP.get(params.slug);
   if (!config) notFound();
   return <InformationPage config={config} />;

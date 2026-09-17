@@ -4,14 +4,13 @@
 import React, { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { FaArrowRight, FaExternalLinkAlt, FaGlobe, FaLayerGroup, FaLink } from "react-icons/fa";
-import SEO from "../components/SEO";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import { LinkGridSection } from "@/components/seo/PageSections";
 import { TRUST_LINKS } from "@/lib/seo/info-pages";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
+import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "@/lib/shared/partner-pages";
 
 const CARD_TONES = [
   {
@@ -78,7 +77,7 @@ const getPartnerMeta = (partner) => {
   if (partner.redirectUrl?.startsWith("/")) {
     return {
       typeLabel: "Internal Route",
-      typeNote: "Structured partner page inside the Stmarys University ecosystem",
+      typeNote: "Structured partner page inside the St. Mary's University ecosystem",
       icon: <FaLink />,
     };
   }
@@ -89,6 +88,21 @@ const getPartnerMeta = (partner) => {
     icon: <FaGlobe />,
   };
 };
+
+const PARTNER_ORDER = [
+  "nst",
+  "emversity",
+  "niat",
+  "carebridge",
+  "qtst",
+  "bytexl",
+  "skilgen",
+  "edinbox",
+  "veloces",
+  "bb",
+  "edridge",
+  "nextgen"
+];
 
 export default function Partner() {
   const { state } = useDeveloperCms();
@@ -110,20 +124,6 @@ export default function Partner() {
     return () => observer.disconnect();
   }, []);
 
-  const PARTNER_ORDER = [
-    "nst",
-    "emversity",
-    "niat",
-    "qtst",
-    "bytexl",
-    "iiat",
-    "edinbox",
-    "veloces",
-    "bb",
-    "edridge",
-    "nextgen"
-  ];
-
   const partners = useMemo(() => {
     return (state.partners || [])
       .filter((partner) => partner.visibility !== "hidden" && partner.status !== "archived")
@@ -131,16 +131,14 @@ export default function Partner() {
       .map((partner, idx) => {
         const tone = CARD_TONES[idx % CARD_TONES.length];
         const internalRedirect = partner.redirectUrl?.startsWith("/");
-        const partnerRoute = partner.slug ? `/partner/${partner.slug}` : "/partner";
+        // "/carebridge" links to its own page, not the /partner/carebridge duplicate of the same view.
+        const partnerRoute = partner.slug ? getPartnerLandingHref(partner.slug) : "/partner";
         const partnerSlug = (partner.slug || "").toLowerCase();
-        const forcedExternalFallback = ""; // Force internal routes to keep Navbar visible
         const configuredExternalUrl =
           (partner.redirectUrl?.startsWith("http") && partner.redirectUrl) ||
           (partner.website?.startsWith("http") && partner.website) ||
           "";
-        const path = forcedExternalFallback
-          ? configuredExternalUrl || forcedExternalFallback
-          : partnerRoute;
+        const path = partnerSlug === "nextgen" && configuredExternalUrl ? configuredExternalUrl : partnerRoute;
         const isComingSoon = !partner.redirectUrl && !partner.website;
         const meta = getPartnerMeta(partner);
 
@@ -183,11 +181,6 @@ export default function Partner() {
 
   return (
     <div className="min-h-screen bg-white">
-      <SEO
-        title="Our Edupartners | Stmarys University"
-        description="Explore strategic education and technology partners powering future-ready learning at Stmarys University."
-      />
-
       <section className="relative overflow-hidden border-b border-slate-100 bg-white pt-10">
         {/* Architectural Background Patterns */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(193,140,63,0.12),transparent_40%),radial-gradient(circle_at_100%_0%,rgba(15,159,122,0.1),transparent_40%)]" />

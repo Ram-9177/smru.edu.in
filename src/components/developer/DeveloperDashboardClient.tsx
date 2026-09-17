@@ -75,7 +75,7 @@ export default function DeveloperDashboardClient() {
       <div className="mx-auto flex w-full max-w-[1760px] flex-col gap-4 p-4 lg:flex-row">
         <aside className="w-full shrink-0 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:w-[280px]">
           <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#019e6e]">Internal Control System</p>
-          <h1 className="mt-2 text-xl font-black tracking-tight text-[#0d315c]">Stmarys University Developer CMS</h1>
+          <h1 className="mt-2 text-xl font-black tracking-tight text-[#0d315c]">St. Mary's University Developer CMS</h1>
           <p className="mt-1 text-xs text-slate-500">Preloaded pseudo CMS for schools, courses, routes, and partners.</p>
 
           <nav className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1">

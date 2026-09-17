@@ -27,7 +27,7 @@ export const DEFAULT_SCHOLARSHIP_NAMES = [
 export const DEFAULT_WHY_CHOOSE_ITEMS = [
   { title: "Multi-Disciplinary Excellence", desc: "Career-focused schools across rehabilitation, health, nursing, psychology, engineering, law, and allied professional fields." },
   { title: "Clinical & Industry Integration", desc: "Practice-led learning through clinical exposure, simulation labs, internships, and partner-supported skilling." },
-  { title: "Stmarys Educational Legacy", desc: "Built on Stmarys educational foundation and now advanced as a UGC 2(f) recognized rehabilitation university." },
+  { title: "St. Mary's Educational Legacy", desc: "Built on St. Mary's educational foundation and now advanced as a UGC 2(f) recognized rehabilitation university." },
   { title: "Career Outcomes", desc: "Structured guidance for internships, skill-building, placements, and professional pathways." },
 ];
 
@@ -49,7 +49,7 @@ export const DEFAULT_CANTEEN_HIGHLIGHTS = [
 
 export const TESTIMONIAL_DATA = [
   {
-    quote: "At Stmarys University, I help learners find their voice—combining therapy and technology to improve speech and hearing outcomes.",
+    quote: "At St. Mary's University, I help learners find their voice—combining therapy and technology to improve speech and hearing outcomes.",
     name: "Raveeti Shiva Deekshith",
     course: "Dept. of Audiology & Speech-Language Pathology",
   },
@@ -59,7 +59,7 @@ export const TESTIMONIAL_DATA = [
     course: "Dept. of Clinical Psychology",
   },
   {
-    quote: "Guiding students to understand behavior and build resilience is the most rewarding part of my work at Stmarys University.",
+    quote: "Guiding students to understand behavior and build resilience is the most rewarding part of my work at St. Mary's University.",
     name: "Rida Subhan",
     course: "Dept. of Psychology",
   },
@@ -69,7 +69,7 @@ export const TESTIMONIAL_DATA = [
     course: "Dept. of Occupational Therapy",
   },
   {
-    quote: "Stmarys University's collaborative clinics let us tailor interventions that restore dignity and daily function.",
+    quote: "St. Mary's University's collaborative clinics let us tailor interventions that restore dignity and daily function.",
     name: "Gunichetty Joshna Priya",
     course: "Dept. of Occupational Therapy",
   },

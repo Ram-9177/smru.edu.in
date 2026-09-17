@@ -4,13 +4,19 @@ import { buildBreadcrumbSchema, buildCollectionPageSchema, buildFaqSchema, build
 import { buildCourseItemListSchema, getSchoolCourseListItems } from "@/lib/seo/course-list";
 import { buildSchoolBreadcrumbs, buildSchoolFaqs, resolveSchool } from "@/lib/seo/academic";
 import { SHOW_PUBLIC_FAQ_SCHEMA } from "@/lib/seo/visibility";
+import dynamic from "next/dynamic";
 import School from "@/views/School";
+
+// Only the matching school's rich view is bundled into its page chunk; the other five schools
+// must not pay for the Law and Nursing landings.
+const LawHubPage = dynamic(() => import("@/views/LawHubPage"));
+const NursingLandingClient = dynamic(() => import("@/views/NursingLandingClient"));
 import { getSchoolMetadata } from "@/lib/shared/dynamic-route-metadata";
 import { schools } from "@/data/schools";
 import { safeSlug } from "@/lib/shared/program-utils";
-import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
 
-export function generateMetadata({ params }: { params: { schoolSlug: string } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ schoolSlug: string }> }): Promise<Metadata> {
+  const params = await props.params;
   return getSchoolMetadata(params);
 }
 
@@ -20,12 +26,10 @@ export function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }: { params: { schoolSlug: string } }) {
+export default async function Page(props: { params: Promise<{ schoolSlug: string }> }) {
+  const params = await props.params;
   const school = resolveSchool(params.schoolSlug);
   const pathname = `/schools/${params.schoolSlug}`;
-  const searchTerms = school
-    ? getSchoolSearchTerms({ slug: params.schoolSlug, name: school.name })
-    : [];
   const courseListItems = school ? getSchoolCourseListItems(school) : [];
 
   return (
@@ -38,9 +42,8 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
         id={`${params.schoolSlug}-page-schema`}
         data={buildCollectionPageSchema({
           title: school?.name || "School",
-          description: school?.about || "Explore school programs and departments at Stmarys University.",
+          description: school?.about || "Explore school programs and departments at St. Mary's University.",
           pathname,
-          keywords: searchTerms,
         })}
       />
       <StructuredData
@@ -64,7 +67,8 @@ export default function Page({ params }: { params: { schoolSlug: string } }) {
         id={`${params.schoolSlug}-course-item-list-schema`}
         data={school ? buildCourseItemListSchema(courseListItems) : null}
       />
-      <School />
+      {/* Law and Nursing keep their richer landing views at the canonical /schools/{slug}/ URL. */}
+      {params.schoolSlug === "law" ? <LawHubPage /> : params.schoolSlug === "nursing-sciences" ? <NursingLandingClient /> : <School />}
     </>
   );
 }

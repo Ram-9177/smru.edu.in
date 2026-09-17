@@ -3,114 +3,80 @@ import React, { useMemo } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
-import { schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
+import { EDU_PARTNERS, schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
+import { getProgrammeFee, formatINR } from "../data/programme-fees";
 import useOpenApply from "../hooks/useOpenApply";
 import SchoolLayout from "../components/SchoolLayout";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
+import { useDeveloperCms } from "../lib/developer/useDeveloperCms";
+import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "../lib/developer/academic-data";
 import {
   findBySlugOrName,
   safeSlug,
-} from "@/lib/shared/program-utils";
-import { AnswerGridSection, FaqSection, LinkGridSection } from "@/components/seo/PageSections";
-import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRecommendationLinks } from "@/lib/seo/academic";
-import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
-import { APPROVAL_SAFETY_NOTE } from "@/lib/shared/university";
+} from "../lib/shared/program-utils";
+import { AnswerGridSection, FaqSection, LinkGridSection } from "../components/seo/PageSections";
+import { ENTRANCE_EXAM_LINK, buildProgramAnswers, buildProgramFaqs, buildProgramRecommendationLinks } from "../lib/seo/academic";
+import { getHealthAlliedCourseSeoProfile } from "../lib/seo/health-allied-course-seo";
+import { formatLevel, getProgrammeAnswerFirst } from "../lib/seo/programme-answer";
+import { getProgrammeDisplayName, getProgrammeShortName } from "../lib/shared/programme-names";
+import { SHOW_PUBLIC_SEO_SECTIONS } from "../lib/seo/visibility";
+import { APPROVAL_SAFETY_NOTE } from "../lib/shared/university";
 import { 
   FaClock, FaUserGraduate, FaCheckCircle,
   FaBriefcase, FaFileDownload, FaUsers, FaArrowRight, FaShieldAlt 
 } from "react-icons/fa";
-import { resolveAssetSrc } from "@/lib/shared/media";
-
-const formatLevel = (lvl = "") => {
-  const l = lvl.toLowerCase().trim();
-  if (l.includes("ug")) return "Undergraduate Program";
-  if (l.includes("pg")) return "Postgraduate Program";
-  if (l.includes("ph.d") || l.includes("phd")) return "Doctoral Program (Ph.D.)";
-  if (l.includes("post") || l.includes("dip")) return "Postgraduate Diploma";
-  return l.toUpperCase();
-};
-
-const compact = (value = "") => value.replace(/\s+/g, " ").trim();
-
-const buildProgramSeoTitle = (programName: string) =>
-  `${compact(programName)} Admissions 2026, Eligibility, Fees & Syllabus at Stmarys University Hyderabad`;
-
-const buildProgramDirectAnswer = ({
-  programName,
-  levelFull,
-  schoolName,
-  departmentName,
-  duration,
-  eligibility,
-}: {
-  programName: string;
-  levelFull: string;
-  schoolName?: string;
-  departmentName?: string;
-  duration?: string;
-  eligibility?: string;
-}) => {
-  const parts = [
-    `${programName} is a ${levelFull || "programme"} offered by ${schoolName || "Stmarys University"}`,
-    departmentName ? `under ${departmentName}` : "",
-    "at Stmarys University Hyderabad",
-    duration ? `Duration: ${duration}` : "",
-    eligibility ? `Eligibility: ${eligibility}` : "",
-  ].filter(Boolean);
-
-  return `${parts.join(". ")}. This page also helps students review course details, admission route, fee guidance, career pathways, FAQs, and recommended related courses before applying.`;
-};
+import { resolveAssetSrc } from "../lib/shared/media";
+import CampusLife360Section from "../components/CampusLife360Section";
+import MandatoryAttendanceNotice from "../components/MandatoryAttendanceNotice";
 
 const getProgramPositioning = (schoolSlug: string, progName: string) => {
   const slug = (schoolSlug || "").toLowerCase();
   if (slug.includes('rehabilitation')) {
     return {
-      overview: `This programme focuses on clinical learning and rehabilitation care. Students gain foundational and advanced knowledge in communication disorders, prosthetics, orthotics, inclusive education, and assistive support according to professional practice requirements.`,
-      study: "Students engage in evidence-based academic modules focused on rehabilitative care, therapeutic interventions, and patient-centric communication methodologies.",
-      experience: "Clinical laboratory exposure and supervised therapeutic practice."
+      overview: `You train to restore communication, mobility and learning: assessing and managing hearing, speech and language disorders, designing and fitting prostheses and orthoses, and teaching children with disabilities in inclusive classrooms.`,
+      study: "You study the anatomy and physiology behind your discipline, assessment methods, therapeutic and assistive-device techniques, rehabilitation planning, and professional ethics.",
+      experience: "You practise in the university's rehabilitation labs and on supervised clinical postings, progressing from observation to managing your own cases."
     };
   }
   if (slug.includes('health')) {
     return {
-      overview: `This programme prepares students for the dynamic patient-care ecosystem, focusing on healthcare delivery, diagnostics, emergency care, and critical operation theatre support.`,
-      study: "Students explore advanced diagnostic methodologies, healthcare delivery protocols, and clinical technologies essential for modern medical environments.",
-      experience: "Hands-on diagnostic laboratory work, clinical rotations, and emergency care simulations."
+      overview: `You join the allied-health professionals every hospital depends on — the people who run its laboratories, imaging, anaesthesia support, emergency care and therapy alongside doctors and nurses.`,
+      study: "You study human anatomy and physiology, the science behind your discipline's instruments and procedures, patient safety and infection control, clinical documentation, and professional practice.",
+      experience: "You start in the skills lab, move on to supervised clinical postings, and spend your final year practising hands-on in the relevant hospital department."
     };
   }
   if (slug.includes('psychology')) {
     return {
-      overview: `This programme offers an in-depth study of human behaviour, mental health, and behavioural health interventions, preparing students for roles in clinical psychology and counselling.`,
-      study: "Coursework covers psychological assessment, rehabilitation psychology, behavioral intervention strategies, and professional ethics.",
-      experience: "Supervised counseling practice, behavioral observation, and psychological assessment labs."
+      overview: `You study human behaviour and mental health, and train to assess, support and rehabilitate people living with psychological, developmental and neurological conditions.`,
+      study: "You study psychological assessment, developmental and abnormal psychology, counselling and behavioural intervention, rehabilitation psychology, research methods, and professional ethics.",
+      experience: "You gain supervised counselling practice, work in psychological-assessment labs, build case studies, and complete community and clinical placements."
     };
   }
   if (slug.includes('nursing')) {
     return {
-      overview: `This programme focuses on patient care, clinical responsibility, and nursing practice, equipping students to become essential members of hospital and community healthcare teams.`,
-      study: "Students master clinical nursing procedures, healthcare ethics, patient safety protocols, and advanced health monitoring.",
-      experience: "Extensive hospital rotations, community healthcare outreach, and rigorous clinical skills training."
+      overview: `You train as a registered nurse for hospital, community and specialist settings, combining nursing science with supervised clinical practice from the early semesters.`,
+      study: "You study anatomy, physiology and pharmacology; medical-surgical, paediatric, mental-health and community-health nursing; patient safety; and nursing research and ethics.",
+      experience: "You practise first in the skills lab, then on supervised clinical postings across medical, surgical, mental-health and community settings."
     };
   }
   if (slug.includes('engineering') || slug.includes('technology') || slug.includes('tech')) {
     return {
-      overview: `This programme merges technical proficiency with emerging technologies. Students explore fields like assistive technology, rehabilitation engineering, computer science, AI, machine learning, and data science.`,
-      study: "Core subjects include software development, data analysis, algorithm design, and the application of emerging technologies to solve real-world problems.",
-      experience: "Project-based learning in advanced computing labs, software simulations, and industry-aligned technical workshops."
+      overview: `You build engineering and computing skills where technology meets people — including assistive and rehabilitation engineering, artificial intelligence, data science and software systems.`,
+      study: "You study programming and software engineering, data structures and algorithms, mathematics for computing, your chosen specialisation (AI, data science, biomedical or assistive technology), and project work.",
+      experience: "You learn through lab-based coursework, semester projects and a capstone project, with industry-partner modules where the programme includes them."
     };
   }
   if (slug.includes('law')) {
     return {
-      overview: `This programme delivers comprehensive legal education rooted in constitutional values, rights, and ethics. It prepares students for advocacy, legal research, and public policy.`,
-      study: "The curriculum spans foundational law, disability rights, healthcare law, public policy, and rigorous legal research methodologies.",
-      experience: "Moot court practice, policy analysis, and legal advocacy internships."
+      overview: `You receive a rigorous legal education grounded in the Constitution, rights and ethics, with particular depth in disability rights, health law and public policy — preparing you for practice, research and public service.`,
+      study: "You study constitutional, criminal, civil and contract law; jurisprudence; procedural law; and specialised areas such as disability rights, healthcare law and technology law.",
+      experience: "You argue in moot court, work in the legal-aid clinic, intern with courts and law firms, and carry out supervised legal research."
     };
   }
-  
+
   return {
-    overview: `This programme provides a structured academic pathway focusing on professional excellence, critical thinking, and industry-relevant skill development.`,
-    study: "A balanced curriculum covering foundational theories, applied knowledge, and professional competencies.",
-    experience: "Practical workshops, academic projects, and industry-focused learning activities."
+    overview: `You follow a structured pathway that combines foundational theory with the applied, profession-oriented skills the field requires.`,
+    study: "You study the core subjects of the discipline, its applied methods, and the professional competencies it requires.",
+    experience: "You learn through practical workshops, supervised projects and applied work aligned to the discipline."
   };
 };
 
@@ -133,16 +99,16 @@ const getRegulatoryStatus = (prog: any) => {
   ];
   const risky = riskyTerms.some((term) => normalized.includes(term.toLowerCase()));
   if (risky) {
-    return "Stmarys University is UGC 2(f) recognized at the university level. Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.";
+    return "St. Mary's University is recognised by the UGC under Section 2(f) of the UGC Act, 1956. Where a professional council approval applies to this programme, it is published on the Approvals & Recognitions page.";
   }
   return raw
-    ? `${raw} Programme-level professional permissions, where required, are verified through official university notifications or relevant statutory council documents.`
+    ? `${raw} Where a professional council approval applies to this programme, it is published on the Approvals & Recognitions page.`
     : APPROVAL_SAFETY_NOTE;
 };
 
 const getAdmissionRoute = (prog: any, isPhd: boolean) => {
-  if (isPhd) return "Ph.D. cycle status is maintained on the Ph.D. page for notices and next-cycle interest.";
-  return prog?.admissionRoute || "Apply through the official admissions and counselling route; entrance test/counselling applies where notified.";
+  if (isPhd) return "Ph.D. admissions run in cycles; the current status and next-cycle notice are on the Ph.D. Admissions page.";
+  return prog?.admissionRoute || "Apply online, then complete admissions counselling to confirm eligibility and your seat. No entrance exam is currently announced; any future test is published only through an official university notice.";
 };
 
 const EMVERSITY_ABOUT =
@@ -162,17 +128,32 @@ export default function Program() {
   const school = findBySlugOrName(schoolSource, schoolSlug) as any;
   const dept = findBySlugOrName(school?.departments, deptSlug) as any;
   const prog = findBySlugOrName(dept?.programs, programSlug) as any;
+  const programmePathname = `/schools/${schoolSlug}/${deptSlug}/${programSlug}`;
+  const programmeFee = getProgrammeFee(programmePathname);
+  const feeValue = programmeFee?.annualINR
+    ? `${formatINR(programmeFee.annualINR)} per year (verify at counselling)`
+    : programmeFee?.totalINR
+      ? `${formatINR(programmeFee.totalINR)} total (verify at counselling)`
+      : "Published at official admissions counselling — call the admissions office.";
 
   const programName = prog?.name || "";
+  // H1 carries the full degree name ("Bachelor of Physiotherapy (BPT)"); running copy keeps the short form.
+  const programDisplayName = getProgrammeDisplayName(prog);
+  const programShortName = getProgrammeShortName(prog) || programName;
   const levelFull = useMemo(() => prog ? formatLevel(prog.level || "") : "", [prog]);
 
   const partners = useMemo(() => {
     if (!prog) return [];
-    return getEduPartners(prog)
-      .map((partner) => ({ ...partner, leadUrl: partner?.landingUrl || getEduPartnerLandingUrl(prog) }))
-      .filter(p => p.code);
+    const programPartners = getEduPartners(prog);
+    const visiblePartners = programPartners.length
+      ? programPartners
+      : [EDU_PARTNERS["St. Mary's University"]];
+
+    return visiblePartners
+      .map((partner: any) => ({ ...partner, leadUrl: partner?.landingUrl || getEduPartnerLandingUrl(prog) }))
+      .filter((p: any) => p.code);
   }, [prog]);
-  const hasEmversityPartner = useMemo(() => partners.some((partner) => partner.code === "EMVERSITY"), [partners]);
+  const hasEmversityPartner = useMemo(() => partners.some((partner: any) => partner.code === "EMVERSITY"), [partners]);
 
   const isPhd = useMemo(() => {
     if (!prog) return false;
@@ -183,6 +164,10 @@ export default function Program() {
 
   const regulatoryStatus = useMemo(() => getRegulatoryStatus(prog), [prog]);
   const admissionRoute = useMemo(() => getAdmissionRoute(prog, isPhd), [prog, isPhd]);
+  const healthAlliedSeo = useMemo(
+    () => getHealthAlliedCourseSeoProfile({ schoolSlug, departmentSlug: deptSlug, programSlug }),
+    [deptSlug, programSlug, schoolSlug]
+  );
 
   const handleApplyClick = () => {
     if (isPhd) {
@@ -220,51 +205,41 @@ export default function Program() {
 
   if (!school || !dept || !prog) notFound();
 
-  const programSeoTitle = buildProgramSeoTitle(programName);
-  const programDirectAnswer = buildProgramDirectAnswer({
-    programName,
-    levelFull,
-    schoolName: school.name,
-    departmentName: dept.name,
-    duration: prog.duration,
-    eligibility: prog.eligibility,
+  const programDirectAnswer = getProgrammeAnswerFirst({
+    school,
+    department: dept,
+    program: prog,
+    schoolSlug,
+    departmentSlug: deptSlug,
+    programSlug,
   });
 
-  const programBreadcrumbs = [
-    { name: school.short || school.name, path: `/schools/${schoolSlugSafe}` },
-    { name: dept.short || dept.name, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}` },
-    { name: "Program Detail", path: `/schools/${schoolSlugSafe}/${deptSlugSafe}/${programSlugSafe}` }
+  const programBreadcrumbs: Array<{ label: string; path?: string }> = [
+    { label: school.short || school.name, path: `/schools/${schoolSlugSafe}` },
+    { label: dept.short || dept.name, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}` },
+    { label: programShortName, path: `/schools/${schoolSlugSafe}/${deptSlugSafe}/${programSlugSafe}` }
   ];
+
+  const isMptOrMot = useMemo(() => {
+    const s = String(programSlugSafe || "").toLowerCase();
+    const p = String(prog?.slug || "").toLowerCase();
+    const n = String(prog?.name || "").toLowerCase();
+    return s === "mpt" || s === "mot" || p === "mpt" || p === "mot" || n.includes("master of physiotherapy") || n.includes("master of occupational therapy");
+  }, [programSlugSafe, prog?.slug, prog?.name]);
 
   return (
     <>
       <SchoolLayout
       activeSchoolSlug={schoolSlugSafe}
-      title={programSeoTitle}
+      title={programDisplayName}
       subtitle={levelFull}
-      breadcrumbs={programBreadcrumbs.map(b => ({ label: b.name, path: b.path }))}
+      breadcrumbs={programBreadcrumbs}
       sectionLabel={levelFull.toUpperCase()}
-      heading={programName}
+      heading={`About the ${programShortName} programme`}
       onApply={handleApplyClick}
     >
       <div className="space-y-12">
-        {/* Regulatory Note */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-[#f8fafc] to-white border border-slate-200 p-4 cut-corner-panel flex items-start gap-4">
-          <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(to_right,rgba(13,49,92,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(13,49,92,0.06)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-          <div className="relative z-10 flex items-start gap-4">
-            <div className="bg-[#019e6e]/10 p-2 rounded-full shrink-0 mt-0.5">
-              <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain" alt="Regulatory" />
-            </div>
-            <div>
-              <h3 className="text-[12px] font-black uppercase tracking-widest text-[#0d315c] mb-1">
-                Recognition & Verification
-              </h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                {regulatoryStatus}
-              </p>
-            </div>
-          </div>
-        </div>
+        {isMptOrMot && <MandatoryAttendanceNotice />}
 
         {/* 1. Overview & Quick Facts */}
         <section className="flex flex-col lg:flex-row gap-10">
@@ -297,13 +272,13 @@ export default function Program() {
               <div>
                 <h4 className="text-[13px] font-black uppercase tracking-widest text-[#019e6e] mb-3">What Students Study</h4>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  {getProgramPositioning(school.slug, prog.name).study}
+                  {healthAlliedSeo?.study || getProgramPositioning(school.slug, prog.name).study}
                 </p>
               </div>
               <div>
                 <h4 className="text-[13px] font-black uppercase tracking-widest text-[#019e6e] mb-3">Learning Experience</h4>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  {prog.labs || prog.fieldExposure || getProgramPositioning(school.slug, prog.name).experience}
+                  {prog.labs || prog.fieldExposure || healthAlliedSeo?.experience || getProgramPositioning(school.slug, prog.name).experience}
                 </p>
               </div>
             </div>
@@ -317,7 +292,7 @@ export default function Program() {
                     { label: "Duration", value: prog.duration, icon: FaClock },
                     { label: "Level", value: prog.level, icon: FaUserGraduate },
                     { label: "Eligibility", value: prog.eligibility, icon: FaCheckCircle },
-                    { label: "Fee Guidance", value: "Confirmed through official admissions counselling and university communication.", icon: FaFileDownload },
+                    { label: "Annual Fee", value: feeValue, icon: FaFileDownload },
                     { label: "Intake / Batch Status", value: prog.intakeDisplay || prog.intake, icon: FaUsers },
                     { label: "Admission Route", value: admissionRoute, icon: FaShieldAlt },
                   ].map((fact, i) => (
@@ -341,6 +316,24 @@ export default function Program() {
              </div>
           </div>
         </section>
+
+        {/* Regulatory Note — placed after the overview so the answer-first paragraph leads the page */}
+        <div className="relative overflow-hidden bg-gradient-to-r from-[#f8fafc] to-white border border-slate-200 p-4 cut-corner-panel flex items-start gap-4">
+          <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(to_right,rgba(13,49,92,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(13,49,92,0.06)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+          <div className="relative z-10 flex items-start gap-4">
+            <div className="bg-[#019e6e]/10 p-2 rounded-full shrink-0 mt-0.5">
+              <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain" alt="Regulatory" />
+            </div>
+            <div>
+              <h3 className="text-[12px] font-black uppercase tracking-widest text-[#0d315c] mb-1">
+                Recognition & Verification
+              </h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                {regulatoryStatus}
+              </p>
+            </div>
+          </div>
+        </div>
 
         {/* ================= CURRICULUM & ADMISSIONS ================= */}
         {(prog.curriculum || prog.admissionProcess) && (
@@ -433,6 +426,9 @@ export default function Program() {
             </div>
           </div>
         </section>
+
+        {/* 3. Campus Life */}
+        <CampusLife360Section />
 
         {/* 5. Industry Partners (Existing) */}
         {partners.length > 0 && (

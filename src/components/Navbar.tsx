@@ -12,6 +12,7 @@ import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
 import { detectProgramCategory, safeSlug } from "@/lib/shared/program-utils";
 import { getSeoAuthorityPage } from "@/lib/seo/authority-map";
+import { predictivePrefetch } from "@/lib/speed/predictive-preloader";
 
 const authorityPath = (key: string, fallback: string) => getSeoAuthorityPage(key)?.path || fallback;
 
@@ -63,6 +64,7 @@ const Navbar = ({
     (path: string) => {
       if (!path) return;
       router.prefetch(path);
+      predictivePrefetch(path);
     },
     [router]
   );
@@ -111,10 +113,10 @@ const Navbar = ({
       onMouseLeave={() => setActiveMenu(null)}
     >
       <div className="flex h-full items-center justify-between lg:items-center lg:justify-between lg:py-0 lg:pr-8">
-        <Link href="/" onClick={closeMenu} onMouseEnter={() => setActiveMenu(null)} className="flex h-full items-center justify-center shrink-0 bg-white cut-corner-badge shadow-md overflow-hidden transition-all duration-300 px-3 sm:px-4 lg:px-5 min-w-[112px] sm:min-w-[128px] lg:min-w-[140px]">
+        <Link prefetch={false} href="/" onClick={closeMenu} onMouseEnter={() => setActiveMenu(null)} className="flex h-full items-center justify-center shrink-0 bg-white cut-corner-badge shadow-md overflow-hidden transition-all duration-300 px-3 sm:px-4 lg:px-5 min-w-[112px] sm:min-w-[128px] lg:min-w-[140px]">
           <Image
             src="/assets/Logo.webp"
-            alt="Stmarys University Logo"
+            alt="St. Mary's University Logo"
             width={374}
             height={200}
             className="w-[86px] object-contain lg:w-[96px]"
@@ -125,13 +127,13 @@ const Navbar = ({
 
         <ul className="hidden flex-wrap items-center justify-end gap-x-6 gap-y-1 overflow-visible font-outfit [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>li]:shrink-0 h-full lg:flex lg:flex-nowrap lg:gap-4 xl:gap-7 pr-4">
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link prefetch={false} href="/" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Home
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href={authority.about} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link prefetch={false} href={authority.about} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               About
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
@@ -144,7 +146,7 @@ const Navbar = ({
               prefetchPath(`/schools/${safeSlug(activeSchool?.slug, activeSchool?.name)}`);
             }}
           >
-            <Link
+            <Link prefetch={false}
               href={authority.schools}
               onClick={closeMenu}
               aria-label="Academic Schools Mega Menu"
@@ -168,7 +170,7 @@ const Navbar = ({
                         const sSlug = safeSlug(s.slug, s.name);
                         const isActive = activeSchoolSlug === sSlug;
                         return (
-                          <Link
+                          <Link prefetch={false}
                             href={`/schools/${sSlug}`}
                             key={sSlug}
                             onMouseEnter={() => {
@@ -187,7 +189,7 @@ const Navbar = ({
                   </div>
 
                   <div className="mt-8 pt-6 border-t border-white/20">
-                    <Link 
+                    <Link prefetch={false} 
                       href={authority.academicStructure}
                       onClick={closeMenu}
                       className="text-left flex items-center gap-3 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all group w-full"
@@ -225,7 +227,7 @@ const Navbar = ({
                               schoolProgramsByCategory[cat].map((p) => (
                                 <li key={p.slug} className="group flex items-start gap-2 p-1.5 rounded-md hover:bg-white/80 transition-all">
                                   <div className="flex flex-col group/item transition-all">
-                                    <Link 
+                                    <Link prefetch={false} 
                                       href={`/schools/${safeSlug(activeSchool?.slug, activeSchool?.name)}/${p.deptSlug}/${p.slug}`}
                                       onClick={closeMenu}
                                       className="text-left text-[13px] font-bold text-slate-800 group-hover/item:text-[#019e6e] leading-snug transition-colors"
@@ -246,7 +248,7 @@ const Navbar = ({
                   </div>
 
                   <div className="mt-8 pt-5 border-t border-slate-200 flex justify-end">
-                    <Link 
+                    <Link prefetch={false} 
                       href={`/schools/${safeSlug(activeSchool?.slug, activeSchool?.name)}`}
                       onClick={closeMenu}
                       className="text-[#019e6e] font-black text-[13px] hover:gap-2 flex items-center gap-1.5 transition-all group"
@@ -263,7 +265,7 @@ const Navbar = ({
             className="flex items-center md:h-full"
             onMouseEnter={() => setActiveMenu('admissions')}
           >
-            <Link
+            <Link prefetch={false}
               href={authority.admissions}
               onClick={closeMenu}
               aria-label="Official University Admissions Mega Menu"
@@ -290,7 +292,7 @@ const Navbar = ({
                       <p className="text-[10px] font-black uppercase tracking-widest mb-1 opacity-80">Apply Now</p>
                       <p className="text-lg font-black leading-none">Admissions 2026</p>
                     </a>
-                    <Link 
+                    <Link prefetch={false} 
                       href={authority.admissions}
                       onClick={closeMenu}
                       className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-xl hover:border-[#019e6e] hover:bg-slate-50 transition-all group w-full text-left"
@@ -314,7 +316,7 @@ const Navbar = ({
                         { label: "Post-Diploma", desc: "Specialized clinical credentials", to: authority.admissions },
                       ].map((item, i) => (
                         <li key={i}>
-                          <Link 
+                          <Link prefetch={false} 
                             href={item.to}
                             onClick={closeMenu}
                             className={`text-left group flex flex-col ${item.highlight ? "text-[#0d315c]" : "text-slate-600"} hover:text-[#019e6e] transition-colors`}
@@ -337,7 +339,7 @@ const Navbar = ({
                         { label: "Mandatory Disclosure", desc: "Official statutory documentation", to: "/mandatory-disclosure" },
                       ].map((item, i) => (
                         <li key={i}>
-                          <Link 
+                          <Link prefetch={false} 
                             href={item.to}
                             onClick={closeMenu}
                             className="text-left group flex flex-col text-slate-600 hover:text-[#019e6e] transition-colors"
@@ -355,26 +357,26 @@ const Navbar = ({
           </li>
 
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/careers" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link prefetch={false} href="/careers" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Careers
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href="/search" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link prefetch={false} href="/search" onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Search
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href={authority.contact} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link prefetch={false} href={authority.contact} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Contact
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>
           </li>
 
           <li onMouseEnter={() => setActiveMenu(null)}>
-            <Link href={authority.campus360} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
+            <Link prefetch={false} href={authority.campus360} onClick={closeMenu} className="whitespace-nowrap text-[10px] lg:text-[12px] xl:text-[14px] font-black uppercase tracking-[0.08em] lg:tracking-[0.14em] xl:tracking-[0.2em] text-white/90 hover:text-[#ffaf3a] transition-all relative group py-2">
               Campus 360
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-[#ffaf3a] transition-all duration-200 group-hover:w-full" />
             </Link>

@@ -5,33 +5,59 @@
   "scripts": {
     "dev": "next dev -p 4000",
     "build": "next build",
-    "start": "next start",
+    "serve:out": "node scripts/serve-out.mjs",
+    "check": "npm run seo:guard && npm run typecheck && npm test && npm run lint",
+    "verify": "npm run check && npm run build && npm run redirects:check && npm run audit:checklist -- ci --strict && npm run seo:gates -- ci --strict && npm run seo:facts -- --strict",
     "lint": "next lint",
-    "seo:guard": "node scripts/seo-guard.js"
+    "typecheck": "tsc --noEmit --pretty false",
+    "test": "node --test tests/*.test.mjs",
+    "seo:guard": "node scripts/seo-guard.js",
+    "redirects:map": "node scripts/redirect-map.mjs",
+    "redirects:check": "node scripts/redirect-map.mjs --check",
+    "links:internal": "node scripts/check-internal-links.mjs",
+    "audit:checklist": "node scripts/checklist-audit.mjs",
+    "audit:integrations": "node scripts/protected-integration-manifest.mjs",
+    "audit:frontend": "node scripts/frontend-audit.mjs",
+    "audit:frontend:compare": "node scripts/compare-frontend-audit.mjs",
+    "audit:visual": "node scripts/visual-baseline.mjs",
+    "audit:visual:compare": "node scripts/compare-visual-baselines.mjs",
+    "seo:crawl": "node scripts/crawl-export.mjs",
+    "seo:gates": "node scripts/seo-gates.mjs",
+    "seo:coverage": "node scripts/course-coverage.mjs",
+    "seo:llms": "node scripts/generate-llms.mjs",
+    "seo:facts": "node scripts/check-facts-consistency.mjs"
   },
   "dependencies": {
     "@photo-sphere-viewer/core": "^5.14.1",
     "@photo-sphere-viewer/markers-plugin": "^5.14.1",
     "framer-motion": "^12.23.12",
-    "next": "^14.2.33",
+    "next": "^15.5.25",
     "nextjs-toploader": "^3.9.17",
-    "puppeteer": "^24.43.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-icons": "^5.5.0",
-    "sharp": "^0.34.5",
     "three": "^0.179.0"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.15.18",
-    "@types/react": "^18.3.23",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.35",
+    "eslint-config-next": "^15.5.25",
     "postcss": "^8.5.6",
+    "puppeteer": "^24.43.1",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
+  },
+  "overrides": {
+    "@next/eslint-plugin-next": {
+      "glob": "10.5.0"
+    }
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
