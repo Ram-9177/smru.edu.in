@@ -36,7 +36,6 @@ const tier3Routes = [
   "/admission-policy",
   "/approvals-recognitions",
   "/departments",
-  "/carebridge",
   "/handbook",
   "/html-sitemap",
 ];
@@ -71,8 +70,9 @@ const partnerPathFromLandingUrl = (landingUrl?: string | null) => {
 
 // Only partner landings that are indexable in app/(Partners)/partner/[slug]/page.tsx enter the sitemap.
 // Mirrors that route's rules: iframe shells (every slug not rendered by an SMRU-authored view) and
-// unverified-claim landings are noindex; /partner/carebridge canonicalises to /carebridge (tier 3 above).
-const SMRU_AUTHORED_PARTNER_PATHS = new Set(["/partner/edinbox", "/partner/carebridge"]);
+// unverified-claim landings are noindex; /partner/carebridge redirects to /carebridge, itself a noindex
+// iframe shell of the partner's home page (public/partners/carebridge/), so neither is in the sitemap.
+const SMRU_AUTHORED_PARTNER_PATHS = new Set(["/partner/edinbox"]);
 const NOINDEX_PARTNER_PATHS = new Set(["/partner/edinbox", "/partner/qtst", "/partner/veloces"]);
 const CANONICALISED_PARTNER_PATHS = new Set(["/partner/carebridge"]);
 const partnerRoutes = Object.values(EDU_PARTNERS || {})

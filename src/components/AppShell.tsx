@@ -66,6 +66,7 @@ function AppShellContent({
       "bb",
       "blackbucks",
       "bytexl",
+      "carebridge",
       "edinbox",
       "edridge",
       "emversity",

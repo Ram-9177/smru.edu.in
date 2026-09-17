@@ -88,6 +88,7 @@
     RewriteRule ^iqac/?$ https://smru.edu.in/iqac-quality-assurance/ [L,R=301]
     RewriteRule ^mandatory-disclosure/(ugc-disclosure|statutory-disclosures|contact|first-academic-year-disclosure|public-information)/?$ https://smru.edu.in/mandatory-disclosure/ [L,R=301]
     RewriteRule ^(niat|bb|skilgen|qtst)/?$ https://smru.edu.in/partner/$1/ [L,R=301]
+    RewriteRule ^partner/carebridge/?$ https://smru.edu.in/carebridge/ [L,R=301]
 
     # --- Legacy aliases that also have a client shell under app/ (kept in sync by scripts/redirect-map.mjs) ---
     RewriteRule ^(blackbucks)/?$ https://smru.edu.in/partner/bb/ [L,R=301]

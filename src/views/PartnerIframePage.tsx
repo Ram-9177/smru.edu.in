@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
 import { useIframeAutoHeight } from "@/hooks/useIframeAutoHeight";
@@ -21,6 +21,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
     bb: "https://smru.theblackbucks.com/",
     nst: "https://university.newtonschool.co/v1/nst-st-marys-hyd",
     emversity: "https://emversity.com/university-partners/st-marys-website-page",
+    carebridge: "/partners/carebridge/index.html",
     qtst: "/partners/qtst/index.html",
     edinbox: "/partners/edinbox/index.html",
     edridge: "https://edridge.in/edridge-st-mary-s-university/",
@@ -65,10 +66,35 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
     externalFallbackBySlug[activeSlug] ||
     "";
 
-  // Reset loading state when slug changes
+  // Reset the overlay when the slug changes. A same-origin document (public/partners/*) can finish
+  // loading before hydration attaches onLoad — a cached reload does — which used to leave the overlay
+  // up for good; so also read the document's readiness directly, and never keep the overlay past 6 s.
+  // Dismissal is deferred by a tick: removing the overlay in the very commit that mounted it leaves
+  // AnimatePresence's exit animation stuck. handleIframeLoad is read through a ref so this effect
+  // depends only on the slug and never re-runs (a re-run would flash the overlay back in).
+  const handleIframeLoadRef = useRef(handleIframeLoad);
+  handleIframeLoadRef.current = handleIframeLoad;
   useEffect(() => {
     setIsIframeLoaded(false);
-  }, [slug]);
+    let cancelled = false;
+    const timers: number[] = [];
+    const markLoaded = () => {
+      if (cancelled) return;
+      handleIframeLoadRef.current();
+      setIsIframeLoaded(true);
+    };
+    try {
+      const doc = iframeRef.current?.contentDocument;
+      if (doc && doc.readyState === "complete" && doc.location?.href !== "about:blank") timers.push(window.setTimeout(markLoaded, 400));
+    } catch {
+      // Cross-origin document: wait for onLoad or the safety timeout.
+    }
+    timers.push(window.setTimeout(markLoaded, 6000));
+    return () => {
+      cancelled = true;
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [slug, iframeRef]);
 
   if (!partner) {
     const displayName = (slug || "Partner").toUpperCase().replace("-", " ");

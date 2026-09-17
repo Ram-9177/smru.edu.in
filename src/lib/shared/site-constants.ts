@@ -81,6 +81,7 @@ export const PARTNER_HIDDEN_STICKY_ROUTES = [] as const;
 
 export const STICKY_CTA_HIDDEN_ROUTES = [
   "/partner",
+  "/carebridge",
   "/bb",
   "/niat",
   "/qtst",

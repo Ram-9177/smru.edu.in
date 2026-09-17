@@ -14,6 +14,7 @@
     "seo:guard": "node scripts/seo-guard.js",
     "redirects:map": "node scripts/redirect-map.mjs",
     "redirects:check": "node scripts/redirect-map.mjs --check",
+    "partners:carebridge": "node scripts/sync-carebridge-homepage.mjs",
     "links:internal": "node scripts/check-internal-links.mjs",
     "audit:checklist": "node scripts/checklist-audit.mjs",
     "audit:integrations": "node scripts/protected-integration-manifest.mjs",
