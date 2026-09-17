@@ -5,9 +5,9 @@ on:
     branches:
       - main
       - seo-hardening-phase-1
+  # Every pull request, whatever its base: stacked PRs (a branch based on another open PR) must run
+  # the same gate as PRs into main.
   pull_request:
-    branches:
-      - main
 
 permissions:
   contents: read
