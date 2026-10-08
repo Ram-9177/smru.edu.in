@@ -1,5 +1,5 @@
 import { UNIVERSITY_INFO } from "../shared/university";
-import { SITE_SOCIAL_LINKS } from "../shared/site-constants";
+import { SITE_CONTACT, SITE_SOCIAL_LINKS } from "../shared/site-constants";
 
 export const SITE_IDENTITY = {
   id: "https://smru.edu.in/#organization",
@@ -47,9 +47,18 @@ export const SITE_IDENTITY = {
   contactPoints: [
     {
       telephone: "+91-9010455591",
+      email: UNIVERSITY_INFO.email,
       contactType: "Admissions",
       areaServed: "IN",
       availableLanguage: ["English", "Hindi", "Telugu"],
+    },
+    {
+      contactType: "Vice-Chancellor Correspondence",
+      email: SITE_CONTACT.viceChancellorEmail,
+    },
+    {
+      contactType: "Registrar Correspondence",
+      email: SITE_CONTACT.registrarEmail,
     },
   ],
   socialLinks: [

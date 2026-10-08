@@ -445,7 +445,7 @@ export default function NursingLanding() {
               <div className="mt-6 space-y-3 text-slate-700">
                 <p className="flex items-center gap-3 font-semibold"><FaPhone className="text-[#019e6e]" /> 080 65459645 · 8712479133</p>
                 <p className="flex items-center gap-3 font-semibold"><FaWhatsapp className="text-[#019e6e]" /> WhatsApp 94933 21969</p>
-                <p className="flex items-center gap-3 font-semibold"><FaEnvelope className="text-[#019e6e]" /> enquiry@smru.edu.in · smru.edu.in</p>
+                <p className="flex items-center gap-3 font-semibold"><FaEnvelope className="text-[#019e6e]" /> <a href="mailto:Reach@smru.edu.in" className="hover:underline">Reach@smru.edu.in</a> · smru.edu.in</p>
               </div>
               <div className="mt-8 border-t border-slate-200 pt-6">
                 <h3 className="mb-4 text-xl font-black uppercase">Visit the Campus</h3>

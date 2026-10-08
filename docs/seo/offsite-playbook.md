@@ -20,7 +20,7 @@ Keep every listing byte-identical so engines reconcile all of them to one entity
 - **Website:** https://smru.edu.in · **Apply:** https://apply.smru.edu.in
 - **Schools (6):** Rehabilitation Sciences · Health & Allied Health Sciences · Psychology · Nursing ·
   Engineering & Emerging Technologies · Law · **Programmes:** 71 (https://smru.edu.in/programmes/)
-- **Email:** reach@smru.edu.in · **Admissions:** +91-7331119432
+- **Email:** Reach@smru.edu.in · **Admissions:** +91-7331119432
 - **Not to be confused with:** St. Mary's College Hyderabad; St. Mary's Group of Institutions;
   St. Mary's University in Texas / Twickenham / Halifax / Calgary.
 

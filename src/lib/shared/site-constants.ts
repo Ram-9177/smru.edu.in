@@ -4,7 +4,9 @@ export const SITE_CONTACT = {
   lawPhone: "08065459645",
   secondaryPhone: "9010455591/90",
   corporateOfficePhone: "+91 87124 79133",
-  email: "reach@smru.edu.in",
+  email: "Reach@smru.edu.in",
+  viceChancellorEmail: "Vice_chancellor@smru.edu.in",
+  registrarEmail: "Registrar@smru.edu.in",
   address:
     "Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.",
   corporateOfficeAddress:

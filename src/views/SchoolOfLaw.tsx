@@ -1038,12 +1038,12 @@ export default function SchoolOfLaw() {
             <div className="flex items-center justify-center gap-2"><FaLandmark className="text-[#ffaf3a]" /> School of Law</div>
             <div className="flex items-center justify-center gap-2"><FaUsers className="text-[#ffaf3a]" /> St. Mary's University</div>
             <div className="flex items-center justify-center gap-2"><FaBalanceScale className="text-[#ffaf3a]" /> Hyderabad, Telangana, India</div>
-            <a href="mailto:reach@smru.edu.in" className="flex items-center justify-center gap-2 underline decoration-white/30 underline-offset-4"><FaEnvelope className="text-[#ffaf3a]" /> reach@smru.edu.in</a>
+            <a href="mailto:Reach@smru.edu.in" className="flex items-center justify-center gap-2 underline decoration-white/30 underline-offset-4"><FaEnvelope className="text-[#ffaf3a]" /> Reach@smru.edu.in</a>
           </div>
           <div className="mt-6 flex flex-wrap justify-center gap-2 sm:gap-3 sm:mt-8">
             <button onClick={() => openApply("general")} className="cut-corner-badge inline-flex items-center gap-2 bg-[#ffaf3a] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-[#0d315c] sm:px-8 sm:py-4 sm:gap-3">Apply for Law Admissions <FaArrowRight className="hidden sm:inline" /></button>
             <a href="#programmes" className="cut-corner-badge border border-white/25 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white sm:px-8 sm:py-4">Explore Law Programmes</a>
-            <a href="mailto:reach@smru.edu.in" className="cut-corner-badge border border-white/25 bg-[#019e6e] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white sm:px-8 sm:py-4">Talk to Admissions</a>
+            <a href="mailto:Reach@smru.edu.in" className="cut-corner-badge border border-white/25 bg-[#019e6e] px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white sm:px-8 sm:py-4">Talk to Admissions</a>
           </div>
         </div>
       </section>

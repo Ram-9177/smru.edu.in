@@ -40,7 +40,7 @@ export default function Page() {
           { type: "list", heading: "Application steps", items: ["Choose a programme and confirm eligibility mapping for your country", "Submit the application with academic documents and passport", "Receive the admission / eligibility letter from the university", "Apply for an Indian student visa at the Indian mission", "Pay fees as advised and confirm your seat", "Travel to Hyderabad and complete FRRO/e-FRRO registration"] },
           { type: "list", heading: "Documents", items: ["Passport (valid)", "Academic transcripts and certificates (attested / verifiable as required)", "AIU equivalence certificate where requested", "Passport photographs", "Medical fitness documents as advised", "Police clearance where required by the visa process"] },
           { type: "prose", heading: "Visa and e-FRRO", paragraphs: ["Most international students need an Indian student visa. After arrival, register with the FRRO/e-FRRO within the required period (commonly 14 days). Nepali nationals study under the India–Nepal treaty without a visa but should carry valid documents."] },
-          { type: "callout", tone: "info", heading: "International admissions contact", text: "Email reach@smru.edu.in or call +91-7331119432 (WhatsApp available) for country-specific guidance, current fees and arrival support." },
+          { type: "callout", tone: "info", heading: "International admissions contact", text: "Email Reach@smru.edu.in or call +91-7331119432 (WhatsApp available) for country-specific guidance, current fees and arrival support." },
         ]}
         faqs={FAQS}
         relatedLinks={[

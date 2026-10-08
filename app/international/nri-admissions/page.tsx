@@ -33,7 +33,7 @@ export default function Page() {
           { type: "list", heading: "Documents", items: ["Passport, and OCI/PIO card where applicable", "Academic transcripts and certificates (attested / verifiable as required)", "AIU equivalence certificate for foreign qualifications, where requested", "Evidence of NRI status / sponsor relationship where required", "Passport photographs and the standard programme documents"] },
           { type: "prose", heading: "How the NRI route differs", paragraphs: ["The NRI category, where it applies, has its own document and (where applicable) fee treatment distinct from the regular domestic route and from the foreign-national route. Foreign nationals (non-Indian passport holders) should use the country pages and apply on a student visa instead."] },
           { type: "prose", heading: "Fees", paragraphs: ["Any applicable NRI fee is quoted at official admissions counselling. Request the current figure in INR and an indicative USD guide from international admissions."] },
-          { type: "callout", tone: "info", heading: "International admissions", text: "Email reach@smru.edu.in or call +91-7331119432 (WhatsApp) to confirm your eligibility and the current NRI route." },
+          { type: "callout", tone: "info", heading: "International admissions", text: "Email Reach@smru.edu.in or call +91-7331119432 (WhatsApp) to confirm your eligibility and the current NRI route." },
         ]}
         faqs={FAQS}
         relatedLinks={[

@@ -322,7 +322,7 @@ export default function LawLanding() {
       <footer className="bg-[#071a32] px-4 py-8 text-white sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-xs font-semibold text-white/60 md:flex-row">
           <p>St. Mary's University, Hyderabad, Telangana</p>
-          <p>{SITE_CONTACT.email} | {SITE_CONTACT.lawPhone}</p>
+          <p><a href={`mailto:${SITE_CONTACT.email}`} className="hover:underline">{SITE_CONTACT.email}</a> | {SITE_CONTACT.lawPhone}</p>
         </div>
       </footer>
     </div>

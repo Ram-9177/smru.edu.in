@@ -24,7 +24,7 @@ const FACTS = {
   act: "Act No. 10 of 2026",
   ugc: "Section 2(f)",
   postalCode: "508284",
-  email: "reach@smru.edu.in",
+  email: "Reach@smru.edu.in",
   website: "https://smru.edu.in",
   schools: [
     "Rehabilitation Sciences",

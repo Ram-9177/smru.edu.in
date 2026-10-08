@@ -27,7 +27,7 @@ const lawSchoolSchema = {
   name: "School of Law",
   url: absoluteUrl(lawPathname),
   description: lawMetaDescription,
-  email: "reach@smru.edu.in",
+  email: "Reach@smru.edu.in",
   parentOrganization: { "@id": "https://smru.edu.in/#organization" },
   address: {
     "@type": "PostalAddress",

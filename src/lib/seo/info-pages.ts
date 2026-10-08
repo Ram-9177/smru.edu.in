@@ -477,7 +477,7 @@ export const INFO_PAGES: InfoPageConfig[] = [
     pageType: "trust",
     ...requestStatus("Registrar Office"),
     answers: [
-      { question: "What contact routes are public?", answer: `Admissions: ${SITE_CONTACT.primaryPhone}. Email: ${SITE_CONTACT.email}. WhatsApp is linked through the contact and admissions pages.` },
+      { question: "What contact routes are public?", answer: `Admissions: ${SITE_CONTACT.primaryPhone}. Email: ${SITE_CONTACT.email}. Vice-Chancellor: ${SITE_CONTACT.viceChancellorEmail}. Registrar: ${SITE_CONTACT.registrarEmail}. WhatsApp is linked through the contact and admissions pages.` },
     ],
     sections: [
       {
@@ -485,6 +485,8 @@ export const INFO_PAGES: InfoPageConfig[] = [
         paragraphs: [
           `Admissions helpdesk: ${SITE_CONTACT.primaryPhone}.`,
           `Email: ${SITE_CONTACT.email}.`,
+          `Vice-Chancellor: ${SITE_CONTACT.viceChancellorEmail}.`,
+          `Registrar: ${SITE_CONTACT.registrarEmail}.`,
           `Campus address: ${SITE_CONTACT.address}`,
           officialRequestParagraph("Registrar Office"),
         ],

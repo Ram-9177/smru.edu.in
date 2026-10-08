@@ -32,6 +32,7 @@ type FlashUpdate = {
 
 const FLASH_UPDATES: FlashUpdate[] = [
   { text: "Admissions and entrance-related updates will be announced through official university notices.", to: "/admissions", isPriority: true },
+  { text: "Careers: Applications invited for Vice-Chancellor, Registrar, Asst. Registrar & Faculty across 6 Schools.", to: "/careers", isPriority: true },
   { text: PHD_ADMISSIONS_STATUS_MESSAGE, to: "/phd-admissions" },
   { text: "Admissions Open: Apply now for UG, PG, and Diploma programmes for the 2026-27 session.", to: "/admissions" },
   { text: "Scholarships: Merit-based financial assistance available for eligible students (T&C apply).", to: "/admissions" },
@@ -183,7 +184,7 @@ function AppShellContent({
               </span>
               <div className="min-w-0 flex-1 overflow-hidden">
                 <div className="smru-global-ticker-track">
-                  {FLASH_UPDATES.map((item, idx) => {
+                  {[...FLASH_UPDATES, ...FLASH_UPDATES].map((item, idx) => {
                     const isExternalOrAsset = item.to.includes("/assets/") || item.to.startsWith("http");
                     
                     const content = (

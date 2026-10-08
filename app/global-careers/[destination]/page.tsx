@@ -52,7 +52,7 @@ export default async function Page(props: { params: Promise<{ destination: strin
           { type: "prose", heading: "Realistic timeline", paragraphs: [d.timeline] },
           { type: "list", heading: "What St. Mary's University provides", items: d.smruProvides },
           { type: "list", heading: "What you must do yourself", items: d.studentMust },
-          { type: "callout", tone: "info", heading: "Plan your pathway", text: "Talk to admissions about the SMRU degree that fits this pathway. Email reach@smru.edu.in or call +91-7331119432 (WhatsApp)." },
+          { type: "callout", tone: "info", heading: "Plan your pathway", text: "Talk to admissions about the SMRU degree that fits this pathway. Email Reach@smru.edu.in or call +91-7331119432 (WhatsApp)." },
         ]}
         faqs={faqs}
         relatedLinks={[

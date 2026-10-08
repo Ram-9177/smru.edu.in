@@ -102,7 +102,20 @@ const Footer = () => {
                 </div>
                 <div className="flex items-start gap-3">
                   <FaEnvelope className="mt-1 shrink-0 text-[#ffaf3a]" size={13} />
-                  <p className="break-all">{email}</p>
+                  <div className="space-y-2 min-w-0">
+                    <div>
+                      <span className="block text-[11px] font-bold uppercase tracking-wider text-[#ffaf3a]">General Enquiries</span>
+                      <a href={`mailto:${SITE_CONTACT.email}`} className="break-all hover:underline text-white/80">{SITE_CONTACT.email}</a>
+                    </div>
+                    <div>
+                      <span className="block text-[11px] font-bold uppercase tracking-wider text-[#ffaf3a]">Vice-Chancellor</span>
+                      <a href={`mailto:${SITE_CONTACT.viceChancellorEmail}`} className="break-all hover:underline text-white/80">{SITE_CONTACT.viceChancellorEmail}</a>
+                    </div>
+                    <div>
+                      <span className="block text-[11px] font-bold uppercase tracking-wider text-[#ffaf3a]">Registrar</span>
+                      <a href={`mailto:${SITE_CONTACT.registrarEmail}`} className="break-all hover:underline text-white/80">{SITE_CONTACT.registrarEmail}</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

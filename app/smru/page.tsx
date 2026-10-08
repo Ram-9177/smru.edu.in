@@ -222,7 +222,10 @@ export default function SmruIdentityPage() {
                 </a>
               </li>
               <li>
-                <strong>Email:</strong> {UNIVERSITY_INFO.email}
+                <strong>Email:</strong>{" "}
+                <a className={linkClass} href={`mailto:${UNIVERSITY_INFO.email}`}>
+                  {UNIVERSITY_INFO.email}
+                </a>
               </li>
               <li>
                 <strong>Admissions:</strong> {UNIVERSITY_INFO.phone}

@@ -51,7 +51,7 @@ export default async function Page(props: { params: Promise<{ country: string }>
           { type: "prose", heading: "Document verification and attestation", paragraphs: [country.attestation] },
           { type: "list", heading: "How to apply", items: ["Choose a programme and confirm the eligibility mapping above", `Submit the application with your ${country.qualification}, transcripts and passport`, "Receive the admission / eligibility letter", "Apply for an Indian student visa where required", "Confirm fees and your seat, then travel to Hyderabad"] },
           { type: "prose", heading: "Fees", paragraphs: [`Fees are quoted at official admissions counselling; request the programme fee in INR and an indicative USD figure (payable from ${country.currency} accounts) from international admissions.`] },
-          { type: "callout", tone: "info", heading: "International admissions", text: "Email reach@smru.edu.in or call +91-7331119432 (WhatsApp) for country-specific guidance and current fees." },
+          { type: "callout", tone: "info", heading: "International admissions", text: "Email Reach@smru.edu.in or call +91-7331119432 (WhatsApp) for country-specific guidance and current fees." },
         ]}
         faqs={faqs}
         relatedLinks={[

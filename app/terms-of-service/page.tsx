@@ -35,7 +35,7 @@ export default function TermsOfServicePage() {
         <p className="mt-8 text-base leading-7">
           All program information and admissions timelines are subject to official university updates. For the latest confirmation, contact
           {" "}
-          <a className="font-semibold text-[#0d315c] underline" href="mailto:reach@smru.edu.in">reach@smru.edu.in</a>.
+          <a className="font-semibold text-[#0d315c] underline" href="mailto:Reach@smru.edu.in">Reach@smru.edu.in</a>.
         </p>
       </main>
     </>

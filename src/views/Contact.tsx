@@ -262,6 +262,33 @@ const Contact = () => {
                   </div>
                </div>
             </div>
+
+            <div className="bg-[#f8fafc] border border-[#dce7f3] cut-corner-panel p-8 space-y-6">
+               <h3 className="text-[12px] font-black text-[#0d315c] uppercase tracking-widest border-b border-[#dce7f3] pb-3">For Correspondence</h3>
+               <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <FaEnvelope className="mt-1 text-[#019e6e]" />
+                    <div>
+                      <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Vice-Chancellor</p>
+                      <a href={`mailto:${SITE_CONTACT.viceChancellorEmail}`} className="text-[14px] font-bold text-[#0d315c] hover:underline">{SITE_CONTACT.viceChancellorEmail}</a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <FaEnvelope className="mt-1 text-[#019e6e]" />
+                    <div>
+                      <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Registrar</p>
+                      <a href={`mailto:${SITE_CONTACT.registrarEmail}`} className="text-[14px] font-bold text-[#0d315c] hover:underline">{SITE_CONTACT.registrarEmail}</a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <FaEnvelope className="mt-1 text-[#019e6e]" />
+                    <div>
+                      <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">General Enquiries</p>
+                      <a href={`mailto:${SITE_CONTACT.email}`} className="text-[14px] font-bold text-[#0d315c] hover:underline">{SITE_CONTACT.email}</a>
+                    </div>
+                  </div>
+               </div>
+            </div>
           </div>
         </div>
       </section>
