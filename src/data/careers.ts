@@ -73,8 +73,9 @@ export const RECRUITMENT_NOTICE_META = {
   deadlineRule: "21 clear calendar days from the later of (i) date of newspaper publication, or (ii) date on which the detailed notification is uploaded on the University website.",
   vcSubmissionEmail: "chancellor@smru.edu.in",
   adminFacultySubmissionEmail: "hr@smru.edu.in",
-  enquiryPhone: "9010455590",
-  alternatePhone: "9010445590",
+  enquiryPhone: "9010455591",
+  alternatePhone: "9010455592",
+  enquiryPhoneDisplay: "9010455591 / 92",
   address: "Near Ramoji Film City, Deshmukhi Village, Pochampally Mandal, Yadadri Bhuvanagiri District, Hyderabad, Telangana - 508284, India.",
 };
 

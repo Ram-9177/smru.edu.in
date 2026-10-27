@@ -4,6 +4,21 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-10-27 — Careers enquiry number is +91 9010455591 / 92 (branch `vc-notification`)
+
+- The careers recruitment enquiry number changed to **9010455591 / 92**. The old pair (`9010455590`
+  on-page and `9010445590` in the downloadable notifications) is gone from the repository.
+- `src/data/careers.ts`: `RECRUITMENT_NOTICE_META.enquiryPhone` = `9010455591`, `alternatePhone` =
+  `9010455592`, plus a new `enquiryPhoneDisplay` (`"9010455591 / 92"`) so the three places that print
+  the number read from one string while `tel:` links use the bare `enquiryPhone`.
+- `src/views/Careers.tsx`: the sticky contact bar, the submission-details card (which used to print
+  `enquiryPhone / alternatePhone`) and the "Telephone Enquiries" tile all use `enquiryPhoneDisplay`;
+  the hardcoded `tel:+919010455590` in the tile now derives from the data file.
+- The six appointment-notification `.docx` files under `public/careers/` (Registrar, Assistant
+  Registrar, Faculty — hyphenated and spaced copies) had `9010445590` replaced in `word/document.xml`;
+  the VC notification contains no phone number. Left deliberately: the recruitment poster image
+  `public/careers/smru-employment-notification-2026.jpg` is artwork and was not re-rendered.
+
 ## 2026-09-17 — Attendance notice behind a button on MPT/MOT (branch `feat/attendance-notice-button`)
 
 - The mandatory-attendance notice for MPT and MOT no longer occupies the top of both programme pages. A compact

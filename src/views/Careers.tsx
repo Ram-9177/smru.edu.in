@@ -313,7 +313,7 @@ export default function Careers() {
               href={`tel:+91${RECRUITMENT_NOTICE_META.enquiryPhone}`}
               className="text-[#ffaf3a] font-bold hover:underline flex items-center gap-1"
             >
-              <FiPhone /> +91 {RECRUITMENT_NOTICE_META.enquiryPhone}
+              <FiPhone /> +91 {RECRUITMENT_NOTICE_META.enquiryPhoneDisplay}
             </a>
           </div>
         </div>
@@ -773,7 +773,7 @@ export default function Careers() {
                     <div className="bg-slate-50 p-3.5 rounded border border-slate-200 text-xs md:text-sm">
                       <span className="text-slate-500 block font-semibold">Contact &amp; Enquiries:</span>
                       <span className="text-[#0d315c] font-bold text-sm">
-                        +91 {RECRUITMENT_NOTICE_META.enquiryPhone} / +91 {RECRUITMENT_NOTICE_META.alternatePhone}
+                        +91 {RECRUITMENT_NOTICE_META.enquiryPhoneDisplay}
                       </span>
                     </div>
                   </div>
@@ -1394,8 +1394,8 @@ export default function Careers() {
             <div className="flex flex-col items-center justify-center gap-2 text-[#0d315c] bg-gray-50 p-5 rounded-xl border border-gray-200">
               <span className="text-2xl text-[#019e6e]"><FiPhone /></span>
               <span className="text-xs text-slate-500 font-semibold uppercase">Telephone Enquiries</span>
-              <a href="tel:+919010455590" className="text-sm font-bold hover:text-[#019e6e]">
-                +91 9010455590
+              <a href={`tel:+91${RECRUITMENT_NOTICE_META.enquiryPhone}`} className="text-sm font-bold hover:text-[#019e6e]">
+                +91 {RECRUITMENT_NOTICE_META.enquiryPhoneDisplay}
               </a>
             </div>
           </div>
