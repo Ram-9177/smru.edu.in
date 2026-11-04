@@ -4,6 +4,59 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-04 — Application-error crashes fixed; error boundaries added (branch `codex/frontend-audit-20261030`)
+
+- Next's bare "Application error: a client-side exception has occurred" screen reproduced in Chrome on two
+  paths. A malformed URL fragment such as `/#%E0%A4%A` made `decodeURIComponent` throw inside a React effect.
+  A script chunk that failed to load reached the root with no error boundary, which can also happen while
+  a long FTP upload has pages on the server ahead of their scripts.
+- `app/error.tsx`, `app/global-error.tsx`, `src/components/AppErrorScreen.tsx`: a failed chunk reloads the page at
+  most once a minute, then shows a recovery screen with no error detail. With storage blocked the limit cannot
+  be kept, so only the button is offered. Inline styles, because the stylesheet may be what failed.
+- `scripts/seo-guard.js` allows `error.tsx` and `global-error.tsx` under `app/`.
+- `src/components/ScrollToTop.tsx`, `src/views/Home.tsx`, `src/lib/shared/program-utils.ts` guard `decodeURIComponent`.
+- `src/components/ApplyModal.tsx` cancels delayed widget start-up on close and stays mounted, so the vendor form's
+  DOM is not torn down. `src/components/ReactDomSafetyPatch.tsx` survives third-party `insertBefore` collisions and
+  vendor promise rejections. `src/lib/campus-360/texture-cache.ts` keeps failed decodes retryable.
+- `tests/client-crash-guards.test.mjs` adds 8 tests. The 5 covering changed code fail against the unfixed files.
+- Verified on a clean checkout of this tree: all CI steps, tests 47/47. Browser test in Chrome across 271 routes and
+  stress scenarios: 337 checks, 0 failing, 0 crash screens; without these fixes the same test showed 33.
+- Left deliberately: the landing intro, hero preload and image-attribute edits, `predictive-preloader`,
+  `useIframeAutoHeight`, `CtplFormWidget`, `tsconfig.json` and the uncommitted audit scripts and reports. Safari,
+  Firefox and real phones were not tested.
+
+## 2026-11-04 — Next 15.5.28 and sharp 0.35.5 clear the critical audit failure (branch `codex/frontend-audit-20261030`)
+
+- CI had been failing at its `Dependency audit` step on `main` since 27 October 2026: the lockfile pinned
+  Next 15.5.25, which has a critical advisory, so `npm audit --audit-level=critical` stopped every run
+  before the build.
+- `package.json`, `package-lock.json`: `next` and `eslint-config-next` 15.5.28, `sharp` 0.35.5, overrides for
+  `postcss` under `next` and `postcss-selector-parser` under `@tailwindcss/typography`.
+- `npm audit`: production went from 1 critical and 3 high to 0; all packages went from 36 to 28 (10 high,
+  18 moderate, none critical). The advisories cover Next's server features, which a static export does not
+  run in production, but the gate blocked CI for every branch.
+- Left deliberately: the `build` script edit in the working tree and the other uncommitted frontend-audit
+  changes on this branch.
+
+## 2026-11-04 — `.env*` ignored; `.htaccess` MIME block and narrower HSTS (branch `codex/frontend-audit-20261030`)
+
+- `.gitignore` now ignores `.env*`. The repository is public and had no such rule; no `.env` file has
+  ever been committed on any ref.
+- `public/.htaccess`: MIME types for scripts, styles, JSON, fonts, SVG and the web manifest are declared
+  under `<IfModule mod_mime.c>`, replacing the bare `AddType image/webp .webp`.
+- `public/.htaccess`: HSTS is now `max-age=31536000`, without `includeSubDomains` or `preload`, so that
+  university subdomains are not affected before a university-wide TLS audit. Production keeps sending
+  the old header until this file is deployed.
+- An uncommitted draft of this file had lost its `<IfModule mod_headers.c>` opening line, leaving a stray
+  `</IfModule>` at the end of the headers block. Apache rejects that with HTTP 500 on every request. It
+  was corrected before this commit, so the broken version never reached Git. Checked on a local Apache
+  2.4.67: the draft returned 500; the committed file returns 301 with HSTS, `nosniff`, `X-Frame-Options`,
+  `Referrer-Policy` and `Permissions-Policy` present. `seo:guard` and `redirects:check` both passed on the
+  broken draft because neither parses `.htaccess` syntax.
+- Left deliberately: the other uncommitted frontend-audit changes on this branch, a guard for `.htaccess`
+  syntax, and the remaining findings of the 4 November 2026 security review. The file still needs a
+  staging run on the real host before production; `npm run verify` was not run for this change.
+
 ## 2026-10-27 — Careers enquiry number is +91 9010455591 / 92 (branch `vc-notification`)
 
 - The careers recruitment enquiry number changed to **9010455591 / 92**. The old pair (`9010455590`

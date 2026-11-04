@@ -14,7 +14,12 @@ export default function ScrollToTop({ smooth = true }) {
 
       const hash = window.location.hash;
       if (hash) {
-        const id = decodeURIComponent(hash.replace("#", ""));
+        let id: string;
+        try {
+          id = decodeURIComponent(hash.replace("#", ""));
+        } catch {
+          return;
+        }
         timeout = setTimeout(() => {
           document.getElementById(id)?.scrollIntoView({
             behavior: smooth ? "smooth" : "auto",

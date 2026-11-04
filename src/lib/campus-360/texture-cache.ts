@@ -1,27 +1,29 @@
 // Ultra-fast client-side texture & image decode cache for instant 360 switches
 
 export const decodedImageRegistry = new Set<string>();
+const pendingImages = new Map<string, Promise<boolean>>();
 
 export function prefetchAndDecode(src?: string, highPriority = false): Promise<boolean> {
   if (!src || typeof window === "undefined") return Promise.resolve(false);
   if (decodedImageRegistry.has(src)) return Promise.resolve(true);
+  const pending = pendingImages.get(src);
+  if (pending) return pending;
 
-  return new Promise((resolve) => {
+  const request = new Promise<boolean>((resolve) => {
     const img = new window.Image();
     img.decoding = "async";
     if (highPriority && "fetchPriority" in img) {
       (img as any).fetchPriority = "high";
     }
-    img.src = src;
     if (img.decode) {
+      img.src = src;
       img.decode()
         .then(() => {
           decodedImageRegistry.add(src);
           resolve(true);
         })
         .catch(() => {
-          decodedImageRegistry.add(src);
-          resolve(true);
+          resolve(false);
         });
     } else {
       img.onload = () => {
@@ -29,8 +31,11 @@ export function prefetchAndDecode(src?: string, highPriority = false): Promise<b
         resolve(true);
       };
       img.onerror = () => resolve(false);
+      img.src = src;
     }
-  });
+  }).finally(() => pendingImages.delete(src));
+  pendingImages.set(src, request);
+  return request;
 }
 
 export function warmUpTourTextures(

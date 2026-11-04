@@ -164,7 +164,12 @@ export default function Home() {
 
   useEffect(() => {
     const scrollToHash = () => {
-      const id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      let id: string;
+      try {
+        id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      } catch {
+        return;
+      }
       if (!id) return;
       const target = document.getElementById(id);
       if (!target) return;
