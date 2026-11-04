@@ -137,7 +137,11 @@ ErrorDocument 500 /500.html
 </IfModule>
 
 <IfModule mod_headers.c>
-    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    # Strict-Transport-Security: 1 year max-age for the primary domain.
+    # NOTE: 'includeSubDomains' and 'preload' are intentionally omitted to prevent
+    # breaking external/internal university subdomains (e.g. ERP, email, student portal)
+    # until a comprehensive university-wide TLS audit is conducted.
+    Header always set Strict-Transport-Security "max-age=31536000"
 
     # Baseline hardening. X-Frame-Options only governs who may frame smru.edu.in pages;
     # the partner iframes we embed on our own pages are unaffected.
@@ -199,7 +203,22 @@ ErrorDocument 500 /500.html
     ExpiresByType text/plain "access plus 0 seconds"
 </IfModule>
 
-AddType image/webp .webp
+<IfModule mod_mime.c>
+    # Ensure standard MIME types for Next.js chunks, scripts, styles, web fonts and modern media.
+    # Essential for X-Content-Type-Options: nosniff compliance.
+    AddType text/javascript .js .mjs
+    AddType text/css .css
+    AddType application/json .json
+    AddType image/webp .webp
+    AddType image/svg+xml .svg .svgz
+    AddEncoding gzip .svgz
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
+    AddType application/manifest+json .webmanifest
+</IfModule>
+<IfModule !mod_mime.c>
+    AddType image/webp .webp
+</IfModule>
 
 # Block sensitive files
 <FilesMatch "(\.env|\.pkg|package\.json|package-lock\.json|vite\.config\.js|tailwind\.config\.js)$">

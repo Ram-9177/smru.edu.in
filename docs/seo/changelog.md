@@ -4,6 +4,25 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-04 — `.env*` ignored; `.htaccess` MIME block and narrower HSTS (branch `codex/frontend-audit-20261030`)
+
+- `.gitignore` now ignores `.env*`. The repository is public and had no such rule; no `.env` file has
+  ever been committed on any ref.
+- `public/.htaccess`: MIME types for scripts, styles, JSON, fonts, SVG and the web manifest are declared
+  under `<IfModule mod_mime.c>`, replacing the bare `AddType image/webp .webp`.
+- `public/.htaccess`: HSTS is now `max-age=31536000`, without `includeSubDomains` or `preload`, so that
+  university subdomains are not affected before a university-wide TLS audit. Production keeps sending
+  the old header until this file is deployed.
+- An uncommitted draft of this file had lost its `<IfModule mod_headers.c>` opening line, leaving a stray
+  `</IfModule>` at the end of the headers block. Apache rejects that with HTTP 500 on every request. It
+  was corrected before this commit, so the broken version never reached Git. Checked on a local Apache
+  2.4.67: the draft returned 500; the committed file returns 301 with HSTS, `nosniff`, `X-Frame-Options`,
+  `Referrer-Policy` and `Permissions-Policy` present. `seo:guard` and `redirects:check` both passed on the
+  broken draft because neither parses `.htaccess` syntax.
+- Left deliberately: the other uncommitted frontend-audit changes on this branch, a guard for `.htaccess`
+  syntax, and the remaining findings of the 4 November 2026 security review. The file still needs a
+  staging run on the real host before production; `npm run verify` was not run for this change.
+
 ## 2026-10-27 — Careers enquiry number is +91 9010455591 / 92 (branch `vc-notification`)
 
 - The careers recruitment enquiry number changed to **9010455591 / 92**. The old pair (`9010455590`
