@@ -11,6 +11,8 @@ export default function ApplyModal({ open, onClose }) {
 
   useEffect(() => {
     if (!open) return;
+    let cancelled = false;
+    let initTimer: ReturnType<typeof setTimeout>;
 
     document.body.style.overflow = "hidden";
     const onKey = (e) => e.key === "Escape" && onClose?.();
@@ -29,20 +31,25 @@ export default function ApplyModal({ open, onClose }) {
     };
 
     const tryInit = (attempts = 0) => {
+      if (cancelled) return;
       const el = document.getElementById(CTPL_CONTAINER_ID);
       if (el && el.isConnected && typeof window.ctplTag === "function") {
+        if (el.querySelector("form") || el.childElementCount > 0) {
+          // Form already mounted inside container; avoid tearing down and rebuilding
+          return;
+        }
         try {
           window.ctplTag(ENQUIRY_CTPL_FORM_ID);
         } catch (e) {
           console.warn("[ApplyModal] Handled ctplTag init:", e);
         }
       } else if (attempts < 30) {
-        setTimeout(() => tryInit(attempts + 1), 100);
+        initTimer = setTimeout(() => tryInit(attempts + 1), 100);
       }
     };
 
     const script = ensureScript();
-    const startInit = () => setTimeout(() => tryInit(), 150);
+    const startInit = () => { initTimer = setTimeout(() => tryInit(), 150); };
 
     if (typeof window.ctplTag === "function") {
       startInit();
@@ -51,17 +58,19 @@ export default function ApplyModal({ open, onClose }) {
     }
 
     return () => {
+      cancelled = true;
+      clearTimeout(initTimer);
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
       script.removeEventListener("load", startInit);
     };
   }, [open, onClose]);
 
-  if (!open) return null;
-
   return (
     <div
-      className="fixed inset-0 z-[4000] bg-black/50 backdrop-blur-[2px] overflow-y-auto"
+      className={`fixed inset-0 z-[4000] bg-black/50 backdrop-blur-[2px] overflow-y-auto transition-opacity duration-200 ${
+        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none hidden"
+      }`}
       onClick={onClose}
     >
       <div

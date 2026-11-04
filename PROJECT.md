@@ -45,7 +45,8 @@ is the guard check "Repository root contains only the allowed entries" in `scrip
 app/              Next.js App Router — one folder per URL, thin page.tsx files (§3). Route groups:
                   app/(Partners)/ holds /partner/, /partner/[slug] and every partner alias shell;
                   app/(seo-pages)/[slug] is the info-page catch-all. Only page.tsx, layout.tsx, route.ts,
-                  not-found.tsx (and the one colocated client island GrievanceTabs.tsx) may live here (guarded).
+                  not-found.tsx, error.tsx, global-error.tsx (and the one colocated client island GrievanceTabs.tsx)
+                  may live here (guarded).
 src/              All application source (§2 "src/ layout"). The only import alias is "@/*" → "src/*".
 public/           URL-addressed static files served verbatim (§6)
 scripts/          Verification, audit and generation tooling (§7). ESM .mjs (seo-guard.js is the one CommonJS
@@ -599,7 +600,7 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 | Release Decision | **PASS** — `npm run verify` green at the head of `feat/attendance-notice-button`; deploy `out/` + `public/.htaccess` |
 | Open PRs | [#11](https://github.com/Ram-9177/smru.edu.in/pull/11) `feat/carebridge-homepage` → `main` (CI green). `feat/attendance-notice-button` → `main` is the current PR; independent of #11. |
 | Gates at head | seo-guard 45/45 · tests 39/39 · typecheck clean · lint 0 errors (4 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (1 warning: 53 descriptions under 120 chars) · seo:facts 29/29 |
-| Last structural change | Next 15.5.28 and sharp 0.35.5 clear the critical `npm audit` failure that had stopped CI at its dependency step on `main` since 27 October 2026. |
-| Previous structural change | `.env*` is gitignored (the repository is public). `public/.htaccess` declares MIME types under `mod_mime` and sends HSTS as `max-age=31536000`, without `includeSubDomains` or `preload`, until a university-wide TLS audit; production keeps the old header until this deploys. `seo:guard` and `redirects:check` do not parse `.htaccess` syntax, so test any edit to that file on Apache. |
+| Last structural change | Client crashes no longer reach Next's bare "Application error" screen. `app/error.tsx` and `app/global-error.tsx` render `src/components/AppErrorScreen.tsx`, which reloads at most once a minute when a script chunk fails to load, then offers a reload button. Malformed URL fragments and slugs no longer throw. When uploading by FTP, send `_next/` first and `.htaccess` last, and never delete old `_next/` files during the upload. |
+| Previous structural change | Next 15.5.28 and sharp 0.35.5 clear the critical `npm audit` failure that had stopped CI at its dependency step on `main` since 27 October 2026. |
 | Deferred, low priority | 4 meta descriptions < 70 chars (`/handbook/`, `/leadership/`, `/privacy-policy/`, `/terms-of-service/`); 25 thin indexable pages under 200 words (handbook, the leadership profiles, privacy/terms, html-sitemap, brochure, exam-notification, campus-360, compliance pages…). |
 | Do not touch | apply.smru.edu.in links, Google Ads / Meta Pixel tags, the Google verification token, `/developer/` and `/api/` disallows, partner-supplied HTML. |

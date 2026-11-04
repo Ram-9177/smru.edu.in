@@ -25,7 +25,13 @@ export const slugify = (s = "") =>
 export const safeSlug = (value: unknown, fallback = "") =>
   typeof value === "string" && value.trim() && !/^\[object\s.+\]$/i.test(value.trim()) ? value : slugify(fallback);
 
-export const decodeSlugParam = (value = "") => decodeURIComponent(value || "").toLowerCase();
+export const decodeSlugParam = (value = "") => {
+  try {
+    return decodeURIComponent(value || "").toLowerCase();
+  } catch {
+    return (value || "").toLowerCase();
+  }
+};
 
 export const findBySlugOrName = <T extends { slug?: string; name?: string }>(list: T[] | undefined, param: string) => {
   const decoded = decodeSlugParam(param);

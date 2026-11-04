@@ -4,6 +4,27 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-04 — Application-error crashes fixed; error boundaries added (branch `codex/frontend-audit-20261030`)
+
+- Next's bare "Application error: a client-side exception has occurred" screen reproduced in Chrome on two
+  paths. A malformed URL fragment such as `/#%E0%A4%A` made `decodeURIComponent` throw inside a React effect.
+  A script chunk that failed to load reached the root with no error boundary, which can also happen while
+  a long FTP upload has pages on the server ahead of their scripts.
+- `app/error.tsx`, `app/global-error.tsx`, `src/components/AppErrorScreen.tsx`: a failed chunk reloads the page at
+  most once a minute, then shows a recovery screen with no error detail. With storage blocked the limit cannot
+  be kept, so only the button is offered. Inline styles, because the stylesheet may be what failed.
+- `scripts/seo-guard.js` allows `error.tsx` and `global-error.tsx` under `app/`.
+- `src/components/ScrollToTop.tsx`, `src/views/Home.tsx`, `src/lib/shared/program-utils.ts` guard `decodeURIComponent`.
+- `src/components/ApplyModal.tsx` cancels delayed widget start-up on close and stays mounted, so the vendor form's
+  DOM is not torn down. `src/components/ReactDomSafetyPatch.tsx` survives third-party `insertBefore` collisions and
+  vendor promise rejections. `src/lib/campus-360/texture-cache.ts` keeps failed decodes retryable.
+- `tests/client-crash-guards.test.mjs` adds 8 tests. The 5 covering changed code fail against the unfixed files.
+- Verified on a clean checkout of this tree: all CI steps, tests 47/47. Browser test in Chrome across 271 routes and
+  stress scenarios: 337 checks, 0 failing, 0 crash screens; without these fixes the same test showed 33.
+- Left deliberately: the landing intro, hero preload and image-attribute edits, `predictive-preloader`,
+  `useIframeAutoHeight`, `CtplFormWidget`, `tsconfig.json` and the uncommitted audit scripts and reports. Safari,
+  Firefox and real phones were not tested.
+
 ## 2026-11-04 — Next 15.5.28 and sharp 0.35.5 clear the critical audit failure (branch `codex/frontend-audit-20261030`)
 
 - CI had been failing at its `Dependency audit` step on `main` since 27 October 2026: the lockfile pinned

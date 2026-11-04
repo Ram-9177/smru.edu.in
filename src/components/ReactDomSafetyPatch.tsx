@@ -13,9 +13,8 @@ export default function ReactDomSafetyPatch() {
     if (typeof window === "undefined") return;
     if (window.__smruRemoveChildGuarded) return;
 
-    // 1. Guard against DOM removal collisions from 3rd party scripts
+    // 1. Guard against DOM removal & insertion collisions from 3rd party scripts
     const originalRemoveChild = Node.prototype.removeChild;
-
     Node.prototype.removeChild = function patchedRemoveChild<T extends Node>(child: T): T {
       if (!child || child.parentNode !== this) {
         return child;
@@ -31,15 +30,32 @@ export default function ReactDomSafetyPatch() {
       }
     };
 
+    const originalInsertBefore = Node.prototype.insertBefore;
+    Node.prototype.insertBefore = function patchedInsertBefore<T extends Node>(newNode: T, referenceNode: Node | null): T {
+      if (referenceNode && referenceNode.parentNode !== this) {
+        return newNode;
+      }
+
+      try {
+        return originalInsertBefore.call(this, newNode, referenceNode) as T;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "NotFoundError") {
+          return newNode;
+        }
+        throw error;
+      }
+    };
+
     // 2. Intercept and isolate unhandled runtime errors from external 3rd-party widgets (e.g. ctplform.js / Meritto)
     const handleGlobalError = (event: ErrorEvent) => {
       const filename = event.filename || "";
       const message = event.message || "";
       const stack = event.error?.stack || "";
 
-      const isThirdPartyWidget =
+      const isThirdPartyWidget = message.includes("placeholder") || 
         filename.includes("ctplform.js") ||
         filename.includes("apply.smru.edu.in") ||
+        filename.includes("fbevents.js") ||
         stack.includes("ctplform.js") ||
         stack.includes("CTPLSelect") ||
         stack.includes("CTPLinitialize") ||
@@ -53,7 +69,23 @@ export default function ReactDomSafetyPatch() {
       }
     };
 
+    const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
+      const reason = event.reason;
+      const str = String(reason?.message || reason?.stack || reason || "");
+      if (
+        str.includes("ctpl") ||
+        str.includes("apply.smru.edu.in") ||
+        str.includes("fbevents") ||
+        str.includes("gtag") ||
+        str.includes("placeholder")
+      ) {
+        event.preventDefault();
+        console.warn("[SMRU Safety Patch] Intercepted non-fatal async rejection:", str);
+      }
+    };
+
     window.addEventListener("error", handleGlobalError, true);
+    window.addEventListener("unhandledrejection", handleUnhandledRejection);
 
     // 3. Suppress benign console error noise from browser extensions that mutate DOM attributes before React hydration (e.g. Bitdefender bis_skin_checked, bis_register, bis_use)
     const originalConsoleError = console.error;
@@ -83,6 +115,7 @@ export default function ReactDomSafetyPatch() {
 
     return () => {
       window.removeEventListener("error", handleGlobalError, true);
+      window.removeEventListener("unhandledrejection", handleUnhandledRejection);
       console.error = originalConsoleError;
     };
   }, []);
