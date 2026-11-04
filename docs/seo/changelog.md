@@ -4,6 +4,19 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-04 — Next 15.5.28 and sharp 0.35.5 clear the critical audit failure (branch `codex/frontend-audit-20261030`)
+
+- CI had been failing at its `Dependency audit` step on `main` since 27 October 2026: the lockfile pinned
+  Next 15.5.25, which has a critical advisory, so `npm audit --audit-level=critical` stopped every run
+  before the build.
+- `package.json`, `package-lock.json`: `next` and `eslint-config-next` 15.5.28, `sharp` 0.35.5, overrides for
+  `postcss` under `next` and `postcss-selector-parser` under `@tailwindcss/typography`.
+- `npm audit`: production went from 1 critical and 3 high to 0; all packages went from 36 to 28 (10 high,
+  18 moderate, none critical). The advisories cover Next's server features, which a static export does not
+  run in production, but the gate blocked CI for every branch.
+- Left deliberately: the `build` script edit in the working tree and the other uncommitted frontend-audit
+  changes on this branch.
+
 ## 2026-11-04 — `.env*` ignored; `.htaccess` MIME block and narrower HSTS (branch `codex/frontend-audit-20261030`)
 
 - `.gitignore` now ignores `.env*`. The repository is public and had no such rule; no `.env` file has
