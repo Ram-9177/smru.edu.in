@@ -4,6 +4,21 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-23 — 2026-27 year branch; Next 15.5.29 (branch `site/2026-27`)
+
+- `site/2026-27` holds the 2026-27 academic-year site. It starts from the head of PR #14 (`main` plus the
+  `.env`/HSTS, dependency and error-boundary fixes) so it passes the CI `npm audit --audit-level=critical`
+  step that still fails on `main` (Next 15.5.25, sharp 0.35.4, postcss 8.4.31 under `next`).
+- `package.json`, `package-lock.json`: `next` and `eslint-config-next` 15.5.28 → 15.5.29, the 15.5 backport.
+  It clears three moderate Next advisories published after 15.5.28 (image-optimizer SVG bypass, Edge-runtime
+  cookie header, forwarded-response injection).
+- `npm audit`: production 0 vulnerabilities; all packages 16 (10 high, 6 moderate, none critical), all in dev
+  tooling: the puppeteer chain (needs puppeteer 25, a major) and `@typescript-eslint`/`minimatch`.
+- `site/2027-28` is created from the same commit for the 2027-28 year's changes.
+- Verified: `npm run verify` on a clean worktree of this tree.
+- Left deliberately: puppeteer 25 and the `@typescript-eslint` bump (§9), the uncommitted frontend-audit work on
+  `codex/frontend-audit-20261030`, and `main`, which still needs PR #14 merged to pass CI.
+
 ## 2026-11-04 — Application-error crashes fixed; error boundaries added (branch `codex/frontend-audit-20261030`)
 
 - Next's bare "Application error: a client-side exception has occurred" screen reproduced in Chrome on two
