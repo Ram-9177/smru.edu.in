@@ -478,9 +478,9 @@ const checks = [
   {
     // app/ is routes only. Anything else (a dropped-in site export, a stray component tree) breaks the
     // one-folder-per-URL rule; the single colocated client island is listed explicitly.
-    name: "app/ contains only route files (page, layout, route, not-found) and route folders",
+    name: "app/ contains only route files (page, layout, route, not-found, error boundaries) and route folders",
     pass: () => {
-      const allowedFiles = new Set(["page.tsx", "layout.tsx", "route.ts", "not-found.tsx", "GrievanceTabs.tsx"]);
+      const allowedFiles = new Set(["page.tsx", "layout.tsx", "route.ts", "not-found.tsx", "error.tsx", "global-error.tsx", "GrievanceTabs.tsx"]);
       const strays = fs.readdirSync(path.join(root, "app"), { recursive: true, withFileTypes: true })
         .filter((entry) => entry.isFile() && !allowedFiles.has(entry.name))
         .map((entry) => path.relative(root, path.join(entry.parentPath ?? entry.path, entry.name)));
