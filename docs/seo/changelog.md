@@ -4,6 +4,17 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-23 — Typecheck skips local scratch folders; 2027-28 is the working branch (branch `site/2027-28`)
+
+- `npm run typecheck` failed with 29 errors in a local checkout because `tsconfig.json` includes `**/*.ts`
+  and the git-ignored `scratch/original-source/` holds an old copy of `src/`. CI and clean checkouts have no
+  `scratch/`, so only local runs were affected.
+- `tsconfig.json`: exclude `scratch` (git-ignored) and `tmp`, local working folders that are not site source.
+- `PROJECT.md` §10: `site/2026-27` is kept aside; `site/2027-28` is the working branch; `main` is kept and
+  is green again after #15; no open PRs.
+- Left deliberately: the rest of the uncommitted frontend-audit work, which stays in the stash, and the
+  question of how 2027-28 work reaches `main`.
+
 ## 2026-11-23 — 2026-27 year branch; Next 15.5.29 (branch `site/2026-27`)
 
 - `site/2026-27` holds the 2026-27 academic-year site. It starts from the head of PR #14 (`main` plus the

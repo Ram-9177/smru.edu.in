@@ -597,9 +597,9 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 | | |
 |---|---|
 | Status date | 23 November 2026 |
-| Release Decision | **PASS** — `npm run verify` green at the head of `site/2026-27`; deploy `out/` + `public/.htaccess` |
-| Year branches | `site/2026-27` is the 2026-27 academic-year site: `main` plus the three fixes of PR #14 plus Next 15.5.29. `site/2027-28` starts from the same commit and is where 2027-28 changes go. |
-| Open PRs | [#14](https://github.com/Ram-9177/smru.edu.in/pull/14) `codex/frontend-audit-20261030` → `main` (CI green); until it merges, `main` still fails CI at the critical `npm audit` step. |
+| Release Decision | **PASS** — `npm run verify` green at the head of `site/2027-28`; deploy `out/` + `public/.htaccess` |
+| Year branches | `site/2026-27` is the 2026-27 academic-year site, kept aside: do not commit to it. `site/2027-28` is the working branch; new work starts from it. `main` is kept. [#15](https://github.com/Ram-9177/smru.edu.in/pull/15) brought `main` to the `site/2026-27` commit on 23 November 2026, and `main`'s CI is green again. How 2027-28 work reaches `main` is not decided yet. |
+| Open PRs | none. #14 landed through #15. |
 | Gates at head | seo-guard 45/45 · tests 47/47 · typecheck clean · lint 0 errors (4 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
 | Last structural change | Client crashes no longer reach Next's bare "Application error" screen. `app/error.tsx` and `app/global-error.tsx` render `src/components/AppErrorScreen.tsx`, which reloads at most once a minute when a script chunk fails to load, then offers a reload button. Malformed URL fragments and slugs no longer throw. When uploading by FTP, send `_next/` first and `.htaccess` last, and never delete old `_next/` files during the upload. |
 | Previous structural change | Next 15.5.28 and sharp 0.35.5 clear the critical `npm audit` failure that had stopped CI at its dependency step on `main` since 27 October 2026; Next 15.5.29 (the 15.5 backport) also clears three moderate Next advisories published after 15.5.28. |
