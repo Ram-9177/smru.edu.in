@@ -43,8 +43,8 @@ import {
   FaFacebookF,
   FaInstagram,
   FaYoutube,
-  FaLinkedinIn
-} from "react-icons/fa";
+  FaLinkedinIn,
+} from "@/components/icons";
 import useOpenApply from "@/hooks/useOpenApply";
 import { SITE_SOCIAL_LINKS } from "@/lib/shared/site-constants";
 
@@ -144,7 +144,7 @@ export default function EdinboxForensicLandingV2() {
           </div>
 
           <div className="lg:hidden">
-            <button onClick={toggleNav} className="text-white text-2xl">
+            <button onClick={toggleNav} aria-label={isNavOpen ? "Close menu" : "Open menu"} aria-expanded={isNavOpen} className="text-white text-2xl">
               {isNavOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>

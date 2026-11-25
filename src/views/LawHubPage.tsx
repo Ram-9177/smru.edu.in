@@ -2,7 +2,7 @@ import StructuredData from "@/components/seo/StructuredData";
 import { buildItemListSchema, toIsoDuration } from "@/lib/seo/schema";
 import { getProgrammeCredential, getProgrammeDisplayName, getProgrammeShortName } from "@/lib/shared/programme-names";
 import { absoluteUrl } from "@/lib/metadata";
-import SchoolOfLaw from "@/views/SchoolOfLaw";
+import { SchoolOfLawView } from "@/components/SchoolViews";
 import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
 
 const lawMetaDescription =
@@ -75,7 +75,7 @@ export default function LawHubPage() {
         id="law-programmes-schema"
         data={buildItemListSchema(lawProgrammes.map((program) => ({ name: getProgrammeDisplayName(program), url: `${lawPathname}#programmes` })))}
       />
-      <SchoolOfLaw />
+      <SchoolOfLawView />
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { schools } from "../data/schools";
 import {
   FaFacebookF,
   FaInstagram,
@@ -10,23 +9,26 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
-  FaChevronUp
-} from "react-icons/fa";
+  FaChevronUp,
+} from "@/components/icons";
 import { SITE_CONTACT, SITE_CTA_LINKS, SITE_SOCIAL_LINKS } from "@/lib/shared/site-constants";
 import { getSchoolLandingPath } from "@/lib/shared/school-landing";
 import { getSeoAuthorityPage } from "@/lib/seo/authority-map";
-
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
+import { useLiveCms } from "@/lib/developer/useLiveCms";
 
 const authorityPath = (key: string, fallback: string) => getSeoAuthorityPage(key)?.path || fallback;
 
-const Footer = () => {
-  const { state } = useDeveloperCms();
+export type FooterProps = {
+  /** The schools listed under Academics, picked in app/layout.tsx so the catalogue stays out of the browser. */
+  schools: Array<{ slug: string; name: string }>;
+  /** The built-in contact line: phone | second phone | email | address. */
+  contact: string;
+};
 
-  const getCmsContent = (id: string, separator = " | ") => {
-    const page = state.pages.find((p) => p.id === id);
-    return page?.content ? page.content.split(separator).map((s) => s.trim()) : [];
-  };
+const Footer = ({ schools, contact }: FooterProps) => {
+  const livePages = useLiveCms()?.pages;
+  const contactLine = livePages ? livePages.find((page) => page.id === "page-contact-primary")?.content : contact;
+
   const normalizePhoneDisplay = (value: string) => {
     const compact = value.replace(/[^\d+]/g, "");
     if (compact === "7331119432" || compact === "+917331119432") return "7331119432";
@@ -38,7 +40,7 @@ const Footer = () => {
     return value;
   };
 
-  const cmsContact = getCmsContent("page-contact-primary"); // [phone1, phone2, email, address]
+  const cmsContact = contactLine ? contactLine.split(" | ").map((part) => part.trim()) : []; // [phone1, phone2, email, address]
   const address = cmsContact[3] || SITE_CONTACT.address;
   const primaryPhone = normalizePhoneDisplay(cmsContact[0] || SITE_CONTACT.primaryPhone);
   const secondaryPhone = normalizePhoneDisplay(cmsContact[1] || SITE_CONTACT.secondaryPhone);
@@ -61,8 +63,6 @@ const Footer = () => {
     { icon: FaInstagram, href: SITE_SOCIAL_LINKS.instagram, label: "Instagram" },
     { icon: FaLinkedinIn, href: SITE_SOCIAL_LINKS.linkedin, label: "LinkedIn" },
   ];
-  const academicLinks = (schools || []).filter(s => s.visibility !== "hidden").slice(0, 6);
-
   const handleScrollTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
@@ -145,7 +145,7 @@ const Footer = () => {
             <nav aria-label="Academics">
               <ul className="grid grid-cols-1 gap-2 text-[13px] font-semibold text-white/50">
                 <li><Link prefetch={false} href={authority.schools} className="transition-colors hover:text-white">Schools</Link></li>
-                {academicLinks.map((school) => (
+                {schools.map((school) => (
                   <li key={school.slug}>
                     <Link prefetch={false}
                       href={getSchoolLandingPath(school.slug)}

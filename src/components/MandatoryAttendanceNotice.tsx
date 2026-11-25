@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { FaExclamationTriangle, FaShieldAlt } from "react-icons/fa";
+import { FaExclamationTriangle, FaShieldAlt } from "@/components/icons";
 
 export default function MandatoryAttendanceNotice() {
   return (

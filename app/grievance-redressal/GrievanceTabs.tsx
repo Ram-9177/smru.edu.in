@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaUserGraduate, FaUserTie, FaChalkboardTeacher, FaEnvelope } from "react-icons/fa";
+import { FaUserGraduate, FaUserTie, FaChalkboardTeacher, FaEnvelope } from "@/components/icons";
 
 export default function GrievanceTabs() {
   const [activeTab, setActiveTab] = useState("students");

@@ -4,6 +4,39 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-25 — Lighter pages, and bugs found on the way (branch `perf/lighter-pages`)
+
+- Every page downloaded about 205 KB of script (gzip), half of it data for a menu phones never show. Median page now
+  134 KB; home 229 → 169, partner landings 263 → 195, programme pages 228 → 199.
+  - `SchoolsMegaMenu.tsx` (desktop, on hover) holds the catalogue and loads while a wide screen is idle, never on a
+    phone. `Footer` gets its six schools and contact line from `app/layout.tsx`.
+  - `src/components/icons/`: one generated file per icon (`npm run icons:generate`) instead of react-icons, which shipped
+    119 of the 171 icons in use on every page. `react-icons` is now a development dependency, same version.
+  - `src/lib/developer/`: `live-cms.ts`, `useLiveCms`, `useCmsPages`, `useCmsPartners`, `useCmsState`. The seed is built
+    once per page load, not four times; `cms-data.json` is revalidated once per load instead of refetched by each view.
+    A published file still overrides the built-in content.
+  - `src/data/edu-partners.ts` split from `schools.ts`; `SchoolViews.tsx` gives each school view its own download (the
+    earlier `next/dynamic` was in a server component, where it does not split); tour data loads when a tour is about to
+    open; the two partner loaders use the slim animation build. Unused helpers removed from `school-landing.ts`.
+- Images: 14 files re-encoded (873 → 161 KB, all above 40 dB PSNR); nursing hero 1,187 → 66 KB on a phone, plus
+  111 KB for the second picture, which now waits for the first; careers poster 550 → 91 KB thumbnail, loaded when reached,
+  the download is still the original JPG; 384 px header logo and 256 px crest.
+- Phone, slow 4G, 4× CPU, old → new: nursing 1,735 → 612 KB and main image 6.9 → 1.8 s; careers 1,070 → 378 KB;
+  partner 833 → 504 KB and 2.3 → 1.4 s; academic structure 730 → 537 KB and 3.8 → 2.5 s; home 788 → 720 KB. Main-thread
+  work fell 16-40% on the six pages traced; the first start-up task is about 15 ms longer because scripts arrive together.
+- Bugs fixed, tests first: a brochure downloaded again for every message the form sent (`MerittoApplyModal`); the loading
+  screen on `/niat-upskilling/` stayed for good when the partner page loaded early or never (`NiatUpskilling`).
+- Also fixed: 22 icon links on `/mandatory-disclosure/` and the Edinbox menu button had no name; scrolling tables can be
+  reached by keyboard; the hostel 360 view says why it is blank without WebGL; the 3 known lint warnings.
+- Tests: `page-shell-weight` (2), `live-cms` (5), `icons` (2), `brochure-download` (3), `partner-loader` (2).
+- Static HTML of all 276 pages, old and new: text, headings, links, JSON-LD and meta identical.
+- Every route in Chrome, old and new, desktop and phone, outside requests blocked: 518 of 534 views match. Of the other
+  16, 6 are the WebGL error the new build no longer raises, 1 a hostel view that varies in both builds, and 9 partner
+  loaders or an animation caught mid-way that match once settled. The Schools menu is identical in all 7 states, phones
+  never request it, and a published `cms-data.json` still changes the footer and the menu.
+- Left deliberately (`PROJECT.md` §9): text contrast of the brand green and the ticker badge (a design decision), the local CMS
+  and its request, unreferenced files in `public/`, the QTST partner page's endless image retry (partner-supplied).
+
 ## 2026-11-25 — CI no longer fails because of Google or a duplicate run (branch `ci/steady-checks`)
 
 - Fonts: `app/layout.tsx` used `next/font/google`, which downloads Cinzel, Inter and Outfit on every build. A run on

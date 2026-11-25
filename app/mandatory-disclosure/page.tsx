@@ -1,7 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { FaFileAlt, FaUniversity, FaUserTie, FaMoneyCheckAlt, FaBookOpen, FaDownload } from "react-icons/fa";
+import {
+  FaFileAlt,
+  FaUniversity,
+  FaUserTie,
+  FaMoneyCheckAlt,
+  FaBookOpen,
+  FaDownload,
+} from "@/components/icons";
 import UniversitySectionHeader from "@/components/UniversitySectionHeader";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
@@ -126,8 +133,8 @@ export default function MandatoryDisclosure() {
                             {item.status}
                           </span>
                           {item.link !== '#' && (
-                            <Link href={item.link} className="text-[#019e6e] hover:text-[#0d315c] transition-colors">
-                              <FaDownload size={14} />
+                            <Link href={item.link} aria-label={`Open ${item.name}`} className="text-[#019e6e] hover:text-[#0d315c] transition-colors">
+                              <FaDownload size={14} aria-hidden="true" />
                             </Link>
                           )}
                         </div>

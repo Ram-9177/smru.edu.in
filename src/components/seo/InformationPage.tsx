@@ -229,7 +229,7 @@ export default function InformationPage({ config }: { config: InfoPageConfig }) 
                   <h2 className="text-[13px] font-black uppercase tracking-[0.3em] text-[#0d315c]">{table.heading}</h2>
                   {table.note && <p className="mt-2 text-xs font-bold leading-6 text-slate-500">{table.note}</p>}
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={`${table.heading} table`}>
                   <table className="w-full min-w-[820px] border-collapse text-left">
                     <thead className="bg-[#0d315c] text-white">
                       <tr>

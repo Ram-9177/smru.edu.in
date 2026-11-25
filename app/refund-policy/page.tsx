@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
-import { FaMoneyBillWave, FaPercentage } from "react-icons/fa";
+import { FaMoneyBillWave, FaPercentage } from "@/components/icons";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 
@@ -54,7 +54,7 @@ export default function RefundPolicyPage() {
                 <h3 className="text-xl font-black text-[#0d315c] mb-6 flex items-center gap-3">
                   <FaPercentage className="text-[#ffaf3a]" /> UGC Prescribed Refund Tiers
                 </h3>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="UGC prescribed refund tiers table">
                   <table className="w-full text-left border-collapse bg-white">
                     <thead>
                       <tr className="bg-[#0d315c] text-white">

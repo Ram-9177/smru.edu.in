@@ -7,7 +7,7 @@ import {
   FaMapMarkerAlt,
   FaTag,
   FaUsers,
-} from "react-icons/fa";
+} from "@/components/icons";
 import StructuredData from "@/components/seo/StructuredData";
 import { UNIVERSITY_EVENTS } from "@/data/events";
 import { buildMetadata } from "@/lib/metadata";

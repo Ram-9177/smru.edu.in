@@ -153,7 +153,7 @@ export default function LandingIntro() {
             {/* Subtle soft backdrop ring */}
             <div className="absolute -inset-4 rounded-full bg-slate-100/70 -z-10 blur-sm scale-110" />
             <Image
-              src="/assets/Logo.webp"
+              src="/assets/logo-384.webp"
               alt="St. Mary's University"
               width={260}
               height={140}

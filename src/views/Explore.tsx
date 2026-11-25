@@ -12,7 +12,7 @@ import {
   FaPhoneAlt,
   FaWhatsapp,
   FaYoutube,
-} from "react-icons/fa";
+} from "@/components/icons";
 import CampusExperienceSection from "@/components/CampusExperienceSection";
 import Hostel360Showcase from "@/components/Hostel360Showcase";
 import ProgramsExplorer from "@/components/ProgramsExplorer";

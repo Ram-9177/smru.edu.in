@@ -3,12 +3,12 @@ import React, { useMemo } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
-import { EDU_PARTNERS, schools as staticSchools, getEduPartnerLandingUrl, getEduPartners } from "../data/schools";
+import { EDU_PARTNERS, getEduPartnerLandingUrl, getEduPartners } from "../data/edu-partners";
 import { getProgrammeFee, formatINR } from "../data/programme-fees";
 import useOpenApply from "../hooks/useOpenApply";
 import SchoolLayout from "../components/SchoolLayout";
-import { useDeveloperCms } from "../lib/developer/useDeveloperCms";
-import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "../lib/developer/academic-data";
+import { useCmsState } from "@/lib/developer/useCmsState";
+import { getAcademicSchools } from "@/lib/developer/academic-schools";
 import {
   findBySlugOrName,
   safeSlug,
@@ -20,10 +20,16 @@ import { formatLevel, getProgrammeAnswerFirst } from "../lib/seo/programme-answe
 import { getProgrammeDisplayName, getProgrammeShortName } from "../lib/shared/programme-names";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "../lib/seo/visibility";
 import { APPROVAL_SAFETY_NOTE } from "../lib/shared/university";
-import { 
-  FaClock, FaUserGraduate, FaCheckCircle,
-  FaBriefcase, FaFileDownload, FaUsers, FaArrowRight, FaShieldAlt 
-} from "react-icons/fa";
+import {
+  FaClock,
+  FaUserGraduate,
+  FaCheckCircle,
+  FaBriefcase,
+  FaFileDownload,
+  FaUsers,
+  FaArrowRight,
+  FaShieldAlt,
+} from "@/components/icons";
 import { resolveAssetSrc } from "../lib/shared/media";
 import CampusLife360Section from "../components/CampusLife360Section";
 import MandatoryAttendanceNoticeButton from "../components/MandatoryAttendanceNoticeButton";
@@ -121,9 +127,8 @@ export default function Program() {
   const programSlug = params.programSlug as string;
   const navigate = useRouter();
   const openApply = useOpenApply();
-  const { state } = useDeveloperCms({ useOverlay: true });
-  const cmsSchools = useMemo(() => buildAcademicSchoolsFromCms(state), [state]);
-  const schoolSource = useMemo(() => syncAcademicSchoolsWithCms(staticSchools, cmsSchools), [cmsSchools]);
+  const { state } = useCmsState({ useOverlay: true });
+  const schoolSource = useMemo(() => getAcademicSchools(state), [state]);
 
   const school = findBySlugOrName(schoolSource, schoolSlug) as any;
   const dept = findBySlugOrName(school?.departments, deptSlug) as any;
@@ -322,7 +327,7 @@ export default function Program() {
           <div className="absolute inset-0 opacity-[0.02] [background-image:linear-gradient(to_right,rgba(13,49,92,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(13,49,92,0.06)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
           <div className="relative z-10 flex items-start gap-4">
             <div className="bg-[#019e6e]/10 p-2 rounded-full shrink-0 mt-0.5">
-              <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain" alt="Regulatory" />
+              <img src="/assets/stmarys-logo-256.webp" className="w-5 h-5 object-contain" alt="Regulatory" />
             </div>
             <div>
               <h3 className="text-[12px] font-black uppercase tracking-widest text-[#0d315c] mb-1">

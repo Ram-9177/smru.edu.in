@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaArrowLeft, FaCameraRetro, FaCompass, FaHome } from "react-icons/fa";
+import { FaArrowLeft, FaCameraRetro, FaCompass, FaHome } from "@/components/icons";
 import Hostel360Showcase from "@/components/Hostel360Showcase";
 
 export default function Hostel360Page() {

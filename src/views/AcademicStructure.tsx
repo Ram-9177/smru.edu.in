@@ -1,19 +1,28 @@
 "use client";
 import React, { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
-import { schools as staticSchools } from "../data/schools";
-import { 
-  FaSearch, FaFilter, FaLayerGroup, FaUniversity, FaUserGraduate, 
-  FaCertificate, FaBrain, FaInfoCircle, FaArrowRight, FaLightbulb,
-  FaBookOpen, FaGlobeAmericas, FaAward
-} from "react-icons/fa";
+import {
+  FaSearch,
+  FaFilter,
+  FaLayerGroup,
+  FaUniversity,
+  FaUserGraduate,
+  FaCertificate,
+  FaBrain,
+  FaInfoCircle,
+  FaArrowRight,
+  FaLightbulb,
+  FaBookOpen,
+  FaGlobeAmericas,
+  FaAward,
+} from "@/components/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import useOpenApply from "../hooks/useOpenApply";
 import abstractHeroBg from "../assets/education-pattern.webp";
 import RelatedLinks from "@/components/seo/RelatedLinks";
 import { resolveAssetSrc } from "@/lib/shared/media";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
+import { useCmsState } from "@/lib/developer/useCmsState";
+import { getAcademicSchools } from "@/lib/developer/academic-schools";
 import { ADMISSIONS_CONTENT_LAST_UPDATED } from "@/lib/shared/site-constants";
 import {
   detectProgramCategory,
@@ -32,9 +41,8 @@ const academicRelatedLinks = [
 
 export default function AcademicStructure() {
   const openApply = useOpenApply();
-  const { state } = useDeveloperCms({ useOverlay: true });
-  const cmsSchools = useMemo(() => buildAcademicSchoolsFromCms(state), [state]);
-  const schoolSource = useMemo(() => syncAcademicSchoolsWithCms(staticSchools, cmsSchools), [cmsSchools]);
+  const { state } = useCmsState({ useOverlay: true });
+  const schoolSource = useMemo(() => getAcademicSchools(state), [state]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterLevel, setFilterLevel] = useState("All");
   useEffect(() => {

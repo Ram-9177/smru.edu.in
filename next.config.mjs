@@ -16,6 +16,8 @@ const nextConfig = {
       config.cache = false;
       config.parallelism = 1;
     }
+    // Importing one icon from src/components/icons must not bring in the other 170.
+    config.module.rules.push({ test: /[\\/]src[\\/]components[\\/]icons[\\/]/, sideEffects: false });
     return config;
   },
 };

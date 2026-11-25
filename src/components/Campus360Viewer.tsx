@@ -4,7 +4,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { EquirectangularAdapter, Viewer } from "@photo-sphere-viewer/core";
 import { MarkersPlugin } from "@photo-sphere-viewer/markers-plugin";
-import { FaSyncAlt } from "react-icons/fa";
+import { FaSyncAlt } from "@/components/icons";
 
 import { decodedImageRegistry, prefetchAndDecode } from "@/lib/campus-360/texture-cache";
 

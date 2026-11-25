@@ -7,7 +7,7 @@ import {
   FaCheckCircle,
   FaEnvelope,
   FaInfoCircle,
-} from "react-icons/fa";
+} from "@/components/icons";
 import { ADMISSIONS_CONTENT_LAST_UPDATED } from "@/lib/shared/site-constants";
 
 export default function ExamNotification() {

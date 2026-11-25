@@ -134,7 +134,7 @@ export default function SmruIdentityPage() {
             </p>
 
             <h2 className="mt-14 text-2xl font-black text-[#0d315c]">The three names, and when each is used</h2>
-            <div className="mt-6 overflow-x-auto">
+            <div className="mt-6 overflow-x-auto" tabIndex={0} role="region" aria-label="The three names and when each is used">
               <table className="w-full min-w-[620px] border-collapse text-left text-sm">
                 <thead>
                   <tr className="bg-[#0d315c] text-white">

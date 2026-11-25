@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import StructuredData from "@/components/seo/StructuredData";
 import Home from "@/views/Home";
+import { schools } from "@/data/schools";
 import { buildMetadata } from "@/lib/metadata";
 import { buildWebPageSchema } from "@/lib/seo/schema";
 import { SITE_IDENTITY } from "@/lib/seo/site";
+
+const schoolIntroductions = Object.fromEntries(schools.map(({ slug, about }) => [slug, about]));
 
 const HOME_TITLE = "St. Mary's University Hyderabad (SMRU) – Official Site";
 const HOME_DESCRIPTION = SITE_IDENTITY.defaultDescription;
@@ -39,7 +42,7 @@ export default function Page() {
           pathname: "/",
         })}
       />
-      <Home />
+      <Home schoolIntroductions={schoolIntroductions} />
     </>
   );
 }

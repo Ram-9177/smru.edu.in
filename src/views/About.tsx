@@ -21,10 +21,21 @@ import { resolveAssetSrc } from "@/lib/shared/media";
 
 
 import {
-  FaTrophy, FaHeart, FaLightbulb, FaShieldAlt, FaUniversity,
-  FaBuilding, FaBookOpen, FaChalkboardTeacher, FaFlask, FaUsers, FaGraduationCap,
-  FaGlobe, FaPaintBrush, FaLaptopMedical
-} from "react-icons/fa";
+  FaTrophy,
+  FaHeart,
+  FaLightbulb,
+  FaShieldAlt,
+  FaUniversity,
+  FaBuilding,
+  FaBookOpen,
+  FaChalkboardTeacher,
+  FaFlask,
+  FaUsers,
+  FaGraduationCap,
+  FaGlobe,
+  FaPaintBrush,
+  FaLaptopMedical,
+} from "@/components/icons";
 import FAQSection from "../components/FAQSection";
 import { LinkGridSection } from "@/components/seo/PageSections";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
@@ -376,7 +387,7 @@ export default function About() {
       <section id="establishment" className="scroll-mt-24 smru-section bg-slate-50">
         <div className="smru-container text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white text-[#0d315c] mb-8 shadow-sm border border-slate-200 overflow-hidden p-3">
-            <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
+            <img src="/assets/stmarys-logo-256.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-[#0d315c] tracking-tight mb-4">
             Official Establishment & Recognition
@@ -501,7 +512,7 @@ export default function About() {
               { icon: <FaTrophy aria-hidden />, title: "Excellence", desc: "Academic quality, clinical readiness, and continuous improvement." },
               { icon: <FaHeart aria-hidden />, title: "Compassion", desc: "Patient-first thinking and dignity in care." },
               { icon: <FaLightbulb aria-hidden />, title: "Innovation", desc: "Assistive technology, rehabilitation research, and modern learning methods." },
-              { icon: <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-6 h-6 object-contain" />, title: "Integrity", desc: "Transparent governance and ethical institutional practice." },
+              { icon: <img src="/assets/stmarys-logo-256.webp" alt="St. Mary's University Logo" className="w-6 h-6 object-contain" />, title: "Integrity", desc: "Transparent governance and ethical institutional practice." },
             ]}
           />
         </div>

@@ -5,6 +5,8 @@ import localFont from "next/font/local";
 import "../src/styles/globals.css";
 import AppShell from "../src/components/AppShell";
 import StructuredData from "../src/components/seo/StructuredData";
+import { schools } from "../src/data/schools";
+import { STATIC_PAGE_CONTENT } from "../src/data/developer/static-seed";
 import { absoluteUrl } from "../src/lib/metadata";
 import { UNIVERSITY_INFO } from "../src/lib/shared/university";
 import { SITE_IDENTITY } from "../src/lib/seo/site";
@@ -13,6 +15,15 @@ import { buildUniversitySchema, buildWebSiteSchema } from "../src/lib/seo/schema
 
 const universitySchema = buildUniversitySchema();
 const websiteSchema = buildWebSiteSchema();
+
+// Picked here, on the server, so the footer does not bring the course catalogue to every page.
+const footer = {
+  schools: schools
+    .filter((school) => school.visibility !== "hidden")
+    .slice(0, 6)
+    .map(({ slug, name }) => ({ slug, name })),
+  contact: STATIC_PAGE_CONTENT.find((page) => page.id === "page-contact-primary")?.content ?? "",
+};
 
 // The font files are in the repository, so a build never waits for Google. These three cover English and are
 // preloaded; the other alphabets are the @font-face rules at the top of globals.css. next/font needs its options
@@ -231,7 +242,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Route-transition indicator. Replaces the loading.tsx boundaries, which in Next 15 static
             export put the fallback inside <main> and streamed the page into a hidden div. */}
         <NextTopLoader color="#019e6e" height={3} showSpinner={false} shadow={false} />
-        <AppShell>{children}</AppShell>
+        <AppShell footer={footer}>{children}</AppShell>
       </body>
     </html>
   );

@@ -2,35 +2,36 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
+import { useCmsPartners } from "@/lib/developer/useCmsPartners";
 import { useIframeAutoHeight } from "@/hooks/useIframeAutoHeight";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation } from "framer-motion";
+import * as m from "framer-motion/m";
 import logo from "../assets/Logo.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
-import { EDU_PARTNERS } from "@/data/schools";
+import { EDU_PARTNERS } from "@/data/edu-partners";
+
+const EXTERNAL_FALLBACK_BY_SLUG: Record<string, string> = {
+  bytexl: "https://bytexl.com/smru.html",
+  niat: "https://www.niatindia.com/external-universities/st.-mary-s-university",
+  skilgen: "https://skilgentech.com",
+  bb: "https://smru.theblackbucks.com/",
+  nst: "https://university.newtonschool.co/v1/nst-st-marys-hyd",
+  emversity: "https://emversity.com/university-partners/st-marys-website-page",
+  carebridge: "/partners/carebridge/index.html",
+  qtst: "/partners/qtst/index.html",
+  edinbox: "/partners/edinbox/index.html",
+  edridge: "https://edridge.in/edridge-st-mary-s-university/",
+  veloces: "/partners/veloces/velocescampus.html",
+};
 
 export default function PartnerIframePage({ slug }: { slug: string }) {
-  const { state } = useDeveloperCms();
+  const cmsPartners = useCmsPartners();
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
   const { iframeRef, iframeHeight, handleIframeLoad, iframeScrolling, hasDynamicHeight } = useIframeAutoHeight(1200);
 
-  const externalFallbackBySlug: Record<string, string> = {
-    bytexl: "https://bytexl.com/smru.html",
-    niat: "https://www.niatindia.com/external-universities/st.-mary-s-university",
-    skilgen: "https://skilgentech.com",
-    bb: "https://smru.theblackbucks.com/",
-    nst: "https://university.newtonschool.co/v1/nst-st-marys-hyd",
-    emversity: "https://emversity.com/university-partners/st-marys-website-page",
-    carebridge: "/partners/carebridge/index.html",
-    qtst: "/partners/qtst/index.html",
-    edinbox: "/partners/edinbox/index.html",
-    edridge: "https://edridge.in/edridge-st-mary-s-university/",
-    veloces: "/partners/veloces/velocescampus.html",
-  };
-
   const partner = useMemo(() => {
     const key = (slug || "").toLowerCase();
-    const cmsPartner = (state.partners || []).find((item) => (item.slug || "").toLowerCase() === key);
+    const cmsPartner = cmsPartners.find((item) => (item.slug || "").toLowerCase() === key);
     if (cmsPartner) return cmsPartner;
     const eduPartner = Object.values(EDU_PARTNERS || {}).find((item: any) => {
       const s = String(item.landingUrl || "").replace(/^\/+/, "").replace(/^partner\//, "").replace(/\/$/, "").toLowerCase();
@@ -42,7 +43,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
         slug: key,
         name: eduPartner.name,
         redirectUrl: String(eduPartner.landingUrl || ""),
-        iframeUrl: (eduPartner as any).iframeUrl || externalFallbackBySlug[key] || "",
+        iframeUrl: (eduPartner as any).iframeUrl || EXTERNAL_FALLBACK_BY_SLUG[key] || "",
         embedCode: (eduPartner as any).embedCode || "",
         logo: (eduPartner as any).logo || "",
         visibility: "public" as const,
@@ -54,7 +55,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
       };
     }
     return null;
-  }, [slug, state.partners]);
+  }, [slug, cmsPartners]);
 
   const activeSlug = (partner?.slug || slug || "").toLowerCase();
   const isFullBleedLayout = true; // Global partner layout is now end-to-end as requested
@@ -63,7 +64,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
     partner?.iframeUrl ||
     (partner?.redirectUrl?.startsWith("http") ? partner.redirectUrl : "") ||
     partner?.website ||
-    externalFallbackBySlug[activeSlug] ||
+    EXTERNAL_FALLBACK_BY_SLUG[activeSlug] ||
     "";
 
   // Reset the overlay when the slug changes. A same-origin document (public/partners/*) can finish
@@ -116,11 +117,11 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
   }
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       {/* Cinematic Transition Loader Overlay */}
       <AnimatePresence mode="wait">
         {!isIframeLoaded && iframeSrc && (
-          <motion.div
+          <m.div
             key="partner-loader"
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
@@ -128,13 +129,13 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="fixed inset-0 z-[1000] bg-white flex flex-col items-center justify-center p-8 pointer-events-none"
           >
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative flex flex-col items-center"
             >
-              <motion.img 
+              <m.img
                 src={resolveAssetSrc(logo)} 
                 alt="St. Mary's University Logo" 
                 className="h-20 md:h-28 w-auto object-contain mb-10 drop-shadow-xl"
@@ -149,7 +150,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
                 }}
               />
               <div className="w-48 h-0.5 bg-slate-100 overflow-hidden relative">
-                <motion.div 
+                <m.div
                   initial={{ left: "-100%" }}
                   animate={{ left: "100%" }}
                   transition={{ 
@@ -163,8 +164,8 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
               <p className="mt-6 text-[10px] font-black uppercase tracking-[0.4em] text-[#0d315c] opacity-40">
                 Securing Partner Gateway
               </p>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -192,7 +193,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
               />
             </div>
           ) : iframeSrc ? (
-            <motion.div
+            <m.div
               initial={false}
               animate={{ opacity: isIframeLoaded ? 1 : 0 }}
               transition={{ duration: 0.5 }}
@@ -223,7 +224,7 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
                   transition: "height 0.3s ease-out" 
                 }}
               />
-            </motion.div>
+            </m.div>
           ) : (
             <div className="cut-corner-panel border border-slate-100 bg-slate-50/50 p-20 text-center backdrop-blur-sm">
               <h2 className="text-4xl md:text-6xl font-black text-[#0d315c] uppercase tracking-tighter opacity-20">
@@ -236,6 +237,6 @@ export default function PartnerIframePage({ slug }: { slug: string }) {
           )}
         </div>
       </section>
-    </>
+    </LazyMotion>
   );
 }

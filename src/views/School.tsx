@@ -3,11 +3,10 @@ import React, { useState, useMemo } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { schools as staticSchools } from "../data/schools";
 import useOpenApply from "../hooks/useOpenApply";
 import SchoolLayout from "../components/SchoolLayout";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
+import { useCmsState } from "@/lib/developer/useCmsState";
+import { getAcademicSchools } from "@/lib/developer/academic-schools";
 import {
   detectProgramCategory,
   findBySlugOrName,
@@ -31,9 +30,8 @@ const sortByName = (a, b) => (a.name || "").localeCompare(b.name || "");
 export default function School() {
   const params = useParams();
   const schoolSlug = params.schoolSlug as string;
-  const { state } = useDeveloperCms({ useOverlay: true });
-  const cmsSchools = useMemo(() => buildAcademicSchoolsFromCms(state), [state]);
-  const schoolSource = useMemo(() => syncAcademicSchoolsWithCms(staticSchools, cmsSchools), [cmsSchools]);
+  const { state } = useCmsState({ useOverlay: true });
+  const schoolSource = useMemo(() => getAcademicSchools(state), [state]);
   const school = findBySlugOrName(schoolSource, schoolSlug) as any;
   const openApply = useOpenApply();
 

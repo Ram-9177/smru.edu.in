@@ -58,13 +58,11 @@ export default function PartnersManagerTab({
     if (target) setActive(target);
   }, [focusEntityId, partners]);
 
+  const activeId = active?.id;
+  const activeLink = active?.iframeUrl || active?.redirectUrl || active?.website || "";
   useEffect(() => {
-    if (!active) {
-      setSingleLink("");
-      return;
-    }
-    setSingleLink(active.iframeUrl || active.redirectUrl || active.website || "");
-  }, [active?.id]);
+    setSingleLink(activeLink);
+  }, [activeId, activeLink]);
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase().trim();

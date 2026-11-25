@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes } from "@/components/icons";
 
 const ENQUIRY_CTPL_FORM_ID = "d1f77bfe0d14579a3b3bc9ea65912e18d15308bc1de18afe198ae57f7cf53f14";
 const CTPL_SCRIPT_SRC = "https://apply.smru.edu.in/js/ctplform.js";

@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
-import { FaUserShield, FaBalanceScale, FaEnvelopeOpenText } from "react-icons/fa";
+import { FaUserShield, FaBalanceScale, FaEnvelopeOpenText } from "@/components/icons";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 import GrievanceTabs from "./GrievanceTabs";

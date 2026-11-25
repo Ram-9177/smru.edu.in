@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { FaDownload, FaFilePdf, FaHome, FaArrowLeft } from "react-icons/fa";
+import { FaDownload, FaFilePdf, FaHome, FaArrowLeft } from "@/components/icons";
 import useOpenApply from "../hooks/useOpenApply";
 import { SITE_CONTACT, SITE_CTA_LINKS } from "@/lib/shared/site-constants";
 

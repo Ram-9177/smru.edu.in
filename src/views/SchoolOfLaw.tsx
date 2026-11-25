@@ -18,7 +18,7 @@ import {
   FaPaperPlane,
   FaTimes,
   FaUsers,
-} from "react-icons/fa";
+} from "@/components/icons";
 import Link from "next/link";
 import useOpenApply from "../hooks/useOpenApply";
 import UniversitySectionHeader from "../components/UniversitySectionHeader";

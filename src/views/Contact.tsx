@@ -1,7 +1,16 @@
 // @ts-nocheck
 "use client";
 import React, { useEffect } from "react";
-import { FaComments, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaShieldAlt, FaWhatsapp, FaClock, FaArrowRight } from "react-icons/fa";
+import {
+  FaComments,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaShieldAlt,
+  FaWhatsapp,
+  FaClock,
+  FaArrowRight,
+} from "@/components/icons";
 import Link from "next/link";
 import useOpenApply from "../hooks/useOpenApply";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
@@ -246,7 +255,7 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <img src="/assets/Stmarys-Logo.webp" className="w-5 h-5 object-contain mt-1" alt="Safety" />
+                    <img src="/assets/stmarys-logo-256.webp" className="w-5 h-5 object-contain mt-1" alt="Safety" />
                     <div>
                       <p className="text-[11px] font-black uppercase tracking-widest text-slate-400">Campus Safety</p>
                       <p className="text-[14px] font-bold text-[#0d315c]">

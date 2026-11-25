@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
+import { FaArrowRight, FaCheckCircle } from "@/components/icons";
 
 export type IntlBlock =
   | { type: "prose"; heading?: string; paragraphs: string[] }
@@ -68,7 +68,7 @@ export default function InternationalPage({
                 return (
                   <div key={index}>
                     <h2 className="text-2xl font-black text-[#0d315c]">{block.heading}</h2>
-                    <div className="mt-4 overflow-x-auto">
+                    <div className="mt-4 overflow-x-auto" tabIndex={0} role="region" aria-label={`${block.heading} table`}>
                       <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                         <thead>
                           <tr className="bg-[#0d315c] text-white">

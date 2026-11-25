@@ -1,5 +1,14 @@
 import React from "react";
-import { FaUniversity, FaAward, FaChartLine, FaHandsHelping, FaBullseye, FaBrain, FaUsers, FaStethoscope } from "react-icons/fa";
+import {
+  FaUniversity,
+  FaAward,
+  FaChartLine,
+  FaHandsHelping,
+  FaBullseye,
+  FaBrain,
+  FaUsers,
+  FaStethoscope,
+} from "@/components/icons";
 
 type StatItem = {
   value: React.ReactNode;

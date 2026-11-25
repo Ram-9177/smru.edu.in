@@ -44,8 +44,6 @@ import {
   FiCheck,
   FiZoomIn,
   FiZoomOut,
-} from "react-icons/fi";
-import {
   FaAward,
   FaHeartbeat,
   FaHandsHelping,
@@ -57,9 +55,9 @@ import {
   FaBrain,
   FaUserNurse,
   FaLaptopCode,
-} from "react-icons/fa";
+} from "@/components/icons";
 
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
+import { useCmsPages } from "@/lib/developer/useCmsPages";
 
 const iconForBenefit = (label = "") => {
   const t = label.toLowerCase();
@@ -86,7 +84,7 @@ const schoolIcon = (name = "") => {
 };
 
 export default function Careers() {
-  const { state } = useDeveloperCms();
+  const cmsPages = useCmsPages();
 
   // Navigation & Tabs State
   const [activeTab, setActiveTab] = useState("vc"); // 'vc' | 'admin-faculty'
@@ -158,11 +156,11 @@ export default function Careers() {
   };
 
   const benefits = useMemo(() => {
-    const page = state.pages.find((item) => item.id === "page-careers-benefits");
+    const page = cmsPages.find((item) => item.id === "page-careers-benefits");
     const fromCms = page?.content ? page.content.split(";").map((item) => item.trim()) : [];
     const source = fromCms.length > 0 ? fromCms : CAREER_BENEFITS;
     return source.map((text) => ({ icon: iconForBenefit(text), text }));
-  }, [state.pages]);
+  }, [cmsPages]);
 
   // ---- Reveal Animations (IntersectionObserver) ----
   useEffect(() => {
@@ -480,8 +478,9 @@ export default function Careers() {
                     className="relative cursor-pointer group overflow-hidden border border-slate-200 shadow rounded bg-white w-full aspect-[3/4] flex items-center justify-center"
                   >
                     <img
-                      src={RECRUITMENT_NOTICE_META.posterImage}
+                      src={RECRUITMENT_NOTICE_META.posterThumb}
                       alt="Employment Notification Poster"
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                     />
                     <div className="absolute inset-0 bg-[#0d315c]/60 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center text-white p-4">
@@ -805,8 +804,9 @@ export default function Careers() {
                     className="relative cursor-pointer group overflow-hidden border border-slate-200 shadow rounded bg-white w-full aspect-[3/4] flex items-center justify-center"
                   >
                     <img
-                      src={RECRUITMENT_NOTICE_META.posterImage}
+                      src={RECRUITMENT_NOTICE_META.posterThumb}
                       alt="Employment Notification Poster"
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                     />
                     <div className="absolute inset-0 bg-[#0d315c]/60 opacity-0 group-hover:opacity-100 transition flex flex-col items-center justify-center text-white p-4">
@@ -1470,7 +1470,7 @@ export default function Careers() {
                 </button>
 
                 <a
-                  href={RECRUITMENT_NOTICE_META.posterImage}
+                  href={RECRUITMENT_NOTICE_META.posterDownload}
                   download="SMRU-Employment-Notification-2026.jpg"
                   className="text-xs bg-[#019e6e] hover:bg-[#00875e] text-white px-3 py-1.5 cut-corner-badge font-bold flex items-center gap-1.5 transition shadow"
                   title="Download Image File"
