@@ -4,6 +4,28 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-25 — Year branches relabelled: 2025-26 is the existing site, 2026-27 the new one (branch `site/2026-27`)
+
+- The two 23 November entries below labelled the years one too high. The existing code is the 2025-26 site; the
+  2026-27 website is new, not built yet, and will be made from this code.
+- `site/2025-26` created at `081c0ee`, the same file tree as `main` (`f275a62`). It is kept aside.
+- `site/2026-27` moved forward from `081c0ee` to `dee0470` (the commit `site/2027-28` held), then this entry. No
+  force-push.
+- `PROJECT.md` §10: year branches, `main` as the future cPanel branch, status date.
+- Left deliberately: the wording of the older entries; `PROJECT.md` on `main` and `site/2025-26`, which still
+  carries the old labels; the cPanel connection.
+
+## 2026-11-23 — Typecheck skips local scratch folders; 2027-28 is the working branch (branch `site/2027-28`)
+
+- `npm run typecheck` failed with 29 errors in a local checkout because `tsconfig.json` includes `**/*.ts`
+  and the git-ignored `scratch/original-source/` holds an old copy of `src/`. CI and clean checkouts have no
+  `scratch/`, so only local runs were affected.
+- `tsconfig.json`: exclude `scratch` (git-ignored) and `tmp`, local working folders that are not site source.
+- `PROJECT.md` §10: `site/2026-27` is kept aside; `site/2027-28` is the working branch; `main` is kept and
+  is green again after #15; no open PRs.
+- Left deliberately: the rest of the uncommitted frontend-audit work, which stays in the stash, and the
+  question of how 2027-28 work reaches `main`.
+
 ## 2026-11-23 — 2026-27 year branch; Next 15.5.29 (branch `site/2026-27`)
 
 - `site/2026-27` holds the 2026-27 academic-year site. It starts from the head of PR #14 (`main` plus the
