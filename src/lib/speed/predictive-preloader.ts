@@ -7,7 +7,6 @@ const prefetchedUrls = new Set<string>();
 
 const ROUTE_MEDIA_MAP: Record<string, string[]> = {
   "/": [
-    "/assets/Stmarys-Logo.webp",
     "/assets/Logo.webp",
   ],
   "/explore": [
@@ -206,19 +205,20 @@ export function initPredictiveNavigation(router?: { prefetch: (url: string) => v
   document.addEventListener("focusin", handleInteraction, { passive: true, capture: true });
 
   // Background idle pre-warming on initial landing
-  const requestIdle = window.requestIdleCallback || ((cb) => window.setTimeout(cb, 800));
+  const requestIdle = window.requestIdleCallback?.bind(window) || ((cb) => window.setTimeout(cb, 800));
   idleHandle = requestIdle(() => {
     // Warm up top universal brand and visual assets
     predictivePrefetch("/");
-    predictivePrefetch("/explore");
   });
 
   return () => {
     document.removeEventListener("pointerenter", handleInteraction, { capture: true });
     document.removeEventListener("touchstart", handleInteraction, { capture: true });
     document.removeEventListener("focusin", handleInteraction, { capture: true });
-    if (typeof window !== "undefined" && "cancelIdleCallback" in window && idleHandle) {
+    if (typeof window.cancelIdleCallback === "function") {
       window.cancelIdleCallback(idleHandle);
+    } else {
+      window.clearTimeout(idleHandle);
     }
   };
 }

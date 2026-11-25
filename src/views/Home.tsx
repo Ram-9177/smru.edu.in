@@ -122,7 +122,7 @@ export default function Home() {
     const features = getCmsContent("page-campus-hostel", ",");
     const iconMap: Record<string, React.ReactNode> = {
       // eslint-disable-next-line @next/next/no-img-element
-      hostel: <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University" className="w-5 h-5 object-contain" />,
+      hostel: <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University" className="w-5 h-5 object-contain" loading="lazy" />,
       sports: <GiRunningShoe />,
       labs: <FaBrain />,
       wellness: <FaStethoscope />,
@@ -206,7 +206,7 @@ export default function Home() {
                 src={PRIMARY_HERO_IMAGE}
                 alt="St. Mary's University Campus Drone View in Hyderabad"
                 fetchPriority="high"
-                decoding="async"
+                decoding="auto"
                 className="absolute inset-0 h-full w-full object-cover object-center hero-campus-image"
               />
             </picture>
@@ -507,7 +507,7 @@ export default function Home() {
         <div className="smru-container text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-[#0d315c] mb-8 shadow-sm border border-slate-100 overflow-hidden p-3 mx-auto">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
+            <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" loading="lazy" />
           </div>
           <UniversitySectionHeader
             title="Our Industrial Skill Partners"
@@ -579,7 +579,7 @@ export default function Home() {
             <div className="flex-1 space-y-6">
               <div className="flex items-center justify-start h-20 mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="h-full w-auto object-contain" />
+                <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="h-full w-auto object-contain" loading="lazy" />
               </div>
               <h2 className="text-3xl md:text-5xl font-black font-outfit text-[#0d315c] tracking-tight uppercase leading-none">
                 Hostel Facilities at <br className="hidden md:block" /> <span className="text-[#019e6e]">St. Mary&apos;s University</span>

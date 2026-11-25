@@ -51,7 +51,7 @@ declare global {
   }
 
   interface Window {
-    __ctplWidgetRegistry?: Record<string, boolean>;
+    __ctplWidgetRegistry?: Record<string, HTMLElement>;
     ctplTag?: (token: string) => void;
     ctplCountryChanged?: (obj: HTMLSelectElement) => void;
     ctplUpdateCorses?: () => void;
