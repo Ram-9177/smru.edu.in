@@ -51,7 +51,8 @@ src/              All application source (§2 "src/ layout"). The only import al
 public/           URL-addressed static files served verbatim (§6)
 scripts/          Verification, audit and generation tooling (§7). ESM .mjs (seo-guard.js is the one CommonJS
                   file); node: built-ins only, except the image/visual tools which use sharp and puppeteer.
-tests/            node:test suites, one file per subject: tests/<subject>.test.mjs (nested folders are not discovered)
+tests/            node:test suites, one file per subject: tests/<subject>.test.mjs (nested folders are not discovered;
+                  tests/helpers/ holds shared test code)
 docs/seo/         Plans, playbooks, trackers, generated CSVs, changelog.md. Prose goes here, never at root.
 tools/            Local-only developer tools (campus map calibrator). Never shipped; a test requires it to exist.
 .github/          One workflow: seo-hardening-ci.yml (checks, then publishing main)
@@ -81,14 +82,18 @@ src/ — app-facing code
                   RelatedLinks, RedirectFallback (PageSections/RelatedLinks are "use client").
     search/       Client search island (SiteSearchClient — also the hand-kept search index `staticItems`).
     developer/    Local-only CMS dashboard. Has NO route (a test forbids app/developer). Do not wire it into pages.
+    icons/        One generated file per icon (npm run icons:generate, §7); icon.ts is hand-written.
     AppShell.tsx  All layout chrome: skip link, ticker (FLASH_UPDATES), Navbar, MobileMenu, sticky CTA, Footer,
-                  ApplyModal provider, hide-chrome rules for partner/landing/360 routes.
+                  ApplyModal provider, hide-chrome rules for partner/landing/360 routes. Every visitor downloads
+                  what it imports directly (tested: no catalogue, tour or SEO tables). Footer data is picked in
+                  app/layout.tsx; SchoolsMegaMenu.tsx (the desktop Schools menu) loads on demand.
+    SchoolViews.tsx  The three school views, one download each. next/dynamic splits only from client components.
   context/, hooks/  ApplyModalContext (Meritto/CTPL apply flow), useOpenApply, useIframeAutoHeight.
   styles/globals.css  The only stylesheet. House classes in @layer components (.smru-*, .cut-corner-*).
   lib/speed/predictive-preloader.ts  Per-route asset preload lists.   lib/campus-360/texture-cache.ts  Panorama cache.
 
 src/ — facts and rules (the sources of truth, §4)
-  data/           schools.ts, official-courses.ts, programme-fees.ts, leaders.ts, international.ts, events.ts,
+  data/           schools.ts, edu-partners.ts, official-courses.ts, programme-fees.ts, leaders.ts, international.ts, events.ts,
                   careers.ts, law.ts, law-brochures.ts, seo-pages.ts, compliance-pages.ts, course-seo.ts,
                   home-data.ts, about-faqs.ts, campus-tour.ts, course-codes.ts (the university course-code register).
   lib/shared/     university.ts, site-constants.ts, programme-names.ts, program-utils.ts, redirect-metadata.ts,
@@ -103,7 +108,8 @@ src/ — facts and rules (the sources of truth, §4)
   types/images.d.ts  Static image module types, committed so `tsc` passes on a fresh checkout before any build
                   (next-env.d.ts is generated and gitignored). Keep it module-free (no import/export).
   lib/developer/, data/developer/static-seed.ts, types/developer.ts
-                  Developer-CMS state and seed. useDeveloperCms is still read by 11 components/views; the
+                  Developer-CMS state and seed. Public pages read it through useCmsPages, useCmsPartners, useCmsState
+                  (catalogue) and useLiveCms (cms-data.json, normally a placeholder); useDeveloperCms is the dashboard. The
                   static seed is a frozen inventory — do not update it for route changes (§9).
 
 src/ — binary and archive trees (known debt, §9)
@@ -198,7 +204,9 @@ and CI, not in `check`); **audit** = the release audit; *(convention)* = reviewe
 11. *(convention)* Client components start with `"use client"` on line 1. Heavy views are code-split with
     `next/dynamic`. Styling is Tailwind utilities plus the house classes in `src/styles/globals.css`. Brand
     colours: `#0d315c` navy, `#019e6e` green, `#ffaf3a` amber, `#f8fbff` surface. Fonts via the
-    `next/font/local` variables (`--font-inter`, `--font-outfit`, `--font-cinzel`), never `next/font/google` (§6). Don't add `// @ts-nocheck` (10 legacy files
+    `next/font/local` variables (`--font-inter`, `--font-outfit`, `--font-cinzel`), never `next/font/google` (§6).
+    Icons come from `@/components/icons`, never from `react-icons`, which ships every icon used anywhere on every
+    page (tested). Don't add `// @ts-nocheck` (10 legacy files
     still carry it) or a second stylesheet.
 
 ### Programme pages (`/schools/{school}/{dept}/{programme}/`)
@@ -275,7 +283,8 @@ Edit the fact in exactly one place. Everything else derives from it.
 | Full postal address string (footer, contact), phones, email, apply URLs, Meritto keys, social links, hidden-CTA routes | `src/lib/shared/site-constants.ts` (`SITE_CONTACT`, `SITE_CTA_LINKS`) |
 | Bridge sentence, founding date, sponsor, geo, `@id`s, schema `alternateName`s, Organization phone | `src/lib/seo/site.ts` |
 | Title/description budgets (65 / 41 / 155) | `MAX_SEO_TITLE_LENGTH` in `src/lib/metadata.ts`; mirrored by the `<= 41` in `getProgrammeTitleName` and `GATE_THRESHOLDS.maxTitleLength` in `scripts/crawl-helpers.mjs` — change all three together |
-| Schools, departments, programme editorial text, `EDU_PARTNERS` registry | `src/data/schools.ts` |
+| Schools, departments, programme editorial text | `src/data/schools.ts` |
+| `EDU_PARTNERS` registry (training partners, logos, landings) | `src/data/edu-partners.ts` |
 | Routable programme register (slug, code, level, duration) | `src/data/official-courses.ts` |
 | University course-code register | `src/data/course-codes.ts` |
 | Programme names and credentials | `src/lib/shared/programme-names.ts` |
@@ -349,7 +358,7 @@ the bridge sentence.
 
 ### Partner landings (`/partner/{slug}/`)
 
-A partner landing is not a page file. Add one entry to `EDU_PARTNERS` in `src/data/schools.ts`:
+A partner landing is not a page file. Add one entry to `EDU_PARTNERS` in `src/data/edu-partners.ts`:
 `KEY: { code: "KEY", name, landingUrl: "/<alias>", logo, iframeUrl, embedCode: "" }`. `landingUrl` is the
 **short alias** (`"/skilgen"`), from which `/partner/[slug]` derives its static params; `logo` is a bundled
 import from `src/assets/partner-logos/NN_<partner>.webp`; raw partner HTML goes under `public/partners/<slug>/`
@@ -465,7 +474,7 @@ static-export contract check (`out/sitemap.xml` and `out/robots.txt` exist and r
 `redirects:check`, `audit:checklist -- ci --strict`, `seo:gates -- ci --strict`, `seo:facts -- --strict`, and
 uploads the checklist and gates reports as the `frontend-audit` artifact. CI is `verify` plus the dependency
 audit. On pull requests and `main` the job reports as "Build, lint audit, and SEO sanity checks", the check `main`
-requires (§8); on a year branch it reports as "Year branch check", so it can neither block a pull request nor pass it. Lint warnings do not fail; there are 3 known `react-hooks/exhaustive-deps` warnings.
+requires (§8); on a year branch it reports as "Year branch check", so it can neither block a pull request nor pass it. Lint warnings do not fail; there are none.
 
 ### Publishing `main` to cPanel
 
@@ -488,7 +497,7 @@ After a live run it checks the home page is this build, `/admissions/`, a 404 an
 |---|---|
 | `scripts/seo-guard.js` (45 named checks) | an architecture invariant is broken: naming standard, bridge sentence, single root `.md` with its required sections, root allowlist, no stray scripts, `app/` holds only route files, no `loading.tsx`, no `redirect()` in pages, JSON-LD only via `<StructuredData>` with `-schema` ids, shells use the lib `buildRedirectMetadata`, sitemap index shape, guarded `.htaccess` rules, Course schema plumbing, programme-page standard, health-allied profiles, AI-crawler robots policy. Change a guarded string → update the guard **in the same commit** and say so. |
 | `tsc --noEmit` | type errors (tsconfig is non-strict). CI runs it before `build` on a fresh checkout, so it must not depend on generated files: image modules are declared in `src/types/images.d.ts`. To reproduce CI locally: `mv next-env.d.ts /tmp && npm run typecheck; mv /tmp/next-env.d.ts .` |
-| `node --test tests/*.test.mjs` | route-collision sets drift, JSON-LD escaping breaks, developer route reappears, crawl gates or visual-audit registries misbehave, a font is fetched from another server or its file is missing, the check name `main` requires changes |
+| `node --test tests/*.test.mjs` | route-collision sets drift, JSON-LD escaping breaks, developer route reappears, crawl gates or visual-audit registries misbehave, a font is fetched from another server or its file is missing, the check name `main` requires changes, the page shell imports heavy data, an icon differs from react-icons, published CMS content is misread, a brochure downloads twice, a partner loading screen never ends |
 | `next lint` | ESLint errors (`next/core-web-vitals`); `<a>` for internal routes is an error |
 | `next build` | any route fails to prerender; also re-runs type and lint checks. It needs no network. |
 | `redirects:check` | `REDIRECT_MAP.csv` stale; Apache row without rule; rule without row; shell without Apache 301; shell targeting `/` |
@@ -498,10 +507,11 @@ After a live run it checks the home page is this build, `/admissions/`, a 404 an
 
 ### Generators (they overwrite committed files)
 
-All three read `out/`. **Order: edit → `npm run build` → generators → review the diff → `npm run verify`.**
+All but `icons:generate` read `out/`. **Order: edit → `npm run build` → generators → review the diff → `npm run verify`.**
 
 | Command | Writes | Run after changing |
 |---|---|---|
+| `npm run icons:generate` | `src/components/icons/` | an import from `@/components/icons` (a test fails until it is run) |
 | `npm run redirects:map` | shell rows of `REDIRECT_MAP.csv` | any shell, alias or `.htaccess` rule |
 | `npm run seo:llms` | the programme block of `public/llms-full.txt` | programme data, names or fees |
 | `npm run seo:coverage` | `docs/seo/course-coverage.csv` | programme data, names or fees |
@@ -601,8 +611,9 @@ Deliberately not fixed yet. Each has an owner decision attached; do not "fix" th
 | `src/360/`, `src/Audio/`, `src/Law_Brouchers/`, `src/Partners - Codes/`, `src/Syllabus For SMCET/` | ~800 MB of originals and byte-identical duplicates of `public/` trees, read by nothing | Move originals to LFS/external storage or delete; keep `public/` as the single served copy. Requires confirming where the master files live. |
 | `src/assets/` | 114 of 138 files never imported (~105 MB) | Prune to the 24 imported `.webp` files and `fonts/` after the decision above. |
 | `scratch/Care_Bridge/` (untracked, 258 MB, its own `.git`) | a copy of Carebridge's site export; the source of truth is the partner's delivery (last: `~/Downloads/v9/V6 - latest`, synced 17 Sep 2026) | Delete the scratch copy; keep exports outside the repo and re-run `npm run partners:carebridge` when a new one arrives. |
-| `public/assets/campus_video.{mp4,webm}` (81 MB) and ~30 unreferenced files; `public/images/` duplicates | shipped, unreferenced | Delete once confirmed no external link depends on them. |
-| `src/components/developer/` + `src/lib/developer/` | local CMS with no route; `useDeveloperCms` read by 11 components/views; `src/data/developer/static-seed.ts` is a frozen inventory | Decide whether the CMS returns as a local tool or is removed. |
+| `public/assets/campus_video.{mp4,webm}` (81 MB) and ~30 unreferenced files; `public/images/` duplicates, including `hero-campus.jpg` and `nursing_hero.png` (1.2 MB), replaced by `public/assets/nursing-hero-*.webp` | shipped, unreferenced | Delete once confirmed no external link depends on them. |
+| `src/components/developer/` + `src/lib/developer/` | local CMS with no route; every page still asks for `/cms-data.json` once so an uploaded file can override content (the deployed file is a placeholder); `src/data/developer/static-seed.ts` is a frozen inventory | Decide whether the CMS returns as a local tool or is removed, which would also drop that request. |
+| Text contrast below WCAG AA | the brand green `#019e6e` and `#1f9a79` as small text on white (3.5:1), the pulsing white-on-orange ticker badge, some `text-slate-400` | A design decision on the colours. |
 | Content-heavy pages written inline in `app/` (`/smru`, compliance pages, `/departments`, `/events`) | work, but break the thin-page convention | Move markup to `src/views/` or `INFO_PAGES` (`src/lib/seo/info-pages.ts`) when next touched. |
 | Four dynamic routes render a fallback instead of `notFound()` | `app/schools/[schoolSlug]`, `…/[deptSlug]`, `app/leadership/[slug]`, `app/departments/[deptSlug]` | Convert when next touched; rule 3 stays *(convention)* until then. |
 | Fee-awareness of copy | counselling sentence and fee FAQ are hard-coded regardless of `src/data/programme-fees.ts` | Make both read `getProgrammeFee` when the first real fee is published (§3). |
@@ -624,8 +635,8 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 | Branches | Three long-lived branches: `main`; `site/2025-26`, the existing 2025-26 site as it is live, kept aside (do not commit to it); `site/2026-27`, where the new 2026-27 website is built from that code (its work starts from this branch, not from `main`, §8 step 1). Every other branch is temporary and deleted after its PR merges. The new site itself is not built yet. |
 | `main` | The university website: the code of the live 2025-26 site, including the landing intro. CI runs on it and publishes it to cPanel once the connection is set up (§7); publishing is off until then. Protected: pull request and green CI required (§8). A build downloads nothing, and a year-branch run has its own check name, so neither Google nor a duplicate run can hold up a pull request (§6, §7). |
 | Open PRs | none. #14 landed through #15. |
-| Gates at head | seo-guard 45/45 · tests 78/78 · typecheck clean · lint 0 errors (3 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
-| Last structural change | The landing intro (`src/components/LandingIntro.tsx`, mounted in `AppShell`) plays once per browser session on `/` only, is skipped for reduced motion and hidden tabs, and always ends within 1.6 s. The home page preloads its hero image per viewport. `/explore` media is no longer fetched in the background. Iframe height messages are accepted only from the frame and origin that own them. This code was already live; it had never been committed. |
-| Previous structural change | Client crashes no longer reach Next's bare "Application error" screen. `app/error.tsx` and `app/global-error.tsx` render `src/components/AppErrorScreen.tsx`, which reloads at most once a minute when a script chunk fails to load, then offers a reload button. Malformed URL fragments and slugs no longer throw. When uploading by FTP, send `_next/` first and `.htaccess` last, and never delete old `_next/` files during the upload. |
+| Gates at head | seo-guard 45/45 · tests 92/92 · typecheck clean · lint 0 errors, 0 warnings · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
+| Last structural change | A page downloads only what it shows. The shell around every page no longer carries the course catalogue, the CMS seed, the campus tour or SEO tables; the desktop Schools menu, the school views and the tour data load on demand; icons are one file each; the heaviest images were re-encoded. Script on the median page 206 → 134 KB (gzip), of which Next and React are about 100 KB. Rendered text, links, headings, JSON-LD and meta are unchanged on every page. |
+| Previous structural change | The landing intro (`src/components/LandingIntro.tsx`, mounted in `AppShell`) plays once per browser session on `/` only, is skipped for reduced motion and hidden tabs, and always ends within 1.6 s. The home page preloads its hero image per viewport. `/explore` media is no longer fetched in the background. Iframe height messages are accepted only from the frame and origin that own them. This code was already live; it had never been committed. |
 | Deferred, low priority | 4 meta descriptions < 70 chars (`/handbook/`, `/leadership/`, `/privacy-policy/`, `/terms-of-service/`); 25 thin indexable pages under 200 words (handbook, the leadership profiles, privacy/terms, html-sitemap, brochure, exam-notification, campus-360, compliance pages…). |
 | Do not touch | apply.smru.edu.in links, Google Ads / Meta Pixel tags, the Google verification token, `/developer/` and `/api/` disallows, partner-supplied HTML. |

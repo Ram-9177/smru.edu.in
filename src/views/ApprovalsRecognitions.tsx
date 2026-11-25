@@ -2,7 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaShieldAlt, FaBalanceScale, FaFileSignature, FaUserShield, FaDownload, FaCheckCircle, FaAward, FaUniversity } from "react-icons/fa";
+import {
+  FaShieldAlt,
+  FaBalanceScale,
+  FaFileSignature,
+  FaUserShield,
+  FaDownload,
+  FaCheckCircle,
+  FaAward,
+  FaUniversity,
+} from "@/components/icons";
 import OfficialDocumentCard from "@/components/OfficialDocumentCard";
 import {
   APPROVAL_SAFETY_NOTE,
@@ -218,7 +227,7 @@ export default function ApprovalsRecognitions() {
 
               <div className="p-8 bg-white border border-[#d8e8fb] cut-corner-panel shadow-sm">
                 <h4 className="text-[13px] font-black uppercase tracking-[0.2em] text-[#0d315c] mb-5">Professional Permission Status</h4>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Professional permission status table">
                   <table className="w-full min-w-[560px] border-collapse text-left text-sm">
                     <thead>
                       <tr className="border-b border-[#d8e8fb] text-[10px] font-black uppercase tracking-widest text-slate-500">

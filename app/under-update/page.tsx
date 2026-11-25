@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaLock, FaArrowLeft, FaClock } from "react-icons/fa";
+import { FaLock, FaArrowLeft, FaClock } from "@/components/icons";
 
 export default function UnderUpdatePage() {
   return (

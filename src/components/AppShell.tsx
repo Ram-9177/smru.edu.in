@@ -4,7 +4,7 @@ import { useEffect, useState, type Dispatch, type ReactNode, type SetStateAction
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer, { type FooterProps } from "./Footer";
 import ScrollToTop from "./ScrollToTop";
 import dynamic from "next/dynamic";
 const EnquiryModal = dynamic(() => import("./ApplyModal"));
@@ -15,7 +15,7 @@ import { ApplyModalContext } from "../context/ApplyModalContext";
 import type { MerittoModalPayload } from "../context/ApplyModalContext";
 import { initPredictiveNavigation } from "@/lib/speed/predictive-preloader";
 
-import { FaPaperPlane, FaPhoneAlt, FaFileDownload, FaWhatsapp, FaHeadset } from "react-icons/fa";
+import { FaPaperPlane, FaPhoneAlt, FaFileDownload, FaWhatsapp, FaHeadset } from "@/components/icons";
 import {
   PARTNER_HIDDEN_STICKY_ROUTES,
   PHD_ADMISSIONS_STATUS_MESSAGE,
@@ -42,6 +42,7 @@ const FLASH_UPDATES: FlashUpdate[] = [
 
 type AppShellContentProps = {
   children: ReactNode;
+  footer: FooterProps;
   openApplyModal: () => void;
   openMerittoModal: (payload?: MerittoModalPayload) => void;
   showEnquiryModal: boolean;
@@ -50,6 +51,7 @@ type AppShellContentProps = {
 
 function AppShellContent({
   children,
+  footer,
   openApplyModal,
   openMerittoModal,
   showEnquiryModal,
@@ -369,7 +371,7 @@ function AppShellContent({
       {!isDeveloperPage && !shouldHideFooter && !isPartnerPage && (
         <>
           <div className="w-full h-1.5 bg-[#019e6e]" />
-          <Footer />
+          <Footer {...footer} />
         </>
       )}
 
@@ -377,7 +379,7 @@ function AppShellContent({
   );
 }
 
-export default function AppShell({ children }: { children: ReactNode }) {
+export default function AppShell({ children, footer }: { children: ReactNode; footer: FooterProps }) {
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [showMerittoModal, setShowMerittoModal] = useState(false);
   const [merittoModalPayload, setMerittoModalPayload] = useState<MerittoModalPayload | null>(null);
@@ -431,7 +433,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
       <ReactDomSafetyPatch />
       <LandingIntro />
 
-      <AppShellContent 
+      <AppShellContent
+        footer={footer}
         openApplyModal={openApplyModal}
         openMerittoModal={openMerittoModal}
         showEnquiryModal={showEnquiryModal}

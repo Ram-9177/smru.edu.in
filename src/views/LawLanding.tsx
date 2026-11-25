@@ -19,7 +19,7 @@ import {
   FaMicroscope,
   FaPhoneAlt,
   FaUsers,
-} from "react-icons/fa";
+} from "@/components/icons";
 // MerittoWidget removed for NPF widget
 import useOpenApply from "@/hooks/useOpenApply";
 import { useApplyModal } from "@/context/ApplyModalContext";
@@ -102,7 +102,7 @@ export default function LawLanding() {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="flex items-center gap-3">
             <span className="flex h-11 w-24 items-center justify-center bg-white px-2 shadow-sm" style={{ clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))" }}>
-              <Image src="/assets/Logo.webp" alt="St. Mary's University" width={86} height={36} className="h-auto w-full object-contain" style={{ height: "auto" }} priority />
+              <Image src="/assets/logo-384.webp" alt="St. Mary's University" width={86} height={36} className="h-auto w-full object-contain" style={{ height: "auto" }} priority />
             </span>
             <span className="hidden text-[11px] font-black uppercase tracking-[0.24em] text-white md:inline">School of Law</span>
           </Link>

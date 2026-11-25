@@ -18,7 +18,7 @@ import {
   FaPhoneAlt,
   FaWhatsapp,
   FaEye,
-} from "react-icons/fa";
+} from "@/components/icons";
 import { SITE_CONTACT, SITE_CTA_LINKS } from "@/lib/shared/site-constants";
 import { warmUpHostelTiles } from "@/lib/campus-360/texture-cache";
 

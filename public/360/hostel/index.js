@@ -68,7 +68,18 @@
   };
 
   // Initialize viewer.
-  var viewer = new Marzipano.Viewer(panoElement, viewerOpts);
+  // Without WebGL there is no 360 view: show the first room's picture and say why, instead of a blank frame.
+  var viewer;
+  try {
+    viewer = new Marzipano.Viewer(panoElement, viewerOpts);
+  } catch (error) {
+    panoElement.style.background = '#0d315c center / cover no-repeat url("tiles/' + data.scenes[0].id + '/1/f/0/0.jpg")';
+    var notice = document.createElement('p');
+    notice.textContent = 'This browser cannot show the 360° view (WebGL is off or not supported). Try another browser to look around.';
+    notice.style.cssText = 'position:absolute;left:0;right:0;bottom:0;margin:0;padding:14px 18px;background:rgba(7,26,50,.85);color:#fff;font:600 14px/1.5 sans-serif;text-align:center';
+    panoElement.appendChild(notice);
+    return;
+  }
 
   // Create scenes.
   var scenes = data.scenes.map(function(data) {

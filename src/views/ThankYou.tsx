@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { FaDownload, FaCheckCircle, FaHome, FaArrowLeft } from "react-icons/fa";
+import { FaDownload, FaCheckCircle, FaHome, FaArrowLeft } from "@/components/icons";
 import useOpenApply from "../hooks/useOpenApply";
 import { SITE_CONTACT, SITE_CTA_LINKS } from "@/lib/shared/site-constants";
 import { trackConversion, GOOGLE_ADS_ID } from "@/lib/shared/gtag";

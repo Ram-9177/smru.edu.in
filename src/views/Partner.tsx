@@ -3,8 +3,8 @@
 
 import React, { useEffect, useMemo } from "react";
 import Link from "next/link";
-import { FaArrowRight, FaExternalLinkAlt, FaGlobe, FaLayerGroup, FaLink } from "react-icons/fa";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
+import { FaArrowRight, FaExternalLinkAlt, FaGlobe, FaLayerGroup, FaLink } from "@/components/icons";
+import { useCmsPartners } from "@/lib/developer/useCmsPartners";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import { LinkGridSection } from "@/components/seo/PageSections";
@@ -105,7 +105,7 @@ const PARTNER_ORDER = [
 ];
 
 export default function Partner() {
-  const { state } = useDeveloperCms();
+  const cmsPartners = useCmsPartners();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -125,7 +125,7 @@ export default function Partner() {
   }, []);
 
   const partners = useMemo(() => {
-    return (state.partners || [])
+    return cmsPartners
       .filter((partner) => partner.visibility !== "hidden" && partner.status !== "archived")
       .filter((partner) => !isRemovedPartnerPageSlug(partner.slug))
       .map((partner, idx) => {
@@ -177,7 +177,7 @@ export default function Partner() {
         if (!a.isComingSoon && b.isComingSoon) return -1;
         return 0;
       });
-  }, [state.partners]);
+  }, [cmsPartners]);
 
   return (
     <div className="min-h-screen bg-white">

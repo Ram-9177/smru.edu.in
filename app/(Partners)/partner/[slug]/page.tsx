@@ -1,7 +1,7 @@
 import PartnerIframePage from "@/views/PartnerIframePage";
 import EdinboxForensicLandingV2 from "@/views/EdinboxForensicLandingV2";
 import RedirectFallback from "@/components/seo/RedirectFallback";
-import { EDU_PARTNERS } from "@/data/schools";
+import { EDU_PARTNERS } from "@/data/edu-partners";
 import { buildMetadata } from "@/lib/metadata";
 import { buildRedirectMetadata } from "@/lib/shared/redirect-metadata";
 import StructuredData from "@/components/seo/StructuredData";

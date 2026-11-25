@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFilePdf, FaExternalLinkAlt } from "react-icons/fa";
+import { FaFilePdf, FaExternalLinkAlt } from "@/components/icons";
 
 type OfficialDocumentCardProps = {
   title: string;

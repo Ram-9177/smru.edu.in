@@ -40,9 +40,11 @@ import {
   FaSyringe,
   FaProcedures,
   FaDna,
-} from "react-icons/fa";
-import { GiBrain, GiMedicalPack, GiRunningShoe } from "react-icons/gi";
-import { useDeveloperCms } from "../lib/developer/useDeveloperCms";
+  GiBrain,
+  GiMedicalPack,
+  GiRunningShoe,
+} from "@/components/icons";
+import { useCmsPages } from "../lib/developer/useCmsPages";
 import { HOME_FAQ_CATEGORIES } from "../lib/seo/home-faqs";
 import { LinkGridSection } from "../components/seo/PageSections";
 import { GLOBAL_TRUST_CTA_LINKS, LOCATION_LINKS } from "../lib/seo/info-pages";
@@ -51,7 +53,7 @@ import { getSchoolLandingPath } from "../lib/shared/school-landing";
 import { getPartnerLandingHref, isRemovedPartnerPageSlug } from "../lib/shared/partner-pages";
 import { PHD_ADMISSIONS_STATUS_MESSAGE } from "../lib/shared/site-constants";
 
-import { EDU_PARTNERS, schools as staticSchools } from "../data/schools";
+import { EDU_PARTNERS } from "../data/edu-partners";
 import FAQSection from "../components/FAQSection";
 import CampusLife360Section from "../components/CampusLife360Section";
 
@@ -83,19 +85,24 @@ const PARTNER_ORDER = [
 ];
 
 /* =============================== Page =============================== */
-export default function Home() {
+type HomeProps = {
+  /** Each school's introduction by slug, read in app/page.tsx so the catalogue stays out of the browser. */
+  schoolIntroductions: Record<string, string>;
+};
+
+export default function Home({ schoolIntroductions }: HomeProps) {
   const router = useRouter();
   const openApply = useOpenApply();
   const latestEvents = useMemo(
     () => [...UNIVERSITY_EVENTS].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3),
     []
   );
-  const { state } = useDeveloperCms();
+  const cmsPages = useCmsPages();
 
   const getCmsContent = useCallback((id: string, separator = " | ") => {
-    const page = state.pages.find((p) => p.id === id);
+    const page = cmsPages.find((p) => p.id === id);
     return page?.content ? page.content.split(separator).map((s) => s.trim()) : [];
-  }, [state.pages]);
+  }, [cmsPages]);
 
   const scholarshipNames = useMemo(() => {
     const fromCms = getCmsContent("page-scholarships", ";");
@@ -122,7 +129,7 @@ export default function Home() {
     const features = getCmsContent("page-campus-hostel", ",");
     const iconMap: Record<string, React.ReactNode> = {
       // eslint-disable-next-line @next/next/no-img-element
-      hostel: <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University" className="w-5 h-5 object-contain" loading="lazy" />,
+      hostel: <img src="/assets/stmarys-logo-256.webp" alt="St. Mary's University" className="w-5 h-5 object-contain" loading="lazy" />,
       sports: <GiRunningShoe />,
       labs: <FaBrain />,
       wellness: <FaStethoscope />,
@@ -389,7 +396,7 @@ export default function Home() {
                 image: "/assets/school_law_hq.webp",
               },
             ] as const).map((school, i) => {
-              const matchedSchool = staticSchools.find(s => s.slug === school.slug);
+              const introduction = schoolIntroductions[school.slug];
               return (
               <Link
                 key={i}
@@ -418,9 +425,9 @@ export default function Home() {
                       <FaArrowRight className="text-[12px] transform group-hover:translate-x-0.5 transition-transform" />
                     </div>
                   </div>
-                  {matchedSchool?.about && (
+                  {introduction && (
                     <p className="mt-3 text-white/80 text-xs font-medium leading-relaxed max-h-0 opacity-0 overflow-hidden group-hover:max-h-32 group-hover:opacity-100 transition-all duration-700 delay-75">
-                      {matchedSchool.about}
+                      {introduction}
                     </p>
                   )}
                 </div>
@@ -507,7 +514,7 @@ export default function Home() {
         <div className="smru-container text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white text-[#0d315c] mb-8 shadow-sm border border-slate-100 overflow-hidden p-3 mx-auto">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" loading="lazy" />
+            <img src="/assets/stmarys-logo-256.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" loading="lazy" />
           </div>
           <UniversitySectionHeader
             title="Our Industrial Skill Partners"
@@ -579,7 +586,7 @@ export default function Home() {
             <div className="flex-1 space-y-6">
               <div className="flex items-center justify-start h-20 mb-4">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="h-full w-auto object-contain" loading="lazy" />
+                <img src="/assets/stmarys-logo-256.webp" alt="St. Mary's University Logo" className="h-full w-auto object-contain" loading="lazy" />
               </div>
               <h2 className="text-3xl md:text-5xl font-black font-outfit text-[#0d315c] tracking-tight uppercase leading-none">
                 Hostel Facilities at <br className="hidden md:block" /> <span className="text-[#019e6e]">St. Mary&apos;s University</span>

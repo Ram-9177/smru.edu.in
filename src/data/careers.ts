@@ -69,7 +69,10 @@ export const RECRUITMENT_NOTICE_META = {
   website: "www.smru.edu.in",
   sponsoringSociety: "Joseph Sriharsha & Mary Indraja Educational Society",
   signatory: "President & Joint Secretary",
-  posterImage: "/careers/smru-employment-notification-2026.jpg",
+  posterImage: "/careers/smru-employment-notification-2026.webp",
+  posterThumb: "/careers/smru-employment-notification-2026-thumb.webp",
+  /** The original file, for the download button. */
+  posterDownload: "/careers/smru-employment-notification-2026.jpg",
   deadlineRule: "21 clear calendar days from the later of (i) date of newspaper publication, or (ii) date on which the detailed notification is uploaded on the University website.",
   vcSubmissionEmail: "chancellor@smru.edu.in",
   adminFacultySubmissionEmail: "hr@smru.edu.in",

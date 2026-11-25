@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/metadata";
-import { FaBan, FaPhoneAlt, FaEnvelope, FaExclamationTriangle } from "react-icons/fa";
+import { FaBan, FaPhoneAlt, FaEnvelope, FaExclamationTriangle } from "@/components/icons";
 import StructuredData from "@/components/seo/StructuredData";
 import { buildBreadcrumbSchema, buildWebPageSchema } from "@/lib/seo/schema";
 

@@ -8,8 +8,8 @@ import {
   FaBullseye,
   FaBicycle,
   FaUniversity,
-} from "react-icons/fa";
-import { GiRunningShoe } from "react-icons/gi";
+  GiRunningShoe,
+} from "@/components/icons";
 import React from "react";
 
 export const DEFAULT_SCHOLARSHIP_NAMES = [

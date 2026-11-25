@@ -27,9 +27,6 @@ declare module "*.pdf" {
   export default src;
 }
 
-declare module "react-icons/fa";
-declare module "react-icons/gi";
-declare module "react-icons/fi";
 
 declare module "react" {
   interface ImgHTMLAttributes<T> {

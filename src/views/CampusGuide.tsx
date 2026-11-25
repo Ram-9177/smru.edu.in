@@ -35,7 +35,7 @@ import {
   FaHeadset,
   FaThLarge,
   FaRegCompass,
-} from "react-icons/fa";
+} from "@/components/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import dynamic from "next/dynamic";

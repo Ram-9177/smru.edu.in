@@ -30,7 +30,7 @@ export default function HandbookPage() {
           {/* SMRU Logo */}
           <div className="mb-10 relative h-20 w-48">
             <Image
-              src="/assets/Logo.webp"
+              src="/assets/logo-384.webp"
               alt="St. Mary's University Logo"
               fill
               style={{ objectFit: 'contain' }}

@@ -1,9 +1,3 @@
-import type { Metadata } from "next";
-import { schools } from "@/data/schools";
-import { buildMetadata } from "@/lib/metadata";
-import { getSchoolSearchTerms } from "@/lib/seo/search-intent";
-import { findBySlugOrName, safeSlug } from "@/lib/shared/program-utils";
-
 // Canonical school hub is always /schools/{slug}. The former short-form landings
 // (/law, /nursing-sciences, ...) 301 to these in public/.htaccess and keep a client
 // redirect shell so nothing 404s without Apache.
@@ -33,59 +27,7 @@ export const COMING_SOON_SCHOOL_SLUGS = [
   "engineering-emerging-technologies",
 ] as const;
 
-const SCHOOL_LANDING_IMAGES: Record<string, string> = {
-  "rehabilitation-sciences": "/assets/school_rehabilitation_sciences_hq.webp",
-  "health-allied-health-sciences": "/assets/school_health_allied_health_sciences_hq.webp",
-  psychology: "/assets/school_psychology_hq.webp",
-  "nursing-sciences": "/assets/school_nursing_hq.webp",
-  "engineering-emerging-technologies": "/assets/school_engineering_emerging_technologies_hq.webp",
-};
-
 export const getKnownSchoolLandingPath = (schoolSlug: string) => SCHOOL_LANDING_PATHS[schoolSlug] || null;
 
 export const getSchoolLandingPath = (schoolSlug: string) =>
   getKnownSchoolLandingPath(schoolSlug) || `/schools/${schoolSlug}`;
-
-export const getSchoolLandingConfig = (schoolSlug: string) => {
-  const school = findBySlugOrName(schools, schoolSlug);
-  if (!school) return null;
-
-  const slug = safeSlug(school.slug, school.name);
-  const pathname = getSchoolLandingPath(slug);
-
-  return {
-    school,
-    slug,
-    pathname,
-    catalogPath: `/schools/${slug}`,
-    name: school.name,
-    shortName: school.short || school.name,
-    description:
-      school.about ||
-      `${school.name} at St. Mary's University with admissions, departments, and programme information.`,
-    imagePath: SCHOOL_LANDING_IMAGES[slug] || "/assets/hero-campus.webp",
-  };
-};
-
-export const buildSchoolLandingMetadata = (schoolSlug: string): Metadata => {
-  const config = getSchoolLandingConfig(schoolSlug);
-  const name = config?.name || "School";
-  const pathname = config?.pathname || `/${schoolSlug}`;
-  const description =
-    config?.description ||
-    `${name} at St. Mary's University with departments, programmes, admissions 2026, and academic pathway information.`;
-
-  return buildMetadata({
-    title: `${name} | Departments, Courses & Admissions 2026`,
-    description: `${description} Explore departments, courses, programmes, admissions 2026, and official school information.`,
-    pathname,
-    keywords: [
-      name,
-      `${name} admissions`,
-      `${name} programmes`,
-      "St. Mary's University schools",
-      "St. Mary's University",
-      ...getSchoolSearchTerms({ slug: schoolSlug, name }),
-    ],
-  });
-};

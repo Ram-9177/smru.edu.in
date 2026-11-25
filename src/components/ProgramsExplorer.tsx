@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "@/components/icons";
 import { OFFICIAL_COURSE_ROWS } from "@/data/official-courses";
 import { useApplyModal } from "@/context/ApplyModalContext";
 

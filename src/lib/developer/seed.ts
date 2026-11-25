@@ -1,6 +1,8 @@
-import { EDU_PARTNERS, schools as websiteSchools } from "@/data/schools";
+import { EDU_PARTNERS } from "@/data/edu-partners";
+import { schools as websiteSchools } from "@/data/schools";
 import { COURSE_CODES } from "@/data/course-codes";
 import { STATIC_PAGE_CONTENT, STATIC_ROUTES } from "@/data/developer/static-seed";
+import { HIDDEN_PARTNER_CODES, SEED_PARTNERS, normalizePath, seedPartnerId } from "@/lib/developer/seed-partners";
 import type {
   CourseCode,
   CoursePartnerLink,
@@ -8,7 +10,6 @@ import type {
   DeveloperCMSState,
   EntityStatus,
   PageRoute,
-  Partner,
   Program,
   ProgramType,
   School,
@@ -29,13 +30,6 @@ const toProgramType = (level = ""): ProgramType => {
 
 const defaultVisibility: Visibility = "public";
 const defaultStatus: EntityStatus = "live";
-const HIDDEN_PARTNER_CODES = new Set(["ST. MARY'S UNIVERSITY", "ST.MARY'S UNIVERSITY", "KPMG", "MICROSOFT", "IIAT"]);
-
-const normalizePath = (path?: string | null) => {
-  if (!path) return "";
-  if (path.startsWith("http")) return path;
-  return path.startsWith("/") ? path : `/${path}`;
-};
 
 const getProgramPartnerCodes = (program: any = {}) => {
   const rawCodes = Array.isArray(program.partnerCodes)
@@ -54,7 +48,6 @@ export function loadSeedState(): DeveloperCMSState {
   const departments: Department[] = [];
   const programs: Program[] = [];
   const courseCodes: CourseCode[] = COURSE_CODES;
-  const partners: Partner[] = [];
   const partnerLinks: CoursePartnerLink[] = [];
   const routes: PageRoute[] = [];
 
@@ -62,28 +55,9 @@ export function loadSeedState(): DeveloperCMSState {
 
   Object.values(EDU_PARTNERS || {}).forEach((partner: any) => {
     const partnerCode = (partner.code || "").toUpperCase();
-    const id = `partner-${(partner.code || "unknown").toLowerCase()}`;
-    partnerCodeToId.set(partnerCode, id);
-    const isHiddenPartner = HIDDEN_PARTNER_CODES.has(partnerCode);
-    partners.push({
-      id,
-      slug: String(partner.landingUrl || "").startsWith("/")
-        ? partner.landingUrl.replace(/^\//, "")
-        : (partner.code || "").toLowerCase(),
-      name: partner.name,
-      redirectUrl: normalizePath(partner.landingUrl),
-      iframeUrl: partner.iframeUrl || "",
-      embedCode: partner.embedCode || "",
-      logo: partner.logo || "",
-      visibility: isHiddenPartner ? "hidden" : "public",
-      status: isHiddenPartner ? "archived" : "live",
-      partnerType: "edutech",
-      shortDescription: "Partner-linked education program pathway",
-      website: "",
-      openInNewTab: false,
-    });
+    partnerCodeToId.set(partnerCode, seedPartnerId(partner));
 
-    if (partner.landingUrl && !isHiddenPartner && !String(partner.landingUrl).startsWith("http")) {
+    if (partner.landingUrl && !HIDDEN_PARTNER_CODES.has(partnerCode) && !String(partner.landingUrl).startsWith("http")) {
       routes.push({
         id: `route-partner-${(partner.code || "").toLowerCase()}`,
         title: `${partner.name} Partner Page`,
@@ -293,7 +267,7 @@ export function loadSeedState(): DeveloperCMSState {
     departments,
     programs,
     courseCodes,
-    partners,
+    partners: SEED_PARTNERS,
     partnerLinks,
     pages: STATIC_PAGE_CONTENT,
   };

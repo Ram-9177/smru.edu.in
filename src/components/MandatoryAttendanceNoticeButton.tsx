@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { FaExclamationTriangle, FaTimes } from "react-icons/fa";
+import { FaExclamationTriangle, FaTimes } from "@/components/icons";
 import MandatoryAttendanceNotice from "./MandatoryAttendanceNotice";
 
 /**

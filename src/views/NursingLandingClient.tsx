@@ -23,7 +23,7 @@ import {
   FaUserNurse,
   FaUsers,
   FaWhatsapp,
-} from "react-icons/fa";
+} from "@/components/icons";
 import MerittoWidget from "@/components/MerittoWidget";
 
 const navItems = [
@@ -35,7 +35,10 @@ const navItems = [
   ["Admissions", "#admissions"],
 ];
 
-const heroImages = ["/images/hero-campus.jpg", "/images/nursing_hero.png"];
+const heroImages = [
+  { src: "/assets/nursing-hero-campus.webp", mobileSrc: "/assets/nursing-hero-campus-mobile.webp" },
+  { src: "/assets/nursing-hero-simulation.webp" },
+];
 
 const stats = [
   ["4.5 Million", FaUserNurse, "The projected global shortfall of nurses by 2030 (WHO, State of the World’s Nursing 2025)."],
@@ -150,13 +153,19 @@ function SectionHeading({
 export default function NursingLanding() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [isApplyOpen, setIsApplyOpen] = useState(false);
+  const [showAllHeroImages, setShowAllHeroImages] = useState(false);
 
   useEffect(() => {
+    // The second picture fades in after 3 s, so it downloads after the first one instead of competing with it.
+    const startDownload = window.setTimeout(() => setShowAllHeroImages(true), 1200);
     const timer = window.setInterval(
       () => setHeroIndex((current) => (current + 1) % heroImages.length),
       3000,
     );
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearTimeout(startDownload);
+      window.clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -180,7 +189,7 @@ export default function NursingLanding() {
           <Link href="/" className="flex items-center gap-3">
             <span className="brand-cut flex h-12 w-24 items-center justify-center bg-white px-2 shadow-sm sm:w-28">
               <Image
-                src="https://smru.edu.in/assets/Logo.webp"
+                src="/assets/logo-384.webp"
                 alt="St. Mary's University logo"
                 width={374}
                 height={200}
@@ -206,16 +215,17 @@ export default function NursingLanding() {
 
       <main>
         <section className="relative flex min-h-dvh items-center overflow-hidden bg-[#071a32] pt-20 text-white">
-          {heroImages.map((src, index) => (
-            <Image
-              key={src}
-              src={src}
-              alt="Nursing campus and clinical training"
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className={`object-cover object-[center_30%] transition-opacity duration-1000 ${heroIndex === index ? "opacity-100" : "opacity-0"}`}
-            />
+          {heroImages.slice(0, showAllHeroImages ? heroImages.length : 1).map(({ src, mobileSrc }, index) => (
+            <picture key={src}>
+              {mobileSrc && <source media="(max-width: 768px)" srcSet={mobileSrc} />}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt="Nursing campus and clinical training"
+                fetchPriority={index === 0 ? "high" : "auto"}
+                className={`absolute inset-0 h-full w-full object-cover object-[center_30%] transition-opacity duration-1000 ${heroIndex === index ? "opacity-100" : "opacity-0"}`}
+              />
+            </picture>
           ))}
           <div className="absolute inset-0 bg-linear-to-br from-[#071a32]/85 via-[#0d315c]/75 to-[#019e6e]/60 mix-blend-multiply" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,26,50,1)_0%,rgba(7,26,50,.95)_45%,rgba(7,26,50,.6)_75%,rgba(7,26,50,.2)_100%)]" />

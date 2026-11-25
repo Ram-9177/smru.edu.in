@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { FaArrowRight, FaSearch } from "react-icons/fa";
+import { FaArrowRight, FaSearch } from "@/components/icons";
 import type { CatalogueProgramme } from "@/lib/seo/programme-catalogue";
 
 type SchoolGroup = { schoolName: string; schoolSlug: string; programmes: CatalogueProgramme[] };

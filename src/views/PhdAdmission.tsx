@@ -3,14 +3,42 @@
 import Link from "next/link";
 import React, { useEffect } from "react";
 import {
-  FaGraduationCap, FaFlask, FaCalendarAlt, FaClipboardCheck,
-  FaArrowRight, FaUsers, FaLightbulb, FaBookOpen, FaHospital,
-  FaMicroscope, FaLaptopCode, FaBrain, FaAward,
-  FaChalkboardTeacher, FaStethoscope, FaChartBar, FaGlobeAmericas,
-  FaShieldAlt, FaLeaf, FaWheelchair, FaDumbbell, FaEnvelope, FaRupeeSign,
-  FaHandshake, FaGlobe, FaUserGraduate, FaChevronDown, FaCheckCircle,
-  FaClock, FaMapMarkerAlt, FaBriefcase, FaPaperPlane, FaBuilding, FaUniversalAccess, FaFileDownload
-} from "react-icons/fa";
+  FaGraduationCap,
+  FaFlask,
+  FaCalendarAlt,
+  FaClipboardCheck,
+  FaArrowRight,
+  FaUsers,
+  FaLightbulb,
+  FaBookOpen,
+  FaHospital,
+  FaMicroscope,
+  FaLaptopCode,
+  FaBrain,
+  FaAward,
+  FaChalkboardTeacher,
+  FaStethoscope,
+  FaChartBar,
+  FaGlobeAmericas,
+  FaShieldAlt,
+  FaLeaf,
+  FaWheelchair,
+  FaDumbbell,
+  FaEnvelope,
+  FaRupeeSign,
+  FaHandshake,
+  FaGlobe,
+  FaUserGraduate,
+  FaChevronDown,
+  FaCheckCircle,
+  FaClock,
+  FaMapMarkerAlt,
+  FaBriefcase,
+  FaPaperPlane,
+  FaBuilding,
+  FaUniversalAccess,
+  FaFileDownload,
+} from "@/components/icons";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 const campusVideo = "/assets/campus_video_fallback.mp4";
 import { resolveAssetSrc } from "@/lib/shared/media";

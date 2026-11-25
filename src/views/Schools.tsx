@@ -1,15 +1,14 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { schools as staticSchools } from "../data/schools";
 import useOpenApply from "../hooks/useOpenApply";
-import { FaLayerGroup, FaInfoCircle } from "react-icons/fa";
+import { FaLayerGroup, FaInfoCircle } from "@/components/icons";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import UniversitySectionHeader from "../components/UniversitySectionHeader";
 import { BigNumberGrid, PillBand } from "../components/InfographicSections";
-import { useDeveloperCms } from "@/lib/developer/useDeveloperCms";
-import { buildAcademicSchoolsFromCms, syncAcademicSchoolsWithCms } from "@/lib/developer/academic-data";
+import { useCmsState } from "@/lib/developer/useCmsState";
+import { getAcademicSchools } from "@/lib/developer/academic-schools";
 import { LinkGridSection } from "@/components/seo/PageSections";
 import { LOCATION_LINKS, TRUST_LINKS } from "@/lib/seo/info-pages";
 import { SHOW_PUBLIC_SEO_SECTIONS } from "@/lib/seo/visibility";
@@ -26,9 +25,8 @@ import { getKnownSchoolLandingPath } from "@/lib/shared/school-landing";
 const sortByName = (a, b) => (a.name || "").localeCompare(b.name || "");
 
 export default function Schools() {
-  const { state } = useDeveloperCms({ useOverlay: true });
-  const cmsItems = useMemo(() => buildAcademicSchoolsFromCms(state), [state]);
-  const source = useMemo(() => syncAcademicSchoolsWithCms(staticSchools, cmsItems), [cmsItems]);
+  const { state } = useCmsState({ useOverlay: true });
+  const source = useMemo(() => getAcademicSchools(state), [state]);
   const baseItems = useMemo(() => 
     (source || [])
       .filter(s => s.visibility !== "hidden")

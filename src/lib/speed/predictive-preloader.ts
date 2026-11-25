@@ -1,13 +1,12 @@
 // Predictive Smart Preloader & Intent-Based Zero-Latency Accelerator
 
 import { prefetchAndDecode, warmUpHostelTiles, warmUpTourTextures } from "../campus-360/texture-cache";
-import { CAMPUS_TOUR_LOCATIONS } from "../../data/campus-tour";
 
 const prefetchedUrls = new Set<string>();
 
 const ROUTE_MEDIA_MAP: Record<string, string[]> = {
   "/": [
-    "/assets/Logo.webp",
+    "/assets/logo-384.webp",
   ],
   "/explore": [
     "/assets/hero-campus.webp",
@@ -71,6 +70,13 @@ const ROUTE_MEDIA_MAP: Record<string, string[]> = {
   ],
 };
 
+// The tour's locations carry their narration in three languages, so they load only when the tour is about to open.
+function warmUpTour(count: number) {
+  import("../../data/campus-tour")
+    .then(({ CAMPUS_TOUR_LOCATIONS }) => warmUpTourTextures(CAMPUS_TOUR_LOCATIONS.slice(0, count)))
+    .catch(() => {});
+}
+
 /**
  * Predictively prefetch and decode high-intent media assets for a given route
  */
@@ -102,11 +108,11 @@ export function predictivePrefetch(targetUrl: string) {
 
   // 2. Specialized route predictive warmers
   if (path.includes("campus-360")) {
-    warmUpTourTextures(CAMPUS_TOUR_LOCATIONS.slice(0, 6));
+    warmUpTour(6);
   } else if (path.includes("hostel-360") || path.includes("hostel")) {
     warmUpHostelTiles(["0-girls-rooms", "6-girls_handwash", "3-girls-washroom-360", "2-girls-wet--dry"]);
   } else if (path.includes("explore")) {
-    warmUpTourTextures(CAMPUS_TOUR_LOCATIONS.slice(0, 4));
+    warmUpTour(4);
     warmUpHostelTiles(["0-girls-rooms", "6-girls_handwash"]);
   }
 }

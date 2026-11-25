@@ -1,0 +1,7 @@
+import { drawIcon, type IconProps, type IconShape } from "./icon";
+
+const shape: IconShape = [{"viewBox":"0 0 512 512"},[["path",{"d":"M76 46c-33.24 0-60 26.76-60 60v300c0 33.24 26.76 60 60 60h360c33.24 0 60-26.76 60-60V106c0-33.24-26.76-60-60-60zm120 60h120v90h90v120h-90v90H196v-90h-90V196h90z"}]]];
+
+export default function GiMedicalPack(props: IconProps) {
+  return drawIcon(shape, props);
+}

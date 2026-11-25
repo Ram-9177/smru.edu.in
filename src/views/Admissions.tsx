@@ -2,10 +2,18 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { 
-  FaUserGraduate, FaBrain, FaArrowRight, FaAward, FaBuilding, 
-  FaCheckCircle, FaFileAlt, FaUserCheck, FaUniversity, FaShieldAlt 
-} from "react-icons/fa";
+import {
+  FaUserGraduate,
+  FaBrain,
+  FaArrowRight,
+  FaAward,
+  FaBuilding,
+  FaCheckCircle,
+  FaFileAlt,
+  FaUserCheck,
+  FaUniversity,
+  FaShieldAlt,
+} from "@/components/icons";
 import abstractHeroBg from "../assets/abstract-hero-bg.webp";
 import { resolveAssetSrc } from "@/lib/shared/media";
 import UniversitySectionHeader from "../components/UniversitySectionHeader";
@@ -51,7 +59,7 @@ export default function Admissions() {
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {[
               { label: "UGC Status", icon: <FaUniversity /> },
-              { label: "Statutory Frameworks", icon: <img src="/assets/Stmarys-Logo.webp" className="w-4 h-4 object-contain" alt="Statutory" /> },
+              { label: "Statutory Frameworks", icon: <img src="/assets/stmarys-logo-256.webp" className="w-4 h-4 object-contain" alt="Statutory" /> },
               { label: "Educational Legacy", icon: <FaAward /> },
             ].map(pill => (
               <div key={pill.label} className="px-6 py-2 bg-white border border-slate-100 cut-corner-badge shadow-sm flex items-center gap-3 hover:border-[#ffaf3a] transition-colors">
@@ -194,7 +202,7 @@ export default function Admissions() {
       <section className="scroll-mt-24 smru-section bg-slate-50 border-t border-slate-200">
          <div className="smru-container flex flex-col items-center text-center">
             <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm border border-slate-200 text-[#0d315c] mb-6 p-3 overflow-hidden">
-              <img src="/assets/Stmarys-Logo.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
+              <img src="/assets/stmarys-logo-256.webp" alt="St. Mary's University Logo" className="w-full h-full object-contain" />
             </div>
             <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-[#0d315c] mb-6">
               Institutional Trust & Recognition

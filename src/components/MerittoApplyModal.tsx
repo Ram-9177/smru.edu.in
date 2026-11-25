@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { FaTimes } from "react-icons/fa";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { FaTimes } from "@/components/icons";
 import MerittoWidget from "./MerittoWidget";
 import type { MerittoModalPayload } from "@/context/ApplyModalContext";
 
@@ -32,42 +32,48 @@ const triggerBrowserDownload = (brochureUrl: string, brochureName?: string) => {
 
 export default function MerittoApplyModal({ open, onClose, payload }: MerittoApplyModalProps) {
   const [hasDownloaded, setHasDownloaded] = useState(false);
-  const hasBrochure = Boolean(payload?.brochureUrl);
+  // The form sends several messages per submission and they can arrive before React re-renders, so whether the
+  // brochure went out is kept in a ref: one download each time the form is opened.
+  const downloaded = useRef(false);
+  const brochureUrl = payload?.brochureUrl;
+  const brochureName = payload?.brochureName;
+  const hasBrochure = Boolean(brochureUrl);
 
   const brochurePrompt = useMemo(() => {
     if (!payload?.programLabel) return "Submit the form to unlock your brochure download.";
     return `Submit the form to unlock ${payload.programLabel} brochure download.`;
   }, [payload?.programLabel]);
 
-  const downloadBrochure = () => {
-    if (!payload?.brochureUrl || hasDownloaded) return;
-    triggerBrowserDownload(payload.brochureUrl, payload.brochureName);
+  const downloadBrochure = useCallback(() => {
+    if (!brochureUrl || downloaded.current) return;
+    downloaded.current = true;
+    triggerBrowserDownload(brochureUrl, brochureName);
     setHasDownloaded(true);
-  };
+  }, [brochureUrl, brochureName]);
+
+  useEffect(() => {
+    if (!open) return;
+    downloaded.current = false;
+    setHasDownloaded(false);
+  }, [open, brochureUrl]);
 
   useEffect(() => {
     if (!open) return;
 
-    setHasDownloaded(false);
     document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
 
     const onMessage = (event: MessageEvent) => {
-      if (!hasBrochure || hasDownloaded) return;
-
       const message = normalizeMessage(event.data);
       const looksLikeSubmit =
         message.includes("submit") ||
-        message.includes("submitted") ||
         message.includes("thank") ||
         message.includes("success") ||
         message.includes("lead");
 
-      if (looksLikeSubmit) {
-        downloadBrochure();
-      }
+      if (looksLikeSubmit) downloadBrochure();
     };
 
     window.addEventListener("keydown", onKey);
@@ -77,7 +83,7 @@ export default function MerittoApplyModal({ open, onClose, payload }: MerittoApp
       window.removeEventListener("message", onMessage);
       document.body.style.overflow = "";
     };
-  }, [open, onClose, hasBrochure, hasDownloaded]);
+  }, [open, onClose, downloadBrochure]);
 
   if (!open) return null;
 

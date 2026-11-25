@@ -15,7 +15,7 @@ import {
   FaShareAlt,
   FaVolumeMute,
   FaVolumeUp,
-} from "react-icons/fa";
+} from "@/components/icons";
 import {
   CAMPUS_TOUR_INTRO_LOCATION,
   CAMPUS_TOUR_LANGUAGES,
@@ -300,7 +300,7 @@ export default function Campus360() {
               aria-label="Open St. Mary's University homepage"
               className="hidden rounded-xl bg-white px-3 py-2 shadow-2xl transition hover:scale-[1.02] sm:block"
             >
-              <img src="/assets/Logo.webp" alt="St. Mary's University" className="h-9 w-auto" />
+              <img src="/assets/logo-384.webp" alt="St. Mary's University" className="h-9 w-auto" />
             </Link>
           </div>
 

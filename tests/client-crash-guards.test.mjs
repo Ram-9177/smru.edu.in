@@ -103,7 +103,7 @@ test('closing enquiry cancels delayed widget initialization', async () => {
   let boots = 0;
   const window = { ctplTag: () => boots++, addEventListener() {}, removeEventListener() {} };
   const document = { body: { style: {} }, querySelector: () => ({ removeEventListener() {} }), getElementById: () => ({ isConnected: true }) };
-  const { default: ApplyModal } = await load('src/components/ApplyModal.tsx', { window, document, setTimeout: t.setTimeout, clearTimeout: t.clearTimeout }, { react: h.react, 'react-icons/fa': { FaTimes: () => null } });
+  const { default: ApplyModal } = await load('src/components/ApplyModal.tsx', { window, document, setTimeout: t.setTimeout, clearTimeout: t.clearTimeout }, { react: h.react, '@/components/icons': { FaTimes: () => null } });
   ApplyModal({ open: true, onClose() {} });
   const cleanup = h.effects[0]();
   cleanup(); t.flush();
