@@ -596,9 +596,10 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 
 | | |
 |---|---|
-| Status date | 23 November 2026 |
-| Release Decision | **PASS** — `npm run verify` green at the head of `site/2027-28`; deploy `out/` + `public/.htaccess` |
-| Year branches | `site/2026-27` is the 2026-27 academic-year site, kept aside: do not commit to it. `site/2027-28` is the working branch; new work starts from it. `main` is kept. [#15](https://github.com/Ram-9177/smru.edu.in/pull/15) brought `main` to the `site/2026-27` commit on 23 November 2026, and `main`'s CI is green again. How 2027-28 work reaches `main` is not decided yet. |
+| Status date | 25 November 2026 |
+| Release Decision | **PASS** — `npm run verify` green at the head of `site/2026-27`; deploy `out/` + `public/.htaccess` |
+| Year branches | `site/2025-26` (`081c0ee`) is the existing site for 2025-26, kept aside: do not commit to it. `site/2026-27` is where the new 2026-27 website is built from that code; its work starts from this branch, not from `main` (§8 step 1). The new site itself is not built yet. |
+| `main` | Holds the existing 2025-26 code ([#15](https://github.com/Ram-9177/smru.edu.in/pull/15), 23 November 2026, CI green). It is the branch cPanel will be connected to later; not connected yet. `out/` is git-ignored, so a cPanel Git pull of `main` needs a build step before it can serve the site. How the 2026-27 site reaches `main` is not decided yet. |
 | Open PRs | none. #14 landed through #15. |
 | Gates at head | seo-guard 45/45 · tests 47/47 · typecheck clean · lint 0 errors (4 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
 | Last structural change | Client crashes no longer reach Next's bare "Application error" screen. `app/error.tsx` and `app/global-error.tsx` render `src/components/AppErrorScreen.tsx`, which reloads at most once a minute when a script chunk fails to load, then offers a reload button. Malformed URL fragments and slugs no longer throw. When uploading by FTP, send `_next/` first and `.htaccess` last, and never delete old `_next/` files during the upload. |
