@@ -6,6 +6,7 @@
     "dev": "next dev -p 4000",
     "build": "next build",
     "serve:out": "node scripts/serve-out.mjs",
+    "deploy:cpanel": "bash scripts/deploy-cpanel.sh",
     "check": "npm run seo:guard && npm run typecheck && npm test && npm run lint",
     "verify": "npm run check && npm run build && npm run redirects:check && npm run audit:checklist -- ci --strict && npm run seo:gates -- ci --strict && npm run seo:facts -- --strict",
     "lint": "next lint",

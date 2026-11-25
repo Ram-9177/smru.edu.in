@@ -4,6 +4,18 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-25 — CI/CD for `main`: publish to cPanel after every check passes (branch `ci/main-deploy`)
+
+- `.github/workflows/seo-hardening-ci.yml`: a `deploy` job that needs the whole `verify` job, runs for `main` only, and
+  is skipped until the repository variable `CPANEL_DEPLOY` is `on`. A manual run defaults to a dry run. CI also runs on
+  pushes to `site/**`, so errors on a year branch show before its PR.
+- `scripts/deploy-cpanel.sh` (`npm run deploy:cpanel`): `_next/` first, `.htaccess` last, no deletions, changed content
+  only, the server folder's own permissions untouched; refuses an incomplete build or a target that is not the site.
+  A run for a commit that is no longer the tip of `main` sends nothing.
+- `tests/deploy-cpanel.test.mjs` adds 16 tests, written first and seen failing; 15 run the script with real rsync.
+- Not tested: the SSH connection itself and the job on GitHub's runner, which need the cPanel secrets.
+- `PROJECT.md` §2, §7, §10.
+
 ## 2026-11-25 — The landing intro and other live-only code committed (branch `feat/landing-intro`)
 
 - smru.edu.in was serving code that was on no branch: it existed only as uncommitted work on one machine. A deploy
