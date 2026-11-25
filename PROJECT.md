@@ -109,6 +109,7 @@ src/ — facts and rules (the sources of truth, §4)
 src/ — binary and archive trees (known debt, §9)
   assets/         Webpack-imported images: only the root files and partner-logos/ are imported (24 distinct .webp
                   files). Law/, Building Images/, Campusimages/, Files/ and the .png/.jpg originals are unreferenced.
+                  fonts/ is in use: the site's 11 font files and their licence (§6).
   360/, Audio/, Law_Brouchers/, "Partners - Codes"/, "Syllabus For SMCET"/
                   Archives of originals, ~800 MB, read by nothing. Do not add to them.
 ```
@@ -196,8 +197,8 @@ and CI, not in `check`); **audit** = the release audit; *(convention)* = reviewe
     retired URL on the same topic should be retargeted to the new page (§5). *(convention)*
 11. *(convention)* Client components start with `"use client"` on line 1. Heavy views are code-split with
     `next/dynamic`. Styling is Tailwind utilities plus the house classes in `src/styles/globals.css`. Brand
-    colours: `#0d315c` navy, `#019e6e` green, `#ffaf3a` amber, `#f8fbff` surface. Fonts via `next/font`
-    variables (`--font-inter`, `--font-outfit`, `--font-cinzel`). Don't add `// @ts-nocheck` (10 legacy files
+    colours: `#0d315c` navy, `#019e6e` green, `#ffaf3a` amber, `#f8fbff` surface. Fonts via the
+    `next/font/local` variables (`--font-inter`, `--font-outfit`, `--font-cinzel`), never `next/font/google` (§6). Don't add `// @ts-nocheck` (10 legacy files
     still carry it) or a second stylesheet.
 
 ### Programme pages (`/schools/{school}/{dept}/{programme}/`)
@@ -418,7 +419,7 @@ Two planes, chosen by how the file is consumed:
 | Plane | Where | Referenced how | Use for |
 |---|---|---|---|
 | URL-addressed | `public/…` | root-absolute string `"/assets/x.webp"`; `resolveAssetSrc()` accepts either plane | panoramas, tiles, audio, video, PDFs, iframe HTML, OG image, sitemap images, favicons |
-| Bundled | `src/assets/…` | relative import `../assets/x.webp` → hashed `/_next/static/media/…` | site logo, leader portraits, partner logos, small fixed visuals |
+| Bundled | `src/assets/…` | relative import `../assets/x.webp` → hashed `/_next/static/media/…` | site logo, leader portraits, partner logos, small fixed visuals, fonts |
 
 Rules:
 
@@ -440,6 +441,9 @@ Rules:
 - Raw partner HTML: `public/partners/<slug>/`, iframed via `src/views/PartnerIframePage.tsx`, kept out of the
   index by the `.htaccess` `X-Robots-Tag` rule. `public/partners/carebridge/` is generated (§4, Partner landings);
   the others are placed by hand from the partner's deliverable.
+- Fonts: `src/assets/fonts/`, all under the SIL Open Font License (`OFL.txt` stays beside them). The English files are
+  the `next/font/local` calls in `app/layout.tsx`, preloaded; the other alphabets and signs such as ₹ are the
+  `@font-face` rules at the top of `src/styles/globals.css`. Nothing is downloaded while building (tested).
 - `public/images/` is legacy (nursing landing, campus-life section). New images go under `public/assets/`.
 
 ---
@@ -460,7 +464,8 @@ CI (`.github/workflows/seo-hardening-ci.yml`) runs on every pull request and on 
 static-export contract check (`out/sitemap.xml` and `out/robots.txt` exist and reference smru.edu.in),
 `redirects:check`, `audit:checklist -- ci --strict`, `seo:gates -- ci --strict`, `seo:facts -- --strict`, and
 uploads the checklist and gates reports as the `frontend-audit` artifact. CI is `verify` plus the dependency
-audit. Lint warnings do not fail; there are 3 known `react-hooks/exhaustive-deps` warnings.
+audit. On pull requests and `main` the job reports as "Build, lint audit, and SEO sanity checks", the check `main`
+requires (§8); on a year branch it reports as "Year branch check", so it can neither block a pull request nor pass it. Lint warnings do not fail; there are 3 known `react-hooks/exhaustive-deps` warnings.
 
 ### Publishing `main` to cPanel
 
@@ -483,9 +488,9 @@ After a live run it checks the home page is this build, `/admissions/`, a 404 an
 |---|---|
 | `scripts/seo-guard.js` (45 named checks) | an architecture invariant is broken: naming standard, bridge sentence, single root `.md` with its required sections, root allowlist, no stray scripts, `app/` holds only route files, no `loading.tsx`, no `redirect()` in pages, JSON-LD only via `<StructuredData>` with `-schema` ids, shells use the lib `buildRedirectMetadata`, sitemap index shape, guarded `.htaccess` rules, Course schema plumbing, programme-page standard, health-allied profiles, AI-crawler robots policy. Change a guarded string → update the guard **in the same commit** and say so. |
 | `tsc --noEmit` | type errors (tsconfig is non-strict). CI runs it before `build` on a fresh checkout, so it must not depend on generated files: image modules are declared in `src/types/images.d.ts`. To reproduce CI locally: `mv next-env.d.ts /tmp && npm run typecheck; mv /tmp/next-env.d.ts .` |
-| `node --test tests/*.test.mjs` | route-collision sets drift, JSON-LD escaping breaks, developer route reappears, crawl gates or visual-audit registries misbehave |
+| `node --test tests/*.test.mjs` | route-collision sets drift, JSON-LD escaping breaks, developer route reappears, crawl gates or visual-audit registries misbehave, a font is fetched from another server or its file is missing, the check name `main` requires changes |
 | `next lint` | ESLint errors (`next/core-web-vitals`); `<a>` for internal routes is an error |
-| `next build` | any route fails to prerender; also re-runs type and lint checks |
+| `next build` | any route fails to prerender; also re-runs type and lint checks. It needs no network. |
 | `redirects:check` | `REDIRECT_MAP.csv` stale; Apache row without rule; rule without row; shell without Apache 301; shell targeting `/` |
 | `audit:checklist -- ci --strict` | any of 19 release blockers > 0: broken internal links or hashes, duplicate ids, invalid/duplicate JSON-LD, missing assets, unsafe link schemes, secrets or credentials in source or bundle, source maps, unexpected or unsafe-SVG public files, debug routes, developer bundles, non-production metadata |
 | `seo:gates -- ci --strict` | on **indexable** pages of the export: `titlesOver65`, `duplicateTitles`, `truncatedTitles` (primary ends on a preposition/conjunction), `guideGuide`, `brandNoSpace`, `descriptionsOver155`, `descriptionsCutMidSentence`, `courseNameAbbreviationOnly`, `missingH1`, `multipleH1`, `missingCanonical`, `jsonLdErrors`, `sitemapMissing`, `sitemapNoindex`, `sitemapCanonicalMismatch`, `answerFirstEntity` (`/`, `/smru/`, `/about/`, `/schools/`, `/programmes/` open with < 35 words). Warnings: `descriptionsUnder120`, `answerFirstProgramme` (< 40 words). Noindex shells and iframe landings are exempt from the page checks. |
@@ -539,7 +544,10 @@ Every change, however small, goes through this loop. An AI assistant working fro
 
 `<type>/<kebab-slug>`: `seo/entity-and-architecture`, `chore/next-15`, `docs/project-handbook`,
 `fix/partner-canonicals`. Long-lived initiatives get one PR; follow-ups stack on it with the PR body naming
-the merge order. Never commit to `main` directly.
+the merge order. Never commit to `main` directly. GitHub
+enforces it since 25 November 2026, for the owner too: `main` changes only by pull request, only after the check
+"Build, lint audit, and SEO sanity checks" passes, and it cannot be force-pushed or deleted. If that check is renamed,
+update the protection rule in the same change, or nothing can merge (`tests/ci-workflow.test.mjs` holds the name).
 
 ### Commit messages
 
@@ -591,7 +599,7 @@ Deliberately not fixed yet. Each has an owner decision attached; do not "fix" th
 | Item | State | Decision needed |
 |---|---|---|
 | `src/360/`, `src/Audio/`, `src/Law_Brouchers/`, `src/Partners - Codes/`, `src/Syllabus For SMCET/` | ~800 MB of originals and byte-identical duplicates of `public/` trees, read by nothing | Move originals to LFS/external storage or delete; keep `public/` as the single served copy. Requires confirming where the master files live. |
-| `src/assets/` | 114 of 138 files never imported (~105 MB) | Prune to the 24 imported `.webp` files after the decision above. |
+| `src/assets/` | 114 of 138 files never imported (~105 MB) | Prune to the 24 imported `.webp` files and `fonts/` after the decision above. |
 | `scratch/Care_Bridge/` (untracked, 258 MB, its own `.git`) | a copy of Carebridge's site export; the source of truth is the partner's delivery (last: `~/Downloads/v9/V6 - latest`, synced 17 Sep 2026) | Delete the scratch copy; keep exports outside the repo and re-run `npm run partners:carebridge` when a new one arrives. |
 | `public/assets/campus_video.{mp4,webm}` (81 MB) and ~30 unreferenced files; `public/images/` duplicates | shipped, unreferenced | Delete once confirmed no external link depends on them. |
 | `src/components/developer/` + `src/lib/developer/` | local CMS with no route; `useDeveloperCms` read by 11 components/views; `src/data/developer/static-seed.ts` is a frozen inventory | Decide whether the CMS returns as a local tool or is removed. |
@@ -612,11 +620,11 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 | | |
 |---|---|
 | Status date | 25 November 2026 |
-| Release Decision | **PASS** — `npm run verify` green at the head of `ci/main-deploy`; deploy `out/` + `public/.htaccess` |
+| Release Decision | **PASS** — `npm run verify` green at the head of `site/2026-27`; deploy `out/` + `public/.htaccess` |
 | Branches | Three long-lived branches: `main`; `site/2025-26`, the existing 2025-26 site as it is live, kept aside (do not commit to it); `site/2026-27`, where the new 2026-27 website is built from that code (its work starts from this branch, not from `main`, §8 step 1). Every other branch is temporary and deleted after its PR merges. The new site itself is not built yet. |
-| `main` | The university website: the code of the live 2025-26 site, including the landing intro. CI runs on it and publishes it to cPanel once the connection is set up (§7); publishing is off until then. |
+| `main` | The university website: the code of the live 2025-26 site, including the landing intro. CI runs on it and publishes it to cPanel once the connection is set up (§7); publishing is off until then. Protected: pull request and green CI required (§8). A build downloads nothing, and a year-branch run has its own check name, so neither Google nor a duplicate run can hold up a pull request (§6, §7). |
 | Open PRs | none. #14 landed through #15. |
-| Gates at head | seo-guard 45/45 · tests 72/72 · typecheck clean · lint 0 errors (3 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
+| Gates at head | seo-guard 45/45 · tests 78/78 · typecheck clean · lint 0 errors (3 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
 | Last structural change | The landing intro (`src/components/LandingIntro.tsx`, mounted in `AppShell`) plays once per browser session on `/` only, is skipped for reduced motion and hidden tabs, and always ends within 1.6 s. The home page preloads its hero image per viewport. `/explore` media is no longer fetched in the background. Iframe height messages are accepted only from the frame and origin that own them. This code was already live; it had never been committed. |
 | Previous structural change | Client crashes no longer reach Next's bare "Application error" screen. `app/error.tsx` and `app/global-error.tsx` render `src/components/AppErrorScreen.tsx`, which reloads at most once a minute when a script chunk fails to load, then offers a reload button. Malformed URL fragments and slugs no longer throw. When uploading by FTP, send `_next/` first and `.htaccess` last, and never delete old `_next/` files during the upload. |
 | Deferred, low priority | 4 meta descriptions < 70 chars (`/handbook/`, `/leadership/`, `/privacy-policy/`, `/terms-of-service/`); 25 thin indexable pages under 200 words (handbook, the leadership profiles, privacy/terms, html-sitemap, brochure, exam-notification, campus-360, compliance pages…). |

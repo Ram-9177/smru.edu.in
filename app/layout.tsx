@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
-import { Cinzel, Inter, Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import "../src/styles/globals.css";
 import AppShell from "../src/components/AppShell";
 import StructuredData from "../src/components/seo/StructuredData";
@@ -14,23 +14,57 @@ import { buildUniversitySchema, buildWebSiteSchema } from "../src/lib/seo/schema
 const universitySchema = buildUniversitySchema();
 const websiteSchema = buildWebSiteSchema();
 
-const inter = Inter({
-  subsets: ["latin"],
+// The font files are in the repository, so a build never waits for Google. These three cover English and are
+// preloaded; the other alphabets are the @font-face rules at the top of globals.css. next/font needs its options
+// written out in full here, so the unicode-range repeats.
+const inter = localFont({
+  src: "../src/assets/fonts/inter-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   display: "swap",
   variable: "--font-inter",
+  declarations: [
+    { prop: "font-family", value: "Inter" },
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+    },
+  ],
 });
 
-const outfit = Outfit({
-  subsets: ["latin"],
+const outfit = localFont({
+  src: "../src/assets/fonts/outfit-latin.woff2",
+  weight: "100 900",
+  style: "normal",
   display: "swap",
   variable: "--font-outfit",
+  declarations: [
+    { prop: "font-family", value: "Outfit" },
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+    },
+  ],
 });
 
-const cinzel = Cinzel({
-  subsets: ["latin"],
+const cinzel = localFont({
+  src: [
+    { path: "../src/assets/fonts/cinzel-latin.woff2", weight: "700", style: "normal" },
+    { path: "../src/assets/fonts/cinzel-latin.woff2", weight: "900", style: "normal" },
+  ],
   display: "swap",
   variable: "--font-cinzel",
-  weight: ["700", "900"],
+  adjustFontFallback: "Times New Roman",
+  declarations: [
+    { prop: "font-family", value: "Cinzel" },
+    {
+      prop: "unicode-range",
+      value:
+        "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+    },
+  ],
 });
 
 export const metadata: Metadata = {

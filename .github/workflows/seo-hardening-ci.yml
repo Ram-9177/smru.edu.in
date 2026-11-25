@@ -22,7 +22,9 @@ permissions:
 
 jobs:
   verify:
-    name: Build, lint audit, and SEO sanity checks
+    name: ${{ (github.event_name == 'pull_request' || github.ref == 'refs/heads/main') && 'Build, lint audit, and SEO sanity checks' || 'Year branch check' }}
+    # main accepts a pull request only when the check with the first name passes. A run on a year branch checks that
+    # branch alone, not its merge into main, so it has its own name and can neither block the pull request nor pass it.
     runs-on: ubuntu-latest
     timeout-minutes: 20
 

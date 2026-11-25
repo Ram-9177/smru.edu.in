@@ -4,6 +4,34 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-25 — CI no longer fails because of Google or a duplicate run (branch `ci/steady-checks`)
+
+- Fonts: `app/layout.tsx` used `next/font/google`, which downloads Cinzel, Inter and Outfit on every build. A run on
+  `site/2026-27` failed when Google's answer could not be read. The same 11 files now live in `src/assets/fonts/` with
+  their licence (SIL OFL 1.1); the English files are `next/font/local` calls, the other alphabets `@font-face` rules in
+  `src/styles/globals.css`. With outside network blocked, the old code fails to build and this code builds all routes.
+- Same fonts as before: the 13 font rules match in file content, weight and character range; the three preloaded files
+  keep their names, so returning visitors do not download them again.
+- Old and new builds compared in Chrome, every route at desktop and phone size with outside requests blocked: 525 of
+  534 views match (107,973 pieces of text). The other 9 are partner loading animations and one WebGL start, where the
+  old build also differs from itself. Text with a symbol the fonts lack (`→`, `✓`) is up to 0.2 px wider or narrower,
+  because Next works out the fallback metrics from the file; no page changes height.
+- Check name: runs on `site/**` reported under the name that `main` requires, so a failing duplicate could block a
+  pull request and a passing one could stand in for it. They now report as "Year branch check"; pull requests and
+  `main` keep "Build, lint audit, and SEO sanity checks". The protection rule is unchanged.
+- `tests/self-hosted-fonts.test.mjs` (4) and `tests/ci-workflow.test.mjs` (2), written first: 5 failed before the
+  change; the sixth holds the required name and passed by design. Six deliberate mistakes in a copy were all caught.
+- `PROJECT.md` §2, §3, §6, §7, §8, §9, §10.
+
+## 2026-11-25 — `main` is protected (GitHub setting; recorded on branch `site/2026-27`)
+
+- `main` changes only by pull request, only when "Build, lint audit, and SEO sanity checks" from GitHub Actions has
+  passed, the owner included; no force-push, no deletion, no approval count. Pull request #16 had merged 12 seconds
+  after opening, before CI could finish.
+- `PROJECT.md` §8 and §10.
+- Known: the build downloads its three fonts from Google, so it can fail when Google answers unexpectedly. It did on
+  25 November 2026 for `4f4508b` on `site/2026-27`, while the same commit passed on `main`; 1 of the last 40 runs.
+
 ## 2026-11-25 — CI/CD for `main`: publish to cPanel after every check passes (branch `ci/main-deploy`)
 
 - `.github/workflows/seo-hardening-ci.yml`: a `deploy` job that needs the whole `verify` job, runs for `main` only, and
