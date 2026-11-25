@@ -11,7 +11,8 @@ history. Each entry: what changed, why, what was verified, what was deliberately
   pushes to `site/**`, so errors on a year branch show before its PR.
 - `scripts/deploy-cpanel.sh` (`npm run deploy:cpanel`): `_next/` first, `.htaccess` last, no deletions, changed content
   only, the server folder's own permissions untouched; refuses an incomplete build or a target that is not the site.
-- `tests/deploy-cpanel.test.mjs` adds 13 tests, written first and seen failing; 12 run the script with real rsync.
+  A run for a commit that is no longer the tip of `main` sends nothing.
+- `tests/deploy-cpanel.test.mjs` adds 16 tests, written first and seen failing; 15 run the script with real rsync.
 - Not tested: the SSH connection itself and the job on GitHub's runner, which need the cPanel secrets.
 - `PROJECT.md` §2, §7, §10.
 

@@ -4,6 +4,8 @@
 #   DEPLOY_TARGET  user@host:/home/user/public_html, or a local folder in the tests
 #   DEPLOY_MODE    dry-run (default: list the changes, send nothing) or live
 #   RSYNC_RSH      the ssh command rsync uses, set by CI
+#   DEPLOY_COMMIT  with DEPLOY_REPO: send only if this commit is still the tip of main there, so a slow run for an
+#                  older commit cannot overwrite a newer site
 #
 # Order matters: _next/ first so no page is ever ahead of its scripts, .htaccess last. Nothing on the server is
 # deleted, because open tabs still load the previous build's _next/ files (PROJECT.md, section 10).
@@ -20,6 +22,15 @@ for needed in index.html .htaccess _next; do
   [ -e "out/$needed" ] || fail "out/$needed is missing; run npm run build first"
 done
 target="${target%/}"
+
+if [ -n "${DEPLOY_COMMIT:-}" ]; then
+  tip="$(git ls-remote "${DEPLOY_REPO:?}" refs/heads/main 2>/dev/null | cut -f1)" || true
+  [ -n "$tip" ] || fail "cannot read main from $DEPLOY_REPO"
+  if [ "$tip" != "$DEPLOY_COMMIT" ]; then
+    echo "deploy: main has moved on to ${tip:0:7}; its own run publishes it, nothing was sent"
+    exit 0
+  fi
+fi
 
 # The live site has a home page. A typo in the path, or the account's home folder, does not.
 listing="$(rsync "$target/" 2>/dev/null)" || fail "$target does not look like the live site: it cannot be listed"
@@ -50,6 +61,7 @@ send ".htaccess" out/.htaccess "$target/"
 
 if [ "$mode" = live ]; then
   echo "deploy: done, $sent files to send, all sent"
+  [ -z "${GITHUB_OUTPUT:-}" ] || echo "published=yes" >> "$GITHUB_OUTPUT"
 else
   echo "deploy: dry run, $sent files to send, nothing was sent"
 fi

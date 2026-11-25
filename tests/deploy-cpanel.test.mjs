@@ -149,6 +149,52 @@ test("an unknown mode is refused", (t) => {
   assert.equal(s.read("server/index.html"), "old home");
 });
 
+// A real git repository standing in for GitHub, with two commits on main.
+function repository(s) {
+  const repo = path.join(s.root, "github");
+  mkdirSync(repo);
+  const git = (...args) => {
+    const result = spawnSync("git", ["-c", "user.name=t", "-c", "user.email=t@example.test", ...args], { cwd: repo, encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr);
+    return result.stdout.trim();
+  };
+  git("init", "-q", "-b", "main");
+  git("commit", "-q", "--allow-empty", "-m", "older");
+  const older = git("rev-parse", "HEAD");
+  git("commit", "-q", "--allow-empty", "-m", "newer");
+  return { repo, older, newer: git("rev-parse", "HEAD") };
+}
+
+test("a run for an older commit does not overwrite a newer main", (t) => {
+  const s = site(t);
+  const { repo, older } = repository(s);
+  const output = path.join(s.root, "output.txt");
+  const { code, text } = s.run({ DEPLOY_MODE: "live", DEPLOY_REPO: repo, DEPLOY_COMMIT: older, GITHUB_OUTPUT: output });
+  assert.equal(code, 0, text);
+  assert.match(text, /main has moved on/);
+  assert.equal(s.read("server/index.html"), "old home");
+  assert.ok(!existsSync(output) || !readFileSync(output, "utf8").includes("published=yes"));
+});
+
+test("a run for the newest commit publishes and says so", (t) => {
+  const s = site(t);
+  const { repo, newer } = repository(s);
+  const output = path.join(s.root, "output.txt");
+  const { code, text } = s.run({ DEPLOY_MODE: "live", DEPLOY_REPO: repo, DEPLOY_COMMIT: newer, GITHUB_OUTPUT: output });
+  assert.equal(code, 0, text);
+  assert.equal(s.read("server/index.html"), "new home");
+  assert.match(readFileSync(output, "utf8"), /^published=yes$/m);
+});
+
+test("if main cannot be read, nothing is sent", (t) => {
+  const s = site(t);
+  const { newer } = repository(s);
+  const { code, text } = s.run({ DEPLOY_MODE: "live", DEPLOY_REPO: path.join(s.root, "nowhere"), DEPLOY_COMMIT: newer });
+  assert.notEqual(code, 0);
+  assert.match(text, /cannot read main/);
+  assert.equal(s.read("server/index.html"), "old home");
+});
+
 test("publishing waits for every check, runs only for main, and is off until switched on", () => {
   const deploy = workflow.split(/^ {2}deploy:$/m)[1];
   assert.ok(deploy, "the workflow has a deploy job");

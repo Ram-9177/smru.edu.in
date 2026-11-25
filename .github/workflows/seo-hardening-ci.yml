@@ -142,7 +142,10 @@ jobs:
           (umask 077; printf '%s\n' "$CPANEL_SSH_KEY" > ~/.ssh/cpanel; printf '%s\n' "$CPANEL_KNOWN_HOSTS" > ~/.ssh/cpanel_hosts)
 
       - name: Send the site
+        id: send
         env:
+          DEPLOY_COMMIT: ${{ github.sha }}
+          DEPLOY_REPO: ${{ github.server_url }}/${{ github.repository }}.git
           DEPLOY_TARGET: ${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:${{ secrets.CPANEL_PATH }}
           RSYNC_RSH: >-
             ssh -i /home/runner/.ssh/cpanel -p ${{ vars.CPANEL_PORT || '22' }} -o BatchMode=yes -o IdentitiesOnly=yes
@@ -150,7 +153,7 @@ jobs:
         run: npm run deploy:cpanel
 
       - name: Check the live site
-        if: env.DEPLOY_MODE == 'live'
+        if: steps.send.outputs.published == 'yes'
         run: |
           get() { curl --http1.1 -sS --retry 4 --retry-all-errors --max-time 30 -A smru-deploy-check -o "$2" -w '%{http_code}' "$1"; }
           expect() { [ "$1" = "$2" ] || { echo "::error::$3 answered $1, expected $2"; exit 1; }; }
