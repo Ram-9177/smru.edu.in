@@ -54,7 +54,7 @@ scripts/          Verification, audit and generation tooling (§7). ESM .mjs (se
 tests/            node:test suites, one file per subject: tests/<subject>.test.mjs (nested folders are not discovered)
 docs/seo/         Plans, playbooks, trackers, generated CSVs, changelog.md. Prose goes here, never at root.
 tools/            Local-only developer tools (campus map calibrator). Never shipped; a test requires it to exist.
-.github/          One workflow: seo-hardening-ci.yml
+.github/          One workflow: seo-hardening-ci.yml (checks, then publishing main)
 .vscode/          settings.json — the only committed IDE file
 PROJECT.md        This file. The only root-level .md (guarded).
 REDIRECT_MAP.csv  The redirect register (§5). Shell rows are generated; Apache rows are hand-kept.
@@ -455,12 +455,26 @@ Run everything from the repository root. Every script prints one JSON summary li
 | `npm run check` | before every commit (≈30 s) | `seo:guard` → `typecheck` → `test` → `lint` |
 | `npm run verify` | before every push (≈4 min) | `check` → `build` → `redirects:check` → `audit:checklist -- ci --strict` → `seo:gates -- ci --strict` → `seo:facts -- --strict` |
 
-CI (`.github/workflows/seo-hardening-ci.yml`) runs on every pull request and on pushes to `main`:
+CI (`.github/workflows/seo-hardening-ci.yml`) runs on every pull request and on pushes to `main` and `site/**`:
 `npm ci`, `npm audit --audit-level=critical`, then `seo:guard`, `typecheck`, `test`, `lint`, `build`, a
 static-export contract check (`out/sitemap.xml` and `out/robots.txt` exist and reference smru.edu.in),
 `redirects:check`, `audit:checklist -- ci --strict`, `seo:gates -- ci --strict`, `seo:facts -- --strict`, and
 uploads the checklist and gates reports as the `frontend-audit` artifact. CI is `verify` plus the dependency
-audit. Lint warnings do not fail; there are 4 known `react-hooks/exhaustive-deps` warnings.
+audit. Lint warnings do not fail; there are 3 known `react-hooks/exhaustive-deps` warnings.
+
+### Publishing `main` to cPanel
+
+The `deploy` job of the same workflow runs after every check has passed, for `main` only. It builds the same commit and
+runs `npm run deploy:cpanel` (`scripts/deploy-cpanel.sh`): `_next/` first, pages and assets next, `.htaccess` last. It
+sends only files whose content changed, deletes nothing on the server, and refuses a target that has no `index.html`.
+After a live run it checks the home page is this build, `/admissions/`, a 404 and the `www` redirect.
+
+- **Off by default.** Pushes to `main` publish only when the repository variable `CPANEL_DEPLOY` is `on`. From then on,
+  merging into `main` publishes the site.
+- **By hand:** Actions → SEO Hardening CI → Run workflow on `main`. The default is a dry run, which lists the changes.
+- **Secrets** (environment `production`): `CPANEL_SSH_KEY`, `CPANEL_KNOWN_HOSTS`, `CPANEL_HOST`, `CPANEL_USER`,
+  `CPANEL_PATH` (the document root). Optional variable `CPANEL_PORT`. The repository is public: never commit them.
+- **Undo:** revert the PR; the next run publishes the previous site.
 
 ### What each gate protects
 
@@ -597,11 +611,11 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 | | |
 |---|---|
 | Status date | 25 November 2026 |
-| Release Decision | **PASS** — `npm run verify` green at the head of `feat/landing-intro`; deploy `out/` + `public/.htaccess` |
-| Year branches | `site/2025-26` is the existing 2025-26 site as it is live, kept aside: do not commit to it. `site/2026-27` is where the new 2026-27 website is built from that code; its work starts from this branch, not from `main` (§8 step 1). The new site itself is not built yet. |
-| `main` | Holds the code of the live 2025-26 site, including the landing intro. It is the branch cPanel will be connected to later; not connected yet. `out/` is git-ignored, so a cPanel Git pull of `main` needs a build step before it can serve the site. How the 2026-27 site reaches `main` is not decided yet. |
+| Release Decision | **PASS** — `npm run verify` green at the head of `ci/main-deploy`; deploy `out/` + `public/.htaccess` |
+| Branches | Three long-lived branches: `main`; `site/2025-26`, the existing 2025-26 site as it is live, kept aside (do not commit to it); `site/2026-27`, where the new 2026-27 website is built from that code (its work starts from this branch, not from `main`, §8 step 1). Every other branch is temporary and deleted after its PR merges. The new site itself is not built yet. |
+| `main` | The university website: the code of the live 2025-26 site, including the landing intro. CI runs on it and publishes it to cPanel once the connection is set up (§7); publishing is off until then. |
 | Open PRs | none. #14 landed through #15. |
-| Gates at head | seo-guard 45/45 · tests 56/56 · typecheck clean · lint 0 errors (3 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
+| Gates at head | seo-guard 45/45 · tests 69/69 · typecheck clean · lint 0 errors (3 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
 | Last structural change | The landing intro (`src/components/LandingIntro.tsx`, mounted in `AppShell`) plays once per browser session on `/` only, is skipped for reduced motion and hidden tabs, and always ends within 1.6 s. The home page preloads its hero image per viewport. `/explore` media is no longer fetched in the background. Iframe height messages are accepted only from the frame and origin that own them. This code was already live; it had never been committed. |
 | Previous structural change | Client crashes no longer reach Next's bare "Application error" screen. `app/error.tsx` and `app/global-error.tsx` render `src/components/AppErrorScreen.tsx`, which reloads at most once a minute when a script chunk fails to load, then offers a reload button. Malformed URL fragments and slugs no longer throw. When uploading by FTP, send `_next/` first and `.htaccess` last, and never delete old `_next/` files during the upload. |
 | Deferred, low priority | 4 meta descriptions < 70 chars (`/handbook/`, `/leadership/`, `/privacy-policy/`, `/terms-of-service/`); 25 thin indexable pages under 200 words (handbook, the leadership profiles, privacy/terms, html-sitemap, brochure, exam-notification, campus-360, compliance pages…). |

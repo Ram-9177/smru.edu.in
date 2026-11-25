@@ -4,9 +4,18 @@ on:
   push:
     branches:
       - main
+      - "site/**"
   # Every pull request, whatever its base: stacked PRs (a branch based on another open PR) must run
   # the same gate as PRs into main.
   pull_request:
+  # Run by hand from the Actions tab. Publishing needs main and stays a dry run unless "live" is chosen.
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish to cPanel after the checks pass
+        type: choice
+        options: [dry-run, live, checks-only]
+        default: dry-run
 
 permissions:
   contents: read
@@ -78,3 +87,80 @@ jobs:
             output/frontend-audit/ci/checklist-audit.json
             output/seo-gates/ci/seo-gates.json
           if-no-files-found: ignore
+
+  # Runs only when every check above passed, only for main. Pushes publish once the repository variable CPANEL_DEPLOY
+  # is "on"; until then this job is skipped. Secrets live in the "production" environment (PROJECT.md, section 7).
+  deploy:
+    name: Publish main to cPanel
+    needs: verify
+    if: >-
+      github.ref == 'refs/heads/main' && (
+        (github.event_name == 'push' && vars.CPANEL_DEPLOY == 'on') ||
+        (github.event_name == 'workflow_dispatch' && inputs.publish != 'checks-only')
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    concurrency:
+      group: cpanel-production
+      cancel-in-progress: false
+    env:
+      DEPLOY_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.publish || 'live' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Build static export
+        run: npm run build
+
+      - name: Prepare the SSH key
+        env:
+          CPANEL_SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          CPANEL_KNOWN_HOSTS: ${{ secrets.CPANEL_KNOWN_HOSTS }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_PATH: ${{ secrets.CPANEL_PATH }}
+        run: |
+          for name in CPANEL_SSH_KEY CPANEL_KNOWN_HOSTS CPANEL_HOST CPANEL_USER CPANEL_PATH; do
+            [ -n "${!name}" ] || { echo "::error::$name is not set in the production environment"; exit 1; }
+          done
+          install -m 700 -d ~/.ssh
+          (umask 077; printf '%s\n' "$CPANEL_SSH_KEY" > ~/.ssh/cpanel; printf '%s\n' "$CPANEL_KNOWN_HOSTS" > ~/.ssh/cpanel_hosts)
+
+      - name: Send the site
+        env:
+          DEPLOY_TARGET: ${{ secrets.CPANEL_USER }}@${{ secrets.CPANEL_HOST }}:${{ secrets.CPANEL_PATH }}
+          RSYNC_RSH: >-
+            ssh -i /home/runner/.ssh/cpanel -p ${{ vars.CPANEL_PORT || '22' }} -o BatchMode=yes -o IdentitiesOnly=yes
+            -o StrictHostKeyChecking=yes -o UserKnownHostsFile=/home/runner/.ssh/cpanel_hosts
+        run: npm run deploy:cpanel
+
+      - name: Check the live site
+        if: env.DEPLOY_MODE == 'live'
+        run: |
+          get() { curl --http1.1 -sS --retry 4 --retry-all-errors --max-time 30 -A smru-deploy-check -o "$2" -w '%{http_code}' "$1"; }
+          expect() { [ "$1" = "$2" ] || { echo "::error::$3 answered $1, expected $2"; exit 1; }; }
+          expect "$(get https://smru.edu.in/ live.html)" 200 "the home page"
+          expect "$(get https://smru.edu.in/admissions/ /dev/null)" 200 "/admissions/"
+          expect "$(get https://smru.edu.in/no-such-page-deploy-check/ /dev/null)" 404 "a page that does not exist"
+          expect "$(get https://www.smru.edu.in/ /dev/null)" 301 "www.smru.edu.in"
+          script="$(grep -oE 'static/chunks/app/layout-[0-9a-f]+\.js' out/index.html | head -1)"
+          [ -n "$script" ] && grep -qF "$script" live.html || { echo "::error::the live home page is not this build"; exit 1; }
+
+      - name: Remove the SSH key
+        if: always()
+        run: rm -f ~/.ssh/cpanel ~/.ssh/cpanel_hosts
