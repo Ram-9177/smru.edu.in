@@ -539,7 +539,10 @@ Every change, however small, goes through this loop. An AI assistant working fro
 
 `<type>/<kebab-slug>`: `seo/entity-and-architecture`, `chore/next-15`, `docs/project-handbook`,
 `fix/partner-canonicals`. Long-lived initiatives get one PR; follow-ups stack on it with the PR body naming
-the merge order. Never commit to `main` directly.
+the merge order. Never commit to `main` directly. GitHub
+enforces it since 25 November 2026, for the owner too: `main` changes only by pull request, only after the check
+"Build, lint audit, and SEO sanity checks" passes, and it cannot be force-pushed or deleted. If that job is renamed,
+update the protection rule in the same change, or nothing can merge.
 
 ### Commit messages
 
@@ -612,9 +615,9 @@ Updated by the loop (§8 step 7). Facts a reader needs today; history is in `doc
 | | |
 |---|---|
 | Status date | 25 November 2026 |
-| Release Decision | **PASS** — `npm run verify` green at the head of `ci/main-deploy`; deploy `out/` + `public/.htaccess` |
+| Release Decision | **PASS** — `npm run verify` green at the head of `site/2026-27`; deploy `out/` + `public/.htaccess` |
 | Branches | Three long-lived branches: `main`; `site/2025-26`, the existing 2025-26 site as it is live, kept aside (do not commit to it); `site/2026-27`, where the new 2026-27 website is built from that code (its work starts from this branch, not from `main`, §8 step 1). Every other branch is temporary and deleted after its PR merges. The new site itself is not built yet. |
-| `main` | The university website: the code of the live 2025-26 site, including the landing intro. CI runs on it and publishes it to cPanel once the connection is set up (§7); publishing is off until then. |
+| `main` | The university website: the code of the live 2025-26 site, including the landing intro. CI runs on it and publishes it to cPanel once the connection is set up (§7); publishing is off until then. Protected: pull request and green CI required (§8). |
 | Open PRs | none. #14 landed through #15. |
 | Gates at head | seo-guard 45/45 · tests 72/72 · typecheck clean · lint 0 errors (3 known warnings) · build 276 routes · redirects:check ok (222 Apache rows, 47 shells, 0 without a 301, 0 homepage targets) · audit:checklist pass · seo:gates pass (3 warnings: 50 descriptions under 120 chars, 1 page with `lang` not `en`, 1 page with a keywords meta) · seo:facts 29/29 · `npm audit --audit-level=critical` pass, production 0 vulnerabilities |
 | Last structural change | The landing intro (`src/components/LandingIntro.tsx`, mounted in `AppShell`) plays once per browser session on `/` only, is skipped for reduced motion and hidden tabs, and always ends within 1.6 s. The home page preloads its hero image per viewport. `/explore` media is no longer fetched in the background. Iframe height messages are accepted only from the frame and origin that own them. This code was already live; it had never been committed. |
