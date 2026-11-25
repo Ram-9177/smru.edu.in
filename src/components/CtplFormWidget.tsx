@@ -50,12 +50,13 @@ export default function CtplFormWidget({
 
       const registry = getRegistry();
       const registryKey = `${currentContainerId}:${formId}`;
-      if (registry[registryKey]) return;
+      if (registry[registryKey] === container) return;
 
-      registry[registryKey] = true;
+      registry[registryKey] = container;
       try {
         window.ctplTag(formId);
       } catch (err) {
+        delete registry[registryKey];
         console.error("Failed to initialize CTPL tag:", err);
       }
     };
@@ -76,7 +77,7 @@ export default function CtplFormWidget({
       if (retryTimer) clearTimeout(retryTimer);
       script.removeEventListener("load", boot);
     };
-  }, [formId]);
+  }, [formId, containerId]);
 
   return (
     <div 

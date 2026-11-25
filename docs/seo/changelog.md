@@ -4,6 +4,22 @@ Dated record of every implementation batch, newest first. The rules live in `PRO
 history. Each entry: what changed, why, what was verified, what was deliberately left. Entries before
 17 September 2026 are the phase log carried over verbatim from the former `REMEDIATION_SUMMARY.md`.
 
+## 2026-11-25 — The landing intro and other live-only code committed (branch `feat/landing-intro`)
+
+- smru.edu.in was serving code that was on no branch: it existed only as uncommitted work on one machine. A deploy
+  of `main` would have removed the landing intro from the live site. Rebuilding that work on `89243dd` (Next
+  15.5.28) matched the live files: runtime and stylesheet byte-identical, and the same text content in the
+  `layout`, `page` and every other live script that could be paired.
+- `src/components/LandingIntro.tsx`, `src/components/AppShell.tsx`: the intro, once per session, on `/` only.
+- `app/page.tsx`, `src/views/Home.tsx`: hero preload per viewport; logos below the fold load lazily.
+- `src/lib/speed/predictive-preloader.ts`: no background fetch of `/explore` media; the idle timer is cancelled.
+- `src/hooks/useIframeAutoHeight.ts`: height messages only from the owning frame and origin, positive values only.
+- `src/components/CtplFormWidget.tsx`, `src/types.d.ts`: a remounted widget starts again in its new container.
+- `tests/runtime-reliability.test.mjs` adds 9 tests; 4 fail against `main` without these changes.
+- Left deliberately, still in the local stash: `audit-reports/` and its root allowlist entry (security notes do not
+  belong in a public repository), an edit that made the release audit ignore `build.zip` files in the export, the
+  `build` script copy of `.htaccess` (Next already copies it), and the audit scripts and `serve-out` changes.
+
 ## 2026-11-25 — Year branches relabelled: 2025-26 is the existing site, 2026-27 the new one (branch `site/2026-27`)
 
 - The two 23 November entries below labelled the years one too high. The existing code is the 2025-26 site; the

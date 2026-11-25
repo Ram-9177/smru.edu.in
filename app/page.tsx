@@ -17,6 +17,20 @@ export const metadata: Metadata = buildMetadata({
 export default function Page() {
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/hero-campus-mobile.webp"
+        media="(max-width: 768px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/hero-campus-fast.webp"
+        media="(min-width: 769px)"
+        fetchPriority="high"
+      />
       <StructuredData
         id="home-webpage-schema"
         data={buildWebPageSchema({

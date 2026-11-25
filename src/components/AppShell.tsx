@@ -9,6 +9,7 @@ import ScrollToTop from "./ScrollToTop";
 import dynamic from "next/dynamic";
 const EnquiryModal = dynamic(() => import("./ApplyModal"));
 const MerittoApplyModal = dynamic(() => import("./MerittoApplyModal"));
+import LandingIntro from "./LandingIntro";
 import ReactDomSafetyPatch from "./ReactDomSafetyPatch";
 import { ApplyModalContext } from "../context/ApplyModalContext";
 import type { MerittoModalPayload } from "../context/ApplyModalContext";
@@ -428,6 +429,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
       }}
     >
       <ReactDomSafetyPatch />
+      <LandingIntro />
 
       <AppShellContent 
         openApplyModal={openApplyModal}

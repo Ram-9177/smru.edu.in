@@ -90,8 +90,9 @@ export function useIframeAutoHeight(initialHeight = 1400, options: UseIframeAuto
   void options;
 
   const applyHeight = useCallback((rawHeight: unknown) => {
+    if (typeof rawHeight !== "number" && (typeof rawHeight !== "string" || !rawHeight.trim())) return false;
     const next = Number(rawHeight);
-    if (!Number.isFinite(next)) return false;
+    if (!Number.isFinite(next) || next <= 0) return false;
     setIframeHeight(clampHeight(next));
     setHasDynamicHeight(true);
     setAllowIframeScroll(false);
@@ -160,9 +161,9 @@ export function useIframeAutoHeight(initialHeight = 1400, options: UseIframeAuto
     const handleMessage = (event: MessageEvent) => {
       const iframe = iframeRef.current;
       const iframeWindow = iframe?.contentWindow;
-      if (iframeWindow && event.source !== iframeWindow) return;
+      if (!iframeWindow || event.source !== iframeWindow) return;
       const expectedOrigin = getIframeOrigin(iframe);
-      if (expectedOrigin && event.origin !== expectedOrigin) return;
+      if (!expectedOrigin || event.origin !== expectedOrigin) return;
 
       // Handle specific St. Mary's University message type
       if (event.data?.type === "SMRU_IFRAME_HEIGHT" && typeof event.data?.height === "number") {
